@@ -28,15 +28,11 @@ module.exports={
          type:String,
         required:true,
         enum:["written","group-discussion","technical","hr","behavioural"]
-       },
-       criterias:[{
-           type:objectId,
-           ref:"criteria"
-       }]
-
+       }
+       
     }],
     date:{
         type:Date,
         default:Date.now
-        },
+        }
 }

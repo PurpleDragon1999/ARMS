@@ -21,21 +21,40 @@ module.exports={
         type:objectId,
         ref:"employee"
     }],
-    performance:[{
-        criteria:{
-            type:objectId,
-            ref:"criteria",
-            },
+   roundNumber:{
+       type:objectId,
+       ref:interview.rounds
+   },
+   logical:{
+       marks:{
+           type:Number,
+           required:true
+       },
+       remarks:{
+           type:String,
+           required:true
+       }
+    },
+    aptitude:{
         marks:{
             type:Number,
-            default:-1
+            required:true
         },
         remarks:{
             type:String,
-            default:null
-            }
-    }],
-   
+            required:true
+        }
+     },
+     communiation:{
+        marks:{
+            type:Number,
+            required:true
+        },
+        remarks:{
+            type:String,
+            required:true
+        }
+     },
     venue:{
         type:String,
         minlength:2,
