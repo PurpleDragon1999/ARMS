@@ -3,7 +3,7 @@ const objectId=mongoose.Schema.Types.objectId;
 const interview=require("./interview");
 const candidate=require("./candidate");
 const employee=require("./employee");
-const criteria=require("./criteria");
+
 module.exports={
   interviewObjId:{
       type:objectId,
