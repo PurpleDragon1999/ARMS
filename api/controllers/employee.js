@@ -23,26 +23,21 @@ class Employee {
         catch(err){
             res.status(400).send({
                 success: false,
-                payload: {
-                    
+                payload: {          
                     message: err.message
                 }
             });
         }
-        
     }
 
     async index(req,res){
         try{
             const employeeList = await models.employee.get();
-
             const page = parseInt(req.query.page) || 1;
-
             const pageSize = 10;
             const pager = await pagination.paginate(employeeList.length, page, pageSize);
             const pageOfItems = employeeList.slice(pager.startIndex, pager.endIndex + 1);
             
-            //return res.json({ pager, pageOfItems });
             res.status(200).send({
                 success : true,
                 data : {
