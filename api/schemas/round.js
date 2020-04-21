@@ -55,7 +55,7 @@ module.exports={
             required:true
         }
      },
-    venue:{
+venue:{
         type:String,
         minlength:2,
         maxlength:20
