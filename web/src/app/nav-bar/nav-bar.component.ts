@@ -7,9 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavBarComponent implements OnInit {
 
+  className: string = "";
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  changeOverlay(){
+    if(this.className == "active")
+      this.className = "";
+    else
+      this.className = "active";
   }
 
 }

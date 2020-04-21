@@ -1,6 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+$background-color-for-body: #F2EDF3;
+$hover-color: #fcfcfc;
+$color-for-headings: #B66DFF;
+
 body {
     font-family: 'Ubuntu', sans-serif;
     color: black;
-    background-color: #F2EDF3;
+    background-color: $background-color-for-body;
 }

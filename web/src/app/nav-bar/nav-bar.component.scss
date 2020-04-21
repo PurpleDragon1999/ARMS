@@ -1,15 +1,16 @@
+@import '../../styles.scss';
+
 .navbar-brand{
     font-weight: 1000;
-    color: #B66DFF;
+    color: $color-for-headings;
 }
 
 .navbar-brand:hover{
-    color: #B66DFF;
+    color: $color-for-headings;
     cursor: pointer;
 }
 
 .navbar-toggler{
-    display: block;
     border: none;
 }
 
@@ -17,36 +18,76 @@
     outline: none;
 }
 
-.navbar-collapse{
-    width: 15%;
-    height: 100vh;
-}
-
-.sidenav-item{
-    display: flex;
-    justify-content: space-between;
-    padding: 1rem;
-}
-
-.sidenav-item i{
-    font-size: 12px;
-    color: #B66DFF;
-}
-
-.sidenav-item a{
-    color: #3E4B5B;
+.navbar{
+    z-index: 989;
 }
 
 .fa-accusoft{
     font-weight: bolder;
     font-size: larger;
-    color: #B66DFF;
+    color: $color-for-headings;
 }
 
-ul{
-    list-style-type: none;
+#navbarSupportedContent{
+    height: 91vh;
+    width: 20rem;
+}
+
+.navbar-collapse{
+    position: fixed;
+    right: 0;
+    height: 91vh;
+    width: 20rem;
+
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    transition: all .3s ease;
+
+    z-index: 989;
+    margin-left: -15rem;
+}
+
+li{
+    display: flex;
+    padding: 1rem;
+    justify-content: space-between;
 }
 
 li:hover{
-    background-color: #fcfcfc;
+    background-color: $hover-color;
+}
+
+li i{
+    align-self: center;
+}
+
+@media only screen and (max-width: 600px) {
+    .navbar-collapse{
+        width: 15rem;
+    }
+  }
+
+ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 988;
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+}
+
+.overlay.active {
+    display: block;
+    opacity: 1;
 }

@@ -4,20 +4,44 @@
     <a class="navbar-brand" href="#">ARMS</a>
   </div>
     
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" (click)="changeOverlay()" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>  
+
+  <div class="d-none d-xl-block d-none d-lg-block d-xl-none">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Dashboard <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Employees</a>
+      </li>
+      <li>
+        <a class="nav-link" href="#">Profile</a>
+      </li>
+    </ul>
+  </div>
 </nav>
 
-<div class="collapse navbar-collapse show bg-white" id="navbarToggleExternalContent">
-  <ul class="h-100 m-0 p-0">
-    <li class="nav-item sidenav-item">
+<div class="collapse navbar-collapse bg-white" id="navbarSupportedContent">
+  <ul>
+    <li>
       <a>Dashboard</a>
-      <i class="fas fa-home align-self-center"></i>
+      <i class="fas fa-home"></i>
     </li>
-    <li class="nav-item sidenav-item">
-      <a>JD's</a>
-      <i class="fas fa-file-alt align-self-center"></i>
+    <li>
+      <a>Employees</a>
+      <i class="fas fa-list-ul"></i>
+    </li>
+    <li>
+      <a>Profile</a>
+      <i class="fas fa-user"></i>
     </li>
   </ul>
 </div>
+
+<div>
+  <router-outlet></router-outlet>
+</div>
+
+<div class="overlay" [ngClass]="className"></div>
