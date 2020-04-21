@@ -4,21 +4,26 @@ class Interview {
     constructor(){
 
     }
-    async createInterview(req,res){
+    async create(req,res){
         try{    
             let interviewObj=req.body;
-            let createdInterview = await interviewModel.save(interviewObj);
+            let createdObj = await interviewModel.save(interviewObj);
             return res.send({
                     success: true,
                     payload: {
-                        body: createdInterview,
-                        message: "created interview successfully"
+                        body: createdObj,
+                        message: "created successfully"
                     }
                 });
 
         }
         catch(error){
-            console.log(error);
+            res.send({
+                success: false,
+                payload: {
+                    message: error
+                }
+            });
         }
     }
 
