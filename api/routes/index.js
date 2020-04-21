@@ -9,8 +9,8 @@ module.exports=(app) =>
     app.delete('/api/employee/:id', controller.employee.remove);
     // Sample get route
     // app.get('/login', controller.);
-    app.post('/api/interview', controller.interview.create);
-    app.patch('/api/interview/:id', controller.interview.updateInterview);
-    app.delete('api/interview/:id', controller.interview.deleteInterview);
-    app.get('api/interview/:id', controller.interview.getInterview);
+    app.post('/api/interview', (req, res) => controller.interview.create(req, res));
+    app.patch('/api/interview/:id', (req, res) => controller.interview.update(req, res));
+    app.delete('/api/interview/:id', (req, res) => controller.interview.delete(req, res));
+    app.get('/api/interview/:id', (req, res) => controller.interview.get(req, res));
 }

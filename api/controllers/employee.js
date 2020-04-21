@@ -5,6 +5,7 @@ class Employee extends Base {
     constructor(){ 
         super(model.employee); 
     }
+
 }
 
 module.exports = new Employee();
