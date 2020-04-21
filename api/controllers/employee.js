@@ -1,10 +1,9 @@
-require('./common');
+const Base = require('./base');
+const model = require('../models');
 
-class Employee extends Common {
-    constructor(){}
-
-    async create(req, res){
-
+class Employee extends Base {
+    constructor(){ 
+        super(model.employee); 
     }
 }
 
