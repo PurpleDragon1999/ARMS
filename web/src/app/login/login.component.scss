@@ -1,15 +1,14 @@
 .login-block {
   background: #F2EDF3;
   float: left;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   padding: 50px 0;
 }
 
 .banner-sec {
   background: url(https://static.pexels.com/photos/33972/pexels-photo.jpg) no-repeat left bottom;
   background-size: cover;
-  min-height: 500px;
   border-radius: 0 10px 10px 0;
   padding: 0;
 }
@@ -35,8 +34,9 @@
 }
 
 .login-sec h2 {
+  margin-top: 30px;
   margin-bottom: 30px;
-  font-weight: 800;
+  font-weight: 700;
   font-size: 30px;
   color: #B66DFF;
 }
@@ -84,3 +84,12 @@
 .banner-text p {
   color: #fff;
 }
+.logo-design{
+    width: 200px;  
+    margin-left:5%; 
+}
+// .login-sec{
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+// }
