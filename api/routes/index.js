@@ -5,6 +5,7 @@ module.exports=(app) =>
     // app.get('/login', controller.);
 
     app.get("/api/employeeByName/:name", controller.employee.searchEmployee);
+    app.get("/api/employees", controller.employee.index);
 }
 
 
