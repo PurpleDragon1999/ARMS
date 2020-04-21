@@ -1,12 +1,13 @@
 const mongoose=require('mongoose');
-const objectId=mongoose.Schema.Types.objectId;
+const Schema=mongoose.Schema;
+const ObjectId= Schema.Types.ObjectId;
 const jobDescription=require("./jobDescription");
 const candidate=require("./candidate");
 const employee=require("./employee");
 
 module.exports={
     jd:{
-        type:objectId,
+        type:ObjectId,
         ref:"jobDescription"
     },
     noOfRounds:{
@@ -17,7 +18,7 @@ module.exports={
     },
     rounds:[{
        panelOfInterviewers:[{
-           type:objectId,
+           type:ObjectId,
            ref:"employee"
        }],
        time:{
