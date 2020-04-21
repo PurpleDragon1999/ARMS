@@ -1,6 +1,6 @@
 const interviewModel = require('../models/interview');
 
-class Interview{
+class Interview {
     constructor(){
 
     }
@@ -103,6 +103,8 @@ class Interview{
             console.log(error);
         }
     }
+
+  
 }
 
 module.exports = new Interview();
