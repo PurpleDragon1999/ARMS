@@ -1,5 +1,7 @@
+const interview = require('./interview');
 const employee = require("./employee")
 
 module.exports = {
-    employee : employee
+    interview,
+    employee
 }
