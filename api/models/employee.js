@@ -8,8 +8,8 @@ class Employee{
         this.Model = mongoose.model('Employee', employeeSchema);
     }
 
-    async get(id){
-        return this.Model.findOne({ _id: id });
+    async get(email){
+        return this.Model.findOne({ email:email });
     }
 
     async getAll(){

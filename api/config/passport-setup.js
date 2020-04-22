@@ -20,23 +20,25 @@ passport.use("provider",
      debugger
      //passport callback function
      var user = profile.raw
+     
       done(null, user);
-     console.log("passport callback function fired");
-     console.log(profile);
-     console.log(accessToken);
-     newEmployee ={
-        email:profile.username,
-        name:profile.displayname,
-        designation:"intern",
-        role:"hr",
-        employeeId:"CGI013"
-
-     };
-     await model.employee.save(newEmployee);
+        console.log("passport callback function fired");
+       var employeeObj= await model.employee.get(profile.username);
+         //if not create new employee in db
+       if(employeeObj){
+         console.log("this employee already exists");
+       }else{
+       newEmployee ={
+          email:profile.username,
+          name:profile.displayname,
+          designation:"intern",
+          role:"hr",
+          employeeId:"CGI015"
+        };
+        await model.employee.save(newEmployee);
+      } 
      
    })
-  
-   
 )
 passport.serializeUser(function(user, done) {
   //console.log("profile : ", user);
