@@ -31,11 +31,9 @@ export class CreateInterviewComponent {
     let interviewObj = interview;
     this.AppServicesService.createInterview(interview).subscribe(res=>{
       if (res.status == 200){
-        console.log("interview created")
         alert("interview Created")
       }
       else{
-        console.log("error occurred")
         alert("some error occurred")
       }
     })

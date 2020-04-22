@@ -6,12 +6,12 @@
                 <h4 class="card-title">Create Interview</h4>
                 <form class="forms-sample" #form="ngForm" (ngSubmit)="createInterview(form.value)">
                     <div class="form-group">
-                    <label for="exampleInputEmail3">Job Description</label>
-                    <textarea name="jd" ngModel #exampleInputJD="ngModel" class="form-control" id="exampleInputJD" placeholder="Job Description" rows="2" maxlength="500" required></textarea>  
+                    <label for="jobDescription">Job Description</label>
+                    <textarea name="jobDescription" ngModel #jobDescription="ngModel" class="form-control" id="jobDescription" placeholder="Job Description" rows="2" maxlength="500" required></textarea>  
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputPassword4">Number of Rounds</label>
-                    <select name="noOfRounds" ngModel #exampleSelectRoundtype="ngModel" class="form-control" id="exampleSelectRoundtype" min="3" max="5" required >
+                    <label for="noOfRounds">Number of Rounds</label>
+                    <select name="noOfRounds" ngModel #noOfRounds="ngModel" class="form-control" id="noOfRounds" min="3" max="5" required >
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -20,9 +20,9 @@
                       </select>
                   </div>
                   <div class="form-group">
-                    <label for="exampleInputPassword4">Panel of Interviewers</label>
+                    <label for="panelOfInterviewers">Panel of Interviewers</label>
                     <div class="input-group"> 
-                      <input name="panelOfInterviewers" type="text" ngModel #panelOfInterviewers="ngModel" class="form-control" placeholder="Panel of Interviewers" aria-label="Recipient's username" aria-describedby="basic-addon2" required>
+                      <input name="panelOfInterviewers" type="text" ngModel #panelOfInterviewers="ngModel" id="panelOfInterviewers" class="form-control" placeholder="Panel of Interviewers" aria-label="Recipient's username" aria-describedby="basic-addon2" required>
                       <div class="input-group-append">
                         <button class="btn btn-sm btn-gradient-primary" type="button" required>Search</button>
                       </div>
@@ -30,8 +30,8 @@
                   </div>
                   <div >
                     <div class="form-group">
-                    <label for="exampleInputCity1">Round Type</label>
-                    <select name="roundType" ngModel #exampleSelectRoundtype="ngModel" class="form-control" id="exampleSelectRoundtype" required>
+                    <label for="roundType">Round Type</label>
+                    <select name="roundType" ngModel #exampleSelectRoundtype="ngModel" class="form-control" id="roundType" required>
                         <option value="Written">Written</option>
                         <option value="Group Discussion">Group Discussion</option>
                         <option value="Technical">Technical</option>
@@ -41,12 +41,12 @@
                   </div>
                 </div>
                   <div class="form-group">
-                    <label for="exampleSelectGender">Time of Interview</label>
-                    <input name="time" #exampleInputTime="ngModel" ngModel type="datetime" class="form-control" id="exampleInputTime" placeholder="Time" required> 
+                    <label for="time">Time of Interview</label>
+                    <input name="time" #time="ngModel" ngModel type="datetime" class="form-control" id="time" placeholder="Time" required> 
                 </div> 
                   <div class="form-group">
-                    <label for="exampleTextarea1">Date of Interview</label>
-                    <input name="date" ngModel #exampleInputDate="ngModel" type="date" class="form-control" id="exampleInputDate" placeholder="Date" required> 
+                    <label for="date">Date of Interview</label>
+                    <input name="date" ngModel #date="ngModel" type="date" class="form-control" id="date" placeholder="Date" required> 
                 </div>  
                   <button type="submit" class="btn btn-gradient-primary mr-2" required>Submit</button>
                 </form>
