@@ -1,4 +1,9 @@
-const jobDescriptionModel=require('./jobDescription');
+const interview = require('./interview');
+const jobDescription=require('./jobDescription');
+const employee=require('./employee');
+
 module.exports = {
-    jobDescription:jobDescriptionModel
+    interview:interview,
+    employee:employee,
+    jobDescription:jobDescription
 };
