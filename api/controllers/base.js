@@ -31,7 +31,7 @@ class Base {
                     data : {
                         searchedRecords
                     },
-                    message: "list of searched records returned successfully!!"
+                    message: "List of Searched Records returned successfully!!"
                 }
             });
 
@@ -60,7 +60,7 @@ class Base {
                 data : {
                     pager : pager,
                     listOfData : pageOfItems,
-                    message : "list of data returned successfully!!"
+                    message : "List of Data returned successfully!!"
                 }
             })
         }
