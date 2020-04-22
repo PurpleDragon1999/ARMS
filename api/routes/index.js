@@ -17,8 +17,12 @@ module.exports=(app) =>
 
   //authentication routes
 app.get('/api/outlook', passport.authenticate('provider', {
-  scope: ["openid", "profile", "User.Read"]
-})); 
+  scope: ['profile']
+}), function(req, res){ 
+  var user = jwt.decode(req.user, "", true);
+  res.send("profile", { user : user});
+    }
+); 
  //callback Route for google to redirect
 app.get("/api/outlook/redirect",passport.authenticate('provider'),controller.login.redirect);
 

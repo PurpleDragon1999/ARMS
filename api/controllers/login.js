@@ -1,16 +1,20 @@
 
-var AzureOAuth2Strategy  = require("passport-azure-oauth2");
+
 var passport=require("passport");
 class login{
 constructor(){}
  redirect(req,res,err){
-       debugger
+       
     if (err ==='TokenError') {
-        res.redirect('/google'); // redirect them back to the login page
+        res.redirect('/api/outlook'); // redirect them back to the login page
        } else {
         // Handle other errors here
        }
-   res.send("you have reached callback URL");
+       debugger
+       var user = jwt.decode(req.user, "", true);
+       return res.send("profile", { user : user});
+       
+  
   }
   logout(req,res){
       //handle with passport

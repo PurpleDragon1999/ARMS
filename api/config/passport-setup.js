@@ -6,8 +6,10 @@ const outlookStrategy=require('passport-azure-oauth').Strategy
 var jwt= require("jwt-simple");
 const keys=require("./keys")
 passport.use("provider",
+  
     new outlookStrategy({
   //options for strategy
+    
     callbackURL:"https://localhost:3000/api/outlook/redirect",
     clientId:keys.outlook.clientID,
     clientSecret:keys.outlook.clientSecret,
@@ -17,16 +19,16 @@ passport.use("provider",
      static:false
     
    },async function(err,accessToken,refreshToken,profile,done){
-     debugger
+    
      //passport callback function
-     var user = profile.raw
-     
-      done(null, user);
+     var user = jwt.decode(refreshToken.id_token, "", true);
+    
         console.log("passport callback function fired");
        var employeeObj= await model.employee.get(profile.username);
          //if not create new employee in db
        if(employeeObj){
          console.log("this employee already exists");
+         return done(err, user);
        }else{
        newEmployee ={
           email:profile.username,
