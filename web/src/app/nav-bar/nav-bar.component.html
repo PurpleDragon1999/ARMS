@@ -1,47 +1,118 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-white">
-  <div class="mx-5">
-    <i class="fab fa-accusoft mr-1"></i>
-    <a class="navbar-brand" href="#">ARMS</a>
-  </div>
+<div class="container-scroller">
+
+  <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
     
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" (click)="changeOverlay()" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>  
+    <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+      <a class="navbar-brand brand-logo" href="index.html"><i class="fab fa-accusoft mr-1"></i>ARMS</a>
+      <a class="navbar-brand brand-logo-mini" href="index.html"><i class="fab fa-accusoft mr-1"></i></a>
+    </div>
+    
+    <div class="navbar-menu-wrapper d-flex align-items-stretch">
+      
+      <button class="navbar-toggler navbar-toggler align-self-center" type="button" (click)="toggleBig()" data-toggle="minimize">
+        <span class="fas fa-bars"></span>
+      </button>
+      
+      <ul class="navbar-nav navbar-nav-right">
+        
+        <li class="nav-item nav-profile dropdown">
+          <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+            
+            <div class="nav-profile-img">
+              <img src="../../assets/images/face1.jpg" alt="image">
+            </div>
+            
+            <div class="nav-profile-text">
+              <p class="mb-1 text-black">Shubham Sharma</p>
+            
+            </div>
+          </a>
+        </li>
 
-  <div class="d-none d-xl-block d-none d-lg-block d-xl-none">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Dashboard <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Employees</a>
-      </li>
-      <li>
-        <a class="nav-link" href="#">Profile</a>
-      </li>
-    </ul>
+        <li class="nav-item nav-logout d-none d-lg-block">
+          <a class="nav-link" href="#">
+            <i class="fas fa-sign-out-alt"></i>
+          </a>
+        </li>
+
+      </ul>
+
+      <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" (click)="toggle()" data-toggle="offcanvas">
+        <span class="fas fa-bars"></span>
+      </button>
+
+    </div>
+
+  </nav>
+
+  <div class="container-fluid page-body-wrapper">
+
+    <nav class="sidebar sidebar-offcanvas" [ngClass]="classNameForToggle" id="sidebar">
+      
+      <ul class="nav">
+        
+        <li class="nav-item nav-profile">
+          <a href="#" class="nav-link">
+
+            <div class="nav-profile-image">
+              <img src="../../assets/images/face1.jpg" alt="profile">
+            </div>
+            
+            <div class="nav-profile-text d-flex flex-column">
+              <span class="font-weight-bold mb-2">David Grey. H</span>
+              <span class="text-secondary text-small">Project Manager</span>
+            </div>
+
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="index.html">
+            <span class="menu-title">Dashboard</span>
+            <i class="fas fa-home menu-icon"></i>
+          </a>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link" href="pages/icons/mdi.html">
+            <span class="menu-title">Employees</span>
+            <i class="fas fa-users menu-icon"></i>
+          </a>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link" href="pages/forms/basic_elements.html">
+            <span class="menu-title">Add Employee</span>
+            <i class="fas fa-user-plus menu-icon"></i>
+          </a>
+        </li>
+
+        <li class="nav-item d-lg-none">
+          <a class="nav-link" href="pages/forms/basic_elements.html">
+            <span class="menu-title">Log Out</span>
+            <i class="fas fa-sign-out-alt menu-icon"></i>
+          </a>
+        </li>
+
+      </ul>
+
+    </nav>
+
+    <div class="main-panel">
+      
+      <div class="content-wrapper">
+        <router-outlet></router-outlet>
+      </div>
+      
+      <footer class="footer">
+        <div class="d-sm-flex justify-content-center justify-content-sm-between">
+          <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2020 <a href="https://www.bootstrapdash.com/" target="_blank">CyberGroup</a>. All rights reserved.</span>
+          <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with BootCampJan2020<i class="mdi mdi-heart text-danger"></i></span>
+        </div>
+      </footer>
+    
+    </div>
+
   </div>
-</nav>
-
-<div class="collapse navbar-collapse bg-white" id="navbarSupportedContent">
-  <ul>
-    <li>
-      <a>Dashboard</a>
-      <i class="fas fa-home"></i>
-    </li>
-    <li>
-      <a>Employees</a>
-      <i class="fas fa-list-ul"></i>
-    </li>
-    <li>
-      <a>Profile</a>
-      <i class="fas fa-user"></i>
-    </li>
-  </ul>
+  
 </div>
-
-<div>
-  <router-outlet></router-outlet>
-</div>
-
-<div class="overlay" [ngClass]="className"></div>
