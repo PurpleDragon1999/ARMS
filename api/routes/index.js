@@ -17,7 +17,7 @@ module.exports=(app) =>
 
   //authentication routes
 app.get('/api/outlook', passport.authenticate('provider', {
-  scope: ['profile']
+  scope: ["openid", "profile", "User.Read"]
 })); 
  //callback Route for google to redirect
 app.get("/api/outlook/redirect",passport.authenticate('provider'),controller.login.redirect);
