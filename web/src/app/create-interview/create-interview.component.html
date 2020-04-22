@@ -5,11 +5,11 @@
               <div class="card-body">
                 <h4 class="card-title">Create Interview</h4>
                 <form class="forms-sample" #form="ngForm" (ngSubmit)="createInterview(form.value)">
-                  <div>
+                    <div class="form-group">
                     <label for="exampleInputEmail3">Job Description</label>
                     <textarea name="jd" ngModel #exampleInputJD="ngModel" class="form-control" id="exampleInputJD" placeholder="Job Description" rows="2" maxlength="500" required></textarea>  
                 </div>
-                  <div >
+                <div class="form-group">
                     <label for="exampleInputPassword4">Number of Rounds</label>
                     <select name="noOfRounds" ngModel #exampleSelectRoundtype="ngModel" class="form-control" id="exampleSelectRoundtype" min="3" max="5" required >
                         <option value="1">1</option>
