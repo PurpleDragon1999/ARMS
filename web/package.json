@@ -20,12 +20,7 @@
     "@angular/platform-browser-dynamic": "~8.2.14",
     "@angular/router": "~8.2.14",
     "@auth0/angular-jwt": "^4.0.0",
-<<<<<<< HEAD
-    "auth0-js": "^9.13.2",
-    "msal": "^1.2.2",
-=======
     "@fortawesome/fontawesome-free": "^5.13.0",
->>>>>>> dcf27fd906a60a4edb820fa6bebd57a71fd3ea33
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"

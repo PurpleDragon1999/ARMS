@@ -13,7 +13,7 @@ import { AdminComponent } from './admin/admin.component';
     AppComponent,
     LoginComponent,
     NavBarComponent,
-    DashboardComponent
+    DashboardComponent,
     AdminComponent
   ],
   imports: [
