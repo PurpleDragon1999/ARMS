@@ -16,7 +16,6 @@ class Base {
     }
 
     async modify(req, res){
-        console.log(req, res, ' req, res ');
         await this.model.modify(req.params.id, req.body);
     }
 
@@ -32,7 +31,7 @@ class Base {
                     success: true,
                     payload: {
                         body: createdObj,
-                        message: "created successfully"
+                        message: "Successfully created"
                     }
                 });
 
@@ -54,7 +53,7 @@ class Base {
                 return res.send({
                     success: true,
                     payload: {
-                        message: "no record found"
+                        message: "Could not find any record"
                     }
                 });
             }
@@ -65,7 +64,7 @@ class Base {
                     success: true,
                     payload: {
                         body: updatedStatus,
-                        message: "updated successfully"
+                        message: "Successfully updated"
                     }
                 });
             }
@@ -89,7 +88,7 @@ class Base {
                 res.send({
                     success: true,
                     payload: {
-                        message: "no record found"
+                        message: "Could not find any record"
                     }
                 });
             }
@@ -99,7 +98,7 @@ class Base {
                     success: true,
                     payload: {
                         body: deletedStatus,
-                        message: "deleted successfully"
+                        message: "Successfully deleted"
                     }
                 });
             }
@@ -121,7 +120,7 @@ class Base {
                 res.send({
                     success: true,
                     payload: {
-                        message: "no record found"
+                        message: "Could not find any record"
                     }
                 });
             }
@@ -130,7 +129,7 @@ class Base {
                     success: true,
                     payload: {
                         body: objToRetrieve,
-                        message: "showing details"
+                        message: "Displaying details"
                     }
                 });
             }
