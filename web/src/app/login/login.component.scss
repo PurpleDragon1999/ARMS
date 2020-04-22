@@ -7,7 +7,7 @@
 }
 
 .banner-sec {
-  background: url(https://static.pexels.com/photos/33972/pexels-photo.jpg) no-repeat left bottom;
+  background: url(../../assets/images/pexels-photo.jpg) no-repeat left bottom;
   background-size: cover;
   border-radius: 0 10px 10px 0;
   padding: 0;
@@ -53,12 +53,6 @@
   margin-right: auto
 }
 
-.btn-login {
-  background: #DE6262;
-  color: #fff;
-  font-weight: 600;
-}
-
 .banner-text {
   width: 70%;
   position: absolute;
@@ -88,8 +82,8 @@
     width: 200px;  
     margin-left:5%; 
 }
-// .login-sec{
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-// }
+@media only screen and (max-width: 600px) {
+    .login-block {
+      padding: 0;
+    }
+  }
