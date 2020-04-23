@@ -1,15 +1,15 @@
 const schema = require('../schemas');
 const mongoose = require('mongoose');
-const employeeSchema = new mongoose.Schema(schema.employee, { versionKey: false });
-employeeSchema.set('toObject', { getters: true });
+const candidateSchema = new mongoose.Schema(schema.candidate, { versionKey: false });
+candidateSchema.set('toObject', { getters: true });
 
-class Employee{
+class Candidate{
     constructor(){
-        this.Model = mongoose.model('Employee', employeeSchema);
+        this.Model = mongoose.model('Candidate', candidateSchema);
     }
 
     async getAll(criteria={}, columns={}){
-        console.log("inside employee getAll")
+        console.log("inside candidate getAll")
         return this.Model.find(criteria, columns).sort({"name": 1});
     }
 
@@ -30,4 +30,4 @@ class Employee{
     }
 }
 
-module.exports = new Employee();
+module.exports = new Candidate();

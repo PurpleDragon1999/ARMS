@@ -11,6 +11,10 @@ module.exports={
     type:Date,
     required:true,
     },
+    name:{
+    type:String,
+    required:true
+    },
     noOfApplicants:{
     type:Number,
     default:0
