@@ -33,6 +33,7 @@
               formControlName="noOfRounds"
                 class="form-control"
                 [ngClass]="{ 'is-invalid': submitted && f.noOfRounds.errors }" 
+                placeholder="Number of Rounds"
                 min="3"
                 max="5"
                 required
@@ -83,6 +84,7 @@
               formControlName="roundType"
               class="form-control" 
               [ngClass]="{ 'is-invalid': submitted && f.roundType.errors }"
+              placeholder="Round Type"
               required
               >
                 <option value="Written">Written</option>
