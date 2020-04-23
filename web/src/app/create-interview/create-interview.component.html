@@ -27,6 +27,20 @@
               </div>
             </div>
             <div class="form-group">
+              <label for="email">Email</label>
+              <input
+                type="text"
+                name="email" id="email"
+                formControlName="email"
+                class="form-control" 
+                [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+                placeholder="Email"
+              >
+              <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+              <div *ngIf="f.email.errors.required"><i class="mdi mdi-alert-outline"></i>Email is required</div>
+              </div>
+            </div>
+            <div class="form-group">
               <label for="noOfRounds">Number of Rounds</label>
               <select
               name="noOfRounds" id="noOfRounds"

@@ -15,6 +15,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class CreateInterviewComponent implements OnInit {
   interview: ICreate = {
     jd: "",
+    email:"",
     date: "",
     time: "",
     roundType: "",
@@ -39,6 +40,7 @@ export class CreateInterviewComponent implements OnInit {
       
       this.registerForm = this.formBuilder.group({
         Name: ['', Validators.required],
+        email: ['', Validators.required],
         noOfRounds: ['', Validators.required],
         panelOfInterviewers: ['', Validators.required],
         roundType: ['', Validators.required],
