@@ -1,15 +1,14 @@
 import { Component, OnInit } from "@angular/core";
 import { IEmployee } from "../../models/employee.interface";
-import { Router, ActivatedRoute } from '@angular/router';
-import { EmployeeService } from '../../employee.service';
-import { IResponse } from 'src/app/models/response.interface';
-import { switchMap } from 'rxjs/operators';
-import { EMPTY } from 'rxjs';
-
+import { Router, ActivatedRoute } from "@angular/router";
+import { EmployeeService } from "../../employee.service";
+import { IResponse } from "src/app/models/response.interface";
+import { switchMap } from "rxjs/operators";
+import { EMPTY } from "rxjs";
 
 interface RouteData {
-    formType: 'create' | 'update' | 'read';
-    employeeId: String;
+  formType: "create" | "update" | "read";
+  employeeId: String;
 }
 
 @Component({
@@ -19,44 +18,52 @@ interface RouteData {
 })
 export class AdminFormComponent implements OnInit {
   employee: IEmployee;
-  formType: RouteData['formType'];
+  formType: RouteData["formType"];
   employeeId: String;
 
-  constructor(private router: Router, private route: ActivatedRoute, private employeeService: EmployeeService){}
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private employeeService: EmployeeService
+  ) {}
 
-  ngOnInit(): void{
-    this.route.params.pipe(
+  ngOnInit(): void {
+    this.route.params
+      .pipe(
         switchMap((routeData: RouteData) => {
-            this.formType = routeData.formType;
-            this.employeeId = routeData.employeeId;
-            if(!routeData.employeeId || !(routeData.formType === 'update' || routeData.formType === 'read')) return EMPTY;
+          this.formType = routeData.formType;
+          this.employeeId = routeData.employeeId;
+          if (
+            !routeData.employeeId ||
+            !(routeData.formType === "update" || routeData.formType === "read")
+          )
+            return EMPTY;
 
-            return this.employeeService.getEmployee(routeData.employeeId);
-        }
-    )).subscribe((response: IResponse) => {
-        console.log(response);
+          return this.employeeService.getEmployee(routeData.employeeId);
+        })
+      )
+      .subscribe((response: IResponse) => {
         this.employee = response.payload.data;
-        console.log(this.employee, 'this.employee');
-        this.employee.employeeId = (Number)(this.employee.employeeId.toString().replace('CYG-', ''));
-    });
+        this.employee.employeeId = Number(
+          this.employee.employeeId.toString().replace("CYG-", "")
+        );
+      });
   }
 
-  handleSubmit(employee: IEmployee): void{
-    if(this.formType === 'create') return this.createEmployee(employee);
-    if(this.formType === 'update') return this.updateEmployee(employee);
+  handleSubmit(employee: IEmployee): void {
+    if (this.formType === "create") return this.createEmployee(employee);
+    if (this.formType === "update") return this.updateEmployee(employee);
   }
 
-  createEmployee(employee: IEmployee): void{
-    console.log(employee, 'Employee');
-    this.employeeService.createEmployee(employee).subscribe((res: IResponse) => {
-      console.log(res, 'response after subscribing to createEmployee Observable');
-    });
+  createEmployee(employee: IEmployee): void {
+    this.employeeService
+      .createEmployee(employee)
+      .subscribe((res: IResponse) => {});
   }
 
-  updateEmployee(employee: IEmployee): void{
-    console.log(employee, 'Employee');
-    this.employeeService.updateEmployee(employee, this.employeeId).subscribe((res: IResponse) => {
-      console.log(res, 'response after subscribing to updateEmployee Observable');
-    });
+  updateEmployee(employee: IEmployee): void {
+    this.employeeService
+      .updateEmployee(employee, this.employeeId)
+      .subscribe((res: IResponse) => {});
   }
 }
