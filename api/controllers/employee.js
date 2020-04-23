@@ -1,6 +1,6 @@
 const Joi = require('@hapi/joi');
 const Base = require('./base');
-const model = require('../models');
+const employeeModel = require('../models/employee');
 
 function validateEmployee(employee) {
     //for removing unnecessary spaces
@@ -34,7 +34,7 @@ async function checkDuplicate(employeeId, email){
 
 class Employee extends Base {
     constructor(){ 
-        super(model.employee); 
+        super(employeeModel); 
     }
 
     async save(req, res){
