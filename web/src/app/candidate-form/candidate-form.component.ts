@@ -19,12 +19,14 @@ interface ICandidate{
 
 
 export class CandidateFormComponent implements OnInit {
-  
+  isSubmitted: Boolean= false;
   
   constructor(private service : AppServicesService) { }
 
   ngOnInit() {
   }
+
+  model: any= {};
 
   createCandidate(candidateObj: ICandidate){
     this.service.createCandidate(candidateObj).subscribe(res =>{
@@ -35,8 +37,13 @@ export class CandidateFormComponent implements OnInit {
         console.log("error")
       }
     })
+  
+  }
     
-   
+  openDialogBox(){
+    this.isSubmitted = true;
+    console.log("hereeeeeeeeeeeee")
+    console.log(this.isSubmitted)
   }
 
 }
