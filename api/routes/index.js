@@ -2,11 +2,11 @@ const controller = require('../controllers');
 module.exports=(app) =>
 { 
     //Employee
-    app.post('/api/employee', controller.employee.save);
-    app.get('/api/employee/:id', controller.employee.get);
-    app.get('/api/employee', controller.employee.getAll);
-    app.patch('/api/employee/:id', controller.employee.modify);
-    app.delete('/api/employee/:id', controller.employee.remove);
+    app.post('/api/employee', (req, res) => controller.employee.save(req, res));
+    app.get('/api/employee/:id', (req, res) => controller.employee.get(req, res));
+    app.get('/api/employee', (req, res) => controller.employee.getAll(req, res));
+    app.put('/api/employee/:id', (req, res) => controller.employee.modify(req, res));
+    app.delete('/api/employee/:id', (req, res) => controller.employee.remove(req, res));
     // Sample get route
     // app.get('/login', controller.);
     app.post('/api/interview', controller.interview.createInterview);

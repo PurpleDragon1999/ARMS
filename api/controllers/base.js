@@ -4,23 +4,103 @@ class Base {
     }
 
     async save(req, res){
-        await this.model.save(req.body);
+        try{
+            const data = await this.model.save(req.body);
+            return res.send({
+                success: true,
+                payload: {
+                    data,  
+                    message: 'Created Successfully'
+                }
+            });
+        }catch(e){
+            res.status(500).send({
+                success: false,
+                payload: {
+                    message: e.message
+                }
+            })
+        }
     }
 
     async get(req, res){
-        await this.model.get(req.params.id);
+        try{
+            const data = await this.model.get(req.params.id);
+            return res.send({
+                success: true,
+                payload: {
+                    data,  
+                    message: 'Retrieved Successfully'
+                }
+            });
+        }catch(e){
+            res.status(500).send({
+                success: false,
+                payload: {
+                    message: e.message
+                }
+            })
+        }
     }
 
     async getAll(req, res){
-        await this.model.getAll();
+        try{
+            const data = await this.model.getAll();
+            return res.send({
+                success: true,
+                payload: {
+                    data,  
+                    message: 'Retrieved Successfully'
+                }
+            });
+        }catch(e){
+            res.status(500).send({
+                success: false,
+                payload: {
+                    message: e.message
+                }
+            })
+        }
     }
 
     async modify(req, res){
-        await this.model.modify(req.params.id, req.body);
+        try{
+            const data = await this.model.modify(req.params.id, req.body);
+            return res.send({
+                success: true,
+                payload: {
+                    data,  
+                    message: 'Modified Successfully'
+                }
+            });
+        }catch(e){
+            res.status(500).send({
+                success: false,
+                payload: {
+                    message: e.message
+                }
+            })
+        }
     }
 
     async remove(req, res){
-        await this.model.remove(req.params.id);
+        try{
+            const data = await this.model.remove(req.params.id);
+            return res.send({
+                success: true,
+                payload: {
+                    data,  
+                    message: 'Removed Successfully'
+                }
+            });
+        }catch(e){
+            res.status(500).send({
+                success: false,
+                payload: {
+                    message: e.message
+                }
+            })
+        }
     }
 }
 

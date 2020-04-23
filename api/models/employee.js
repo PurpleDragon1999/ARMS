@@ -17,7 +17,7 @@ class Employee{
     }
 
     async modify(id, data){
-        return this.Model.findByIdAndUpdate(id, { $set: data }, {new:true});
+        return this.Model.findByIdAndUpdate(id, { $set: data }, { new: true, useFindAndModify: false });
     }
 
     async save(data){
@@ -26,6 +26,10 @@ class Employee{
 
     async remove(id){
         return this.Model.deleteOne({ _id: id });
+    }
+
+    async getByCriteria(criteria){
+        return this.Model.findOne(criteria);
     }
 }
 
