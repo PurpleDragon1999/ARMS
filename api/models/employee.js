@@ -8,15 +8,16 @@ class Employee{
         this.Model = mongoose.model('Employee', employeeSchema);
     }
 
-    async get(id){
-        return this.Model.findOne({ _id: id });
+    async getAll(criteria={}, columns={}){
+        console.log("inside employee getAll")
+        return this.Model.find(criteria, columns).sort({"name": 1});
     }
     async getbyEmail(email){
         return this.Model.findOne({ email:email });
     }
 
-    async getAll(){
-        return this.Model.find({});
+    async get(id){
+        return this.Model.findOne({ _id: id });
     }
 
     async modify(id, data){
