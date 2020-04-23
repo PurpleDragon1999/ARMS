@@ -1,5 +1,7 @@
 const interviewModel = require('../models/interview');
+const jobDescriptionModel = require('../models/jobDescription');
 const mailer=require('./mailHelper');
+const pdfGenerator=require('../middlewares/pdfGenerator')
 class Interview {
     constructor(){
 
@@ -7,7 +9,9 @@ class Interview {
     async createInterview(req,res){
         try{    
             let interviewObj=req.body;
-            const email=req.query.email
+             const email=req.query.email
+             const jdObj=await jobDescriptionModel.get({_id:req.body.jd});
+           
             let createdInterview = await interviewModel.save(interviewObj);
             const output = `
             <style>
@@ -20,8 +24,8 @@ class Interview {
             <h3>You have been shortlisted for interview in our company as per following details</h3>
           <table>
           <tr>
-            <td>Post:</td>
-            <td>Consultant1</td>
+            <td>Designation:</td>
+            <td>${jdObj.appliedFor}</td>
           </tr>
           <tr>
             <td>No Of Rounds</td>
@@ -36,7 +40,8 @@ class Interview {
           <p>Sign Up on below form to confirm your presence</p>
           <p class="bottom">This is Computer Generated Email ,Don't reply back to it</p>
           `;
-            nodeMail(output,email);
+            pdfGenerator(jdObj);
+            nodeMail(output,email,jdObj);
             return res.send({
                     success: true,
                     payload: {

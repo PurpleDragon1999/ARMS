@@ -3,7 +3,7 @@ const nodemailer = require("nodemailer");
 require("dotenv").config();
 // node function which sends email to new user create
 
- nodeMail=async function(output,email){
+ nodeMail=async function(output,email,jdJson){
    try{
      let testAccount = await nodemailer.createTestAccount();
     
@@ -21,7 +21,12 @@ require("dotenv").config();
      to:email, // list of receivers
      subject: "Cybergroup  Contact Request", // Subject line
      text: "Welcome to Cybergroup ", // plain text body
-     html:output
+     html:output,
+     attachments: [{
+      filename: jdJson.jdName+".pdf",
+      path: 'C:/Users/deepanshu.balani/Desktop/Interview Management System/ARMS/api/jobDescriptions/'+jdJson.jdName+'.pdf',
+      contentType: 'application/pdf'
+    }],
    }
    transporter.sendMail(info,function(err,data){
       

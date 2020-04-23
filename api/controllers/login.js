@@ -1,6 +1,7 @@
 
 const jwt = require("jsonwebtoken");
 var passport=require("passport");
+
 class login{
   
 constructor(){}
