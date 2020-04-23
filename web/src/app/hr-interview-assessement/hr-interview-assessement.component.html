@@ -1,0 +1,174 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title"><b>Interview Assessement form</b></h4>
+                <form class="form-sample" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Name</label>
+                        <div class="col-sm-9">
+                          <input type="text" formControlName="Name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.Name.errors }"/>
+                          <div *ngIf="submitted && f.Name.errors" class="invalid-feedback">
+                            <div *ngIf="f.Name.errors.required"><i class="mdi mdi-alert-outline"></i>Name is required</div>
+                          </div>
+                          <!-- <div [style.display]="candidateName.valid && candidateName.touched ? 'none' : 'none'" class="text-danger"><i class="mdi mdi-alert-outline"></i>Candidate name is required</div> -->
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Applied For</label>
+                          <div class="col-sm-9">
+                            <select class="form-control">
+                              <option>intern</option>
+                              <option>consultant1</option>
+                              <option>consultant2</option>
+                              <option>associate1</option>
+                              <option>associate2</option>
+                              <option>manager1</option>
+                              <option>manager2</option>
+                            </select>
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Date of Interview</label>
+                        <div class="col-sm-9">
+                          <input formControlName="dateOfInterview" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.dateOfInterview.errors }" type="date" />
+                          <div *ngIf="submitted && f.dateOfInterview.errors" class="invalid-feedback">
+                            <div *ngIf="f.dateOfInterview.errors.required"><i class="mdi mdi-alert-outline"></i>Date of interview is required</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Panel Name/s</label>
+                          <div class="col-sm-9">
+                            <ul class="list-ticked">
+                                <li>Panel Member 1</li>
+                                <li>Panel Member 2</li>
+                            </ul>
+                          </div>
+                        </div>
+                    </div> 
+                  </div>
+                  <hr class="mb-5">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Round Number</label>
+                        <div class="col-sm-6">
+                          <select class="form-control" formControlName="roundNumber" [ngClass]="{ 'is-invalid': submitted && f.roundNumber.errors }">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                          </select>
+                          <div *ngIf="submitted && f.roundNumber.errors" class="invalid-feedback">
+                            <div *ngIf="f.roundNumber.errors.required"><i class="mdi mdi-alert-outline"></i>Round number is required</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Round Type</label>
+                        <div class="col-sm-7">
+                          <select class="form-control" formControlName="roundType" [ngClass]="{ 'is-invalid': submitted && f.roundType.errors }">
+                            <option>written</option>
+                            <option>group-discussion</option>
+                            <option>technical</option>
+                            <option>HR</option>
+                            <option>behavioural</option>
+                          </select>
+                          <div *ngIf="submitted && f.roundType.errors" class="invalid-feedback">
+                            <div *ngIf="f.roundType.errors.required"><i class="mdi mdi-alert-outline"></i>Round number is required</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12 eval-table-col">
+                        <table class="table table-hover table-bordered">
+                            <thead>
+                              <tr>
+                                <th>Evaluation Criteria</th>
+                                <th>Remarks</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                  <td><label for="aptitude">Aptitude</label></td>
+                                
+                                <td><textarea class="form-control" name="remarks" id="aptitude" rows="1"></textarea></td>    
+                              </tr>
+                              <tr>
+                                  <td><label for="logical">Logical</label></td>
+                                
+                                <td><textarea class="form-control" name="remarks" id="Logical" rows="1"></textarea></td>    
+                              </tr>
+                              <tr>
+                                <td><label for="communication">Communication</label></td>
+                                <td><textarea class="form-control" name="remarks" id="communication" rows="1"></textarea></td>    
+                              </tr>
+                            </tbody>
+                          </table>
+                    </div>
+                  </div>
+                  <hr class="my-5">
+                  <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Selected</label>
+                          <div class="col-sm-9">
+                            <select class="form-control" style="height: 3.2rem;">
+                              <option>Yes</option>
+                              <option>No</option>
+                            </select>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Recommend Interviewer</label>
+                          <div class="col-sm-9">
+                            <select class="form-control" style="height: 3.2rem;">
+                              <option>Vishal</option>
+                              <option>Mayank</option>
+                            </select>
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group row">
+                          <label class="col-sm-2 col-form-label">Feedback</label>
+                          <div class="col-sm-9">
+                              <textarea class="form-control" name="Feedback" id="feedback" rows="1" placeholder="Enter your feedback here...." formControlName="interviewFeedback" [ngClass]="{ 'is-invalid': submitted && f.interviewFeedback.errors }"></textarea>
+                              <div *ngIf="submitted && f.interviewFeedback.errors" class="invalid-feedback">
+                                <div *ngIf="f.interviewFeedback.errors.required"><i class="mdi mdi-alert-outline"></i>Feedback is required</div>
+                              </div>
+                            </div>
+                        </div>
+                      </div>
+                  </div>
+                  <button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
+                  <button class="btn btn-light">Cancel</button>
+                </form>
+              </div>
+            </div>
+          </div>
+    </div>
+</div>
+
+
