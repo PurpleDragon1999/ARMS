@@ -8,9 +8,14 @@ module.exports=(app) =>
     app.get("/api/employeeBySearch/:searchBy", (req, res)=>controller.employee.searchRecord(req, res));
     app.patch('/api/employee/:id', controller.employee.modify);
     app.delete('/api/employee/:id', controller.employee.remove);
+
     
-    // Sample get route
-    // app.get('/login', controller.);
+
+    //Candidate
+    app.get("/api/candidates", (req, res)=>controller.candidate.getAll(req, res));
+    app.get("/api/candidateBySearch/:searchBy", (req, res)=>controller.candidate.searchRecord(req, res));
+    
+
 
 
     app.post('/api/interview', controller.interview.createInterview);

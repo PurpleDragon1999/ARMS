@@ -25,16 +25,28 @@ class Base {
         try{
             let queryObject = { $regex: req.params.searchBy, $options: 'i'};
             const searchedRecords = await this.model.getAll({name: queryObject});
-            res.status(200).send({
-                success: true,
-                payload: {
-                    data : {
-                        searchedRecords
-                    },
-                    message: "List of Searched Records returned successfully!!"
-                }
-            });
 
+            if (searchedRecords.length != 0){
+                res.status(200).send({
+                    success: true,
+                    payload: {
+                        data : {
+                            searchedRecords
+                        },
+                        message: "List of Searched Records returned successfully!!"
+                    }
+                });
+
+            }
+            else{
+                res.status(200).send({
+                    success: true,
+                    payload: {
+                        
+                        message: "No Results Found"
+                    }
+                });
+            }
         }
         catch(err){
             res.status(400).send({
@@ -49,6 +61,7 @@ class Base {
     async getAll(req,res){
         
         try{
+            console.log(this.model, "this.model")
             const recordList = await this.model.getAll();
             const page = parseInt(req.query.page) || 1;
             const pageSize = 10;
