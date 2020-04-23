@@ -20,11 +20,11 @@ module.exports={
         type:objectId,
         ref:"employee"
     }],
-   roundNumber:{
+    roundNumber:{
        type:objectId,
        ref:interview.rounds
-   },
-   logical:{
+    },
+    logical:{
        marks:{
            type:Number,
            required:true
@@ -43,8 +43,8 @@ module.exports={
             type:String,
             required:true
         }
-     },
-     communiation:{
+    },
+    communiation:{
         marks:{
             type:Number,
             required:true
@@ -53,8 +53,8 @@ module.exports={
             type:String,
             required:true
         }
-     },
-venue:{
+    },
+    venue:{
         type:String,
         minlength:2,
         maxlength:20
