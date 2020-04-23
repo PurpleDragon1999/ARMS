@@ -24,7 +24,9 @@ export class HrInterviewAssessementComponent implements OnInit {
       this.registerForm = this.formBuilder.group({
         Name: ['', Validators.required],
         dateOfInterview: ['', Validators.required],
-        interviewFeedback: ['', Validators.required]
+        interviewFeedback: ['', Validators.required],
+        roundNumber: ['', Validators.required],
+        roundType: ['', Validators.required]
 
         
     });
