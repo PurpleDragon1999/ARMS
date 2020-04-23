@@ -7,7 +7,9 @@ const fs = require('fs');
 const app = express();
 const database = require('./database/config');
 const passportSetup=require("./config/passport-setup");
+const cookieSession=require('cookie-session');
 app.use(bodyParser.json());
+
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(cors({origin: '*'}));
