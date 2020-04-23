@@ -1,5 +1,5 @@
 const candidateModel=require('../models/candidate');
-const mailer=require('./mailHelper');
+
 
 
 class Candidate{
@@ -10,7 +10,7 @@ class Candidate{
         try{    
             let candidateObj=req.body;
             let createdCandidate = await candidateModel.save(candidateObj);
-            nodeMail(createdCandidate);
+          
             return res.send({
                     success: true,
                     payload: {

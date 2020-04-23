@@ -1,5 +1,5 @@
 const interviewModel = require('../models/interview');
-
+const mailer=require('./mailHelper');
 class Interview {
     constructor(){
 
@@ -7,7 +7,36 @@ class Interview {
     async createInterview(req,res){
         try{    
             let interviewObj=req.body;
+            const email=req.query.email
             let createdInterview = await interviewModel.save(interviewObj);
+            const output = `
+            <style>
+                .bottom{
+                  color:grey;
+                  font-size:0.8rem;
+                   }
+            </style>
+         <p>Congratulations,you are registered on our CyberGroup</p>
+            <h3>You have been shortlisted for interview in our company as per following details</h3>
+          <table>
+          <tr>
+            <td>Post:</td>
+            <td>Consultant1</td>
+          </tr>
+          <tr>
+            <td>No Of Rounds</td>
+            <td>${createdInterview.noOfRounds}</td>
+            </tr>
+          <tr>
+          <td>Date Of Interview</td>
+          <td>${createdInterview.date}</td>
+          </tr>
+         
+        </table>
+          <p>Sign Up on below form to confirm your presence</p>
+          <p class="bottom">This is Computer Generated Email ,Don't reply back to it</p>
+          `;
+            nodeMail(output,email);
             return res.send({
                     success: true,
                     payload: {
