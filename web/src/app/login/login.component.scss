@@ -1,0 +1,89 @@
+.login-block {
+  background: #F2EDF3;
+  float: left;
+  width: 100vw;
+  height: 100vh;
+  padding: 50px 0;
+}
+
+.banner-sec {
+  background: url(../../assets/images/pexels-photo.jpg) no-repeat left bottom;
+  background-size: cover;
+  border-radius: 0 10px 10px 0;
+  padding: 0;
+}
+
+.container {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 15px 20px 0px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-inner {
+  border-radius: 0 10px 10px 0;
+}
+
+.carousel-caption {
+  text-align: left;
+  left: 5%;
+}
+
+.login-sec {
+  padding: 50px 30px;
+  position: relative;
+}
+
+.login-sec h2 {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  font-weight: 700;
+  font-size: 30px;
+  color: #B66DFF;
+}
+
+.login-sec h2:after {
+  content: " ";
+  width: 100px;
+  height: 5px;
+  background: #FEB58A;
+  display: block;
+  margin-top: 20px;
+  border-radius: 3px;
+  margin-left: auto;
+  margin-right: auto
+}
+
+.banner-text {
+  width: 70%;
+  position: absolute;
+  bottom: 40px;
+  padding-left: 20px;
+}
+
+.banner-text h2 {
+  color: #fff;
+  font-weight: 600;
+}
+
+.banner-text h2:after {
+  content: " ";
+  width: 100px;
+  height: 5px;
+  background: #FFF;
+  display: block;
+  margin-top: 20px;
+  border-radius: 3px;
+}
+
+.banner-text p {
+  color: #fff;
+}
+.logo-design{
+    width: 200px;  
+    margin-left:5%; 
+}
+@media only screen and (max-width: 600px) {
+    .login-block {
+      padding: 0;
+    }
+  }
