@@ -13,4 +13,5 @@ module.exports=(app) =>
     app.patch('/api/interview/:id', (req, res) => controller.interview.update(req, res));
     app.delete('/api/interview/:id', (req, res) => controller.interview.delete(req, res));
     app.get('/api/interview/:id', (req, res) => controller.interview.get(req, res));
+    app.post('/api/candidate', (req,res)=> controller.candidate.create(req,res));
 }

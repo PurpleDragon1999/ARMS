@@ -1,0 +1,41 @@
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Candidate form details</h4>
+        <form class="forms" #myform="ngForm" >
+          <div class="form-group pt-4">
+            <label for="Name">Name</label>
+            <input type="text" class="form-control needs-validation" ngModel id="name" placeholder="Name" name="name" #name="ngModel">
+            <div class="invalid-feedback">
+                Please enter your name
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="Experience">Experience</label>
+            <input type="number" class="form-control" ngModel id="experience" placeholder="Experience" name="experience" #experience="ngModel">
+          </div>
+          <div class="form-group">
+            <label for="Email">Email address</label>
+            <input type="email" class="form-control" ngModel id="email" placeholder="Email" name="email" #email="ngModel">
+          </div>
+          <div class="form-group">
+            <label>Upload CV</label>
+            <div class="input-group col-xs-12">              
+              <input id="files" class="form-control file-upload-info" type="file">
+              <label for="files" class="file-upload-browse btn btn-gradient-primary">Upload CV</label>
+            </div>
+          </div>   
+          <div class="form-group">
+            <label for="Skills">Skills</label>
+            <textarea class="form-control" ngModel id="skills" rows="4" placeholder="Skills" name="skills" #skills="ngModel"></textarea>
+          </div>  
+          <div class="form-group">
+            <label for="appliedFor">Applied for</label>
+            <input class="form-control" ngModel id="appliedFor" rows="4" placeholder="JD referal" name="appliedFor" #appliedFor="ngModel">
+          </div>      
+          <button type="submit" class="btn btn-gradient-primary mr-2" (click)="createCandidate(myform.value); myform.resetForm()">Submit</button>
+          <button class="btn btn-light" (click)="myform.resetForm()">Cancel</button>
+        </form>
+      </div>
+    </div>
+  </div>
