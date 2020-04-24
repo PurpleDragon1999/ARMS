@@ -1,0 +1,47 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white">
+  <div class="mx-5">
+    <i class="fab fa-accusoft mr-1"></i>
+    <a class="navbar-brand" href="#">ARMS</a>
+  </div>
+    
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" (click)="changeOverlay()" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>  
+
+  <div class="d-none d-xl-block d-none d-lg-block d-xl-none">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Dashboard <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Employees</a>
+      </li>
+      <li>
+        <a class="nav-link" href="#">Profile</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="collapse navbar-collapse bg-white" id="navbarSupportedContent">
+  <ul>
+    <li>
+      <a>Dashboard</a>
+      <i class="fas fa-home"></i>
+    </li>
+    <li>
+      <a>Employees</a>
+      <i class="fas fa-list-ul"></i>
+    </li>
+    <li>
+      <a>Profile</a>
+      <i class="fas fa-user"></i>
+    </li>
+  </ul>
+</div>
+
+<div>
+  <router-outlet></router-outlet>
+</div>
+
+<div class="overlay" [ngClass]="className"></div>
