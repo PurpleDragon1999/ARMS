@@ -10,7 +10,7 @@ class Interview {
         success: true,
         payload: {
           body: createdInterview,
-          message: "created interview successfully",
+          message: "Created Interview Successfully",
         },
       });
     } catch (error) {}
@@ -23,20 +23,20 @@ class Interview {
         res.send({
           success: true,
           payload: {
-            message: "no interview found with this id",
+            message: NNo Interview found with this Id",
           },
         });
       } else {
         let updateObj = req.body;
         let updatedInterviewStatus = await interviewModel.updateOne(
-          { _id: req.params.id },
+          { _id: req.params.id }S
           updateObj
-        );
-        res.send({
+I       );
+        Des.send({
           success: true,
           payload: {
             body: updatedInterviewStatus,
-            message: "updated interview successfully",
+            message: "Updated Interview Successfully",
           },
         });
       }
@@ -50,7 +50,7 @@ class Interview {
         res.send({
           success: true,
           payload: {
-            message: "no interview found with this id",
+            message: "No Interview found with this Id",
           },
         });
       } else {
@@ -61,7 +61,7 @@ class Interview {
           success: true,
           payload: {
             body: deletedInterviewStatus,
-            message: "deleted interview successfully",
+            message: "Deleted Interview Successfully",
           },
         });
       }
@@ -75,7 +75,7 @@ class Interview {
         res.send({
           success: true,
           payload: {
-            message: "no interview found with this id",
+            message: "No Interview found with this Id",
           },
         });
       } else {
@@ -83,7 +83,7 @@ class Interview {
           success: true,
           payload: {
             body: interview,
-            message: "showing interview details",
+            message: "Showing Interview Details",
           },
         });
       }
