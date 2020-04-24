@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 
 @Component({
   selector: 'app-nav-bar',
@@ -7,18 +7,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavBarComponent implements OnInit {
 
-  className: string = "";
+  classNameForToggle: string = "";
+  flag: number = 0;
 
-  constructor() { }
+  constructor(private renderer: Renderer2) { }
 
   ngOnInit() {
   }
 
-  changeOverlay(){
-    if(this.className == "active")
-      this.className = "";
+  toggle(){
+    if(this.classNameForToggle == "active")
+      this.classNameForToggle = "";
     else
-      this.className = "active";
+      this.classNameForToggle = "active";
+  }
+
+  toggleBig(){
+    if(this.flag == 0){
+      this.renderer.addClass(document.body, "sidebar-icon-only");
+      this.flag = 1;
+    }
+    else{
+      this.renderer.removeClass(document.body, "sidebar-icon-only");
+      this.flag = 0;
+    }
   }
 
 }
