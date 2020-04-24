@@ -15,11 +15,11 @@ class JobDescription{
     return this.model.create(jdObj);
   }
     //update the JD data as per criteria and show updatedEmployeeObj
-    async update(criteria={},updatedJdObj){
+    async modify(criteria={},updatedJdObj){
        return this.model.updateOne(criteria,updatedJdObj);
     }
     //delete the employee data as per criteria
-    async delete(criteria={}){
+    async remove(criteria={}){
       return this.model.deleteOne(criteria);
     }
     //to get all the JDs
