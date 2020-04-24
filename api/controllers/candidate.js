@@ -5,6 +5,7 @@ class Candidate extends Base{
     constructor(){
         super(candidateModel);
     }
+    
 }
 
 module.exports = new Candidate();

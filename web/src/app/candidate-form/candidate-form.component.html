@@ -34,7 +34,7 @@
           <div class="form-group">
             <label>CV<span class="asterick">*</span></label>
             <div class="input-group col-xs-12">              
-              <input type="file" name="cv" class="form-control file-upload-info" [(ngModel)]="model.cv" #cv="ngModel" [ngClass]="{ 'is-invalid': f.submitted && cv.invalid }" required>
+              <input type="file" name="cv" class="form-control file-upload-info"  ng2FileSelect [uploader]="uploader" ngModel #cv="ngModel" [ngClass]="{ 'is-invalid': f.submitted && cv.invalid }" required>
               <label for="files" class="file-upload-browse btn btn-gradient-primary">Upload CV</label>
               <div *ngIf="f.submitted && cv.invalid" class="invalid-feedback">
                 <div *ngIf="cv.errors.required"><i class="mdi mdi-alert-outline"></i>CV is required</div>
@@ -43,14 +43,14 @@
           </div>   
           <div class="form-group">
             <label for="Skills">Skills<span class="asterick">*</span></label>
-            <textarea class="form-control" name="skills" [(ngModel)]="model.skills" rows="4" placeholder="Skills"  #skills="ngModel" [ngClass]="{ 'is-invalid': f.submitted && skills.invalid }" required></textarea>
+            <textarea class="form-control" name="skills"  ngModel rows="4" placeholder="Skills"  #skills="ngModel" [ngClass]="{ 'is-invalid': f.submitted && skills.invalid }" required></textarea>
             <div *ngIf="f.submitted && skills.invalid" class="invalid-feedback">
               <div *ngIf="skills.errors.required"><i class="mdi mdi-alert-outline"></i>Skills is required</div>
             </div>
           </div>  
           <div class="form-group">
             <label for="appliedFor">Applied for</label>
-            <input class="form-control" ngModel id="appliedFor" rows="4" placeholder="JD referral" name="appliedFor" #appliedFor="ngModel">
+            <input type="text" class="form-control" ngModel id="appliedFor" rows="4" placeholder="JD referral" name="appliedFor" #appliedFor="ngModel">
           </div>      
           <button type="submit" class="btn btn-gradient-primary mr-2" (click)="f.form.valid; createCandidate(f.value); f.resetForm()">Submit</button>
           <button class="btn btn-light" (click)="f.resetForm()">Cancel</button>

@@ -1,4 +1,25 @@
 const controller = require('../controllers');
+var multer  = require('multer');
+var fs  = require('fs');
+var fileName;
+const dir = './cvUploads';
+
+let storage = multer.diskStorage({
+    destination: (req, file, callback) => {
+      if (!fs.existsSync(dir)){
+       fs.mkdirSync(dir);
+      }
+      callback(null, dir);
+    },
+    filename: (req, file, callback) => {
+        fileName = Date.now() + '-' + file.originalname;
+        callback(null, fileName);
+    }
+});
+let upload = multer({storage: storage});
+
+
+
 module.exports=(app) =>
 { 
     //Employee
@@ -13,5 +34,5 @@ module.exports=(app) =>
     app.patch('/api/interview/:id', (req, res) => controller.interview.update(req, res));
     app.delete('/api/interview/:id', (req, res) => controller.interview.delete(req, res));
     app.get('/api/interview/:id', (req, res) => controller.interview.get(req, res));
-    app.post('/api/candidate', (req,res)=> controller.candidate.create(req,res));
+    app.post('/api/candidate',upload.single('file'), (req,res)=> controller.candidate.uploadDetails(req,res));
 }

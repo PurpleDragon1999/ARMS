@@ -8,19 +8,22 @@ import { AdminComponent } from './admin/admin.component';
 import { CandidateFormComponent } from './candidate-form/candidate-form.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { FileSelectDirective } from 'ng2-file-upload';
+
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     AdminComponent,
-    CandidateFormComponent
+    CandidateFormComponent,
+    FileSelectDirective
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule, 
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
