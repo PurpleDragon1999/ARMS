@@ -1,9 +1,11 @@
 const employee = require('./employee');
-const interview = require('./interview')
-const candidate = require("./candidate")
+const interview = require('./interview');
+const jobDescription = require('./JobDescription');
+const candidate = require("./candidate");
 
 module.exports = {
-    employee,
-    interview,
-    candidate
-}
+    employee:employee,
+    interview:interview,
+    jobDescription:jobDescription,
+    candidate:candidate
+};
