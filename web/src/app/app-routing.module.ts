@@ -1,3 +1,4 @@
+import { JdFormComponent } from './jd-form/jd-form.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
@@ -7,6 +8,7 @@ import { HrInterviewAssessementComponent } from './hr-interview-assessement/hr-i
 
 
 const routes: Routes = [
+  { path: "form", component: JdFormComponent },
   { path: "hr/assessement", component:HrInterviewAssessementComponent  },
   {
     path:"",component:LoginComponent
