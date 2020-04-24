@@ -6,7 +6,7 @@ require("dotenv").config();
  nodeMail=async function(output,email,jdJson){
    try{
      let testAccount = await nodemailer.createTestAccount();
-    
+   
      // create reusable transporter object using the default SMTP transport
          let transporter = nodemailer.createTransport({
          service:'gmail',
@@ -24,7 +24,7 @@ require("dotenv").config();
      html:output,
      attachments: [{
       filename: jdJson.jdName+".pdf",
-      path: 'C:/Users/deepanshu.balani/Desktop/Interview Management System/ARMS/api/jobDescriptions/'+jdJson.jdName+'.pdf',
+       path: 'C:/Users/deepanshu.balani/Desktop/Interview Management System/ARMS/api/jobDescriptions/'+jdJson.jdName+'.pdf',
       contentType: 'application/pdf'
     }],
    }
@@ -34,7 +34,7 @@ require("dotenv").config();
           console.error("error occurs",err);
         }
         else{
-        
+           console.log("email sent successfully");
         }
    });
   }catch(error){

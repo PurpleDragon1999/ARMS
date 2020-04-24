@@ -10,6 +10,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "fs": "0.0.1-security",
+    "html-to-pdf": "^0.1.11",
     "https": "^1.0.0",
     "jsonwebtoken": "^8.5.1",
     "jwt-simple": "^0.5.6",
