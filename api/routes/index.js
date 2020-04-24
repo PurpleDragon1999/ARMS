@@ -8,8 +8,6 @@ module.exports=(app) =>
     app.get("/api/employeeBySearch/:searchBy", (req, res)=>controller.employee.searchRecord(req, res));
     app.patch('/api/employee/:id', controller.employee.modify);
     app.delete('/api/employee/:id', controller.employee.remove);
-    // Sample get route
-    // app.get('/login', controller.);
 
     //Routes for Job Description
     app.post('/api/jobDescription',controller.jobDescription.createJd);
