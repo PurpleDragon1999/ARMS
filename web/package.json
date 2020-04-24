@@ -15,12 +15,17 @@
     "@angular/common": "~8.2.14",
     "@angular/compiler": "~8.2.14",
     "@angular/core": "~8.2.14",
-    "@angular/forms": "~8.2.14",
+    "@angular/forms": "^8.2.14",
     "@angular/platform-browser": "~8.2.14",
     "@angular/platform-browser-dynamic": "~8.2.14",
     "@angular/router": "~8.2.14",
     "@auth0/angular-jwt": "^4.0.0",
+<<<<<<< HEAD
     "ng2-file-upload": "^1.4.0",
+=======
+    "ngx-toaster": "^1.0.1",
+    "@fortawesome/fontawesome-free": "^5.13.0",
+>>>>>>> 8743c7fc7cac885a8ab4ca6377cbafbb08ac575d
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"

@@ -1,9 +1,9 @@
 const Base = require('./base');
-const model = require('../models');
+const employeeModel = require('../models/employee');
 
 class Employee extends Base {
     constructor(){ 
-        super(model.employee); 
+        super(employeeModel); 
     }
 
 }
