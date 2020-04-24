@@ -9,7 +9,7 @@ module.exports=(app) =>
     app.delete('/api/employee/:id', (req, res) => controller.employee.remove(req, res));
     
     //Job Description
-    app.post('/api/jobDescription',controller.jobDescription.createJd);
+    // app.post('/api/jobDescription',controller.jobDescription.createJd);
     app.get('/api/jobDescription',controller.jobDescription.showAllJds);
     app.get('/api/jobDescription/:id',controller.jobDescription.showJd);
     app.put('/api/jobDescription/:id',controller.jobDescription.updateJd);	

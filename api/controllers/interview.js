@@ -23,16 +23,16 @@ class Interview {
         res.send({
           success: true,
           payload: {
-            message: NNo Interview found with this Id",
+            message: "No Interview found with this Id",
           },
         });
       } else {
         let updateObj = req.body;
         let updatedInterviewStatus = await interviewModel.updateOne(
-          { _id: req.params.id }S
+          { _id: req.params.id },
           updateObj
-I       );
-        Des.send({
+        );
+        res.send({
           success: true,
           payload: {
             body: updatedInterviewStatus,
