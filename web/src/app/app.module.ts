@@ -8,6 +8,8 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { AdminComponent } from './employee/admin.component';
 import { AdminFormComponent } from './employee/containers/employee-form/employee-form.component';
+
+import { JdFormComponent } from './jd-form/jd-form.component';
 import { HrInterviewAssessementComponent } from './hr-interview-assessement/hr-interview-assessement.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -18,6 +20,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     LoginComponent,
     AdminComponent,
     AdminFormComponent,
+    JdFormComponent,
     HrInterviewAssessementComponent,
     NavBarComponent,
     DashboardComponent,

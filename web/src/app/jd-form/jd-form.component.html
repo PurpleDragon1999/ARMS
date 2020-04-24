@@ -1,0 +1,115 @@
+<div class="main-panel">
+    <div class="content-wrapper">
+      <div class="page-header">
+        <h3 class="page-title"> Job Description Form </h3>
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-lg-12 grid-margin stretch-card">
+          <div class="card">
+            <div class="card-body">
+              <br>
+              <form class="forms-sample" [formGroup]="jdForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                  <label for="nameOfJD">Name of JD :</label>
+                  <input type="text" class="form-control" id="nameOfJD" placeholder="Name"
+                  formControlName="jdName" [ngClass]="{ 'is-invalid': submitted && formControls.jdName.errors }"/>
+                  <div *ngIf="submitted && formControls.jdName.errors" class="invalid-feedback">
+                    <div *ngIf="formControls.jdName.errors.required"><i class="mdi mdi-alert-outline"></i> JD Name is required</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="appliedFor">Applied For : </label>
+                  <input type="text" class="form-control" placeholder="Applied For"
+                  formControlName="appliedFor" [ngClass]="{ 'is-invalid': submitted && formControls.appliedFor.errors }"/>
+                  <div *ngIf="submitted && formControls.appliedFor.errors" class="invalid-feedback">
+                    <div *ngIf="formControls.appliedFor.errors.required"><i class="mdi mdi-alert-outline"></i> Applied for is required</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                    <label for="openingDate">Opening date : </label>
+                    <input type="date" class="form-control" formControlName="openingDate" [ngClass]="{ 'is-invalid': submitted && formControls.openingDate.errors }"/>
+                    <div *ngIf="submitted && formControls.openingDate.errors" class="invalid-feedback">
+                      <div *ngIf="formControls.openingDate.errors.required"><i class="mdi mdi-alert-outline"></i> Opening Date is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                  <label for="closingDate">Closing Date : </label>
+                  <input type="date" class="form-control" formControlName="closingDate" [ngClass]="{ 'is-invalid': submitted && formControls.closingDate.errors }"/>
+                  <div *ngIf="submitted && formControls.closingDate.errors" class="invalid-feedback">
+                    <div *ngIf="formControls.closingDate.errors.required"><i class="mdi mdi-alert-outline"></i> Closing Date is required</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                    <label for="jobProfileDescription">Job Profile Description : </label>
+                    <input type="text" class="form-control" placeholder="Job Profile Description" 
+                    formControlName="jobProfileDescription" [ngClass]="{ 'is-invalid': submitted && formControls.jobProfileDescription.errors }"/>
+                    <div *ngIf="submitted && formControls.jobProfileDescription.errors" class="invalid-feedback">
+                      <div *ngIf="formControls.jobProfileDescription.errors.required"><i class="mdi mdi-alert-outline"></i> Job Profile Description is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                  <label for="skills">Skills : </label>
+                  <input type="text" class="form-control" placeholder="Skills"
+                  formControlName="skills" [ngClass]="{ 'is-invalid': submitted && formControls.skills.errors }"/>
+                    <div *ngIf="submitted && formControls.skills.errors" class="invalid-feedback">
+                      <div *ngIf="formControls.skills.errors.required"><i class="mdi mdi-alert-outline"></i> Skills is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="jobType">Job Type : </label>
+                    <input type="text" class="form-control" placeholder="Job Type" 
+                    formControlName="jobType" [ngClass]="{ 'is-invalid': submitted && formControls.jobType.errors }"/>
+                    <div *ngIf="submitted && formControls.jobType.errors" class="invalid-feedback">
+                      <div *ngIf="formControls.jobType.errors.required"><i class="mdi mdi-alert-outline"></i> Job Type is required</div>
+                    </div>
+                  </div>
+                <div class="form-group">
+                  <label for="eligibilityCriteria">Eligibility criteria :</label>
+                  <input type="text" class="form-control" placeholder="Criteria"
+                  formControlName="eligibilityCriteria" [ngClass]="{ 'is-invalid': submitted && formControls.eligibilityCriteria.errors }"/>
+                    <div *ngIf="submitted && formControls.eligibilityCriteria.errors" class="invalid-feedback">
+                      <div *ngIf="formControls.eligibilityCriteria.errors.required"><i class="mdi mdi-alert-outline"></i> Eligibility criteria is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                  <label for="location">Location : </label>
+                  <input type="text" class="form-control" placeholder="Location"
+                  formControlName="location" [ngClass]="{ 'is-invalid': submitted && formControls.location.errors }"/>
+                    <div *ngIf="submitted && formControls.location.errors" class="invalid-feedback">
+                      <div *ngIf="formControls.location.errors.required"><i class="mdi mdi-alert-outline"></i> Location is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="salary">Salary : </label>
+                    <input type="text" class="form-control" placeholder="Salary"
+                    formControlName="salary" [ngClass]="{ 'is-invalid': submitted && formControls.salary.errors }"/>
+                    <div *ngIf="submitted && formControls.salary.errors" class="invalid-feedback">
+                      <div *ngIf="formControls.salary.errors.required"><i class="mdi mdi-alert-outline"></i> Salary is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="vacancies">No.of  Vacancies : </label>
+                    <input type="number" class="form-control" placeholder="Vacancies" 
+                    formControlName="vacancies" [ngClass]="{ 'is-invalid': submitted && formControls.vacancies.errors }"/>
+                    <div *ngIf="submitted && formControls.vacancies.errors" class="invalid-feedback">
+                      <div *ngIf="formControls.vacancies.errors.required"><i class="mdi mdi-alert-outline"></i> No.of Vacancies is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="applicants">No.of  Applicants : </label>
+                    <input type="number" class="form-control" placeholder="Applicants"
+                    formControlName="applicants" [ngClass]="{ 'is-invalid': submitted && formControls.applicants.errors }"/>
+                    <div *ngIf="submitted && formControls.applicants.errors" class="invalid-feedback">
+                      <div *ngIf="formControls.applicants.errors.required"><i class="mdi mdi-alert-outline"></i> No.of Applicants is required</div>
+                    </div>
+                </div>
+                  <br>
+                <button type="submit" class="btn btn-gradient-primary mr-2">ADD</button>
+                <button class="btn btn-light">Cancel</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> 
+</div>
