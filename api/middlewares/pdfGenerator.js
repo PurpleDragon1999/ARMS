@@ -1,7 +1,6 @@
 var pdf=require('pdfkit');
 var fs=require('fs');
-const HTMLToPDF = require('html-to-pdf');
- 
+
 //this function generates pdf of json
  const pdfGenerator=(jdJson)=>{
     var jdPdf=new pdf;
