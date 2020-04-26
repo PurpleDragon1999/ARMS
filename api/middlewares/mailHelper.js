@@ -43,7 +43,7 @@ shortlisted for an interview process with CyberGroup.The details of interview ar
 <em class="bottom">This is automatically generated email,please do not reply</em>
 <p>Thanks</p>
 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRCUuWWhu0HByWgdDAp2cA1TDf-a_
-          FpjUA_DFbRt33DViY9tNDH&usqp=CAU"width="100"height="100">
+ FpjUA_DFbRt33DViY9tNDH&usqp=CAU"width="100"height="100">
   
 `;
    try{
