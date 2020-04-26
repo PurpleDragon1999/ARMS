@@ -32,9 +32,9 @@ module.exports={
        type:String,
        enum:["applied-for","in-progress","selected","rejected"]
     },
-   //  appliedFor:{
-   //     type:objectId,
-   //     ref:"jobDescription"
-   //  }
+    appliedFor:{
+       type:objectId,
+       ref:"jobDescription"
+    }
    
 }
