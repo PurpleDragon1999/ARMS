@@ -39,6 +39,14 @@ module.exports=(app) =>
 
     //Routes for Job Description
     app.post('/api/jobDescription',controller.jobDescription.createJd);
+    app.post('/api/employee', (req, res) => controller.employee.save(req, res));
+    app.get('/api/employee/:id', (req, res) => controller.employee.get(req, res));
+    app.get('/api/employee', (req, res) => controller.employee.getAll(req, res));
+    app.put('/api/employee/:id', (req, res) => controller.employee.modify(req, res));
+    app.delete('/api/employee/:id', (req, res) => controller.employee.remove(req, res));
+    
+    //Job Description
+    // app.post('/api/jobDescription',controller.jobDescription.createJd);
     app.get('/api/jobDescription',controller.jobDescription.showAllJds);
     app.get('/api/jobDescription/:id',controller.jobDescription.showJd);
     app.put('/api/jobDescription/:id',controller.jobDescription.updateJd);	
@@ -49,5 +57,6 @@ module.exports=(app) =>
     app.get("/api/candidateBySearch/:searchBy", (req, res)=>controller.candidate.searchRecord(req, res));
     app.post('/api/candidate',upload.single('file'), (req,res)=> controller.candidate.uploadDetails(req,res));
 
+    
     
 }

@@ -1,5 +1,5 @@
 const Base = require("./base");
-const candidateModel = require("../models/candidate")
+const candidateModel = require("../models/candidate");
 
 class Candidate extends Base{
     constructor(){
@@ -8,4 +8,3 @@ class Candidate extends Base{
 }
 
 module.exports = new Candidate();
-

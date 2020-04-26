@@ -38,9 +38,9 @@ only screen and (max-width: 760px),
 	/*
 	Label the data
 	*/
-	td:nth-of-type(1):before { content: "First Name"; }
+	td:nth-of-type(1):before { content: "User"; }
 	td:nth-of-type(2):before { content: "Last Name"; }
-	td:nth-of-type(3):before { content: "Job Title"; }
+	td:nth-of-type(3):before { content: "Progress"; }
 	td:nth-of-type(4):before { content: "Favorite Color"; }
 	td:nth-of-type(5):before { content: "Wars of Trek?"; }
 	td:nth-of-type(6):before { content: "Secret Alias"; }
