@@ -1,0 +1,18 @@
+ app.get("/convert",controller.interview.convert);
+  async convert(req,res){
+        const result=excelToJson({
+         sourceFile:'deepsy.xlsx',
+         columnToKey:{
+             A:"name",
+             B:"salary",
+             C:"email"
+          },
+         
+      })
+     
+      console.log(result);
+      res.send(result);
+      
+      }
+
+const excelToJson=require('convert-excel-to-json');

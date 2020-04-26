@@ -33,7 +33,7 @@ module.exports={
        
     }],
     date:{
-        type:Date,
-        required:true
-        }
+        type: Date,
+        required: true
+    }
 }

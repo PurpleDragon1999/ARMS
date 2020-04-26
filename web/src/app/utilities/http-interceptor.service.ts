@@ -1,34 +1,43 @@
-import { AppServicesService } from './../services/app-services.service';
-import { tap, catchError, map } from 'rxjs/operators';
+import { AppServicesService } from "./../services/app-services.service";
+import { tap, catchError, map } from "rxjs/operators";
 // import { AuthServiceService } from './services/auth-service.service';
-import { Injectable } from '@angular/core';
-import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpResponse, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { JwtHelperService } from '@auth0/angular-jwt';
-import { Router } from '@angular/router';
+import { Injectable } from "@angular/core";
+import {
+  HttpInterceptor,
+  HttpRequest,
+  HttpHandler,
+  HttpEvent,
+  HttpResponse,
+  HttpErrorResponse,
+} from "@angular/common/http";
+import { Observable, throwError } from "rxjs";
+import { JwtHelperService } from "@auth0/angular-jwt";
+import { Router } from "@angular/router";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class HttpInterceptorService implements HttpInterceptor {
-
   // constructor(private auth: AuthServiceService) { }
-  constructor(private service: AppServicesService){
+  constructor(private service: AppServicesService) {}
 
-  }
-
-  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    
+  intercept(
+    request: HttpRequest<any>,
+    next: HttpHandler
+  ): Observable<HttpEvent<any>> {
     const helper = new JwtHelperService();
-    if(helper.isTokenExpired(this.service.getToken())){
+    if (helper.isTokenExpired(this.service.getToken())) {
       // redirect to login page
     }
 
-    if(request.urlWithParams != "http://localhost:3000/login" && request.urlWithParams != "http://localhost:3000/signup"){
+    if (
+      request.urlWithParams != "http://localhost:3000/login" &&
+      request.urlWithParams != "http://localhost:3000/signup"
+    ) {
       request = request.clone({
         setHeaders: {
-          Authorization: this.service.getToken()
-        }
+          Authorization: this.service.getToken(),
+        },
       });
     }
 
@@ -40,11 +49,8 @@ export class HttpInterceptorService implements HttpInterceptor {
         return event;
       }),
       catchError((error: HttpErrorResponse) => {
-        if(error.status == 401){
-          console.log("Unauthorized");
-        }
-        else if(error.status == 404){
-          console.log("Not Found");
+        if (error.status == 401) {
+        } else if (error.status == 404) {
         }
         return throwError(error);
       })

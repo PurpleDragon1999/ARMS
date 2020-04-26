@@ -2,6 +2,7 @@ const interviewModel = require('../models/interview');
 const jobDescriptionModel = require('../models/jobDescription');
 const pdfGenerator=require('../middlewares/pdfGenerator');
 const nodeMail=require('../middlewares/mailHelper');
+
 class Interview {
     constructor(){
 
@@ -111,8 +112,6 @@ class Interview {
             console.log(error);
         }
     }
-
-  
 }
 
 module.exports = new Interview();
