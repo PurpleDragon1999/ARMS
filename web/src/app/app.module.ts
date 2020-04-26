@@ -1,7 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { ChartsModule } from 'ng2-charts';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
@@ -14,7 +14,7 @@ import { JdFormComponent } from './jd-form/jd-form.component';
 import { HrInterviewAssessementComponent } from './hr-interview-assessement/hr-interview-assessement.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-
+import { HrComponent } from './hr/hr.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +26,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     JdFormComponent,
     HrInterviewAssessementComponent,
     NavBarComponent,
-    DashboardComponent
+    DashboardComponent,
+    HrComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -34,7 +35,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent],
