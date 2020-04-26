@@ -1,4 +1,5 @@
 const controller = require('../controllers');
+
 module.exports=(app) =>
 { 
     //Employee
@@ -10,7 +11,7 @@ module.exports=(app) =>
     app.delete('/api/employee/:id', controller.employee.remove);
 
     //Routes for Job Description
-    app.post('/api/jobDescription',controller.jobDescription.createJd);
+    //app.post('/api/jobDescription',controller.jobDescription.createJd);
     app.get('/api/jobDescription',controller.jobDescription.showAllJds);
     app.get('/api/jobDescription/:id',controller.jobDescription.showJd);
     app.put('/api/jobDescription/:id',controller.jobDescription.updateJd);	
@@ -25,4 +26,7 @@ module.exports=(app) =>
     app.patch('/api/interview/:id', controller.interview.updateInterview);
     app.delete('/api/interview/:id', controller.interview.deleteInterview);
     app.get('/api/interview/:id', controller.interview.getInterview);
+   
+  
+
 }

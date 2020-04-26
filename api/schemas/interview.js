@@ -34,6 +34,6 @@ module.exports={
     }],
     date:{
         type:Date,
-        default:Date.now
+        required:true
         }
 }

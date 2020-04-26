@@ -3,5 +3,5 @@ package-lock.json
 node_modules/
 
 api/.env
-
+api/config/keys.js
 yarn.lock

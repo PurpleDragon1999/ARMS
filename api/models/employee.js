@@ -12,6 +12,9 @@ class Employee{
         console.log("inside employee getAll")
         return this.Model.find(criteria, columns).sort({"name": 1});
     }
+    async getbyEmail(email){
+        return this.Model.findOne({ email:email });
+    }
 
     async get(id){
         return this.Model.findOne({ _id: id });
