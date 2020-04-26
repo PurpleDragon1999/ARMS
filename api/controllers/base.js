@@ -28,14 +28,14 @@ class Base {
   async get(req, res) {
     try {
       const data = await this.model.get(req.params.id);
-      if(!data){
-        return res.status(404).send({
-                          payload: {
-                          data,
-                          message: "Id does not exists!"
-                          }
-                        });
-      }
+      // if(!data){
+      //   return res.status(404).send({
+      //                     payload: {
+      //                     data,
+      //                     message: "Id does not exists!"
+      //                     }
+      //                   });
+      // }
       return res.send({
         success: true,
         payload: {
@@ -53,18 +53,37 @@ class Base {
     }
   }
 
+  // async getAll(req, res){
+  //     try{
+  //         const data = await this.model.getAll();
+  //         return res.send({
+  //             success: true,
+  //             payload: {
+  //                 data,
+  //                 message: 'Retrieved Successfully'
+  //             }
+  //         });
+  //     }catch(e){
+  //         res.status(500).send({
+  //             success: false,
+  //             payload: {
+  //                 message: e.message
+  //             }
+  //         })
+  //     }
+  // }
   async index(req, res){
       try{
           const data = await this.model.index();
-        if(!data)
-        {
-            return res.status(404).send({
-                              payload: {
-                              data,
-                              message: "List has no items!"
-                              }
-                            });   
-        }
+        // if(!data)
+        // {
+        //     return res.status(404).send({
+        //                       payload: {
+        //                       data,
+        //                       message: "List has no items!"
+        //                       }
+        //                     });   
+        // }
           return res.send({
               success: true,
               payload: {
