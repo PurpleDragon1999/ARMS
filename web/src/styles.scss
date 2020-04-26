@@ -6720,7 +6720,7 @@ a.close.disabled {
     .popover .arrow::before, .popover .arrow::after {
       position: absolute;
       display: block;
-=======
+
     display: block;
     opacity: 1; }
   .toast.hide {
@@ -7023,7 +7023,7 @@ a.close.disabled {
     width: 0.5rem;
     height: 1rem;
     margin: 0.3rem 0; }
-=======
+
 .bs-tooltip-top, .bs-tooltip-auto[x-placement^="top"] {
   padding: 0.4rem 0; }
   .bs-tooltip-top .arrow, .bs-tooltip-auto[x-placement^="top"] .arrow {
@@ -11475,7 +11475,7 @@ code {
 
     -webkit-box-align: end;
     -ms-flex-align: end;
-    align-items: end; }
+    align-items: end; 
 
     -webkit-box-align: flex-end;
     -ms-flex-align: flex-end;
@@ -14082,3 +14082,4 @@ dl {
   flex-grow: 1; }
 
 /*# sourceMappingURL=style.css.map */
+}
