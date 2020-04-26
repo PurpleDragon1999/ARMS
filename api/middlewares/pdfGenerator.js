@@ -48,12 +48,5 @@ var fs=require('fs');
             align: 'left'
           });
         jdPdf.end();
-     
-        
-     
-
-
-
-
 }
 module.exports=pdfGenerator;
