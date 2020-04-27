@@ -1,4 +1,5 @@
 const controller = require('../controllers');
+
 module.exports=(app) =>
 { 
     //Employee
@@ -24,6 +25,7 @@ module.exports=(app) =>
     app.patch('/api/interview/:id', controller.interview.updateInterview);
     app.delete('/api/interview/:id', controller.interview.deleteInterview);
     app.get('/api/interview/:id', controller.interview.getInterview);
+   
 
     //Candidate
     app.get("/api/candidates", (req, res)=>controller.candidate.getAll(req, res));

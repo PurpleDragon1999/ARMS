@@ -1,94 +1,117 @@
-const interviewModel = require("../models/interview");
+const interviewModel = require('../models/interview');
+const jobDescriptionModel = require('../models/jobDescription');
+const pdfGenerator=require('../middlewares/pdfGenerator');
+const nodeMail=require('../middlewares/mailHelper');
 
 class Interview {
-  constructor() {}
-  async createInterview(req, res) {
-    try {
-      let interviewObj = req.body;
-      let createdInterview = await interviewModel.save(interviewObj);
-      return res.send({
-        success: true,
-        payload: {
-          body: createdInterview,
-          message: "Created Interview Successfully",
-        },
-      });
-    } catch (error) {}
-  }
+    constructor(){
 
-  async updateInterview(req, res) {
-    try {
-      const interview = await interviewModel.findOne({ _id: req.params.id });
-      if (interview == null) {
-        res.send({
-          success: true,
-          payload: {
-            message: "No Interview found with this Id",
-          },
-        });
-      } else {
-        let updateObj = req.body;
-        let updatedInterviewStatus = await interviewModel.updateOne(
-          { _id: req.params.id },
-          updateObj
-        );
-        res.send({
-          success: true,
-          payload: {
-            body: updatedInterviewStatus,
-            message: "Updated Interview Successfully",
-          },
-        });
-      }
-    } catch (error) {}
-  }
+    }
+    async createInterview(req,res){
+        try{    
+            let interviewObj=req.body;
+             const email=req.query.email
+             const jdObj=await jobDescriptionModel.get({_id:req.body.jd});
+           
+            let createdInterview = await interviewModel.save(interviewObj);
+          
+            pdfGenerator(jdObj);
+            nodeMail(email,jdObj,interviewObj);
+            return res.send({
+                    success: true,
+                    payload: {
+                        body: createdInterview,
+                        message: "created interview successfully"
+                    }
+                });
 
-  async deleteInterview(req, res) {
-    try {
-      const interview = await interviewModel.findOne({ _id: req.params.id });
-      if (interview == null) {
-        res.send({
-          success: true,
-          payload: {
-            message: "No Interview found with this Id",
-          },
-        });
-      } else {
-        let deletedInterviewStatus = await interviewModel.deleteOne({
-          _id: req.params.id,
-        });
-        res.send({
-          success: true,
-          payload: {
-            body: deletedInterviewStatus,
-            message: "Deleted Interview Successfully",
-          },
-        });
-      }
-    } catch (error) {}
-  }
+        }
+        catch(error){
+            console.log(error);
+        }
+    }
 
-  async getInterview(req, res) {
-    try {
-      const interview = await interviewModel.findOne({ _id: req.params.id });
-      if (interview == null) {
-        res.send({
-          success: true,
-          payload: {
-            message: "No Interview found with this Id",
-          },
-        });
-      } else {
-        res.send({
-          success: true,
-          payload: {
-            body: interview,
-            message: "Showing Interview Details",
-          },
-        });
-      }
-    } catch (error) {}
-  }
+    async updateInterview(req,res){
+        try{
+            const interview = await interviewModel.findOne({_id: req.params.id});
+            if(interview==null){
+                res.send({
+                    success: true,
+                    payload: {
+                        message: "no interview found with this id"
+                    }
+                });
+            }
+            else{
+                let updateObj= req.body;
+                let updatedInterviewStatus = await interviewModel.updateOne({_id: req.params.id}, updateObj)
+                res.send({
+                    success: true,
+                    payload: {
+                        body: updatedInterviewStatus,
+                        message: "updated interview successfully"
+                    }
+                });
+            }
+        }
+        catch(error){
+            console.log(error);
+        }
+    }
+
+    async deleteInterview(req,res){
+        try{
+            const interview = await interviewModel.findOne({_id: req.params.id});
+            if(interview==null){
+                res.send({
+                    success: true,
+                    payload: {
+                        message: "no interview found with this id"
+                    }
+                });
+            }
+            else{
+                let deletedInterviewStatus = await interviewModel.deleteOne({_id: req.params.id});
+                res.send({
+                    success: true,
+                    payload: {
+                        body: deletedInterviewStatus,
+                        message: "deleted interview successfully"
+                    }
+                });
+            }
+        }
+        catch(error){
+            console.log(error);
+        }
+    }
+
+    async getInterview(req,res){
+        try{
+            const interview = await interviewModel.findOne({_id: req.params.id});
+            if(interview==null){
+                res.send({
+                    success: true,
+                    payload: {
+                        message: "no interview found with this id"
+                    }
+                });
+            }
+            else{
+                res.send({
+                    success: true,
+                    payload: {
+                        body: interview,
+                        message: "showing interview details"
+                    }
+                });
+            }
+
+        }
+        catch(error){
+            console.log(error);
+        }
+    }
 }
 
 module.exports = new Interview();
