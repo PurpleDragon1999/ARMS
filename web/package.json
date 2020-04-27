@@ -20,10 +20,13 @@
     "@angular/platform-browser-dynamic": "~8.2.14",
     "@angular/router": "~8.2.14",
     "@auth0/angular-jwt": "^4.0.0",
+    "ng2-file-upload": "^1.4.0",
     "ngx-toaster": "^1.0.1",
+    "@azure/msal-angular": "^1.0.0-beta.5",
     "@fortawesome/fontawesome-free": "^5.13.0",
     "chart.js": "^2.9.3",
     "ng2-charts": "^2.3.0",
+    "msal": "^1.2.2",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
