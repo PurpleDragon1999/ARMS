@@ -5,16 +5,20 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { CreateInterviewComponent } from './create-interview/create-interview.component';
 import { HrInterviewAssessementComponent } from './hr-interview-assessement/hr-interview-assessement.component';
 
+import { AdminFormComponent } from './employee/containers/employee-form/employee-form.component';
 
 const routes: Routes = [
   { path: "candidate", component: CandidateFormComponent},
+  { path: "create-interview", component: CreateInterviewComponent },
   { path: "form", component: JdFormComponent },
   { path: "hr/assessement", component:HrInterviewAssessementComponent  },
   {
     path:"",component:LoginComponent
   },
+  { path: "hr/assessement", component:HrInterviewAssessementComponent  },
   {
     path: "navbar", component: NavBarComponent, children: [
       {
@@ -23,6 +27,12 @@ const routes: Routes = [
       {
         path:"dashboard", component: DashboardComponent
       }
+    ]
+  },
+  { path: 'employee/:formType', 
+    children: [
+      { path: '', component: AdminFormComponent, pathMatch: 'full' },
+      { path: ':employeeId', component: AdminFormComponent }
     ]
   }
 ];

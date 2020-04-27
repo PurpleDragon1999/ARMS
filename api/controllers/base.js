@@ -156,7 +156,7 @@ class Base {
                 res.send({
                     success: true,
                     payload: {
-                        message: "No record found"
+                        message: "No record"
                     }
                 });
             }
