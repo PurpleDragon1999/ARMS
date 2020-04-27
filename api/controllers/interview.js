@@ -6,4 +6,4 @@ class Interview extends Base{
         super(interviewModel);
     }
 
-  module.exports = new Interview();
+ module.exports = new Interview();
