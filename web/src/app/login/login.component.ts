@@ -53,25 +53,6 @@ export class LoginComponent implements OnInit {
   checkAccount() {
     this.loggedIn = !!this.authService.getAccount();
   }
-  
-  
-  async getProfile() {
-    let obj=await this.http.get(GRAPH_ENDPOINT).toPromise()
-      .then(profile => {
-        this.profile=profile
-      });
-      
-    this.loginService.checkPermissions(this.profile).subscribe(
-      res=>{
-         this.message=res.payload.message
-         this.employeeData=res.payload.data;
-        
-      },err=>{
-        this.message=err.payload.message
-      }
-    )
-    
-  }
   loginFunction() {
     const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
     console.log(isIE);
@@ -80,9 +61,17 @@ export class LoginComponent implements OnInit {
     } else {
       this.authService.loginPopup();
     }
-    this.getProfile();
+    const idToken= window.localStorage.getItem("msal.idtoken");
+      
+    this.loginService.checkPermissions(idToken).subscribe(
+      res=>{
+         this.message=res.payload.message
+         this.employeeData=res.payload.data;
+        
+      },err=>{
+        this.message=err.payload.message
+      }
+    )
   
   }
-   
-
 }

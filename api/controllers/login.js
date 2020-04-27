@@ -1,11 +1,12 @@
 const model=require('../models')
+const jwt_decode=require("jwt-decode");
 class Login{
   constructor(){}
 
   async checkValidEmployee(req,res){
      try{
-      
-         const employeeObj=await model.employee.get({email:req.body.mail});
+         const data=jwt_decode(req.body.idToken);
+         const employeeObj=await model.employee.get({email:data.email});
          if(employeeObj!=null){
             res.status(200).send({
                 success:true,

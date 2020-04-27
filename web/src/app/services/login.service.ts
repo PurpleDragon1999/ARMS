@@ -15,8 +15,9 @@ export class LoginService {
 };
  
   
-  checkPermissions(profile):Observable<any>{
-      return this.http.post<any>(LOGIN_API,{...profile},{...this.httpOptions});
+  checkPermissions(idToken):Observable<any>{
+    console.log(idToken);
+      return this.http.post<any>(LOGIN_API,{idToken},{...this.httpOptions});
 
   }
 
