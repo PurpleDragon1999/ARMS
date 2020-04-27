@@ -83,3 +83,34 @@
     </div>
   </div>
 </div>
+
+<div class="col-12 grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Create using csv file</h4>
+      <form name="form" #f="ngForm" novalidate>
+        <div class="form-group">
+          <label>File<span class="asterick">*</span></label>
+          <div class="input-group col-xs-12">              
+            <input type="file" name="csv" class="form-control file-upload-info"  ng2FileSelect [uploader]="uploader" ngModel #csv="ngModel" [ngClass]="{ 'is-invalid': f.submitted && csv.invalid }"
+            required>
+            <label for="files" class="file-upload-browse btn btn-gradient-primary">Upload File</label>
+            <div *ngIf="f.submitted && csv.invalid" class="invalid-feedback">
+              <div *ngIf="csv.errors.required"><i class="mdi mdi-alert-outline"></i>File is required</div>
+              <div *ngIf="email.errors.email"><i class="mdi mdi-alert-outline"></i>File of type .csv is supported</div>
+            </div>
+          </div>
+          <div class="progress mt-3" style="height: 1.5rem">
+            <div class="progress-bar btn btn-gradient-primary" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }">
+              <label>{{uploadProgress}}%</label>
+            </div>
+          </div>
+        </div>   
+       
+          
+        <button type="submit" class="btn btn-gradient-primary mr-2" (click)=" uploader.uploadAll(); f.resetForm()">Create</button>
+        <button class="btn btn-light" (click)="f.resetForm(); uploader.clearQueue()">Cancel</button>
+      </form>
+    </div>
+  </div>
+</div>

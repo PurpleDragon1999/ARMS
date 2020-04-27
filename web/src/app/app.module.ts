@@ -13,6 +13,10 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { CandidateFormComponent } from './candidate-form/candidate-form.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { FileSelectDirective } from 'ng2-file-upload';
+import { ProgressHttpModule } from 'angular-progress-http';
+// import { NgCircleProgressModule } from 'ng-circle-progress';
+
+
 
 import { MsalModule, MsalInterceptor } from '@azure/msal-angular';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
@@ -40,6 +44,15 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     FormsModule, 
     ReactiveFormsModule,
     HttpClientModule,
+    ProgressHttpModule, 
+    // NgCircleProgressModule.forRoot({
+    //   radius: 100,
+    //   outerStrokeWidth: 16,
+    //   innerStrokeWidth: 8,
+    //   outerStrokeColor: "#78C000",
+    //   innerStrokeColor: "#C7E596",
+    //   animationDuration: 300,
+    // }),
     MsalModule.forRoot({
       auth: {
         clientId: '4d31e348-bc89-40d2-821c-f65942084ae3',

@@ -6,10 +6,16 @@ import { IResponse } from "src/app/models/response.interface";
 import { switchMap } from "rxjs/operators";
 import { EMPTY } from "rxjs";
 
+import { ProgressHttp } from 'angular-progress-http';
+import { FileUploader } from 'ng2-file-upload';
+
+
 interface RouteData {
   formType: "create" | "update" | "read";
   employeeId: String;
 }
+
+const URL = 'http://localhost:3000/example';
 
 @Component({
   selector: "app-employee-form",
@@ -20,12 +26,18 @@ export class AdminFormComponent implements OnInit {
   employee: IEmployee;
   formType: RouteData["formType"];
   employeeId: String;
+  uploadProgress: Number = 0;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private employeeService: EmployeeService
+    private employeeService: EmployeeService,
   ) {}
+
+  public uploader: FileUploader = new FileUploader({
+    url: URL,
+    itemAlias: 'file',
+  });
 
   ngOnInit(): void {
     this.route.params
@@ -48,6 +60,24 @@ export class AdminFormComponent implements OnInit {
           this.employee.employeeId.toString().replace("CYG-", "")
         );
       });
+
+      this.uploader.onAfterAddingFile = (file) => {
+        file.withCredentials = false; 
+      };
+      this.uploader.onProgressItem = (item, progress) => {
+        this.uploadProgress = progress;
+        console.log(progress)
+        if (progress < 100) {
+            console.log(progress);
+        }
+        item.onComplete = (res) => {
+            console.log('Done!');
+        }
+      };
+      this.uploader.onCompleteItem = (item: any, status: any) => {
+        this.uploader.clearQueue();
+        console.log('FileUpload:uploaded successfully:', item, status);
+      };
   }
 
   handleSubmit(employee: IEmployee): void {
@@ -66,4 +96,11 @@ export class AdminFormComponent implements OnInit {
       .updateEmployee(employee, this.employeeId)
       .subscribe((res: IResponse) => {});
   }
+
+
+
+ 
+
+
+
 }
