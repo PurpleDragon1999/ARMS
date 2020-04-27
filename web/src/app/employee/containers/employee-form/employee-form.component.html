@@ -76,7 +76,7 @@
             </div>
           </div> -->
           
-          <button type="submit" *ngIf="formType !== 'read'" class="btn btn-gradient-primary mr-2">{{ formType | titlecase }}</button>
+          <button type="submit" [disabled]="form.invalid" *ngIf="formType !== 'read'" class="btn btn-gradient-primary mr-2">{{ formType | titlecase }}</button>
           <button class="btn btn-light">Cancel</button>
         </form>
       </div>

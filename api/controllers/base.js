@@ -5,8 +5,25 @@ class Base {
         this.model = model;
     }
     
-    async save(req, res){
-        await this.model.save(req.body);
+    
+    async save(req, res, successMessage) {
+        try {
+        const data = await this.model.save(req.body);
+        return res.send({
+            success: true,
+            payload: {
+            data,
+            message: successMessage || "Created Successfully"
+            },
+        });
+        } catch (e) {
+        res.status(500).send({
+            success: false,
+            payload: {
+            message: e.message,
+            },
+        });
+        }
     }
 
     async get(req, res){

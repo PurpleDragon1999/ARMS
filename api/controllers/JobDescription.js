@@ -5,7 +5,6 @@ const jobDescriptionModel = require("../models/jobDescription")
 class JobDescription extends Base{
   constructor(){
       super(jobDescriptionModel);
-      console.log("hits child class");
   }
 
 
