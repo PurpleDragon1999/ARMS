@@ -1,4 +1,6 @@
 const controller = require('../controllers');
+const upload = require('../middlewares/csvUpload');
+
 module.exports=(app) =>
 { 
     //Employee
@@ -7,6 +9,7 @@ module.exports=(app) =>
     app.get('/api/employee', (req, res) => controller.employee.getAll(req, res));
     app.put('/api/employee/:id', (req, res) => controller.employee.modify(req, res));
     app.delete('/api/employee/:id', (req, res) => controller.employee.remove(req, res));
+    app.post('/api/employee/bulk', upload.single('csvUpload'), (req, res) => controller.employee.bulk(req, res));
     
     //Job Description
     // app.post('/api/jobDescription',controller.jobDescription.createJd);

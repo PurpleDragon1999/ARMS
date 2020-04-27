@@ -5,14 +5,14 @@ class Base {
     this.model = model;
   }
 
-  async save(req, res) {
+  async save(req, res, successMessage) {
     try {
       const data = await this.model.save(req.body);
       return res.send({
         success: true,
         payload: {
           data,
-          message: "Created Successfully",
+          message: successMessage || "Created Successfully"
         },
       });
     } catch (e) {
