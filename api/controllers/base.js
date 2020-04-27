@@ -156,7 +156,7 @@ class Base {
                 res.send({
                     success: true,
                     payload: {
-                        message: "Could not find any record"
+                        message: "No record found"
                     }
                 });
             }
@@ -165,7 +165,7 @@ class Base {
                     success: true,
                     payload: {
                         body: objToRetrieve,
-                        message: "Displaying details"
+                        message: "Details retrieved successfully!!"
                     }
                 });
             }
