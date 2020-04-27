@@ -4,7 +4,6 @@ var fs=require('fs');
 //this function generates pdf of json
  const pdfGenerator=(jdJson)=>{
     var jdPdf=new pdf;
-        
         jdPdf.pipe(fs.createWriteStream('jobDescriptions/'+jdJson.jdName+".pdf"));
         jdPdf.on('pageAdded', () => jdPdf.text("Job Details"));
        

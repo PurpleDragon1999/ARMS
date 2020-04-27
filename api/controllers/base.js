@@ -10,7 +10,7 @@ class Base {
   async save(req, res) {
     try {
       const data = await this.model.save(req.body);
-      return res.send({
+       return res.send({
         success: true,
         payload: {
           data,

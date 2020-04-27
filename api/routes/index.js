@@ -30,6 +30,7 @@ module.exports=(app) =>
     app.delete('/api/employee/:id', controller.employee.remove);
   
     //Routes for Interview
+   
     app.post('/api/interview', (req, res) => controller.interview.create(req, res));
     app.patch('/api/interview/:id', (req, res) => controller.interview.update(req, res));
     app.delete('/api/interview/:id', (req, res) => controller.interview.delete(req, res));
