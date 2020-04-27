@@ -11,6 +11,7 @@ import { HrInterviewAssessementComponent } from './hr-interview-assessement/hr-i
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AdminComponent } from './admin/admin.component';
+import { ScheduleInterviewComponent } from './schedule-interview/schedule-interview.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { AdminComponent } from './admin/admin.component';
     HrInterviewAssessementComponent,
     NavBarComponent,
     DashboardComponent,
-    AdminComponent
+    AdminComponent,
+    ScheduleInterviewComponent
 
   ],
   imports: [

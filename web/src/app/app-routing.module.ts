@@ -1,3 +1,4 @@
+import { ScheduleInterviewComponent } from './schedule-interview/schedule-interview.component';
 import { JdFormComponent } from './jd-form/jd-form.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -9,6 +10,7 @@ import { HrInterviewAssessementComponent } from './hr-interview-assessement/hr-i
 
 
 const routes: Routes = [
+  { path: "scedule-interview", component: ScheduleInterviewComponent },
 
   { path: "create-interview", component: CreateInterviewComponent },
 
