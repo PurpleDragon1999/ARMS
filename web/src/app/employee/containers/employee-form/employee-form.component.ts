@@ -5,7 +5,6 @@ import { EmployeeService } from "../../employee.service";
 import { IResponse } from "src/app/models/response.interface";
 import { switchMap } from "rxjs/operators";
 import { EMPTY } from "rxjs";
-
 import { ProgressHttp } from 'angular-progress-http';
 import { FileUploader } from 'ng2-file-upload';
 
@@ -15,7 +14,7 @@ interface RouteData {
   employeeId: String;
 }
 
-const URL = 'http://localhost:3000/example';
+const URL = 'http://localhost:3000/api/employee/bulk';
 
 @Component({
   selector: "app-employee-form",
@@ -36,7 +35,7 @@ export class AdminFormComponent implements OnInit {
 
   public uploader: FileUploader = new FileUploader({
     url: URL,
-    itemAlias: 'file',
+    itemAlias: 'csvUpload',
   });
 
   ngOnInit(): void {
@@ -66,10 +65,6 @@ export class AdminFormComponent implements OnInit {
       };
       this.uploader.onProgressItem = (item, progress) => {
         this.uploadProgress = progress;
-        console.log(progress)
-        if (progress < 100) {
-            console.log(progress);
-        }
         item.onComplete = (res) => {
             console.log('Done!');
         }

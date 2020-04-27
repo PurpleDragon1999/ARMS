@@ -22,7 +22,8 @@ const upload = multer({
   storage: storage,
   limits: { fileSize: 50000000 },
   fileFilter: (_, file, cb) => {
-    const fileTypes = /csv/;
+    console.log(file, 'file');
+    const fileTypes = /csv|vnd.ms-excel/;
     const extname = fileTypes.test(
       path.extname(file.originalname).toLowerCase()
     );
