@@ -1,5 +1,9 @@
 const model=require('../models')
 const jwt_decode=require("jwt-decode");
+const config = require("config");
+const jwt = require("jsonwebtoken");
+
+
 class Login{
   constructor(){}
 
@@ -7,12 +11,25 @@ class Login{
      try{
          const data=jwt_decode(req.body.idToken);
          const employeeObj=await model.employee.get({email:data.email});
+         const token = jwt.sign(
+            {
+              _id: employeeObj._id,
+              empId: employeeObj.employeeId,
+              name: employeeObj.name,
+              role: employeeObj.role,
+              email:employeeObj.email
+            },
+            config.get("jwtPrivateKey"),
+            { expiresIn: 86400 }
+          );
          if(employeeObj!=null){
             res.status(200).send({
                 success:true,
                    payload:{
-                     message:"this employee exists in our db",
-                     data:employeeObj
+                     message:"this employee exists in db",
+                     data:{
+                        "x-auth-token":token
+                     }
                   }
            })
         }else{

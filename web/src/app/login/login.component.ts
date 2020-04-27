@@ -65,8 +65,14 @@ export class LoginComponent implements OnInit {
       
     this.loginService.checkPermissions(idToken).subscribe(
       res=>{
+        if (res != null) {
+          window.localStorage.setItem(
+            "x-auth-token",
+            `${res.payload.data["x-auth-token"]}`
+          );
+          }
          this.message=res.payload.message
-         this.employeeData=res.payload.data;
+      
         
       },err=>{
         this.message=err.payload.message
