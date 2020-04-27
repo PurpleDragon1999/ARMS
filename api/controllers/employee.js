@@ -108,6 +108,7 @@ class Employee extends Base {
         },
       });
     }
+
   }
 
   async bulk(req, res) {
