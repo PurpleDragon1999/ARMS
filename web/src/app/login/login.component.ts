@@ -4,6 +4,8 @@ import { Logger, CryptoUtils } from 'msal';
 const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
 // import {jsonDecoder} from "../utilities/token-decoder.service"
 import { HttpClient } from '@angular/common/http';
+import{LoginService}from '../services/login.service'
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -12,11 +14,15 @@ import { HttpClient } from '@angular/common/http';
 export class LoginComponent implements OnInit {
   isIframe = false;
   loggedIn = false;
-  profile
+  profile:any;
+  message:string;
+  employeeData={};
   constructor(
+    
     private broadcastService: BroadcastService, 
     private authService: MsalService,
-    private http: HttpClient) { }
+    private http: HttpClient,
+    private loginService:LoginService) { }
 
   ngOnInit() {
     this.isIframe = window !== window.parent && !window.opener;
@@ -47,12 +53,24 @@ export class LoginComponent implements OnInit {
   checkAccount() {
     this.loggedIn = !!this.authService.getAccount();
   }
-  getProfile() {
-    this.http.get(GRAPH_ENDPOINT).toPromise()
+  
+  
+  async getProfile() {
+    let obj=await this.http.get(GRAPH_ENDPOINT).toPromise()
       .then(profile => {
-          this.profile = profile;
-          console.log(profile);
+        this.profile=profile
       });
+      
+    this.loginService.checkPermissions(this.profile).subscribe(
+      res=>{
+         this.message=res.payload.message
+         this.employeeData=res.payload.data;
+        
+      },err=>{
+        this.message=err.payload.message
+      }
+    )
+    
   }
   loginFunction() {
     const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;

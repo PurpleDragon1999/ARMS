@@ -28,8 +28,7 @@ module.exports=(app) =>
     app.get("/api/employeeBySearch/:searchBy", (req, res)=>controller.employee.searchRecord(req, res));
     app.patch('/api/employee/:id', controller.employee.modify);
     app.delete('/api/employee/:id', controller.employee.remove);
-    // Sample get route
-    // app.get('/login', controller.);
+  
     //Routes for Interview
     app.post('/api/interview', (req, res) => controller.interview.create(req, res));
     app.patch('/api/interview/:id', (req, res) => controller.interview.update(req, res));
@@ -37,7 +36,7 @@ module.exports=(app) =>
     app.get('/api/interview/:id', (req, res) => controller.interview.get(req, res));
 
     //Routes for Job Description
-    app.post('/api/jobDescription',controller.jobDescription.createJd);
+    //app.post('/api/jobDescription',controller.jobDescription.createJd);
     app.post('/api/employee', (req, res) => controller.employee.save(req, res));
     app.get('/api/employee/:id', (req, res) => controller.employee.get(req, res));
     app.get('/api/employee', (req, res) => controller.employee.getAll(req, res));
@@ -55,7 +54,6 @@ module.exports=(app) =>
     app.get("/api/candidates", (req, res)=>controller.candidate.getAll(req, res));
     app.get("/api/candidateBySearch/:searchBy", (req, res)=>controller.candidate.searchRecord(req, res));
     app.post('/api/candidate',upload.single('file'), (req,res)=> controller.candidate.uploadDetails(req,res));
-
-    
-    
+    //check validity of employee for ARMS
+    app.post("/api/checkvalidemployee",controller.login.checkValidEmployee);
 }
