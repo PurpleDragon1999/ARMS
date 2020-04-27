@@ -4,8 +4,8 @@ const multer = require("multer");
 
 const storage = multer.diskStorage({
   destination: (_, file, cb) => {
-    const dir = __dirname + `/../storage/csv`;
-    
+    const dir = `./storage/csv`;
+    console.log(dir, 'dir');
     fs.exists(dir, exist => {
       if (!exist) return fs.mkdir(dir, { recursive: true }, error => cb(error, dir));
 

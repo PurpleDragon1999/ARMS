@@ -4,12 +4,6 @@ class Base {
     constructor(model){
         this.model = model;
     }
-    
-    async save(req, res){
-        await this.model.save(req.body);
-        constructor(model) {
-        this.model = model;
-  }
 
   async save(req, res, successMessage) {
     try {
