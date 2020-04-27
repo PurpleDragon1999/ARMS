@@ -37,7 +37,7 @@ module.exports=(app) =>
     app.get('/api/interview/:id', (req, res) => controller.interview.get(req, res));
 
     //Routes for Job Description
-    app.post('/api/jobDescription',controller.jobDescription.createJd);
+    //app.post('/api/jobDescription',controller.jobDescription.createJd);
     app.post('/api/employee', (req, res) => controller.employee.save(req, res));
     app.get('/api/employee/:id', (req, res) => controller.employee.get(req, res));
     app.get('/api/employee', (req, res) => controller.employee.getAll(req, res));
