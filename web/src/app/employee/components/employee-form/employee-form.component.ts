@@ -1,4 +1,4 @@
-import { Component, OnInit, Injectable } from "@angular/core";
+import { Component, OnInit, Injectable, Output, EventEmitter, Input } from "@angular/core";
 import { IEmployee } from "../../models/employee.interface";
 import { Router, ActivatedRoute } from "@angular/router";
 import { EmployeeService } from "../../employee.service";
@@ -16,8 +16,13 @@ interface RouteData {
   styleUrls: ["employee-form.component.scss"],
   templateUrl: "./employee-form.component.html",
 })
-export class AdminFormComponent implements OnInit {
+export class EmployeeFormComponent implements OnInit {
+  @Output()
+  closeModal: EventEmitter<void> = new EventEmitter();
+
+  @Input()
   employee: IEmployee;
+
   formType: RouteData["formType"];
   employeeId: String;
 
@@ -28,26 +33,32 @@ export class AdminFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.params
-      .pipe(
-        switchMap((routeData: RouteData) => {
-          this.formType = routeData.formType;
-          this.employeeId = routeData.employeeId;
-          if (
-            !routeData.employeeId ||
-            !(routeData.formType === "update" || routeData.formType === "read")
-          )
-            return EMPTY;
+    console.log(this.employee, 'Employee');
+    // this.route.params
+    //   .pipe(
+    //     switchMap((routeData: RouteData) => {
+    //       this.formType = routeData.formType;
+    //       this.employeeId = routeData.employeeId;
+    //       if (
+    //         !routeData.employeeId ||
+    //         !(routeData.formType === "update" || routeData.formType === "read")
+    //       )
 
-          return this.employeeService.getEmployee(routeData.employeeId);
-        })
-      )
-      .subscribe((response: IResponse) => {
-        this.employee = response.payload.data;
-        this.employee.employeeId = Number(
-          this.employee.employeeId.toString().replace("CYG-", "")
-        );
-      });
+    //         return EMPTY;
+
+    //       return this.employeeService.getEmployee(routeData.employeeId);
+    //     })
+    //   )
+    //   .subscribe((response: IResponse) => {
+    //     this.employee = response.payload.data;
+    //     this.employee.employeeId = Number(
+    //       this.employee.employeeId.toString().replace("CYG-", "")
+    //     );
+    //   });
+
+    this.employee.employeeId = Number(
+      this.employee.employeeId.toString().replace("CYG-", "")
+    );
   }
 
   handleSubmit(employee: IEmployee): void {
@@ -65,5 +76,9 @@ export class AdminFormComponent implements OnInit {
     this.employeeService
       .updateEmployee(employee, this.employeeId)
       .subscribe((res: IResponse) => {});
+  }
+
+  modalClose(){
+    this.closeModal.emit();    
   }
 }

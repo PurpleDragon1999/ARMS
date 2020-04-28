@@ -21,7 +21,7 @@ module.exports={
     },
     cv:{
       type:String,//to keep file type or string
-      required:true,
+     // required:true,
     },
     skills:[{
        type:String,

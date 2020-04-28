@@ -1,5 +1,3 @@
-
-
 <div class="col-lg-12 stretch-card desktopView">
     <div class="card">
       <div class="card-body">
@@ -19,15 +17,15 @@
         <table class="table table-hover">
           <thead>
             <tr>
-              <th *ngFor = "let coloumnName of coloumns; let i = index">{{coloumnName}}</th>
+              <th *ngFor = "let columnName of columns; let i = index">{{columnName | uppercase}}</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor = " let user of values">
-              <td *ngFor = "let userValue of user">
-                {{userValue}}
+            <tr *ngFor="let employee of employees">
+              <td *ngFor="let columnName of columns;">
+                {{ employee[columnName] }}
               </td>
-              <td (click)="openModal('update')"><i class="mdi mdi-grease-pencil"></i></td>
+              <td (click)="openModal('update', employee)"><i class="mdi mdi-grease-pencil"></i></td>
               <td><i class="mdi mdi-delete"></i> </td>
             </tr>
           </tbody>
@@ -63,9 +61,9 @@
             </div>
           <!-- <h4 class="card-title">Default accordion</h4>
           <p class="card-description">Use class <code>.accordion</code> for basic accordion</p> -->
-          <div class="mt-4 userCard ">
+          <div class="mt-4 userCard">
             <ngb-accordion [closeOthers]="true" activeIds="collapse-1">
-              <ngb-panel id="collapse-2" title="Shivani Bansal">
+              <ngb-panel id="collapse-2" title="Shivani Bansal" class="accordion">
                 <ng-template ngbPanelHeader let-opened="opened">
                     <div class="d-flex align-items-center justify-content-between">
                       <h5 class="m-0 p-3">Sonali Chawla</h5>

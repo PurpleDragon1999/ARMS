@@ -1,6 +1,10 @@
+//3rd Party Modules and Node Modules
 const Joi = require("@hapi/joi");
+const fs = require("fs");
+const csv = require("csv-parser");
+//Custom Modules
 const Base = require("./base");
-const employeeModel = require("../models/employee");
+const model = require("../models");
 
 function validateEmployee(employee) {
   //for removing unnecessary spaces
@@ -13,7 +17,7 @@ function validateEmployee(employee) {
     email: Joi.string()
       .pattern(
         new RegExp(
-          "^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+).([a-zA-Z]{2,5})$"
+          "^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$"
         )
       )
       .min(5)
@@ -49,7 +53,7 @@ async function checkDuplicate(employeeId, email) {
 
 class Employee extends Base {
   constructor() {
-    super(employeeModel);
+    super(model.employee);
   }
 
   async save(req, res) {
@@ -104,6 +108,42 @@ class Employee extends Base {
         },
       });
     }
+
+  }
+
+  async bulk(req, res) {
+    const employees = [];
+    const employeesToSave = [];
+    const notSavedEmployees = [];
+    
+    fs.createReadStream(req.file.path)
+      .pipe(csv({ separator: "," }))
+      .on("data", (employee) => employees.push(employee))
+      .on("end", async () => {
+        await Promise.all(
+          employees.map(async employee => {
+            try {
+              const { error, value } = validateEmployee(employee);
+
+              if (error)
+                throw new Error();
+
+              value.employeeId = `CYG-${value.employeeId}`;
+
+              await checkDuplicate(value.employeeId, value.email);
+              employeesToSave.push(value);
+            } catch (e) {
+              notSavedEmployees.push(employee);
+            }
+          })
+        ).then(() =>{
+          req.body = employeesToSave;
+      
+          const successMessage = `Employees from CSV uploaded successfully with lossage of ${notSavedEmployees.length}`
+
+          super.save(req, res, successMessage);  
+        });
+      });
   }
 }
 

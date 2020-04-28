@@ -1,7 +1,7 @@
-import { AdminFormComponent } from './../employee/containers/employee-form/employee-form.component';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { map } from 'rxjs/operators';
-import { Component, OnInit } from '@angular/core';
+import { IEmployee } from './../employee/models/employee.interface';
+import { EmployeeFormComponent } from '../employee/components/employee-form/employee-form.component';
+import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnInit, Input, OnChanges, SimpleChange, EventEmitter, SimpleChanges, AfterContentInit, AfterViewInit } from '@angular/core';
 
 type FormType = "create" | "update" | "read"; 
 
@@ -12,42 +12,25 @@ type FormType = "create" | "update" | "read";
 })
 export class ListComponent implements OnInit {
   formType: FormType;
-  coloumns : any
-  usersArray : any
-  values : any
 
-  constructor(private modalService : NgbModal, private AdminFormComponent:AdminFormComponent) { }
+  @Input()
+  columns : Array<String> = [];
 
-  ngOnInit() {
-    this.assignValues()
-    }
+  @Input()
+  employees : Array<any> = [];
 
-    assignValues(){
-      this.coloumns = ["Name", "EmployeeId", "Designation", "Email", "Mobile"]
-      this.usersArray = [
-        {name:"Shivani Bansall", employeeId: "CGI1", designation:"Intern", email:"shivani.bansal@cygrp.com", mobile:"987654321"},
-        {name:"Sonali Chawla", employeeId: "CGY1", designation:"Associate2", email:"sonali.chawla@cygrp.com", mobile:null},
-      ]
-
-      this.values = this.usersArray.map(user=>{
-        console.log(user, "myUser")
-        this.values = Object.values(user)
-        return this.values
-      })
-      console.log(this.values, "values")
-    }
-
-    openModal(formType: FormType) {
+  constructor(private modalService : NgbModal) { }
+  
+  ngOnInit(): void{
+    console.log(this.employees, this.columns, 'Inside ngOnInit');
+  }
+    openModal(formType: FormType, employee: IEmployee) {
       this.formType = formType;
-      const modalRef = this.modalService.open(AdminFormComponent);
+      const modalRef = this.modalService.open(EmployeeFormComponent);
       modalRef.componentInstance.formType = this.formType;
-      // modalRef.componentInstance.formType = this.formType;
+      modalRef.componentInstance.employee = employee;
+      modalRef.componentInstance.closeModal.subscribe(() => {
+        modalRef.close();
+      })
     }
-
-    // openModal(){
-    //   this.modalService.open(AdminFormComponent)
-    // }
-
-
-
 }

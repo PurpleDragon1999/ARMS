@@ -33,9 +33,6 @@ module.exports={
         lowercase: true,
         unique: true,
         required: 'Email address is required',
-
-        // error : validateEmail is undefined => PS: had to comment
-        //validate: [validateEmai, 'Please fill a valid email address'],
         match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
     },
     profileImageURL:{

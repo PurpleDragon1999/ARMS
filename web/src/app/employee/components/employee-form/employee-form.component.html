@@ -1,14 +1,13 @@
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
   Launch demo modal
-</button>
+</button> -->
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content" >
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Employee Form --- {{ formType | uppercase }}</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" (click)="modalClose()" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -74,30 +73,16 @@
                 </div>
             </div>
           </div>
-
-          <!-- <div class="form-group">
-            <label for="gender">Gender</label>
-            <select name="gender" [ngModel]="employee?.gender" required class="form-control" id="gender" #gender="ngModel" [ngClass]="{ 'is-invalid': form.submitted && gender.invalid }">
-              <option [value]="null" disabled>Select Gender</option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-            </select>
-            <div *ngIf="form.submitted && gender.errors?.required" class="invalid-feedback">
-              <div><i class="mdi mdi-alert-outline"></i>Gender is required</div>
-            </div>
-          </div> -->
-          
-          <button type="submit" *ngIf="formType !== 'read'" class="btn btn-gradient-primary mr-2">{{ formType | titlecase }}</button>
-          <button class="btn btn-light">Cancel</button>
+          <button type="submit" [disabled]="form.invalid" *ngIf="formType !== 'read'" class="btn btn-gradient-primary mr-2">{{ formType | titlecase }}</button>
+          <button class="btn btn-light" (click)="modalClose()">Cancel</button>
         </form>
       </div>
-      <div class="modal-footer">
+      <!-- <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+      </div> -->
     </div>
   </div>
-</div>
 
 <!-- <div class="app-form-admin">
 <div class="col-12 grid-margin stretch-card">
@@ -176,11 +161,11 @@
               <div><i class="mdi mdi-alert-outline"></i>Gender is required</div>
             </div>
           </div> -->
-<!--           
-          <button type="submit" *ngIf="formType !== 'read'" class="btn btn-gradient-primary mr-2">{{ formType | titlecase }}</button>
+          
+          <!-- <button type="submit" [disabled]="form.invalid" *ngIf="formType !== 'read'" class="btn btn-gradient-primary mr-2">{{ formType | titlecase }}</button>
           <button class="btn btn-light">Cancel</button>
         </form>
       </div>
     </div>
   </div>
-</div> -->
+</div> --> 
