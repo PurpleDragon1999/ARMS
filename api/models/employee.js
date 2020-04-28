@@ -14,8 +14,8 @@ class Employee {
     return this.Model.find(criteria, columns).sort({ name: 1 });
   }
 
-  async get(id) {
-    return this.Model.findOne({ _id: id });
+  async get(criteria={}) {
+    return this.Model.findOne(criteria);
   }
 
   async modify(id, data) {

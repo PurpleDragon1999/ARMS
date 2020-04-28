@@ -28,9 +28,9 @@ module.exports=(app) =>
     app.get("/api/employeeBySearch/:searchBy", (req, res)=>controller.employee.searchRecord(req, res));
     app.patch('/api/employee/:id', controller.employee.modify);
     app.delete('/api/employee/:id', controller.employee.remove);
-    // Sample get route
-    // app.get('/login', controller.);
+  
     //Routes for Interview
+   
     app.post('/api/interview', (req, res) => controller.interview.create(req, res));
     app.patch('/api/interview/:id', (req, res) => controller.interview.update(req, res));
     app.delete('/api/interview/:id', (req, res) => controller.interview.delete(req, res));
@@ -56,5 +56,7 @@ module.exports=(app) =>
     app.get("/api/candidateBySearch/:searchBy", (req, res)=>controller.candidate.searchRecord(req, res));
     app.post('/api/candidate',upload.single('file'), (req,res)=> controller.candidate.uploadDetails(req,res));
 
-   
+    //check validity of employee for ARMS
+    app.post("/api/checkvalidemployee",controller.login.checkValidEmployee);
+
 }

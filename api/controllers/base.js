@@ -4,18 +4,11 @@ class Base {
     constructor(model){
         this.model = model;
     }
-    
-    async save(req, res){
-        await this.model.save(req.body);
-        constructor(model) ;{
-        this.model = model;
-  }
-}
 
   async save(req, res) {
     try {
       const data = await this.model.save(req.body);
-      return res.send({
+       return res.send({
         success: true,
         payload: {
           data,

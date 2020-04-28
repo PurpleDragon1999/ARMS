@@ -1,13 +1,9 @@
 import { Injectable } from '@angular/core';
-import { JwtHelperService } from '@auth0/angular-jwt'
-import { Observable} from 'rxjs';
-import { HttpClient, HttpClientModule, HttpResponse, HttpHeaders} from '@angular/common/http';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { HttpClient, HttpResponse, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
+const USER_DOMAIN = 'http://localhost:3000';
 import { ICreate} from '../models/create.interface';
-
-
-const USER_DOMAIN: string = 'http://localhost:3000';
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -41,7 +37,6 @@ headers: this.createHeader
     const helper = new JwtHelperService();
     return helper.decodeToken(localStorage.getItem(''));
   }
-  
 
   // For making HTTP calls
   createCandidate(candidateObj): Observable<HttpResponse<any>>{
