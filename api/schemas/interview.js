@@ -8,7 +8,7 @@ const employee=require("./employee");
 module.exports={
     jd:{
         type:ObjectId,
-        ref:"jobDescription"
+        ref:jobDescription
     },
     noOfRounds:{
         type:Number,
@@ -28,7 +28,7 @@ module.exports={
        roundType:{
          type:String,
         required:true,
-        enum:["written","group-discussion","technical","hr","behavioural"]
+        enum:["non-technical","technical","hr"]
        }
        
     }],

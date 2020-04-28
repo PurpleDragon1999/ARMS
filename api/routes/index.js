@@ -10,11 +10,11 @@ module.exports=(app) =>
     app.delete('/api/employee/:id', controller.employee.remove);
 
     //Routes for Job Description
-    app.post('/api/jobDescription',controller.jobDescription.createJd);
-	app.get('/api/jobDescription',controller.jobDescription.showAllJds);
-	app.get('/api/jobDescription/:id',controller.jobDescription.showJd);
-	app.put('/api/jobDescription/:id',controller.jobDescription.updateJd);	
-	app.delete('/api/jobDescription/:id',controller.jobDescription.deleteJd);	
+    app.post('/api/jobDescription',(req,res)=>controller.jobDescription.save(req,res));
+	app.get('/api/jobDescription',(req,res)=>controller.jobDescription.showAllJds(req,res));
+	app.get('/api/jobDescription/:id',(req,res)=>controller.jobDescription.showJd(req,res));
+	app.put('/api/jobDescription/:id',(req,res)=>controller.jobDescription.updateJd(req,res));	
+	app.delete('/api/jobDescription/:id',(req,res)=>controller.jobDescription.deleteJd(req,res));	
 
     //Candidate
     app.get("/api/candidates", (req, res)=>controller.candidate.getAll(req, res));
