@@ -1,41 +1,97 @@
-const mongoose=require("mongoose");
-const objectId=mongoose.Schema.Types.objectId;
-const interview=require("./interview");
-const candidate=require("./candidate");
-const employee=require("./employee");
+const mongoose = require("mongoose");
+const objectId = mongoose.Schema.Types.ObjectId;
+
 // const criteria=require("./criteria");
-module.exports={
-  interviewObjId:{
-      type:objectId,
-      ref:"interview"
-   },
-  candidateObjId:{
-      type:objectId,
-      ref:"candidate"
-   },
-  recommendedBy:[{
-      type:objectId,
-      ref:"employee"
-    }],
-    interviewer:[{
-        type:objectId,
-        ref:"employee"
-    }],
-   roundNumber:{
-       type:objectId,
-       ref:interview.rounds
-   },
-   logical:{
-       marks:{
-           type:Number,
-           required:true
-       },
-       remarks:{
-           type:String,
-           required:true
-       }
+module.exports = {
+
+    interviewObjId: {
+        type: objectId,
+        ref: "Interview"
     },
-    aptitude:{
+
+    candidateObjId: {
+        type: objectId,
+        ref: "candidate"
+    },
+
+    recommendedBy: [{
+        type: objectId,
+        ref: "employee"
+    }],
+
+    interviewer: [{
+        type: objectId,
+        ref: "employee"
+    }],
+
+    //Why is it here ?
+    // roundNumber:{
+    //     type:objectId,
+    //     ref:interview.rounds
+    // },
+    //--------------------------------------------------
+    
+    communiation: {
+        marks: {
+            type:Number,
+            required:true
+        },
+        remarks: {
+            type:String,
+            required:true
+        }
+    },
+    flexibility: {
+        marks: {
+            type:Number,
+            required:true
+        },
+        remarks: {
+            type:String,
+            required:true
+        }
+    },
+    reasoning: {
+        marks: {
+            type:Number,
+            required:true
+        },
+        remarks: {
+            type:String,
+            required:true
+        }
+    },
+    confidence: {
+        marks: {
+            type:Number,
+            required:true
+        },
+        remarks: {
+            type:String,
+            required:true
+        }
+    },
+    thought_process: {
+        marks: {
+            type:Number,
+            required:true
+        },
+        remarks: {
+            type:String,
+            required:true
+        }
+    },
+    attitude: {
+        marks: {
+            type:Number,
+            required:true
+        },
+        remarks: {
+            type:String,
+            required:true
+        }
+    },
+    personality: {
         marks:{
             type:Number,
             required:true
@@ -44,28 +100,32 @@ module.exports={
             type:String,
             required:true
         }
-     },
-     communiation:{
-        marks:{
-            type:Number,
-            required:true
-        },
-        remarks:{
-            type:String,
-            required:true
+    },
+    other_values: [
+        {
+            name: String,
+            marks: {
+                type: Number,
+                required: true
+            },
+            remarks: {
+                type: String,
+                required: true
+            }
         }
-     },
-    venue:{
+    ],
+    
+    venue: {
         type:String,
         minlength:2,
         maxlength:20
     },
-    feedback:{
+    feedback: {
         type:String,
         minlength:2,
         maxlength:100
     },
-    roundResult:{
+    roundResult: {
         type:String,
         enum:['success','failure','un-clear']
     }

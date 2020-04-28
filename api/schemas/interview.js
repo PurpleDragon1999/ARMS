@@ -7,35 +7,45 @@ const jobDescription=require("./jobDescription");
 const candidate=require("./candidate");
 const employee=require("./employee");
 // const criteria=require("./criteria");
-module.exports={
-    jd:{
+module.exports = {
+    jd: {
         type:ObjectId,
         ref:"jobDescription"
     },
-    noOfRounds:{
+
+    noOfRounds: {
         type:Number,
         required:true,
         minimum:3,
         maximum:5
     },
-    rounds:[{
-       panelOfInterviewers:[{
-           type:ObjectId,
-           ref:"employee"
-       }],
-       time:{
-        type:Date,
-        default:Date.now
-        },
-       roundType:{
-         type:String,
-        required:true,
-        enum:["written","group-discussion","technical","hr","behavioural"]
-       }
+
+    rounds: [
+        {
+            panelOfInterviewers: [
+                {
+                    type:ObjectId,
+                    ref:"employee"
+                }
+            ],
+
+            time: {
+                type:Date,
+                default:Date.now
+            },
+
+            roundType: {
+                type:String,
+                required:true,
+                enum:["written","group-discussion","technical","hr","behavioural"]
+            }
        
-    }],
-    date:{
+        }
+    ],
+
+    date: {
         type:Date,
         default:Date.now
-        }
+    }
+
 }
