@@ -22,7 +22,7 @@ class JobDescription extends Base{
 }
 
     // gets a particular JD by job profile name
-       async showJd(req,res){
+       async get(req,res){
          try{
            super.get(req,res);
          }catch(e){
@@ -36,7 +36,7 @@ class JobDescription extends Base{
      }
   
   //gets list of all JDs
-    async showAllJds(req,res){
+    async index(req,res){
       try{
         super.index(req,res);
       }catch(e){
@@ -50,7 +50,7 @@ class JobDescription extends Base{
     }
   
   //update a job description
-    async updateJd(req,res){ 
+    async modify(req,res){ 
       try{
         super.modify(req,res);
       }catch(e){
@@ -65,7 +65,7 @@ class JobDescription extends Base{
 
 
 //delete a job  description
-    async deleteJd(req,res){
+    async remove(req,res){
         try{
           super.remove(req,res);
         }catch(e){

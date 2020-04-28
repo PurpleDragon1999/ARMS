@@ -4,13 +4,23 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "@hapi/joi": "^17.1.1",
     "body-parser": "^1.19.0",
+    "convert-excel-to-json": "^1.6.1",
+    "cookie-session": "^1.4.0",
     "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "html-to-pdf": "^0.1.11",
+    "https": "^1.0.0",
     "jsonwebtoken": "^8.5.1",
+    "jwt-simple": "^0.5.6",
     "mongoose": "^5.9.9",
     "multer": "^1.4.2",
-    "nodemon": "^2.0.3"
+    "nodemailer": "^6.4.6",
+    "nodemon": "^2.0.3",
+    "pdfkit": "^0.11.0"
   },
   "devDependencies": {},
   "scripts": {

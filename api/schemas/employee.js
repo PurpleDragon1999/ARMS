@@ -11,7 +11,7 @@ module.exports={
     designation:{
        type:String,
        required:true,
-       enum:["intern","consultant1","consultant2","associate1","associate2","manager1","manager2"],
+       enum:["intern","consultant1","consultant2","associate1","associate2","manager"],
        default:"consultant1"
     },
     role:{

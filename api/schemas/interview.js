@@ -33,7 +33,7 @@ module.exports={
        
     }],
     date:{
-        type:Date,
-        default:Date.now
-        }
+        type: Date,
+        required: true
+    }
 }

@@ -11,9 +11,9 @@ module.exports={
     type:Date,
     required:true,
     },
-    name:{
-    type:String,
-    required:true
+    jdName:{
+        type:String,
+        
     },
     noOfApplicants:{
     type:Number,
