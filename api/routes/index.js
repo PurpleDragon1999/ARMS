@@ -31,7 +31,7 @@ module.exports=(app) =>
     app.post('/api/employee/bulk', upload.single('csvUpload'), (req, res) => controller.employee.bulk(req, res));
 
     //Routes for Interview
-    app.post('/api/interview', (req, res) => controller.interview.create(req, res));
+    app.post('/api/interview', (req, res) => controller.interview.save(req, res));
     app.patch('/api/interview/:id', (req, res) => controller.interview.update(req, res));
     app.delete('/api/interview/:id', (req, res) => controller.interview.delete(req, res));
     app.get('/api/interview/:id', (req, res) => controller.interview.get(req, res));

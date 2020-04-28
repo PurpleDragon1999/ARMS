@@ -28,14 +28,7 @@ class Base {
   async get(req, res) {
     try {
       const data = await this.model.get(req.params.id);
-      // if(!data){
-      //   return res.status(404).send({
-      //                     payload: {
-      //                     data,
-      //                     message: "Id does not exists!"
-      //                     }
-      //                   });
-      // }
+      
       return res.send({
         success: true,
         payload: {
@@ -75,15 +68,6 @@ class Base {
   async index(req, res){
       try{
           const data = await this.model.index();
-        // if(!data)
-        // {
-        //     return res.status(404).send({
-        //                       payload: {
-        //                       data,
-        //                       message: "List has no items!"
-        //                       }
-        //                     });   
-        // }
           return res.send({
               success: true,
               payload: {
@@ -212,10 +196,6 @@ class Base {
         }
     }
 
-//     async searchRecord(req, res){
-//         try{
-//             let queryObject = { $regex: req.params.searchBy, $options: 'i'};
-//             const searchedRecords = await this.model.getAll({name: queryObject});
   async remove(req, res) {
     try {
       const data = await this.model.remove(req.params.id);
@@ -352,14 +332,14 @@ class Base {
       );
       res.status(200).send({
         success: true,
-        data: {
+        payload: {
           pager: pager,
-          listOfData: pageOfItems,
+          data: pageOfItems,
           message: "List of Data returned successfully!!",
         },
       });
     } catch (err) {
-      res.status(400).send({
+      res.status(500).send({
         success: false,
         payload: {
           message: err.message,

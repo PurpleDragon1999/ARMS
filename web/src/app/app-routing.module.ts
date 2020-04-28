@@ -9,6 +9,7 @@ import { CreateInterviewComponent } from './create-interview/create-interview.co
 import { HrInterviewAssessementComponent } from './hr-interview-assessement/hr-interview-assessement.component';
 
 import { AdminFormComponent } from './employee/containers/employee-form/employee-form.component';
+import { EmployeeComponent } from './employee/containers/employee/employee.component';
 
 const routes: Routes = [
   { path: "candidate", component: CandidateFormComponent},
@@ -34,6 +35,11 @@ const routes: Routes = [
       { path: '', component: AdminFormComponent, pathMatch: 'full' },
       { path: ':employeeId', component: AdminFormComponent }
     ]
+  },
+  { path: 'employee', pathMatch: 'full', 
+    children: [
+      { path: '', component: EmployeeComponent }
+    ] 
   }
 ];
 

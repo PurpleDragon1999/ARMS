@@ -3,10 +3,9 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { HttpClient, HttpResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-const USER_DOMAIN = 'http://localhost:3000';
-import { JwtHelperService } from '@auth0/angular-jwt'
-import { Observable} from 'rxjs';
-import { HttpClient, HttpClientModule, HttpResponse, HttpHeaders} from '@angular/common/http';
+// const USER_DOMAIN = 'http://localhost:3000';
+// import { JwtHelperService } from '@auth0/angular-jwt'
+// import { Observable} from 'rxjs';
 import { ICreate} from '../models/create.interface';
 
 
@@ -46,13 +45,13 @@ headers: this.createHeader
     const helper = new JwtHelperService();
     return helper.decodeToken(localStorage.getItem(''));
   }
-  headers: HttpHeaders = new HttpHeaders({
-    'Content-Type': 'application/json',
-    // Authorization: localStorage.getItem("Authorization")
-  });
-  httpOptions = {
-    headers: this.headers
-  };
+  // headers: HttpHeaders = new HttpHeaders({
+  //   'Content-Type': 'application/json',
+  //   // Authorization: localStorage.getItem("Authorization")
+  // });
+  // httpOptions = {
+  //   headers: this.headers
+  // };
 
 
   // For making HTTP calls
