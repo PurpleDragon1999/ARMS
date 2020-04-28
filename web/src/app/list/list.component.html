@@ -1,0 +1,163 @@
+<div class="col-lg-12 stretch-card desktopView">
+    <div class="card">
+      <div class="card-body">
+        <div class="addEmployee">
+            <button type="button" class="btn btn-outline-primary btn-fw" (click)="openModal('create')"><i class="mdi mdi-account-plus"></i> Add Employee</button>
+        </div>
+        <div class="search-field  d-md-block ">
+            <form class="d-flex align-items-center h-100" action="#">
+              <div class="input-group">
+                <div class="input-group-prepend bg-transparent card">
+                  <i class=" card-body input-group-text border-0 mdi mdi-magnify"></i>
+                </div>
+                <input type="text" class="form-control bg-transparent border-0" placeholder="Search ">
+              </div>
+            </form>
+        </div>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th *ngFor = "let columnName of columns; let i = index">{{columnName | uppercase}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let employee of employees">
+              <td *ngFor="let columnName of columns;">
+                {{ employee[columnName] }}
+              </td>
+              <td (click)="openModal('update', employee)"><i class="mdi mdi-grease-pencil"></i></td>
+              <td><i class="mdi mdi-delete"></i> </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+      <div class="card paginationDiv">
+        <ngb-pagination  [collectionSize]="40" [pageSize]="10" [page]="1" aria-label="Custom pagination" class="pagination-flat pagination-danger pagination">
+            <ng-template class="page-item" ngbPaginationPrevious> <i class="mdi mdi-chevron-left arrow"></i></ng-template>
+            <ng-template ngbPaginationNext><i class="mdi mdi-chevron-right arrow"></i></ng-template>          
+        </ngb-pagination>
+      </div>
+    </div>  
+  </div>
+  
+  
+  <div class="row mobileView">
+    <div class="col-lg-6 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+            <div class="addEmployee">
+                <button type="button" class="btn btn-outline-primary btn-fw"><i class="mdi mdi-account-plus"></i> </button>
+            </div>
+            <div class="search-field d-md-block ">
+                <form class="d-flex align-items-center h-100" action="#">
+                  <div class="input-group">
+                    <div class="input-group-prepend bg-transparent card">
+                      <i class=" card-body input-group-text border-0 mdi mdi-magnify"></i>
+                    </div>
+                    <input type="text" class="form-control bg-transparent border-0" placeholder="Search ">
+                  </div>
+                </form>
+            </div>
+          <!-- <h4 class="card-title">Default accordion</h4>
+          <p class="card-description">Use class <code>.accordion</code> for basic accordion</p> -->
+          <div class="mt-4 userCard">
+            <ngb-accordion [closeOthers]="true" activeIds="collapse-1">
+              <ngb-panel id="collapse-2" title="Shivani Bansal" class="accordion">
+                <ng-template ngbPanelHeader let-opened="opened">
+                    <div class="d-flex align-items-center justify-content-between">
+                      <h5 class="m-0 p-3">Sonali Chawla</h5>
+                      <button ngbPanelToggle class="btn btn-link p-0"><i class="mdi mdi-plus"></i></button>
+                    </div>
+                  </ng-template>
+                <ng-template ngbPanelContent>
+                    <div class="py-2">
+                        <div>
+                            <b>
+                                EmployeeId
+                            </b>
+                        </div>
+                        <div>
+                            CGY1
+                        </div>
+                    </div>
+                    <div class="py-2">
+                        <div>
+                            <b>
+                                Designation
+                            </b>
+                        </div>
+                        <div>
+                            Associate2
+                        </div>
+                    </div>
+                    <div class="py-2">
+                        <div>
+                            <b>
+                                Email
+                            </b>
+                        </div>
+                        <div>
+                            sonali.chawla@cygrp.com
+                        </div>
+                    </div>
+                </ng-template>
+              </ngb-panel>
+            </ngb-accordion>
+          </div>
+          <div class="mt-4 userCard ">
+            <ngb-accordion [closeOthers]="true" activeIds="collapse-1">
+              <ngb-panel id="collapse-2" title="Shivani Bansal">
+                <ng-template ngbPanelHeader let-opened="opened">
+                    <div class="d-flex align-items-center justify-content-between">
+                      <h5 class="m-0 p-3">Shivani Bansal</h5>
+                      <button ngbPanelToggle class="btn btn-link p-0"><i class="mdi mdi-plus"></i></button>
+                    </div>
+                  </ng-template>
+                <ng-template ngbPanelContent>
+                    <div class="py-2">
+                        <div>
+                            <b>
+                                EmployeeId
+                            </b>
+                        </div>
+                        <div>
+                            CGI1
+                        </div>
+                    </div>
+                    <div class="py-2">
+                        <div>
+                            <b>
+                                Designation
+                            </b>
+                        </div>
+                        <div>
+                            Intern
+                        </div>
+                    </div>
+                    <div class="py-2">
+                        <div>
+                            <b>
+                                Email
+                            </b>
+                        </div>
+                        <div>
+                            shivani.bansal@cygrp.com
+                        </div>
+                    </div>
+                </ng-template>
+              </ngb-panel>
+            </ngb-accordion>
+          </div>
+
+        </div>
+        <div class="card paginationDiv">
+            <ngb-pagination  [collectionSize]="40" [pageSize]="10" [page]="1" aria-label="Custom pagination" class="pagination-flat pagination-danger pagination">
+                <ng-template class="page-item" ngbPaginationPrevious> <i class="mdi mdi-chevron-left arrow"></i></ng-template>
+                <ng-template ngbPaginationNext><i class="mdi mdi-chevron-right arrow"></i></ng-template>          
+            </ngb-pagination>
+          </div>
+      </div>
+    </div>
+  
+

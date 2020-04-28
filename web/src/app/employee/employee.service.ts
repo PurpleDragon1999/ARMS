@@ -32,4 +32,8 @@ export class EmployeeService {
     getEmployee(employeeId: String): Observable<IResponse>{
         return this.http.get<IResponse>(`${EMPLOYEE_API}/${employeeId}`, this.options);
     }
+
+    getAllEmployees(): Observable<IResponse>{
+        return this.http.get<IResponse>(EMPLOYEE_API, this.options);
+    }
 }

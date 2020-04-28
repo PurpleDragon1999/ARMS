@@ -11,6 +11,7 @@ const USER_DOMAIN: string = 'http://localhost:3000';
 @Injectable({
   providedIn: 'root'
 })
+
 export class AppServicesService {
   headers: HttpHeaders = new HttpHeaders({
     'Content-Type': 'application/json',
@@ -35,6 +36,18 @@ headers: this.createHeader
   getToken(): string {
     return localStorage.getItem('');
   }
+
+  tokenDecoder(): any {
+    const helper = new JwtHelperService();
+    return helper.decodeToken(localStorage.getItem(''));
+  }
+  // headers: HttpHeaders = new HttpHeaders({
+  //   'Content-Type': 'application/json',
+  //   // Authorization: localStorage.getItem("Authorization")
+  // });
+  // httpOptions = {
+  //   headers: this.headers
+  // };
 
 
   // For making HTTP calls
