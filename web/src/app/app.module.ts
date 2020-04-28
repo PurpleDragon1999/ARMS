@@ -14,7 +14,8 @@ import { JdFormComponent } from './jd-form/jd-form.component';
 import { HrInterviewAssessementComponent } from './hr-interview-assessement/hr-interview-assessement.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { ListComponent } from './list/list.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     JdFormComponent,
     HrInterviewAssessementComponent,
     NavBarComponent,
-    DashboardComponent
+    DashboardComponent,
+    ListComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -34,7 +36,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent],
