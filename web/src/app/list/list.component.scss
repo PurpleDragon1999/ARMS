@@ -74,9 +74,9 @@ only screen and (max-width: 760px),
 //     color: rgb(182, 109, 255);
 // }
 
-.desktopView{
-    padding-top: 1em;
-}
+// .desktopView, .mobileView{
+//     padding: 1em;
+// }
 
 button{
     padding: 1em;
@@ -119,8 +119,6 @@ ngb-accordion ngb-panel ::before {
 
 ngb-pagination ::ng-deep ul > li:not(.active) > a {
     color: #212529 !important;
-
-
 }
 
 // ngb-pagination ::ng-deep {
@@ -165,6 +163,12 @@ ngb-pagination ::ng-deep{
         //font-weight: 400;
         color: #212529;
         text-decoration: none;
+    }
+    
+    ngb-accordion.collapse.show{
+        h5, button{
+            color: rgb(182, 109, 255);
+        }
     }
 }
 

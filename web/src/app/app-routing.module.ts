@@ -10,7 +10,7 @@ import { HrInterviewAssessementComponent } from './hr-interview-assessement/hr-i
 import { AdminFormComponent } from './employee/containers/employee-form/employee-form.component';
 
 const routes: Routes = [
-  {path:"list", component : ListComponent},
+  {path:"list", component:ListComponent},
   { path: "create-interview", component: CreateInterviewComponent },
 
   { path: "form", component: JdFormComponent },
@@ -21,7 +21,7 @@ const routes: Routes = [
   },
   { path: "hr/assessement", component:HrInterviewAssessementComponent  },
   {
-    path: "navbar", component: NavBarComponent, children: [
+    path: "navbar", children: [
       {
         path: "", redirectTo: "dashboard", pathMatch: "full"
       },

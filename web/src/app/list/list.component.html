@@ -4,9 +4,9 @@
     <div class="card">
       <div class="card-body">
         <div class="addEmployee">
-            <button type="button" class="btn btn-outline-primary btn-fw"><i class="mdi mdi-account-plus"></i> Add Employee</button>
+            <button type="button" class="btn btn-outline-primary btn-fw" (click)="openModal('create')"><i class="mdi mdi-account-plus"></i> Add Employee</button>
         </div>
-        <div class="search-field d-none d-md-block ">
+        <div class="search-field  d-md-block ">
             <form class="d-flex align-items-center h-100" action="#">
               <div class="input-group">
                 <div class="input-group-prepend bg-transparent card">
@@ -19,46 +19,17 @@
         <table class="table table-hover">
           <thead>
             <tr>
-              <!-- <th> User </th> -->
-              <th class="notInMobile">EmployeeId</th>
-              <th> Name </th>
-              <th> Designation </th>
-              <th class="notInMobile"> Email </th>
-              <th></th>
-        
+              <th *ngFor = "let coloumnName of coloumns; let i = index">{{coloumnName}}</th>
             </tr>
           </thead>
           <tbody>
-            <tr >
-              <!-- <td class="py-1"> -->
-                <!-- <img src="../../assets/images/faces-clipart/pic-1.png" alt="image" /> -->
-                <!-- <i class="fa fa-user"></i>
-              </td> -->
-              <td class="notInMobile">
-                CGI1
+            <tr *ngFor = " let user of values">
+              <td *ngFor = "let userValue of user">
+                {{userValue}}
               </td>
-              <td> Herman Beck </td>
-              
-              <td> Consultant1 </td>
-              <td class="notInMobile"> herman@gmail.com </td>
-              <td><i class="mdi mdi-grease-pencil"></i></td>
+              <td (click)="openModal('update')"><i class="mdi mdi-grease-pencil"></i></td>
               <td><i class="mdi mdi-delete"></i> </td>
             </tr>
-            <tr >
-                <!-- <td class="py-1"> -->
-                  <!-- <img src="../../assets/images/faces-clipart/pic-1.png" alt="image" /> -->
-                  <!-- <i class="fa fa-user"></i>
-                </td> -->
-                <td class="notInMobile">
-                  CGI1
-                </td>
-                <td> Herman Beck </td>
-                
-                <td> Consultant1 </td>
-                <td class="notInMobile"> herman@gmail.com </td>
-                <td><i class="mdi mdi-grease-pencil"></i></td>
-                <td><i class="mdi mdi-delete"></i> </td>
-              </tr>
           </tbody>
         </table>
         
@@ -80,6 +51,16 @@
             <div class="addEmployee">
                 <button type="button" class="btn btn-outline-primary btn-fw"><i class="mdi mdi-account-plus"></i> </button>
             </div>
+            <div class="search-field d-md-block ">
+                <form class="d-flex align-items-center h-100" action="#">
+                  <div class="input-group">
+                    <div class="input-group-prepend bg-transparent card">
+                      <i class=" card-body input-group-text border-0 mdi mdi-magnify"></i>
+                    </div>
+                    <input type="text" class="form-control bg-transparent border-0" placeholder="Search ">
+                  </div>
+                </form>
+            </div>
           <!-- <h4 class="card-title">Default accordion</h4>
           <p class="card-description">Use class <code>.accordion</code> for basic accordion</p> -->
           <div class="mt-4 userCard ">
@@ -87,7 +68,7 @@
               <ngb-panel id="collapse-2" title="Shivani Bansal">
                 <ng-template ngbPanelHeader let-opened="opened">
                     <div class="d-flex align-items-center justify-content-between">
-                      <h5 class="m-0 p-3">Shivani Bansal</h5>
+                      <h5 class="m-0 p-3">Sonali Chawla</h5>
                       <button ngbPanelToggle class="btn btn-link p-0"><i class="mdi mdi-plus"></i></button>
                     </div>
                   </ng-template>
@@ -95,11 +76,11 @@
                     <div class="py-2">
                         <div>
                             <b>
-                                Designation
+                                EmployeeId
                             </b>
                         </div>
                         <div>
-                            Intern
+                            CGY1
                         </div>
                     </div>
                     <div class="py-2">
@@ -109,17 +90,17 @@
                             </b>
                         </div>
                         <div>
-                            Intern
+                            Associate2
                         </div>
                     </div>
                     <div class="py-2">
                         <div>
                             <b>
-                                Designation
+                                Email
                             </b>
                         </div>
                         <div>
-                            Intern
+                            sonali.chawla@cygrp.com
                         </div>
                     </div>
                 </ng-template>
@@ -139,11 +120,11 @@
                     <div class="py-2">
                         <div>
                             <b>
-                                Designation
+                                EmployeeId
                             </b>
                         </div>
                         <div>
-                            Intern
+                            CGI1
                         </div>
                     </div>
                     <div class="py-2">
@@ -159,11 +140,11 @@
                     <div class="py-2">
                         <div>
                             <b>
-                                Designation
+                                Email
                             </b>
                         </div>
                         <div>
-                            Intern
+                            shivani.bansal@cygrp.com
                         </div>
                     </div>
                 </ng-template>

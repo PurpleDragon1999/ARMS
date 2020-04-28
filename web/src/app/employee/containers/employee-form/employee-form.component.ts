@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Injectable } from "@angular/core";
 import { IEmployee } from "../../models/employee.interface";
 import { Router, ActivatedRoute } from "@angular/router";
 import { EmployeeService } from "../../employee.service";
