@@ -26,6 +26,7 @@ export class AdminFormComponent implements OnInit {
   formType: RouteData["formType"];
   employeeId: String;
   uploadProgress: Number = 0;
+  isNotAllowedUploadType: Boolean = true;
 
   constructor(
     private router: Router,
@@ -33,9 +34,11 @@ export class AdminFormComponent implements OnInit {
     private employeeService: EmployeeService,
   ) {}
 
+  
   public uploader: FileUploader = new FileUploader({
     url: URL,
     itemAlias: 'csvUpload',
+    allowedMimeType: ['text/csv', 'application/vnd.ms-excel'] 
   });
 
   ngOnInit(): void {
@@ -73,6 +76,9 @@ export class AdminFormComponent implements OnInit {
         this.uploader.clearQueue();
         console.log('FileUpload:uploaded successfully:', item, status);
       };
+      this.uploader.onWhenAddingFileFailed = function (item: any, filter: any, options: any,) {
+        this.isNotAllowedUploadType=true;
+      };
   }
 
   handleSubmit(employee: IEmployee): void {
@@ -91,11 +97,6 @@ export class AdminFormComponent implements OnInit {
       .updateEmployee(employee, this.employeeId)
       .subscribe((res: IResponse) => {});
   }
-
-
-
- 
-
 
 
 }
