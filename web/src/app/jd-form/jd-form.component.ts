@@ -35,12 +35,11 @@ export class JdFormComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-
     // stop here if form is invalid
     if (this.jdForm.invalid) {
         return;
     }
-    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.jdForm.value))
+    // alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.jdForm.value))
 }
 
 }

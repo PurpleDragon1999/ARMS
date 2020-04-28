@@ -89,19 +89,12 @@
                 </div>
                 <div class="form-group">
                     <label for="vacancies">No.of  Vacancies : </label>
-                    <input type="number" class="form-control" placeholder="Vacancies" 
-                    formControlName="vacancies" [ngClass]="{ 'is-invalid': submitted && formControls.vacancies.errors }"/>
-                    <div *ngIf="submitted && formControls.vacancies.errors" class="invalid-feedback">
-                      <div *ngIf="formControls.vacancies.errors.required"><i class="mdi mdi-alert-outline"></i> No.of Vacancies is required</div>
-                    </div>
+                    <input type="number" class="form-control" placeholder="Vacancies" />
+                  
                 </div>
                 <div class="form-group">
                     <label for="applicants">No.of  Applicants : </label>
-                    <input type="number" class="form-control" placeholder="Applicants"
-                    formControlName="applicants" [ngClass]="{ 'is-invalid': submitted && formControls.applicants.errors }"/>
-                    <div *ngIf="submitted && formControls.applicants.errors" class="invalid-feedback">
-                      <div *ngIf="formControls.applicants.errors.required"><i class="mdi mdi-alert-outline"></i> No.of Applicants is required</div>
-                    </div>
+                    <input type="number" class="form-control" placeholder="Applicants"/>
                 </div>
                   <br>
                 <button type="submit" class="btn btn-gradient-primary mr-2">ADD</button>
