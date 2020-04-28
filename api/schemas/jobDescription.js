@@ -11,11 +11,15 @@ module.exports={
     type:Date,
     required:true,
     },
+    jdName:{
+        type:String,
+        
+    },
     noOfApplicants:{
     type:Number,
     default:0
     },
-     noOfVacancies:{
+    noOfVacancies:{
     type:Number,
     required:true,
     default:20
@@ -28,33 +32,27 @@ module.exports={
     },
     salary:{
      type:Number,
-     minimum:20000,
-     maximum :200000    
+     minimum:5000,
+     maximum:20000
     },
-    skills:[{
+    skills:{
         type:String,
-      
-    }],
+      },
     eligibilityCriteria:{
         type:String,
         default:"ALL CLEAR"
     },
-    otherBenefits:[{
-        type:String,
-    }],
-    jobType:{
+     jobType:{
         type:String,
         required:true,
         enum:["full-time","part-time"]
     },
     location:{
         type:String,
-        required:true,
-        enum:["delhi","noida","mumbai","bengaluru","chennai","dallas","pan-India"]
+        required:true
     },
     jobProfileDescription:{
         type:String,
         required:true
-    },
-
+    }
 }
