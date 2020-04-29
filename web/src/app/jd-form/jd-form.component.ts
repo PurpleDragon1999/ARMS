@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AppServicesService } from './../services/app-services.service';
 import { ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -12,9 +12,11 @@ import { ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 })
 export class JdFormComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder, private _service: AppServicesService) { }
-
+  constructor(private formBuilder: FormBuilder, 
+    private _service: AppServicesService,
+    private router:Router) { }
   
+
   @ViewChild('jdId', {static: false}) jdId: ElementRef;
   @ViewChild('jdTitle', {static: false}) jdTitle: ElementRef;
   @ViewChild('openingDate', {static: false}) openingDate: ElementRef;
@@ -54,7 +56,6 @@ export class JdFormComponent implements OnInit {
   error:any={isError:false,errorMessage:''};
 
   compareTwoDates(){
-    console.log("reached compare");
      if(new Date(this.jdForm.controls['closingDate'].value)<new Date(this.jdForm.controls['openingDate'].value)){
         this.error={isError:true,errorMessage:'Closing Date cannot be before Opening date'};
      }
@@ -67,9 +68,8 @@ export class JdFormComponent implements OnInit {
         return;
     }
     // alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.jdForm.value))
-    this.compareTwoDates();
     this.jdFormData();
-    
+    this.compareTwoDates();
   }
 
   jdFormData(){
@@ -91,6 +91,7 @@ export class JdFormComponent implements OnInit {
     this._service.jdFormData(jdFormObject).subscribe(res => {
       console.log(this.res);
     });
-  } 
-
+    
+    this.router.navigate(["/jd-pdf"])
+  }
 }

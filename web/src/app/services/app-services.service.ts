@@ -20,7 +20,7 @@ createHeader: HttpHeaders= new HttpHeaders({
     'Content-Type': 'application/json'
 });
 
-header_token: HttpHeaders = new HttpHeaders().set("Authentication", localStorage.getItem("Authentication"));
+header_token: HttpHeaders = new HttpHeaders().set("x-auth-token", localStorage.getItem("x-auth-token"));
 
 httpOptions = {
   headers: this.headers
@@ -37,11 +37,6 @@ headers: this.createHeader
   }
 
 
-  // For making HTTP calls
-  createCandidate(candidateObj): Observable<HttpResponse<any>>{
-    return this.http.post<any>(`${USER_DOMAIN}/api/candidate`,candidateObj,{ ... this.headers, observe :'response'});
-  }
-
   createInterview(user: ICreate): Observable<HttpResponse<any>>{
     return this.http.post<any>(`${USER_DOMAIN}/api/interview`, user, { ...this.options, observe: 'response' });
   }   
@@ -51,7 +46,7 @@ headers: this.createHeader
   }
 
   jdList(): Observable<any>{
-    return this.http.get<any>(`${USER_DOMAIN}/api/jobDescription`, {headers: this.headers, observe: 'response'});
+    return this.http.get<any>(`${USER_DOMAIN}/api/jobDescription`,  {headers: this.headers, observe: 'response'} );
   }
 }
 

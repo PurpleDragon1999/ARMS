@@ -1,0 +1,1 @@
+https://portal.azure.com/#blade/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/Overview/appId/4d31e348-bc89-40d2-821c-f65942084ae3/objectId/7fda29c6-6da9-423b-8d8e-d4aa2f243513/isMSAApp//defaultBlade/Overview/appSignInAudience/AzureADMyOrg/servicePrincipalCreated/true

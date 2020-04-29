@@ -24,6 +24,8 @@ class Base {
         });
         }
     }
+  
+
 
   async index(req, res) {
     try {
