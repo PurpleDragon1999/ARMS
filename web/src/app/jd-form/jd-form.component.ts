@@ -47,9 +47,18 @@ export class JdFormComponent implements OnInit {
         salary: ['', Validators.required],
         vacancies: ['', Validators.required]      
     });
+    this.compareTwoDates();
   }
   get formControls() { return this.jdForm.controls; }
 
+  error:any={isError:false,errorMessage:''};
+
+  compareTwoDates(){
+    console.log("reached compare");
+     if(new Date(this.jdForm.controls['closingDate'].value)<new Date(this.jdForm.controls['openingDate'].value)){
+        this.error={isError:true,errorMessage:'Closing Date cannot be before Opening date'};
+     }
+  }
   onSubmit() {
     this.submitted = true;
     this.jdFormData();
@@ -58,7 +67,9 @@ export class JdFormComponent implements OnInit {
         return;
     }
     // alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.jdForm.value))
+    this.compareTwoDates();
     this.jdFormData();
+    
   }
 
   jdFormData(){

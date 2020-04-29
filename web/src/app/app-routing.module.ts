@@ -30,6 +30,9 @@ const routes: Routes = [
       },
       {
       path: "hr", component: HrComponent
+      },
+      {
+        path: "form", component: JdFormComponent
       }
     ]
   },
