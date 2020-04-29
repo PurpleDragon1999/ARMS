@@ -148,6 +148,10 @@ ngb-pagination ::ng-deep ul > li:not(.active) > a {
         outline: none !important;
         border: none !important;
     }
+
+    // .page-item:hover .page-link{
+    //     background-color:rgb(182, 109, 255);;
+    // }
 }
 
 
@@ -176,3 +180,7 @@ ngb-pagination ::ng-deep ul > li:not(.active) > a {
     }
 }
 
+.mdi-account-plus{
+    color: rgb(182, 109, 255);
+
+}

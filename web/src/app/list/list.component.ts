@@ -49,6 +49,8 @@ export class ListComponent implements OnInit {
       // this.valueChange.emit(this.page);
       this.getEmployees(page)
       console.log(this.getEmployees, "my funcccccccccccc")
+      console.log(this.pager, "pager");
+      
     }
 
     search(character : string){
