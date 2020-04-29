@@ -1,4 +1,8 @@
+
+import { ScheduleInterviewComponent } from './schedule-interview/schedule-interview.component';
+
 import { CandidateFormComponent } from './candidate-form/candidate-form.component';
+
 import { JdFormComponent } from './jd-form/jd-form.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -11,6 +15,8 @@ import{JdPdfComponent} from './jd-form/jd-pdf/jd-pdf.component'
 import { AdminFormComponent } from './employee/containers/employee-form/employee-form.component';
 
 const routes: Routes = [
+  { path: "scedule-interview", component: ScheduleInterviewComponent },
+
   { path: "candidate", component: CandidateFormComponent},
   { path: "create-interview", component: CreateInterviewComponent },
   { path: "form", component: JdFormComponent },

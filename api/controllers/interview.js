@@ -1,8 +1,9 @@
 const Base = require('./base');
 const interviewModel = require('../models/interview');
 const jobDescriptionModel = require('../models/jobDescription');
-const pdfGenerator=require('../middlewares/pdfGenerator')
-const nodeMail=require('../middlewares/mailHelper')
+const pdfGenerator=require('../middlewares/pdfGenerator');
+const nodeMail=require('../middlewares/mailHelper');
+
 class Interview extends Base{
     constructor(){
         super(interviewModel);
@@ -31,6 +32,10 @@ async create(req, res) {
         },
       });
     }
+
 }
 }
+
+
  module.exports = new Interview();
+

@@ -11,6 +11,8 @@ import { JdFormComponent } from './jd-form/jd-form.component';
 import { HrInterviewAssessementComponent } from './hr-interview-assessement/hr-interview-assessement.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+//import { AdminComponent } from './admin/admin.component';
+import { ScheduleInterviewComponent } from './schedule-interview/schedule-interview.component';
 import { HrComponent } from './hr/hr.component';
 import { CandidateFormComponent } from './candidate-form/candidate-form.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -35,8 +37,11 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     HrInterviewAssessementComponent,
     NavBarComponent,
     DashboardComponent,
+    AdminComponent,
+    ScheduleInterviewComponent,
     JdListComponent,
     JdPdfComponent,
+
   ],
   imports: [
     ReactiveFormsModule,

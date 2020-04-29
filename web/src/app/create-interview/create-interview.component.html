@@ -76,15 +76,6 @@
                   aria-describedby="basic-addon2"
                   required
                 />
-                <div class="input-group-append">
-                  <button
-                    class="btn btn-sm btn-gradient-primary"
-                    type="button"
-                    required
-                  >
-                    Search
-                  </button>
-                </div>
                 <div *ngIf="submitted && f.panelOfInterviewers.errors" class="invalid-feedback">
                   <div *ngIf="f.panelOfInterviewers.errors.required"><i class="mdi mdi-alert-outline"></i>Interviewer name is required</div>
                   </div>

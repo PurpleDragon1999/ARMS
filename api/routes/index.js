@@ -59,14 +59,14 @@ module.exports = (app) => {
     controller.interview.get(req, res)
   );
 
-  //Routes for Candidate
-  app.get("/api/candidates", (req, res) =>
-    controller.candidate.getAll(req, res)
-  );
-  app.get("/api/candidateBySearch/:searchBy", (req, res) =>
-    controller.candidate.searchRecord(req, res)
-  );
-  app.post("/api/candidate", upload.single("file"), (req, res) =>
-    controller.candidate.uploadDetails(req, res)
-  );
-};
+
+   //Routes for Candidate
+    app.get("/api/candidates", (req, res)=>controller.candidate.getAll(req, res));
+    app.get("/api/candidateBySearch/:searchBy", (req, res)=>controller.candidate.searchRecord(req, res));
+    app.post('/api/candidate',upload.single('file'), (req,res)=> controller.candidate.uploadDetails(req,res));
+
+    //check validity of employee for ARMS
+    app.post("/api/checkvalidemployee",controller.login.checkValidEmployee);
+
+}
+
