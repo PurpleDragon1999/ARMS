@@ -1,10 +1,9 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
-import { FileUploader } from 'ng2-file-upload';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { IResponse } from "src/app/models/response.interface";
+import { ModalComponent } from '../../../modal/modal.component';
 import { EmployeeService } from "../../employee.service";
 import { IEmployee } from "../../models/employee.interface";
-
-const URL = 'http://localhost:3000/api/employee/bulk';
 
 @Component({
   selector: "app-employee-form",
@@ -25,15 +24,9 @@ export class EmployeeFormComponent {
   isNotAllowedUploadType: Boolean = true;
 
   constructor(
-    private employeeService: EmployeeService
+    private employeeService: EmployeeService,
+    private modalService : NgbModal
   ) {}
-
-  
-  public uploader: FileUploader = new FileUploader({
-    url: URL,
-    itemAlias: 'csvUpload',
-    allowedMimeType: ['text/csv', 'application/vnd.ms-excel'] 
-  });
 
   handleSubmit(employee: IEmployee): void {
     if (this.formType === "create") return this.createEmployee(employee);
@@ -45,8 +38,15 @@ export class EmployeeFormComponent {
     this.employeeService
       .createEmployee(employee)
       .subscribe((res: IResponse) => {
-        console.log(res);
-      });
+        const modalRef = this.modalService.open(ModalComponent);
+        modalRef.componentInstance.message = res.payload.message; 
+        this.modalClose();
+      }, (error) => {
+        const modalRef = this.modalService.open(ModalComponent);
+        modalRef.componentInstance.message = error.error.payload.message; 
+        this.modalClose();
+      }); 
+    
   }
 
   updateEmployee(employee: IEmployee): void {
@@ -55,9 +55,17 @@ export class EmployeeFormComponent {
     this.employeeService
       .updateEmployee(updatedEmployee)
       .subscribe((res: IResponse) => {
+        const modalRef = this.modalService.open(ModalComponent);
         console.log(res);
+        modalRef.componentInstance.message = res.payload.message; 
+        this.modalClose();
+      },(error) => {
+        console.log(error);
+        const modalRef = this.modalService.open(ModalComponent);
+        modalRef.componentInstance.message = error.error.payload.message; 
+        this.modalClose();
       });
-  } 
+  }
 
   modalClose(){
     this.closeModal.emit();    
