@@ -10,14 +10,13 @@ import { JdFormComponent } from './jd-form/jd-form.component';
 import { HrInterviewAssessementComponent } from './hr-interview-assessement/hr-interview-assessement.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { AdminComponent } from './admin/admin.component';
 import { CandidateFormComponent } from './candidate-form/candidate-form.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 import { FileSelectDirective } from 'ng2-file-upload';
 
 import { MsalModule, MsalInterceptor } from '@azure/msal-angular';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { JdListComponent } from './jd-list/jd-list.component'
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
 @NgModule({
@@ -33,6 +32,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     HrInterviewAssessementComponent,
     NavBarComponent,
     DashboardComponent,
+    JdListComponent,
   ],
   imports: [
     ReactiveFormsModule,

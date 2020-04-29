@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AppServicesService } from './../services/app-services.service';
+import { ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+
+
 
 @Component({
   selector: 'app-jd-form',
@@ -8,7 +12,20 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class JdFormComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private _service: AppServicesService) { }
+
+  
+  @ViewChild('jdId', {static: false}) jdId: ElementRef;
+  @ViewChild('jdTitle', {static: false}) jdTitle: ElementRef;
+  @ViewChild('openingDate', {static: false}) openingDate: ElementRef;
+  @ViewChild('closingDate', {static: false}) closingDate: ElementRef;
+  @ViewChild('jobProfileDescription', {static: false}) jobProfileDescription: ElementRef;
+  @ViewChild('skills', {static: false}) skills: ElementRef;
+  @ViewChild('jobType', {static: false}) jobType: ElementRef;
+  @ViewChild('eligibilityCriteria', {static: false}) eligibilityCriteria: ElementRef;
+  @ViewChild('location', {static: false}) location: ElementRef;
+  @ViewChild('salary', {static: false}) salary: ElementRef;
+  @ViewChild('vacancies', {static: false}) vacancies: ElementRef;
 
   jdForm: FormGroup;
     submitted = false;
@@ -16,8 +33,8 @@ export class JdFormComponent implements OnInit {
   ngOnInit() {
   
       this.jdForm = this.formBuilder.group({
-        jdName: ['', Validators.required],
-        appliedFor: ['', Validators.required],
+        jdId: ['', Validators.required],
+        jdTitle: ['', Validators.required],
         openingDate: ['', Validators.required],
         closingDate: ['', Validators.required],
         jobProfileDescription: ['', Validators.required],
@@ -26,9 +43,7 @@ export class JdFormComponent implements OnInit {
         eligibilityCriteria: ['', Validators.required],
         location: ['', Validators.required],
         salary: ['', Validators.required],
-        vacancies: ['', Validators.required],
-        applicants: ['', Validators.required]
-        
+        vacancies: ['', Validators.required]      
     });
   }
   get formControls() { return this.jdForm.controls; }
@@ -40,6 +55,25 @@ export class JdFormComponent implements OnInit {
         return;
     }
     // alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.jdForm.value))
-}
+  }
+
+  jdFormData(){
+    let jdFormObject = {
+       jdId: this.jdId.nativeElement.value,
+       jdTitle: this.jdTitle.nativeElement.value,
+       openingDate: this.openingDate.nativeElement.value,
+       closingDate: this.closingDate.nativeElement.value,
+       jobProfileDescription: this.jobProfileDescription.nativeElement.value,
+       skills: this.skills.nativeElement.value,
+       jobType: this.jobType.nativeElement.value,
+       eligibilityCriteria: this.eligibilityCriteria.nativeElement.value,
+       location: this.location.nativeElement.value,
+       salary: this.salary.nativeElement.value,
+       vacancies: this.vacancies.nativeElement.value,
+     
+    }
+
+    this._service.jdFormData(jdFormObject).subscribe(res => {});
+  } 
 
 }
