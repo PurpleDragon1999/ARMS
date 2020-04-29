@@ -7,8 +7,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CreateInterviewComponent } from './create-interview/create-interview.component';
 import { HrInterviewAssessementComponent } from './hr-interview-assessement/hr-interview-assessement.component';
-import { HrComponent } from './hr/hr.component';
-
+import{JdPdfComponent} from './jd-form/jd-pdf/jd-pdf.component'
 import { AdminFormComponent } from './employee/containers/employee-form/employee-form.component';
 
 const routes: Routes = [
@@ -28,9 +27,9 @@ const routes: Routes = [
       {
         path:"dashboard", component: DashboardComponent
       },
-      {
-      path: "hr", component: HrComponent
-      }
+      // {
+      // path: "hr", component: HrComponent
+      // }
     ]
   },
   { path: 'employee/:formType', 
@@ -38,8 +37,8 @@ const routes: Routes = [
       { path: '', component: AdminFormComponent, pathMatch: 'full' },
       { path: ':employeeId', component: AdminFormComponent }
     ]
-  }
-
+  },
+  {path:"jd-pdf",component:JdPdfComponent}
 ];
 
 @NgModule({
