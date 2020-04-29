@@ -17,7 +17,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { FileSelectDirective } from 'ng2-file-upload';
 import { ProgressHttpModule } from 'angular-progress-http';
 import { MsalModule, MsalInterceptor } from '@azure/msal-angular';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { JdHomeComponent } from './jd-home/jd-home.component'
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
 @NgModule({
@@ -33,7 +34,8 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     HrInterviewAssessementComponent,
     NavBarComponent,
     DashboardComponent,
-    HrComponent
+    HrComponent,
+    JdHomeComponent
   ],
   imports: [
     ReactiveFormsModule,

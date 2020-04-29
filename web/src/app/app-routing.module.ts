@@ -1,3 +1,4 @@
+import { JdHomeComponent } from './jd-home/jd-home.component';
 import { CandidateFormComponent } from './candidate-form/candidate-form.component';
 import { JdFormComponent } from './jd-form/jd-form.component';
 import { LoginComponent } from './login/login.component';
@@ -8,7 +9,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { CreateInterviewComponent } from './create-interview/create-interview.component';
 import { HrInterviewAssessementComponent } from './hr-interview-assessement/hr-interview-assessement.component';
 import { HrComponent } from './hr/hr.component';
-
 import { AdminFormComponent } from './employee/containers/employee-form/employee-form.component';
 
 const routes: Routes = [
@@ -30,6 +30,10 @@ const routes: Routes = [
       },
       {
       path: "hr", component: HrComponent
+      },
+      {
+      path: "jdHome", component: JdHomeComponent
+
       }
     ]
   },

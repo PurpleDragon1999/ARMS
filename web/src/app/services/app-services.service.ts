@@ -45,5 +45,10 @@ headers: this.createHeader
   createInterview(user: ICreate): Observable<HttpResponse<any>>{
     return this.http.post<any>(`${USER_DOMAIN}/api/interview`, user, { ...this.options, observe: 'response' });
 }   
+
+  getAllJobs(): Observable<HttpResponse<any>>{
+    return this.http.get<any>(`${USER_DOMAIN}/api/jobDescription`, this.options);
+}
+
 }
 
