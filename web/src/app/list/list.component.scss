@@ -1,6 +1,6 @@
 @media 
-only screen and (max-width: 760px),
-(min-device-width: 768px) and (max-device-width: 1024px)  {
+only screen and (max-width: 990px),
+(min-device-width: 768px) and (max-device-width: 990px)  {
 
 	/* Force table to not be like tables anymore */
 	// table, thead, tbody, th, td, tr{ 
@@ -70,9 +70,14 @@ only screen and (max-width: 760px),
 	// td:nth-of-type(10):before { content: "Arbitrary Data"; }
 }
 
-// .mdi{
-//     color: rgb(182, 109, 255);
-// }
+.mdi-grease-pencil, .mdi-delete{
+    color: #212529;
+    font-size: large;
+}
+
+.mdi-grease-pencil:hover, .mdi-delete:hover{
+    color: rgb(182, 109, 255);
+}
 
 // .desktopView, .mobileView{
 //     padding: 1em;
@@ -134,7 +139,7 @@ ngb-pagination ::ng-deep ul > li:not(.active) > a {
 //     } 
 // } 
 
-ngb-pagination ::ng-deep{
+.paginationDiv ::ng-deep{
     .page-item.active .page-link {
         // z-index: 1;
         color: #fff;
@@ -144,7 +149,6 @@ ngb-pagination ::ng-deep{
         border: none !important;
     }
 }
-
 
 
 .paginationDiv{

@@ -33,7 +33,8 @@ export class EmployeeService {
         return this.http.get<IResponse>(`${EMPLOYEE_API}/${employeeId}`, this.options);
     }
 
-    getAllEmployees(): Observable<IResponse>{
-        return this.http.get<IResponse>(EMPLOYEE_API, this.options);
+    getAllEmployees(page? ): Observable<IResponse>{
+        console.log("inside page service")
+        return this.http.get<IResponse>(`${EMPLOYEE_API}?page=${page}`, this.options);
     }
 }

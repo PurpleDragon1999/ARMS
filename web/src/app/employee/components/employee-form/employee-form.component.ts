@@ -67,12 +67,14 @@ export class EmployeeFormComponent implements OnInit {
   }
 
   createEmployee(employee: IEmployee): void {
+    
     this.employeeService
       .createEmployee(employee)
       .subscribe((res: IResponse) => {});
   }
 
   updateEmployee(employee: IEmployee): void {
+    console.log("inside update")
     this.employeeService
       .updateEmployee(employee, this.employeeId)
       .subscribe((res: IResponse) => {});

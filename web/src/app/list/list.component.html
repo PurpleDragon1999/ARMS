@@ -25,18 +25,37 @@
               <td *ngFor="let columnName of columns;">
                 {{ employee[columnName] }}
               </td>
-              <td (click)="openModal('update', employee)"><i class="mdi mdi-grease-pencil"></i></td>
-              <td><i class="mdi mdi-delete"></i> </td>
+              <!-- {{employee["_id"]}} -->
+              <td ><a (click)="openModal('update', employee)" [routerLink]="['/employee/update',employee['_id']]"><i class="mdi mdi-grease-pencil"></i></a></td>
+              <td><a href=""><i class="mdi mdi-delete"></i></a> </td>
             </tr>
           </tbody>
         </table>
         
       </div>
       <div class="card paginationDiv">
-        <ngb-pagination  [collectionSize]="40" [pageSize]="10" [page]="1" aria-label="Custom pagination" class="pagination-flat pagination-danger pagination">
-            <ng-template class="page-item" ngbPaginationPrevious> <i class="mdi mdi-chevron-left arrow"></i></ng-template>
-            <ng-template ngbPaginationNext><i class="mdi mdi-chevron-right arrow"></i></ng-template>          
-        </ngb-pagination>
+        <!-- <ngb-pagination  [collectionSize]="40" [pageSize]="10" [page]="1" aria-label="Custom pagination" class="pagination-flat pagination-danger pagination">
+            <ng-template class="page-item" ngbPaginationPrevious > <a (click)="setPage(page-1)"><i class="mdi mdi-chevron-left arrow"></i></a></ng-template>
+
+            
+            <ng-template *ngFor="let page of pager.pages"  class="page-item" ngbPaginationNumber let-page> <a (click)="setPage(page)">{{page}}</a></ng-template>
+
+            <ng-template ngbPaginationNext><a (click)="setPage(page+1)"><i class="mdi mdi-chevron-right arrow"></i></a></ng-template>          
+        </ngb-pagination> -->
+        <div >
+			<ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+				
+				<li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item previous-item">
+					<a (click)="setPage(page-1)"  class="page-link"><i class="mdi mdi-chevron-left arrow"></i></a>
+				</li>
+				<li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}" class="page-item number-item">
+					<a  (click)="setPage(page)"  class="page-link">{{page}}</a>
+				</li>
+				<li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item next-item">
+					<a (click)="setPage(page+1)" class="page-link"><i class="mdi mdi-chevron-right arrow"></i></a>
+				</li>
+			</ul>
+		</div>
       </div>
     </div>  
   </div>
@@ -47,7 +66,7 @@
       <div class="card">
         <div class="card-body">
             <div class="addEmployee">
-                <button type="button" class="btn btn-outline-primary btn-fw"><i class="mdi mdi-account-plus"></i> </button>
+                <button  type="button" class="btn btn-outline-primary btn-fw"><a [routerLink]="['./employee/create']"><i class="mdi mdi-account-plus"></i></a> </button>
             </div>
             <div class="search-field d-md-block ">
                 <form class="d-flex align-items-center h-100" action="#">

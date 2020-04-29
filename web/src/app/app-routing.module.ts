@@ -31,12 +31,12 @@ const routes: Routes = [
       }
     ]
   },
-  { path: 'employee/:formType', 
-    children: [
-      { path: '', component: EmployeeComponent, pathMatch: 'full' },
-      { path: ':employeeId', component: EmployeeComponent }
-    ]
-  },
+  // { path: 'employee/:formType', 
+  //   children: [
+  //     { path: '', component: EmployeeComponent, pathMatch: 'full' },
+  //     { path: ':employeeId', component: EmployeeComponent }
+  //   ]
+  // },
   { path: 'employee', pathMatch: 'full', 
     children: [
       { path: '', component: EmployeeComponent }

@@ -1,7 +1,7 @@
 import { IEmployee } from './../employee/models/employee.interface';
 import { EmployeeFormComponent } from '../employee/components/employee-form/employee-form.component';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Component, OnInit, Input, OnChanges, SimpleChange, EventEmitter, SimpleChanges, AfterContentInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChange, EventEmitter, SimpleChanges, AfterContentInit, AfterViewInit, Output } from '@angular/core';
 
 type FormType = "create" | "update" | "read"; 
 
@@ -12,12 +12,22 @@ type FormType = "create" | "update" | "read";
 })
 export class ListComponent implements OnInit {
   formType: FormType;
+  
 
   @Input()
   columns : Array<String> = [];
 
   @Input()
   employees : Array<any> = [];
+
+  @Input()
+  pager : any = {}
+
+  @Input()
+  getEmployees : Function;
+
+  @Output() valueChange = new EventEmitter();
+  page : number = 1
 
   constructor(private modalService : NgbModal) { }
   
@@ -32,5 +42,14 @@ export class ListComponent implements OnInit {
       modalRef.componentInstance.closeModal.subscribe(() => {
         modalRef.close();
       })
+    }
+
+    setPage(page){
+      console.log(page, "set page called")
+      this.page = page
+      // this.valueChange.emit(this.page);
+      this.getEmployees(page)
+      console.log(this.getEmployees, "my funcccccccccccc")
+
     }
 }

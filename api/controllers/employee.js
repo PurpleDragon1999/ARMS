@@ -101,6 +101,7 @@ class Employee extends Base {
 
       super.modify(req, res);
     } catch (e) {
+      console.log(e)
       return res.status(500).send({
         success: false,
         payload: {

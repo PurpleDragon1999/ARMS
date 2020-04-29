@@ -320,7 +320,8 @@ class Base {
     try {
       const recordList = await this.model.getAll();
       const page = parseInt(req.query.page) || 1;
-      const pageSize = 10;
+      console.log(page, "inside api")
+      const pageSize = 2;
       const pager = await pagination.paginate(
         recordList.length,
         page,
@@ -333,8 +334,10 @@ class Base {
       res.status(200).send({
         success: true,
         payload: {
-          pager: pager,
-          data: pageOfItems,
+          data: {
+            dataList : pageOfItems,
+            pager : pager
+          },
           message: "List of Data returned successfully!!",
         },
       });
