@@ -25,8 +25,9 @@ export class EmployeeService {
         return this.http.post<IResponse>(`${EMPLOYEE_API}`, employee, this.options);
     }
 
-    updateEmployee(employee: IEmployee, employeeId: String): Observable<IResponse>{
-        return this.http.put<IResponse>(`${EMPLOYEE_API}/${employeeId}`, employee, this.options);
+    updateEmployee(employee: IEmployee): Observable<IResponse>{
+        console.log(employee, 'Employee');
+        return this.http.put<IResponse>(`${EMPLOYEE_API}/${employee._id}`, employee, this.options);
     }
 
     getEmployee(employeeId: String): Observable<IResponse>{

@@ -3,7 +3,6 @@ import { NgModule } from "@angular/core";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { LoginComponent } from "./login/login.component";
-import { AdminComponent } from "./employee/admin.component";
 import { EmployeeFormComponent } from "./employee/components/employee-form/employee-form.component";
 import { CreateInterviewComponent } from "./create-interview/create-interview.component";
 import { JdFormComponent } from "./jd-form/jd-form.component";
@@ -29,7 +28,6 @@ const isIE =
   declarations: [
     AppComponent,
     LoginComponent,
-    AdminComponent,
     CandidateFormComponent,
     FileSelectDirective,
     EmployeeFormComponent,

@@ -9,7 +9,10 @@ const model = require("../models");
 function validateEmployee(employee) {
   //for removing unnecessary spaces
   for (let key in employee) {
-    employee[key] = employee[key].toString().trim();
+    console.log(employee[key], key);
+    if(employee[key]){
+      employee[key] = employee[key].toString().trim();
+    }
   }
 
   const schema = Joi.object({
@@ -35,6 +38,8 @@ function validateEmployee(employee) {
       )
       .required(),
     role: Joi.string().valid("admin", "hr", "interviewer").required(),
+    profileImageURL: Joi.optional(),
+    _id: Joi.optional()
   });
   return schema.validate(employee);
 }
@@ -82,6 +87,7 @@ class Employee extends Base {
   }
 
   async modify(req, res) {
+    console.log(req.body, req.params);
     try {
       const { error, value } = validateEmployee(req.body);
       if (error)
@@ -98,7 +104,7 @@ class Employee extends Base {
         await checkDuplicate(null, req.body.email);
 
       req.body = Object.assign(storedData, value);
-
+      
       super.modify(req, res);
     } catch (e) {
       return res.status(500).send({

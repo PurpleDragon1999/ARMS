@@ -33,7 +33,7 @@ module.exports=(app) =>
     //Routes for Interview
     app.post('/api/interview', (req, res) => controller.interview.save(req, res));
     app.patch('/api/interview/:id', (req, res) => controller.interview.update(req, res));
-    app.delete('/api/interview/:id', (req, res) => controller.interview.delete(req, res));
+    // app.delete('/api/interview/:id', (req, res) => controller.interview.delete(req, res));
     app.get('/api/interview/:id', (req, res) => controller.interview.get(req, res));
 
     //Routes for Job Description
@@ -50,7 +50,7 @@ module.exports=(app) =>
    //Routes for Candidate
     app.get("/api/candidates", (req, res)=>controller.candidate.getAll(req, res));
     app.get("/api/candidateBySearch/:searchBy", (req, res)=>controller.candidate.searchRecord(req, res));
-    app.post('/api/candidate',upload.single('file'), (req,res)=> controller.candidate.uploadDetails(req,res));
+    // app.post('/api/candidate',upload.single('file'), (req,res)=> controller.candidate.uploadDetails(req,res));
 
     
     

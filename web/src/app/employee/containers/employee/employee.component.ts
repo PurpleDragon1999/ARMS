@@ -23,13 +23,21 @@ export class EmployeeComponent implements OnInit{
                 this.employees = res.payload.data;
                 this.columns = ['name', 'email', 'employeeId', 'designation', 'role'];
             }
-            console.log(this.employees, 'response for all employees'); 
         });
     }
 
     openModal(dataModal: IDataModal) {
         console.log(dataModal, 'dataModal inside employeeComponet');
-        
+
+        if(dataModal.formType === 'update' && dataModal.data.employeeId){
+            dataModal.data.employeeId = Number(
+                dataModal.data.employeeId.toString().replace("CYG-", "")
+            );   
+        }
+        else{
+            dataModal.data = {};
+        }
+
         const modalRef = this.modalService.open(EmployeeFormComponent);
         modalRef.componentInstance.formType = dataModal.formType;
         modalRef.componentInstance.data = dataModal.data;

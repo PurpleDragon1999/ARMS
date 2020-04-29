@@ -1,23 +1,11 @@
-import { IEmployee } from './../employee/models/employee.interface';
-import { EmployeeFormComponent } from '../employee/components/employee-form/employee-form.component';
-import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Component, OnInit, Input, OnChanges, SimpleChange, EventEmitter, SimpleChanges, AfterContentInit, AfterViewInit, Output } from '@angular/core';
-
-type FormType = "create" | "update" | "read"; 
-
-interface IDataModal {
-  formType: FormType,
-  data: any; 
-}
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })
-export class ListComponent implements OnInit {
-  formType: FormType;
-
+export class ListComponent {
   @Input()
   columns : Array<String> = [];
 
@@ -29,11 +17,7 @@ export class ListComponent implements OnInit {
 
   constructor() { }
   
-  ngOnInit(): void{
-    console.log(this.data, this.columns, 'Inside ngOnInit');
-  }
-  
-  openModal(formType: FormType, data: any) {
+  openModal(formType: IDataModal['formType'], data: IDataModal['data']) {
     console.log(formType, 'formType', data, 'data');
     this.emitOpenModal.emit({ formType, data });    
   }
