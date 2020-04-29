@@ -73,4 +73,5 @@ module.exports = (app) => {
     controller.candidate.uploadDetails(req, res)
   );
   app.post("/api/checkvalidemployee",controller.login.checkValidEmployee);
+  
 };

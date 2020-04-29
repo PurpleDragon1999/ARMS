@@ -1,6 +1,7 @@
 import { RoleGuardService } from './utilities/role-guard.service';
 import { AdminComponent } from './employee/admin.component';
 import { ProfileComponent } from './profile/profile.component';
+import { ScheduleInterviewComponent } from './schedule-interview/schedule-interview.component';
 import { CandidateFormComponent } from './candidate-form/candidate-form.component';
 import { JdFormComponent } from './jd-form/jd-form.component';
 import { LoginComponent } from './login/login.component';
@@ -40,6 +41,7 @@ const routes: Routes = [
       path: "home", component: AdminComponent
     }
   ]},
+  { path: "scedule-interview", component: ScheduleInterviewComponent },
 
   { path: "candidate", component: CandidateFormComponent},
   { path: "create-interview", component: CreateInterviewComponent },
