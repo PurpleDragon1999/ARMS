@@ -27,8 +27,10 @@ export class JdFormComponent implements OnInit {
   @ViewChild('salary', {static: false}) salary: ElementRef;
   @ViewChild('vacancies', {static: false}) vacancies: ElementRef;
 
+  res:any;
+
   jdForm: FormGroup;
-    submitted = false;
+  submitted = false;
 
   ngOnInit() {
   
@@ -50,11 +52,13 @@ export class JdFormComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
+    this.jdFormData();
     // stop here if form is invalid
     if (this.jdForm.invalid) {
         return;
     }
     // alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.jdForm.value))
+    this.jdFormData();
   }
 
   jdFormData(){
@@ -69,11 +73,13 @@ export class JdFormComponent implements OnInit {
        eligibilityCriteria: this.eligibilityCriteria.nativeElement.value,
        location: this.location.nativeElement.value,
        salary: this.salary.nativeElement.value,
-       vacancies: this.vacancies.nativeElement.value,
-     
+       vacancies: this.vacancies.nativeElement.value
     }
+    console.log(jdFormObject)
 
-    this._service.jdFormData(jdFormObject).subscribe(res => {});
+    // this._service.jdFormData(jdFormObject).subscribe(res => {
+    //   console.log(this.res);
+    // });
   } 
 
 }
