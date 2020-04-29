@@ -37,16 +37,11 @@ module.exports=(app) =>
     app.delete('/api/interview/:id', (req, res) => controller.interview.delete(req, res));
     app.get('/api/interview/:id', (req, res) => controller.interview.get(req, res));
 
-    //Routes for Job Description
-    //app.post('/api/jobDescription',controller.jobDescription.createJd);
+    
    
     
     //Job Description
-    // app.post('/api/jobDescription',controller.jobDescription.createJd);
-    app.get('/api/jobDescription',controller.jobDescription.showAllJds);
-    app.get('/api/jobDescription/:id',controller.jobDescription.showJd);
-    app.put('/api/jobDescription/:id',controller.jobDescription.updateJd);	
-    app.delete('/api/jobDescription/:id',controller.jobDescription.deleteJd);	
+    
 
    //Routes for Candidate
     app.get("/api/candidates", (req, res)=>controller.candidate.getAll(req, res));
