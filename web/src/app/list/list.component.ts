@@ -26,8 +26,8 @@ export class ListComponent implements OnInit {
   @Input()
   getEmployees : Function;
 
-  @Output() valueChange = new EventEmitter();
-  page : number = 1
+  @Input()
+  searchEmployee : Function
 
   constructor(private modalService : NgbModal) { }
   
@@ -46,10 +46,14 @@ export class ListComponent implements OnInit {
 
     setPage(page){
       console.log(page, "set page called")
-      this.page = page
       // this.valueChange.emit(this.page);
       this.getEmployees(page)
       console.log(this.getEmployees, "my funcccccccccccc")
+    }
+
+    search(character : string){
+      console.log(character, "character")
+      this.searchEmployee(character)
 
     }
 }

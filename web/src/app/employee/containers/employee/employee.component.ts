@@ -13,6 +13,7 @@ export class EmployeeComponent implements OnInit{
     employees: IEmployee[] = [];
     columns: Array<String> = [];
     pager : any
+    alertMessage : string
 
     @Input()
     valueChange : any
@@ -25,7 +26,7 @@ export class EmployeeComponent implements OnInit{
         
     }
 
-    getEmployees=(page? )=>{
+    getEmployees=(page? : number )=>{
         console.log(this.employeeService, "employee service")
         console.log(page, "page is here")
         this.employeeService.getAllEmployees(page).subscribe((res: IResponse) => {
@@ -37,6 +38,26 @@ export class EmployeeComponent implements OnInit{
             }
             console.log(res,this.employees, 'response for all employees'); 
         });
+    }
+
+    deleteEmployee(employeeID : string){
+        this.employeeService.deleteEmployee(employeeID).subscribe(res=>{            
+            this.alertMessage = res.payload.message
+
+        })
+    }
+
+    searchEmployee=(character : string)=>{
+        this.employeeService.searchEmployee(character).subscribe(res=>{
+            console.log(res, "search response")
+            
+                this.employees = res.payload.data.searchedRecords
+                this.alertMessage = res.payload.message
+               
+        })
+
+        
+
     }
 }
 

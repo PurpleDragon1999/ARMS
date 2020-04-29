@@ -10,7 +10,7 @@
                 <div class="input-group-prepend bg-transparent card">
                   <i class=" card-body input-group-text border-0 mdi mdi-magnify"></i>
                 </div>
-                <input type="text" class="form-control bg-transparent border-0" placeholder="Search ">
+                <input #searchBar (input)="search(searchBar.value)" type="text" class="form-control bg-transparent border-0" placeholder="Search ">
               </div>
             </form>
         </div>
@@ -21,7 +21,9 @@
             </tr>
           </thead>
           <tbody>
+            <small class="p-2" *ngIf="employees.length==0"> No Match Found</small>
             <tr *ngFor="let employee of employees">
+                
               <td *ngFor="let columnName of columns;">
                 {{ employee[columnName] }}
               </td>
@@ -34,14 +36,6 @@
         
       </div>
       <div class="card paginationDiv">
-        <!-- <ngb-pagination  [collectionSize]="40" [pageSize]="10" [page]="1" aria-label="Custom pagination" class="pagination-flat pagination-danger pagination">
-            <ng-template class="page-item" ngbPaginationPrevious > <a (click)="setPage(page-1)"><i class="mdi mdi-chevron-left arrow"></i></a></ng-template>
-
-            
-            <ng-template *ngFor="let page of pager.pages"  class="page-item" ngbPaginationNumber let-page> <a (click)="setPage(page)">{{page}}</a></ng-template>
-
-            <ng-template ngbPaginationNext><a (click)="setPage(page+1)"><i class="mdi mdi-chevron-right arrow"></i></a></ng-template>          
-        </ngb-pagination> -->
         <div >
 			<ul *ngIf="pager.pages && pager.pages.length" class="pagination">
 				
@@ -78,11 +72,9 @@
                   </div>
                 </form>
             </div>
-          <!-- <h4 class="card-title">Default accordion</h4>
-          <p class="card-description">Use class <code>.accordion</code> for basic accordion</p> -->
-          <div class="mt-4 userCard">
+          <div class="mt-4 userCard" *ngFor="let employee of employees">
             <ngb-accordion [closeOthers]="true" activeIds="collapse-1">
-              <ngb-panel id="collapse-2" title="Shivani Bansal" class="accordion">
+              <ngb-panel id="collapse-2" class="accordion">
                 <ng-template ngbPanelHeader let-opened="opened">
                     <div class="d-flex align-items-center justify-content-between">
                       <h5 class="m-0 p-3">Sonali Chawla</h5>
