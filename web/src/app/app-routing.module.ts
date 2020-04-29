@@ -1,4 +1,4 @@
-import { JdHomeComponent } from './jd-home/jd-home.component';
+import { JdListComponent } from './jd-list/jd-list.component';
 import { ScheduleInterviewComponent } from './schedule-interview/schedule-interview.component';
 import { CandidateFormComponent } from './candidate-form/candidate-form.component';
 import { JdFormComponent } from './jd-form/jd-form.component';
@@ -33,10 +33,10 @@ const routes: Routes = [
         path:"dashboard", component: DashboardComponent
       },
       {
-        path:"jdHome", component: JdHomeComponent
+        path:"jobs", component: JdListComponent
       },
       {
-        path:"hr", component: HrComponent
+        path:"hr/dashboard", component: HrComponent
       }
     ]
   },

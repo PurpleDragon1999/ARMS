@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { JdHomeComponent } from './jd-home.component';
+import { JdListComponent } from './jd-list.component';
 
-describe('JdHomeComponent', () => {
-  let component: JdHomeComponent;
-  let fixture: ComponentFixture<JdHomeComponent>;
+describe('JdListComponent', () => {
+  let component: JdListComponent;
+  let fixture: ComponentFixture<JdListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ JdHomeComponent ]
+      declarations: [ JdListComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(JdHomeComponent);
+    fixture = TestBed.createComponent(JdListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

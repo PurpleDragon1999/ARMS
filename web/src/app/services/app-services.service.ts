@@ -61,7 +61,7 @@ headers: this.createHeader
     return this.http.get<any>(`${USER_DOMAIN}/api/jobDescription`, this.options);
 }
 
-deleteJD(jobObjId): Observable<HttpResponse<any>>{
+deleteJd(jobObjId): Observable<HttpResponse<any>>{
   return this.http.delete<any>(`${USER_DOMAIN}/api/jobDescription/${jobObjId}`, this.options);
 }  
 
