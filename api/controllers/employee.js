@@ -72,7 +72,7 @@ class Employee extends Base {
 
       super.save(req, res);
     } catch (e) {
-      return res.status(500).send({
+      return res.send({
         success: false,
         payload: {
           message: e.message,

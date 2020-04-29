@@ -74,6 +74,7 @@ export class EmployeeFormComponent implements OnInit {
     this.employeeService
       .createEmployee(employee)
       .subscribe((res: IResponse) => {
+        console.log(res.payload.message,"!!!!!!!!!!!!!")
         const modalRef = this.modalService.open(ModalComponent);
         modalRef.componentInstance.message = res.payload.message; 
         this.modalClose();
