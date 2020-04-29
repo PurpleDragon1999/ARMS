@@ -28,16 +28,9 @@ headers: this.createHeader
   constructor(private http: HttpClient) { }
 
   //Regarding tokens
-
   getToken(): string {
     return localStorage.getItem('');
   }
-
-  tokenDecoder(): any {
-    const helper = new JwtHelperService();
-    return helper.decodeToken(localStorage.getItem(''));
-  }
- 
 
 
   // For making HTTP calls

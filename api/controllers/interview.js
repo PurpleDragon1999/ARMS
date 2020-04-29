@@ -8,6 +8,7 @@ class Interview extends Base{
         super(interviewModel);
     }
 
+
 async create(req, res) {
     try {
         const email=req.query.email;

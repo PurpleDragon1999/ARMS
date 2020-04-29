@@ -5,7 +5,6 @@ const pdfGenerator=require("../middlewares/pdfGenerator");
 class JobDescription extends Base{
   constructor(){
       super(jobDescriptionModel);
-      console.log("hits child class");
   }
 
 
