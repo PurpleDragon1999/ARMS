@@ -1,18 +1,20 @@
 //const model = require("../models");
 const Base = require("./base");
 const jobDescriptionModel = require("../models/jobDescription")
-
+const pdfGenerator=require("../middlewares/pdfGenerator");
 class JobDescription extends Base{
   constructor(){
       super(jobDescriptionModel);
-      console.log("hits child class");
   }
 
 
 // creates a new job description
   async save(req, res) {
       try {
-    super.save(req, res);
+      
+     
+        super.save(req, res);
+    
   } catch (e) {
     return res.status(500).send({
       success: false,
