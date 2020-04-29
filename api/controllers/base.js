@@ -26,6 +26,7 @@ class Base {
     }
   
 
+
   async index(req, res) {
     try {
       const data = await this.model.index();

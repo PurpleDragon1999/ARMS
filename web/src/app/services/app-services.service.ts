@@ -32,6 +32,12 @@ headers: this.createHeader
     return localStorage.getItem('');
   }
 
+
+  tokenDecoder(): any {
+    const helper = new JwtHelperService();
+    return helper.decodeToken(localStorage.getItem(''));
+  }
+
     //return helper.decodeToken(localStorage.getItem(''));
   //}
   // headers: HttpHeaders = new HttpHeaders({
