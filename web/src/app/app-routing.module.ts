@@ -1,3 +1,4 @@
+import { EmployeeUploadComponent } from './employee/components/employee-upload/employee-upload.component';
 import { ListComponent } from './list/list.component';
 import { CandidateFormComponent } from './candidate-form/candidate-form.component';
 import { JdFormComponent } from './jd-form/jd-form.component';
@@ -12,7 +13,7 @@ import { EmployeeFormComponent } from './employee/components/employee-form/emplo
 import { EmployeeComponent } from './employee/containers/employee/employee.component';
 
 const routes: Routes = [
-  {path:"list", component:ListComponent},
+  { path:"list", component:ListComponent},
   { path: "candidate", component: CandidateFormComponent},
   { path: "create-interview", component: CreateInterviewComponent },
   { path: "form", component: JdFormComponent },

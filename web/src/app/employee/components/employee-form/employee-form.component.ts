@@ -1,20 +1,18 @@
-import { Component, OnInit, Injectable, Output, EventEmitter, Input } from "@angular/core";
+import { ModalComponent } from '../../../modal/modal.component';
+import { Component, OnInit, Injectable, Output, EventEmitter, Input,} from "@angular/core";
 import { IEmployee } from "../../models/employee.interface";
 import { Router, ActivatedRoute } from "@angular/router";
 import { EmployeeService } from "../../employee.service";
 import { IResponse } from "src/app/models/response.interface";
+import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { switchMap } from "rxjs/operators";
 import { EMPTY } from "rxjs";
-import { ProgressHttp } from 'angular-progress-http';
-import { FileUploader } from 'ng2-file-upload';
 
 
 interface RouteData {
   formType: "create" | "update" | "read";
   employeeId: String;
 }
-
-const URL = 'http://localhost:3000/api/employee/bulk';
 
 @Component({
   selector: "app-employee-form",
@@ -37,17 +35,11 @@ export class EmployeeFormComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private employeeService: EmployeeService,
+    private modalService : NgbModal
   ) {}
 
   
-  public uploader: FileUploader = new FileUploader({
-    url: URL,
-    itemAlias: 'csvUpload',
-    allowedMimeType: ['text/csv', 'application/vnd.ms-excel'] 
-  });
-
   ngOnInit(): void {
-    console.log(this.employee, 'Employee');
     // this.route.params
     //   .pipe(
     //     switchMap((routeData: RouteData) => {
@@ -60,34 +52,6 @@ export class EmployeeFormComponent implements OnInit {
 
     //         return EMPTY;
 
-<<<<<<< HEAD:web/src/app/employee/containers/employee-form/employee-form.component.ts
-          return this.employeeService.getEmployee(routeData.employeeId);
-        })
-      )
-      .subscribe((response: IResponse) => {
-        this.employee = response.payload.data;
-        this.employee.employeeId = Number(
-          this.employee.employeeId.toString().replace("CYG-", "")
-        );
-      });
-
-      this.uploader.onAfterAddingFile = (file) => {
-        file.withCredentials = false; 
-      };
-      this.uploader.onProgressItem = (item, progress) => {
-        this.uploadProgress = progress;
-        item.onComplete = (res) => {
-            console.log('Done!');
-        }
-      };
-      this.uploader.onCompleteItem = (item: any, status: any) => {
-        this.uploader.clearQueue();
-        console.log('FileUpload:uploaded successfully:', item, status);
-      };
-      this.uploader.onWhenAddingFileFailed = function (item: any, filter: any, options: any,) {
-        this.isNotAllowedUploadType=true;
-      };
-=======
     //       return this.employeeService.getEmployee(routeData.employeeId);
     //     })
     //   )
@@ -98,10 +62,7 @@ export class EmployeeFormComponent implements OnInit {
     //     );
     //   });
 
-    this.employee.employeeId = Number(
-      this.employee.employeeId.toString().replace("CYG-", "")
-    );
->>>>>>> 77f865820e1b24f490b52ba4d88059fc0626debc:web/src/app/employee/components/employee-form/employee-form.component.ts
+    
   }
 
   handleSubmit(employee: IEmployee): void {
@@ -112,20 +73,25 @@ export class EmployeeFormComponent implements OnInit {
   createEmployee(employee: IEmployee): void {
     this.employeeService
       .createEmployee(employee)
-      .subscribe((res: IResponse) => {});
+      .subscribe((res: IResponse) => {
+        const modalRef = this.modalService.open(ModalComponent);
+        modalRef.componentInstance.message = res.payload.message; 
+        this.modalClose();
+      });
+    
   }
 
   updateEmployee(employee: IEmployee): void {
     this.employeeService
       .updateEmployee(employee, this.employeeId)
-      .subscribe((res: IResponse) => {});
+      .subscribe((res: IResponse) => {
+        const modalRef = this.modalService.open(ModalComponent);
+        modalRef.componentInstance.message = res.payload.message; 
+        this.modalClose();
+      });
   }
 
-<<<<<<< HEAD:web/src/app/employee/containers/employee-form/employee-form.component.ts
-
-=======
   modalClose(){
     this.closeModal.emit();    
   }
->>>>>>> 77f865820e1b24f490b52ba4d88059fc0626debc:web/src/app/employee/components/employee-form/employee-form.component.ts
 }

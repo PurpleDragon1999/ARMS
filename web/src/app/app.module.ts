@@ -1,3 +1,4 @@
+import { ModalComponent } from './modal/modal.component';
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { AppRoutingModule } from "./app-routing.module";
@@ -5,6 +6,7 @@ import { AppComponent } from "./app.component";
 import { LoginComponent } from "./login/login.component";
 import { AdminComponent } from "./employee/admin.component";
 import { EmployeeFormComponent } from "./employee/components/employee-form/employee-form.component";
+import { EmployeeUploadComponent } from "./employee/components/employee-upload/employee-upload.component"
 import { CreateInterviewComponent } from "./create-interview/create-interview.component";
 import { JdFormComponent } from "./jd-form/jd-form.component";
 import { HrInterviewAssessementComponent } from "./hr-interview-assessement/hr-interview-assessement.component";
@@ -39,6 +41,8 @@ const isIE =
     DashboardComponent,
     ListComponent,
     EmployeeComponent,
+    EmployeeUploadComponent,
+    ModalComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -82,7 +86,7 @@ const isIE =
       multi: true,
     },
   ],
-  entryComponents: [EmployeeFormComponent],
+  entryComponents: [EmployeeFormComponent, ModalComponent, EmployeeUploadComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
