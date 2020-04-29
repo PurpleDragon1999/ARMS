@@ -5,5 +5,7 @@ class Interview extends Base{
     constructor(){
         super(interviewModel);
     }
+}
+module.exports = new Interview();
+ 
 
- module.exports = new Interview();
