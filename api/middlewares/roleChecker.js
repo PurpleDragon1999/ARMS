@@ -6,7 +6,7 @@ class RoleChecker{
     }
 
     checkForAdmin(req, res, next){
-        let role = decoder(req.headers.token).role;
+        let role = decoder(req.header('Authorization')).role;
         if(role == "Admin"){
             next();
         }

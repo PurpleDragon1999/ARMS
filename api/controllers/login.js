@@ -5,19 +5,21 @@ const jwt = require("jsonwebtoken");
 
 
 class Login{
-  constructor(){}
+   constructor(){}
 
   async checkValidEmployee(req,res){
      try{
-         const data=jwt_decode(req.body.idToken);
-         const employeeObj=await model.employee.get({email:data.email});
+         const data = jwt_decode(req.body.idToken);
+         console.log(data);
+         const employeeObj = await model.employee.get({email:data.email});
+         console.log(employeeObj);
          const token = jwt.sign(
             {
               _id: employeeObj._id,
               empId: employeeObj.employeeId,
               name: employeeObj.name,
               role: employeeObj.role,
-              email:employeeObj.email
+              email: employeeObj.email
             },
             config.get("jwtPrivateKey"),
             { expiresIn: 86400 }
@@ -26,17 +28,17 @@ class Login{
             res.status(200).send({
                 success:true,
                    payload:{
-                     message:"this employee exists in db",
+                     message:"Employee exists in database",
                      data:{
                         "x-auth-token":token
                      }
                   }
-           })
+            })
         }else{
            res.status(401).send({
               success:true,
                  payload:{
-                   message:"you are unauthorized on ARMS"
+                   message:"You are unauthorized on ARMS"
                 }
 
             });
