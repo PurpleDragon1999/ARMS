@@ -22,4 +22,10 @@ export class JdHomeComponent implements OnInit {
     });
   }
 
+  deleteJD(jobObjId: string) {
+    this._service.deleteJD(jobObjId).subscribe(res => {
+      this.loadJds();
+    }
+    )};
+
 }

@@ -15,7 +15,7 @@
                     </h3>
 
                     <h6 class="font-weight-normal">Opening Date : {{job.openingDate | date}}
-                        <i class="mdi mdi-delete mdi-24px float-right"></i>
+                        <i class="mdi mdi-delete mdi-24px float-right" (click)="deleteJD(job._id)"></i>
                         <i class="mdi mdi-download mdi-24px float-right"></i>
                     </h6>
 
