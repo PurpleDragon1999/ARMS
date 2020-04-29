@@ -50,7 +50,6 @@ export class EmployeeComponent implements OnInit{
     searchEmployee=(character : string)=>{
         this.employeeService.searchEmployee(character).subscribe(res=>{
             console.log(res, "search response")
-            
                 this.employees = res.payload.data.searchedRecords
                 this.alertMessage = res.payload.message
                
