@@ -1,5 +1,5 @@
-const Base = require('./base');
-const interviewModel = require('../models/interview');
+const Base = require("./base");
+const interviewModel = require("../models/interview");
 
 class Interview extends Base{
     constructor(){
