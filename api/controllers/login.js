@@ -26,7 +26,7 @@ class Login{
             res.status(200).send({
                 success:true,
                    payload:{
-                     message:"this employee exists in db",
+                     message:"This employee exists in our DB",
                      data:{
                         "x-auth-token":token
                      }
@@ -36,7 +36,7 @@ class Login{
            res.status(401).send({
               success:true,
                  payload:{
-                   message:"you are unauthorized on ARMS"
+                   message:"You are unauthorized on ARMS"
                 }
 
             });

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+ <head>
+   <style>
+     .outer-border {
+       width: 715px;
+       height: 535px;
+       padding: 20px;
+       text-align: center;
+       border: 10px solid #787878;
+     }
+     .inner-border {
+       width: 665px;
+       height: 485px;
+       padding: 20px;
+       text-align: center;
+       border: 5px solid #787878;
+     }
+     .title {
+       font-size: 25pt;
+       font-weight: bold;
+     }
+     .fs30 { font-size: 15pt; }
+     .fs25 { font-size: 12pt; }
+     .fs20 { font-size: 10pt; }
+   </style>
+ </head>
+ <body>
+   <div class="outer-border">
+   <div class="inner-border">
+     <span class="title">Certificate of Completion</span>
+     <br/><br/>
+     <span class="fs25"><i>This is to certify that</i></span>
+     <br/><br/>
+     <span class="fs30"><b><%= student.name %></b></span><br/><br/>
+     <span class="fs25"><i>has completed the course</i></span> <br/><br/>
+     <span class="fs30"><%= student.couse_name %></span> <br/><br/>
+     <span class="fs20">with score of <b><%= student.grade %>%</b></span> <br/><br/><br/><br/>
+     <span class="fs25"><i>dated</i></span><br/>
+     <span class="fs30"><%= student.completion_date %></span>
+   </div>
+   </div>
+ </body>
+</html>

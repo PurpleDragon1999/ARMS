@@ -14,8 +14,7 @@ async create(req, res) {
     try {
         const email=req.query.email;
         const jdObj=await jobDescriptionModel.get({_id:req.body.jd});
-        pdfGenerator(jdObj);
-        nodeMail(email,jdObj,req.body);
+         nodeMail(email,jdObj,req.body);
         const data = await interviewModel.save(req.body);
 
        return res.send({
@@ -37,4 +36,6 @@ async create(req, res) {
 }
 }
 
+
  module.exports = new Interview();
+
