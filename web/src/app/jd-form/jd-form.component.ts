@@ -34,7 +34,7 @@ export class JdFormComponent implements OnInit {
     jdFormObject:any;
   ngOnInit() {
   
-      this.jdForm = this.formBuilder.group({
+      this.jdFormObject= this.formBuilder.group({
         jdId: ['', Validators.required],
         jdTitle: ['', Validators.required],
         openingDate: ['', Validators.required],
@@ -74,7 +74,7 @@ export class JdFormComponent implements OnInit {
        salary: this.salary.nativeElement.value,
         vacancies: this.vacancies.nativeElement.value,
      }
-     console.log(this.jdFormObject);
+    
      this.router.navigate(["/jd-pdf"])
     
     

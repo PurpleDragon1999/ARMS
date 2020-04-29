@@ -10,7 +10,7 @@ export class JdPdfComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.jdObj);
+   
   }
   //listening from jd-form
   makePdf(jdPdf:{jdFormObject}){
