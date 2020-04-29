@@ -1,23 +1,24 @@
-  <div class="main-panel">
-    <div class="content-wrapper">
-      <div class="page-header">
+<div class="main-panel">
+  <div class="content-wrapper">
+    <div class="page-header">
         <h3 class="page-title">Analytics</h3>
-      </div>
+    </div>
 
-      <div class="row">
-        <div class="col-md-6 col-lg-6 grid-margin stretch-card">
-          <div class="card">
-            <div class="card-body">
-              <div class="clearfix">
-                <h4 class="card-title float-left">
+    <div class="row">
+      <div class="col-md-6 col-lg-6 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <div class="clearfix">
+              <h4 class="card-title float-left">
                   Applicants vs Hired candidates
-                </h4>
+              </h4>
 
-                <!-- <div
+              <!-- <div
                   id="applicant-vs-hired-chart-legend"
                   class="rounded-legend legend-horizontal legend-top-right float-right"> 
-                </div> -->
-              </div>
+              </div> -->
+
+            </div>
               <canvas
                 id="applicants-vs-hired-chart"
                 class="mt-4"
@@ -28,21 +29,23 @@
                 [legend]="barChartLegend"
                 [chartType]="barChartType">
               </canvas>
-            </div>
           </div>
         </div>
-        <div class="col-md-6 col-lg-6 grid-margin stretch-card">
-          <div class="card">
-            <div class="card-body">
-              <div class="clearfix">
-                <h4 class="card-title float-left">
-                Profile Vacancies
-                </h4>
+      </div>
+
+      <div class="col-md-6 col-lg-6 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <div class="clearfix">
+              <h4 class="card-title float-left">
+                  Profile Vacancies
+              </h4>
 
               <!-- <div
                 id="profile-vacancies-chart-legend"
                 class="rounded-legend legend-vertical legend-bottom-left pt-4">
-            </div> -->
+              </div> -->
+
             </div>
               <canvas
                 id="profile-vacancies-chart"
@@ -52,9 +55,9 @@
                 [labels]="doughnutChartLabels"
                 [chartType]="doughnutChartType">
               </canvas>
-            </div>
-            </div>
           </div>
         </div>
+      </div>
     </div>
   </div>
+</div>
