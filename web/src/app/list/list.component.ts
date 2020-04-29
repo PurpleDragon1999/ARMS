@@ -1,61 +1,57 @@
-import { IEmployee } from './../employee/models/employee.interface';
-import { EmployeeFormComponent } from '../employee/components/employee-form/employee-form.component';
-import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Component, OnInit, Input, OnChanges, SimpleChange, EventEmitter, SimpleChanges, AfterContentInit, AfterViewInit, Output } from '@angular/core';
-
-type FormType = "create" | "update" | "read"; 
+import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { EmployeeUploadComponent } from "../employee/components/employee-upload/employee-upload.component";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
-  selector: 'app-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss']
+  selector: "app-list",
+  templateUrl: "./list.component.html",
+  styleUrls: ["./list.component.scss"],
 })
-export class ListComponent implements OnInit {
-  formType: FormType;
-  
+export class ListComponent {
+  @Input()
+  columns: Array<String> = [];
 
   @Input()
-  columns : Array<String> = [];
+  data: Array<any> = [];
+
+  @Output()
+  emitOpenModal: EventEmitter<IDataModal> = new EventEmitter();
 
   @Input()
-  employees : Array<any> = [];
+  pager: any = {};
 
   @Input()
-  pager : any = {}
+  getEmployees: Function;
 
   @Input()
-  getEmployees : Function;
+  searchEmployee: Function;
 
-  @Input()
-  searchEmployee : Function
+  @Output()
+  delete: EventEmitter<IDataModal["data"]> = new EventEmitter();
 
-  constructor(private modalService : NgbModal) { }
-  
-  ngOnInit(): void{
-    console.log(this.employees, this.columns, 'Inside ngOnInit');
+  @Output()
+  emitSearch: EventEmitter<String> = new EventEmitter();
+
+  constructor(private modalService: NgbModal) {}
+
+  openModal(formType: IDataModal["formType"], data: IDataModal["data"]) {
+    this.emitOpenModal.emit({ formType, data });
   }
-    openModal(formType: FormType, employee: IEmployee) {
-      this.formType = formType;
-      const modalRef = this.modalService.open(EmployeeFormComponent);
-      modalRef.componentInstance.formType = this.formType;
-      modalRef.componentInstance.employee = employee;
-      modalRef.componentInstance.closeModal.subscribe(() => {
-        modalRef.close();
-      })
-    }
 
-    setPage(page){
-      console.log(page, "set page called")
-      // this.valueChange.emit(this.page);
-      this.getEmployees(page)
-      console.log(this.getEmployees, "my funcccccccccccc")
-      console.log(this.pager, "pager");
-      
-    }
+  openUpload() {
+    const modalRef = this.modalService.open(EmployeeUploadComponent);
+  }
 
-    search(character : string){
-      console.log(character, "character")
-      this.searchEmployee(character)
+  setPage(page) {
+    this.getEmployees(page);
+    
+  }
 
-    }
+  search(character) {
+    this.emitSearch.emit(character);
+  }
+
+  deleteEntry(entry: any) {
+    this.delete.emit(entry);
+  }
 }

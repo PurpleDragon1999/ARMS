@@ -1,6 +1,4 @@
-
-
-  <div class="modal-dialog" role="document">
+<div class="modal-dialog" role="document">
     <div class="modal-content" >
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Employee Form --- {{ formType | uppercase }}</h5>
@@ -9,10 +7,8 @@
         </button>
       </div>
       <div class="modal-body">
-        
-        <!-- {{formType | json}} -->
-        <form (ngSubmit)="handleSubmit(form.value)" class="forms-sample" #form="ngForm" novalidate>
-          <div class="form-group ">
+        <form (ngSubmit)="handleSubmit(form.value)" *ngIf="data as employee" class="forms-sample" #form="ngForm" novalidate>
+          <div class="form-group">
             <label for="name">Name</label>
             <input name="name" [ngModel]="employee?.name" type="text" required class="form-control" id="name" placeholder="Name" #name="ngModel" [ngClass]="{ 'is-invalid': form.submitted && name.invalid }">
             <div *ngIf="form.submitted && name.errors?.required" class="invalid-feedback">
@@ -75,4 +71,3 @@
       </div>
     </div>
   </div>
-

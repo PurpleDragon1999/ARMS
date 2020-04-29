@@ -27,8 +27,8 @@ export class EmployeeService {
         return this.http.post<IResponse>(`${EMPLOYEE_API}`, employee, this.options);
     }
 
-    updateEmployee(employee: IEmployee, employeeId: String): Observable<IResponse>{
-        return this.http.put<IResponse>(`${EMPLOYEE_API}/${employeeId}`, employee, this.options);
+    updateEmployee(employee: IEmployee): Observable<IResponse>{
+        return this.http.put<IResponse>(`${EMPLOYEE_API}/${employee._id}`, employee, this.options);
     }
 
     getEmployee(employeeId: String): Observable<IResponse>{
@@ -36,11 +36,10 @@ export class EmployeeService {
     }
 
     getAllEmployees(page? ): Observable<IResponse>{
-        console.log("inside page service")
         return this.http.get<IResponse>(`${EMPLOYEE_API}?page=${page}`, this.options);
     }
 
-    deleteEmployee(employeeId : string): Observable<IResponse>{
+    deleteEmployee(employeeId : String): Observable<IResponse>{
         return this.http.delete<IResponse>(`${EMPLOYEE_API}/${employeeId}`, this.options);
     }
 

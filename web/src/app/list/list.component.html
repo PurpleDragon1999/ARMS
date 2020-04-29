@@ -1,16 +1,22 @@
 <div class="col-lg-12 stretch-card desktopView">
     <div class="card">
-      <div class="card-body">
-        <div class="addEmployee">
-            <button type="button" class="btn btn-outline-primary btn-fw" (click)="openModal('create')"><i class="mdi mdi-account-plus"></i> Add Employee</button>
+      <div class="card-body">       
+        <div ngbDropdown class="addEmployee">  
+          <button class="btn btn-outline-primary" 
+              id="addOption" ngbDropdownToggle><i class="mdi mdi-account-plus"></i>Add Employee/s</button>
+          <div ngbDropdownMenu>
+            <button ngbDropdownItem  class="btn btn-outline-primary btn-fw" (click)="openModal('create')"><i class="mdi mdi-account-plus"></i> Add Employee</button>
+            <button ngbDropdownItem class="btn btn-outline-primary btn-fw" (click)="openUpload()"><i class="mdi mdi-account-plus"></i> Add through file upload</button>
+          </div>
         </div>
+
         <div class="search-field  d-md-block ">
             <form class="d-flex align-items-center h-100" action="#">
               <div class="input-group">
                 <div class="input-group-prepend bg-transparent card">
                   <i class=" card-body input-group-text border-0 mdi mdi-magnify"></i>
                 </div>
-                <input #searchHere (input)="search(searchHere.value)" type="text" class="form-control bg-transparent border-0" placeholder="Search ">
+                <input #searchInput (keyup)="search(searchInput.value)" type="text" class="form-control bg-transparent border-0" placeholder="Search ">
               </div>
             </form>
         </div>
@@ -21,15 +27,14 @@
             </tr>
           </thead>
           <tbody>
-            <small class="p-2" *ngIf="employees.length==0"> No Match Found</small>
-            <tr *ngFor="let employee of employees">
+            <small class="p-2" *ngIf="data.length==0"> No Match Found</small>
+            <tr *ngFor="let entry of data">
                 
               <td *ngFor="let columnName of columns;">
-                {{ employee[columnName] }}
+                {{ entry[columnName] }}
               </td>
-              <!-- {{employee["_id"]}} -->
-              <td ><a (click)="openModal('update', employee)" [routerLink]="['/employee/update',employee['_id']]"><i class="mdi mdi-grease-pencil"></i></a></td>
-              <td><a href=""><i class="mdi mdi-delete"></i></a> </td>
+              <td ><a (click)="openModal('update', entry)"><i class="mdi mdi-grease-pencil"></i></a></td>
+              <td><a (click)="deleteEntry(entry)"><i class="mdi mdi-delete"></i></a> </td>
             </tr>
           </tbody>
         </table>
@@ -38,7 +43,7 @@
       
       <div class="card paginationDiv">
         <div >
-			<ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+			<ul *ngIf="pager?.pages && pager?.pages.length" class="pagination">
 				
 				<li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item previous-item">
 					<a (click)="setPage(pager.currentPage - 1)"  class="page-link"><i class="mdi mdi-chevron-left arrow"></i></a>
@@ -69,7 +74,7 @@
                     <div class="input-group-prepend bg-transparent card">
                       <i class=" card-body input-group-text border-0 mdi mdi-magnify"></i>
                     </div>
-                    <input #searchBar (input)="search(searchBar.value)" type="text" class="form-control bg-transparent border-0" placeholder="Search ">
+                    <input #input (keyup)="search(input.value)" type="text" class="form-control bg-transparent border-0" placeholder="Search ">
                   </div>
                 </form>
             </div>
