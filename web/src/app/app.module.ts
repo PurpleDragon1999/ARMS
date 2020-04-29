@@ -11,6 +11,8 @@ import { JdFormComponent } from './jd-form/jd-form.component';
 import { HrInterviewAssessementComponent } from './hr-interview-assessement/hr-interview-assessement.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+//import { AdminComponent } from './admin/admin.component';
+import { ScheduleInterviewComponent } from './schedule-interview/schedule-interview.component';
 import { HrComponent } from './hr/hr.component';
 import { CandidateFormComponent } from './candidate-form/candidate-form.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -19,6 +21,8 @@ import { ProgressHttpModule } from 'angular-progress-http';
 import { MsalModule, MsalInterceptor } from '@azure/msal-angular';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { JdHomeComponent } from './jd-home/jd-home.component'
+import { JdListComponent } from './jd-list/jd-list.component';
+import { JdPdfComponent } from './jd-form/jd-pdf/jd-pdf.component'
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
 @NgModule({
@@ -35,7 +39,12 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     NavBarComponent,
     DashboardComponent,
     HrComponent,
-    JdHomeComponent
+    JdHomeComponent,
+    AdminComponent,
+    ScheduleInterviewComponent,
+    JdListComponent,
+    JdPdfComponent,
+
   ],
   imports: [
     ReactiveFormsModule,

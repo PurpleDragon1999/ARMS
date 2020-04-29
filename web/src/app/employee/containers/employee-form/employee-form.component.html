@@ -1,20 +1,31 @@
-<div class="app-form-admin">
-<div class="col-12 grid-margin stretch-card">
-    <div class="card">
-      <div class="card-body">
-        <h4 class="card-title">Employee Form</h4>
-        <p class="card-description">Employee Form --- {{ formType | uppercase }}</p>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Launch demo modal
+</button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" >
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabel"><b>Employee Form --- {{ formType | uppercase }}</b></h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+        <!-- <p >Employee Form --- {{ formType | uppercase }}</p> -->
         <form (ngSubmit)="handleSubmit(form.value)" class="forms-sample" #form="ngForm" novalidate>
-          {{ form.value | json }}{{ form.invalid }}{{ email.errors | json }}
-          <div class="form-group">
-            <label for="name">Name</label>
+          <!-- {{ form.value | json }}{{ form.invalid }}{{ email.errors | json }} -->
+          <div class="form-group ">
+            <label for="name" class="label">Name</label>
             <input name="name" [ngModel]="employee?.name" type="text" required class="form-control" id="name" placeholder="Name" #name="ngModel" [ngClass]="{ 'is-invalid': form.submitted && name.invalid }">
             <div *ngIf="form.submitted && name.errors?.required" class="invalid-feedback">
               <div><i class="mdi mdi-alert-outline"></i>Name is required</div>
             </div>
           </div>
           <div class="form-group">
-            <label for="designation">Designation</label>
+            <label for="designation" class="label">Designation</label>
             <select name="designation" [ngModel]="employee?.designation" required class="form-control" id="designation" #designation="ngModel" [ngClass]="{ 'is-invalid': form.submitted && designation.invalid }">
               <option [value]="null" disabled>Select Designation</option>
               <option value="intern">Intern</option>
@@ -29,7 +40,7 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="role">Role</label>
+            <label for="role" class="label">Role</label>
             <select name="role" [ngModel]="employee?.role" required class="form-control" id="role" #role="ngModel" [ngClass]="{ 'is-invalid': form.submitted && role.invalid }">
               <option [value]="null" disabled>Select Role</option>
               <option value="admin">Admin</option>
@@ -41,7 +52,7 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="email">Email address</label>
+            <label for="email" class="label">Email address</label>
             <input name="email" [ngModel]="employee?.email" type="email" pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" required class="form-control" id="email" placeholder="Email" #email="ngModel" [ngClass]="{ 'is-invalid': form.submitted && email.invalid }">
             <div *ngIf="form.submitted && email.errors?.required" class="invalid-feedback">
               <div><i class="mdi mdi-alert-outline"></i>Email is required</div>
@@ -51,10 +62,10 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="employeeId">Employee Id</label>
+            <label for="employeeId" class="label">Employee Id</label>
 
               <div class="input-group col-xs-12">
-                <span class="input-group-append btn btn-gradient-primary">
+                <span class="input-group-append btn btn-gradient-primary span">
                     CYG-
                 </span>
                 <input [readOnly]="formType !== 'create'" name="employeeId" [ngModel]="employee?.employeeId" type="number" required class="form-control" id="employeeId" placeholder="Employee Id" #employeeId="ngModel" [ngClass]="{ 'is-invalid': form.submitted && employeeId.invalid }">
@@ -62,7 +73,10 @@
                   <div><i class="mdi mdi-alert-outline"></i>Employee Id is required</div>
                 </div>
             </div>
-          </div>
+
+          </div>          
+          <button type="submit" *ngIf="formType !== 'read'" class="btn btn-gradient-primary mr-2 button">{{ formType | titlecase }}</button>
+          <!-- </div> -->
 
           <!-- <div class="form-group">
             <label for="gender">Gender</label>
@@ -78,7 +92,12 @@
           
           <button type="submit" [disabled]="form.invalid" *ngIf="formType !== 'read'" class="btn btn-gradient-primary mr-2">{{ formType | titlecase }}</button>
           <button class="btn btn-light">Cancel</button>
+
         </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary " data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
