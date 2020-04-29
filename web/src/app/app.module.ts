@@ -13,7 +13,7 @@ import { DashboardComponent } from "./dashboard/dashboard.component";
 import { CandidateFormComponent } from "./candidate-form/candidate-form.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { FileSelectDirective } from "ng2-file-upload";
-
+// import { ProgressHttpModule } from 'angular-progress-http';
 import { MsalModule, MsalInterceptor } from "@azure/msal-angular";
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { EmployeeService } from "./employee/employee.service";
@@ -45,18 +45,16 @@ const isIE =
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MsalModule.forRoot(
-      {
-        auth: {
-          clientId: "4d31e348-bc89-40d2-821c-f65942084ae3",
-          authority:
-            "https://login.microsoftonline.com/94a76bb1-611b-4eb5-aee5-e312381c32cb",
-          redirectUri: "http://localhost:4200/",
-        },
-        cache: {
-          cacheLocation: "localStorage",
-          storeAuthStateInCookie: isIE, // set to true for IE 11
-        },
+    // ProgressHttpModule, 
+    MsalModule.forRoot({
+      auth: {
+        clientId: '4d31e348-bc89-40d2-821c-f65942084ae3',
+        authority: 'https://login.microsoftonline.com/94a76bb1-611b-4eb5-aee5-e312381c32cb',
+        redirectUri: 'http://localhost:4200/',
+      },
+      cache: {
+        cacheLocation: 'localStorage',
+        storeAuthStateInCookie: isIE, // set to true for IE 11
       },
       {
         popUp: !isIE,

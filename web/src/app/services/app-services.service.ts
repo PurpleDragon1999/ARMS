@@ -36,7 +36,6 @@ headers: this.createHeader
   constructor(private http: HttpClient) { }
 
   //Regarding tokens
-
   getToken(): string {
     return localStorage.getItem('');
   }
