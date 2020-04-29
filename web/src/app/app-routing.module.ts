@@ -24,6 +24,22 @@ const routes: Routes = [
       path: "home", component: AdminComponent
     }
   ]},
+  { path: "su", component: NavBarComponent, canActivate: [RoleGuardService], data: {role: "SuperUser"}, children: [
+    {
+      path: "", redirectTo: "home", pathMatch: "full"
+    },
+    {
+      path: "home", component: AdminComponent
+    }
+  ]},
+  { path: "user", component: NavBarComponent, canActivate: [RoleGuardService], data: {role: "User"}, children: [
+    {
+      path: "", redirectTo: "home", pathMatch: "full"
+    },
+    {
+      path: "home", component: AdminComponent
+    }
+  ]},
 
   { path: "candidate", component: CandidateFormComponent},
   { path: "create-interview", component: CreateInterviewComponent },

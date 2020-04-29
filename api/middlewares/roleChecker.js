@@ -11,7 +11,7 @@ class RoleChecker{
             next();
         }
         else{
-            res.status(401).send({
+            return res.status(401).send({
                 success: false,
                 payload: {
                     message: "You are not authorized to make this request"

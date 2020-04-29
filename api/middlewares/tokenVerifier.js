@@ -8,7 +8,7 @@ module.exports = (req, res, next) => {
     var s  = 'User Auth';                           // Subject 
     var a  = 'someone@cygrp.com';                   // Audience
 
-    var token = null;
+    var token = req.header('Authorization');
 
     var verifyOptions = {
         issuer:  i,
@@ -20,23 +20,31 @@ module.exports = (req, res, next) => {
 
     try{
         if(token == null){
-            res.status(401).send({
+            return res.status(401).send({
                 success: false,
                 payload: {
                     message: "No token attached to the request"
                 }
             });
         }
-        let verify = jwt.verify(token, privateKEY, verifyOptions);
-        if(verify == true){
+        let verify = jwt.verify(token, privateKEY, (err, payload) => {
+            if(err){
+                return res.status(401).send({
+                    success: false,
+                    payload: {
+                        message: "Error with token. Error -> " + err
+                    }
+                });
+            }
+
             next();
-        }
+        });
     }
     catch(error){
-        res.status(500).send({
+        return res.status(500).send({
             success: false,
             payload: {
-                message: "Internal Server Error while verifiying token"
+                message: "Internal Server Error while verifiying token, Possible Reason -> "+error
             }
         });
     }
