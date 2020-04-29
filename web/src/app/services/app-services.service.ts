@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
-import { JwtHelperService } from '@auth0/angular-jwt';
-import { HttpClient, HttpResponse, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
-
-const USER_DOMAIN = 'http://localhost:3000';
+import { JwtHelperService } from '@auth0/angular-jwt'
+import { Observable} from 'rxjs';
+import { HttpClient, HttpClientModule, HttpResponse, HttpHeaders, HttpParams} from '@angular/common/http';
 import { ICreate} from '../models/create.interface';
+
+
+const USER_DOMAIN: string = 'http://localhost:3000';
+
 
 @Injectable({
   providedIn: 'root'
@@ -30,22 +32,9 @@ headers: this.createHeader
   constructor(private http: HttpClient) { }
 
   //Regarding tokens
-
   getToken(): string {
     return localStorage.getItem('');
   }
-
-  tokenDecoder(): any {
-    const helper = new JwtHelperService();
-    return helper.decodeToken(localStorage.getItem(''));
-  }
-  // headers: HttpHeaders = new HttpHeaders({
-  //   'Content-Type': 'application/json',
-  //   // Authorization: localStorage.getItem("Authorization")
-  // });
-  // httpOptions = {
-  //   headers: this.headers
-  // };
 
 
   // For making HTTP calls
