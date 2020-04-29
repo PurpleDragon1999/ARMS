@@ -26,7 +26,10 @@ const routes: Routes = [
       },
       {
         path:"dashboard", component: DashboardComponent
-      }
+      },
+      // {
+      // path: "hr", component: HrComponent
+      // }
     ]
   },
   { path: 'employee/:formType', 

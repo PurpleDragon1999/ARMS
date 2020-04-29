@@ -31,7 +31,7 @@ export class JdFormComponent implements OnInit {
 
   jdForm: FormGroup;
     submitted = false;
-    @Output() jdFormObjectCreated=new EventEmitter<{jdFormObject:any}>();//EventEmitter is an angular object
+    jdFormObject:any;
   ngOnInit() {
   
       this.jdForm = this.formBuilder.group({
@@ -61,7 +61,7 @@ export class JdFormComponent implements OnInit {
   }
 
   jdFormData(){
-    let jdFormObject = {
+     this.jdFormObject = {
        jdId: this.jdId.nativeElement.value,
        jdTitle: this.jdTitle.nativeElement.value,
        openingDate: this.openingDate.nativeElement.value,
@@ -74,9 +74,9 @@ export class JdFormComponent implements OnInit {
        salary: this.salary.nativeElement.value,
         vacancies: this.vacancies.nativeElement.value,
      }
-     console.log(jdFormObject);
-     this.router.navigate(["/jd-pdf"]);
-     //this.jdFormObjectCreated.emit({jdFormObject});
+     console.log(this.jdFormObject);
+     this.router.navigate(["/jd-pdf"])
+    
     
    
     // this._service.jdFormData(jdFormObject).subscribe(res => {
