@@ -16,7 +16,7 @@
                 <div class="input-group-prepend bg-transparent card">
                   <i class=" card-body input-group-text border-0 mdi mdi-magnify"></i>
                 </div>
-                <input type="text" class="form-control bg-transparent border-0" placeholder="Search ">
+                <input #searchInput (keyup)="search(searchInput.value)" type="text" class="form-control bg-transparent border-0" placeholder="Search ">
               </div>
             </form>
         </div>
@@ -27,22 +27,36 @@
             </tr>
           </thead>
           <tbody>
+            <small class="p-2" *ngIf="data.length==0"> No Match Found</small>
             <tr *ngFor="let entry of data">
+                
               <td *ngFor="let columnName of columns;">
                 {{ entry[columnName] }}
               </td>
-              <td (click)="openModal('update', entry)"><i class="mdi mdi-grease-pencil"></i></td>
-              <td><i class="mdi mdi-delete"></i> </td>
+              <!-- {{employee["_id"]}} -->
+              <td ><a (click)="openModal('update', entry)"><i class="mdi mdi-grease-pencil"></i></a></td>
+              <td><a (click)="deleteEntry(entry)"><i class="mdi mdi-delete"></i></a> </td>
             </tr>
           </tbody>
         </table>
         
       </div>
+      
       <div class="card paginationDiv">
-        <ngb-pagination  [collectionSize]="40" [pageSize]="10" [page]="1" aria-label="Custom pagination" class="pagination-flat pagination-danger pagination">
-            <ng-template class="page-item" ngbPaginationPrevious> <i class="mdi mdi-chevron-left arrow"></i></ng-template>
-            <ng-template ngbPaginationNext><i class="mdi mdi-chevron-right arrow"></i></ng-template>          
-        </ngb-pagination>
+        <div >
+			<ul *ngIf="pager?.pages && pager?.pages.length" class="pagination">
+				
+				<li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item previous-item">
+					<a (click)="setPage(pager.currentPage - 1)"  class="page-link"><i class="mdi mdi-chevron-left arrow"></i></a>
+				</li>
+				<li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}" class="page-item number-item">
+					<a  (click)="setPage(page)"  class="page-link">{{page}}</a>
+				</li>
+				<li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item next-item">
+					<a (click)="setPage(pager.currentPage + 1)" class="page-link"><i class="mdi mdi-chevron-right arrow"></i></a>
+				</li>
+			</ul>
+		</div>
       </div>
     </div>  
   </div>
@@ -53,7 +67,7 @@
       <div class="card">
         <div class="card-body">
             <div class="addEmployee">
-                <button type="button" class="btn btn-outline-primary btn-fw"><i class="mdi mdi-account-plus"></i> </button>
+                <button (click)="openModal('create')"  type="button" class="btn btn-outline-primary btn-fw"><a [routerLink]="['./employee/create']"><i class="mdi mdi-account-plus"></i></a> </button>
             </div>
             <div class="search-field d-md-block ">
                 <form class="d-flex align-items-center h-100" action="#">
@@ -61,107 +75,53 @@
                     <div class="input-group-prepend bg-transparent card">
                       <i class=" card-body input-group-text border-0 mdi mdi-magnify"></i>
                     </div>
-                    <input type="text" class="form-control bg-transparent border-0" placeholder="Search ">
+                    <input #input (keyup)="search(input.value)" type="text" class="form-control bg-transparent border-0" placeholder="Search ">
                   </div>
                 </form>
             </div>
-          <!-- <h4 class="card-title">Default accordion</h4>
-          <p class="card-description">Use class <code>.accordion</code> for basic accordion</p> -->
-          <div class="mt-4 userCard">
-            <ngb-accordion [closeOthers]="true" activeIds="collapse-1">
-              <ngb-panel id="collapse-2" title="Shivani Bansal" class="accordion">
+          <div class="mt-4 userCard" *ngFor="let employee of employees">
+            <ngb-accordion  [closeOthers]="true" activeIds="collapse-1">
+              <ngb-panel id="collapse-2" class="accordion">
                 <ng-template ngbPanelHeader let-opened="opened">
                     <div class="d-flex align-items-center justify-content-between">
-                      <h5 class="m-0 p-3">Sonali Chawla</h5>
+                      <h5 class="m-0 p-3">{{employee[columns[0]]}}</h5>
+                      <!-- <a (click)="openModal('update', employee)" ><i class="mdi mdi-grease-pencil"></i></a>
+                      <a href=""><i class="mdi mdi-delete"></i></a>  -->
                       <button ngbPanelToggle class="btn btn-link p-0"><i class="mdi mdi-plus"></i></button>
                     </div>
                   </ng-template>
                 <ng-template ngbPanelContent>
-                    <div class="py-2">
+                    <div *ngFor="let columnName of columns ;" class="py-2">
                         <div>
                             <b>
-                                EmployeeId
+                                {{columnName | uppercase}}
                             </b>
                         </div>
                         <div>
-                            CGY1
-                        </div>
-                    </div>
-                    <div class="py-2">
-                        <div>
-                            <b>
-                                Designation
-                            </b>
-                        </div>
-                        <div>
-                            Associate2
-                        </div>
-                    </div>
-                    <div class="py-2">
-                        <div>
-                            <b>
-                                Email
-                            </b>
-                        </div>
-                        <div>
-                            sonali.chawla@cygrp.com
+                            {{employee[columnName]}}
                         </div>
                     </div>
                 </ng-template>
               </ngb-panel>
             </ngb-accordion>
           </div>
-          <div class="mt-4 userCard ">
-            <ngb-accordion [closeOthers]="true" activeIds="collapse-1">
-              <ngb-panel id="collapse-2" title="Shivani Bansal">
-                <ng-template ngbPanelHeader let-opened="opened">
-                    <div class="d-flex align-items-center justify-content-between">
-                      <h5 class="m-0 p-3">Shivani Bansal</h5>
-                      <button ngbPanelToggle class="btn btn-link p-0"><i class="mdi mdi-plus"></i></button>
-                    </div>
-                  </ng-template>
-                <ng-template ngbPanelContent>
-                    <div class="py-2">
-                        <div>
-                            <b>
-                                EmployeeId
-                            </b>
-                        </div>
-                        <div>
-                            CGI1
-                        </div>
-                    </div>
-                    <div class="py-2">
-                        <div>
-                            <b>
-                                Designation
-                            </b>
-                        </div>
-                        <div>
-                            Intern
-                        </div>
-                    </div>
-                    <div class="py-2">
-                        <div>
-                            <b>
-                                Email
-                            </b>
-                        </div>
-                        <div>
-                            shivani.bansal@cygrp.com
-                        </div>
-                    </div>
-                </ng-template>
-              </ngb-panel>
-            </ngb-accordion>
-          </div>
-
         </div>
+        
         <div class="card paginationDiv">
-            <ngb-pagination  [collectionSize]="40" [pageSize]="10" [page]="1" aria-label="Custom pagination" class="pagination-flat pagination-danger pagination">
-                <ng-template class="page-item" ngbPaginationPrevious> <i class="mdi mdi-chevron-left arrow"></i></ng-template>
-                <ng-template ngbPaginationNext><i class="mdi mdi-chevron-right arrow"></i></ng-template>          
-            </ngb-pagination>
+            <div >
+                <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+                    
+                    <li [ngClass]="{disabled:pager.currentPage == 1}" class="page-item previous-item">
+                        <a (click)="setPage(pager.currentPage-1)"  class="page-link"><i class="mdi mdi-chevron-left arrow"></i></a>
+                    </li>
+                    <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}" class="page-item number-item">
+                        <a  (click)="setPage(page)"  class="page-link">{{page}}</a>
+                    </li>
+                    <li [ngClass]="{disabled:pager.currentPage == pager.totalPages}" class="page-item next-item">
+                        <a (click)="setPage(pager.currentPage+1)" class="page-link"><i class="mdi mdi-chevron-right arrow"></i></a>
+                    </li>
+                </ul>
+            </div>
           </div>
       </div>
     </div>

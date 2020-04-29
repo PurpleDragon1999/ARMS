@@ -136,24 +136,28 @@ class Base {
 
   async searchRecord(req, res) {
     try {
-      let queryObject = { $regex: req.params.searchBy, $options: "i" };
-      const searchedRecords = await this.model.getAll({ name: queryObject });
-
+      let searchBy = req.params.searchBy
+      let queryObject = { $regex: ".*^" + searchBy + ".*", $options: "i" };
+      const searchedRecords = await this.model.getAll({ $or : [{name: queryObject}, {designation: queryObject}, {email: queryObject}]  });
+      
       if (searchedRecords.length != 0) {
         res.status(200).send({
           success: true,
           payload: {
             data: {
-              searchedRecords,
+              searchedRecords ,
             },
             message: "List of Searched Records returned successfully!!",
           },
         });
       } else {
-        res.status(200).send({
-          success: true,
+        res.send({
+          success: false,
           payload: {
-            message: "No Results Found",
+            data:{
+              searchedRecords : []
+            },
+            message: "No Match Found",
           },
         });
       }
@@ -171,7 +175,8 @@ class Base {
     try {
       const recordList = await this.model.getAll();
       const page = parseInt(req.query.page) || 1;
-      const pageSize = 10;
+      console.log(page, "inside api")
+      const pageSize = 5;
       const pager = await pagination.paginate(
         recordList.length,
         page,
@@ -185,8 +190,10 @@ class Base {
       res.status(200).send({
         success: true,
         payload: {
-          pager: pager,
-          data: pageOfItems,
+          data: {
+            dataList : pageOfItems,
+            pager : pager
+          },
           message: "List of Data returned successfully!!",
         },
       });

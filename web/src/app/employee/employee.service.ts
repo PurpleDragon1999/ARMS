@@ -4,8 +4,10 @@ import { Observable } from 'rxjs';
 import { IEmployee } from './models/employee.interface';
 import { IResponse } from '../models/response.interface';
 import { HOST } from '../config/apiHost.config';
+import { $ } from 'protractor';
 
 const EMPLOYEE_API = `${HOST}/api/employee`;
+const EMPLOYEE_SEARCH = `${HOST}/api/employeeBySearch`;
 
 @Injectable({
     providedIn: 'root'
@@ -34,7 +36,18 @@ export class EmployeeService {
         return this.http.get<IResponse>(`${EMPLOYEE_API}/${employeeId}`, this.options);
     }
 
-    getAllEmployees(): Observable<IResponse>{
-        return this.http.get<IResponse>(EMPLOYEE_API, this.options);
+    getAllEmployees(page? ): Observable<IResponse>{
+        console.log("inside page service")
+        return this.http.get<IResponse>(`${EMPLOYEE_API}?page=${page}`, this.options);
+    }
+
+    deleteEmployee(employeeId : String): Observable<IResponse>{
+        return this.http.delete<IResponse>(`${EMPLOYEE_API}/${employeeId}`, this.options);
+    }
+
+    searchEmployee(character : string){
+        console.log(character, 'character inside service')
+        return this.http.get<IResponse>(`${EMPLOYEE_SEARCH}/${character}`, this.options);
+
     }
 }

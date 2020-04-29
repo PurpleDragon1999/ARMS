@@ -34,7 +34,7 @@ export class EmployeeFormComponent {
   }
 
   createEmployee(employee: IEmployee): void {
-    console.log(employee, 'employee');
+    
     this.employeeService
       .createEmployee(employee)
       .subscribe((res: IResponse) => {
