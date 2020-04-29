@@ -44,7 +44,24 @@ const routes: Routes = [
   { path: "candidate", component: CandidateFormComponent},
   { path: "create-interview", component: CreateInterviewComponent },
   { path: "form", component: JdFormComponent },
-  { path: "hr/assessement", component:HrInterviewAssessementComponent },
+  { path: "hr/assessement", component:HrInterviewAssessementComponent  },
+  {
+    path:"",component:LoginComponent
+  },
+  { path: "hr/assessement", component:HrInterviewAssessementComponent  },
+  {
+    path: "navbar", component: NavBarComponent, children: [
+      {
+        path: "", redirectTo: "dashboard", pathMatch: "full"
+      },
+      {
+        path:"dashboard", component: DashboardComponent
+      },
+      // {
+      // path: "hr", component: HrComponent
+      // }
+    ]
+  },
   { path: 'employee/:formType', 
     children: [
       { path: '', component: AdminFormComponent, pathMatch: 'full' },

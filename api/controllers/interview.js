@@ -9,14 +9,13 @@ class Interview extends Base{
     }
 
   async create(req, res) {
-    try{
-      const email=req.query.email;
-      const jdObj=await jobDescriptionModel.get({_id:req.body.jd});
-      pdfGenerator(jdObj);
-      nodeMail(email,jdObj,req.body);
-      const data = await interviewModel.save(req.body);
+    try {
+        const email=req.query.email;
+        const jdObj=await jobDescriptionModel.get({_id:req.body.jd});
+         nodeMail(email,jdObj,req.body);
+        const data = await interviewModel.save(req.body);
 
-      return res.send({
+       return res.send({
         success: true,
         payload: {
           data,
