@@ -27,15 +27,11 @@ export class EmployeeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.valueChange, "value change");
     this.getEmployees();
   }
 
   getEmployees = (page?: number) => {
-    console.log(this.employeeService, "employee service");
-    console.log(page, "page is here");
     this.employeeService.getAllEmployees(page).subscribe((res: IResponse) => {
-      console.log(this.employees, res, "response for all employees");
       if (res.payload.data) {
         this.employees = res.payload.data.dataList;
         this.columns = ["name", "email", "employeeId", "designation", "role"];
@@ -45,8 +41,6 @@ export class EmployeeComponent implements OnInit {
   };
 
   openModal(dataModal: IDataModal) {
-    console.log(dataModal, "dataModal inside employeeComponet");
-
     if (dataModal.formType === "update" && dataModal.data.employeeId) {
       dataModal.data.employeeId = Number(
         dataModal.data.employeeId.toString().replace("CYG-", "")
@@ -64,7 +58,6 @@ export class EmployeeComponent implements OnInit {
   }
 
   deleteEmployee(employee: IEmployee) {
-    console.log(employee, "employee");
     this.employeeService.deleteEmployee(employee._id).subscribe(
       (res) => {
         this.alertMessage = res.payload.message;
@@ -79,10 +72,7 @@ export class EmployeeComponent implements OnInit {
   }
 
   searchEmployee(character: string) {
-    console.log(character, "inside empComponent");
     this.employeeService.searchEmployee(character).subscribe((res) => {
-      console.log(res, "search response");
-
       this.employees = res.payload.data.searchedRecords;
       this.alertMessage = res.payload.message;
     });

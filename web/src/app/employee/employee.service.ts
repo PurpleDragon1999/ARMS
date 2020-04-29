@@ -28,7 +28,6 @@ export class EmployeeService {
     }
 
     updateEmployee(employee: IEmployee): Observable<IResponse>{
-        console.log(employee, 'Employee');
         return this.http.put<IResponse>(`${EMPLOYEE_API}/${employee._id}`, employee, this.options);
     }
 
@@ -37,7 +36,6 @@ export class EmployeeService {
     }
 
     getAllEmployees(page? ): Observable<IResponse>{
-        console.log("inside page service")
         return this.http.get<IResponse>(`${EMPLOYEE_API}?page=${page}`, this.options);
     }
 
@@ -46,7 +44,6 @@ export class EmployeeService {
     }
 
     searchEmployee(character : string){
-        console.log(character, 'character inside service')
         return this.http.get<IResponse>(`${EMPLOYEE_SEARCH}/${character}`, this.options);
 
     }

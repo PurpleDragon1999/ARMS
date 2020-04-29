@@ -34,9 +34,6 @@ export class EmployeeUploadComponent implements OnInit {
     };
     this.uploader.onProgressItem = (item, progress) => {
       this.uploadProgress = progress;
-      // item.onComplete = (res) => {
-      //     console.log('Done!');
-      // }
     };   
     this.uploader.onCompleteItem = (item: any, status: any) => {
       this.uploader.clearQueue();
@@ -51,7 +48,6 @@ export class EmployeeUploadComponent implements OnInit {
       this.modalClose()   
       }
     
-
     this.uploader.onWhenAddingFileFailed = function (item: any, filter: any, options: any,) {
       this.isNotAllowedUploadType=true;
     };
