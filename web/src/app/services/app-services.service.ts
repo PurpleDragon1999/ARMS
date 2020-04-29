@@ -58,7 +58,7 @@ headers: this.createHeader
   }   
 
   jdFormData(jdFormObject): Observable<any>{
-    return this.http.post<any>(`${USER_DOMAIN}/api/jobDescription`, jdFormObject, {headers: this.headers, observe: 'response'});
+    return this.http.post<any>(`${USER_DOMAIN}/api/jobDescription`, jdFormObject, {... this.headers, observe: 'response'});
   }
 
   jdList(): Observable<any>{

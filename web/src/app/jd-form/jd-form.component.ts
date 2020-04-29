@@ -73,13 +73,13 @@ export class JdFormComponent implements OnInit {
        eligibilityCriteria: this.eligibilityCriteria.nativeElement.value,
        location: this.location.nativeElement.value,
        salary: this.salary.nativeElement.value,
-       vacancies: this.vacancies.nativeElement.value
+       noOfVacancies: this.vacancies.nativeElement.value
     }
     console.log(jdFormObject)
 
-    // this._service.jdFormData(jdFormObject).subscribe(res => {
-    //   console.log(this.res);
-    // });
+    this._service.jdFormData(jdFormObject).subscribe(res => {
+      console.log(this.res);
+    });
   } 
 
 }
