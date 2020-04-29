@@ -344,9 +344,9 @@ class Base {
             
             res.status(200).send({
                 success : true,
-                data : {
+                payload : {
                     pager : pager,
-                    listOfData : pageOfItems,
+                    data : pageOfItems,
                     message : "List of Data returned successfully!!"
                 }
             })

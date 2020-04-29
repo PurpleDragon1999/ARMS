@@ -9,6 +9,5 @@ export interface IEmployee{
     role: Role;
     email: String;
     employeeId: Number;
-    password: String;
     profileImageUrl?: File;
 }

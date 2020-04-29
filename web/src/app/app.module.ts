@@ -4,7 +4,7 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { LoginComponent } from "./login/login.component";
 import { AdminComponent } from "./employee/admin.component";
-import { AdminFormComponent } from "./employee/containers/employee-form/employee-form.component";
+import { EmployeeFormComponent } from "./employee/components/employee-form/employee-form.component";
 import { CreateInterviewComponent } from "./create-interview/create-interview.component";
 import { JdFormComponent } from "./jd-form/jd-form.component";
 import { HrInterviewAssessementComponent } from "./hr-interview-assessement/hr-interview-assessement.component";
@@ -13,7 +13,10 @@ import { DashboardComponent } from "./dashboard/dashboard.component";
 import { CandidateFormComponent } from "./candidate-form/candidate-form.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { FileSelectDirective } from "ng2-file-upload";
-// import { ProgressHttpModule } from 'angular-progress-http';
+import { ProgressHttpModule } from 'angular-progress-http';
+import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ListComponent } from './list/list.component';
+
 import { MsalModule, MsalInterceptor } from "@azure/msal-angular";
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { EmployeeService } from "./employee/employee.service";
@@ -29,12 +32,13 @@ const isIE =
     AdminComponent,
     CandidateFormComponent,
     FileSelectDirective,
-    AdminFormComponent,
+    EmployeeFormComponent,
     CreateInterviewComponent,
     JdFormComponent,
     HrInterviewAssessementComponent,
     NavBarComponent,
     DashboardComponent,
+    ListComponent,
     EmployeeComponent,
   ],
   imports: [
@@ -43,9 +47,11 @@ const isIE =
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule,
+    NgbModule,
     ReactiveFormsModule,
     HttpClientModule,
-    // ProgressHttpModule, 
+    ProgressHttpModule, 
     MsalModule.forRoot({
       auth: {
         clientId: '4d31e348-bc89-40d2-821c-f65942084ae3',
@@ -55,25 +61,26 @@ const isIE =
       cache: {
         cacheLocation: 'localStorage',
         storeAuthStateInCookie: isIE, // set to true for IE 11
-      },
-      {
-        popUp: !isIE,
-        consentScopes: ["user.read", "openid", "profile"],
-        unprotectedResources: [],
-        protectedResourceMap: [
-          ["https://graph.microsoft.com/v1.0/me", ["user.read"]],
-        ],
-        extraQueryParameters: {},
-      }
-    ),
+      }, 
+    },
+    {
+      popUp: !isIE,
+      consentScopes: ["user.read", "openid", "profile"],
+      unprotectedResources: [],
+      protectedResourceMap: [
+        ["https://graph.microsoft.com/v1.0/me", ["user.read"]],
+      ],
+      extraQueryParameters: {}}),
   ],
   providers: [
+    NgbActiveModal,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: MsalInterceptor,
       multi: true,
     },
   ],
+  entryComponents: [EmployeeFormComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
