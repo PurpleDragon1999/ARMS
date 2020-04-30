@@ -1,76 +1,83 @@
 <div class="modal-dialog" role="document">
-    <div class="modal-content" >
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Employee Form --- {{ formType | uppercase }}</h5>
-        <button type="button" (click)="modalClose()" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        
-        <!-- <p >Employee Form --- {{ formType | uppercase }}</p> -->
-        <form (ngSubmit)="handleSubmit(form.value)" *ngIf="data as employee" class="forms-sample" #form="ngForm" novalidate>
-          <!-- {{ form.value | json }}{{ form.invalid }}{{ email.errors | json }} -->
-          <div class="form-group">
-            <label for="name">Name</label>
-            <input name="name" [ngModel]="employee?.name" type="text" required class="form-control" id="name" placeholder="Name" #name="ngModel" [ngClass]="{ 'is-invalid': form.submitted && name.invalid }">
-            <div *ngIf="form.submitted && name.errors?.required" class="invalid-feedback">
-              <div><i class="mdi mdi-alert-outline"></i>Name is required</div>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="designation">Designation</label>
-            <select name="designation" [ngModel]="employee?.designation" required class="form-control" id="designation" #designation="ngModel" [ngClass]="{ 'is-invalid': form.submitted && designation.invalid }">
-              <option [value]="null" disabled>Select Designation</option>
-              <option value="intern">Intern</option>
-              <option value="consultant1">Consultant 1</option>
-              <option value="consultant2">Consultant 2</option>
-              <option value="associate1">Associate 1</option>
-              <option value="associate2">Associate 2</option>
-              <option value="manager">Manager</option>
-            </select>
-            <div *ngIf="form.submitted && designation.errors?.required" class="invalid-feedback">
-              <div><i class="mdi mdi-alert-outline"></i>Designation is required</div>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="role">Role</label>
-            <select name="role" [ngModel]="employee?.role" required class="form-control" id="role" #role="ngModel" [ngClass]="{ 'is-invalid': form.submitted && role.invalid }">
-              <option [value]="null" disabled>Select Role</option>
-              <option value="admin">Admin</option>
-              <option value="hr">HR</option>
-              <option value="interviewer">Interviewer</option>
-            </select>
-            <div *ngIf="form.submitted && role.errors?.required" class="invalid-feedback">
-              <div><i class="mdi mdi-alert-outline"></i>Role is required</div>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="email">Email address</label>
-            <input name="email" [ngModel]="employee?.email" type="email" pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" required class="form-control" id="email" placeholder="Email" #email="ngModel" [ngClass]="{ 'is-invalid': form.submitted && email.invalid }">
-            <div *ngIf="form.submitted && email.errors?.required" class="invalid-feedback">
-              <div><i class="mdi mdi-alert-outline"></i>Email is required</div>
-            </div>
-            <div *ngIf="form.submitted && email.errors?.pattern" class="invalid-feedback">
-              <div><i class="mdi mdi-alert-outline"></i>Enter valid email atleast</div>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="employeeId">Employee Id</label>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">{{ (formType | titlecase) + ' Employee' }}</h5>
+      <!-- <button type="button" (click)="modalClose()" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button> -->
+    </div>
+    <div class="modal-body">
 
-              <div class="input-group col-xs-12">
-                <span class="input-group-append btn btn-gradient-primary">
-                    CYG-
-                </span>
-                <input [readOnly]="formType !== 'create'" name="employeeId" [ngModel]="employee?.employeeId" type="number" required class="form-control" id="employeeId" placeholder="Employee Id" #employeeId="ngModel" [ngClass]="{ 'is-invalid': form.submitted && employeeId.invalid }">
-                <div *ngIf="form.submitted && employeeId.errors?.required" class="invalid-feedback">
-                  <div><i class="mdi mdi-alert-outline"></i>Employee Id is required</div>
-                </div>
+      <form (ngSubmit)="handleSubmit(form.value)" *ngIf="data as employee" class="forms-sample" #form="ngForm"
+        novalidate>
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input name="name" [ngModel]="employee?.name" type="text" required class="form-control" id="name"
+            placeholder="Name" #name="ngModel" [ngClass]="{ 'is-invalid': name.dirty && name.invalid }">
+          <div *ngIf="name.dirty && name.errors?.required" class="invalid-feedback">
+            <div><i class="mdi mdi-alert-outline"></i>Name is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="designation">Designation</label>
+          <select name="designation" [ngModel]="employee?.designation" required class="form-control" id="designation"
+            #designation="ngModel" [ngClass]="{ 'is-invalid': designation.dirty && designation.invalid }">
+            <option [value]="null" disabled>Select Designation</option>
+            <option value="intern">Intern</option>
+            <option value="consultant1">Consultant 1</option>
+            <option value="consultant2">Consultant 2</option>
+            <option value="associate1">Associate 1</option>
+            <option value="associate2">Associate 2</option>
+            <option value="manager">Manager</option>
+          </select>
+          <div *ngIf="designation.dirty && designation.errors?.required" class="invalid-feedback">
+            <div><i class="mdi mdi-alert-outline"></i>Designation is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="role">Role</label>
+          <select name="role" [ngModel]="employee?.role" required class="form-control" id="role" #role="ngModel"
+            [ngClass]="{ 'is-invalid': role.dirty && role.invalid }">
+            <option [value]="null" disabled>Select Role</option>
+            <option value="admin">Admin</option>
+            <option value="hr">HR</option>
+            <option value="interviewer">Interviewer</option>
+          </select>
+          <div *ngIf="role.dirty && role.errors?.required" class="invalid-feedback">
+            <div><i class="mdi mdi-alert-outline"></i>Role is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input name="email" [ngModel]="employee?.email" type="email"
+            pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" required class="form-control"
+            id="email" placeholder="Email" #email="ngModel" [ngClass]="{ 'is-invalid': email.dirty && email.invalid }">
+          <div *ngIf="email.dirty && email.errors?.required" class="invalid-feedback">
+            <div><i class="mdi mdi-alert-outline"></i>Email is required</div>
+          </div>
+          <div *ngIf="email.dirty && email.errors?.pattern" class="invalid-feedback">
+            <div><i class="mdi mdi-alert-outline"></i>Enter valid email atleast</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="employeeId">Employee Id</label>
+
+          <div class="input-group col-xs-12">
+            <span class="input-group-append btn btn-gradient-primary">
+              CYG
+            </span>
+            <input [readOnly]="formType !== 'create'" name="employeeId" [ngModel]="employee?.employeeId" type="number"
+              required class="form-control" id="employeeId" placeholder="Employee Id" #employeeId="ngModel"
+              [ngClass]="{ 'is-invalid': employeeId.dirty && employeeId.invalid }">
+            <div *ngIf="employeeId.dirty && employeeId.errors?.required" class="invalid-feedback">
+              <div><i class="mdi mdi-alert-outline"></i>Employee Id is required</div>
             </div>
           </div>
-          <button type="submit" [disabled]="form.invalid" *ngIf="formType !== 'read'" class="btn btn-gradient-primary mr-2">{{ formType | titlecase }}</button>
-          <button class="btn btn-light" (click)="modalClose()">Cancel</button>
-        </form>
-      </div>
+        </div>
+        <button class="btn btn-light" (click)="modalClose()">Cancel</button>
+        <button type="submit" [disabled]="form.invalid" *ngIf="formType !== 'read'"
+          class="btn btn-gradient-primary mr-2">{{ formType | titlecase }}</button>
+      </form>
     </div>
   </div>
+</div>

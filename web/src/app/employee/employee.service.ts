@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpHeaders, HttpClient } from "@angular/common/http";
+import { HttpHeaders, HttpClient, HttpParams } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { IEmployee } from "./models/employee.interface";
 import { IResponse } from "../models/response.interface";
@@ -20,7 +20,7 @@ export class EmployeeService {
     headers: this.headers,
   };
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   createEmployee(employee: IEmployee): Observable<IResponse> {
     return this.http.post<IResponse>(`${EMPLOYEE_API}`, employee, this.options);
@@ -56,9 +56,10 @@ export class EmployeeService {
   }
 
   searchEmployee(character: string) {
+    const params: HttpParams = new HttpParams().set('searchBy', character);
     return this.http.get<IResponse>(
-      `${EMPLOYEE_SEARCH}/${character}`,
-      this.options
+      EMPLOYEE_SEARCH,
+      { ...this.options, params }
     );
   }
 }

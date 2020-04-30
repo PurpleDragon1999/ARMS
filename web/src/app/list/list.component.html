@@ -2,26 +2,14 @@
   <div class="card">
     <div class="card-body">
       <div ngbDropdown class="addEmployee">
-        <button
-          class="btn btn-outline-primary"
-          id="addOption"
-          ngbDropdownToggle
-        >
+        <button class="btn btn-outline-primary" id="addOption" ngbDropdownToggle>
           <i class="mdi mdi-account-plus"></i>Add Employee/s
         </button>
         <div ngbDropdownMenu>
-          <button
-            ngbDropdownItem
-            class="btn btn-outline-primary btn-fw"
-            (click)="openModal('create')"
-          >
+          <button ngbDropdownItem class="btn btn-outline-primary btn-fw" (click)="openModal('create')">
             <i class="mdi mdi-account-plus"></i> Add Employee
           </button>
-          <button
-            ngbDropdownItem
-            class="btn btn-outline-primary btn-fw"
-            (click)="openUpload()"
-          >
+          <button ngbDropdownItem class="btn btn-outline-primary btn-fw" (click)="openUpload()">
             <i class="mdi mdi-account-plus"></i> Add through file upload
           </button>
         </div>
@@ -31,17 +19,10 @@
         <form class="d-flex align-items-center h-100" action="#">
           <div class="input-group">
             <div class="input-group-prepend bg-transparent card">
-              <i
-                class="card-body input-group-text border-0 mdi mdi-magnify"
-              ></i>
+              <i class="card-body input-group-text border-0 mdi mdi-magnify"></i>
             </div>
-            <input
-              #searchInput
-              (keyup)="search(searchInput.value)"
-              type="text"
-              class="form-control bg-transparent border-0"
-              placeholder="Search "
-            />
+            <input #searchInput (input)="search(searchInput.value)" type="text"
+              class="form-control bg-transparent border-0" placeholder="Search " />
           </div>
         </form>
       </div>
@@ -61,9 +42,7 @@
             </td>
             <!-- {{employee["_id"]}} -->
             <td>
-              <a (click)="openModal('update', entry)"
-                ><i class="mdi mdi-grease-pencil"></i
-              ></a>
+              <a (click)="openModal('update', entry)"><i class="mdi mdi-grease-pencil"></i></a>
             </td>
             <td>
               <a (click)="deleteEntry(entry)"><i class="mdi mdi-delete"></i></a>
@@ -76,28 +55,16 @@
     <div class="card paginationDiv">
       <div>
         <ul *ngIf="pager?.pages && pager?.pages.length" class="pagination">
-          <li
-            [ngClass]="{ disabled: pager.currentPage === 1 }"
-            class="page-item previous-item"
-          >
-            <a (click)="setPage(pager.currentPage - 1)" class="page-link"
-              ><i class="mdi mdi-chevron-left arrow"></i
-            ></a>
+          <li [ngClass]="{ disabled: pager.currentPage === 1 }" class="page-item previous-item">
+            <a (click)="setPage(pager.currentPage - 1)" class="page-link"><i class="mdi mdi-chevron-left arrow"></i></a>
           </li>
-          <li
-            *ngFor="let page of pager.pages"
-            [ngClass]="{ active: pager.currentPage === page }"
-            class="page-item number-item"
-          >
+          <li *ngFor="let page of pager.pages" [ngClass]="{ active: pager.currentPage === page }"
+            class="page-item number-item">
             <a (click)="setPage(page)" class="page-link">{{ page }}</a>
           </li>
-          <li
-            [ngClass]="{ disabled: pager.currentPage === pager.totalPages }"
-            class="page-item next-item"
-          >
-            <a (click)="setPage(pager.currentPage + 1)" class="page-link"
-              ><i class="mdi mdi-chevron-right arrow"></i
-            ></a>
+          <li [ngClass]="{ disabled: pager.currentPage === pager.totalPages }" class="page-item next-item">
+            <a (click)="setPage(pager.currentPage + 1)" class="page-link"><i
+                class="mdi mdi-chevron-right arrow"></i></a>
           </li>
         </ul>
       </div>
@@ -106,35 +73,22 @@
 </div>
 
 <div class="row mobileView">
-  <div class="col-lg-6 grid-margin stretch-card">
+  <div class="grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
         <div class="addEmployee">
-          <button
-            (click)="openModal('create')"
-            type="button"
-            class="btn btn-outline-primary btn-fw"
-          >
-            <a [routerLink]="['./employee/create']"
-              ><i class="mdi mdi-account-plus"></i
-            ></a>
+          <button (click)="openModal('create')" type="button" class="btn btn-outline-primary btn-fw">
+            <a [routerLink]="['./employee/create']"><i class="mdi mdi-account-plus"></i></a>
           </button>
         </div>
         <div class="search-field d-md-block">
           <form class="d-flex align-items-center h-100" action="#">
             <div class="input-group">
               <div class="input-group-prepend bg-transparent card">
-                <i
-                  class="card-body input-group-text border-0 mdi mdi-magnify"
-                ></i>
+                <i class="card-body input-group-text border-0 mdi mdi-magnify"></i>
               </div>
-              <input
-                #input
-                (keyup)="search(input.value)"
-                type="text"
-                class="form-control bg-transparent border-0"
-                placeholder="Search "
-              />
+              <input #searchInput (input)="search(searchInput.value)" type="text"
+                class="form-control bg-transparent border-0" placeholder="Search " />
             </div>
           </form>
         </div>
@@ -171,28 +125,17 @@
       <div class="card paginationDiv">
         <div>
           <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
-            <li
-              [ngClass]="{ disabled: pager.currentPage == 1 }"
-              class="page-item previous-item"
-            >
-              <a (click)="setPage(pager.currentPage - 1)" class="page-link"
-                ><i class="mdi mdi-chevron-left arrow"></i
-              ></a>
+            <li [ngClass]="{ disabled: pager.currentPage == 1 }" class="page-item previous-item">
+              <a (click)="setPage(pager.currentPage - 1)" class="page-link"><i
+                  class="mdi mdi-chevron-left arrow"></i></a>
             </li>
-            <li
-              *ngFor="let page of pager.pages"
-              [ngClass]="{ active: pager.currentPage === page }"
-              class="page-item number-item"
-            >
+            <li *ngFor="let page of pager.pages" [ngClass]="{ active: pager.currentPage === page }"
+              class="page-item number-item">
               <a (click)="setPage(page)" class="page-link">{{ page }}</a>
             </li>
-            <li
-              [ngClass]="{ disabled: pager.currentPage == pager.totalPages }"
-              class="page-item next-item"
-            >
-              <a (click)="setPage(pager.currentPage + 1)" class="page-link"
-                ><i class="mdi mdi-chevron-right arrow"></i
-              ></a>
+            <li [ngClass]="{ disabled: pager.currentPage == pager.totalPages }" class="page-item next-item">
+              <a (click)="setPage(pager.currentPage + 1)" class="page-link"><i
+                  class="mdi mdi-chevron-right arrow"></i></a>
             </li>
           </ul>
         </div>
