@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AppServicesService } from "./../services/app-services.service";
 import { ViewChild, ElementRef, AfterViewInit } from "@angular/core";
 import { Router } from "@angular/router";
+import * as jsPDF from "jspdf";
+import { jobDescription } from "../models/jobDescription.interface";
+import html2canvas from "html2canvas";
 
 @Component({
   selector: "app-jd-form",
@@ -29,12 +32,14 @@ export class JdFormComponent implements OnInit {
   @ViewChild("location", { static: false }) location: ElementRef;
   @ViewChild("salary", { static: false }) salary: ElementRef;
   @ViewChild("vacancies", { static: false }) vacancies: ElementRef;
-
+  @ViewChild("content", { static: true }) content: ElementRef;
   jdForm: FormGroup;
   submitted = false;
-  jdFormObject: any;
+  jdFormObject: jobDescription;
+  data: jobDescription;
+
   ngOnInit() {
-    this.jdFormObject = this.formBuilder.group({
+    this.jdForm = this.formBuilder.group({
       jdId: ["", Validators.required],
       jdTitle: ["", Validators.required],
       openingDate: ["", Validators.required],
@@ -75,14 +80,10 @@ export class JdFormComponent implements OnInit {
       salary: this.salary.nativeElement.value,
       vacancies: this.vacancies.nativeElement.value,
     };
-    if (this.jdFormObject.openingDate > this.jdFormObject.closingDate) {
-      alert("opening date cannot be greater than closing  date");
-    }
-    this.router.navigate(["/navbar/jobs"]);
 
-    // this._service.jdFormData(jdFormObject).subscribe(res => {
-    //     const data=res.payload.data;
-    //     console.log(data);
-    //});
+    this._service.jdFormData(this.jdFormObject).subscribe((res) => {
+      this.data = res.payload.data;
+      this.router.navigate(["/jd-pdf", this.data.jdId]);
+    });
   }
 }
