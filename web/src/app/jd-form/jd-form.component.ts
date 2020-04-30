@@ -17,11 +17,11 @@ export class JdFormComponent implements OnInit {
     private router:Router) { }
   
 
-  @ViewChild('jdId', {static: false}) jdId: ElementRef;
-  @ViewChild('jdTitle', {static: false}) jdTitle: ElementRef;
+  @ViewChild('jobId', {static: false}) jobId: ElementRef;
+  @ViewChild('jobTitle', {static: false}) jobTitle: ElementRef;
   @ViewChild('openingDate', {static: false}) openingDate: ElementRef;
   @ViewChild('closingDate', {static: false}) closingDate: ElementRef;
-  @ViewChild('jobProfileDescription', {static: false}) jobProfileDescription: ElementRef;
+  @ViewChild('jobDescription', {static: false}) jobDescription: ElementRef;
   @ViewChild('skills', {static: false}) skills: ElementRef;
   @ViewChild('jobType', {static: false}) jobType: ElementRef;
   @ViewChild('eligibilityCriteria', {static: false}) eligibilityCriteria: ElementRef;
@@ -31,17 +31,17 @@ export class JdFormComponent implements OnInit {
 
   res:any;
 
-  jdForm: FormGroup;
+  jobListingForm: FormGroup;
   submitted = false;
 
   ngOnInit() {
   
-      this.jdForm = this.formBuilder.group({
-        jdId: ['', Validators.required],
-        jdTitle: ['', Validators.required],
+      this.jobListingForm = this.formBuilder.group({
+        jobId: ['', Validators.required],
+        jobTitle: ['', Validators.required],
         openingDate: ['', Validators.required],
         closingDate: ['', Validators.required],
-        jobProfileDescription: ['', Validators.required],
+        jobDescription: ['', Validators.required],
         skills: ['', Validators.required],
         jobType: ['', Validators.required],
         eligibilityCriteria: ['', Validators.required],
@@ -51,47 +51,46 @@ export class JdFormComponent implements OnInit {
     });
     this.compareTwoDates();
   }
-  get formControls() { return this.jdForm.controls; }
+  get formControls() { return this.jobListingForm.controls; }
 
   error:any={isError:false,errorMessage:''};
 
   compareTwoDates(){
-     if(new Date(this.jdForm.controls['closingDate'].value)<new Date(this.jdForm.controls['openingDate'].value)){
+     if(new Date(this.jobListingForm.controls['closingDate'].value)<new Date(this.jobListingForm.controls['openingDate'].value)){
         this.error={isError:true,errorMessage:'Closing Date cannot be before Opening date'};
      }
   }
   onSubmit() {
     this.submitted = true;
-    this.jdFormData();
+    this.jobListingFormData();
     // stop here if form is invalid
-    if (this.jdForm.invalid) {
+    if (this.jobListingForm.invalid) {
         return;
     }
     // alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.jdForm.value))
-    this.jdFormData();
     this.compareTwoDates();
   }
 
-  jdFormData(){
-    let jdFormObject = {
-       jdId: this.jdId.nativeElement.value,
-       jdTitle: this.jdTitle.nativeElement.value,
+  jobListingFormData(){
+    let jobListingFormObject = {
+       jdId: this.jobId.nativeElement.value,
+       jdTitle: this.jobTitle.nativeElement.value,
        openingDate: this.openingDate.nativeElement.value,
        closingDate: this.closingDate.nativeElement.value,
-       jobProfileDescription: this.jobProfileDescription.nativeElement.value,
+       jobProfileDescription: this.jobDescription.nativeElement.value,
        skills: this.skills.nativeElement.value,
-       jobType: this.jobType.nativeElement.value,
-       eligibilityCriteria: this.eligibilityCriteria.nativeElement.value,
-       location: this.location.nativeElement.value,
+      //  jobType: this.jobType.
+      //  eligibilityCriteria: this.eligibilityCriteria.nativeElement.value,
+      //  location: this.location.nativeElement.value,
        salary: this.salary.nativeElement.value,
-       noOfVacancies: this.vacancies.nativeElement.value
+      //  noOfVacancies: this.vacancies.nativeElement.value
     }
-    console.log(jdFormObject)
+    console.log(jobListingFormObject)
 
-    this._service.jdFormData(jdFormObject).subscribe(res => {
+    this._service.jdFormData(jobListingFormObject).subscribe(res => {
       console.log(this.res);
     });
     
-    this.router.navigate(["/jd-pdf"])
+    // this.router.navigate(["/jd-pdf"])
   }
 }
