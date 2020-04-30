@@ -6,7 +6,7 @@ name: Node Test
 on: 
   push:
     branches:
-      - develop-test
+      - develop
 
 jobs:
   build:
