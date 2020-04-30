@@ -33,7 +33,7 @@ export class ListComponent {
   @Output()
   emitSearch: EventEmitter<String> = new EventEmitter();
 
-  constructor(private modalService: NgbModal) {}
+  constructor(private modalService: NgbModal) { }
 
   openModal(formType: IDataModal["formType"], data: IDataModal["data"]) {
     this.emitOpenModal.emit({ formType, data });
@@ -41,21 +41,13 @@ export class ListComponent {
 
   openUpload() {
     const modalRef = this.modalService.open(EmployeeUploadComponent);
-  }  
+  }
 
   setPage(page) {
-<<<<<<< HEAD
-    // this.valueChange.emit(this.page);
-=======
->>>>>>> b91005ba3fc0b4976c6b47904e531440a5685c56
     this.getEmployees(page);
   }
 
   search(character) {
-<<<<<<< HEAD
-    // this.searchEmployee(character);
-=======
->>>>>>> b91005ba3fc0b4976c6b47904e531440a5685c56
     this.emitSearch.emit(character);
   }
 

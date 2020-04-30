@@ -1,4 +1,4 @@
-const pagination = require("../generic/pagination")
+const pagination = require("../generic/pagination");
 
 class Base {
   constructor(model) {
@@ -23,28 +23,28 @@ class Base {
         },
       });
     }
+  }
+  async get(req, res) {
+    try {
+      const data = await this.model.get(req.params.id);
 
-    async get(req, res) {
-      try {
-        const data = await this.model.get(req.params.id);
-
-        return res.send({
-          success: true,
-          payload: {
-            data,
-            message: "Retrieved Successfully",
-          },
-        });
-      } catch (e) {
-        res.status(500).send({
-          success: false,
-          payload: {
-            message: e.message,
-          },
-        });
-      }
+      return res.send({
+        success: true,
+        payload: {
+          data,
+          message: "Retrieved Successfully",
+        },
+      });
+    } catch (e) {
+      res.status(500).send({
+        success: false,
+        payload: {
+          message: e.message,
+        },
+      });
     }
   }
+
   // async getAll(req, res){
   //     try{
   //         const data = await this.model.getAll();
@@ -93,7 +93,6 @@ class Base {
     }
   }
 
-
   async create(req, res) {
     try {
       let objToCreate = req.body;
@@ -102,17 +101,15 @@ class Base {
         success: true,
         payload: {
           body: createdObj,
-          message: "Record created successfully!!"
-        }
+          message: "Record created successfully!!",
+        },
       });
-
-    }
-    catch (error) {
+    } catch (error) {
       res.send({
         success: false,
         payload: {
-          message: error.message
-        }
+          message: error.message,
+        },
       });
     }
   }
@@ -124,32 +121,32 @@ class Base {
         return res.send({
           success: true,
           payload: {
-            message: "No record found"
-          }
+            message: "No record found",
+          },
         });
-      }
-      else {
+      } else {
         let updateObj = req.body;
-        let updatedStatus = await this.model.updateOne({ _id: req.params.id }, updateObj)
+        let updatedStatus = await this.model.updateOne(
+          { _id: req.params.id },
+          updateObj
+        );
         return res.send({
           success: true,
           payload: {
             body: updatedStatus,
-            message: "Record updated successfully!!"
-          }
+            message: "Record updated successfully!!",
+          },
         });
       }
-    }
-    catch (error) {
-      console.log(error)
+    } catch (error) {
+      console.log(error);
       return res.send({
         success: false,
         payload: {
-          message: error.message
-        }
+          message: error.message,
+        },
       });
     }
-
   }
 
   // async searchRecord(req, res) {
@@ -188,40 +185,34 @@ class Base {
   //       }
   //   }
 
-
-
   async searchRecord(req, res) {
     try {
-      let queryObject = { $regex: req.params.searchBy, $options: 'i' };
+      let queryObject = { $regex: req.params.searchBy, $options: "i" };
       const searchedRecords = await this.model.getAll({ name: queryObject });
       if (searchedRecords.length != 0) {
         res.status(200).send({
           success: true,
           payload: {
             data: {
-              searchedRecords
+              searchedRecords,
             },
-            message: "List of Searched Records returned successfully!!"
-          }
+            message: "List of Searched Records returned successfully!!",
+          },
         });
-
-      }
-      else {
+      } else {
         res.status(200).send({
           success: true,
           payload: {
-            message: "No Results Found"
-          }
+            message: "No Results Found",
+          },
         });
       }
-    }
-
-    catch (err) {
+    } catch (err) {
       res.status(400).send({
         success: false,
         payload: {
-          message: err.message
-        }
+          message: err.message,
+        },
       });
     }
   }
@@ -233,27 +224,24 @@ class Base {
         res.send({
           success: true,
           payload: {
-            message: "No record"
-          }
+            message: "No record",
+          },
         });
-      }
-      else {
+      } else {
         res.send({
           success: true,
           payload: {
             body: objToRetrieve,
-            message: "Details retrieved successfully!!"
-          }
+            message: "Details retrieved successfully!!",
+          },
         });
       }
-
-    }
-    catch (error) {
+    } catch (error) {
       res.send({
         success: false,
         payload: {
-          message: error.message
-        }
+          message: error.message,
+        },
       });
     }
   }
@@ -270,27 +258,25 @@ class Base {
         email: req.body.email,
         cv: path,
         skills: req.body.skills,
-        appliedFor: req.body.appliedFor
-      }
+        appliedFor: req.body.appliedFor,
+      };
       let createdObj = await this.model.save(objToCreate);
       return res.send({
         success: true,
         payload: {
           body: createdObj,
-          message: "Record created successfully!!"
-        }
+          message: "Record created successfully!!",
+        },
       });
-    }
-    catch (error) {
+    } catch (error) {
       res.send({
         success: false,
         payload: {
-          message: error.message
-        }
-      })
+          message: error.message,
+        },
+      });
     }
   }
-
 
   async getAll(req, res) {
     try {
@@ -325,7 +311,6 @@ class Base {
         },
       });
     }
-
   }
 }
 

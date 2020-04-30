@@ -52,10 +52,10 @@ module.exports = (app) => {
 
   //Job Description
   // app.post('/api/jobDescription',controller.jobDescription.createJd);
-  app.get("/api/jobDescription", controller.jobDescription.showAllJds);
-  app.get("/api/jobDescription/:id", controller.jobDescription.showJd);
-  app.put("/api/jobDescription/:id", controller.jobDescription.updateJd);
-  app.delete("/api/jobDescription/:id", controller.jobDescription.deleteJd);
+  //   app.get("/api/jobDescription", controller.jobDescription.showAllJds);
+  //   app.get("/api/jobDescription/:id", controller.jobDescription.showJd);
+  //   app.put("/api/jobDescription/:id", controller.jobDescription.updateJd);
+  //   app.delete("/api/jobDescription/:id", controller.jobDescription.deleteJd);
 
   //Routes for Candidate
   app.get("/api/candidates", (req, res) =>
