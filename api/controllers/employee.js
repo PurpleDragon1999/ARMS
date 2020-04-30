@@ -9,7 +9,6 @@ const model = require("../models");
 function validateEmployee(employee) {
   //for removing unnecessary spaces
   for (let key in employee) {
-    console.log(employee[key], key);
     if(employee[key]){
       employee[key] = employee[key].toString().trim();
     }
