@@ -8,9 +8,7 @@ only screen and (max-width: 990px),
 
     .desktopView{
         display: none ;
-    }
-
-    
+    }    
 }
 
 .mdi-pencil, .mdi-delete{
@@ -85,7 +83,6 @@ ngb-pagination ::ng-deep ul > li:not(.active) > a {
         color: #212529;
         text-decoration: none;
     }
-    
     ngb-accordion.collapse.show{
         h5, button{
             color: rgb(182, 109, 255);
