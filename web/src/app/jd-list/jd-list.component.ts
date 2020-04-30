@@ -10,8 +10,9 @@ import { AppServicesService } from './../services/app-services.service';
 export class JdListComponent implements OnInit {
 
   constructor(private _service: AppServicesService) { }
-
+  
   ngOnInit() {
+
   }
 
 }

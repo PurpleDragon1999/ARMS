@@ -3,8 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AppServicesService } from './../services/app-services.service';
 import { ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import {Router}from '@angular/router'
-
-
+import * as jsPDF from 'jspdf'
+import{jobDescription}from '../models/jobDescription.interface'
+import html2canvas from 'html2canvas';  
+  
 @Component({
   selector: 'app-jd-form',
   templateUrl: './jd-form.component.html',
@@ -28,13 +30,15 @@ export class JdFormComponent implements OnInit {
   @ViewChild('location', {static: false}) location: ElementRef;
   @ViewChild('salary', {static: false}) salary: ElementRef;
   @ViewChild('vacancies', {static: false}) vacancies: ElementRef;
-
+  @ViewChild('content',{static:true})content:ElementRef;
   jdForm: FormGroup;
     submitted = false;
-    jdFormObject:any;
+    jdFormObject:jobDescription;
+    data:jobDescription;
+
   ngOnInit() {
   
-      this.jdFormObject= this.formBuilder.group({
+      this.jdForm= this.formBuilder.group({
         jdId: ['', Validators.required],
         jdTitle: ['', Validators.required],
         openingDate: ['', Validators.required],
@@ -59,7 +63,7 @@ export class JdFormComponent implements OnInit {
     }
     // alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.jdForm.value))
   }
-
+ 
   jdFormData(){
      this.jdFormObject = {
        jdId: this.jdId.nativeElement.value,
@@ -74,15 +78,45 @@ export class JdFormComponent implements OnInit {
        salary: this.salary.nativeElement.value,
         vacancies: this.vacancies.nativeElement.value,
      }
-    
-     this.router.navigate(["/jd-pdf"])
-    
-    
-   
-    // this._service.jdFormData(jdFormObject).subscribe(res => {
-    //     const data=res.payload.data;
-    //     console.log(data);
-    //});
+    this._service.jdFormData(this.jdFormObject).subscribe(res => {
+         this.data=res.payload.data;
+        console.log(this.data);
+        
+    });
+    this.downloadPdf();
   } 
+  image = {
+    name: "Image 1", url:"https://d2q79iu7y748jz.cloudfront.net/s/_logo/03b1f41ce2752d969c31c4c10182a005"
+  }
+  getBase64Image(img) {
+    var canvas = document.createElement("canvas");
+    console.log("image");
+    canvas.width = img.width;
+    canvas.height = img.height;
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0);
+    var dataURL = canvas.toDataURL("image/png");
+    let imageData= this.getBase64Image(document.getElementById('img'));
+    console.log(imageData);
+    return dataURL;
+  }
+  
+  downloadPdf(){
 
+   let doc=new jsPDF();
+   let specialElementHandlers={
+     '#editor':function(element,renderer){
+           return true;
+       }
+       
+   }
+     let content=this.content.nativeElement
+     doc.fromHTML(content.innerHTML,15,15,{
+      "width":198,
+      "element":specialElementHandlers
+
+     }); 
+     doc.save(this.data.jdId+".pdf");
+  }
+  
 }

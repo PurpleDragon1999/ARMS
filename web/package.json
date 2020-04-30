@@ -25,6 +25,7 @@
     "@fortawesome/fontawesome-free": "^5.13.0",
     "angular-progress-http": "^1.0.0",
     "chart.js": "^2.9.3",
+    "jspdf": "^1.5.3",
     "msal": "^1.2.2",
     "ng-bootstrap": "^1.6.3",
     "ng-circular-progress": "^1.0.1",
