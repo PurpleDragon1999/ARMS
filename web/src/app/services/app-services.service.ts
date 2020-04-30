@@ -50,7 +50,10 @@ deleteJd(jobObjId): Observable<HttpResponse<any>>{
 }  
 
   jdFormData(jdFormObject): Observable<any>{
-    return this.http.post<any>(`${USER_DOMAIN}/api/jobDescription`, jdFormObject, {... this.headers, observe: 'response'});
+    return this.http.post<any>(`${USER_DOMAIN}/api/jobDescription`, jdFormObject);
+  }
+  getJdData(jdId):Observable<any>{
+    return this.http.get<any>(`${USER_DOMAIN}/api/jobDescription/${jdId}`)
   }
 
   jdList(): Observable<any>{

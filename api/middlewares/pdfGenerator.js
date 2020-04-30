@@ -19,7 +19,7 @@ const pdfGenerator = (jdJson, filename) => {
     columns: 2,
     columnGap: 15,
   });
-  jdPdf.fillColor("red").text(`Profile:${jdJson.jdTitle}`, {
+  jdPdf.fillColor("black").text(`Profile:${jdJson.jdTitle}`, {
     width: 410,
     align: "left",
     columns: 2,
@@ -36,7 +36,7 @@ const pdfGenerator = (jdJson, filename) => {
 
   jdPdf
     .fillColor("black")
-    .text(`Eligibility Criteria:${jdJson.eligibiltyCriteria}`, {
+    .text(`Eligibility Criteria:${jdJson.eligibilityCriteria}`, {
       width: 410,
       align: "left",
     });

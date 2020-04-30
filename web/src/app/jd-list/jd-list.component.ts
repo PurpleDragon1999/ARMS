@@ -11,7 +11,7 @@ export class JdListComponent implements OnInit {
   jobsList: string[];
 
   constructor(private _service: AppServicesService) { }
-
+  
   ngOnInit() {
     this.loadJds();
   }

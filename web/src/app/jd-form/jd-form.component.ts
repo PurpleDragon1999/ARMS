@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AppServicesService } from './../services/app-services.service';
 import { ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { Router } from '@angular/router';
-
-
+import {Router}from '@angular/router'
+import * as jsPDF from 'jspdf'
+import{jobDescription}from '../models/jobDescription.interface'
+import html2canvas from 'html2canvas';  
+  
 @Component({
   selector: 'app-jd-form',
   templateUrl: './jd-form.component.html',
@@ -28,15 +30,32 @@ export class JdFormComponent implements OnInit {
   @ViewChild('location', {static: false}) location: ElementRef;
   @ViewChild('salary', {static: false}) salary: ElementRef;
   @ViewChild('vacancies', {static: false}) vacancies: ElementRef;
-
-  res:any;
-  assessmentSelfTS: String;
+  @ViewChild('content',{static:true})content:ElementRef;
+  
+  res: any;
+  eligibilityCriteriaOptions: String;
+  locationOptions: String;
+  jobTypeOptions: String;
   jobListingForm: FormGroup;
   submitted = false;
+  jdFormObject:jobDescription;
+  data:jobDescription;
+
+  selectChangeHandlerEligibilityCriteria(event: any){
+    this.eligibilityCriteriaOptions = event.target.value;
+  }
+
+  selectChangeHandlerLocation(event: any){
+    this.locationOptions = event.target.value;
+  }
+
+  selectChangeHandlerJobType(event: any){
+    this.jobTypeOptions = event.target.value;
+  }
 
   ngOnInit() {
   
-      this.jobListingForm = this.formBuilder.group({
+      this.jobListingForm= this.formBuilder.group({
         jobId: ['', Validators.required],
         jobTitle: ['', Validators.required],
         openingDate: ['', Validators.required],
@@ -50,6 +69,7 @@ export class JdFormComponent implements OnInit {
         vacancies: ['', Validators.required]      
     });
     this.compareTwoDates();
+    
   }
   get formControls() { return this.jobListingForm.controls; }
 
@@ -62,36 +82,39 @@ export class JdFormComponent implements OnInit {
   }
   onSubmit() {
     this.submitted = true;
-    this.jobListingFormData();
-    console.log(this.assessmentSelfTS);
+    this.jdFormData();
+    this.compareTwoDates();
     // stop here if form is invalid
     if (this.jobListingForm.invalid) {
         return;
     }
-    // alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.jdForm.value))
-    this.compareTwoDates();
+   
   }
 
-  jobListingFormData(){
-    let jobListingFormObject = {
+  jdFormData(){
+    let jdFormObject = {
        jdId: this.jobId.nativeElement.value,
        jdTitle: this.jobTitle.nativeElement.value,
        openingDate: this.openingDate.nativeElement.value,
        closingDate: this.closingDate.nativeElement.value,
        jobProfileDescription: this.jobDescription.nativeElement.value,
        skills: this.skills.nativeElement.value,
-      //  jobType: this.jobType.
-      //  eligibilityCriteria: this.eligibilityCriteria.nativeElement.value,
-      //  location: this.location.nativeElement.value,
-      //  salary: this.salary.nativeElement.value,
-      //  noOfVacancies: this.vacancies.nativeElement.value
-    }
-    console.log(jobListingFormObject)
-
-    this._service.jdFormData(jobListingFormObject).subscribe(res => {
-      console.log(this.res);
+       jobType: this.jobTypeOptions,
+       eligibilityCriteria: this.eligibilityCriteriaOptions,
+       location: this.locationOptions,
+       salary: this.salary.nativeElement.value,
+       vacancies: this.vacancies.nativeElement.value,
+     }
+     console.log(jdFormObject);
+    
+    this._service.jdFormData(this.jdFormObject).subscribe(res => {
+      console.log("abc") ; 
+       this.data=res.payload.data;
+        // this.router.navigate(["/jd-pdf",this.data.jdId]);
     });
     
-    // this.router.navigate(["/jd-pdf"])
-  }
+  } 
+  
+
+  
 }
