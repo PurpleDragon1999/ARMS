@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { ChartsModule } from 'ng2-charts';
 import { HrComponent } from './hr.component';
 
 describe('HrComponent', () => {
@@ -8,7 +8,8 @@ describe('HrComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HrComponent ]
+      declarations: [ HrComponent ],
+      imports: [ ChartsModule ]
     })
     .compileComponents();
   }));
@@ -22,4 +23,8 @@ describe('HrComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  afterEach(() => {
+    TestBed.resetTestingModule();
+  })
 });

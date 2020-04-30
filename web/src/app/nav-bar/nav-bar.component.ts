@@ -6,7 +6,7 @@ import { MsalService } from '@azure/msal-angular';
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.scss']
 })
-export class NavBarComponent implements OnInit {
+export class AppNavBarComponent implements OnInit {
 
   classNameForToggle: string = "";
   flag: number = 0;

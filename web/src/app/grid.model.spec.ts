@@ -1,7 +1,7 @@
-import { Grid.Model } from './grid.model';
+// import { DynamicGrid } from './grid.model';
 
-describe('Grid.Model', () => {
-  it('should create an instance', () => {
-    expect(new Grid.Model()).toBeTruthy();
-  });
-});
+// describe('Grid.Model', () => {
+//   it('should create an instance', () => {
+//     expect(new DynamicGrid()).toBeTruthy();
+//   });
+// });
