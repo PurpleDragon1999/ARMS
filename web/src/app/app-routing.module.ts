@@ -36,6 +36,9 @@ const routes: Routes = [
         path:"jobs", component: JdListComponent
       },
       {
+        path:"jobs/form", component: JdFormComponent
+      },
+      {
         path:"hr/dashboard", component: HrComponent
       }
     ]
