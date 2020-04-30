@@ -34,16 +34,15 @@ export class EmployeeFormComponent {
   }
 
   createEmployee(employee: IEmployee): void {
-    
-    this.employeeService
+      this.employeeService
       .createEmployee(employee)
       .subscribe((res: IResponse) => {
         const modalRef = this.modalService.open(ModalComponent);
-        modalRef.componentInstance.message = res.payload.message; 
+        modalRef.componentInstance.message = res; 
         this.modalClose();
       }, (error) => {
         const modalRef = this.modalService.open(ModalComponent);
-        modalRef.componentInstance.message = error.error.payload.message; 
+        modalRef.componentInstance.message = error.error; 
         this.modalClose();
       }); 
     
@@ -56,13 +55,12 @@ export class EmployeeFormComponent {
       .updateEmployee(updatedEmployee)
       .subscribe((res: IResponse) => {
         const modalRef = this.modalService.open(ModalComponent);
-        console.log(res);
-        modalRef.componentInstance.message = res.payload.message; 
+        modalRef.componentInstance.message = res; 
         this.modalClose();
       },(error) => {
         console.log(error);
         const modalRef = this.modalService.open(ModalComponent);
-        modalRef.componentInstance.message = error.error.payload.message; 
+        modalRef.componentInstance.message = error.error; 
         this.modalClose();
       });
   }

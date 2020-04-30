@@ -167,7 +167,7 @@ class Base {
     }
 
     
-    ,
+    
     async remove(req, res) {
         try {
         const data = await this.model.remove(req.params.id);
@@ -292,43 +292,43 @@ class Base {
     }
    
     
-    async getAll(req, res) {
-        try {
-        const recordList = await this.model.getAll();
-        const page = parseInt(req.query.page) || 1;
-        const pageSize = 10;
-        const pager = await pagination.paginate(
-            recordList.length,
-            page,
-            pageSize
-        );
-        const pageOfItems = recordList.slice(
-            pager.startIndex,
-            pager.endIndex + 1
-        );
-        res.status(200).send({
-            success: true,
-            payload: {
-            pager: pager,
-            data: pageOfItems,
-            message: "List of Data returned successfully!!",
-            },
-        });
-        } catch (err) {
-        res.status(500).send({
-            success: false,
-            payload: {
-            message: err.message,
-            },
-        });
-        }
-    }
+    // async getAll(req, res) {
+    //     try {
+    //     const recordList = await this.model.getAll();
+    //     const page = parseInt(req.query.page) || 1;
+    //     const pageSize = 10;
+    //     const pager = await pagination.paginate(
+    //         recordList.length,
+    //         page,
+    //         pageSize
+    //     );
+    //     const pageOfItems = recordList.slice(
+    //         pager.startIndex,
+    //         pager.endIndex + 1
+    //     );
+    //     res.status(200).send({
+    //         success: true,
+    //         payload: {
+    //         pager: pager,
+    //         data: pageOfItems,
+    //         message: "List of Data returned successfully!!",
+    //         },
+    //     });
+    //     } catch (err) {
+    //     res.status(500).send({
+    //         success: false,
+    //         payload: {
+    //         message: err.message,
+    //         },
+    //     });
+    //     }
+    // }
   async getAll(req, res) {
     try {
       const recordList = await this.model.getAll();
       const page = parseInt(req.query.page) || 1;
       console.log(page, "inside api")
-      const pageSize = 2;
+      const pageSize = 5;
       const pager = await pagination.paginate(
         recordList.length,
         page,

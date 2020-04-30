@@ -58,17 +58,17 @@ export class EmployeeComponent implements OnInit {
   }
 
   deleteEmployee(employee: IEmployee) {
-    this.employeeService.deleteEmployee(employee._id).subscribe(
-      (res) => {
-        this.alertMessage = res.payload.message;
-        const modalRef = this.modalService.open(ModalComponent);
-        modalRef.componentInstance.message = this.alertMessage;
-      },
-      (error) => {
-        const modalRef = this.modalService.open(ModalComponent);
-        modalRef.componentInstance.message = error.error.payload.message;
+    const modalRef = this.modalService.open(ModalComponent);
+    let message = {
+      success : "request",
+      payload: {
+        data: employee
       }
-    );
+    }
+    let deleteFor = "employee";
+    modalRef.componentInstance.message = message; 
+    modalRef.componentInstance.deleteFor = deleteFor;     
+
   }
 
   searchEmployee(character: string) {
