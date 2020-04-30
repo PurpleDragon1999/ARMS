@@ -2,11 +2,14 @@ import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { HttpClient, HttpResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-const USER_DOMAIN = 'http://localhost:3000';
 import { ICreate} from '../models/create.interface';
+
+const USER_DOMAIN = 'http://localhost:3000';
+
 @Injectable({
   providedIn: 'root'
 })
+
 export class AppServicesService {
   headers: HttpHeaders = new HttpHeaders({
     'Content-Type': 'application/json',
@@ -32,14 +35,10 @@ headers: this.createHeader
     return localStorage.getItem('');
   }
 
-
   tokenDecoder(): any {
     const helper = new JwtHelperService();
     return helper.decodeToken(localStorage.getItem(''));
   }
-
-    //return helper.decodeToken(localStorage.getItem(''));
-  //}
   // headers: HttpHeaders = new HttpHeaders({
   //   'Content-Type': 'application/json',
   //   // Authorization: localStorage.getItem("Authorization")
@@ -48,11 +47,12 @@ headers: this.createHeader
   //   headers: this.headers
   // };
 
+  //return helper.decodeToken(localStorage.getItem(''));
+  
+
 
   // For making HTTP calls
-   // return this.http.post<any>(`${USER_DOMAIN}/api/candidate`,candidateObj,{ ... this.headers, observe :'response'});
-  //}
-
+  
   createInterview(user: ICreate): Observable<HttpResponse<any>>{
     return this.http.post<any>(`${USER_DOMAIN}/api/interview`, user, { ...this.options, observe: 'response' });
 }   
