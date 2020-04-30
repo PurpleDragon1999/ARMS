@@ -1,0 +1,68 @@
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- Page Container -->
+<div class="w3-content w3-margin-top" style="max-width:1400px;"id="content"#content>
+  <!-- The Grid -->
+    <div class="w3-row-padding">
+    <!-- Right Column -->
+      <div>
+        <img src={{imageUrl}} alt="">
+        <div class="w3-container w3-card w3-white w3-margin-bottom">
+          <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Cybergroup Job Description</h2>
+          <div class="w3-container">
+            <h5 class="w3-opacity"><b></b></h5>
+            <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i><p class="w3-tag w3-teal w3-round">Opening Date</p><span class="date">{{jdObject?.openingDate}}</span></h6>
+            <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i><p class="w3-tag w3-teal w3-round">Closing Date</p><span class="date">{{jdObject?.closingDate}}</span></h6>
+           <hr>
+          </div>
+          <div class="w3-container">
+            <h5 class="w3-opacity"><b>Responsibilities and Duties</b></h5>
+            <p>{{jdObject.jobProfileDescription}}</p>
+            <hr>
+          </div>
+          <div class="w3-container">
+            <h5 class="w3-opacity"><b>Skills And Qualifications</b></h5>
+              <div class="display">
+                  <label >Eligibilty Criteria:</label>
+                  <p>{{jdObject.eligibilityCriteria}}</p>
+              </div>
+              <div class="display">
+                <label>Skills Required:</label>
+                <p>{{jdObject.skills}}</p>
+            </div>      
+        </div>
+     </div>
+    <div class="w3-container w3-card w3-white">
+        <div class="w3-container">
+            <h5 class="w3-opacity"><b>Other Details About Job</b></h5>
+            <div class="display">
+                <label >Employment Type:</label>
+                <p>{{jdObject.jobType}}</p>
+            </div>
+            <div class="display">
+              <label>Location:</label>
+              <p>{{jdObject.location}}</p>
+          </div> 
+          <div class="display">
+            <label>Cost To Company:</label>
+            <p>{{jdObject.salary}}</p>
+         </div>    
+   <!-- End Right Column -->
+      </div>
+<!-- End Grid -->
+    </div>
+<!-- End Page Container -->
+  </div>
+  
+   
+  
+  <footer class="w3-container w3-teal w3-center w3-margin-top">
+    <p>Find me on LinkedIn.</p>
+    <i class="fa fa-linkedin w3-hover-opacity"></i>
+    <div class="d-sm-flex justify-content-center justify-content-sm-between">
+        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2020 <a href="https://www.cygrp.com/" target="_blank">CyberGroup</a>. All rights reserved.</span>
+        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with CyberGroup<i class="mdi mdi-heart text-danger"></i></span>
+      </div>
+  </footer>
+<button (click)="convertToPDF()">Export ToPdf</button>

@@ -51,7 +51,7 @@ export class JdFormComponent implements OnInit {
         salary: ['', Validators.required],
         vacancies: ['', Validators.required]      
     });
-   
+    
   }
   get formControls() { return this.jdForm.controls; }
 
@@ -78,29 +78,35 @@ export class JdFormComponent implements OnInit {
        salary: this.salary.nativeElement.value,
         vacancies: this.vacancies.nativeElement.value,
      }
+    
     this._service.jdFormData(this.jdFormObject).subscribe(res => {
          this.data=res.payload.data;
-        console.log(this.data);
+        this.router.navigate(["/jd-pdf",this.data.jdId]);
         
     });
-    this.downloadPdf();
+    this.convertToPDF();
   } 
   image = {
     name: "Image 1", url:"https://d2q79iu7y748jz.cloudfront.net/s/_logo/03b1f41ce2752d969c31c4c10182a005"
   }
-  getBase64Image(img) {
-    var canvas = document.createElement("canvas");
-    console.log("image");
-    canvas.width = img.width;
-    canvas.height = img.height;
-    var ctx = canvas.getContext("2d");
-    ctx.drawImage(img, 0, 0);
-    var dataURL = canvas.toDataURL("image/png");
-    let imageData= this.getBase64Image(document.getElementById('img'));
-    console.log(imageData);
-    return dataURL;
+ 
+  public convertToPDF()
+  {
+  var data = document.getElementById('content');
+  html2canvas(data).then(canvas => {
+  // Few necessary setting options
+  var imgWidth = 208;
+  var pageHeight = 295;
+  var imgHeight = canvas.height * imgWidth / canvas.width;
+  var heightLeft = imgHeight;
+   
+  const contentDataURL = canvas.toDataURL('image/png')
+  let pdf = new jsPDF('p', 'mm', 'a4'); // A4 size page of PDF
+  var position = 0;
+  pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
+  pdf.save('new-file.pdf'); // Generated PDF
+  });
   }
-  
   downloadPdf(){
 
    let doc=new jsPDF();

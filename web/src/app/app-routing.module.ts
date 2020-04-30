@@ -12,7 +12,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { CreateInterviewComponent } from './create-interview/create-interview.component';
 import { HrInterviewAssessementComponent } from './hr-interview-assessement/hr-interview-assessement.component';
 import { AdminFormComponent } from './employee/containers/employee-form/employee-form.component';
-
+import{JdPdfComponent}from'./jd-form/jd-pdf/jd-pdf.component'
 const routes: Routes = [
   { path: "scedule-interview", component: ScheduleInterviewComponent },
 
@@ -41,8 +41,14 @@ const routes: Routes = [
     children: [
       { path: '', component: AdminFormComponent, pathMatch: 'full' },
       { path: ':employeeId', component: AdminFormComponent }
-    ]
-  }
+    ],
+  },
+  { path: 'jd-pdf', 
+  children: [
+     { path: ':jdId', component: JdPdfComponent }
+  ],
+},
+   
   
 ];
 
