@@ -26,7 +26,7 @@ module.exports=(app) =>
     app.post('/api/employee', (req, res) => controller.employee.save(req, res));
     app.get('/api/employee/:id', (req, res) => controller.employee.get(req, res));
     app.get('/api/employee', (req, res) => controller.employee.getAll(req, res));
-    app.get("/api/employeeBySearch/:searchBy", (req, res)=>controller.employee.searchRecord(req, res));
+    app.get("/api/employee/search/:searchBy", (req, res)=>controller.employee.searchRecord(req, res));
     app.put('/api/employee/:id', (req, res) => controller.employee.modify(req, res));
     app.delete('/api/employee/:id', (req, res) => controller.employee.remove(req, res));
     app.post('/api/employee/bulk', upload.single('csvUpload'), (req, res) => controller.employee.bulk(req, res));
@@ -50,9 +50,6 @@ module.exports=(app) =>
 
    //Routes for Candidate
     app.get("/api/candidates", (req, res)=>controller.candidate.getAll(req, res));
-    app.get("/api/candidateBySearch/:searchBy", (req, res)=>controller.candidate.searchRecord(req, res));
-    // app.post('/api/candidate',upload.single('file'), (req,res)=> controller.candidate.uploadDetails(req,res));
-
-    
-    
+    app.get("/api/candidate/search/:searchBy", (req, res)=>controller.candidate.searchRecord(req, res));
+    // app.post('/api/candidate',upload.single('file'), (req,res)=> controller.candidate.uploadDetails(req,res));   
 }
