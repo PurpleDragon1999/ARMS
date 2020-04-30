@@ -7,7 +7,7 @@ class JobDescription {
     this.model = mongoose.model("jobDescription", jobDescriptionschema);
   }
   //getting the JD data as per criteria
-  async get(criteria) {
+  async get(criteria={}) {
     return this.model.findOne(criteria);
   }
   //creates a new JD

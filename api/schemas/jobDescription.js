@@ -26,7 +26,7 @@ module.exports = {
     type: Number,
     default: 0,
   },
-  noOfVacancies: {
+  vacancies: {
     type: Number,
     required: true,
     default: 20,

@@ -5,6 +5,7 @@ import { IResponse } from "src/app/models/response.interface";
 import { IEmployee } from "../../models/employee.interface";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { EmployeeFormComponent } from "../../components/employee-form/employee-form.component";
+import { EmployeeUploadComponent } from '../../components/employee-upload/employee-upload.component'
 import { ModalComponent } from "src/app/modal/modal.component";
 
 @Component({

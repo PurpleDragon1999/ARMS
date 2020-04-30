@@ -41,7 +41,7 @@ export class ListComponent {
 
   openUpload() {
     const modalRef = this.modalService.open(EmployeeUploadComponent);
-  }
+  }  
 
   setPage(page) {
     this.getEmployees(page);
