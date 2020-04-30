@@ -1,5 +1,7 @@
 import { EmployeeUploadComponent } from './employee/components/employee-upload/employee-upload.component';
 import { ListComponent } from './list/list.component';
+import { JdListComponent } from './jd-list/jd-list.component';
+import { ScheduleInterviewComponent } from './schedule-interview/schedule-interview.component';
 import { CandidateFormComponent } from './candidate-form/candidate-form.component';
 import { JdFormComponent } from './jd-form/jd-form.component';
 import { LoginComponent } from './login/login.component';
@@ -11,9 +13,12 @@ import { CreateInterviewComponent } from './create-interview/create-interview.co
 import { HrInterviewAssessementComponent } from './hr-interview-assessement/hr-interview-assessement.component';
 import { EmployeeFormComponent } from './employee/components/employee-form/employee-form.component';
 import { EmployeeComponent } from './employee/containers/employee/employee.component';
+import { JdPdfComponent } from './jd-form/jd-pdf/jd-pdf.component'
+import { HrComponent } from './hr/hr.component';
 
 const routes: Routes = [
   { path:"list", component:ListComponent},
+  { path: "scedule-interview", component: ScheduleInterviewComponent },
   { path: "candidate", component: CandidateFormComponent},
   { path: "create-interview", component: CreateInterviewComponent },
   { path: "form", component: JdFormComponent },
@@ -29,6 +34,12 @@ const routes: Routes = [
       },
       {
         path:"dashboard", component: DashboardComponent
+      },
+      {
+        path:"jobs", component: JdListComponent
+      },
+      {
+        path:"hr/dashboard", component: HrComponent
       }
     ]
   },
@@ -42,7 +53,14 @@ const routes: Routes = [
     children: [
       { path: '', component: EmployeeComponent }
     ] 
-  }
+  },
+  { path: 'jd-pdf', 
+  children: [
+     { path: ':jdId', component: JdPdfComponent }
+  ],
+},
+   
+  
 ];
 
 @NgModule({

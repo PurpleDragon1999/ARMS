@@ -5,6 +5,7 @@ import { IResponse } from "src/app/models/response.interface";
 import { IEmployee } from "../../models/employee.interface";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { EmployeeFormComponent } from "../../components/employee-form/employee-form.component";
+import { EmployeeUploadComponent } from '../../components/employee-upload/employee-upload.component'
 import { ModalComponent } from "src/app/modal/modal.component";
 
 @Component({
@@ -27,13 +28,11 @@ export class EmployeeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.valueChange, "value change");
     this.getEmployees();
   }
 
   getEmployees (page?: number){
     this.employeeService.getAllEmployees(page).subscribe((res: IResponse) => {
-      console.log(this.employees, res, "response for all employees");
       if (res.payload.data) {
         this.employees = res.payload.data.dataList;
         this.columns = ["name", "email", "employeeId", "designation", "role"];
@@ -43,7 +42,6 @@ export class EmployeeComponent implements OnInit {
   };
 
   openModal(dataModal: IDataModal) {
-
     if (dataModal.formType === "update" && dataModal.data.employeeId) {
       dataModal.data.employeeId = Number(
         dataModal.data.employeeId.toString().replace("CYG-", "")
@@ -61,17 +59,17 @@ export class EmployeeComponent implements OnInit {
   }
 
   deleteEmployee(employee: IEmployee) {
-    this.employeeService.deleteEmployee(employee._id).subscribe(
-      (res) => {
-        this.alertMessage = res.payload.message;
-        const modalRef = this.modalService.open(ModalComponent);
-        modalRef.componentInstance.message = this.alertMessage;
-      },
-      (error) => {
-        const modalRef = this.modalService.open(ModalComponent);
-        modalRef.componentInstance.message = error.error.payload.message;
+    const modalRef = this.modalService.open(ModalComponent);
+    let message = {
+      success : "request",
+      payload: {
+        data: employee
       }
-    );
+    }
+    let deleteFor = "employee";
+    modalRef.componentInstance.message = message; 
+    modalRef.componentInstance.deleteFor = deleteFor;     
+
   }
 
   searchEmployee(character: string) {

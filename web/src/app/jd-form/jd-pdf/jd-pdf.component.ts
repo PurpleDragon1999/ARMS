@@ -1,7 +1,10 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { Component, OnInit ,Input} from '@angular/core';
 
 =======
+=======
+>>>>>>> b91005ba3fc0b4976c6b47904e531440a5685c56
 import { Component, OnInit, AfterViewChecked } from '@angular/core';
 import html2canvas from 'html2canvas';  
 import * as jsPDF from 'jspdf'
@@ -9,13 +12,17 @@ import { Router, ActivatedRoute, Params } from "@angular/router";
 import { switchMap } from "rxjs/operators";
 import {jobDescription} from '../../models/jobDescription.interface'
 import{AppServicesService} from '../../services/app-services.service'
+<<<<<<< HEAD
 >>>>>>> 7929fbe9660639a9a637164619282afca666fa32
+=======
+>>>>>>> b91005ba3fc0b4976c6b47904e531440a5685c56
 @Component({
   selector: 'app-jd-pdf',
   templateUrl: './jd-pdf.component.html',
   styleUrls: ['./jd-pdf.component.scss']
 })
 export class JdPdfComponent implements OnInit {
+<<<<<<< HEAD
 <<<<<<< HEAD
   @Input()jdObj:any;
   constructor() { }
@@ -28,6 +35,8 @@ export class JdPdfComponent implements OnInit {
     
   
 =======
+=======
+>>>>>>> b91005ba3fc0b4976c6b47904e531440a5685c56
   jdObject:jobDescription;
   constructor(
     private route: ActivatedRoute,
@@ -66,7 +75,10 @@ export class JdPdfComponent implements OnInit {
   pdf.addImage(contentDataURL, 'PNG', 0, position, 2*imgWidth, 2*imgHeight)
   pdf.save("jobdescription"+this.jdObject.jdId+'.pdf'); // Generated PDF
   });
+<<<<<<< HEAD
 >>>>>>> 7929fbe9660639a9a637164619282afca666fa32
+=======
+>>>>>>> b91005ba3fc0b4976c6b47904e531440a5685c56
   }
 
 }

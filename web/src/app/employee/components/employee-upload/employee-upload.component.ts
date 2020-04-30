@@ -16,7 +16,7 @@ const URL = 'http://localhost:3000/api/employee/bulk';
 export class EmployeeUploadComponent implements OnInit {
   uploadProgress: Number = 0;
   isNotAllowedUploadType: Boolean = true;
-  message: String;
+  message: any;
   
   constructor(private modalService : NgbModal,
               private activeModal: NgbActiveModal
@@ -34,24 +34,23 @@ export class EmployeeUploadComponent implements OnInit {
     };
     this.uploader.onProgressItem = (item, progress) => {
       this.uploadProgress = progress;
-      // item.onComplete = (res) => {
-      //     console.log('Done!');
-      // }
     };   
     this.uploader.onCompleteItem = (item: any, status: any) => {
       this.uploader.clearQueue();
-      console.log('FileUpload:uploaded successfully:', item, status,);
+      let response = {
+        item : item,
+        status: status
+      }
     };
 
     this.uploader.onSuccessItem = (item: any, response: string, status: number) => {
       let data = JSON.parse(response); 
-      this.message = data.payload.message; 
+      this.message = data;
       const modalRef = this.modalService.open(ModalComponent);
       modalRef.componentInstance.message = this.message; 
       this.modalClose()   
       }
     
-
     this.uploader.onWhenAddingFileFailed = function (item: any, filter: any, options: any,) {
       this.isNotAllowedUploadType=true;
     };
