@@ -34,18 +34,18 @@ export class JdFormComponent implements OnInit {
   submitted = false;
   jdFormObject: any;
   ngOnInit() {
-      this.jdFormObject= this.formBuilder.group({
-        jdId: ['', Validators.required],
-        jdTitle: ['', Validators.required],
-        openingDate: ['', Validators.required],
-        closingDate: ['', Validators.required],
-        jobProfileDescription: ['', Validators.required],
-        skills: ['', Validators.required],
-        jobType: ['', Validators.required],
-        eligibilityCriteria: ['', Validators.required],
-        location: ['', Validators.required],
-        salary: ['', Validators.required],
-        vacancies: ['', Validators.required]
+    this.jdFormObject = this.formBuilder.group({
+      jdId: ["", Validators.required],
+      jdTitle: ["", Validators.required],
+      openingDate: ["", Validators.required],
+      closingDate: ["", Validators.required],
+      jobProfileDescription: ["", Validators.required],
+      skills: ["", Validators.required],
+      jobType: ["", Validators.required],
+      eligibilityCriteria: ["", Validators.required],
+      location: ["", Validators.required],
+      salary: ["", Validators.required],
+      vacancies: ["", Validators.required],
     });
   }
   get formControls() {
@@ -62,9 +62,8 @@ export class JdFormComponent implements OnInit {
   }
 
   jdFormData() {
-    console.log("yshs rfhs hyu");
     this.jdFormObject = {
-      jdId: `CYGJID-${this.jdId.nativeElement.value}`,
+      jdId: `CYGJID${this.jdId.nativeElement.value}`,
       jdTitle: this.jdTitle.nativeElement.value,
       openingDate: this.openingDate.nativeElement.value,
       closingDate: this.closingDate.nativeElement.value,
@@ -77,14 +76,9 @@ export class JdFormComponent implements OnInit {
       vacancies: this.vacancies.nativeElement.value,
     };
     if (this.jdFormObject.openingDate > this.jdFormObject.closingDate) {
-      console.log(
-        this.jdFormObject.openingDate,
-        this.jdFormObject.closingDate,this.jdFormObject.jdId,
-        "dates hai yaha"
-      );
-      alert("bhaag");
+      alert("opening date cannot be greater than closing  date");
     }
-   // this.router.navigate(["/jd-pdf"]);
+    this.router.navigate(["/navbar/jobs"]);
 
     // this._service.jdFormData(jdFormObject).subscribe(res => {
     //     const data=res.payload.data;
