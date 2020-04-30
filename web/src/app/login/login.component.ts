@@ -3,7 +3,9 @@ import { BroadcastService, MsalService } from "@azure/msal-angular";
 import { Logger, CryptoUtils } from "msal";
 const GRAPH_ENDPOINT = "https://graph.microsoft.com/v1.0/me";
 // import {jsonDecoder} from "../utilities/token-decoder.service"
-import { HttpClient } from "@angular/common/http";
+import { HttpClient } from '@angular/common/http';
+import { LoginService } from '../services/login.service'
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 @Component({
   selector: "app-login",
   templateUrl: "./login.component.html",
@@ -12,12 +14,15 @@ import { HttpClient } from "@angular/common/http";
 export class LoginComponent implements OnInit {
   isIframe = false;
   loggedIn = false;
-  profile;
+  profile: any;
+  message: string;
+  employeeData = {};
   constructor(
+
     private broadcastService: BroadcastService,
     private authService: MsalService,
-    private http: HttpClient
-  ) {}
+    private http: HttpClient,
+    private loginService: LoginService) { }
 
   ngOnInit() {
     this.isIframe = window !== window.parent && !window.opener;
@@ -35,7 +40,7 @@ export class LoginComponent implements OnInit {
       }
     });
     this.authService.setLogger(
-      new Logger((logLevel, message, piiEnabled) => {}, {
+      new Logger((logLevel, message, piiEnabled) => { }, {
         correlationId: CryptoUtils.createNewGuid(),
         piiLoggingEnabled: false,
       })
@@ -43,14 +48,6 @@ export class LoginComponent implements OnInit {
   }
   checkAccount() {
     this.loggedIn = !!this.authService.getAccount();
-  }
-  getProfile() {
-    this.http
-      .get(GRAPH_ENDPOINT)
-      .toPromise()
-      .then((profile) => {
-        this.profile = profile;
-      });
   }
   loginFunction() {
     const isIE =
@@ -61,6 +58,23 @@ export class LoginComponent implements OnInit {
     } else {
       this.authService.loginPopup();
     }
-    this.getProfile();
+    const idToken = window.localStorage.getItem("msal.idtoken");
+
+    this.loginService.checkPermissions(idToken).subscribe(
+      res => {
+        if (res != null) {
+          window.localStorage.setItem(
+            "x-auth-token",
+            `${res.payload.data["x-auth-token"]}`
+          );
+        }
+        this.message = res.payload.message
+
+
+      }, err => {
+        this.message = err.payload.message
+      }
+    )
+
   }
 }

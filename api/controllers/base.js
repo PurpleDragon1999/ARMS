@@ -1,4 +1,4 @@
-const pagination = require("../generic/pagination");
+const pagination = require("../generic/pagination")
 
 class Base {
   constructor(model) {
@@ -23,29 +23,28 @@ class Base {
         },
       });
     }
-  }
 
-  async get(req, res) {
-    try {
-      const data = await this.model.get(req.params.id);
+    async get(req, res) {
+      try {
+        const data = await this.model.get(req.params.id);
 
-      return res.send({
-        success: true,
-        payload: {
-          data,
-          message: "Retrieved Successfully",
-        },
-      });
-    } catch (e) {
-      res.status(500).send({
-        success: false,
-        payload: {
-          message: e.message,
-        },
-      });
+        return res.send({
+          success: true,
+          payload: {
+            data,
+            message: "Retrieved Successfully",
+          },
+        });
+      } catch (e) {
+        res.status(500).send({
+          success: false,
+          payload: {
+            message: e.message,
+          },
+        });
+      }
     }
   }
-
   // async getAll(req, res){
   //     try{
   //         const data = await this.model.getAll();
@@ -94,88 +93,204 @@ class Base {
     }
   }
 
-  async modify(req, res) {
+
+  async create(req, res) {
     try {
-      const data = await this.model.modify(req.params.id, req.body);
+      let objToCreate = req.body;
+      let createdObj = await this.model.save(objToCreate);
       return res.send({
         success: true,
         payload: {
-          data,
-          message: "Modified Successfully",
-        },
+          body: createdObj,
+          message: "Record created successfully!!"
+        }
       });
-    } catch (e) {
-      res.status(500).send({
+
+    }
+    catch (error) {
+      res.send({
         success: false,
         payload: {
-          message: e.message,
-        },
+          message: error.message
+        }
       });
     }
   }
 
-  async remove(req, res) {
+  async update(req, res) {
     try {
-      const data = await this.model.remove(req.params.id);
+      const objToUpdate = await this.model.findOne({ _id: req.params.id });
+      if (objToUpdate == null) {
+        return res.send({
+          success: true,
+          payload: {
+            message: "No record found"
+          }
+        });
+      }
+      else {
+        let updateObj = req.body;
+        let updatedStatus = await this.model.updateOne({ _id: req.params.id }, updateObj)
+        return res.send({
+          success: true,
+          payload: {
+            body: updatedStatus,
+            message: "Record updated successfully!!"
+          }
+        });
+      }
+    }
+    catch (error) {
+      console.log(error)
       return res.send({
-        success: true,
-        payload: {
-          data,
-          message: "Removed Successfully",
-        },
-      });
-    } catch (e) {
-      res.status(500).send({
         success: false,
         payload: {
-          message: e.message,
-        },
+          message: error.message
+        }
       });
     }
+
   }
+
+  // async searchRecord(req, res) {
+  //   try {
+  //     let searchBy = req.query.searchBy;
+  //     let queryObject = { $regex: ".*^" + searchBy + ".*", $options: "i" };
+  //     const searchedRecords = await this.model.getAll({
+  //       $or: [
+  //         { name: queryObject },
+  //         { designation: queryObject },
+  //         { email: queryObject },
+  //       ],
+  //     });
+  //     console.log(searchedRecords);
+  //     if (searchedRecords.length != 0) {
+  //       res.status(200).send({
+  //         success: true,
+  //         payload: {
+  //           data: {
+  //             searchedRecords,
+  //           },
+  //       });
+  //     } else {
+  //       res.send({
+  //         success: false,
+  //         payload: {
+  //           data: {
+  //             searchedRecords: [],
+  //       } catch (e) {
+  //       res.status(500).send({
+  //           success: false,
+  //           payload: {
+  //           message: e.message,
+  //           },
+  //       });
+  //       }
+  //   }
+
+
 
   async searchRecord(req, res) {
     try {
-      let searchBy = req.query.searchBy;
-      let queryObject = { $regex: ".*^" + searchBy + ".*", $options: "i" };
-      const searchedRecords = await this.model.getAll({
-        $or: [
-          { name: queryObject },
-          { designation: queryObject },
-          { email: queryObject },
-        ],
-      });
-      console.log(searchedRecords);
+      let queryObject = { $regex: req.params.searchBy, $options: 'i' };
+      const searchedRecords = await this.model.getAll({ name: queryObject });
       if (searchedRecords.length != 0) {
         res.status(200).send({
           success: true,
           payload: {
             data: {
-              searchedRecords,
+              searchedRecords
             },
-            message: "List of Searched Records returned successfully!!",
-          },
+            message: "List of Searched Records returned successfully!!"
+          }
         });
-      } else {
-        res.send({
-          success: false,
+
+      }
+      else {
+        res.status(200).send({
+          success: true,
           payload: {
-            data: {
-              searchedRecords: [],
-            },
-            message: "No Match Found",
-          },
+            message: "No Results Found"
+          }
         });
       }
-    } catch (err) {
+    }
+
+    catch (err) {
       res.status(400).send({
         success: false,
         payload: {
-          message: err.message,
-        },
+          message: err.message
+        }
       });
     }
   }
+
+  async get(req, res) {
+    try {
+      const objToRetrieve = await this.model.findOne({ _id: req.params.id });
+      if (objToRetrieve == null) {
+        res.send({
+          success: true,
+          payload: {
+            message: "No record"
+          }
+        });
+      }
+      else {
+        res.send({
+          success: true,
+          payload: {
+            body: objToRetrieve,
+            message: "Details retrieved successfully!!"
+          }
+        });
+      }
+
+    }
+    catch (error) {
+      res.send({
+        success: false,
+        payload: {
+          message: error.message
+        }
+      });
+    }
+  }
+
+  async uploadDetails(req, res) {
+    try {
+      let path = "";
+      if (req.file) {
+        path = req.file.path;
+      }
+      let objToCreate = {
+        name: req.body.name,
+        experience: req.body.experience,
+        email: req.body.email,
+        cv: path,
+        skills: req.body.skills,
+        appliedFor: req.body.appliedFor
+      }
+      let createdObj = await this.model.save(objToCreate);
+      return res.send({
+        success: true,
+        payload: {
+          body: createdObj,
+          message: "Record created successfully!!"
+        }
+      });
+    }
+    catch (error) {
+      res.send({
+        success: false,
+        payload: {
+          message: error.message
+        }
+      })
+    }
+  }
+
 
   async getAll(req, res) {
     try {
@@ -192,7 +307,6 @@ class Base {
         pager.startIndex,
         pager.endIndex + 1
       );
-
       res.status(200).send({
         success: true,
         payload: {
@@ -204,13 +318,14 @@ class Base {
         },
       });
     } catch (err) {
-      res.status(400).send({
+      res.status(500).send({
         success: false,
         payload: {
           message: err.message,
         },
       });
     }
+
   }
 }
 

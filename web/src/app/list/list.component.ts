@@ -1,3 +1,4 @@
+import { ModalComponent } from './../modal/modal.component';
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { EmployeeUploadComponent } from "../employee/components/employee-upload/employee-upload.component";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
@@ -40,15 +41,21 @@ export class ListComponent {
 
   openUpload() {
     const modalRef = this.modalService.open(EmployeeUploadComponent);
-  }
+  }  
 
   setPage(page) {
+<<<<<<< HEAD
     // this.valueChange.emit(this.page);
+=======
+>>>>>>> b91005ba3fc0b4976c6b47904e531440a5685c56
     this.getEmployees(page);
   }
 
   search(character) {
+<<<<<<< HEAD
     // this.searchEmployee(character);
+=======
+>>>>>>> b91005ba3fc0b4976c6b47904e531440a5685c56
     this.emitSearch.emit(character);
   }
 

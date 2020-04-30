@@ -26,7 +26,7 @@ export class EmployeeFormComponent {
   constructor(
     private employeeService: EmployeeService,
     private modalService: NgbModal
-  ) {}
+  ) { }
 
   handleSubmit(employee: IEmployee): void {
     if (this.formType === "create") return this.createEmployee(employee);
@@ -37,12 +37,12 @@ export class EmployeeFormComponent {
     this.employeeService.createEmployee(employee).subscribe(
       (res: IResponse) => {
         const modalRef = this.modalService.open(ModalComponent);
-        modalRef.componentInstance.message = res.payload.message;
+        modalRef.componentInstance.message = res;
         this.modalClose();
       },
       (error) => {
         const modalRef = this.modalService.open(ModalComponent);
-        modalRef.componentInstance.message = error.error.payload.message;
+        modalRef.componentInstance.message = error.error;
         this.modalClose();
       }
     );
@@ -53,12 +53,12 @@ export class EmployeeFormComponent {
     this.employeeService.updateEmployee(updatedEmployee).subscribe(
       (res: IResponse) => {
         const modalRef = this.modalService.open(ModalComponent);
-        modalRef.componentInstance.message = res.payload.message;
+        modalRef.componentInstance.message = res;
         this.modalClose();
       },
       (error) => {
         const modalRef = this.modalService.open(ModalComponent);
-        modalRef.componentInstance.message = error.error.payload.message;
+        modalRef.componentInstance.message = error.error;
         this.modalClose();
       }
     );

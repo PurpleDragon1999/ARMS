@@ -1,8 +1,8 @@
+import { IEmployee } from './models/employee.interface';
+import { IResponse } from '../models/response.interface';
 import { Injectable } from "@angular/core";
 import { HttpHeaders, HttpClient, HttpParams } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { IEmployee } from "./models/employee.interface";
-import { IResponse } from "../models/response.interface";
 import { HOST } from "../config/apiHost.config";
 
 const EMPLOYEE_API = `${HOST}/api/employee`;
@@ -27,11 +27,7 @@ export class EmployeeService {
   }
 
   updateEmployee(employee: IEmployee): Observable<IResponse> {
-    return this.http.put<IResponse>(
-      `${EMPLOYEE_API}/${employee._id}`,
-      employee,
-      this.options
-    );
+    return this.http.put<IResponse>(`${EMPLOYEE_API}/${employee._id}`, employee, this.options);
   }
 
   getEmployee(employeeId: String): Observable<IResponse> {
@@ -42,10 +38,7 @@ export class EmployeeService {
   }
 
   getAllEmployees(page?): Observable<IResponse> {
-    return this.http.get<IResponse>(
-      `${EMPLOYEE_API}?page=${page}`,
-      this.options
-    );
+    return this.http.get<IResponse>(`${EMPLOYEE_API}?page=${page}`, this.options);
   }
 
   deleteEmployee(employeeId: String): Observable<IResponse> {

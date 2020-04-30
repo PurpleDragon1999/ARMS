@@ -1,8 +1,9 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { EmployeeFormComponent } from "../../components/employee-form/employee-form.component";
+import { EmployeeUploadComponent } from '../../components/employee-upload/employee-upload.component'
 import { ModalComponent } from "src/app/modal/modal.component";
 import { IResponse } from "src/app/models/response.interface";
-import { EmployeeFormComponent } from "../../components/employee-form/employee-form.component";
 import { EmployeeService } from "../../employee.service";
 import { IEmployee } from "../../models/employee.interface";
 
@@ -23,7 +24,7 @@ export class EmployeeComponent implements OnInit {
   constructor(
     private employeeService: EmployeeService,
     private modalService: NgbModal
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getEmployees();
@@ -57,17 +58,17 @@ export class EmployeeComponent implements OnInit {
   }
 
   deleteEmployee(employee: IEmployee) {
-    this.employeeService.deleteEmployee(employee._id).subscribe(
-      (res) => {
-        this.alertMessage = res.payload.message;
-        const modalRef = this.modalService.open(ModalComponent);
-        modalRef.componentInstance.message = this.alertMessage;
-      },
-      (error) => {
-        const modalRef = this.modalService.open(ModalComponent);
-        modalRef.componentInstance.message = error.error.payload.message;
+    const modalRef = this.modalService.open(ModalComponent);
+    let message = {
+      success: "request",
+      payload: {
+        data: employee
       }
-    );
+    }
+    let deleteFor = "employee";
+    modalRef.componentInstance.message = message;
+    modalRef.componentInstance.deleteFor = deleteFor;
+
   }
 
   searchEmployee(character: string) {
