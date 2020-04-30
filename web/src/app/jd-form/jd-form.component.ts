@@ -74,7 +74,6 @@ export class JdFormComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    this.jdFormData();
     // stop here if form is invalid
     if (this.jobListingForm.invalid) {
       return;
