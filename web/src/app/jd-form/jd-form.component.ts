@@ -34,19 +34,19 @@ export class JdFormComponent implements OnInit {
   submitted = false;
   jdFormObject: any;
   ngOnInit() {
-    //   this.jdFormObject= this.formBuilder.group({
-    //     jdId: ['', Validators.required],
-    //     jdTitle: ['', Validators.required],
-    //     openingDate: ['', Validators.required],
-    //     closingDate: ['', Validators.required],
-    //     jobProfileDescription: ['', Validators.required],
-    //     skills: ['', Validators.required],
-    //     jobType: ['', Validators.required],
-    //     eligibilityCriteria: ['', Validators.required],
-    //     location: ['', Validators.required],
-    //     salary: ['', Validators.required],
-    //     vacancies: ['', Validators.required]
-    // });
+      this.jdFormObject= this.formBuilder.group({
+        jdId: ['', Validators.required],
+        jdTitle: ['', Validators.required],
+        openingDate: ['', Validators.required],
+        closingDate: ['', Validators.required],
+        jobProfileDescription: ['', Validators.required],
+        skills: ['', Validators.required],
+        jobType: ['', Validators.required],
+        eligibilityCriteria: ['', Validators.required],
+        location: ['', Validators.required],
+        salary: ['', Validators.required],
+        vacancies: ['', Validators.required]
+    });
   }
   get formControls() {
     return this.jdForm.controls;
@@ -62,6 +62,7 @@ export class JdFormComponent implements OnInit {
   }
 
   jdFormData() {
+    console.log("yshs rfhs hyu");
     this.jdFormObject = {
       jdId: `CYGJID-${this.jdId.nativeElement.value}`,
       jdTitle: this.jdTitle.nativeElement.value,
@@ -83,7 +84,7 @@ export class JdFormComponent implements OnInit {
       );
       alert("bhaag");
     }
-    this.router.navigate(["/jd-pdf"]);
+   // this.router.navigate(["/jd-pdf"]);
 
     // this._service.jdFormData(jdFormObject).subscribe(res => {
     //     const data=res.payload.data;
