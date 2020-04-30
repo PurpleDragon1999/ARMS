@@ -10,7 +10,7 @@
               <br>
               <form class="forms-sample" [formGroup]="jdForm" (ngSubmit)="onSubmit()">
                 <div class="form-group">
-                  <label for="jdId">JD ID :</label>
+                  <label for="jdId">Job ID</label>
                   <input type="text" class="form-control" id="jdId" #jdId placeholder="JD ID"
                   formControlName="jdId" [ngClass]="{ 'is-invalid': submitted && formControls.jdId.errors }"/>
                   <div *ngIf="submitted && formControls.jdId.errors" class="invalid-feedback">
@@ -18,7 +18,7 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="jdTitle">JD Title : </label>
+                  <label for="jdTitle">Job Title</label>
                   <input type="text" class="form-control" placeholder="JD Title" #jdTitle
                   formControlName="jdTitle" [ngClass]="{ 'is-invalid': submitted && formControls.jdTitle.errors }"/>
                   <div *ngIf="submitted && formControls.jdTitle.errors" class="invalid-feedback">
@@ -26,21 +26,21 @@
                   </div>
                 </div>
                 <div class="form-group">
-                    <label for="openingDate">Opening date : </label>
+                    <label for="openingDate">Opening date</label>
                     <input type="date" #openingDate class="form-control" formControlName="openingDate" [ngClass]="{ 'is-invalid': submitted && formControls.openingDate.errors }"/>
                     <div *ngIf="submitted && formControls.openingDate.errors" class="invalid-feedback">
                       <div *ngIf="formControls.openingDate.errors.required"><i class="mdi mdi-alert-outline"></i> Opening Date is required</div>
                     </div>
                 </div>
                 <div class="form-group">
-                  <label for="closingDate">Closing Date : </label>
+                  <label for="closingDate">Closing Date</label>
                   <input type="date" #closingDate class="form-control" formControlName="closingDate" [ngClass]="{ 'is-invalid': submitted && formControls.closingDate.errors }"/>
                   <div *ngIf="submitted && formControls.closingDate.errors" class="invalid-feedback">
                     <div *ngIf="formControls.closingDate.errors.required"><i class="mdi mdi-alert-outline"></i> Closing Date is required</div>
                   </div>
                 </div>
                 <div class="form-group">
-                    <label for="jobProfileDescription">Job Profile Description : </label>
+                    <label for="jobProfileDescription">Job Profile Description</label>
                     <input type="text" #jobProfileDescription class="form-control" placeholder="Job Profile Description" 
                     formControlName="jobProfileDescription" [ngClass]="{ 'is-invalid': submitted && formControls.jobProfileDescription.errors }"/>
                     <div *ngIf="submitted && formControls.jobProfileDescription.errors" class="invalid-feedback">
@@ -48,7 +48,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                  <label for="skills">Skills : </label>
+                  <label for="skills">Skills</label>
                   <input type="text" class="form-control" placeholder="Skills"#skills
                   formControlName="skills" [ngClass]="{ 'is-invalid': submitted && formControls.skills.errors }"/>
                     <div *ngIf="submitted && formControls.skills.errors" class="invalid-feedback">
@@ -56,7 +56,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="jobType">Job Type : </label>
+                    <label for="jobType">Job Type</label>
                     <input type="text" class="form-control" placeholder="Job Type" #jobType
                     formControlName="jobType" [ngClass]="{ 'is-invalid': submitted && formControls.jobType.errors }"/>
                     <div *ngIf="submitted && formControls.jobType.errors" class="invalid-feedback">
@@ -72,7 +72,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                  <label for="location">Location : </label>
+                  <label for="location">Location</label>
                   <input type="text" class="form-control" placeholder="Location"#location
                   formControlName="location" [ngClass]="{ 'is-invalid': submitted && formControls.location.errors }"/>
                     <div *ngIf="submitted && formControls.location.errors" class="invalid-feedback">
@@ -80,7 +80,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="salary">Salary : </label>
+                    <label for="salary">Salary per annum</label>
                     <input type="text" class="form-control" placeholder="Salary"#salary
                     formControlName="salary" [ngClass]="{ 'is-invalid': submitted && formControls.salary.errors }"/>
                     <div *ngIf="submitted && formControls.salary.errors" class="invalid-feedback">
@@ -88,7 +88,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="vacancies">No.of  Vacancies : </label>
+                    <label for="vacancies">No. of Vacancies</label>
                     <input type="number" class="form-control" placeholder="Vacancies"#vacancies />
                 </div>
                 <!-- <div class="form-group">
