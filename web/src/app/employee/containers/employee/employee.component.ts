@@ -31,7 +31,7 @@ export class EmployeeComponent implements OnInit {
     this.getEmployees();
   }
 
-  getEmployees = (page?: number) => {
+  getEmployees (page?: number){
     this.employeeService.getAllEmployees(page).subscribe((res: IResponse) => {
       console.log(this.employees, res, "response for all employees");
       if (res.payload.data) {

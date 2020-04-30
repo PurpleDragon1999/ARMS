@@ -20,18 +20,15 @@ export class ListComponent {
   @Input()
   pager: any = {};
 
-  @Input()
-  getEmployees: Function;
-
-  @Input()
-  searchEmployee: Function;
-
   @Output()
   delete: EventEmitter<IDataModal["data"]> = new EventEmitter();
 
   @Output()
-  emitSearch: EventEmitter<String> = new EventEmitter();
+    emitPage : EventEmitter<number> = new EventEmitter();
 
+  @Output()
+  emitSearch: EventEmitter<String> = new EventEmitter();
+  
   constructor(private modalService: NgbModal) {}
 
   openModal(formType: IDataModal["formType"], data: IDataModal["data"]) {
@@ -42,12 +39,13 @@ export class ListComponent {
     const modalRef = this.modalService.open(EmployeeUploadComponent);
   }
 
-  setPage(page) {
-    this.getEmployees(page);
-    
+  setPage(page : number) {
+    console.log(page, "page")
+    this.emitPage.emit(page)
+  
   }
 
-  search(character) {
+  search(character : string) {
     this.emitSearch.emit(character);
   }
 

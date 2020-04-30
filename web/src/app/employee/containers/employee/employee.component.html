@@ -1,1 +1,1 @@
-<app-list [searchEmployee]="searchEmployee"  [getEmployees]="getEmployees"  [data]="employees" [columns]="columns" [pager]="pager" (emitOpenModal)="openModal($event)" (delete)="deleteEmployee($event)" (emitSearch)="searchEmployee($event)"></app-list>
+<app-list [data]="employees" [columns]="columns" [pager]="pager" (emitOpenModal)="openModal($event)" (delete)="deleteEmployee($event)" (emitSearch)="searchEmployee($event)" (emitPage)="getEmployees($event)"></app-list>

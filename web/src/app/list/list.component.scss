@@ -70,12 +70,12 @@ only screen and (max-width: 990px),
 	// td:nth-of-type(10):before { content: "Arbitrary Data"; }
 }
 
-.mdi-grease-pencil, .mdi-delete{
+.mdi-pencil, .mdi-delete{
     color: #212529;
     font-size: large;
 }
 
-.mdi-grease-pencil:hover, .mdi-delete:hover{
+.mdi-pencil:hover, .mdi-delete:hover{
     color: rgb(182, 109, 255);
 }
 
@@ -101,14 +101,13 @@ button{
     display: none;
 }
 
-.mobileView .usercard{
-        -webkit-box-shadow: 3px 3px 5px 6px #ccc;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
-        -moz-box-shadow:    3px 3px 5px 6px #ccc;  /* Firefox 3.5 - 3.6 */
-        box-shadow:         3px 3px 5px 6px #ccc;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
-        padding : 3em ;
-        background-color: red;
+// .cardMobileView{
+//         -webkit-box-shadow: 3px 3px 5px 6px #ccc;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+//         -moz-box-shadow:    3px 3px 5px 6px #ccc;  /* Firefox 3.5 - 3.6 */
+//         box-shadow:         3px 3px 5px 6px #ccc;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+//         background-color: white;
 
-}
+// }
 
 ngb-accordion ngb-panel ::before {
     content: "\F374";
@@ -187,5 +186,33 @@ select{
 
 .mdi-account-plus{
     color: rgb(182, 109, 255);
+}
 
+.itemsDiv{
+    display: flex;
+    justify-content: space-between;
+}
+
+a {
+    cursor: pointer;
+}
+
+// .card-body{
+//     overflow-x: scroll;
+// }
+
+// .card-body:-webkit-scrollbar{
+//     width: 0 !important
+// }
+
+.addMobile{
+    text-align: end;
+}
+
+ngb-accordion ::ng-deep .card-header{
+    padding: 1em;
+    -webkit-box-shadow: 6px 4px 5px 6px #ccc;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+        -moz-box-shadow:    3px 3px 5px 6px #ccc;  /* Firefox 3.5 - 3.6 */
+        box-shadow:         3px 3px 5px 6px #ccc;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+        background-color: white;
 }

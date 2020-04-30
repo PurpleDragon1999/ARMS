@@ -7,7 +7,7 @@ import { HOST } from '../config/apiHost.config';
 import { $ } from 'protractor';
 
 const EMPLOYEE_API = `${HOST}/api/employee`;
-const EMPLOYEE_SEARCH = `${HOST}/api/employeeBySearch`;
+const EMPLOYEE_SEARCH = `${HOST}/api/employee/search`;
 
 @Injectable({
     providedIn: 'root'
