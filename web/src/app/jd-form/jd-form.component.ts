@@ -3,8 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AppServicesService } from './../services/app-services.service';
 import { ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import {Router}from '@angular/router'
-
-
+import * as jsPDF from 'jspdf'
+import{jobDescription}from '../models/jobDescription.interface'
+import html2canvas from 'html2canvas';  
+  
 @Component({
   selector: 'app-jd-form',
   templateUrl: './jd-form.component.html',
@@ -28,13 +30,15 @@ export class JdFormComponent implements OnInit {
   @ViewChild('location', {static: false}) location: ElementRef;
   @ViewChild('salary', {static: false}) salary: ElementRef;
   @ViewChild('vacancies', {static: false}) vacancies: ElementRef;
-
+  @ViewChild('content',{static:true})content:ElementRef;
   jdForm: FormGroup;
     submitted = false;
-    jdFormObject:any;
+    jdFormObject:jobDescription;
+    data:jobDescription;
+
   ngOnInit() {
   
-      this.jdFormObject= this.formBuilder.group({
+      this.jdForm= this.formBuilder.group({
         jdId: ['', Validators.required],
         jdTitle: ['', Validators.required],
         openingDate: ['', Validators.required],
@@ -47,7 +51,7 @@ export class JdFormComponent implements OnInit {
         salary: ['', Validators.required],
         vacancies: ['', Validators.required]      
     });
-   
+    
   }
   get formControls() { return this.jdForm.controls; }
 
@@ -59,7 +63,7 @@ export class JdFormComponent implements OnInit {
     }
     // alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.jdForm.value))
   }
-
+ 
   jdFormData(){
      this.jdFormObject = {
        jdId: this.jdId.nativeElement.value,
@@ -75,14 +79,14 @@ export class JdFormComponent implements OnInit {
         vacancies: this.vacancies.nativeElement.value,
      }
     
-     this.router.navigate(["/jd-pdf"])
+    this._service.jdFormData(this.jdFormObject).subscribe(res => {
+         this.data=res.payload.data;
+        this.router.navigate(["/jd-pdf",this.data.jdId]);
+        
+    });
     
-    
-   
-    // this._service.jdFormData(jdFormObject).subscribe(res => {
-    //     const data=res.payload.data;
-    //     console.log(data);
-    //});
   } 
+  
 
+  
 }
