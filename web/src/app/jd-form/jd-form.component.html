@@ -9,29 +9,29 @@
           <br>
           <form class="forms-sample" [formGroup]="jobListingForm" (ngSubmit)="onSubmit()" novalidate>
             <div class="form-group">
-              <label for="jobId">Job ID</label>
-              <input type="text" class="form-control" id="jobId" #jobId placeholder="Job ID" maxlength="7" (input)="jobId.value=$event.target.value.toUpperCase()"
-              formControlName="jobId" [ngClass]="{ 'is-invalid': submitted && formControls.jobId.errors }"/>
-              <div *ngIf="submitted && formControls.jobId.errors" class="invalid-feedback">
-                <div *ngIf="formControls.jobId.errors.required"><i class="mdi mdi-alert-outline"></i> Job ID is required</div>
+              <label for="jdId">Job ID</label>
+              <input type="text" class="form-control" id="jdId" #jdId placeholder="Job ID" maxlength="7" (input)="jdId.value=$event.target.value.toUpperCase()"
+              formControlName="jdId" [ngClass]="{ 'is-invalid': submitted && formControls.jdId.errors }"/>
+              <div *ngIf="submitted && formControls.jdId.errors" class="invalid-feedback">
+                <div *ngIf="formControls.jdId.errors.required"><i class="mdi mdi-alert-outline"></i> Job ID is required</div>
               </div>
             </div>
 
             <div class="form-group">
-              <label for="jobTitle">Job Title </label>
-              <input type="text" class="form-control" placeholder="Job Title" #jobTitle maxlength="40"
-              formControlName="jobTitle" [ngClass]="{ 'is-invalid': submitted && formControls.jobTitle.errors }"/>
-              <div *ngIf="submitted && formControls.jobTitle.errors" class="invalid-feedback">
-                <div *ngIf="formControls.jobTitle.errors.required"><i class="mdi mdi-alert-outline"></i> Job Title is required</div>
+              <label for="jdTitle">Job Title </label>
+              <input type="text" class="form-control" placeholder="Job Title" #jdTitle maxlength="40"
+              formControlName="jdTitle" [ngClass]="{ 'is-invalid': submitted && formControls.jdTitle.errors }"/>
+              <div *ngIf="submitted && formControls.jdTitle.errors" class="invalid-feedback">
+                <div *ngIf="formControls.jdTitle.errors.required"><i class="mdi mdi-alert-outline"></i> Job Title is required</div>
               </div>
             </div>
            
             <div class="form-group">
-              <label for="jobDescription">Job Description </label>
-              <textarea class="form-control" #jobDescription rows="10" placeholder="Job Description"
-              formControlName="jobDescription" [ngClass]="{ 'is-invalid': submitted && formControls.jobDescription.errors }"></textarea>
-              <div *ngIf="submitted && formControls.jobDescription.errors" class="invalid-feedback">
-                <div *ngIf="formControls.jobDescription.errors.required"><i class="mdi mdi-alert-outline"></i> Job Description is required</div>
+              <label for="jobProfileDescription">Job Description </label>
+              <textarea class="form-control" #jobProfileDescription rows="10" placeholder="Job Description"
+              formControlName="jobProfileDescription" [ngClass]="{ 'is-invalid': submitted && formControls.jobProfileDescription.errors }"></textarea>
+              <div *ngIf="submitted && formControls.jobProfileDescription.errors" class="invalid-feedback">
+                <div *ngIf="formControls.jobProfileDescription.errors.required"><i class="mdi mdi-alert-outline"></i> Job Description is required</div>
               </div>
             </div>
 

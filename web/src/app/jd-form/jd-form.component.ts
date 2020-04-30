@@ -19,11 +19,11 @@ export class JdFormComponent implements OnInit {
     private router:Router) { }
   
  
-  @ViewChild('jobId', {static: false}) jobId: ElementRef;
-  @ViewChild('jobTitle', {static: false}) jobTitle: ElementRef;
+  @ViewChild('jdId', {static: false}) jdId: ElementRef;
+  @ViewChild('jdTitle', {static: false}) jdTitle: ElementRef;
   @ViewChild('openingDate', {static: false}) openingDate: ElementRef;
   @ViewChild('closingDate', {static: false}) closingDate: ElementRef;
-  @ViewChild('jobDescription', {static: false}) jobDescription: ElementRef;
+  @ViewChild('jobProfileDescription', {static: false}) jobProfileDescription: ElementRef;
   @ViewChild('skills', {static: false}) skills: ElementRef;
   @ViewChild('jobType', {static: false}) jobType: ElementRef;
   @ViewChild('eligibilityCriteria', {static: false}) eligibilityCriteria: ElementRef;
@@ -56,11 +56,11 @@ export class JdFormComponent implements OnInit {
   ngOnInit() {
   
       this.jobListingForm= this.formBuilder.group({
-        jobId: ['', Validators.required],
-        jobTitle: ['', Validators.required],
+        jdId: ['', Validators.required],
+        jdTitle: ['', Validators.required],
         openingDate: ['', Validators.required],
         closingDate: ['', Validators.required],
-        jobDescription: ['', Validators.required],
+        jobProfileDescription: ['', Validators.required],
         skills: ['', Validators.required],
         jobType: ['', Validators.required],
         eligibilityCriteria: ['', Validators.required],
@@ -93,11 +93,11 @@ export class JdFormComponent implements OnInit {
 
   jdFormData(){
     let jdFormObject = {
-       jdId: this.jobId.nativeElement.value,
-       jdTitle: this.jobTitle.nativeElement.value,
+       jdId: this.jdId.nativeElement.value,
+       jdTitle: this.jdTitle.nativeElement.value,
        openingDate: this.openingDate.nativeElement.value,
        closingDate: this.closingDate.nativeElement.value,
-       jobProfileDescription: this.jobDescription.nativeElement.value,
+       jobProfileDescription: this.jobProfileDescription.nativeElement.value,
        skills: this.skills.nativeElement.value,
        jobType: this.jobTypeOptions,
        eligibilityCriteria: this.eligibilityCriteriaOptions,
@@ -107,9 +107,9 @@ export class JdFormComponent implements OnInit {
      }
      console.log(jdFormObject);
     
-    this._service.jdFormData(this.jdFormObject).subscribe(res => {
+    this._service.jdFormData(jdFormObject).subscribe(res => {
       console.log("abc") ; 
-       this.data=res.payload.data;
+      //  this.data=res.payload.data;
         // this.router.navigate(["/jd-pdf",this.data.jdId]);
     });
     

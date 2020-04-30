@@ -32,7 +32,7 @@ const routes: Routes = [
         path:"dashboard", component: DashboardComponent
       },
       {
-        path:"jobs/form", component: JdFormComponent
+        path:"jobs/new", component: JdFormComponent
       },
       {
         path:"jobs", component: JdListComponent
