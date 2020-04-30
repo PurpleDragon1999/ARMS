@@ -46,7 +46,7 @@ export class JdPdfComponent implements OnInit {
   const contentDataURL = canvas.toDataURL('image/png')
   let pdf = new jsPDF('p', 'mm', 'a4'); // A4 size page of PDF
   var position = 0;
-  pdf.addImage(contentDataURL, 'PNG', 0, position, 2*imgWidth, 2*imgHeight)
+  pdf.addImage(contentDataURL, 'PNG', 0, position, 1.5*imgWidth, 1.5*imgHeight)
   // pdf.setTextColor(255,0,0);
   // pdf.setFillColor(135, 124,45,0);
   // pdf.setFontType("italic");
