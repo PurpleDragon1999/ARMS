@@ -34,7 +34,7 @@ class Employee {
     return this.Model.deleteOne({ _id: id });
   }
 
-  async getByCriteria(criteria) {
+  async getByCriteria(criteria={}) {
     return this.Model.findOne(criteria);
   }
 }
