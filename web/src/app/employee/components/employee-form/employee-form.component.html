@@ -1,24 +1,18 @@
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Launch demo modal
-</button>
-
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+<div class="modal-dialog" role="document">
     <div class="modal-content" >
       <div class="modal-header">
-        <h3 class="modal-title" id="exampleModalLabel"><b>Employee Form --- {{ formType | uppercase }}</b></h3>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <h5 class="modal-title" id="exampleModalLabel">Employee Form --- {{ formType | uppercase }}</h5>
+        <button type="button" (click)="modalClose()" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         
         <!-- <p >Employee Form --- {{ formType | uppercase }}</p> -->
-        <form (ngSubmit)="handleSubmit(form.value)" class="forms-sample" #form="ngForm" novalidate>
+        <form (ngSubmit)="handleSubmit(form.value)" *ngIf="data as employee" class="forms-sample" #form="ngForm" novalidate>
           <!-- {{ form.value | json }}{{ form.invalid }}{{ email.errors | json }} -->
-          <div class="form-group ">
-            <label for="name" class="label">Name</label>
+          <div class="form-group">
+            <label for="name">Name</label>
             <input name="name" [ngModel]="employee?.name" type="text" required class="form-control" id="name" placeholder="Name" #name="ngModel" [ngClass]="{ 'is-invalid': form.submitted && name.invalid }">
             <div *ngIf="form.submitted && name.errors?.required" class="invalid-feedback">
               <div><i class="mdi mdi-alert-outline"></i>Name is required</div>
@@ -73,60 +67,10 @@
                   <div><i class="mdi mdi-alert-outline"></i>Employee Id is required</div>
                 </div>
             </div>
-
-          </div>          
-          <button type="submit" *ngIf="formType !== 'read'" class="btn btn-gradient-primary mr-2 button">{{ formType | titlecase }}</button>
-          <!-- </div> -->
-
-          <!-- <div class="form-group">
-            <label for="gender">Gender</label>
-            <select name="gender" [ngModel]="employee?.gender" required class="form-control" id="gender" #gender="ngModel" [ngClass]="{ 'is-invalid': form.submitted && gender.invalid }">
-              <option [value]="null" disabled>Select Gender</option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-            </select>
-            <div *ngIf="form.submitted && gender.errors?.required" class="invalid-feedback">
-              <div><i class="mdi mdi-alert-outline"></i>Gender is required</div>
-            </div>
-          </div> -->
-          
+          </div>
           <button type="submit" [disabled]="form.invalid" *ngIf="formType !== 'read'" class="btn btn-gradient-primary mr-2">{{ formType | titlecase }}</button>
-          <button class="btn btn-light">Cancel</button>
-
+          <button class="btn btn-light" (click)="modalClose()">Cancel</button>
         </form>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary " data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
     </div>
   </div>
-</div>
-
-<div class="col-12 grid-margin stretch-card">
-  <div class="card">
-    <div class="card-body">
-      <h4 class="card-title">Create using csv file</h4>
-      <form name="form" #f="ngForm" novalidate>
-        <div class="form-group">
-          <label>File<span class="asterick">*</span></label>
-          <div class="input-group col-xs-12">              
-            <input type="file" name="csv" class="form-control file-upload-info"  ng2FileSelect [uploader]="uploader"  ngModel #csv="ngModel" [ngClass]="{ 'is-invalid': f.submitted && csv.invalid }"
-            required>
-            <label for="files" class="file-upload-browse btn btn-gradient-primary">Upload file</label>
-            <div *ngIf="f.submitted && csv.invalid" class="invalid-feedback">
-              <div *ngIf="csv.errors.required"><i class="mdi mdi-alert-outline"></i>File of type .csv is required</div>
-            </div>
-          </div>
-          <div class="progress mt-3" style="height: 1.5rem">
-            <div class="progress-bar btn btn-gradient-primary" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }">
-              <label>{{uploadProgress}}%</label>
-            </div>
-          </div>
-        </div>            
-        <button type="submit" class="btn btn-gradient-primary mr-2" (click)=" uploader.uploadAll(); f.resetForm()">Create</button>
-        <button class="btn btn-light" (click)="f.resetForm(); uploader.clearQueue()">Cancel</button>
-      </form>
-    </div>
-  </div>
-</div>
