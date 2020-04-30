@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewChecked } from '@angular/core';
 import html2canvas from 'html2canvas';  
 import * as jsPDF from 'jspdf'
 import { Router, ActivatedRoute, Params } from "@angular/router";
@@ -28,10 +28,11 @@ export class JdPdfComponent implements OnInit {
     )
     .subscribe((res) => {
       this.jdObject = res.payload.data;
-      console.log(this.jdObject);
+      this.convertToPDF();
     });
-    this.convertToPDF()
+     
   }
+  
   public convertToPDF()
   {
   var data = document.getElementById('content');
@@ -45,7 +46,7 @@ export class JdPdfComponent implements OnInit {
   const contentDataURL = canvas.toDataURL('image/png')
   let pdf = new jsPDF('p', 'mm', 'a4'); // A4 size page of PDF
   var position = 0;
-  pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
+  pdf.addImage(contentDataURL, 'PNG', 0, position, 2*imgWidth, 2*imgHeight)
   pdf.save("jobdescription"+this.jdObject.jdId+'.pdf'); // Generated PDF
   });
   }
