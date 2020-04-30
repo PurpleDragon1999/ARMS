@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AppServicesService } from "./../services/app-services.service";
 import { ViewChild, ElementRef, AfterViewInit } from "@angular/core";
@@ -19,12 +19,11 @@ export class JdFormComponent implements OnInit {
     private router: Router
   ) {}
 
-  @ViewChild("jdId", { static: true }) jdId: ElementRef;
-  @ViewChild("jdTitle", { static: false }) jdTitle: ElementRef;
+  @ViewChild("jobId", { static: false }) jobId: ElementRef;
+  @ViewChild("jobTitle", { static: false }) jobTitle: ElementRef;
   @ViewChild("openingDate", { static: false }) openingDate: ElementRef;
   @ViewChild("closingDate", { static: false }) closingDate: ElementRef;
-  @ViewChild("jobProfileDescription", { static: false })
-  jobProfileDescription: ElementRef;
+  @ViewChild("jobDescription", { static: false }) jobDescription: ElementRef;
   @ViewChild("skills", { static: false }) skills: ElementRef;
   @ViewChild("jobType", { static: false }) jobType: ElementRef;
   @ViewChild("eligibilityCriteria", { static: false })
@@ -33,18 +32,33 @@ export class JdFormComponent implements OnInit {
   @ViewChild("salary", { static: false }) salary: ElementRef;
   @ViewChild("vacancies", { static: false }) vacancies: ElementRef;
   @ViewChild("content", { static: true }) content: ElementRef;
-  jdForm: FormGroup;
+  res: any;
+  eligibilityCriteriaOptions: String;
+  locationOptions: String;
+  jobTypeOptions: String;
+  jobListingForm: FormGroup;
   submitted = false;
   jdFormObject: jobDescription;
   data: jobDescription;
+  jdForm: FormGroup;
+  selectChangeHandlerEligibilityCriteria(event: any) {
+    this.eligibilityCriteriaOptions = event.target.value;
+  }
 
+  selectChangeHandlerLocation(event: any) {
+    this.locationOptions = event.target.value;
+  }
+
+  selectChangeHandlerJobType(event: any) {
+    this.jobTypeOptions = event.target.value;
+  }
   ngOnInit() {
-    this.jdForm = this.formBuilder.group({
-      jdId: ["", Validators.required],
-      jdTitle: ["", Validators.required],
+    this.jobListingForm = this.formBuilder.group({
+      jobId: ["", Validators.required],
+      jobTitle: ["", Validators.required],
       openingDate: ["", Validators.required],
       closingDate: ["", Validators.required],
-      jobProfileDescription: ["", Validators.required],
+      jobDescription: ["", Validators.required],
       skills: ["", Validators.required],
       jobType: ["", Validators.required],
       eligibilityCriteria: ["", Validators.required],
@@ -54,25 +68,26 @@ export class JdFormComponent implements OnInit {
     });
   }
   get formControls() {
-    return this.jdForm.controls;
+    return this.jobListingForm.controls;
   }
+  error: any = { isError: false, errorMessage: "" };
 
   onSubmit() {
     this.submitted = true;
+    this.jdFormData();
     // stop here if form is invalid
-    if (this.jdForm.invalid) {
+    if (this.jobListingForm.invalid) {
       return;
     }
-    // alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.jdForm.value))
   }
 
   jdFormData() {
     this.jdFormObject = {
-      jdId: `CYGJID${this.jdId.nativeElement.value}`,
-      jdTitle: this.jdTitle.nativeElement.value,
+      jdId: `CYGJID${this.jobId.nativeElement.value}`,
+      jdTitle: this.jobTitle.nativeElement.value,
       openingDate: this.openingDate.nativeElement.value,
       closingDate: this.closingDate.nativeElement.value,
-      jobProfileDescription: this.jobProfileDescription.nativeElement.value,
+      jobProfileDescription: this.jobDescription.nativeElement.value,
       skills: this.skills.nativeElement.value,
       jobType: this.jobType.nativeElement.value,
       eligibilityCriteria: this.eligibilityCriteria.nativeElement.value,
@@ -80,7 +95,16 @@ export class JdFormComponent implements OnInit {
       salary: this.salary.nativeElement.value,
       vacancies: this.vacancies.nativeElement.value,
     };
-
+    if (
+      new Date(this.jobListingForm.controls["closingDate"].value) <
+      new Date(this.jobListingForm.controls["openingDate"].value)
+    ) {
+      this.error = {
+        isError: true,
+        errorMessage: "Closing Date cannot be before Opening date",
+      };
+      return;
+    }
     this._service.jdFormData(this.jdFormObject).subscribe((res) => {
       this.data = res.payload.data;
       this.router.navigate(["/jd-pdf", this.data.jdId]);
