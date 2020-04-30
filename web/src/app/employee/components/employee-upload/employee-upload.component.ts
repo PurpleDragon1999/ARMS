@@ -1,4 +1,4 @@
-import { ModalComponent } from "../../../modal/modal.component";
+import { ModalComponent } from "../../../reusable-components/modal/modal.component";
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { FileUploader } from "ng2-file-upload";
 import { NgbModal, NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";

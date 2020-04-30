@@ -1,7 +1,8 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { IResponse } from "src/app/models/response.interface";
-import { ModalComponent } from "../../../modal/modal.component";
+import { ModalComponent } from "../../../reusable-components/modal/modal.component";
 import { EmployeeService } from "../../employee.service";
 import { IEmployee } from "../../models/employee.interface";
 
@@ -12,16 +13,13 @@ import { IEmployee } from "../../models/employee.interface";
 })
 export class EmployeeFormComponent {
   @Output()
-  closeModal: EventEmitter<void> = new EventEmitter();
+  closeModal: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   @Input()
   data: IEmployee;
 
   @Input()
   formType: IDataModal["formType"];
-
-  uploadProgress: Number = 0;
-  isNotAllowedUploadType: Boolean = true;
 
   constructor(
     private employeeService: EmployeeService,
@@ -37,13 +35,13 @@ export class EmployeeFormComponent {
     this.employeeService.createEmployee(employee).subscribe(
       (res: IResponse) => {
         const modalRef = this.modalService.open(ModalComponent);
-        modalRef.componentInstance.message = res;
-        this.modalClose();
+        modalRef.componentInstance.message = res.payload.message;
+        this.modalClose(true);
       },
-      (error) => {
+      (error: HttpErrorResponse) => {
+
         const modalRef = this.modalService.open(ModalComponent);
         modalRef.componentInstance.message = error.error;
-        this.modalClose();
       }
     );
   }
@@ -54,17 +52,16 @@ export class EmployeeFormComponent {
       (res: IResponse) => {
         const modalRef = this.modalService.open(ModalComponent);
         modalRef.componentInstance.message = res;
-        this.modalClose();
+        this.modalClose(true);
       },
-      (error) => {
+      (error: HttpErrorResponse) => {
         const modalRef = this.modalService.open(ModalComponent);
         modalRef.componentInstance.message = error.error;
-        this.modalClose();
       }
     );
   }
 
-  modalClose() {
-    this.closeModal.emit();
+  modalClose(rerender: boolean): void {
+    this.closeModal.emit(rerender);
   }
 }

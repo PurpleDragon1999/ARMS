@@ -1,8 +1,8 @@
-import { ModalComponent } from './modal/modal.component';
+import { ModalComponent } from './reusable-components/modal/modal.component';
 import { EmployeeFormComponent } from "./employee/components/employee-form/employee-form.component";
 import { EmployeeUploadComponent } from "./employee/components/employee-upload/employee-upload.component"
 import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { ListComponent } from './list/list.component';
+import { ListComponent } from './reusable-components/list/list.component';
 import { EmployeeService } from "./employee/employee.service";
 import { EmployeeComponent } from "./employee/containers/employee/employee.component";
 import { BrowserModule } from '@angular/platform-browser';
@@ -21,7 +21,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ScheduleInterviewComponent } from './schedule-interview/schedule-interview.component';
 import { HrComponent } from './hr/hr.component';
 import { CandidateFormComponent } from './candidate-form/candidate-form.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FileSelectDirective } from 'ng2-file-upload';
 import { ProgressHttpModule } from 'angular-progress-http';
 import { MsalModule, MsalInterceptor } from '@azure/msal-angular';
@@ -60,10 +60,10 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     HttpClientModule,
     NgbModule,
     ChartsModule,
-    FormsModule, 
+    FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    ProgressHttpModule, 
+    ProgressHttpModule,
     MsalModule.forRoot({
       auth: {
         clientId: '4d31e348-bc89-40d2-821c-f65942084ae3',
@@ -73,16 +73,17 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
       cache: {
         cacheLocation: 'localStorage',
         storeAuthStateInCookie: isIE, // set to true for IE 11
-      }, 
+      },
     },
-    {
-      popUp: !isIE,
-      consentScopes: ["user.read", "openid", "profile"],
-      unprotectedResources: [],
-      protectedResourceMap: [
-        ["https://graph.microsoft.com/v1.0/me", ["user.read"]],
-      ],
-      extraQueryParameters: {}}),
+      {
+        popUp: !isIE,
+        consentScopes: ["user.read", "openid", "profile"],
+        unprotectedResources: [],
+        protectedResourceMap: [
+          ["https://graph.microsoft.com/v1.0/me", ["user.read"]],
+        ],
+        extraQueryParameters: {}
+      }),
   ],
   providers: [
     NgbActiveModal,
@@ -95,4 +96,4 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
   entryComponents: [EmployeeFormComponent, ModalComponent, EmployeeUploadComponent],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

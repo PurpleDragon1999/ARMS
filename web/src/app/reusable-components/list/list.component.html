@@ -3,13 +3,13 @@
     <div class="card-body">
       <div ngbDropdown class="addEmployee">
         <button class="btn btn-outline-primary" id="addOption" ngbDropdownToggle>
-          <i class="mdi mdi-account-plus"></i>Add Employee/s
+          <i class="mdi mdi-account-plus"></i>Add {{ title | titlecase }}(s)
         </button>
         <div ngbDropdownMenu>
           <button ngbDropdownItem class="btn btn-outline-primary btn-fw" (click)="openModal('create')">
-            <i class="mdi mdi-account-plus"></i> Add Employee
+            <i class="mdi mdi-account-plus"></i> Add {{ title | titlecase }}
           </button>
-          <button ngbDropdownItem class="btn btn-outline-primary btn-fw" (click)="openUpload()">
+          <button ngbDropdownItem class="btn btn-outline-primary btn-fw" (click)="openFileUploadModal()">
             <i class="mdi mdi-account-plus"></i> Add through file upload
           </button>
         </div>
@@ -55,15 +55,16 @@
     <div class="card paginationDiv">
       <div>
         <ul *ngIf="pager?.pages && pager?.pages.length" class="pagination">
-          <li [ngClass]="{ disabled: pager.currentPage === 1 }" class="page-item previous-item">
-            <a (click)="setPage(pager.currentPage - 1)" class="page-link"><i class="mdi mdi-chevron-left arrow"></i></a>
+          <li [ngClass]="{ disabled: pager?.currentPage === 1 }" class="page-item previous-item">
+            <a (click)="setPageForPagination(pager?.currentPage - 1)" class="page-link"><i
+                class="mdi mdi-chevron-left arrow"></i></a>
           </li>
-          <li *ngFor="let page of pager.pages" [ngClass]="{ active: pager.currentPage === page }"
+          <li *ngFor="let page of pager?.pages" [ngClass]="{ active: pager?.currentPage === page }"
             class="page-item number-item">
-            <a (click)="setPage(page)" class="page-link">{{ page }}</a>
+            <a (click)="setPageForPagination(page)" class="page-link">{{ page }}</a>
           </li>
           <li [ngClass]="{ disabled: pager.currentPage === pager.totalPages }" class="page-item next-item">
-            <a (click)="setPage(pager.currentPage + 1)" class="page-link"><i
+            <a (click)="setPageForPagination(pager.currentPage + 1)" class="page-link"><i
                 class="mdi mdi-chevron-right arrow"></i></a>
           </li>
         </ul>
@@ -92,13 +93,13 @@
             </div>
           </form>
         </div>
-        <div class="mt-4 userCard" *ngFor="let employee of data">
+        <div class="mt-4 userCard" *ngFor="let entry of data">
           <ngb-accordion [closeOthers]="true" activeIds="collapse-1">
             <ngb-panel id="collapse-2" class="accordion">
               <ng-template ngbPanelHeader let-opened="opened">
                 <div class="d-flex align-items-center justify-content-between">
-                  <h5 class="m-0 p-3">{{ employee[columns[0]] }}</h5>
-                  <!-- <a (click)="openModal('update', employee)" ><i class="mdi mdi-grease-pencil"></i></a>
+                  <h5 class="m-0 p-3">{{ entry[columns[0]] }}</h5>
+                  <!-- <a (click)="openModal('update', entry)" ><i class="mdi mdi-grease-pencil"></i></a>
                       <a href=""><i class="mdi mdi-delete"></i></a>  -->
                   <button ngbPanelToggle class="btn btn-link p-0">
                     <i class="mdi mdi-plus"></i>
@@ -113,7 +114,7 @@
                     </b>
                   </div>
                   <div>
-                    {{ employee[columnName] }}
+                    {{ entry[columnName] }}
                   </div>
                 </div>
               </ng-template>
@@ -124,7 +125,7 @@
 
       <div class="card paginationDiv">
         <div>
-          <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+          <!-- <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
             <li [ngClass]="{ disabled: pager.currentPage == 1 }" class="page-item previous-item">
               <a (click)="setPage(pager.currentPage - 1)" class="page-link"><i
                   class="mdi mdi-chevron-left arrow"></i></a>
@@ -137,7 +138,7 @@
               <a (click)="setPage(pager.currentPage + 1)" class="page-link"><i
                   class="mdi mdi-chevron-right arrow"></i></a>
             </li>
-          </ul>
+          </ul> -->
         </div>
       </div>
     </div>
