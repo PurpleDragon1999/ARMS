@@ -145,7 +145,7 @@ class Base {
           { email: queryObject },
         ],
       });
-
+      console.log(searchedRecords);
       if (searchedRecords.length != 0) {
         res.status(200).send({
           success: true,
