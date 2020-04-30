@@ -91,13 +91,16 @@
                 </div>
                 <input
                   #input
-                  (keyup)="search(input.value)"
+                  (input)="search(input.value)"
                   type="text"
                   class="form-control bg-transparent "
                   placeholder="Search "
                 />
               </div>
             </form>
+          </div>
+          <div>
+            <small class="p-2" *ngIf="data.length==0"> No Match Found</small>
           </div>
           <div class="mt-4 userCard" *ngFor="let employee of data">
             <ngb-accordion [closeOthers]="true" activeIds="collapse-1">
