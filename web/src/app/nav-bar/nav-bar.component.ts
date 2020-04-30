@@ -1,4 +1,5 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
+import { MsalService } from '@azure/msal-angular';
 
 @Component({
   selector: 'app-nav-bar',
@@ -10,7 +11,8 @@ export class NavBarComponent implements OnInit {
   classNameForToggle: string = "";
   flag: number = 0;
 
-  constructor(private renderer: Renderer2) { }
+  constructor(private renderer: Renderer2,
+              private authService:MsalService) { }
 
   ngOnInit() {
   }
@@ -31,6 +33,9 @@ export class NavBarComponent implements OnInit {
       this.renderer.removeClass(document.body, "sidebar-icon-only");
       this.flag = 0;
     }
+  }
+  logout() {
+    this.authService.logout();
   }
 
 }
