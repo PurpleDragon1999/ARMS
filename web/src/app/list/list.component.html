@@ -135,7 +135,7 @@
   
         <div class="card paginationDiv">
           <div>
-            <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+            <ul *ngIf="pager?.pages && pager?.pages.length" class="pagination">
               <li
                 [ngClass]="{ disabled: pager.currentPage == 1 }"
                 class="page-item previous-item"
