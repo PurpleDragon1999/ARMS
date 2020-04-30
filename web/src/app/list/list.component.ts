@@ -35,7 +35,6 @@ export class ListComponent {
   constructor(private modalService: NgbModal) {}
 
   openModal(formType: IDataModal["formType"], data: IDataModal["data"]) {
-    console.log(formType, "formType", data, "data");
     this.emitOpenModal.emit({ formType, data });
   }
 
@@ -44,21 +43,16 @@ export class ListComponent {
   }
 
   setPage(page) {
-    console.log(page, "set page called");
     // this.valueChange.emit(this.page);
     this.getEmployees(page);
-    console.log(this.getEmployees, "my funcccccccccccc");
-    console.log(this.pager, "pager");
   }
 
   search(character) {
-    console.log(character, this.searchEmployee, "character");
     // this.searchEmployee(character);
     this.emitSearch.emit(character);
   }
 
   deleteEntry(entry: any) {
-    console.log(entry, "entry");
     this.delete.emit(entry);
   }
 }
