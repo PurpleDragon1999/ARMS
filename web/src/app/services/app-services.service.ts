@@ -39,7 +39,15 @@ headers: this.createHeader
 
   createInterview(user: ICreate): Observable<HttpResponse<any>>{
     return this.http.post<any>(`${USER_DOMAIN}/api/interview`, user, { ...this.options, observe: 'response' });
-  }   
+}   
+
+  getAllJobs(): Observable<HttpResponse<any>>{
+    return this.http.get<any>(`${USER_DOMAIN}/api/jobDescription`, this.options);
+}
+
+deleteJd(jobObjId): Observable<HttpResponse<any>>{
+  return this.http.delete<any>(`${USER_DOMAIN}/api/jobDescription/${jobObjId}`, this.options);
+}  
 
   jdFormData(jdFormObject): Observable<any>{
     return this.http.post<any>(`${USER_DOMAIN}/api/jobDescription`, jdFormObject, {... this.headers, observe: 'response'});

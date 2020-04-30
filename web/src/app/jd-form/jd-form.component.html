@@ -54,10 +54,11 @@
                   <label for="eligibilityCriteria">Eligibility criteria </label>
                   <select class="form-control form-control-lg" placeholder="Criteria" #eligibilityCriteria
                   formControlName="eligibilityCriteria" [ngClass]="{ 'is-invalid': submitted && formControls.eligibilityCriteria.errors }">
-                    <option>High School</option>
-                    <option>Bachelor's</option>
-                    <option>Master's</option>
-                    <option>Doctoral</option>
+                    <option>{{assessmentSelfCS}}</option>
+                    <option value="High School">High School</option>
+                    <option value="High School">Bachelor's</option>
+                    <option value="High School">Master's</option>
+                    <option value="High School">Doctoral</option>
                   </select>
                   <!-- <input type="text" class="form-control" placeholder="Criteria" #eligibilityCriteria maxlength="900"
                   formControlName="eligibilityCriteria" [ngClass]="{ 'is-invalid': submitted && formControls.eligibilityCriteria.errors }"/> -->

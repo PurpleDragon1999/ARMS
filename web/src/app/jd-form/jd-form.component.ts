@@ -16,7 +16,7 @@ export class JdFormComponent implements OnInit {
     private _service: AppServicesService,
     private router:Router) { }
   
-
+ 
   @ViewChild('jobId', {static: false}) jobId: ElementRef;
   @ViewChild('jobTitle', {static: false}) jobTitle: ElementRef;
   @ViewChild('openingDate', {static: false}) openingDate: ElementRef;
@@ -30,7 +30,7 @@ export class JdFormComponent implements OnInit {
   @ViewChild('vacancies', {static: false}) vacancies: ElementRef;
 
   res:any;
-
+  assessmentSelfTS: String;
   jobListingForm: FormGroup;
   submitted = false;
 
@@ -63,6 +63,7 @@ export class JdFormComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     this.jobListingFormData();
+    console.log(this.assessmentSelfTS);
     // stop here if form is invalid
     if (this.jobListingForm.invalid) {
         return;
@@ -82,7 +83,7 @@ export class JdFormComponent implements OnInit {
       //  jobType: this.jobType.
       //  eligibilityCriteria: this.eligibilityCriteria.nativeElement.value,
       //  location: this.location.nativeElement.value,
-       salary: this.salary.nativeElement.value,
+      //  salary: this.salary.nativeElement.value,
       //  noOfVacancies: this.vacancies.nativeElement.value
     }
     console.log(jobListingFormObject)
