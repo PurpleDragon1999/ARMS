@@ -1,8 +1,8 @@
+import { IEmployee } from './models/employee.interface';
+import { IResponse } from '../models/response.interface';
 import { Injectable } from "@angular/core";
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { IEmployee } from './models/employee.interface';
-import { IResponse } from '../models/response.interface';
 import { HOST } from '../config/apiHost.config';
 
 const EMPLOYEE_API = `${HOST}/api/employee`;

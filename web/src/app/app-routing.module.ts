@@ -1,8 +1,6 @@
-
+import { JdListComponent } from './jd-list/jd-list.component';
 import { ScheduleInterviewComponent } from './schedule-interview/schedule-interview.component';
-
 import { CandidateFormComponent } from './candidate-form/candidate-form.component';
-
 import { JdFormComponent } from './jd-form/jd-form.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -11,6 +9,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CreateInterviewComponent } from './create-interview/create-interview.component';
 import { HrInterviewAssessementComponent } from './hr-interview-assessement/hr-interview-assessement.component';
+import { HrComponent } from './hr/hr.component';
+
 import { AdminFormComponent } from './employee/containers/employee-form/employee-form.component';
 import{JdPdfComponent}from'./jd-form/jd-pdf/jd-pdf.component'
 const routes: Routes = [
@@ -32,9 +32,12 @@ const routes: Routes = [
       {
         path:"dashboard", component: DashboardComponent
       },
-      // {
-      // path: "hr", component: HrComponent
-      // }
+      {
+        path:"jobs", component: JdListComponent
+      },
+      {
+        path:"hr/dashboard", component: HrComponent
+      }
     ]
   },
   { path: 'employee/:formType', 

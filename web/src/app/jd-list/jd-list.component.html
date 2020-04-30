@@ -1,1 +1,34 @@
-<p>jd-list works!</p>
+<div class="main-panel">
+    <div class="page-header">
+        <h3 class="page-title">Job Listing
+        </h3>
+        <button class="add btn btn-gradient-light font-weight-bold float-right" id="addbtn" routerLink="/form">Add<i class="mdi mdi-file-plus"></i></button>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 grid-margin stretch-card" *ngFor="let job of jobsList">
+            <div class="card">
+                <div class="card-body">
+
+                    <h4 class="font-weight-normal mb-2">Job Description ID: {{job.jdId}} 
+                        <i class="mdi mdi-delete float-right" (click)="deleteJD(job._id)"></i>
+                        <i class="mdi mdi-download float-right"></i>
+                        <i class="mdi mdi-pencil float-right"></i>
+
+                    </h4>
+
+                    <h3 class="mb-3">{{job.jdTitle}}
+                    </h3>
+
+                    <h6 class="font-weight-normal">Opening Date : {{job.openingDate | date}}
+                    </h6>
+
+                    <h6 class="font-weight-normal" [style.visibility]="(job.closingDate) ? 'visible':'hidden'">
+                        Closing Date : {{job.closingDate | date}}
+                    </h6>
+                    <label class="badge badge-gradient-danger float-right mb-0">CLOSED</label>
+                </div>
+            </div>
+        </div> 
+    </div>
+</div>
