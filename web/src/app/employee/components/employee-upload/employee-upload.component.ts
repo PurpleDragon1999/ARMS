@@ -53,7 +53,10 @@ export class EmployeeUploadComponent implements OnInit {
     };
   }
 
-  modalClose() {
-    if (this.activeModal) this.activeModal.dismiss();
+
+
+  modalClose(){
+    if(this.activeModal)
+      this.activeModal.dismiss()
   }
 }
