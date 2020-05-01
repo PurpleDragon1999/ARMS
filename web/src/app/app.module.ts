@@ -7,7 +7,7 @@ import { EmployeeService } from "./employee/employee.service";
 import { EmployeeComponent } from "./employee/containers/employee/employee.component";
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ChartsModule } from 'ng2-charts';
+// import { ChartsModule } from 'ng2-charts';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -62,9 +62,13 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     AppRoutingModule,
     HttpClientModule,
     NgbModule,
+<<<<<<< HEAD
     ChartsModule,
     FormsModule,
     ReactiveFormsModule,
+=======
+    // ChartsModule,
+>>>>>>> 252c1cf88788ac89aae0ba3ee1329c08b95aa364
     HttpClientModule,
     ProgressHttpModule,
     MsalModule.forRoot({
