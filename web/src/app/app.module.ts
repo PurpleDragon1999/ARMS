@@ -65,8 +65,6 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     HttpClientModule,
     NgbModule,
     ChartsModule,
-    FormsModule,
-    ReactiveFormsModule,
     HttpClientModule,
     ProgressHttpModule,
     MsalModule.forRoot({

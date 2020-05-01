@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit {
     this.http.get(GRAPH_ENDPOINT).toPromise()
       .then(profile => {
           this.profile = profile;
-          console.log(profile);
+          
       });
   }
   
@@ -72,7 +72,7 @@ export class LoginComponent implements OnInit {
     }
     const idToken = window.localStorage.getItem("msal.idtoken");
 
-    this.loginService.checkPermissions(idToken).subscribe(
+     this.loginService.checkPermissions(idToken).subscribe(
       res => {
         if (res != null) {
           window.localStorage.setItem(
@@ -80,7 +80,7 @@ export class LoginComponent implements OnInit {
             `${res.payload.data["x-auth-token"]}`
           );
           let role = this.loginService.tokenDecoder().role;
-          if(role == "admin"){
+          if(role == "admin"||role=="Admin"){
             this._router.navigate(['/admin']);
           }
           else if(role == "hr"){
@@ -94,7 +94,7 @@ export class LoginComponent implements OnInit {
 
 
       }, err => {
-        this.message = err.payload.message
+        this.message = err.error.payload.message
       }
     )
 
