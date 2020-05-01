@@ -14,7 +14,7 @@
                <span class="input-group-append btn btn-gradient-primary span">
                  CYGJID
                </span>
-               <input type="number" class="form-control" id="jobId" #jobId placeholder="Job ID" maxlength="4"
+               <input type="text" class="form-control" id="jobId" #jobId placeholder="Job ID" maxlength="4"
                  (input)="jobId.value=$event.target.value.toUpperCase()" formControlName="jobId"
                  [ngClass]="{ 'is-invalid': submitted && formControls.jobId.errors }" />
                <div *ngIf="submitted && formControls.jobId.errors" class="invalid-feedback">
