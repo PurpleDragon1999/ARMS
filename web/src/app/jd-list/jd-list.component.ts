@@ -33,7 +33,8 @@ export class JdListComponent implements OnInit {
   }
 
   datecheck(closingDate){
-    if(closingDate <= Date.now())
+    let currentDate = new Date().toISOString();
+    if(closingDate <= currentDate)
       return 1;
     else return 0;
   }

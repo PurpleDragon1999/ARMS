@@ -39,9 +39,11 @@
           >
             Closing Date : {{ job.closingDate | date }}
           </h6>
-          <label [style.visibility]="(datecheck(job.closingDate)==1) ? 'visible':'hidden'" class="badge badge-gradient-danger float-right mb-0"
-            >CLOSED</label
-          >
+          
+          <label *ngIf="datecheck(job.closingDate)==1" class="badge badge-gradient-danger float-right mb-0"
+            >CLOSED</label>
+          <label *ngIf="datecheck(job.closingDate)==0" class="badge badge-gradient-success float-right mb-0"
+            >OPEN</label>
         </div>
       </div>
     </div>
