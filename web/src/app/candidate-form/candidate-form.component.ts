@@ -12,11 +12,7 @@ interface ICandidate {
   appliedFor: string;
 }
 
-<<<<<<< HEAD
-const URL = "http://localhost:3000/api/candidate";
-=======
 const URL = 'http://localhost:3000/api/candidate'
->>>>>>> 252c1cf88788ac89aae0ba3ee1329c08b95aa364
 
 @Component({
   selector: "app-candidate-form",
@@ -26,7 +22,7 @@ const URL = 'http://localhost:3000/api/candidate'
 export class CandidateFormComponent implements OnInit {
   isSubmitted: Boolean = false;
 
-  constructor(private service: AppServicesService) {}
+  constructor(private service: AppServicesService) { }
 
   public uploader: FileUploader = new FileUploader({
     url: URL,
@@ -37,7 +33,7 @@ export class CandidateFormComponent implements OnInit {
     this.uploader.onAfterAddingFile = (file) => {
       file.withCredentials = false;
     };
-    this.uploader.onCompleteItem = (item: any, status: any) => {};
+    this.uploader.onCompleteItem = (item: any, status: any) => { };
   }
 
   model: any = {};

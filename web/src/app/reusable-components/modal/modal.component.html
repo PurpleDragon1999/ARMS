@@ -5,7 +5,7 @@
         <h2 *ngIf="message.success === true"><b>Successful!</b></h2>
         <h2 *ngIf="message.success === false"><b>Error alert!</b></h2>
         <p>{{ message.payload.message }}.</p>
-        <button class=" btn btn-outline-primary btn-fw" (click)="modalClose(true)">OK</button>
+        <button class=" btn btn-outline-primary btn-fw" (click)="simpleCloseModal()">OK</button>
       </div>
 
       <div *ngIf="message.success === 'request'" class="modal-body text-center">

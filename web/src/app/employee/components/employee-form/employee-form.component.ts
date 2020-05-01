@@ -52,6 +52,7 @@ export class EmployeeFormComponent {
       (res: IResponse) => {
         const modalRef = this.modalService.open(ModalComponent);
         modalRef.componentInstance.message = res;
+        console.log('i was here');
         this.modalClose(true);
       },
       (error: HttpErrorResponse) => {
