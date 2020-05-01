@@ -46,6 +46,10 @@ export class ModalComponent implements OnInit {
     );
   }
 
+  simpleCloseModal() {
+    this.activeModal.dismiss();
+  }
+
   modalClose(rerender: boolean): void {
     console.log(rerender);
     this.closeModal.emit(rerender);

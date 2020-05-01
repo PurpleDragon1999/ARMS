@@ -23,7 +23,7 @@ const upload = require('../middlewares/csvUpload');
 
 module.exports = (app) => {
   //Employee
-  app.get("/api/employeeBySearch/:searchBy", (req, res)=>controller.employee.searchRecord(req, res));
+  // app.get("/api/employeeBySearch/:searchBy", (req, res)=>controller.employee.searchRecord(req, res));
   app.post("/api/employee", (req, res) => controller.employee.save(req, res));
   
   app.get("/api/employeeSearch", (req, res) =>
