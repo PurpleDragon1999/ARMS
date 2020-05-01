@@ -141,15 +141,13 @@ class Base {
   // }
 
   async searchRecord(req, res) {
-    console.log('I was here');
     try {
       let queryObject = {
         $regex: ".*^" + req.query.character + ".*",
         $options: "i",
       };
-      console.log(req.query);
+      
       const searchedRecords = await this.model.getAll({ name: queryObject });
-      console.log(searchedRecords);
       req.body.searchedRecords = searchedRecords;
       return this.getPaginatedResult(req, res);
     } catch (err) {
