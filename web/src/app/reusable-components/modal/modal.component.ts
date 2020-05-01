@@ -47,6 +47,7 @@ export class ModalComponent implements OnInit {
   }
 
   modalClose(rerender: boolean): void {
+    console.log(rerender);
     this.closeModal.emit(rerender);
   }
 }

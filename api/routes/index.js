@@ -4,16 +4,21 @@ const upload = require("../middlewares/csvUpload");
 module.exports = (app) => {
   //Employee
   app.post("/api/employee", (req, res) => controller.employee.save(req, res));
-  app.get("/api/employee/:id", (req, res) => controller.employee.get(req, res));
+  
+  app.get("/api/employeeSearch", (req, res) =>
+    controller.employee.searchRecord(req, res)
+  );
+
   app.get("/api/employee", (req, res) =>
     controller.employee.getPaginatedResult(req, res)
   );
-  app.get("/api/employee/search", (req, res) =>
-    controller.employee.searchRecord(req, res)
-  );
+  
   app.put("/api/employee/:id", (req, res) =>
     controller.employee.modify(req, res)
   );
+
+  app.get("/api/employee/:id", (req, res) => controller.employee.get(req, res));
+
   app.delete("/api/employee/:id", (req, res) =>
     controller.employee.remove(req, res)
   );

@@ -1,89 +1,81 @@
 <div class="col-lg-12 stretch-card desktopView">
   <div class="card">
-    <div class="card-body">
-      <div ngbDropdown class="addEmployee">
-        <button class="btn btn-outline-primary" id="addOption" ngbDropdownToggle>
-          <i class="mdi mdi-account-plus"></i>Add {{ title | titlecase }}(s)
-        </button>
-        <div ngbDropdownMenu>
-          <button ngbDropdownItem class="btn btn-outline-primary btn-fw" (click)="openModal('create')">
-            <i class="mdi mdi-account-plus"></i> Add {{ title | titlecase }}
-          </button>
-          <button ngbDropdownItem class="btn btn-outline-primary btn-fw" (click)="openFileUploadModal()">
-            <i class="mdi mdi-account-plus"></i> Add through file upload
-          </button>
-        </div>
-      </div>
+    <div class="card-body">       
+      
 
-      <div class="search-field d-md-block">
-        <form class="d-flex align-items-center h-100" action="#">
-          <div class="input-group">
-            <div class="input-group-prepend bg-transparent card">
-              <i class="card-body input-group-text border-0 mdi mdi-magnify"></i>
-            </div>
-            <input #searchInput (input)="search(searchInput.value)" type="text"
-              class="form-control bg-transparent border-0" placeholder="Search " />
+      <div class="itemsDiv">
+          <div class="search-field  d-md-block ">
+              <form class="d-flex align-items-center h-100" action="#">
+              <div class="input-group ">
+                  <div class="input-group-prepend bg-transparent card">
+                  <i class=" card-body input-group-text mdi mdi-magnify"></i>
+                  </div>
+                  <input  #searchInput (input)="search(searchInput.value)" type="text" class="form-control bg-transparent " placeholder="Search ">
+              </div>
+              </form>
           </div>
-        </form>
+          <div ngbDropdown class="addEmployee">  
+              <button class="btn btn-outline-primary" 
+                  id="addOption" ngbDropdownToggle><i class="mdi mdi-account-plus"></i>Add {{ title | titlecase }}(s)
+              </button>
+              <div ngbDropdownMenu>
+                <button ngbDropdownItem  class="btn btn-outline-primary btn-fw" (click)="openModal('create')"><i class="mdi mdi-account-plus"></i> Add {{ title | titlecase }}</button>
+                <button ngbDropdownItem class="btn btn-outline-primary btn-fw" (click)="openFileUploadModal()"><i class="mdi mdi-account-plus"></i> Add through file upload</button>
+              </div>
+          </div>
       </div>
-      <table class="table table-hover">
+      <table class="table table-striped">
         <thead>
           <tr>
-            <th *ngFor="let columnName of columns; let i = index">
-              {{ columnName | uppercase }}
-            </th>
+            <th *ngFor = "let columnName of columns; let i = index">{{columnName | uppercase}}</th>
           </tr>
         </thead>
         <tbody>
-          <small class="p-2" *ngIf="data.length == 0"> No Match Found</small>
+          <div>
+              <small class="p-2" *ngIf="data.length==0"> No Match Found</small>
+          </div>
           <tr *ngFor="let entry of data">
-            <td *ngFor="let columnName of columns">
+            <td *ngFor="let columnName of columns;">
               {{ entry[columnName] }}
             </td>
-            <!-- {{employee["_id"]}} -->
-            <td>
-              <a (click)="openModal('update', entry)"><i class="mdi mdi-grease-pencil"></i></a>
-            </td>
-            <td>
-              <a (click)="deleteEntry(entry)"><i class="mdi mdi-delete"></i></a>
-            </td>
+            <td ><a (click)="openModal('update', entry)"><i class="mdi mdi-pencil"></i></a></td>
+            <td><a (click)="deleteEntry(entry)"><i class="mdi mdi-delete"></i></a> </td>
           </tr>
         </tbody>
       </table>
+      
     </div>
-
+    
     <div class="card paginationDiv">
-      <div>
-        <ul *ngIf="pager?.pages && pager?.pages.length" class="pagination">
-          <li [ngClass]="{ disabled: pager?.currentPage === 1 }" class="page-item previous-item">
-            <a (click)="setPageForPagination(pager?.currentPage - 1)" class="page-link"><i
-                class="mdi mdi-chevron-left arrow"></i></a>
-          </li>
-          <li *ngFor="let page of pager?.pages" [ngClass]="{ active: pager?.currentPage === page }"
-            class="page-item number-item">
-            <a (click)="setPageForPagination(page)" class="page-link">{{ page }}</a>
-          </li>
-          <li [ngClass]="{ disabled: pager.currentPage === pager.totalPages }" class="page-item next-item">
-            <a (click)="setPageForPagination(pager.currentPage + 1)" class="page-link"><i
-                class="mdi mdi-chevron-right arrow"></i></a>
-          </li>
-        </ul>
-      </div>
-    </div>
+      <div >
+    <ul *ngIf="pager?.pages && pager?.pages.length" class="pagination">
+      
+      <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item previous-item">
+        <a (click)="setPageForPagination(pager.currentPage - 1)"  class="page-link"><i class="mdi mdi-chevron-left arrow"></i></a>
+      </li>
+      <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}" class="page-item number-item">
+        <a  (click)="setPageForPagination(page)"  class="page-link">{{page}}</a>
+      </li>
+      <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item next-item">
+        <a (click)="setPageForPagination(pager.currentPage + 1)" class="page-link"><i class="mdi mdi-chevron-right arrow"></i></a>
+      </li>
+    </ul>
   </div>
+    </div>
+  </div>  
 </div>
 
 <div class="row mobileView">
   <!-- <div class="col-lg-6 grid-margin stretch-card">
     <div class="card"> -->
-      <div class="card-body">
+      <div class="card-body justify-content-between">
         <div ngbDropdown class="addEmployee addMobile">  
           <button class="btn btn-outline-primary" 
               id="addOption" ngbDropdownToggle><i class="mdi mdi-account-plus"></i>Add {{ title | titlecase }}(s)
           </button>
           <div ngbDropdownMenu>
             <button ngbDropdownItem  class="btn btn-outline-primary btn-fw" (click)="openModal('create')"><i class="mdi mdi-account-plus"></i>Add {{ title | titlecase }} </button>
-            <button ngbDropdownItem class="btn btn-outline-primary btn-fw" (click)="openUpload()"><i class="mdi mdi-account-plus"></i> Add through file upload</button>
+            <button ngbDropdownItem class="btn btn-outline-primary btn-fw" (click)="openFileUploadModal()"><i class="mdi mdi-account-plus"></i> Add through file upload</button>
           </div>
       </div>
         <div class="search-field d-md-block">
@@ -156,7 +148,7 @@
               [ngClass]="{ disabled: pager.currentPage == 1 }"
               class="page-item previous-item"
             >
-              <a (click)="setPage(pager.currentPage - 1)" class="page-link"
+              <a (click)="setPageForPagination(pager.currentPage - 1)" class="page-link"
                 ><i class="mdi mdi-chevron-left arrow"></i
               ></a>
             </li>
@@ -165,13 +157,13 @@
               [ngClass]="{ active: pager.currentPage === page }"
               class="page-item number-item"
             >
-              <a (click)="setPage(page)" class="page-link">{{ page }}</a>
+              <a (click)="setPageForPagination(page)" class="page-link">{{ page }}</a>
             </li>
             <li
               [ngClass]="{ disabled: pager.currentPage == pager.totalPages }"
               class="page-item next-item"
             >
-              <a (click)="setPage(pager.currentPage + 1)" class="page-link"
+              <a (click)="setPageForPagination(pager.currentPage + 1)" class="page-link"
                 ><i class="mdi mdi-chevron-right arrow"></i
               ></a>
             </li>
