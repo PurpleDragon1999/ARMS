@@ -31,4 +31,10 @@ export class JdListComponent implements OnInit {
   downloadPdf(jdId) {
     this.router.navigate(["/jd-pdf", jdId]);
   }
+
+  datecheck(closingDate){
+    if(closingDate <= Date.now())
+      return 1;
+    else return 0;
+  }
 }

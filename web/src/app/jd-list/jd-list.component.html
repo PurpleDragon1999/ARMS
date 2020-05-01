@@ -15,10 +15,10 @@
       <div class="card">
         <div class="card-body">
           <h4 class="font-weight-normal mb-2">
-            Job Description ID: {{ job.jdId }}
+            Job ID: {{ job.jdId }}
             <i
               class="mdi mdi-delete float-right"
-              (click)="deleteJD(job._id)"
+              (click)="deleteJd(job._id)"
             ></i>
             <i
               class="mdi mdi-download float-right"
@@ -39,7 +39,7 @@
           >
             Closing Date : {{ job.closingDate | date }}
           </h6>
-          <label class="badge badge-gradient-danger float-right mb-0"
+          <label [style.visibility]="(datecheck(job.closingDate)==1) ? 'visible':'hidden'" class="badge badge-gradient-danger float-right mb-0"
             >CLOSED</label
           >
         </div>
