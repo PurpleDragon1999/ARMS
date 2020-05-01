@@ -14,8 +14,45 @@ import { EmployeeFormComponent } from './employee/components/employee-form/emplo
 import { EmployeeComponent } from './employee/containers/employee/employee.component';
 import { JdPdfComponent } from './jd-form/jd-pdf/jd-pdf.component'
 import { HrComponent } from './hr/hr.component';
+import { AppNavBarComponent } from './nav-bar/nav-bar.component';
+import { RoleGuardService } from './utilities/role-guard.service';
 
 const routes: Routes = [
+  { path: "", redirectTo: 'login', pathMatch: 'full'},
+  { path: "login", component: LoginComponent },
+  { path: "admin", component: AppNavBarComponent, canActivate: [RoleGuardService], data: {role: "admin"}, children: [
+    {
+      path: "", redirectTo: "home", pathMatch: "full"
+    },
+    {
+      path: "home", component: HrComponent
+    },
+    {
+      path: "employee", component: EmployeeComponent
+    }
+  ]},
+  { path: "hr", component: AppNavBarComponent, canActivate: [RoleGuardService], data: {role: "hr"}, children: [
+    {
+      path: "", redirectTo: "home", pathMatch: "full"
+    },
+    {
+      path: "home", component: HrComponent
+    },
+    {
+      path: "job-desc", component: JdListComponent
+    },
+    {
+      path: "job-desc/new", component: JdFormComponent
+    }
+  ]},
+  { path: "user", component: AppNavBarComponent, canActivate: [RoleGuardService], data: {role: "user"}, children: [
+    {
+      path: "", redirectTo: "home", pathMatch: "full"
+    },
+    {
+      path: "home", component: HrComponent
+    }
+  ]},
   { path: "list", component: ListComponent },
   { path: "scedule-interview", component: ScheduleInterviewComponent },
   { path: "candidate", component: CandidateFormComponent },

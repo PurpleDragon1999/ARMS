@@ -15,15 +15,15 @@
       
       <ul class="navbar-nav navbar-nav-right">
         
-        <li class="nav-item nav-profile dropdown">
-          <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+        <li class="nav-item nav-profile">
+          <a class="nav-link">
             
             <div class="nav-profile-img">
               <img src="../../assets/images/customers-icon-3.png" alt="image">
             </div>
             
             <div class="nav-profile-text">
-              <p class="mb-1 text-black">Shubham Sharma</p>
+              <p class="mb-1 text-black">{{name}}</p>
             
             </div>
           </a>
@@ -51,43 +51,43 @@
       
       <ul class="nav">
         
-        <li class="nav-item nav-profile">
-          <a href="#" class="nav-link">
+        <li class="nav-item nav-profile" routerLink="profile">
+          <a class="nav-link">
 
             <div class="nav-profile-image">
               <img src="../../assets/images/customers-icon-3.png" alt="profile">
             </div>
             
             <div class="nav-profile-text d-flex flex-column">
-              <span class="font-weight-bold mb-2">David Grey. H</span>
-              <span class="text-secondary text-small">Project Manager</span>
+              <span class="font-weight-bold mb-2">{{name}}</span>
+              <span class="text-secondary text-small">{{role | uppercase}}</span>
             </div>
 
           </a>
         </li>
 
-        <li class="nav-item">
-          <a class="nav-link" href="#">
-            <span class="menu-title">Dashboard</span>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['home']">
+            <span class="menu-title">Home</span>
             <i class="fas fa-home menu-icon"></i>
           </a>
         </li>
+
+        <li class="nav-item" *ngIf="hrBool" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['job-desc']">
+            <span class="menu-title">Job Descriptions</span>
+            <i class="fas fa-file-alt menu-icon"></i>
+          </a>
+        </li>        
         
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/employee']">
+        <li class="nav-item" *ngIf="adminBool" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['employee']">
             <span  class="menu-title">Employees</span>
             <i class="fas fa-users menu-icon"></i>
           </a>
         </li>
-        
-        <li class="nav-item">
-          <a class="nav-link" href="#">
-            <span class="menu-title">Add Employee</span>
-            <i class="fas fa-user-plus menu-icon"></i>
-          </a>
-        </li>
 
-        <li class="nav-item ">
+        <li class="nav-item d-lg-none">
           <a class="nav-link" href="#">
             <span class="menu-title"(click)="logout()">Log Out</span>
             <i class="fas fa-sign-out-alt menu-icon"></i>

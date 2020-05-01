@@ -1,3 +1,4 @@
+import { RoleGuardService } from './utilities/role-guard.service';
 import { ModalComponent } from './reusable-components/modal/modal.component';
 import { EmployeeFormComponent } from "./employee/components/employee-form/employee-form.component";
 import { EmployeeUploadComponent } from "./employee/components/employee-upload/employee-upload.component"
@@ -46,6 +47,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     HrInterviewAssessementComponent,
     AppNavBarComponent,
     DashboardComponent,
+    ScheduleInterviewComponent,
     ListComponent,
     EmployeeComponent,
     EmployeeUploadComponent,

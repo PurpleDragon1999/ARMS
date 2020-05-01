@@ -5,6 +5,7 @@ import { Router, ActivatedRoute, Params } from "@angular/router";
 import { switchMap } from "rxjs/operators";
 import {jobDescription} from '../../models/jobDescription.interface'
 import{AppServicesService} from '../../services/app-services.service'
+
 @Component({
   selector: 'app-jd-pdf',
   templateUrl: './jd-pdf.component.html',
@@ -29,7 +30,7 @@ export class JdPdfComponent implements OnInit {
     )
     .subscribe((res) => {
       this.jdObject = res.payload.data;
-     
+      this.convertToPDF();
     });
      
   }
