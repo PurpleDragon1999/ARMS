@@ -146,10 +146,9 @@ class Base {
         $regex: ".*^" + req.query.character + ".*",
         $options: "i",
       };
+      
       const searchedRecords = await this.model.getAll({ name: queryObject });
-
       req.body.searchedRecords = searchedRecords;
-
       return this.getPaginatedResult(req, res);
     } catch (err) {
       res.status(500).send({
@@ -166,7 +165,6 @@ class Base {
       const recordList =
         req.body.searchedRecords || (await this.model.getAll());
       const page = parseInt(req.query.page) || 1;
-
       const pageSize = 5;
       const pager = await pagination.paginate(
         recordList.length,
