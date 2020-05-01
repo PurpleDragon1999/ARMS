@@ -62,7 +62,7 @@ export class JdPdfComponent implements OnInit {
   
   }
   navigation(){
-    this.router.navigate(["navbar/jobs"]);
+    this.router.navigate(["/hr/job-desc"]);
   }
 
 }
