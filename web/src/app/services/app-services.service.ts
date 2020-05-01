@@ -1,3 +1,4 @@
+  
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { HttpClient, HttpResponse, HttpHeaders, HttpParams } from '@angular/common/http';
@@ -32,12 +33,12 @@ headers: this.createHeader
 
   //Regarding tokens
   getToken(): string {
-    return localStorage.getItem('');
+    return localStorage.getItem('x-auth-token');
   }
 
   tokenDecoder(): any {
     const helper = new JwtHelperService();
-    return helper.decodeToken(localStorage.getItem(''));
+    return helper.decodeToken(this.getToken());
   }
   // headers: HttpHeaders = new HttpHeaders({
   //   'Content-Type': 'application/json',
@@ -66,8 +67,7 @@ deleteJd(jobObjId): Observable<HttpResponse<any>>{
 }  
 
   jdFormData(jdFormObject): Observable<any>{
-    
-    return this.http.post<any>(`${USER_DOMAIN}/api/jobDescription`, jdFormObject/*, {headers: this.headers, observe: 'response'}*/);
+    return this.http.post<any>(`${USER_DOMAIN}/api/jobDescription`, jdFormObject, { ...this.options, observe: 'response' });
   }
   getJdData(jdId):Observable<any>{
     return this.http.get<any>(`${USER_DOMAIN}/api/jobDescription/${jdId}`)
@@ -77,4 +77,3 @@ deleteJd(jobObjId): Observable<HttpResponse<any>>{
     return this.http.get<any>(`${USER_DOMAIN}/api/jobDescription`,  {headers: this.headers, observe: 'response'} );
   }
 }
-

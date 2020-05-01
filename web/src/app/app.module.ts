@@ -1,3 +1,5 @@
+import { ChartsModule } from 'ng2-charts';
+import { RoleGuardService } from './utilities/role-guard.service';
 import { ModalComponent } from './reusable-components/modal/modal.component';
 import { EmployeeFormComponent } from "./employee/components/employee-form/employee-form.component";
 import { EmployeeUploadComponent } from "./employee/components/employee-upload/employee-upload.component"
@@ -25,6 +27,7 @@ import { MsalModule, MsalInterceptor } from '@azure/msal-angular';import { HTTP_
 import { JdListComponent } from './jd-list/jd-list.component'
 import { JdPdfComponent } from './jd-form/jd-pdf/jd-pdf.component'
 
+
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
 
@@ -42,6 +45,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     HrInterviewAssessementComponent,
     AppNavBarComponent,
     DashboardComponent,
+    ScheduleInterviewComponent,
     ListComponent,
     EmployeeComponent,
     EmployeeUploadComponent,
@@ -58,8 +62,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     AppRoutingModule,
     HttpClientModule,
     NgbModule,
-    FormsModule,
-    ReactiveFormsModule,
+    ChartsModule,
     HttpClientModule,
     ProgressHttpModule,
     MsalModule.forRoot({

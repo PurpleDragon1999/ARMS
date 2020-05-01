@@ -5,6 +5,7 @@ import { Router, ActivatedRoute, Params } from "@angular/router";
 import { switchMap } from "rxjs/operators";
 import {jobDescription} from '../../models/jobDescription.interface'
 import{AppServicesService} from '../../services/app-services.service'
+
 @Component({
   selector: 'app-jd-pdf',
   templateUrl: './jd-pdf.component.html',
@@ -14,6 +15,7 @@ export class JdPdfComponent implements OnInit {
   jdObject:jobDescription;
   constructor(
     private route: ActivatedRoute,
+    private router:Router,
     private appService:AppServicesService
   ) { }
   imageUrl=
@@ -28,15 +30,15 @@ export class JdPdfComponent implements OnInit {
     )
     .subscribe((res) => {
       this.jdObject = res.payload.data;
-     
+      this.convertToPDF();
     });
      
   }
-  
+  obj:any;
   public convertToPDF()
   {
   var data = document.getElementById('content');
-  html2canvas(data).then(canvas => {
+   html2canvas(data).then(canvas => {
   // Few necessary setting options
   var imgWidth = 208;
   var pageHeight = 295;
@@ -51,8 +53,16 @@ export class JdPdfComponent implements OnInit {
   // pdf.setFillColor(135, 124,45,0);
   // pdf.setFontType("italic");
   // pdf.text("Copyright © 2020  CyberGroup . All rights reserved.", 10, 280)
-  pdf.save("jobdescription"+this.jdObject.jdId+'.pdf'); // Generated PDF
+   pdf.save("jobdescription"+this.jdObject.jdId+'.pdf'); // Generated PDF
   });
+  setTimeout(() => {
+    this.navigation();
+  }, 5000); 
+ 
+  
+  }
+  navigation(){
+    this.router.navigate(["navbar/jobs"]);
   }
 
 }
