@@ -22,7 +22,7 @@
                   <button ngbDropdownItem  class="btn btn-outline-primary btn-fw" (click)="openModal('create')"><i class="mdi mdi-account-plus"></i> Add Employee</button>
                   <button ngbDropdownItem class="btn btn-outline-primary btn-fw" (click)="openUpload()"><i class="mdi mdi-account-plus"></i> Add through file upload</button>
                 </div>
-              </div>
+            </div>
         </div>
         <table class="table table-striped">
           <thead>
@@ -31,7 +31,6 @@
             </tr>
           </thead>
           <tbody>
-              <!-- {{data | json}} -->
             <div>
                 <small class="p-2" *ngIf="data.length==0"> No Match Found</small>
             </div>
@@ -68,23 +67,21 @@
   
   
   <div class="row mobileView">
-    <div class="col-lg-6 grid-margin stretch-card">
-      <div class="card">
+    <!-- <div class="col-lg-6 grid-margin stretch-card">
+      <div class="card"> -->
         <div class="card-body">
-          <div class="addEmployee addMobile">
-            <button
-              (click)="openModal('create')"
-              type="button"
-              class="btn btn-outline-primary btn-fw"
-            >
-              <a [routerLink]="['./employee/create']"
-                ><i class="mdi mdi-account-plus"></i
-              ></a>
+          <div ngbDropdown class="addEmployee addMobile">  
+            <button class="btn btn-outline-primary" 
+                id="addOption" ngbDropdownToggle><i class="mdi mdi-account-plus"></i>Add Employee/s
             </button>
-          </div>
+            <div ngbDropdownMenu>
+              <button ngbDropdownItem  class="btn btn-outline-primary btn-fw" (click)="openModal('create')"><i class="mdi mdi-account-plus"></i>Add Employee </button>
+              <button ngbDropdownItem class="btn btn-outline-primary btn-fw" (click)="openUpload()"><i class="mdi mdi-account-plus"></i> Add through file upload</button>
+            </div>
+        </div>
           <div class="search-field d-md-block">
             <form class="d-flex align-items-center h-100" action="#">
-              <div class="input-group">
+              <div class="input-group w-25">
                 <div class="input-group-prepend bg-transparent card">
                   <i
                     class="card-body input-group-text border-0 mdi mdi-magnify"
@@ -94,7 +91,7 @@
                   #input
                   (input)="search(input.value)"
                   type="text"
-                  class="form-control bg-transparent "
+                  class="form-control "
                   placeholder="Search "
                 />
               </div>
@@ -103,17 +100,29 @@
           <div>
             <small class="p-2" *ngIf="data.length==0"> No Match Found</small>
           </div>
-          <div class="mt-4 userCard" *ngFor="let employee of data">
+          <div class="mt-4 userCard" *ngFor="let entry of data">
             <ngb-accordion [closeOthers]="true" activeIds="collapse-1">
               <ngb-panel id="collapse-2" class="accordion">
                 <ng-template ngbPanelHeader let-opened="opened" >
-                <div class="card  cardMobileView">
-                    <div class="d-flex align-items-center justify-content-between">
-                        <h5 class="m-0 p-3">{{ employee[columns[0]] }}</h5>
-                        <button ngbPanelToggle class="btn btn-link p-0">
-                        <i class="mdi mdi-plus"></i>
-                        </button>
-                    </div>
+                <div class="  cardMobileView">
+                        <div class="d-flex justify-content-between">
+                            <div class="d-flex">
+                                <div class="pt-2">
+                                    <img class="nav-profile-img" src="../../assets/images/customers-icon-3.png" 
+                                    alt="image">
+                                </div>
+                                <h5 class="m-0 p-3">{{ entry[columns[0]] }}</h5>
+                            </div>
+                            <div class="d-flex">
+                                <div class="p-3">
+                                    <a class="p-2" (click)="openModal('update', entry)" ><i class="mdi mdi-pencil"></i></a>
+                                    <a class="p-2" (click)="deleteEntry(entry)" ><i class="mdi mdi-delete"></i></a> 
+                                </div >
+                                <button ngbPanelToggle class="btn btn-link p-0">
+                                <i class="mdi mdi-plus"></i>
+                                </button>
+                            </div>
+                        </div>
                 </div>
                 </ng-template>
                 <ng-template ngbPanelContent>
@@ -124,7 +133,7 @@
                       </b>
                     </div>
                     <div>
-                      {{ employee[columnName] }}
+                      {{ entry[columnName] }}
                     </div>
                   </div>
                 </ng-template>
@@ -133,8 +142,8 @@
           </div>
         </div>
   
-        <div class="card paginationDiv">
-          <div>
+        <div class="paginationDiv">
+          
             <ul *ngIf="pager?.pages && pager?.pages.length" class="pagination">
               <li
                 [ngClass]="{ disabled: pager.currentPage == 1 }"
@@ -160,8 +169,8 @@
                 ></a>
               </li>
             </ul>
-          </div>
+    
         </div>
-      </div>
-    </div>
+      <!-- </div>
+    </div> -->
   </div>

@@ -1,4 +1,4 @@
-import { ModalComponent } from './../modal/modal.component';
+//import { ModalComponent } from './../modal/modal.component';
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { EmployeeUploadComponent } from "../employee/components/employee-upload/employee-upload.component";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";

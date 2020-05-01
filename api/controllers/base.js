@@ -290,7 +290,6 @@ class Base {
         }
     }
    
-    
   async getAll(req, res) {
     try {
       const recordList = await this.model.getAll();
