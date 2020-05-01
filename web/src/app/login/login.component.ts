@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { BroadcastService, MsalService } from '@azure/msal-angular';
 import { Logger, CryptoUtils } from 'msal';
@@ -22,7 +23,8 @@ export class LoginComponent implements OnInit {
     private broadcastService: BroadcastService, 
     private authService: MsalService,
     private http: HttpClient,
-    private loginService: LoginService) { }
+    private loginService: LoginService,
+    private _router: Router) { }
 
   ngOnInit() {
     this.isIframe = window !== window.parent && !window.opener;
@@ -77,6 +79,17 @@ export class LoginComponent implements OnInit {
             "x-auth-token",
             `${res.payload.data["x-auth-token"]}`
           );
+          console.log(this.loginService.tokenDecoder());
+          let role = this.loginService.tokenDecoder().role;
+          if(role == "admin"){
+            this._router.navigate(['/admin']);
+          }
+          else if(role == "hr"){
+            this._router.navigate(['/hr']);
+          }
+          else if(role == "interviewer"){
+            this._router.navigate(['/user']);
+          }
         }
         this.message = res.payload.message
 

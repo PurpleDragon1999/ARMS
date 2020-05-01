@@ -33,12 +33,12 @@ headers: this.createHeader
 
   //Regarding tokens
   getToken(): string {
-    return localStorage.getItem('');
+    return localStorage.getItem('x-auth-token');
   }
 
   tokenDecoder(): any {
     const helper = new JwtHelperService();
-    return helper.decodeToken(localStorage.getItem(''));
+    return helper.decodeToken(this.getToken());
   }
   // headers: HttpHeaders = new HttpHeaders({
   //   'Content-Type': 'application/json',
