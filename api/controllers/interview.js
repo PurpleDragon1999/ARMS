@@ -9,8 +9,7 @@ class Interview extends Base{
         super(interviewModel);
     }
 
-
-async create(req, res) {
+  async create(req, res) {
     try {
         const email=req.query.email;
         const jdObj=await jobDescriptionModel.get({_id:req.body.jd});
@@ -32,8 +31,7 @@ async create(req, res) {
         },
       });
     }
-
-}
+  }
 }
 
  module.exports = new Interview();

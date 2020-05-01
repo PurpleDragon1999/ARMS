@@ -105,7 +105,6 @@ export class JdFormComponent implements OnInit {
       return;
     }
     this._service.jdFormData(this.jdFormObject).subscribe((res) => {
-      console.log(res, "response dekho");
       this.data = res.payload.data;
       this.router.navigate(["/jd-pdf", this.data.jdId]);
     });
