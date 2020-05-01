@@ -1,8 +1,9 @@
-import { Component, OnInit } from "@angular/core";
-import { BroadcastService, MsalService } from "@azure/msal-angular";
-import { Logger, CryptoUtils } from "msal";
-const GRAPH_ENDPOINT = "https://graph.microsoft.com/v1.0/me";
-// import {jsonDecoder} from "../utilities/token-decoder.service"
+import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { BroadcastService, MsalService } from '@azure/msal-angular';
+import { Logger, CryptoUtils } from 'msal';
+const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
+
 import { HttpClient } from '@angular/common/http';
 import { LoginService } from '../services/login.service'
 import { analyzeAndValidateNgModules } from '@angular/compiler';
@@ -14,15 +15,16 @@ import { analyzeAndValidateNgModules } from '@angular/compiler';
 export class LoginComponent implements OnInit {
   isIframe = false;
   loggedIn = false;
-  profile: any;
-  message: string;
-  employeeData = {};
-  constructor(
+  profile:any;
+  message:string;
+  employeeData={};
 
-    private broadcastService: BroadcastService,
+  constructor(  
+    private broadcastService: BroadcastService, 
     private authService: MsalService,
     private http: HttpClient,
-    private loginService: LoginService) { }
+    private loginService: LoginService,
+    private _router: Router) { }
 
   ngOnInit() {
     this.isIframe = window !== window.parent && !window.opener;
@@ -46,17 +48,27 @@ export class LoginComponent implements OnInit {
       })
     );
   }
+
   checkAccount() {
     this.loggedIn = !!this.authService.getAccount();
   }
-  loginFunction() {
+
+  getProfile() {
+    this.http.get(GRAPH_ENDPOINT).toPromise()
+      .then(profile => {
+          this.profile = profile;
+          console.log(profile);
+      });
+  }
+  
+  async loginFunction() {
     const isIE =
       window.navigator.userAgent.indexOf("MSIE ") > -1 ||
       window.navigator.userAgent.indexOf("Trident/") > -1;
     if (isIE) {
-      this.authService.loginRedirect();
+      let object = await this.authService.loginRedirect();
     } else {
-      this.authService.loginPopup();
+      let object = await this.authService.loginPopup();
     }
     const idToken = window.localStorage.getItem("msal.idtoken");
 
@@ -67,6 +79,16 @@ export class LoginComponent implements OnInit {
             "x-auth-token",
             `${res.payload.data["x-auth-token"]}`
           );
+          let role = this.loginService.tokenDecoder().role;
+          if(role == "admin"){
+            this._router.navigate(['/admin']);
+          }
+          else if(role == "hr"){
+            this._router.navigate(['/hr']);
+          }
+          else if(role == "interviewer"){
+            this._router.navigate(['/user']);
+          }
         }
         this.message = res.payload.message
 
