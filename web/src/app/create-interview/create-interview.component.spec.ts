@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { CreateInterviewComponent } from './create-interview.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('CreateInterviewComponent', () => {
   let component: CreateInterviewComponent;
@@ -8,7 +10,8 @@ describe('CreateInterviewComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CreateInterviewComponent ]
+      imports:[ ReactiveFormsModule, HttpClientTestingModule, RouterTestingModule],
+      declarations: [CreateInterviewComponent ]
     })
     .compileComponents();
   }));
@@ -22,4 +25,8 @@ describe('CreateInterviewComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  afterEach(() => {
+    TestBed.resetTestingModule();
+  })
 });
