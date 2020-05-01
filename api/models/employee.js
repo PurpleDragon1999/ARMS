@@ -14,8 +14,8 @@ class Employee {
     return this.Model.find(criteria, columns).sort({ name: 1 });
   }
 
-  async get(criteria={}) {
-    return this.Model.findOne(criteria);
+  async get(id) {
+    return this.Model.findOne({ _id: id });
   }
 
   async modify(id, data) {
@@ -34,7 +34,7 @@ class Employee {
     return this.Model.deleteOne({ _id: id });
   }
 
-  async getByCriteria(criteria) {
+  async getByCriteria(criteria={}) {
     return this.Model.findOne(criteria);
   }
 }

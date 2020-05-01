@@ -3,10 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AppServicesService } from './../services/app-services.service';
 import { ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import {Router}from '@angular/router'
-import * as jsPDF from 'jspdf'
 import{jobDescription}from '../models/jobDescription.interface'
-import html2canvas from 'html2canvas';  
-  
 @Component({
   selector: 'app-jd-form',
   templateUrl: './jd-form.component.html',
@@ -86,7 +83,5 @@ export class JdFormComponent implements OnInit {
     });
     
   } 
-  
-
-  
+ 
 }
