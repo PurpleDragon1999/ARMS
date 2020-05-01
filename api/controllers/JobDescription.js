@@ -33,7 +33,7 @@ class JobDescription extends Base {
   // gets a particular JD by job profile name
   async get(req, res) {
     try {
-      const data = await model.jobDescription.get({ _id: req.params.id });
+      const data = await model.jobDescription.get({jdId: req.params.id });
       return res.send({
         success: true,
         payload: {

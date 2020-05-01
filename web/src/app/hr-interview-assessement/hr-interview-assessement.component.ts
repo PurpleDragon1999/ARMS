@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { DynamicGrid } from "../grid.model";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from "@angular/forms";
 
 @Component({
   selector: "app-hr-interview-assessement",

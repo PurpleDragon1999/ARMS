@@ -1,0 +1,36 @@
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Create through file upload</h5>
+        </div>
+        <div class="modal-body">
+
+            <form name="form" #f="ngForm" novalidate>
+                <div class="form-group">
+                    <label>File<span class="asterick">*</span></label>
+                    <div class="input-group col-xs-12">
+                        <input id="file" type="file"
+                            accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                            name="csv" class="form-control file-upload-info" ng2FileSelect [uploader]="uploader" ngModel
+                            #csv="ngModel" [ngClass]="{ 'is-invalid': csv.dirty && csv.invalid }" required>
+                        <label for="file" class="file-upload-browse btn btn-gradient-primary">Upload file</label>
+                        <div *ngIf="csv.dirty && csv.invalid" class="invalid-feedback">
+                            <div *ngIf="csv.errors?.required"><i class="mdi mdi-alert-outline"></i>File of type .csv is
+                                required</div>
+                        </div>
+                    </div>
+                    <div class="progress mt-3" style="height: 1.5rem">
+                        <div class="progress-bar btn btn-gradient-primary" role="progressbar"
+                            [ngStyle]="{ 'width': uploader.progress + '%' }">
+                            <label>{{uploadProgress}}%</label>
+                        </div>
+                    </div>
+                    {{message}}
+                </div>
+                <button class="btn btn-light" (click)="modalClose()">Cancel</button>
+                <button [disabled]="f.invalid" type="submit" class="btn btn-gradient-primary mr-2"
+                    (click)=" uploader.uploadAll(); f.resetForm()">Create</button>
+            </form>
+        </div>
+    </div>
+</div>
