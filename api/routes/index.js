@@ -23,15 +23,19 @@ const upload = require('../middlewares/csvUpload');
 
 module.exports = (app) => {
   //Employee
-  app.get("/api/employeeBySearch/:searchBy", (req, res)=>controller.employee.searchRecord(req, res));
+  // app.get("/api/employeeBySearch/:searchBy", (req, res)=>controller.employee.searchRecord(req, res));
   app.post("/api/employee", (req, res) => controller.employee.save(req, res));
-  app.get("/api/employee/:id", (req, res) => controller.employee.get(req, res));
+  
+  app.get("/api/employeeSearch", (req, res) =>
+    controller.employee.searchRecord(req, res)
+  );
+
   app.get("/api/employee", (req, res) =>
     controller.employee.getPaginatedResult(req, res)
   );
-  app.get("/api/employeeBySearch", (req, res) =>
-    controller.employee.searchRecord(req, res)
-  );
+
+  app.get("/api/employee/:id", (req, res) => controller.employee.get(req, res));
+  
   app.put("/api/employee/:id", (req, res) =>
     controller.employee.modify(req, res)
   );
@@ -62,12 +66,11 @@ module.exports = (app) => {
   app.delete("/api/jobDescription/:id", (req, res) =>
     controller.jobDescription.remove(req, res)
   );
-
   //Routes for Candidate
   app.get("/api/candidates", (req, res) =>
     controller.candidate.getPaginatedResult(req, res)
   );
-  app.get("/api/candidateBySearch/:searchBy", (req, res) =>
+  app.get("/api/candidate/search/:searchBy", (req, res) =>
     controller.candidate.searchRecord(req, res)
   );
 
@@ -75,4 +78,6 @@ module.exports = (app) => {
     controller.login.checkValidEmployee(req, res)
   );
   // app.post('/api/candidate',upload.single('file'), (req,res)=> controller.candidate.uploadDetails(req,res));
+  //login route
+  app.post("/api/checkvalidemployee",controller.login.checkValidEmployee);
 };

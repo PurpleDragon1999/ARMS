@@ -33,4 +33,6 @@ class Interview extends Base{
     }
   }
 }
-module.exports = new Interview();
+
+ module.exports = new Interview();
+

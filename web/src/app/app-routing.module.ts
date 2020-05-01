@@ -53,51 +53,11 @@ const routes: Routes = [
       path: "home", component: HrComponent
     }
   ]},
-  { path: "list", component: ListComponent },
-  { path: "scedule-interview", component: ScheduleInterviewComponent },
-  { path: "candidate", component: CandidateFormComponent },
-  { path: "create-interview", component: CreateInterviewComponent },
-  { path: "form", component: JdFormComponent },
-  { path: "hr/assessement", component: HrInterviewAssessementComponent },
   {
-    path: "", component: LoginComponent
-  },
-  { path: "hr/assessement", component: HrInterviewAssessementComponent },
-  {
-    path: "navbar", children: [
-      {
-        path: "", redirectTo: "dashboard", pathMatch: "full"
-      },
-      {
-        path: "dashboard", component: DashboardComponent
-      },
-      {
-        path: "jobs", component: JdListComponent
-      },
-      {
-        path: "hr/dashboard", component: HrComponent
-      }
-    ]
-  },
-  // { path: 'employee/:formType', 
-  //   children: [
-  //     { path: '', component: EmployeeComponent, pathMatch: 'full' },
-  //     { path: ':employeeId', component: EmployeeComponent }
-  //   ]
-  // },
-  {
-    path: 'employee', pathMatch: 'full',
-    children: [
-      { path: '', component: EmployeeComponent }
-    ]
-  },
-  {
-    path: 'jd-pdf',
-    children: [
+    path: 'jd-pdf', children: [
       { path: ':jdId', component: JdPdfComponent }
     ],
   },
-
 
 ];
 

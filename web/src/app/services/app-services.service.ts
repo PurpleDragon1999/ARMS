@@ -15,19 +15,21 @@ export class AppServicesService {
   headers: HttpHeaders = new HttpHeaders({
     'Content-Type': 'application/json',
     Authorization: localStorage.getItem("Authorization")
-});
-createHeader: HttpHeaders= new HttpHeaders({
+  });
+  
+  createHeader: HttpHeaders= new HttpHeaders({
     'Content-Type': 'application/json'
-});
+  });
 
-header_token: HttpHeaders = new HttpHeaders().set("x-auth-token", localStorage.getItem("x-auth-token"));
+  header_token: HttpHeaders = new HttpHeaders().set("x-auth-token", localStorage.getItem("x-auth-token"));
 
-httpOptions = {
-  headers: this.headers
-};
-options = {
-headers: this.createHeader
-}
+  httpOptions = {
+    headers: this.headers
+  };
+
+  options = {
+    headers: this.createHeader  
+  }
 
   constructor(private http: HttpClient) { }
 
@@ -67,8 +69,7 @@ deleteJd(jobObjId): Observable<HttpResponse<any>>{
 }  
 
   jdFormData(jdFormObject): Observable<any>{
-    
-    return this.http.post<any>(`${USER_DOMAIN}/api/jobDescription`, jdFormObject/*, {headers: this.headers, observe: 'response'}*/);
+    return this.http.post<any>(`${USER_DOMAIN}/api/jobDescription`, jdFormObject, { ...this.options, observe: 'response' });
   }
   getJdData(jdId):Observable<any>{
     return this.http.get<any>(`${USER_DOMAIN}/api/jobDescription/${jdId}`)
