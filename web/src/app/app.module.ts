@@ -1,3 +1,4 @@
+import { ChartsModule } from 'ng2-charts';
 import { RoleGuardService } from './utilities/role-guard.service';
 import { ModalComponent } from './reusable-components/modal/modal.component';
 import { EmployeeFormComponent } from "./employee/components/employee-form/employee-form.component";
@@ -8,12 +9,9 @@ import { EmployeeService } from "./employee/employee.service";
 import { EmployeeComponent } from "./employee/containers/employee/employee.component";
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ChartsModule } from 'ng2-charts';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-// import { AdminComponent } from './employee/admin.component';
-// import { AdminFormComponent } from './employee/containers/employee-form/employee-form.component';
 import { CreateInterviewComponent } from './create-interview/create-interview.component';
 import { JdFormComponent } from './jd-form/jd-form.component';
 import { HrInterviewAssessementComponent } from './hr-interview-assessement/hr-interview-assessement.component';
@@ -25,10 +23,10 @@ import { CandidateFormComponent } from './candidate-form/candidate-form.componen
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FileSelectDirective } from 'ng2-file-upload';
 import { ProgressHttpModule } from 'angular-progress-http';
-import { MsalModule, MsalInterceptor } from '@azure/msal-angular';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { MsalModule, MsalInterceptor } from '@azure/msal-angular';import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { JdListComponent } from './jd-list/jd-list.component'
 import { JdPdfComponent } from './jd-form/jd-pdf/jd-pdf.component'
+
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 

@@ -29,8 +29,7 @@ module.exports = {
   },
   salary: {
     type: Number,
-    minimum: 5000,
-    maximum: 20000,
+
   },
   skills: {
     type: String,
