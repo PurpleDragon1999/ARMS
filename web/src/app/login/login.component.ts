@@ -1,3 +1,4 @@
+import { EnvVarService } from './../utilities/env-var.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { BroadcastService, MsalService } from '@azure/msal-angular';
@@ -24,7 +25,8 @@ export class LoginComponent implements OnInit {
     private authService: MsalService,
     private http: HttpClient,
     private loginService: LoginService,
-    private _router: Router) { }
+    private _router: Router,
+    private _env: EnvVarService) { }
 
   ngOnInit() {
     this.isIframe = window !== window.parent && !window.opener;
@@ -80,13 +82,13 @@ export class LoginComponent implements OnInit {
             `${res.payload.data["x-auth-token"]}`
           );
           let role = this.loginService.tokenDecoder().role;
-          if(role == "admin"||role=="Admin"){
+          if(role == this._env.ADMIN){
             this._router.navigate(['/admin']);
           }
-          else if(role == "hr"){
+          else if(role == this._env.HR){
             this._router.navigate(['/hr']);
           }
-          else if(role == "interviewer"){
+          else if(role == this._env.INTERVIEWER){
             this._router.navigate(['/user']);
           }
         }
