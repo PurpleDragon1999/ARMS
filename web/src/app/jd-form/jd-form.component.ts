@@ -1,9 +1,14 @@
+import { ModalComponent } from '../reusable-components/modal/modal.component';
 import { Component, OnInit ,Output,EventEmitter,} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AppServicesService } from './../services/app-services.service';
 import { ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import {Router}from '@angular/router'
 import{jobDescription}from '../models/jobDescription.interface'
+import html2canvas from 'html2canvas';  
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
+  
 @Component({
   selector: 'app-jd-form',
   templateUrl: './jd-form.component.html',
@@ -13,7 +18,8 @@ export class JdFormComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, 
               private _service: AppServicesService,
-              private router:Router) { }
+              private router:Router,
+              private modalService: NgbModal) { }
 
   
   @ViewChild('jdId', {static: true}) jdId: ElementRef;
@@ -73,15 +79,19 @@ export class JdFormComponent implements OnInit {
        eligibilityCriteria: this.eligibilityCriteria.nativeElement.value,
        location: this.location.nativeElement.value,
        salary: this.salary.nativeElement.value,
-        vacancies: this.vacancies.nativeElement.value,
+      vacancies: this.vacancies.nativeElement.value,
      }
     
     this._service.jdFormData(this.jdFormObject).subscribe(res => {
-         this.data=res.payload.data;
+        const modalRef = this.modalService.open(ModalComponent);
+        modalRef.componentInstance.message = res;
+        this.data=res.payload.data;
         this.router.navigate(["/jd-pdf",this.data.jdId]);
-        
+    },(error) => {
+        const modalRef = this.modalService.open(ModalComponent);
+        modalRef.componentInstance.message = error.error; 
     });
-    
+          
   } 
  
 }
