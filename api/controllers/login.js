@@ -10,7 +10,7 @@ class Login{
   async checkValidEmployee(req,res){
      try{
          const data=jwt_decode(req.body.idToken);
-         const employeeObj=await model.employee.get({email:data.email});
+         const employeeObj=await model.employee.getByCriteria({email:data.email});
          const token = jwt.sign(
             {
               _id: employeeObj._id,

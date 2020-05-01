@@ -28,7 +28,7 @@ export class JdPdfComponent implements OnInit {
     )
     .subscribe((res) => {
       this.jdObject = res.payload.data;
-      this.convertToPDF();
+     
     });
      
   }
@@ -46,7 +46,11 @@ export class JdPdfComponent implements OnInit {
   const contentDataURL = canvas.toDataURL('image/png')
   let pdf = new jsPDF('p', 'mm', 'a4'); // A4 size page of PDF
   var position = 0;
-  pdf.addImage(contentDataURL, 'PNG', 0, position, 2*imgWidth, 2*imgHeight)
+  pdf.addImage(contentDataURL, 'PNG', 0, position, 1.5*imgWidth, 1.5*imgHeight)
+  // pdf.setTextColor(255,0,0);
+  // pdf.setFillColor(135, 124,45,0);
+  // pdf.setFontType("italic");
+  // pdf.text("Copyright © 2020  CyberGroup . All rights reserved.", 10, 280)
   pdf.save("jobdescription"+this.jdObject.jdId+'.pdf'); // Generated PDF
   });
   }

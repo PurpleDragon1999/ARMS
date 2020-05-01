@@ -1,12 +1,11 @@
-import { EventEmitter } from "protractor";
-import { Component, OnInit, Input } from "@angular/core";
-import { EmployeeService } from "../../employee.service";
-import { IResponse } from "src/app/models/response.interface";
-import { IEmployee } from "../../models/employee.interface";
+import { Component, Input, OnInit } from "@angular/core";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { EmployeeFormComponent } from "../../components/employee-form/employee-form.component";
 import { EmployeeUploadComponent } from '../../components/employee-upload/employee-upload.component'
-import { ModalComponent } from "src/app/modal/modal.component";
+import { ModalComponent } from "src/app/reusable-components/modal/modal.component";
+import { IResponse } from "src/app/models/response.interface";
+import { EmployeeService } from "../../employee.service";
+import { IEmployee } from "../../models/employee.interface";
 
 @Component({
   selector: "app-employee",
@@ -17,22 +16,18 @@ export class EmployeeComponent implements OnInit {
   employees: IEmployee[] = [];
   columns: Array<String> = [];
   pager: any;
-  alertMessage: string;
-
-  @Input()
-  valueChange: any;
 
   constructor(
     private employeeService: EmployeeService,
     private modalService: NgbModal
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getEmployees();
   }
 
-  getEmployees (page?: number){
-    this.employeeService.getAllEmployees(page).subscribe((res: IResponse) => {
+  getEmployees(page?: string) {
+    this.employeeService.getPaginatedEmployees(page).subscribe((res: IResponse) => {
       if (res.payload.data) {
         this.employees = res.payload.data.dataList;
         this.columns = ["name", "email", "employeeId", "designation", "role"];
@@ -53,7 +48,10 @@ export class EmployeeComponent implements OnInit {
     const modalRef = this.modalService.open(EmployeeFormComponent);
     modalRef.componentInstance.formType = dataModal.formType;
     modalRef.componentInstance.data = dataModal.data;
-    modalRef.componentInstance.closeModal.subscribe(() => {
+    modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+      if (rerender) {
+        this.getEmployees();
+      }
       modalRef.close();
     });
   }
@@ -61,21 +59,29 @@ export class EmployeeComponent implements OnInit {
   deleteEmployee(employee: IEmployee) {
     const modalRef = this.modalService.open(ModalComponent);
     let message = {
-      success : "request",
+      success: "request",
       payload: {
         data: employee
       }
     }
     let deleteFor = "employee";
-    modalRef.componentInstance.message = message; 
-    modalRef.componentInstance.deleteFor = deleteFor;     
-
+    modalRef.componentInstance.message = message;
+    modalRef.componentInstance.deleteFor = deleteFor;
+    modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+      if (rerender) {
+        this.getEmployees();
+      }
+      modalRef.close();
+    });
   }
 
   searchEmployee(character: string) {
     this.employeeService.searchEmployee(character).subscribe((res) => {
-      this.employees = res.payload.data.searchedRecords;
-      this.alertMessage = res.payload.message;
+      this.employees = res.payload.data.dataList;
     });
+  }
+
+  openUpload(): void {
+    this.modalService.open(EmployeeUploadComponent);
   }
 }
