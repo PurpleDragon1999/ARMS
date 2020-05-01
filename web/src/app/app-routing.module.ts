@@ -40,6 +40,9 @@ const routes: Routes = [
     },
     {
       path: "job-desc", component: JdListComponent
+    },
+    {
+      path: "job-desc/new", component: JdFormComponent
     }
   ]},
   { path: "user", component: AppNavBarComponent, canActivate: [RoleGuardService], data: {role: "user"}, children: [

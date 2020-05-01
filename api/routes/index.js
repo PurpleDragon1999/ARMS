@@ -53,14 +53,15 @@ module.exports = (app) => {
   );
 
   //Routes for Job Description
-  //app.post('/api/jobDescription',controller.jobDescription.createJd);
-
-  //Job Description
-  // app.post('/api/jobDescription',controller.jobDescription.createJd);
-  //   app.get("/api/jobDescription", controller.jobDescription.showAllJds);
-  //   app.get("/api/jobDescription/:id", controller.jobDescription.showJd);
-  //   app.put("/api/jobDescription/:id", controller.jobDescription.updateJd);
-  //   app.delete("/api/jobDescription/:id", controller.jobDescription.deleteJd);
+  app.post("/api/jobDescription", controller.jobDescription.save);
+  app.get("/api/jobDescription", (req, res) =>
+    controller.jobDescription.index(req, res)
+  );
+  app.get("/api/jobDescription/:id", controller.jobDescription.get);
+  app.put("/api/jobDescription/:id", controller.jobDescription.modify);
+  app.delete("/api/jobDescription/:id", (req, res) =>
+    controller.jobDescription.remove(req, res)
+  );
 
   //Routes for Candidate
   app.get("/api/candidates", (req, res) =>

@@ -66,21 +66,21 @@
           </a>
         </li>
 
-        <li class="nav-item">
+        <li class="nav-item" routerLinkActive="active">
           <a class="nav-link" [routerLink]="['home']">
             <span class="menu-title">Home</span>
             <i class="fas fa-home menu-icon"></i>
           </a>
         </li>
 
-        <li class="nav-item" *ngIf="hrBool">
+        <li class="nav-item" *ngIf="hrBool" routerLinkActive="active">
           <a class="nav-link" [routerLink]="['job-desc']">
             <span class="menu-title">Job Descriptions</span>
             <i class="fas fa-file-alt menu-icon"></i>
           </a>
         </li>        
         
-        <li class="nav-item" *ngIf="adminBool">
+        <li class="nav-item" *ngIf="adminBool" routerLinkActive="active">
           <a class="nav-link" [routerLink]="['employee']">
             <span  class="menu-title">Employees</span>
             <i class="fas fa-users menu-icon"></i>

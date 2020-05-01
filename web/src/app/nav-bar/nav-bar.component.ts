@@ -52,8 +52,13 @@ export class AppNavBarComponent implements OnInit {
     }
   }
 
+  toggleActive(){
+    
+  }
+
   logout() {
     this.authService.logout();
+    localStorage.removeItem('x-auth-token');
   }
 
 }

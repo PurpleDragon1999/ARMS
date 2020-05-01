@@ -61,14 +61,14 @@ export class LoginComponent implements OnInit {
       });
   }
   
-  loginFunction() {
+  async loginFunction() {
     const isIE =
       window.navigator.userAgent.indexOf("MSIE ") > -1 ||
       window.navigator.userAgent.indexOf("Trident/") > -1;
     if (isIE) {
-      this.authService.loginRedirect();
+      let object = await this.authService.loginRedirect();
     } else {
-      this.authService.loginPopup();
+      let object = await this.authService.loginPopup();
     }
     const idToken = window.localStorage.getItem("msal.idtoken");
 
@@ -79,7 +79,6 @@ export class LoginComponent implements OnInit {
             "x-auth-token",
             `${res.payload.data["x-auth-token"]}`
           );
-          console.log(this.loginService.tokenDecoder());
           let role = this.loginService.tokenDecoder().role;
           if(role == "admin"){
             this._router.navigate(['/admin']);
