@@ -34,8 +34,6 @@ export class AppNavBarComponent implements OnInit {
       this.flag = 0;
     }
   }
-  logout() {
-    this.authService.logout();
-  }
+ 
 
 }

@@ -49,18 +49,18 @@ export class LoginComponent implements OnInit {
   checkAccount() {
     this.loggedIn = !!this.authService.getAccount();
   }
-  loginFunction() {
+ async loginFunction() {
     const isIE =
       window.navigator.userAgent.indexOf("MSIE ") > -1 ||
       window.navigator.userAgent.indexOf("Trident/") > -1;
     if (isIE) {
-      this.authService.loginRedirect();
+     let obj=await this.authService.loginRedirect();
     } else {
-      this.authService.loginPopup();
+     let  obj =await this.authService.loginPopup();
     }
     const idToken = window.localStorage.getItem("msal.idtoken");
 
-    this.loginService.checkPermissions(idToken).subscribe(
+     this.loginService.checkPermissions(idToken).subscribe(
       res => {
         if (res != null) {
           window.localStorage.setItem(
@@ -72,7 +72,7 @@ export class LoginComponent implements OnInit {
 
 
       }, err => {
-        this.message = err.payload.message
+        this.message = err.error.payload.message
       }
     )
 
