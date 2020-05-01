@@ -33,6 +33,7 @@ export class EmployeeComponent implements OnInit {
         this.columns = ["name", "email", "employeeId", "designation", "role"];
         this.pager = res.payload.data.pager;
       }
+
     });
   };
 
@@ -58,14 +59,14 @@ export class EmployeeComponent implements OnInit {
 
   deleteEmployee(employee: IEmployee) {
     const modalRef = this.modalService.open(ModalComponent);
-    let message = {
+    let deleteRequest = {
       success: "request",
       payload: {
         data: employee
       }
     }
     let deleteFor = "employee";
-    modalRef.componentInstance.message = message;
+    modalRef.componentInstance.deleteRequest = deleteRequest;
     modalRef.componentInstance.deleteFor = deleteFor;
     modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
       if (rerender) {
@@ -76,7 +77,7 @@ export class EmployeeComponent implements OnInit {
   }
 
   searchEmployee(character: string) {
-    console.log("inside search func")
+
     this.employeeService.searchEmployee(character).subscribe((res) => {
       this.employees = res.payload.data.dataList;
     });

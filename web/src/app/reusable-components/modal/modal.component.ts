@@ -14,7 +14,11 @@ export class ModalComponent implements OnInit {
   @Output()
   closeModal: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  @Input() message: any;
+  @Input()
+  deleteRequest: any;
+
+  @Input() success: boolean;
+  @Input() message: string;
   @Input() deleteFor: string;
   calleeService: any;
   requestRes: any;
@@ -38,7 +42,6 @@ export class ModalComponent implements OnInit {
     this.calleeService.subscribe(
       (res: IResponse) => {
         this.requestRes = res;
-
       },
       (error: HttpErrorResponse) => {
         this.requestRes = error.error;
@@ -47,15 +50,11 @@ export class ModalComponent implements OnInit {
   }
 
   simpleCloseModal() {
-<<<<<<< HEAD
-    console.log('i was here');
-=======
->>>>>>> 93d6a79af46b245c81eed66a65d689aae631c7b3
     this.activeModal.dismiss();
   }
 
   modalClose(rerender: boolean): void {
-    console.log(rerender);
+
     this.closeModal.emit(rerender);
   }
 }

@@ -23,7 +23,7 @@ import { CandidateFormComponent } from './candidate-form/candidate-form.componen
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FileSelectDirective } from 'ng2-file-upload';
 import { ProgressHttpModule } from 'angular-progress-http';
-import { MsalModule, MsalInterceptor } from '@azure/msal-angular';import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { MsalModule, MsalInterceptor } from '@azure/msal-angular'; import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { JdListComponent } from './jd-list/jd-list.component'
 import { JdPdfComponent } from './jd-form/jd-pdf/jd-pdf.component'
 
@@ -62,11 +62,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     AppRoutingModule,
     HttpClientModule,
     NgbModule,
-<<<<<<< HEAD
     // ChartsModule,
-=======
-    ChartsModule,
->>>>>>> 93d6a79af46b245c81eed66a65d689aae631c7b3
     HttpClientModule,
     ProgressHttpModule,
     MsalModule.forRoot({

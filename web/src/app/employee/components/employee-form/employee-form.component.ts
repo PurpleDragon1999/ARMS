@@ -35,13 +35,14 @@ export class EmployeeFormComponent {
     this.employeeService.createEmployee(employee).subscribe(
       (res: IResponse) => {
         const modalRef = this.modalService.open(ModalComponent);
+        modalRef.componentInstance.success = res.success;
         modalRef.componentInstance.message = res.payload.message;
         this.modalClose(true);
       },
       (error: HttpErrorResponse) => {
-
         const modalRef = this.modalService.open(ModalComponent);
-        modalRef.componentInstance.message = error.error;
+        modalRef.componentInstance.success = error.error.success;
+        modalRef.componentInstance.message = error.error.payload.message;
       }
     );
   }
@@ -51,13 +52,14 @@ export class EmployeeFormComponent {
     this.employeeService.updateEmployee(updatedEmployee).subscribe(
       (res: IResponse) => {
         const modalRef = this.modalService.open(ModalComponent);
-        modalRef.componentInstance.message = res;
-        console.log('i was here');
+        modalRef.componentInstance.success = res.success;
+        modalRef.componentInstance.message = res.payload.message;
         this.modalClose(true);
       },
       (error: HttpErrorResponse) => {
         const modalRef = this.modalService.open(ModalComponent);
-        modalRef.componentInstance.message = error.error;
+        modalRef.componentInstance.success = error.error.success;
+        modalRef.componentInstance.message = error.error.payload.message;
       }
     );
   }

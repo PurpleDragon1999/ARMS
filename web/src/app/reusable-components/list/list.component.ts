@@ -50,7 +50,6 @@ export class ListComponent {
   }
 
   setPageForPagination(page: number) {
-
     this.emitPaginatedResult.emit(page.toString());
   }
 }
