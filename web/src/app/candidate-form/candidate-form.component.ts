@@ -12,7 +12,7 @@ interface ICandidate{
     appliedFor: string
 }
 
-const URL = 'http://localhost:3000/api/candidate';
+const URL = 'http://localhost:3000/api/candidate'
 
 @Component({
   selector: 'app-candidate-form',
