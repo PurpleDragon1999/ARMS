@@ -7,7 +7,7 @@ import { EmployeeService } from "./employee/employee.service";
 import { EmployeeComponent } from "./employee/containers/employee/employee.component";
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ChartsModule } from 'ng2-charts';
+// import { ChartsModule } from 'ng2-charts';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -19,7 +19,7 @@ import { HrInterviewAssessementComponent } from './hr-interview-assessement/hr-i
 import { AppNavBarComponent } from './nav-bar/nav-bar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ScheduleInterviewComponent } from './schedule-interview/schedule-interview.component';
-import { HrComponent } from './hr/hr.component';
+// import { HrComponent } from './hr/hr.component';
 import { CandidateFormComponent } from './candidate-form/candidate-form.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { FileSelectDirective } from 'ng2-file-upload';
@@ -50,7 +50,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     EmployeeComponent,
     EmployeeUploadComponent,
     ModalComponent,
-    HrComponent,
+    // HrComponent,
     JdListComponent,
     ScheduleInterviewComponent,
     JdPdfComponent,
@@ -62,7 +62,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     AppRoutingModule,
     HttpClientModule,
     NgbModule,
-    ChartsModule,
+    // ChartsModule,
     HttpClientModule,
     ProgressHttpModule, 
     MsalModule.forRoot({

@@ -25,7 +25,7 @@
     "@fortawesome/fontawesome-free": "^5.13.0",
     "@ng-bootstrap/ng-bootstrap": "^5.3.1",
     "angular-progress-http": "^1.0.0",
-    "chart.js": "^2.9.3",
+    "html2canvas": "^1.0.0-rc.5",
     "jspdf": "^1.5.3",
     "msal": "^1.2.2",
     "ng-bootstrap": "^1.6.3",
@@ -36,8 +36,7 @@
     "puppeteer": "^3.0.2",
     "rxjs": "~6.4.0",
     "rxjs-compat": "^6.5.5",
-    "tslib": "^1.10.0",
-    "zone.js": "~0.9.1"
+    "zone.js": "^0.10.3"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.803.25",

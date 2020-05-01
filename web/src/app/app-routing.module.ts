@@ -13,7 +13,7 @@ import { HrInterviewAssessementComponent } from './hr-interview-assessement/hr-i
 import { EmployeeFormComponent } from './employee/components/employee-form/employee-form.component';
 import { EmployeeComponent } from './employee/containers/employee/employee.component';
 import { JdPdfComponent } from './jd-form/jd-pdf/jd-pdf.component'
-import { HrComponent } from './hr/hr.component';
+// import { HrComponent } from './hr/hr.component';
 
 const routes: Routes = [
   { path:"list", component:ListComponent},
@@ -36,10 +36,10 @@ const routes: Routes = [
       },
       {
         path:"jobs", component: JdListComponent
-      },
-      {
-        path:"hr/dashboard", component: HrComponent
       }
+      // {
+      //   path:"hr/dashboard", component: HrComponent
+      // }
     ]
   },
   // { path: 'employee/:formType', 
