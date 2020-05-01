@@ -1,4 +1,5 @@
 # Action to test angular app
+# It will run all .spec files
 name: Ng Test
 
 on: 
