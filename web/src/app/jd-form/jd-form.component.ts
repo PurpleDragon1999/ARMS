@@ -7,6 +7,8 @@ import {Router}from '@angular/router'
 import{jobDescription}from '../models/jobDescription.interface'
 import html2canvas from 'html2canvas';  
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { HttpErrorResponse } from '@angular/common/http';
+import { IResponse } from "src/app/models/response.interface";
 
   
 @Component({
@@ -82,12 +84,13 @@ export class JdFormComponent implements OnInit {
       vacancies: this.vacancies.nativeElement.value,
      }
     
-    this._service.jdFormData(this.jdFormObject).subscribe(res => {
+    this._service.jdFormData(this.jdFormObject).subscribe((res: IResponse )=> {
         const modalRef = this.modalService.open(ModalComponent);
         modalRef.componentInstance.message = res;
+        console.log(res)
         this.data=res.payload.data;
         this.router.navigate(["/jd-pdf",this.data.jdId]);
-    },(error) => {
+    },(error: HttpErrorResponse) => {
         const modalRef = this.modalService.open(ModalComponent);
         modalRef.componentInstance.message = error.error; 
     });

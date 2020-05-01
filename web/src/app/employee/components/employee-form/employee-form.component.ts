@@ -34,13 +34,11 @@ export class EmployeeFormComponent {
   createEmployee(employee: IEmployee): void {
     this.employeeService.createEmployee(employee).subscribe(
       (res: IResponse) => {
-        console.log(res);
         const modalRef = this.modalService.open(ModalComponent);
-        modalRef.componentInstance.message = res.payload.message;
+        modalRef.componentInstance.message = res;
         this.modalClose(true);
       },
       (error: HttpErrorResponse) => {
-        console.log(error,"!!!!!!!!!!!!!!!!!!!!!!!!", error.error)
         const modalRef = this.modalService.open(ModalComponent);
         modalRef.componentInstance.message = error.error;
       }

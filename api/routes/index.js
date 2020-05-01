@@ -35,7 +35,7 @@ module.exports = (app) => {
   //app.post('/api/jobDescription',controller.jobDescription.createJd);
 
   //Job Description
-  // app.post('/api/jobDescription',controller.jobDescription.createJd);
+  app.post('/api/jobDescription',(req,res) => controller.jobDescription.save);
   //   app.get("/api/jobDescription", controller.jobDescription.showAllJds);
   //   app.get("/api/jobDescription/:id", controller.jobDescription.showJd);
   //   app.put("/api/jobDescription/:id", controller.jobDescription.updateJd);
