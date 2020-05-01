@@ -57,8 +57,7 @@ const routes: Routes = [
   { path: "scedule-interview", component: ScheduleInterviewComponent },
   { path: "candidate", component: CandidateFormComponent },
   { path: "create-interview", component: CreateInterviewComponent },
-  { path: "form", component: JdFormComponent },
-  { path: "hr/assessement", component: HrInterviewAssessementComponent },
+  { path: "hr/assessement", component:HrInterviewAssessementComponent  },
   {
     path: "", component: LoginComponent
   },
@@ -72,7 +71,10 @@ const routes: Routes = [
         path: "dashboard", component: DashboardComponent
       },
       {
-        path: "jobs", component: JdListComponent
+        path:"jobs/new", component: JdFormComponent
+      },
+      {
+        path:"jobs", component: JdListComponent
       },
       {
         path: "hr/dashboard", component: HrComponent
