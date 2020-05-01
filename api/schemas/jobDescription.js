@@ -19,8 +19,7 @@ module.exports = {
     default: Date.now,
   },
   closingDate: {
-    type: Date,
-    required: true,
+    type: Date
   },
   vacancies: {
     type: Number,
