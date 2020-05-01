@@ -5,19 +5,19 @@ const jwt = require("jsonwebtoken");
 
 
 class Login{
-  constructor(){}
+   constructor(){}
 
   async checkValidEmployee(req,res){
      try{
          const data=jwt_decode(req.body.idToken);
-         const employeeObj=await model.employee.get({email:data.email});
+         const employeeObj=await model.employee.getByCriteria({email:data.email});
          const token = jwt.sign(
             {
               _id: employeeObj._id,
               empId: employeeObj.employeeId,
               name: employeeObj.name,
               role: employeeObj.role,
-              email:employeeObj.email
+              email: employeeObj.email
             },
             config.get("jwtPrivateKey"),
             { expiresIn: 86400 }
@@ -26,12 +26,12 @@ class Login{
             res.status(200).send({
                 success:true,
                    payload:{
-                     message:"This employee exists in our DB",
+                     message:"Employee exists in database",
                      data:{
                         "x-auth-token":token
                      }
                   }
-           })
+            })
         }else{
            res.status(401).send({
               success:true,

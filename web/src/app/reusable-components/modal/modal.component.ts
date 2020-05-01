@@ -47,11 +47,15 @@ export class ModalComponent implements OnInit {
   }
 
   simpleCloseModal() {
+<<<<<<< HEAD
     console.log('i was here');
+=======
+>>>>>>> 93d6a79af46b245c81eed66a65d689aae631c7b3
     this.activeModal.dismiss();
   }
 
   modalClose(rerender: boolean): void {
+    console.log(rerender);
     this.closeModal.emit(rerender);
   }
 }
