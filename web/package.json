@@ -33,6 +33,7 @@
     "ng2-charts": "^2.3.0",
     "ng2-file-upload": "^1.4.0",
     "ngx-toaster": "^1.0.1",
+    "puppeteer": "^3.0.2",
     "rxjs": "~6.4.0",
     "rxjs-compat": "^6.5.5",
     "tslib": "^1.10.0",

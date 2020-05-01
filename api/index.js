@@ -10,6 +10,11 @@ app.use(cors({origin: '*'}));
 
 require('./routes/index')(app);
 
+app.get('/ignition',(req, res)=>{
+    res.json('App is alive and kicking!!')
+})
 app.listen(3000, () =>{
     console.log("Listening port 3000");
 });
+
+module.exports = app

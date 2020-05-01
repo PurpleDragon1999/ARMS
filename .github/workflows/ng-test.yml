@@ -1,0 +1,31 @@
+# Action to test angular app
+name: Ng Test
+
+on: 
+  push:
+    branches:
+      - develop
+
+jobs:
+      
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
+    steps:
+    - name: Checkout
+      uses: actions/checkout@master
+
+    - name: Install dependencies
+      working-directory: ./web
+      run: npm install
+        
+    - name: Node ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+        
+    - name: Test the project
+      working-directory: ./web
+      run: npm run test
