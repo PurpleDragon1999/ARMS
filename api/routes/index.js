@@ -62,7 +62,6 @@ module.exports = (app) => {
   app.delete("/api/jobDescription/:id", (req, res) =>
     controller.jobDescription.remove(req, res)
   );
-
   //Routes for Candidate
   app.get("/api/candidates", (req, res) =>
     controller.candidate.getPaginatedResult(req, res)
@@ -75,4 +74,6 @@ module.exports = (app) => {
     controller.login.checkValidEmployee(req, res)
   );
   // app.post('/api/candidate',upload.single('file'), (req,res)=> controller.candidate.uploadDetails(req,res));
+  //login route
+  app.post("/api/checkvalidemployee",controller.login.checkValidEmployee);
 };
