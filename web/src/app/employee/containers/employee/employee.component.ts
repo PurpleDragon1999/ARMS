@@ -1,11 +1,12 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { NgbModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
 import { EmployeeFormComponent } from "../../components/employee-form/employee-form.component";
 import { EmployeeUploadComponent } from '../../components/employee-upload/employee-upload.component'
 import { ModalComponent } from "src/app/reusable-components/modal/modal.component";
 import { IResponse } from "src/app/models/response.interface";
 import { EmployeeService } from "../../employee.service";
 import { IEmployee } from "../../models/employee.interface";
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: "app-employee",
@@ -46,7 +47,7 @@ export class EmployeeComponent implements OnInit {
       dataModal.data = {};
     }
 
-    const modalRef = this.modalService.open(EmployeeFormComponent);
+    const modalRef: NgbModalRef = this.modalService.open(EmployeeFormComponent);
     modalRef.componentInstance.formType = dataModal.formType;
     modalRef.componentInstance.data = dataModal.data;
     modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
@@ -58,21 +59,23 @@ export class EmployeeComponent implements OnInit {
   }
 
   deleteEmployee(employee: IEmployee) {
-    const modalRef = this.modalService.open(ModalComponent);
-    let deleteRequest = {
-      success: "request",
-      payload: {
-        data: employee
-      }
-    }
-    let deleteFor = "employee";
-    modalRef.componentInstance.deleteRequest = deleteRequest;
-    modalRef.componentInstance.deleteFor = deleteFor;
+    const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
+
+    modalRef.componentInstance.shouldConfirm = true;
+
     modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
-      if (rerender) {
-        this.getEmployees();
-      }
       modalRef.close();
+    });
+    modalRef.componentInstance.emitPerformRequest.subscribe(() => {
+      this.employeeService.deleteEmployee(employee._id).subscribe((res: IResponse) => {
+        this.getEmployees();
+        modalRef.componentInstance.success = res.success;
+        modalRef.componentInstance.message = res.payload.message;
+      }, (error: HttpErrorResponse) => {
+        this.getEmployees();
+        modalRef.componentInstance.success = error.error.success;
+        modalRef.componentInstance.message = error.error.payload.message;
+      });
     });
   }
 

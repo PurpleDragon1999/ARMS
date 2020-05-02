@@ -1,30 +1,29 @@
 <div class="modal-dialog" role="document">
   <div class="modal-content">
     <div class="modal-body">
-      <div class="modal-body text-center" *ngIf="!deleteRequest">
-        <h2 *ngIf=" success===true"><b>Successful!</b></h2>
+      <div class="modal-body text-center" *ngIf="!shouldConfirm">
+        <h2 *ngIf="success === true"><b>Successful!</b></h2>
         <h2 *ngIf="success === false"><b>Error alert!</b></h2>
         <p>{{ message }}.</p>
-        <button class=" btn btn-outline-primary btn-fw" (click)="simpleCloseModal()">OK</button>
+        <button class=" btn btn-outline-primary btn-fw" (click)="modalClose(false)">OK</button>
       </div>
 
-      <div *ngIf="deleteRequest" class="modal-body text-center">
+      <div *ngIf="shouldConfirm" class="modal-body text-center">
         <div *ngIf="submitted === false">
           <h2><b>Are you sure?</b></h2>
           <p>Do you really want to delete these records? This process cannot be undone.</p>
           <span>
             <button class=" btn btn-outline-primary btn-fw mr-2" (click)="modalClose(false)">Cancel</button>
-            <button class=" btn btn-outline-primary btn-fw"
-              (click)="performRequest(deleteRequest.payload.data)">OK</button>
+            <button class=" btn btn-outline-primary btn-fw" (click)="performRequest()">OK</button>
           </span>
         </div>
 
-        <div class="modal-body text-center" *ngIf="submitted === true">
+        <!-- <div class="modal-body text-center" *ngIf="submitted === true">
           <h2 *ngIf="requestRes?.success === true"><b>Successful!</b></h2>
           <h2 *ngIf="requestRes?.success === false"><b>Error alert!</b></h2>
           <p>{{ requestRes?.payload.message }}.</p>
           <button class=" btn btn-outline-primary btn-fw" (click)="modalClose(true)">OK</button>
-        </div>
+        </div> -->
 
       </div>
     </div>

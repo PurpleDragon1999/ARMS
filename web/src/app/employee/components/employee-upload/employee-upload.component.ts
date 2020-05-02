@@ -1,7 +1,7 @@
 import { ModalComponent } from "../../../reusable-components/modal/modal.component";
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { FileUploader } from "ng2-file-upload";
-import { NgbModal, NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
+import { NgbModal, NgbActiveModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
 
 const URL = "http://localhost:3000/api/employee/bulk";
 
@@ -43,9 +43,18 @@ export class EmployeeUploadComponent implements OnInit {
     this.uploader.onSuccessItem = (item: any, response: string, status: number) => {
       let data = JSON.parse(response);
       this.message = data;
-      const modalRef = this.modalService.open(ModalComponent);
-      modalRef.componentInstance.message = this.message;
-      this.modalClose()
+      const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
+
+      modalRef.componentInstance.shouldConfirm = false;
+
+      modalRef.componentInstance.success = data.success;
+      modalRef.componentInstance.message = data.payload.message;
+
+      modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+        modalRef.close();
+      });
+
+      this.modalClose();
     }
 
     this.uploader.onWhenAddingFileFailed = function (item: any, filter: any, options: any, ) {
@@ -53,7 +62,7 @@ export class EmployeeUploadComponent implements OnInit {
     };
   }
 
-  modalClose() {
-    if (this.activeModal) this.activeModal.dismiss();
+  modalClose(): void {
+    this.activeModal.dismiss();
   }
 }

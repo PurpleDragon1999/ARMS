@@ -14,47 +14,29 @@ export class ModalComponent implements OnInit {
   @Output()
   closeModal: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+  @Output()
+  emitPerformRequest: EventEmitter<void> = new EventEmitter<void>();
+
   @Input()
-  deleteRequest: any;
+  shouldConfirm: boolean;
 
   @Input() success: boolean;
   @Input() message: string;
-  @Input() deleteFor: string;
-  calleeService: any;
-  requestRes: any;
+
   submitted: boolean = false;
 
-  constructor(public activeModal: NgbActiveModal,
-    private employeeService: EmployeeService) { }
+  constructor() { }
 
   ngOnInit() {
   }
 
-  performRequest(data) {
+  performRequest() {
     this.submitted = true;
-    if (this.deleteFor == "employee") {
-      this.calleeService = this.employeeService.deleteEmployee(data._id);
-    }
-    else {
-      //add your services here for delete 
-      //pass deleteFor from where this modal is being called
-    }
-    this.calleeService.subscribe(
-      (res: IResponse) => {
-        this.requestRes = res;
-      },
-      (error: HttpErrorResponse) => {
-        this.requestRes = error.error;
-      }
-    );
-  }
-
-  simpleCloseModal() {
-    this.activeModal.dismiss();
+    this.shouldConfirm = false;
+    this.emitPerformRequest.emit();
   }
 
   modalClose(rerender: boolean): void {
-
     this.closeModal.emit(rerender);
   }
 }
