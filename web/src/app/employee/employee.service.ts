@@ -6,7 +6,7 @@ import { Observable } from "rxjs";
 import { HOST } from "../config/apiHost.config";
 
 const EMPLOYEE_API = `${HOST}/api/employee`;
-const EMPLOYEE_SEARCH = `${HOST}/api/employeeBySearch`;
+const EMPLOYEE_SEARCH = `${HOST}/api/employeeSearch`;
 
 @Injectable({
   providedIn: "root",
@@ -50,6 +50,8 @@ export class EmployeeService {
   }
 
   searchEmployee(character: string) {
+    console.log(character, 'character');
+
     const params: HttpParams = new HttpParams().set('character', character);
     return this.http.get<IResponse>(
       EMPLOYEE_SEARCH,
