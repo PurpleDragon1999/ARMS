@@ -27,7 +27,7 @@
                     </div>
                 </div>
                 <div class="d-flex flex-row-reverse">
-                    <button class="btn btn-light" (click)="modalClose()">Cancel</button>
+                    <button class="btn btn-light" (click)="modalClose(false)">Cancel</button>
                     <button [disabled]="f.invalid" type="submit" class="btn btn-gradient-primary mr-2"
                         (click)=" uploader.uploadAll(); f.resetForm()">Create</button>
                 </div>

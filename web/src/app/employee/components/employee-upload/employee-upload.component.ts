@@ -1,7 +1,7 @@
+import { Component, EventEmitter, OnInit, Output } from "@angular/core";
+import { NgbModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
+import { FileItem, FileUploader, ParsedResponseHeaders } from "ng2-file-upload";
 import { ModalComponent } from "../../../reusable-components/modal/modal.component";
-import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
-import { FileUploader } from "ng2-file-upload";
-import { NgbModal, NgbActiveModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
 
 const URL = "http://localhost:3000/api/employee/bulk";
 
@@ -14,8 +14,10 @@ export class EmployeeUploadComponent implements OnInit {
   uploadProgress: Number = 0;
   isNotAllowedUploadType: Boolean = true;
 
-  constructor(private modalService: NgbModal,
-    private activeModal: NgbActiveModal
+  @Output()
+  closeModal: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  constructor(private modalService: NgbModal
   ) { }
 
   public uploader: FileUploader = new FileUploader({
@@ -36,6 +38,7 @@ export class EmployeeUploadComponent implements OnInit {
     };
 
     this.uploader.onSuccessItem = (item: any, response: string, status: number) => {
+      this.modalClose(true);
       let data = JSON.parse(response);
       const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
 
@@ -47,16 +50,29 @@ export class EmployeeUploadComponent implements OnInit {
       modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
         modalRef.close();
       });
-
-      this.modalClose();
     }
 
-    this.uploader.onWhenAddingFileFailed = function (item: any, filter: any, options: any, ) {
-      this.isNotAllowedUploadType = true;
+    this.uploader.onErrorItem = (item: FileItem, response: string, status: number, headers: ParsedResponseHeaders) => {
+      this.modalClose(false);
+      let data = JSON.parse(response);
+      const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
+
+      modalRef.componentInstance.shouldConfirm = false;
+
+      modalRef.componentInstance.success = data.success;
+      modalRef.componentInstance.message = data.payload.message;
+
+      modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+        modalRef.close();
+      });
+    };
+
+    this.uploader.onWhenAddingFileFailed = () => {
+
     };
   }
 
-  modalClose(): void {
-    this.activeModal.dismiss();
+  modalClose(rerender: boolean): void {
+    this.closeModal.emit(rerender);
   }
 }

@@ -78,13 +78,18 @@ export class EmployeeComponent implements OnInit {
   }
 
   searchEmployee(character: string) {
-
     this.employeeService.searchEmployee(character).subscribe((res) => {
       this.employees = res.payload.data.dataList;
     });
   }
 
   openUpload(): void {
-    this.modalService.open(EmployeeUploadComponent);
+    const modalRef = this.modalService.open(EmployeeUploadComponent);
+    modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+      if (rerender) {
+        this.getEmployees(this.pager.currentPage);
+      }
+      modalRef.close();
+    });
   }
 }
