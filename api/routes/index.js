@@ -1,25 +1,7 @@
 const controller = require('../controllers');
 const roleChecker = require('../middlewares/roleChecker');
 const authorize = require('../middlewares/tokenVerifier');
-var multer = require('multer');
-var fs = require('fs');
-var fileName;
-const dir = './cvUploads';
 const upload = require('../middlewares/csvUpload');
-
-// let storage = multer.diskStorage({
-//     destination: (req, file, callback) => {
-//       if (!fs.existsSync(dir)){
-//        fs.mkdirSync(dir);
-//       }
-//       callback(null, dir);
-//     },
-//     filename: (req, file, callback) => {
-//         fileName = Date.now() + '-' + file.originalname;
-//         callback(null, fileName);
-//     }
-// });
-// let upload = multer({storage: storage});
 
 module.exports = (app) => {
   //Employee

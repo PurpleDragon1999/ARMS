@@ -1,175 +1,163 @@
 <div class="col-lg-12 stretch-card desktopView">
   <div class="card">
-    <div class="card-body">       
-      
+    <div class="card-body">
+
 
       <div class="itemsDiv">
-          <div class="search-field  d-md-block ">
-              <form class="d-flex align-items-center h-100" action="#">
-              <div class="input-group ">
-                  <div class="input-group-prepend bg-transparent card">
-                  <i class=" card-body input-group-text mdi mdi-magnify"></i>
-                  </div>
-                  <input  #searchInput (input)="search(searchInput.value)" type="text" class="form-control bg-transparent " placeholder="Search ">
+        <div class="search-field  d-md-block ">
+          <form class="d-flex align-items-center h-100" action="#">
+            <div class="input-group ">
+              <div class="input-group-prepend bg-transparent card">
+                <i class=" card-body input-group-text mdi mdi-magnify"></i>
               </div>
-              </form>
+              <input #searchInput (input)="search(searchInput.value)" type="text" class="form-control bg-transparent "
+                placeholder="Search ">
+            </div>
+          </form>
+        </div>
+        <div ngbDropdown class="addEmployee">
+          <button class="btn btn-outline-primary" id="addOption" ngbDropdownToggle><i
+              class="mdi mdi-account-plus"></i>Add {{ title | titlecase }}(s)
+          </button>
+          <div ngbDropdownMenu>
+            <button ngbDropdownItem class="btn btn-outline-primary btn-fw" (click)="openModal('create')"><i
+                class="mdi mdi-account-plus"></i> Add {{ title | titlecase }}</button>
+            <button ngbDropdownItem class="btn btn-outline-primary btn-fw" (click)="openFileUploadModal()"><i
+                class="mdi mdi-account-plus"></i> Add through file upload</button>
           </div>
-          <div ngbDropdown class="addEmployee">  
-              <button class="btn btn-outline-primary" 
-                  id="addOption" ngbDropdownToggle><i class="mdi mdi-account-plus"></i>Add {{ title | titlecase }}(s)
-              </button>
-              <div ngbDropdownMenu>
-                <button ngbDropdownItem  class="btn btn-outline-primary btn-fw" (click)="openModal('create')"><i class="mdi mdi-account-plus"></i> Add {{ title | titlecase }}</button>
-                <button ngbDropdownItem class="btn btn-outline-primary btn-fw" (click)="openFileUploadModal()"><i class="mdi mdi-account-plus"></i> Add through file upload</button>
-              </div>
-          </div>
+        </div>
       </div>
       <table class="table table-striped">
         <thead>
           <tr>
-            <th *ngFor = "let columnName of columns; let i = index">{{columnName | uppercase}}</th>
+            <th *ngFor="let columnName of columns; let i = index">{{columnName | uppercase}}</th>
           </tr>
         </thead>
         <tbody>
           <div>
-              <small class="p-2" *ngIf="data.length==0"> No Match Found</small>
+            <small class="p-2" *ngIf="data.length==0"> No Match Found</small>
           </div>
           <tr *ngFor="let entry of data">
             <td *ngFor="let columnName of columns;">
               {{ entry[columnName] }}
             </td>
-            <td ><a (click)="openModal('update', entry)"><i class="mdi mdi-pencil"></i></a></td>
+            <td><a (click)="openModal('update', entry)"><i class="mdi mdi-pencil"></i></a></td>
             <td><a (click)="deleteEntry(entry)"><i class="mdi mdi-delete"></i></a> </td>
           </tr>
         </tbody>
       </table>
-      
+
     </div>
-    
+
     <div class="card paginationDiv">
-      <div >
-    <ul *ngIf="pager?.pages && pager?.pages.length" class="pagination">
-      
-      <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item previous-item">
-        <a (click)="setPageForPagination(pager.currentPage - 1)"  class="page-link"><i class="mdi mdi-chevron-left arrow"></i></a>
-      </li>
-      <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}" class="page-item number-item">
-        <a  (click)="setPageForPagination(page)"  class="page-link">{{page}}</a>
-      </li>
-      <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item next-item">
-        <a (click)="setPageForPagination(pager.currentPage + 1)" class="page-link"><i class="mdi mdi-chevron-right arrow"></i></a>
-      </li>
-    </ul>
-  </div>
+      <div>
+        <ul *ngIf="pager?.pages && pager?.pages.length" class="pagination">
+
+          <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item previous-item">
+            <a (click)="setPageForPagination(pager.currentPage - 1)" class="page-link"><i
+                class="mdi mdi-chevron-left arrow"></i></a>
+          </li>
+          <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}"
+            class="page-item number-item">
+            <a (click)="setPageForPagination(page)" class="page-link">{{page}}</a>
+          </li>
+          <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item next-item">
+            <a (click)="setPageForPagination(pager.currentPage + 1)" class="page-link"><i
+                class="mdi mdi-chevron-right arrow"></i></a>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>  
+  </div>
 </div>
 
 <div class="row mobileView">
   <!-- <div class="col-lg-6 grid-margin stretch-card">
     <div class="card"> -->
-      <div class="card-body justify-content-between">
-        <div ngbDropdown class="addEmployee addMobile">  
-          <button class="btn btn-outline-primary" 
-              id="addOption" ngbDropdownToggle><i class="mdi mdi-account-plus"></i>Add {{ title | titlecase }}(s)
-          </button>
-          <div ngbDropdownMenu>
-            <button ngbDropdownItem  class="btn btn-outline-primary btn-fw" (click)="openModal('create')"><i class="mdi mdi-account-plus"></i>Add {{ title | titlecase }} </button>
-            <button ngbDropdownItem class="btn btn-outline-primary btn-fw" (click)="openFileUploadModal()"><i class="mdi mdi-account-plus"></i> Add through file upload</button>
+  <div class="card-body justify-content-between">
+    <div ngbDropdown class="addEmployee addMobile">
+      <button class="btn btn-outline-primary" id="addOption" ngbDropdownToggle><i class="mdi mdi-account-plus"></i>Add
+        {{ title | titlecase }}(s)
+      </button>
+      <div ngbDropdownMenu>
+        <button ngbDropdownItem class="btn btn-outline-primary btn-fw" (click)="openModal('create')"><i
+            class="mdi mdi-account-plus"></i>Add {{ title | titlecase }} </button>
+        <button ngbDropdownItem class="btn btn-outline-primary btn-fw" (click)="openFileUploadModal()"><i
+            class="mdi mdi-account-plus"></i> Add through file upload</button>
+      </div>
+    </div>
+    <div class="search-field d-md-block">
+      <form class="d-flex align-items-center h-100" action="#">
+        <div class="input-group w-25">
+          <div class="input-group-prepend bg-transparent card">
+            <i class="card-body input-group-text border-0 mdi mdi-magnify"></i>
           </div>
-      </div>
-        <div class="search-field d-md-block">
-          <form class="d-flex align-items-center h-100" action="#">
-            <div class="input-group w-25">
-              <div class="input-group-prepend bg-transparent card">
-                <i
-                  class="card-body input-group-text border-0 mdi mdi-magnify"
-                ></i>
-              </div>
-              <input
-                #input
-                (input)="search(input.value)"
-                type="text"
-                class="form-control "
-                placeholder="Search "
-              />
-            </div>
-          </form>
+          <input #input (input)="search(input.value)" type="text" class="form-control " placeholder="Search " />
         </div>
-        <div>
-          <small class="p-2" *ngIf="data.length==0"> No Match Found</small>
-        </div>
-        <div class="mt-4 userCard" *ngFor="let entry of data">
-          <ngb-accordion [closeOthers]="true" activeIds="collapse-1">
-            <ngb-panel id="collapse-2" class="accordion">
-              <ng-template ngbPanelHeader let-opened="opened" >
-              <div class="  cardMobileView">
-                      <div class="d-flex justify-content-between">
-                          <div class="d-flex">
-                              <div class="pt-2">
-                                  <img class="nav-profile-img" src="../../assets/images/customers-icon-3.png" 
-                                  alt="image">
-                              </div>
-                              <h5 class="m-0 p-3">{{ entry[columns[0]] }}</h5>
-                          </div>
-                          <div class="d-flex">
-                              <div class="p-3">
-                                  <a class="p-2" (click)="openModal('update', entry)" ><i class="mdi mdi-pencil"></i></a>
-                                  <a class="p-2" (click)="deleteEntry(entry)" ><i class="mdi mdi-delete"></i></a> 
-                              </div >
-                              <button ngbPanelToggle class="btn btn-link p-0">
-                              <i class="mdi mdi-plus"></i>
-                              </button>
-                          </div>
-                      </div>
-              </div>
-              </ng-template>
-              <ng-template ngbPanelContent>
-                <div *ngFor="let columnName of columns | slice:1" class="py-2">
-                  <div>
-                    <b>
-                      {{ columnName | uppercase }}
-                    </b>
+      </form>
+    </div>
+    <div>
+      <small class="p-2" *ngIf="data.length==0"> No Match Found</small>
+    </div>
+    <div class="mt-4 userCard" *ngFor="let entry of data">
+      <ngb-accordion [closeOthers]="true" activeIds="collapse-1">
+        <ngb-panel id="collapse-2" class="accordion">
+          <ng-template ngbPanelHeader let-opened="opened">
+            <div class="  cardMobileView">
+              <div class="d-flex justify-content-between">
+                <div class="d-flex">
+                  <div class="pt-2">
+                    <img class="nav-profile-img" src="../../assets/images/customers-icon-3.png" alt="image">
                   </div>
-                  <div>
-                    {{ entry[columnName] }}
-                  </div>
+                  <h5 class="m-0 p-3">{{ entry[columns[0]] }}</h5>
                 </div>
-              </ng-template>
-            </ngb-panel>
-          </ngb-accordion>
-        </div>
-      </div>
+                <div class="d-flex">
+                  <div class="p-3">
+                    <a class="p-2" (click)="openModal('update', entry)"><i class="mdi mdi-pencil"></i></a>
+                    <a class="p-2" (click)="deleteEntry(entry)"><i class="mdi mdi-delete"></i></a>
+                  </div>
+                  <button ngbPanelToggle class="btn btn-link p-0">
+                    <i class="mdi mdi-plus"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+          <ng-template ngbPanelContent>
+            <div *ngFor="let columnName of columns | slice: 1" class="py-2">
+              <div>
+                <b>
+                  {{ columnName | uppercase }}
+                </b>
+              </div>
+              <div>
+                {{ entry[columnName] }}
+              </div>
+            </div>
+          </ng-template>
+        </ngb-panel>
+      </ngb-accordion>
+    </div>
+  </div>
 
-      <div class="paginationDiv">
-        
-          <ul *ngIf="pager?.pages && pager?.pages.length" class="pagination">
-            <li
-              [ngClass]="{ disabled: pager.currentPage == 1 }"
-              class="page-item previous-item"
-            >
-              <a (click)="setPageForPagination(pager.currentPage - 1)" class="page-link"
-                ><i class="mdi mdi-chevron-left arrow"></i
-              ></a>
-            </li>
-            <li
-              *ngFor="let page of pager.pages"
-              [ngClass]="{ active: pager.currentPage === page }"
-              class="page-item number-item"
-            >
-              <a (click)="setPageForPagination(page)" class="page-link">{{ page }}</a>
-            </li>
-            <li
-              [ngClass]="{ disabled: pager.currentPage == pager.totalPages }"
-              class="page-item next-item"
-            >
-              <a (click)="setPageForPagination(pager.currentPage + 1)" class="page-link"
-                ><i class="mdi mdi-chevron-right arrow"></i
-              ></a>
-            </li>
-          </ul>
-  
-      </div>
-    <!-- </div>
+  <div class="paginationDiv">
+
+    <ul *ngIf="pager?.pages && pager?.pages.length" class="pagination">
+      <li [ngClass]="{ disabled: pager.currentPage == 1 }" class="page-item previous-item">
+        <a (click)="setPageForPagination(pager.currentPage - 1)" class="page-link"><i
+            class="mdi mdi-chevron-left arrow"></i></a>
+      </li>
+      <li *ngFor="let page of pager.pages" [ngClass]="{ active: pager.currentPage === page }"
+        class="page-item number-item">
+        <a (click)="setPageForPagination(page)" class="page-link">{{ page }}</a>
+      </li>
+      <li [ngClass]="{ disabled: pager.currentPage == pager.totalPages }" class="page-item next-item">
+        <a (click)="setPageForPagination(pager.currentPage + 1)" class="page-link"><i
+            class="mdi mdi-chevron-right arrow"></i></a>
+      </li>
+    </ul>
+
+  </div>
+  <!-- </div>
   </div> -->
 </div>

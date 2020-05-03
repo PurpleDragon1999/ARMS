@@ -19,7 +19,7 @@ export class ListComponent {
   emitOpenModal: EventEmitter<IDataModal> = new EventEmitter<IDataModal>();
 
   @Input()
-  pager: any = {};
+  pager: IPager;
 
   @Output()
   emitDelete: EventEmitter<IDataModal["data"]> = new EventEmitter<IDataModal["data"]>();
@@ -31,7 +31,7 @@ export class ListComponent {
   emitOpenFileUploadModal: EventEmitter<void> = new EventEmitter<void>();
 
   @Output()
-  emitPaginatedResult: EventEmitter<string> = new EventEmitter<string>();
+  emitPaginatedResult: EventEmitter<number> = new EventEmitter<number>();
 
   openModal(formType: IDataModal["formType"], data: IDataModal["data"]) {
     this.emitOpenModal.emit({ formType, data });
@@ -50,6 +50,6 @@ export class ListComponent {
   }
 
   setPageForPagination(page: number) {
-    this.emitPaginatedResult.emit(page.toString());
+    this.emitPaginatedResult.emit(page);
   }
 }

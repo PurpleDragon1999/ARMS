@@ -32,9 +32,9 @@ export class EmployeeFormComponent {
   }
 
   createEmployee(employee: IEmployee): void {
-    this.modalClose(true);
     this.employeeService.createEmployee(employee).subscribe(
       (res: IResponse) => {
+        this.modalClose(true);
         this.openMessageModal(res.success, res.payload.message);
       },
       (error: HttpErrorResponse) => {
@@ -48,6 +48,7 @@ export class EmployeeFormComponent {
     const updatedEmployee = Object.assign({}, this.data, employee);
     this.employeeService.updateEmployee(updatedEmployee).subscribe(
       (res: IResponse) => {
+        this.modalClose(true);
         this.openMessageModal(res.success, res.payload.message);
       },
       (error: HttpErrorResponse) => {

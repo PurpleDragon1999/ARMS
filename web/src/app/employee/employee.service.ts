@@ -37,8 +37,8 @@ export class EmployeeService {
     );
   }
 
-  getPaginatedEmployees(page?: string): Observable<IResponse> {
-    const params: HttpParams = new HttpParams().set('page', page);
+  getPaginatedEmployees(page: number = 1): Observable<IResponse> {
+    const params: HttpParams = new HttpParams().set('page', page.toString());
     return this.http.get<IResponse>(EMPLOYEE_API, { ...this.options, params });
   }
 
