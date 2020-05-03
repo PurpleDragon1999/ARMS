@@ -36,7 +36,7 @@ export class EmployeeFormComponent {
       (res: IResponse) => {
         const modalRef = this.modalService.open(ModalComponent);
         modalRef.componentInstance.message = res;
-        this.modalClose( );
+        this.modalClose(true);
       },
       (error: HttpErrorResponse) => {
 
@@ -52,7 +52,7 @@ export class EmployeeFormComponent {
       (res: IResponse) => {
         const modalRef = this.modalService.open(ModalComponent);
         modalRef.componentInstance.message = res;
-        this.modalClose( );
+        this.modalClose(true);
       },
       (error: HttpErrorResponse) => {
         const modalRef = this.modalService.open(ModalComponent);
@@ -61,10 +61,8 @@ export class EmployeeFormComponent {
     );
   }
 
-  // modalClose(rerender: boolean): void {
-  //   this.closeModal.emit(rerender);
-  // }
-  modalClose(){
-    this.closeModal.emit();    
+  modalClose(rerender: boolean): void {
+    this.closeModal.emit(rerender);
   }
+  
 }
