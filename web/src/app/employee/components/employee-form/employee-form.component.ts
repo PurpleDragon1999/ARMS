@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter, Input, Output } from "@angular/core";
-import { NgbModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { IResponse } from "src/app/models/response.interface";
 import { ModalComponent } from "../../../reusable-components/modal/modal.component";
 import { EmployeeService } from "../../employee.service";
@@ -34,41 +34,37 @@ export class EmployeeFormComponent {
   createEmployee(employee: IEmployee): void {
     this.employeeService.createEmployee(employee).subscribe(
       (res: IResponse) => {
-        this.modalClose(true);
-        this.openMessageModal(res.success, res.payload.message);
+        const modalRef = this.modalService.open(ModalComponent);
+        modalRef.componentInstance.message = res;
+        this.modalClose( );
       },
       (error: HttpErrorResponse) => {
-        this.openMessageModal(error.error.success, error.error.payload.message);
+
+        const modalRef = this.modalService.open(ModalComponent);
+        modalRef.componentInstance.message = error.error;
       }
     );
   }
 
   updateEmployee(employee: IEmployee): void {
-    this.modalClose(true);
     const updatedEmployee = Object.assign({}, this.data, employee);
     this.employeeService.updateEmployee(updatedEmployee).subscribe(
       (res: IResponse) => {
-        this.modalClose(true);
-        this.openMessageModal(res.success, res.payload.message);
+        const modalRef = this.modalService.open(ModalComponent);
+        modalRef.componentInstance.message = res;
+        this.modalClose( );
       },
       (error: HttpErrorResponse) => {
-        this.openMessageModal(error.error.success, error.error.payload.message);
+        const modalRef = this.modalService.open(ModalComponent);
+        modalRef.componentInstance.message = error.error;
       }
     );
   }
 
-  modalClose(rerender: boolean): void {
-    this.closeModal.emit(rerender);
-  }
-
-  openMessageModal(success: boolean, message: string) {
-    const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
-    modalRef.componentInstance.shouldConfirm = false;
-
-    modalRef.componentInstance.success = success;
-    modalRef.componentInstance.message = message;
-    modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
-      modalRef.close();
-    });
+  // modalClose(rerender: boolean): void {
+  //   this.closeModal.emit(rerender);
+  // }
+  modalClose(){
+    this.closeModal.emit();    
   }
 }
