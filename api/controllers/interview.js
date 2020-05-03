@@ -1,4 +1,5 @@
 const Base = require('./base');
+const model = require("../models");
 const interviewModel = require('../models/interview');
 const jobDescriptionModel = require('../models/jobDescription');
 const pdfGenerator=require('../middlewares/pdfGenerator');
@@ -32,38 +33,34 @@ class Interview extends Base{
       });
     }
   }
+
+
+  
+  async get(req, res) {
+    try {
+      const data = await interviewModel.get({_id: req.params.id} );
+      console.log(data.length)
+      if (data.length==0){
+        return res.status(400).send({
+          success: false,
+          payload: {
+            message: "No interview record found",
+          },
+        });
+      }
+      super.get(req, res, "Interview record retrieved successfully");
+    } catch (e) {
+      return res.status(500).send({
+        success: false,
+        payload: {
+          message: e.message,
+        },
+      });
+    }
+  }
+  
 }
 
-// async uploadDetails(req, res) {
-  //   try {
-  //     let path = "";
-  //     if (req.file) {
-  //       path = req.file.path;
-  //     }
-  //     let objToCreate = {
-  //       name: req.body.name,
-  //       experience: req.body.experience,
-  //       email: req.body.email,
-  //       cv: path,
-  //       skills: req.body.skills,
-  //       appliedFor: req.body.appliedFor,
-  //     };
-  //     let createdObj = await this.model.save(objToCreate);
-  //     return res.send({
-  //       success: true,
-  //       payload: {
-  //         body: createdObj,
-  //         message: "Record created successfully!!",
-  //       },
-  //     });
-  //   } catch (error) {
-  //     res.send({
-  //       success: false,
-  //       payload: {
-  //         message: error.message,
-  //       },
-  //     });
-  //   }
-  // }
+
  module.exports = new Interview();
 

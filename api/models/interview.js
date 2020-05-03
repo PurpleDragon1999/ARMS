@@ -21,5 +21,17 @@ class Interview{
     async deleteOne(criteria){
         return this.model.deleteOne(criteria);
     }
+
+    async index(criteria = {}, columns = {}) {
+        return this.model.find(criteria, columns);
+      }
+
+    async get(criteria={}, columns={}){
+        let fields = 'jdId jdTitle openingDate closingDate vacancies salary skills eligibilityCriteria jobType location jobProfileDescription';
+        let data = await this.model.find({_id: criteria}, columns).populate('jdObjectId', fields);
+        return (data);
+    }
+   
+
 }
 module.exports = new Interview();

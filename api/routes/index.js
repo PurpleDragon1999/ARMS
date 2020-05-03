@@ -55,6 +55,9 @@ module.exports = (app) => {
   app.get("/api/interview/:id", (req, res) =>
     controller.interview.get(req, res)
   );
+  app.get("/api/interview", (req, res) =>
+    controller.interview.index(req, res)
+  );
 
   //Routes for Job Description
   app.post("/api/jobDescription", controller.jobDescription.save);

@@ -64,15 +64,14 @@ class Base {
     }
   }
 
-  async get(req, res) {
+  async get(req, res, successMessage) {
     try {
       const data = await this.model.get(req.params.id);
-
       return res.send({
         success: true,
         payload: {
           data,
-          message: "Retrieved Successfully",
+          message:  successMessage || "Retrieved Successfully",
         },
       });
     } catch (e) {
