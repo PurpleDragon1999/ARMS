@@ -1,4 +1,4 @@
-import { ChartsModule } from 'ng2-charts';
+
 import { RoleGuardService } from './utilities/role-guard.service';
 import { ModalComponent } from './reusable-components/modal/modal.component';
 import { EmployeeFormComponent } from "./employee/components/employee-form/employee-form.component";
