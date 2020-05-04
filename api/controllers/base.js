@@ -45,13 +45,13 @@ class Base {
     }
   }
 
-  async remove(req, res) {
+  async remove(req, res, successMessage) {
     try {
       await this.model.remove(req.params.id);
       return res.send({
         success: true,
         payload: {
-          message: "Removed Successfully",
+          message: successMessage || "Removed Successfully",
         },
       });
     } catch (e) {

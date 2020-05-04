@@ -51,7 +51,7 @@ module.exports = (app) => {
   app.patch("/api/interview/:id", (req, res) =>
     controller.interview.modify(req, res)
   );
-  // app.delete('/api/interview/:id', (req, res) => controller.interview.delete(req, res));
+  app.delete('/api/interview/:id', (req, res) => controller.interview.remove(req, res));
   app.get("/api/interview/:id", (req, res) =>
     controller.interview.get(req, res)
   );
