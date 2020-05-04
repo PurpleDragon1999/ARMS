@@ -50,7 +50,6 @@ export class EmployeeService {
   }
 
   searchEmployee(character: string) {
-    console.log(character, 'character');
 
     const params: HttpParams = new HttpParams().set('character', character);
     return this.http.get<IResponse>(

@@ -76,7 +76,6 @@ export class EmployeeComponent implements OnInit {
   }
 
   searchEmployee(character: string) {
-    console.log("inside search func")
     this.employeeService.searchEmployee(character).subscribe((res) => {
       this.employees = res.payload.data.dataList;
     });
