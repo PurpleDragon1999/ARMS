@@ -50,8 +50,6 @@ export class EmployeeService {
   }
 
   searchEmployee(character: string) {
-
-
     const params: HttpParams = new HttpParams().set('character', character);
     return this.http.get<IResponse>(
       EMPLOYEE_SEARCH,

@@ -39,16 +39,20 @@ export class EmployeeComponent implements OnInit {
 
   openModal(dataModal: IDataModal) {
     if (dataModal.formType === "update" && dataModal.data.employeeId) {
-      dataModal.data.employeeId = Number(
-        dataModal.data.employeeId.replace("CYG-", "")
+      var copyDataModal = JSON.parse(JSON.stringify(dataModal));
+      copyDataModal.data.employeeId = Number(
+        copyDataModal.data.employeeId.replace("CYG-", "")
       );
     } else {
-      dataModal.data = {};
+      copyDataModal.data = {};
     }
 
-    const modalRef: NgbModalRef = this.modalService.open(EmployeeFormComponent);
-    modalRef.componentInstance.formType = dataModal.formType;
-    modalRef.componentInstance.data = dataModal.data;
+    const modalRef: NgbModalRef = this.modalService.open(EmployeeFormComponent, {
+      backdrop: 'static',
+      keyboard: false
+    });
+    modalRef.componentInstance.formType = copyDataModal.formType;
+    modalRef.componentInstance.data = copyDataModal.data;
     modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
       if (rerender) {
         this.getEmployees(this.pager.currentPage);
@@ -85,6 +89,7 @@ export class EmployeeComponent implements OnInit {
 
   openUpload(): void {
     const modalRef = this.modalService.open(EmployeeUploadComponent);
+
     modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
       if (rerender) {
         this.getEmployees(this.pager.currentPage);
