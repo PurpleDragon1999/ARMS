@@ -25,8 +25,8 @@ export class JdModalComponent implements OnInit {
     private modalService:NgbModal) {}
 
 
-    // @Output()
-    // closeModal: EventEmitter<boolean> = new EventEmitter<boolean>();
+    @Output()
+    closeModal: EventEmitter<boolean> = new EventEmitter<boolean>();
   
     @ViewChild("jobId", { static: false }) jobId: ElementRef;
     @ViewChild("jobTitle", { static: false }) jobTitle: ElementRef;
@@ -154,7 +154,7 @@ export class JdModalComponent implements OnInit {
         modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
           modalRef.close();
         });
-        // this.modalClose(true);
+        this.modalClose(true);
       },
       (error: HttpErrorResponse) => {
         console.log(error, 'response');
@@ -167,12 +167,12 @@ export class JdModalComponent implements OnInit {
         });
       }
       ); 
-        // this.data = error.error.payload.data;
-        // this.router.navigate(["/jd-pdf", this.data.jdId]);
+        this.data = error.error.payload.data;
+        this.router.navigate(["/jd-pdf", this.data.jdId]);
     
-  //  }
-  //   modalClose(rerender: boolean): void {
-  //     this.closeModal.emit(rerender);
+   }
+    modalClose(rerender: boolean): void {
+      this.closeModal.emit(rerender);
   
   }
   
