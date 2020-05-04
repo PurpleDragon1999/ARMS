@@ -1,16 +1,22 @@
-import { Component, OnInit } from "@angular/core";
+import { JdModalComponent } from '../jd-modal/jd-modal.component';
+import { Component, OnInit,EventEmitter, Output, Input} from "@angular/core";
 import { AppServicesService } from "src/app/services/app-services.service";
 import { Router } from "@angular/router";
+import { NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: "app-jd-list",
   templateUrl: "./jd-list.component.html",
   styleUrls: ["./jd-list.component.scss"],
 })
+
+
+
 export class JdListComponent implements OnInit {
   jobsList: string[];
 
-  constructor(private _service: AppServicesService, private router: Router) {}
+  constructor(private _service: AppServicesService, private router: Router, 
+    private modalService:NgbModal) {}
 
   ngOnInit() {
     this.loadJds();
@@ -22,11 +28,11 @@ export class JdListComponent implements OnInit {
     });
   }
 
-  updateJdInfo(jobId:string) {
-    this._service.updateJobInfo(jobId).subscribe((res) => {
-      this.loadJds();
-    });
+  jdUpdateModal(id:string){
+    const modalRef =this.modalService.open(JdModalComponent)
+    modalRef.componentInstance.jdUpdateId = id
   }
+
 
   deleteJd(jobObjId: string) {
     this._service.deleteJd(jobObjId).subscribe((res) => {

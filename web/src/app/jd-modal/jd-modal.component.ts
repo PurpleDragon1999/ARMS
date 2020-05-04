@@ -1,16 +1,15 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { AppServicesService } from "../../services/app-services.service";
+import { AppServicesService } from "../services/app-services.service";
 import { ViewChild, ElementRef, AfterViewInit } from "@angular/core";
 import { IResponse } from "src/app/models/response.interface";
 import { Router } from "@angular/router";
-import { ModalComponent } from "../../reusable-components/modal/modal.component";
+import { ModalComponent } from "../reusable-components/modal/modal.component";
 import * as jsPDF from "jspdf";
-import { jobDescription } from "../../models/jobDescription.interface";
+import { jobDescription } from "../models/jobDescription.interface";
 import html2canvas from "html2canvas";
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { NgbModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
-
 
 @Component({
   selector: 'app-jd-modal',
@@ -19,20 +18,24 @@ import { NgbModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
 })
 export class JdModalComponent implements OnInit {
 
+  @Input()
+  jdUpdateId : string
+
   constructor( private formBuilder: FormBuilder,
     private _service: AppServicesService,
     private router: Router,
-    private modalService:NgbModal) {}
+    private modalService:NgbModal,
+    private _router:Router) {}
 
 
     @Output()
     closeModal: EventEmitter<boolean> = new EventEmitter<boolean>();
   
-    @ViewChild("jobId", { static: false }) jobId: ElementRef;
-    @ViewChild("jobTitle", { static: false }) jobTitle: ElementRef;
+    @ViewChild("jdId", { static: false }) jdId: ElementRef;
+    @ViewChild("jdTitle", { static: false }) jdTitle: ElementRef;
     @ViewChild("openingDate", { static: false }) openingDate: ElementRef;
     @ViewChild("closingDate", { static: false }) closingDate: ElementRef;
-    @ViewChild("jobDescription", { static: false }) jobDescription: ElementRef;
+    @ViewChild("jobProfileDescription", { static: false }) jobProfileDescription: ElementRef;
     @ViewChild("skills", { static: false }) skills: ElementRef;
     @ViewChild("jobType", { static: false }) jobType: ElementRef;
     @ViewChild("eligibilityCriteria", { static: false })
@@ -41,8 +44,8 @@ export class JdModalComponent implements OnInit {
     @ViewChild("salary", { static: false }) salary: ElementRef;
     @ViewChild("vacancies", { static: false }) vacancies: ElementRef;
     @ViewChild("content", { static: true }) content: ElementRef;
+    
     jobArray:any;
-    res: any;
     eligibilityCriteriaOptions: String;
     locationOptions: String;
     jobTypeOptions: String;
@@ -63,6 +66,7 @@ export class JdModalComponent implements OnInit {
       this.jobTypeOptions = event.target.value;
     }
     ngOnInit() {
+      this.loadJobData(this.jdUpdateId);
       this.jobListingForm = this.formBuilder.group({
         jobId: ["", Validators.required],
         jobTitle: ["", Validators.required],
@@ -90,20 +94,20 @@ export class JdModalComponent implements OnInit {
       }
     }
 
-    loadJobData(){
-      this._service.getAllJobs().subscribe(res => {
-        if(res.status == 200){
-          this. jobArray= res.body;
+    loadJobData(Id:string){
+      this._service.getJobsById(Id).subscribe((res:any) =>{
+        if(res.success){
+          this.jobArray= res.payload.data;
           this.setJobData();
         }
       });
     }
     setJobData(){
-      this.jobId = this.jobArray.jdId;
-      this.jobTitle = this.jobArray.jdTitle;
+      this.jdId = this.jobArray.jdId;
+      this.jdTitle = this.jobArray.jdTitle;
       this.openingDate = this.jobArray.openingDate;
       this.closingDate = this.jobArray.closingDate;
-      this.jobDescription = this.jobArray.jobProfileDescription;
+      this.jobProfileDescription = this.jobArray.jobProfileDescription;
       this.skills = this.jobArray.skills;
       this.jobType = this.jobArray.jobType;
       this.eligibilityCriteria = this.jobArray.eligibilityCriteria;
@@ -112,22 +116,30 @@ export class JdModalComponent implements OnInit {
       this.vacancies = this.jobArray.vacancies;
     }
 
-    sendUpdateRequest(jobObj: any, id: string){
-      this._service.updateJobInfo(jobObj).subscribe(res =>  {
-        if(res.status == 200){
-          this. jobArray= res.body;
+    sendUpdateRequest(jdFormObject: any ){
+      console.log(jdFormObject.value,"EEEHHHHHHHH")
+   
+      this._service.updateJobInfo(jdFormObject,jdFormObject.jobId).subscribe((res:any) =>  {
+        if(res.success == 200){
+          this. jobArray= res.payload.data;
           this.jdFormData();
+            setTimeout(()=> { 
+              this._router.navigate(["/edit"]);
+            }, 1000);
+        }
+        else if(res.status == 401){
+          this._router.navigate(['/login']);
         }
       });
     }
   
     jdFormData() {
       this.jdFormObject = {
-        jdId: `CYGJID${this.jobId.nativeElement.value}`,
-        jdTitle: this.jobTitle.nativeElement.value,
+        jdId: `CYGJID${this.jdId.nativeElement.value}`,
+        jdTitle: this.jdTitle.nativeElement.value,
         openingDate: this.openingDate.nativeElement.value,
         closingDate: this.closingDate.nativeElement.value,
-        jobProfileDescription: this.jobDescription.nativeElement.value,
+        jobProfileDescription: this.jobProfileDescription.nativeElement.value,
         skills: this.skills.nativeElement.value,
         jobType: this.jobType.nativeElement.value,
         eligibilityCriteria: this.eligibilityCriteria.nativeElement.value,
@@ -135,6 +147,8 @@ export class JdModalComponent implements OnInit {
         salary: this.salary.nativeElement.value,
         vacancies: this.vacancies.nativeElement.value,
       };
+
+      
       if (
         new Date(this.jobListingForm.controls["closingDate"].value) <
         new Date(this.jobListingForm.controls["openingDate"].value)

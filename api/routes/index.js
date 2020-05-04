@@ -43,7 +43,7 @@ module.exports = (app) => {
   app.get("/api/jobDescription", (req, res) =>
     controller.jobDescription.index(req, res)
   );
-  app.get("/api/jobDescription/:id", controller.jobDescription.get);
+  app.get("/api/jobDescription/:id", (req, res) =>controller.jobDescription.get(req, res));
   app.put("/api/jobDescription/:id", (req, res) =>controller.jobDescription.modify(req, res));
   app.delete("/api/jobDescription/:id", (req, res) =>
     controller.jobDescription.remove(req, res)

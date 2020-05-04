@@ -26,7 +26,7 @@ import { ProgressHttpModule } from 'angular-progress-http';
 import { MsalModule, MsalInterceptor } from '@azure/msal-angular'; import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { JdListComponent } from './jd-list/jd-list.component'
 import { JdPdfComponent } from './jd-form/jd-pdf/jd-pdf.component';
-import { JdModalComponent } from './jd-list/jd-modal/jd-modal.component'
+import { JdModalComponent } from './jd-modal/jd-modal.component'
 
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;

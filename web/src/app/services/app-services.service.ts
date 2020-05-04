@@ -59,13 +59,15 @@ export class AppServicesService {
   createInterview(user: ICreate): Observable<HttpResponse<any>>{
     return this.http.post<any>(`${USER_DOMAIN}/api/interview`, user, { ...this.options, observe: 'response' });
 }   
-
-  getAllJobs(): Observable<HttpResponse<any>>{
+getAllJobs(): Observable<HttpResponse<any>>{
     return this.http.get<any>(`${USER_DOMAIN}/api/jobDescription`, this.options);
 }
+getJobsById(Id): Observable<HttpResponse<any>>{
+  return this.http.get<any>(`${USER_DOMAIN}/api/jobDescription/${Id}`, this.options);
+}
 
-updateJobInfo(jobId): Observable<HttpResponse<any>>{
-  return this.http.put<any>(`${USER_DOMAIN}/api/jobDescription`, this.options);
+updateJobInfo(jobFormObject,jobId): Observable<HttpResponse<any>>{
+  return this.http.put<any>(`${USER_DOMAIN}/api/jobDescription/${jobId}`,jobFormObject, this.options);
 }
 
 
