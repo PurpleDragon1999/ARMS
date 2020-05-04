@@ -10,8 +10,8 @@
               <div class="input-group-prepend bg-transparent card">
                 <i class=" card-body input-group-text mdi mdi-magnify"></i>
               </div>
-              <input #searchInput (input)="search(searchInput.value)" type="text" class="form-control bg-transparent "
-                placeholder="Search ">
+              <input #searchInput (input)="setPageForPagination(searchInput.value)" type="text"
+                class="form-control bg-transparent " placeholder="Search ">
             </div>
           </form>
         </div>
@@ -54,15 +54,15 @@
         <ul *ngIf="pager?.pages && pager?.pages.length" class="pagination">
 
           <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item previous-item">
-            <a (click)="setPageForPagination(pager.currentPage - 1)" class="page-link"><i
+            <a (click)="setPageForPagination(searchInput.value, pager.currentPage - 1)" class="page-link"><i
                 class="mdi mdi-chevron-left arrow"></i></a>
           </li>
           <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}"
             class="page-item number-item">
-            <a (click)="setPageForPagination(page)" class="page-link">{{page}}</a>
+            <a (click)="setPageForPagination(searchInput.value, page)" class="page-link">{{page}}</a>
           </li>
           <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item next-item">
-            <a (click)="setPageForPagination(pager.currentPage + 1)" class="page-link"><i
+            <a (click)="setPageForPagination(searchInput.value, pager.currentPage + 1)" class="page-link"><i
                 class="mdi mdi-chevron-right arrow"></i></a>
           </li>
         </ul>
@@ -92,7 +92,8 @@
           <div class="input-group-prepend bg-transparent card">
             <i class="card-body input-group-text border-0 mdi mdi-magnify"></i>
           </div>
-          <input #input (input)="search(input.value)" type="text" class="form-control " placeholder="Search " />
+          <input #searchInputForSmallDevice (input)="setPageForPagination(searchInputForSmallDevice.value)" type="text"
+            class="form-control " placeholder="Search " />
         </div>
       </form>
     </div>
@@ -144,15 +145,15 @@
 
     <ul *ngIf="pager?.pages && pager?.pages.length" class="pagination">
       <li [ngClass]="{ disabled: pager.currentPage == 1 }" class="page-item previous-item">
-        <a (click)="setPageForPagination(pager.currentPage - 1)" class="page-link"><i
+        <a (click)="setPageForPagination(searchInputForSmallDevice.value, pager.currentPage - 1)" class="page-link"><i
             class="mdi mdi-chevron-left arrow"></i></a>
       </li>
       <li *ngFor="let page of pager.pages" [ngClass]="{ active: pager.currentPage === page }"
         class="page-item number-item">
-        <a (click)="setPageForPagination(page)" class="page-link">{{ page }}</a>
+        <a (click)="setPageForPagination(searchInputForSmallDevice.value, page)" class="page-link">{{ page }}</a>
       </li>
       <li [ngClass]="{ disabled: pager.currentPage == pager.totalPages }" class="page-item next-item">
-        <a (click)="setPageForPagination(pager.currentPage + 1)" class="page-link"><i
+        <a (click)="setPageForPagination(searchInputForSmallDevice.value, pager.currentPage + 1)" class="page-link"><i
             class="mdi mdi-chevron-right arrow"></i></a>
       </li>
     </ul>

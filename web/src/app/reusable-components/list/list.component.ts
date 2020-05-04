@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { IModelForPagination } from 'src/app/models/modelPagination.interface';
 
 @Component({
   selector: "app-list",
@@ -25,13 +26,10 @@ export class ListComponent {
   emitDelete: EventEmitter<IDataModal["data"]> = new EventEmitter<IDataModal["data"]>();
 
   @Output()
-  emitSearch: EventEmitter<string> = new EventEmitter<string>();
-
-  @Output()
   emitOpenFileUploadModal: EventEmitter<void> = new EventEmitter<void>();
 
   @Output()
-  emitPaginatedResult: EventEmitter<number> = new EventEmitter<number>();
+  emitPaginatedResult: EventEmitter<IModelForPagination> = new EventEmitter<IModelForPagination>();
 
   openModal(formType: IDataModal["formType"], data: IDataModal["data"]) {
     this.emitOpenModal.emit({ formType, data });
@@ -41,15 +39,11 @@ export class ListComponent {
     this.emitOpenFileUploadModal.emit();
   }
 
-  search(character: string) {
-    this.emitSearch.emit(character);
-  }
-
   deleteEntry(entry: any) {
     this.emitDelete.emit(entry);
   }
 
-  setPageForPagination(page: number) {
-    this.emitPaginatedResult.emit(page);
+  setPageForPagination(character: string, page: number) {
+    this.emitPaginatedResult.emit({ page, character });
   }
 }
