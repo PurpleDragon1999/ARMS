@@ -24,16 +24,19 @@ class Interview{
 
     async index(criteria = {}, columns = {}) {
         let fields = 'jdId jdTitle openingDate closingDate vacancies salary skills eligibilityCriteria jobType location jobProfileDescription';
-        let data = await this.model.find(criteria, columns).populate('jdObjectId', fields);
+        let panelFields= 'name designation role employeeId email profileImageURL'
+        let data = await this.model.find(criteria, columns).populate('jdObjectId', fields)
+            .populate('rounds.panelOfInterviewers',panelFields);
         return (data);
       }
 
     async get(criteria={}, columns={}){
-        let fields = 'jdId jdTitle openingDate closingDate vacancies salary skills eligibilityCriteria jobType location jobProfileDescription';
-        let data = await this.model.find({_id: criteria}, columns).populate('jdObjectId', fields);
+        let jdFields = 'jdId jdTitle openingDate closingDate vacancies salary skills eligibilityCriteria jobType location jobProfileDescription';
+        let panelFields= 'name designation role employeeId email profileImageURL'
+        let data = await this.model.find({_id: criteria}, columns).populate('jdObjectId', jdFields)
+            .populate('rounds.panelOfInterviewers',panelFields);
         return (data);
     }
-   
-
+           
 }
 module.exports = new Interview();

@@ -59,4 +59,5 @@ export class EmployeeUploadComponent implements OnInit {
     if(this.activeModal)
       this.activeModal.dismiss()
   }
+  
 }
