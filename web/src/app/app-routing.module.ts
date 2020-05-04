@@ -8,6 +8,7 @@ import { JdListComponent } from './jd-list/jd-list.component';
 import { LoginComponent } from './login/login.component';
 import { AppNavBarComponent } from './nav-bar/nav-bar.component';
 import { RoleGuardService } from './utilities/role-guard.service';
+import { JdModalComponent } from './jd-list/jd-modal/jd-modal.component'
 
 const routes: Routes = [
   { path: "", redirectTo: 'login', pathMatch: 'full' },
@@ -20,6 +21,9 @@ const routes: Routes = [
       {
         path: "home", component: HrComponent
       },
+      {
+        path: "edit", component: JdModalComponent 
+  },
       {
         path: "employee", component: EmployeeComponent
       }

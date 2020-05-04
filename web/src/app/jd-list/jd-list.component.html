@@ -24,7 +24,7 @@
               class="mdi mdi-download float-right"
               (click)="downloadPdf(job.jdId)"
             ></i>
-            <i class="mdi mdi-pencil float-right"></i>
+            <i class="mdi mdi-pencil float-right" (click)="updateJdInfo(job._id)"></i>
           </h4>
 
           <h3 class="mb-3">{{ job.jdTitle }}</h3>

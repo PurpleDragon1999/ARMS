@@ -22,6 +22,12 @@ export class JdListComponent implements OnInit {
     });
   }
 
+  updateJdInfo(jobId:string) {
+    this._service.updateJobInfo().subscribe((res) => {
+      this.loadJds();
+    });
+  }
+
   deleteJd(jobObjId: string) {
     this._service.deleteJd(jobObjId).subscribe((res) => {
       this.loadJds();

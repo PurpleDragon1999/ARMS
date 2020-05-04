@@ -64,6 +64,11 @@ export class AppServicesService {
     return this.http.get<any>(`${USER_DOMAIN}/api/jobDescription`, this.options);
 }
 
+updateJobInfo(): Observable<HttpResponse<any>>{
+  return this.http.put<any>(`${USER_DOMAIN}/api/jobDescription`, this.options);
+}
+
+
 deleteJd(jobObjId): Observable<HttpResponse<any>>{
   return this.http.delete<any>(`${USER_DOMAIN}/api/jobDescription/${jobObjId}`, this.options);
 }  
