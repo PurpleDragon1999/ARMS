@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AppServicesService } from "../../services/app-services.service";
 import { ViewChild, ElementRef, AfterViewInit } from "@angular/core";
@@ -113,7 +113,7 @@ export class JdModalComponent implements OnInit {
     }
 
     sendUpdateRequest(jobObj: any, id: string){
-      this._service.updateJobInfo().subscribe(res =>  {
+      this._service.updateJobInfo(jobObj).subscribe(res =>  {
         if(res.status == 200){
           this. jobArray= res.body;
           this.jdFormData();
@@ -165,10 +165,10 @@ export class JdModalComponent implements OnInit {
         modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
           modalRef.close();
         });
-      }
-      ); 
         this.data = error.error.payload.data;
         this.router.navigate(["/jd-pdf", this.data.jdId]);
+      }
+      ); 
     
    }
     modalClose(rerender: boolean): void {

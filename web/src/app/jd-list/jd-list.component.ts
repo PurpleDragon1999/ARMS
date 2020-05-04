@@ -23,7 +23,7 @@ export class JdListComponent implements OnInit {
   }
 
   updateJdInfo(jobId:string) {
-    this._service.updateJobInfo().subscribe((res) => {
+    this._service.updateJobInfo(jobId).subscribe((res) => {
       this.loadJds();
     });
   }

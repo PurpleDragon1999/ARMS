@@ -64,7 +64,7 @@ export class AppServicesService {
     return this.http.get<any>(`${USER_DOMAIN}/api/jobDescription`, this.options);
 }
 
-updateJobInfo(): Observable<HttpResponse<any>>{
+updateJobInfo(jobId): Observable<HttpResponse<any>>{
   return this.http.put<any>(`${USER_DOMAIN}/api/jobDescription`, this.options);
 }
 
