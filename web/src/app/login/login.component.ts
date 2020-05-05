@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { BroadcastService, MsalService } from '@azure/msal-angular';
 import { Logger, CryptoUtils } from 'msal';
+
 const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
 
 import { HttpClient } from '@angular/common/http';
@@ -58,9 +59,8 @@ export class LoginComponent implements OnInit {
   getProfile() {
     this.http.get(GRAPH_ENDPOINT).toPromise()
       .then(profile => {
-        this.profile = profile;
-
-      });
+          this.profile = profile;
+        });
   }
 
   async loginFunction() {
@@ -72,8 +72,9 @@ export class LoginComponent implements OnInit {
     } else {
       let object = await this.authService.loginPopup();
     }
+    
     const idToken = window.localStorage.getItem("msal.idtoken");
-
+    
     this.loginService.checkPermissions(idToken).subscribe(
       res => {
         if (res != null) {
@@ -101,4 +102,5 @@ export class LoginComponent implements OnInit {
     )
 
   }
+  
 }

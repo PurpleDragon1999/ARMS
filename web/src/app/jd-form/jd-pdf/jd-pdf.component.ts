@@ -27,17 +27,18 @@ export class JdPdfComponent implements OnInit {
        
      return this.appService.getJdData(params.jdId);
       })
+      
     )
     .subscribe((res) => {
       this.jdObject = res.payload.data;
     });
-     
+   
   }
-  obj:any;
+ 
   public convertToPDF()
   {
   var data = document.getElementById('content');
-   html2canvas(data).then(canvas => {
+  html2canvas(data).then(canvas => {
   // Few necessary setting options
   var imgWidth = 208;
   var pageHeight = 295;

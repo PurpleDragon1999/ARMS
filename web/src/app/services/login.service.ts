@@ -23,11 +23,7 @@ export class LoginService {
     const helper = new JwtHelperService();
     return helper.decodeToken(this.getToken());
   }
- 
-  
-  checkPermissions(idToken):Observable<any>{
-     return this.http.post<any>(LOGIN_API,{idToken},{...this.httpOptions});
-
+   checkPermissions(idToken):Observable<any>{
+    return this.http.post<any>(LOGIN_API,{idToken},{...this.httpOptions});
   }
-
 }

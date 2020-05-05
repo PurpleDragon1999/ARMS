@@ -113,7 +113,7 @@ export class JdFormComponent implements OnInit {
       return;
     }
     this._service.jdFormData(this.jdFormObject).subscribe((res: any) => {
-      console.log(res, 'response');
+      this.data=res.body.payload.data;
       const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
       modalRef.componentInstance.shouldConfirm = false;
       modalRef.componentInstance.success = res.body.success;
@@ -122,6 +122,7 @@ export class JdFormComponent implements OnInit {
         modalRef.close();
       });
       this.modalClose(true);
+      this.router.navigate(["/jd-pdf", this.data.jdId]);
     },
     (error: HttpErrorResponse) => {
       console.log(error, 'response');
@@ -134,7 +135,7 @@ export class JdFormComponent implements OnInit {
       });
       
       this.data = error.error.payload.data;
-      this.router.navigate(["/jd-pdf", this.data.jdId]);
+      
     }
     ); 
   
