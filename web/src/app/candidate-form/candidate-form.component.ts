@@ -14,7 +14,7 @@ const URL = 'http://localhost:3000/api/candidate'
 export class CandidateFormComponent implements OnInit {
   isSubmitted: Boolean = false;
 
-  constructor(private service: AppServicesService) {}
+  constructor(private service: AppServicesService) { }
 
   public uploader: FileUploader = new FileUploader({
     url: URL,

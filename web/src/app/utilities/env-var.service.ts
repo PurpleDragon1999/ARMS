@@ -7,7 +7,7 @@ export class EnvVarService {
 
   constructor() { }
 
-  ADMIN:string = "admin";
-  HR: string = "hr";
-  INTERVIEWER: string = "user";
+  ADMIN: string = "admin";
+  EMPLOYEE: string = "employee";
+  SUPERUSER: string = "superuser";
 }
