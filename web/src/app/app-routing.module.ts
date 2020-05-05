@@ -1,3 +1,4 @@
+import { ProgressTrackerComponent } from './progress-tracker/progress-tracker.component';
 import { EmployeeUploadComponent } from './employee/components/employee-upload/employee-upload.component';
 import { ListComponent } from './reusable-components/list/list.component';
 import { JdListComponent } from './jd-list/jd-list.component';
@@ -58,6 +59,9 @@ const routes: Routes = [
       { path: ':jdId', component: JdPdfComponent }
     ],
   },
+  {
+    path:"progressTracker", component: ProgressTrackerComponent
+  }
 
 ];
 
