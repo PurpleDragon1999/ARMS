@@ -1,11 +1,7 @@
 <div class="main-panel">
   <div class="page-header">
     <h3 class="page-title">Job Listing</h3>
-    <button
-      class="add btn btn-gradient-light font-weight-bold float-right"
-      id="addbtn"
-      routerLink="/hr/job-desc/new"
-    >
+    <button class="add btn btn-gradient-light font-weight-bold float-right" id="addbtn" routerLink="/hr/job-desc/new">
       Add<i class="mdi mdi-file-plus"></i>
     </button>
   </div>
@@ -35,19 +31,111 @@
             Opening Date : {{ job.openingDate | date }}
           </h6>
 
-          <h6
-            class="font-weight-normal"
-            [style.visibility]="job.closingDate ? 'visible' : 'hidden'"
-          >
+          <h6 class="font-weight-normal" [style.visibility]="job.closingDate ? 'visible' : 'hidden'">
             Closing Date : {{ job.closingDate | date }}
           </h6>
-          
-          <label *ngIf="datecheck(job.closingDate)==1" class="badge badge-gradient-danger float-right mb-0"
-            >CLOSED</label>
-          <label *ngIf="datecheck(job.closingDate)==0" class="badge badge-gradient-success float-right mb-0"
-            >OPEN</label>
+
+          <label *ngIf="datecheck(job.closingDate)==1"
+            class="badge badge-gradient-danger float-right mb-0">CLOSED</label>
+          <label *ngIf="datecheck(job.closingDate)==0"
+            class="badge badge-gradient-success float-right mb-0">OPEN</label>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="w3-content w3-margin-top" style="max-width:1400px; display: none;" id="content" #content>
+  <!-- The Grid -->
+  <div class="w3-row-padding">
+    <!-- Right Column -->
+
+    <button (click)="convertToPDF()" class="pull-right btn btn-primary">Download</button>
+    <div class="image">
+      <img src="" class="image" alt="cyg">
+    </div>
+    <div class="w3-container w3-card w3-white w3-margin-bottom">
+      <h2 class="w3-text-grey "><i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Job
+        Description</h2>
+      <div class="w3-container">
+        <h5 class="w3-opacity"><b>Job Title</b></h5>
+        <p>{{jdObject?.jdTitle}}</p>
+        <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>
+          <p class="w3-tag w3-teal w3-round">Opening Date</p><span class="date">{{jdObject?.openingDate|date}}</span>
+        </h6>
+        <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>
+          <p class="w3-tag w3-teal w3-round">Closing Date</p><span class="date">{{jdObject?.closingDate|date}}</span>
+        </h6>
+        <hr>
+      </div>
+      <div class="w3-container">
+        <h5 class="w3-opacity"><b>Responsibilities and Duties</b></h5>
+        <p>{{jdObject?.jobProfileDescription}}</p>
+        <hr>
+      </div>
+      <div class="w3-container">
+        <h5 class="w3-opacity"><b>Skills And Qualifications</b></h5>
+        <div class="display">
+          <label class="make-bold">Eligibilty Criteria:</label>
+          <p>{{jdObject?.eligibilityCriteria}}</p>
+        </div>
+        <div class="display">
+          <label class="make-bold">Skills Required:</label>
+          <p>{{jdObject?.skills}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="w3-container w3-card w3-white">
+      <div class="w3-container">
+        <h5 class="w3-opacity"><b>Other Details About Job</b></h5>
+        <div class="display">
+          <label class="make-bold">Employment Type:</label>
+          <p>{{jdObject?.jobType}}</p>
+        </div>
+        <div class="display">
+          <label class="make-bold">Location:</label>
+          <p>{{jdObject?.location}}</p>
+        </div>
+        <div class="display">
+          <label class="make-bold">Cost To Company:</label>
+          <p>{{jdObject?.salary}}</p>
+        </div>
+        <!-- End Right Column -->
+      </div>
+      <!-- End Grid -->
+    </div>
+    <!-- End Page Container -->
+
+
+
+
+    <footer class="w3-container w3-teal w3-center w3-margin-top foot">
+      <div class="bottom">
+        <p></p>
+
+      </div>
+      <div class="d-sm-flex justify-content-center justify-content-sm-between">
+        <span class="text">Copyright © 2020 <a href="https://www.cygrp.com/" target="_blank">CyberGroup</a>. All rights
+          reserved.</span>
+
+      </div>
+    </footer>

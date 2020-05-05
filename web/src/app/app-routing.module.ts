@@ -17,7 +17,8 @@ const routes: Routes = [
     path: "edit", component: JdModalComponent 
 },
   {
-    path: "admin", component: AppNavBarComponent, canActivate: [RoleGuardService], data: { role: "admin" }, children: [
+    
+    path: "superuser", component: AppNavBarComponent, canActivate: [RoleGuardService], data: { role: "admin" }, children: [
       {
         path: "", redirectTo: "home", pathMatch: "full"
       },
@@ -31,7 +32,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: "hr", component: AppNavBarComponent, canActivate: [RoleGuardService], data: { role: "hr" }, children: [
+    path: "admin", component: AppNavBarComponent, canActivate: [RoleGuardService], data: { role: "admin" }, children: [
       {
         path: "", redirectTo: "home", pathMatch: "full"
       },
@@ -47,7 +48,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: "user", component: AppNavBarComponent, canActivate: [RoleGuardService], data: { role: "user" }, children: [
+    path: "employee", component: AppNavBarComponent, canActivate: [RoleGuardService], data: { role: "employee" }, children: [
       {
         path: "", redirectTo: "home", pathMatch: "full"
       },

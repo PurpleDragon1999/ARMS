@@ -117,7 +117,7 @@ export class JdModalComponent implements OnInit {
     }
 
     sendUpdateRequest(jdFormObject: any ){
-      console.log(jdFormObject.value,"EEEHHHHHHHH")
+      console.log(jdFormObject.value,"YYEEEHHHHHHHH")
    
       this._service.updateJobInfo(jdFormObject,jdFormObject.jobId).subscribe((res:any) =>  {
         if(res.success == 200){
