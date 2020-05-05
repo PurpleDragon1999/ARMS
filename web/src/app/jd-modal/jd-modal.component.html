@@ -1,144 +1,136 @@
-<div class="main-panel">
-  <div class="content-wrapper">
-
-  <div class="page-header">
-   <h3 class="page-title"> Job Listing Form </h3>
- </div>
- <div class="row">
-   <div class="col-md-6 col-lg-12 grid-margin stretch-card">
-     <div class="card">
-       <div class="card-body">
-         <br>
-         <form class="forms-sample" [formGroup]="jobListingForm" (ngSubmit)="onSubmit()" novalidate>
-           <div class="form-group">
-             <label for="jobId">Job ID</label>
-             <div class="input-group col-xs-12">
-               <span class="input-group-append btn btn-gradient-primary span">
-                 CYGJID
-               </span>
-               <input type="text" class="form-control" id="jobId" #jobId placeholder="Job ID" maxlength="4"
-                 (input)="jobId.value=$event.target.value.toUpperCase()" formControlName="jobId"
-                 [ngClass]="{ 'is-invalid': submitted && formControls.jobId.errors }" />
-               <div *ngIf="submitted && formControls.jobId.errors" class="invalid-feedback">
-                 <div *ngIf="formControls.jobId.errors.required"><i class="mdi mdi-alert-outline"></i> Job ID is
-                   required</div>
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Update Job Description</h5>
+    </div>
+    <div class="modal-body">
+           <form class="forms-sample" #form="ngForm" (ngSubmit)="sendUpdateRequest(form)" novalidate>
+             <div class="form-group">
+               <label for="jobId">Job ID</label>
+               
+               <div class="input-group col-xs-12">
+                 <span class="input-group-append btn btn-gradient-primary span">
+                   CYGJID
+                 </span>
+                 <input name="jdId" [ngModel]="jdId" type="text" required class="form-control" id="jdId"
+                 placeholder="Job Id" #jobId="ngModel" [ngClass]="{ 'is-invalid': submitted && formControls.jdId.errors }">
+                 <div *ngIf="submitted && formControls.jobId.errors" class="invalid-feedback">
+                  <div *ngIf="formControls.jdId.errors.required"><i class="mdi mdi-alert-outline"></i> Job ID is
+                    required</div>
+                </div>
                </div>
              </div>
-           </div>
-           <div class="form-group">
-             <label for="jobTitle">Job Title </label>
-             <input type="text" class="form-control" placeholder="Job Title" #jobTitle maxlength="40"
-               formControlName="jobTitle" [ngClass]="{ 'is-invalid': submitted && formControls.jobTitle.errors }" />
-             <div *ngIf="submitted && formControls.jobTitle.errors" class="invalid-feedback">
-               <div *ngIf="formControls.jobTitle.errors.required"><i class="mdi mdi-alert-outline"></i> Job Title is
-                 required</div>
+             <div class="form-group">
+               <label for="jobTitle">Job Title </label>
+               <input name="jdTitle" [ngModel]="jdTitle" type="text" required class="form-control" id="jdTitle"
+               placeholder="Job Title" #jobTitle="ngModel" [ngClass]="{ 'is-invalid': submitted && formControls.jdTitle.errors }">
+               <div *ngIf="submitted && formControls.jdTitle.errors" class="invalid-feedback">
+                <div *ngIf="formControls.jobId.errors.required"><i class="mdi mdi-alert-outline"></i> Job ID is
+                  required</div>
+              </div>
              </div>
-           </div>
-
-           <div class="form-group">
-             <label for="jobDescription">Job Description </label>
-             <textarea class="form-control" #jobDescription rows="10" placeholder="Job Description"
-               formControlName="jobDescription"
-               [ngClass]="{ 'is-invalid': submitted && formControls.jobDescription.errors }"></textarea>
-             <div *ngIf="submitted && formControls.jobDescription.errors" class="invalid-feedback">
-               <div *ngIf="formControls.jobDescription.errors.required"><i class="mdi mdi-alert-outline"></i> Job
-                 Description is required</div>
+  
+             <div class="form-group">
+               <label for="jobDescription">Job Description </label>
+               <textarea name="jobDescription" [ngModel]="jobProfileDescription" type="text" required class="form-control" id="jobDescription"
+               placeholder="Job Description" #jobDescription="ngModel" [ngClass]="{ 'is-invalid': submitted && formControls.jobProfileDescription.errors }">
+               </textarea>
+               <div *ngIf="submitted && formControls.jobId.errors" class="invalid-feedback">
+                <div *ngIf="formControls.jobProfileDescription.errors.required"><i class="mdi mdi-alert-outline"></i> Job ID is
+                  required</div>
+              </div>
              </div>
-           </div>
-
-           <div class="form-group">
-             <label for="openingDate">Opening date </label>
-             <input type="date" #openingDate class="form-control" formControlName="openingDate"
-               [ngClass]="{ 'is-invalid': submitted && formControls.openingDate.errors }" />
-             <div *ngIf="submitted && formControls.openingDate.errors" class="invalid-feedback">
-               <div *ngIf="formControls.openingDate.errors.required"><i class="mdi mdi-alert-outline"></i> Opening
-                 Date is required</div>
+  
+             <div class="form-group">
+               <label for="openingDate">Opening date</label>
+               <input name="openingDate" [ngModel]="openingDate" type="date" required class="form-control" 
+               placeholder="Opening Date" ngModel [ngClass]="{ 'is-invalid': submitted && formControls.openingDate.errors }">
+               <div *ngIf="submitted && formControls.openingDate.errors" class="invalid-feedback">
+                <div *ngIf="formControls.openingDate.errors.required"><i class="mdi mdi-alert-outline"></i> Job ID is
+                  required</div>
+              </div>
              </div>
-           </div>
-
-           <div class="form-group">
-             <label for="closingDate">Closing Date </label>
-             <input type="date" #closingDate class="form-control" formControlName="closingDate" />
-             <div *ngIf="error.isError" class="alert alert-danger">
-               {{ error.errorMessage }}
+  
+             <div class="form-group">
+               <label for="closingDate">Closing Date</label>
+               <input name="closingDate" [ngModel]="closingDate" type="date" required class="form-control"
+               placeholder="Closing Date" ngModel [ngClass]="{ 'is-invalid': submitted && formControls.closingDate.errors }">
+               <div *ngIf="submitted && formControls.closingDate.errors" class="invalid-feedback">
+                <div *ngIf="formControls.closingDate.errors.required"><i class="mdi mdi-alert-outline"></i> Job ID is
+                  required</div>
+              </div>
              </div>
-           </div>
-
-           <div class="form-group">
-             <label for="skills">Skills </label>
-             <input type="text" class="form-control" placeholder="Skills" #skills maxlength="30"
-               formControlName="skills" [ngClass]="{ 'is-invalid': submitted && formControls.skills.errors }" />
-             <div *ngIf="submitted && formControls.skills.errors" class="invalid-feedback">
-               <div *ngIf="formControls.skills.errors.required"><i class="mdi mdi-alert-outline"></i> Skills is
-                 required</div>
+  
+             <div class="form-group">
+               <label for="skills">Skills </label>
+               <input name="skills" [ngModel]="skills" type="text" required class="form-control"
+               placeholder="Skills" ngModel [ngClass]="{ 'is-invalid': submitted && formControls.skills.errors }">
+               <div *ngIf="submitted && formControls.skills.errors" class="invalid-feedback">
+                <div *ngIf="formControls.skills.errors.required"><i class="mdi mdi-alert-outline"></i> Job ID is
+                  required</div>
+              </div>
              </div>
-           </div>
-
-           <div class="form-group">
-             <label for="eligibilityCriteria">Eligibility criteria </label>
-             <select class="form-control form-control-lg" placeholder="Criteria" #eligibilityCriteria
-               (change)="selectChangeHandlerEligibilityCriteria($event)" formControlName="eligibilityCriteria"
-               [ngClass]="{ 'is-invalid': submitted && formControls.eligibilityCriteria.errors }">
-               <option>{{eligibilityCriteriaOptions}}</option>
-               <option value="High School">High School</option>
-               <option value="Bachelor's">Bachelor's</option>
-               <option value="Master's">Master's</option>
-               <option value="Doctoral">Doctoral</option>
-             </select>
-             <div *ngIf="submitted && formControls.eligibilityCriteria.errors" class="invalid-feedback">
-               <div *ngIf="formControls.eligibilityCriteria.errors.required"><i class="mdi mdi-alert-outline"></i>
-                 Eligibility criteria is required</div>
+  
+             <div class="form-group">
+               <label for="eligibilityCriteria">Eligibility criteria</label>
+               <select name="eligibilityCriteria" [ngModel]="eligibilityCriteria" type="text" required class="form-control"
+               placeholder="Eligibility Criteria" ngModel [ngClass]="{ 'is-invalid': submitted && formControls.eligibilityCriteria.errors }">
+                 <option value="High School">High School</option>
+                 <option value="Bachelor's">Bachelor's</option>
+                 <option value="Master's">Master's</option>
+                 <option value="Doctoral">Doctoral</option>
+               </select>
+               <div *ngIf="submitted && formControls.eligibilityCriteria.errors" class="invalid-feedback">
+                <div *ngIf="formControls.eligibilityCriteria.errors.required"><i class="mdi mdi-alert-outline"></i> Job ID is
+                  required</div>
+              </div>
              </div>
-           </div>
-
-           <div class="form-group">
-             <label for="jobType">Job Type </label>
-             <select class="form-control form-control-lg" placeholder="Criteria" #jobType
-               (change)="selectChangeHandlerJobType($event)" formControlName="jobType"
-               [ngClass]="{ 'is-invalid': submitted && formControls.jobType.errors }">
-               <option>{{jobTypeOptions}}</option>
-               <option value="full-time">Full-time</option>
-               <option value="part-time">Part-time</option>
-               <option value="intern">Intern</option>
-             </select>
-             <div *ngIf="submitted && formControls.jobType.errors" class="invalid-feedback">
-               <div *ngIf="formControls.jobType.errors.required"><i class="mdi mdi-alert-outline"></i> Job Type is
-                 required</div>
+  
+             <div class="form-group">
+               <label for="jobType">Job Type</label>
+               <select name="jobType" [ngModel]="jobType" type="text" required class="form-control"
+               placeholder="Job Type" ngModel [ngClass]="{ 'is-invalid': submitted && formControls.jobType.errors }">
+                 <option value="full-time">Full-time</option>
+                 <option value="part-time">Part-time</option>
+                 <option value="intern">Intern</option>
+               </select>
+               <div *ngIf="submitted && formControls.jobType.errors" class="invalid-feedback">
+                <div *ngIf="formControls.jobType.errors.required"><i class="mdi mdi-alert-outline"></i> Job ID is
+                  required</div>
+              </div>
              </div>
-           </div>
-
-           <div class="form-group">
-             <label for="location">Location </label>
-             <select class="form-control form-control-lg" placeholder="Criteria" #location
-               (change)="selectChangeHandlerLocation($event)" formControlName="location"
-               [ngClass]="{ 'is-invalid': submitted && formControls.location.errors }">
-               <option>{{locationOptions}}</option>
-               <option> Dallas, TX - USA</option>
-               <option> Noida, UP - India</option>
-             </select>
-             <div *ngIf="submitted && formControls.location.errors" class="invalid-feedback">
-               <div *ngIf="formControls.location.errors.required"><i class="mdi mdi-alert-outline"></i> Location is
-                 required</div>
+  
+             <div class="form-group">
+               <label for="location">Location</label>
+               <select name="location" [ngModel]="location" type="text" required class="form-control"
+               placeholder="Location" ngModel [ngClass]="{ 'is-invalid': submitted && formControls.location.errors }">
+                 <option value="Dallas, TX - USA"> Dallas, TX - USA</option>
+                 <option value="Noida, UP - India"> Noida, UP - India</option>
+               </select>
+               <div *ngIf="submitted && formControls.location.errors" class="invalid-feedback">
+                <div *ngIf="formControls.location.errors.required"><i class="mdi mdi-alert-outline"></i> Location is
+                  required</div>
+              </div>
              </div>
+  
+             <div class="form-group">
+               <label for="salary">Salary (per annum)</label>
+               <input name="salary" [ngModel]="salary" type="number" required class="form-control"
+               placeholder="Salary" ngModel>
+             </div>
+  
+             <div class="form-group">
+               <label for="vacancies">No .of Vacancies </label>
+               <input name="vacancies" [ngModel]="vacancies" type="number" required class="form-control"
+               placeholder="Job Id" ngModel>
+             </div>
+             <br>
+             <button type="submit" class="btn btn-gradient-primary mr-2">UPDATE</button>
+             <button class="btn btn-light">Cancel</button>
+             <!-- <app-jd-pdf [jdObj]="jobListingFormObject"></app-jd-pdf> -->
+           </form>
            </div>
-
-           <div class="form-group">
-             <label for="salary">Salary (per annum)</label>
-             <input type="number" class="form-control" placeholder="Salary" #salary />
            </div>
-
-           <div class="form-group">
-             <label for="vacancies">No .of Vacancies </label>
-             <input type="number" class="form-control" placeholder="Vacancies" #vacancies />
            </div>
-           <br>
-           <button type="submit" class="btn btn-gradient-primary mr-2" (click)="jdFormData()">ADD</button>
-           <button class="btn btn-light">Cancel</button>
-           <!-- <app-jd-pdf [jdObj]="jobListingFormObject"></app-jd-pdf> -->
-         </form>
-       </div>
-     </div>
-   </div>
- </div>
-</div>
-</div>
+     
+  
