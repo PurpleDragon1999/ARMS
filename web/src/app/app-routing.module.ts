@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: "", redirectTo: 'login', pathMatch: 'full' },
   { path: "login", component: LoginComponent },
   {
-    path: "su", component: AppNavBarComponent, canActivate: [RoleGuardService], data: { role: "admin" }, children: [
+    path: "superuser", component: AppNavBarComponent, canActivate: [RoleGuardService], data: { role: "admin" }, children: [
       {
         path: "", redirectTo: "home", pathMatch: "full"
       },

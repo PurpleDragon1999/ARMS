@@ -1,31 +1,30 @@
-import { ChartsModule } from 'ng2-charts';
-import { RoleGuardService } from './utilities/role-guard.service';
-import { ModalComponent } from './reusable-components/modal/modal.component';
-import { EmployeeFormComponent } from "./employee/components/employee-form/employee-form.component";
-import { EmployeeUploadComponent } from "./employee/components/employee-upload/employee-upload.component"
-import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { ListComponent } from './reusable-components/list/list.component';
-import { EmployeeService } from "./employee/employee.service";
-import { EmployeeComponent } from "./employee/containers/employee/employee.component";
-import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { MsalInterceptor, MsalModule } from '@azure/msal-angular';
+import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ProgressHttpModule } from 'angular-progress-http';
+import { ChartsModule } from 'ng2-charts';
+import { FileSelectDirective } from 'ng2-file-upload';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { CreateInterviewComponent } from './create-interview/create-interview.component';
-import { JdFormComponent } from './jd-form/jd-form.component';
-import { HrInterviewAssessementComponent } from './hr-interview-assessement/hr-interview-assessement.component';
-import { AppNavBarComponent } from './nav-bar/nav-bar.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { ScheduleInterviewComponent } from './schedule-interview/schedule-interview.component';
-import { HrComponent } from './hr/hr.component';
 import { CandidateFormComponent } from './candidate-form/candidate-form.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FileSelectDirective } from 'ng2-file-upload';
-import { ProgressHttpModule } from 'angular-progress-http';
-import { MsalModule, MsalInterceptor } from '@azure/msal-angular'; import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { JdListComponent } from './jd-list/jd-list.component'
-import { JdPdfComponent } from './jd-form/jd-pdf/jd-pdf.component'
+import { CreateInterviewComponent } from './create-interview/create-interview.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { EmployeeFormComponent } from "./employee/components/employee-form/employee-form.component";
+import { EmployeeUploadComponent } from "./employee/components/employee-upload/employee-upload.component";
+import { EmployeeComponent } from "./employee/containers/employee/employee.component";
+import { HrInterviewAssessementComponent } from './hr-interview-assessement/hr-interview-assessement.component';
+import { HrComponent } from './hr/hr.component';
+import { JdFormComponent } from './jd-form/jd-form.component';
+import { JdPdfComponent } from './jd-form/jd-pdf/jd-pdf.component';
+import { JdListComponent } from './jd-list/jd-list.component';
+import { LoginComponent } from './login/login.component';
+import { AppNavBarComponent } from './nav-bar/nav-bar.component';
+import { ListComponent } from './reusable-components/list/list.component';
+import { ModalComponent } from './reusable-components/modal/modal.component';
+import { ScheduleInterviewComponent } from './schedule-interview/schedule-interview.component';
 
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
@@ -62,7 +61,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     AppRoutingModule,
     HttpClientModule,
     NgbModule,
-    // ChartsModule,
+    ChartsModule,
     HttpClientModule,
     ProgressHttpModule,
     MsalModule.forRoot({

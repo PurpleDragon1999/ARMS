@@ -36,7 +36,7 @@
           <select name="role" [ngModel]="employee?.role" required class="form-control" id="role" #role="ngModel"
             [ngClass]="{ 'is-invalid': role.dirty && role.invalid }">
             <option [value]="null" disabled>Select Role</option>
-            <option value="superuser">Superuser</option>
+            <option value="superuser">Super User</option>
             <option value="admin">Admin</option>
             <option value="employee">Employee</option>
           </select>

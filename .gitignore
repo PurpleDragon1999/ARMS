@@ -6,3 +6,5 @@ api/.env
 
 yarn.lock
 .vscode/
+
+**/*/*.csv
