@@ -5,17 +5,17 @@
   </div>
   <div class="modal-body">
     <form class="forms-sample" #form="ngForm" (ngSubmit)="sendUpdateRequest(form)" novalidate>
-      <div class="form-group"> <label for="jobId">Job ID</label>
+      <div class="form-group"> <label for="jdId">Job ID</label>
         <div class="input-group col-xs-12"> <span class="input-group-append btn btn-gradient-primary span"> CYGJID
-          </span> <input name="jdId" [ngModel]="jdId" type="text" required class="form-control" id="jdId"
-            placeholder="Job Id" #jobId="ngModel" [ngClass]="{ 'is-invalid': submitted && formControls.jobId.errors }">
-          <div *ngIf="submitted && formControls.jobId.errors" class="invalid-feedback">
-            <div *ngIf="formControls.jobId.errors.required"><i class="mdi mdi-alert-outline"></i> Job ID is required
+          </span> <input name="jdId" ngModel value="{{jdId}}" type="text" required class="form-control" id="jdId"
+            placeholder="Job Id" #jdId="ngModel" [ngClass]="{ 'is-invalid': submitted && formControls.jdId.errors }">
+          <div *ngIf="submitted && formControls.jdId.errors" class="invalid-feedback">
+            <div *ngIf="formControls.jdId.errors.required"><i class="mdi mdi-alert-outline"></i> Job ID is required
             </div>
           </div>
         </div>
       </div>
-      <div class="form-group"> <label for="jobTitle">Job Title </label> <input name="jdTitle" [ngModel]="jdTitle"
+      <div class="form-group"> <label for="jobTitle">Job Title </label> <input name="jdTitle" ngModel value="{{jdTitle}}"
           type="text" required class="form-control" id="jdTitle" placeholder="Job Title" #jobTitle="ngModel"
           [ngClass]="{ 'is-invalid': submitted && formControls.jobId.errors }">
         <div *ngIf="submitted && formControls.jobId.errors" class="invalid-feedback">
@@ -23,15 +23,15 @@
         </div>
       </div>
       <div class="form-group"> <label for="jobDescription">Job Description </label> <textarea name="jobDescription"
-          [ngModel]="jobProfileDescription" type="text" required class="form-control" id="jobDescription"
+          ngModel value="{{jobProfileDescription}}" type="text" required class="form-control" id="jobDescription"
           placeholder="Job Description" #jobDescription="ngModel"
           [ngClass]="{ 'is-invalid': submitted && formControls.jobId.errors }"> </textarea>
         <div *ngIf="submitted && formControls.jobId.errors" class="invalid-feedback">
           <div *ngIf="formControls.jobId.errors.required"><i class="mdi mdi-alert-outline"></i> Job ID is required</div>
         </div>
       </div>
-     <!-- <div class="form-group"> <label for="openingDate">Opening date </label> <input
-          name="openingDate" [ngModel]="openingDate" type="date" required class="form-control" id="openingDate"
+     <div class="form-group"> <label for="openingDate">Opening date </label> <input
+          name="openingDate" ngModel value="{{openingDate}}" type="date" required class="form-control" id="openingDate"
           placeholder="Opening Date" #openingDate="ngModel"
           [ngClass]="{ 'is-invalid': submitted && formControls.jobId.errors }">
         <div *ngIf="submitted && formControls.jobId.errors" class="invalid-feedback">
@@ -39,13 +39,13 @@
         </div>
       </div>
       <div class="form-group"> <label for="closingDate">Closing Date </label> <input name="closingDate"
-          [ngModel]="closingDate" type="date" required class="form-control" id="closingDate" placeholder="Closing Date"
+          ngModel value="{{closingDate}}" type="date" required class="form-control" id="closingDate" placeholder="Closing Date"
           #closingDate="ngModel" [ngClass]="{ 'is-invalid': submitted && formControls.jobId.errors }">
         <div *ngIf="submitted && formControls.jobId.errors" class="invalid-feedback">
           <div *ngIf="formControls.jobId.errors.required"><i class="mdi mdi-alert-outline"></i> Job ID is required</div>
         </div>
-      </div> -->
-      <div class="form-group"> <label for="skills">Skills </label> <input name="skills" [ngModel]="skills" type="text"
+      </div>
+      <div class="form-group"> <label for="skills">Skills </label> <input name="skills" ngModel value="{{skills}}" type="text"
           required class="form-control" id="skills" placeholder="Skills" #skills="ngModel"
           [ngClass]="{ 'is-invalid': submitted && formControls.jobId.errors }">
         <div *ngIf="submitted && formControls.jobId.errors" class="invalid-feedback">
@@ -53,9 +53,10 @@
         </div>
       </div>
       <div class="form-group"> <label for="eligibilityCriteria">Eligibility criteria </label> <select
-          name="eligibilityCriteria" [ngModel]="eligibilityCriteria" type="text" required class="form-control"
+          name="eligibilityCriteria" ngModel  type="text" required class="form-control"
           id="eligibilityCriteria" placeholder="Eligibility Criteria" #eligibilityCriteria="ngModel"
           [ngClass]="{ 'is-invalid': submitted && formControls.jobId.errors }">
+          <option value="{{eligibilityCriteria}}">{{eligibilityCriteria}}</option>
           <option value="High School">High School</option>
           <option value="Bachelor's">Bachelor's</option>
           <option value="Master's">Master's</option>
@@ -65,9 +66,10 @@
           <div *ngIf="formControls.jobId.errors.required"><i class="mdi mdi-alert-outline"></i> Job ID is required</div>
         </div>
       </div>
-      <div class="form-group"> <label for="jobType">Job Type </label> <select name="jobType" [ngModel]="jobType"
+      <div class="form-group"> <label for="jobType">Job Type </label> <select name="jobType" ngModel value="{{jobType}}"
           type="text" required class="form-control" id="jobType" placeholder="Job Type" #jobType="ngModel"
           [ngClass]="{ 'is-invalid': submitted && formControls.jobId.errors }">
+          <option value="{{jobType}}">{{jobType}}</option>
           <option value="full-time">Full-time</option>
           <option value="part-time">Part-time</option>
           <option value="intern">Intern</option>
@@ -76,9 +78,10 @@
           <div *ngIf="formControls.jobId.errors.required"><i class="mdi mdi-alert-outline"></i> Job ID is required</div>
         </div>
       </div>
-      <div class="form-group"> <label for="location">Location </label> <select name="location" [ngModel]="location"
+      <div class="form-group"> <label for="location">Location </label> <select name="location" ngModel value="{{location}}"
           type="text" required class="form-control" id="location" placeholder="Location" #location="ngModel"
           [ngClass]="{ 'is-invalid': submitted && formControls.jobId.errors }">
+          <option value="{{location}}">{{location}}</option>
           <option> Dallas, TX - USA</option>
           <option> Noida, UP - India</option>
         </select>
@@ -86,10 +89,10 @@
           <div *ngIf="formControls.jobId.errors.required"><i class="mdi mdi-alert-outline"></i> Job ID is required</div>
         </div>
       </div>
-      <div class="form-group"> <label for="salary">Salary (per annum)</label> <input name="salary" [ngModel]="salary"
+      <div class="form-group"> <label for="salary">Salary (per annum)</label> <input name="salary" ngModel value="{{salary}}"
           type="number" required class="form-control" id="salary" placeholder="Salary" #salary="ngModel"> </div>
       <div class="form-group"> <label for="vacancies">No .of Vacancies </label> <input name="vacancies"
-          [ngModel]="vacancies" type="number" required class="form-control" id="vacancies" placeholder="Job Id"
+          ngModel value="{{vacancies}}" type="number" required class="form-control" id="vacancies" placeholder="Job Id"
           #vacancies="ngModel"> </div> <br> <button type="submit" class="btn btn-gradient-primary mr-2">UPDATE</button>
       <button class="btn btn-light">Cancel</button> <!-- <app-jd-pdf [jdObj]="jobListingFormObject"></app-jd-pdf> -->
     </form>
