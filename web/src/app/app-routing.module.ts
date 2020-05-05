@@ -16,10 +16,12 @@ import { JdPdfComponent } from './jd-form/jd-pdf/jd-pdf.component'
 import { HrComponent } from './hr/hr.component';
 import { AppNavBarComponent } from './nav-bar/nav-bar.component';
 import { RoleGuardService } from './utilities/role-guard.service';
+import { ErrorPageComponent } from './error-page/error-page.component';
 
 const routes: Routes = [
   { path: "", redirectTo: 'login', pathMatch: 'full'},
   { path: "login", component: LoginComponent },
+  { path: "404", component: ErrorPageComponent},
   { path: "admin", component: AppNavBarComponent, canActivate: [RoleGuardService], data: {role: "admin"}, children: [
     {
       path: "", redirectTo: "home", pathMatch: "full"

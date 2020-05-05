@@ -25,7 +25,8 @@ import { FileSelectDirective } from 'ng2-file-upload';
 import { ProgressHttpModule } from 'angular-progress-http';
 import { MsalModule, MsalInterceptor } from '@azure/msal-angular';import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { JdListComponent } from './jd-list/jd-list.component'
-import { JdPdfComponent } from './jd-form/jd-pdf/jd-pdf.component'
+import { JdPdfComponent } from './jd-form/jd-pdf/jd-pdf.component';
+import { ErrorPageComponent } from './error-page/error-page.component';
 
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
@@ -54,6 +55,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     JdListComponent,
     ScheduleInterviewComponent,
     JdPdfComponent,
+    ErrorPageComponent
   ],
   imports: [
     ReactiveFormsModule,
