@@ -1,3 +1,4 @@
+import { IResponse } from 'src/app/models/response.interface';
   
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -71,7 +72,7 @@ updateJobInfo(jobFormObject,jobId): Observable<HttpResponse<any>>{
 }
 
 
-deleteJd(jobObjId): Observable<HttpResponse<any>>{
+deleteJd(jobObjId): Observable<IResponse>{
   return this.http.delete<any>(`${USER_DOMAIN}/api/jobDescription/${jobObjId}`, this.options);
 }  
 
