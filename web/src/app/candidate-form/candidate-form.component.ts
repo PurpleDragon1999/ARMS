@@ -22,7 +22,7 @@ const URL = 'http://localhost:3000/api/candidate'
 export class CandidateFormComponent implements OnInit {
   isSubmitted: Boolean = false;
 
-  constructor(private service: AppServicesService) {}
+  constructor(private service: AppServicesService) { }
 
   public uploader: FileUploader = new FileUploader({
     url: URL,
@@ -33,7 +33,7 @@ export class CandidateFormComponent implements OnInit {
     this.uploader.onAfterAddingFile = (file) => {
       file.withCredentials = false;
     };
-    this.uploader.onCompleteItem = (item: any, status: any) => {};
+    this.uploader.onCompleteItem = (item: any, status: any) => { };
   }
 
   model: any = {};

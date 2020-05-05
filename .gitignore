@@ -5,3 +5,6 @@ node_modules/
 api/.env
 
 yarn.lock
+.vscode/
+
+**/*/*.csv
