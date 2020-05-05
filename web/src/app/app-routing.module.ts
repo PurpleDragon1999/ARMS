@@ -20,6 +20,7 @@ import { RoleGuardService } from './utilities/role-guard.service';
 const routes: Routes = [
   { path: "", redirectTo: 'login', pathMatch: 'full'},
   { path: "login", component: LoginComponent },
+  { path: "candidate", component: CandidateFormComponent},
   { path: "admin", component: AppNavBarComponent, canActivate: [RoleGuardService], data: {role: "admin"}, children: [
     {
       path: "", redirectTo: "home", pathMatch: "full"
