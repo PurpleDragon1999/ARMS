@@ -1,10 +1,11 @@
-const Base = require('./base');
 const model = require("../models");
+const Base = require('./base');
 const interviewModel = require('../models/interview');
 const jobDescriptionModel = require('../models/jobDescription');
 const pdfGenerator=require('../middlewares/pdfGenerator');
 const nodeMail=require('../middlewares/mailHelper');
 var outlook = require('node-outlook');
+const mongoose=require('mongoose');
 class Interview extends Base{
     constructor(){
         super(interviewModel);
@@ -86,7 +87,7 @@ shortlisted for an interview process with CyberGroup.The details of interview ar
   async get(req, res) {
     try {
       const data = await interviewModel.get({_id: req.params.id} );
-      if (data.length==0){
+     if (data.length==0){
         return res.status(400).send({
           success: false,
           payload: {

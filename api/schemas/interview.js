@@ -21,15 +21,15 @@ module.exports = {
       panelOfInterviewers: {
          panel1:{
            type:ObjectId,
-           ref:"employee"
+           ref:"Employee"
          },
         panel2:{
           type:ObjectId,
-          ref:"employee"
+          ref:"Employee"
         },
         panel3:{
           type:ObjectId,
-          ref:"employee"
+          ref:"Employee"
         }
       },
       time: {
