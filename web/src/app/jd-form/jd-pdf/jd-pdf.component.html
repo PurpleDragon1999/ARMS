@@ -1,74 +1,83 @@
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+   rel="stylesheet" 
+   integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+   crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<!-- Page Container -->
 
-<div class="w3-content w3-margin-top" style="max-width:1400px;"id="content"#content>
-  <!-- The Grid -->
-
-    <div class="w3-row-padding">
-    <!-- Right Column -->
-    <button class="btn btn-primary pull-right"(click)="convertToPDF()">Download</button>
-        <div class="image">
-        <img src={{imageUrl}} class="image"alt="cyg">
-        </div>
-        <div class="w3-container w3-card w3-white w3-margin-bottom">
-        
-          <h2 class="w3-text-grey "><i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Job Description</h2>
-          <div class="w3-container">
-            <h5 class="w3-opacity"><b>Job Title</b></h5>
-            <p>{{jdObject?.jdTitle}}</p>
-            <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i><p class="w3-tag w3-teal w3-round">Opening Date</p><span class="date">{{jdObject?.openingDate|date}}</span></h6>
-            <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i><p class="w3-tag w3-teal w3-round">Closing Date</p><span class="date">{{jdObject?.closingDate|date}}</span></h6>
-           <hr>
-          </div>
-          <div class="w3-container">
-            <h5 class="w3-opacity"><b>Responsibilities and Duties</b></h5>
-            <p class="description">{{jdObject?.jobProfileDescription}}</p>
-            <hr>
-          </div>
-          <div class="w3-container">
-            <h5 class="w3-opacity"><b>Skills And Qualifications</b></h5>
-              <div class="display">
-                  <label class="make-bold" >Eligibilty Criteria:</label>
-                  <p>{{jdObject?.eligibilityCriteria}}</p>
-              </div>
-              <div class="display">
-                <label class="make-bold">Skills Required:</label>
-                <p>{{jdObject?.skills}}</p>
-            </div>      
-        </div>
-     </div>
-    <div class="w3-container w3-card w3-white">
-        <div class="w3-container">
-            <h5 class="w3-opacity"><b>Other Details About Job</b></h5>
-            <div class="display">
-                <label class="make-bold" >Employment Type:</label>
-                <p>{{jdObject?.jobType}}</p>
-            </div>
-            <div class="display">
-              <label class="make-bold">Location:</label>
-              <p>{{jdObject?.location}}</p>
-          </div> 
-          <div class="display">
-            <label class="make-bold">Cost To Company:</label>
-            <p>{{jdObject?.salary}}</p>
-         </div>    
-   <!-- End Right Column -->
-      </div>
-<!-- End Grid -->
-    </div>
-<!-- End Page Container -->
-  
-  
-   
-  
-  <footer class="w3-container w3-teal w3-center w3-margin-top foot">
-    <div class="bottom">
-     <p></p>
-      
-    </div>
-         <div class="d-sm-flex justify-content-center justify-content-sm-between">
-        <span class="text">Copyright © 2020 <a href="https://www.cygrp.com/" target="_blank">CyberGroup</a>. All rights reserved.</span>
-       
-      </div>
-  </footer>
+<div class="container"id="content">
  
+    <div class="image">
+      <img src={{imageUrl}} class="image" alt="cyg">
+   </div>
+   <button  class="pull-right btn btn-primary"style="float:right"(click)="convertToPDF()">Download</button>
+  <div class="card"style=" height:240px;" >
+   <div class="card-body">
+      <div class="heading-holder">
+        <i class="fa fa-suitcase"></i>
+        <h5 class="card-title">Job Description</h5>
+      </div>
+        <h6 class="card-subtitle mb-2 text-muted">Job Title:</h6>
+     <p class="card-text">{{jdObject?.jdTitle}}</p>
+    <div class="date-holder">
+     <i class="fa fa-calendar"></i><h5 class="date-label">Opening Date</h5><p class="date">{{jdObject?.openingDate|date}}</p>
+   </div>
+     <div class="date-holder">
+      <i class="fa fa-calendar"></i><h5 class="date-label">Closing Date</h5><p class="date">{{jdObject?.closingDate|date}}</p>
+     </div>
+  </div>
+ </div>
+
+<div class="card" >
+  <div class="card-body">
+     <div class="heading-holder">
+      <h6 class="card-subtitle mb-2 text-muted">Responsibilities and Duties</h6>
+     </div>
+      <div>
+        <p class="para">{{jdObject?.jobProfileDescription}}</p>
+      </div>
+      <div class="heading-holder">
+        <h6 class="card-subtitle mb-2 text-muted">Skills and Qualifications</h6>
+      </div>
+        <div class="list-body"style=" height:60px;">
+          <div class="list-item">
+            <p class="make-bold">Eligibility Criteria:&nbsp;</p>
+            <p>{{jdObject?.eligibilityCriteria}}</p>
+          </div>
+          <div class="list-item">
+            <p class="make-bold">Skills Required:&nbsp;&nbsp;&nbsp;&nbsp;</p>
+            <p>{{jdObject?.skills}}</p>
+          </div>
+          
+        </div>
+        <div class="heading-holder">
+          <h6 class="card-subtitle mb-2 text-muted">Other Details about job</h6>
+        </div>
+          <div class="list-body"style=" height:90px;">
+            <div class="list-item">
+              <p class="make-bold">Employment Type:&nbsp;</p>
+              <p>{{jdObject?.jobType}}</p>
+            </div>
+            <div class="list-item">
+              <p class="make-bold">Location:&nbsp;&nbsp;&nbsp;&nbsp;</p>
+              <p>{{jdObject?.location}}</p>
+            </div>
+            <div class="list-item">
+              <p class="make-bold">Cost To Company:&nbsp;&nbsp;&nbsp;&nbsp;</p>
+              <p>{{jdObject?.salary}}</p>
+            </div>
+                      
+          </div>
+  </div>
+</div>
+
+<footer class="page-footer font-small">
+
+  <!-- Copyright -->
+  <div class="footer-copyright  py-3 bottom">Copyright © 2020
+    <a href="www.cygrp.com/">CyberGroup</a> All rights reserved
+  </div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
+</div>
