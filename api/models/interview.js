@@ -14,12 +14,29 @@ class Interview{
         return this.model.findOne(criteria);
     }
 
-    async updateOne(criteria, updateObj){
-        return this.model.updateOne(criteria, updateObj);
+    async modify(criteria, updateObj){
+        return this.model.updateOne({_id: criteria}, updateObj);
     }
 
-    async deleteOne(criteria){
-        return this.model.deleteOne(criteria);
+    async remove(criteria){
+        return this.model.deleteOne({_id: criteria});
     }
+
+    async index(criteria = {}, columns = {}) {
+        let fields = 'jdId jdTitle openingDate closingDate vacancies salary skills eligibilityCriteria jobType location jobProfileDescription';
+        let panelFields= 'name designation role employeeId email profileImageURL'
+        let data = await this.model.find(criteria, columns).populate('jdObjectId', fields)
+            .populate('rounds.panelOfInterviewers',panelFields);
+        return (data);
+      }
+
+    async get(criteria={}, columns={}){
+        let jdFields = 'jdId jdTitle openingDate closingDate vacancies salary skills eligibilityCriteria jobType location jobProfileDescription';
+        let panelFields= 'name designation role employeeId email profileImageURL'
+        let data = await this.model.find({_id: criteria}, columns).populate('jdObjectId', jdFields)
+            .populate('rounds.panelOfInterviewers',panelFields);
+        return (data);
+    }
+           
 }
 module.exports = new Interview();

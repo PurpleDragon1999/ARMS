@@ -75,4 +75,5 @@ export class EmployeeUploadComponent implements OnInit {
   modalClose(rerender: boolean): void {
     this.closeModal.emit(rerender);
   }
+  
 }

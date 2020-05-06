@@ -21,7 +21,7 @@ module.exports={
     },
     cv:{
       type:String,//to keep file type or string
-     // required:true,
+      required:true,
     },
     skills:[{
        type:String,
@@ -30,7 +30,7 @@ module.exports={
     }],
     selection:{
        type:String,
-       enum:["applied-for","in-progress","selected","rejected"]
+       enum:["applied","in-progress","selected","rejected"]
     },
     appliedFor:{
        type:objectId,

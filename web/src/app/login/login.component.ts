@@ -87,10 +87,10 @@ export class LoginComponent implements OnInit {
             this._router.navigate(['/admin']);
           }
           else if (role == this._env.SUPERUSER) {
-            this._router.navigate(['/hr']);
+            this._router.navigate(['/superuser']);
           }
           else if (role == this._env.EMPLOYEE) {
-            this._router.navigate(['/user']);
+            this._router.navigate(['/employee']);
           }
         }
         this.message = res.payload.message

@@ -18,7 +18,7 @@ const routes: Routes = [
 },
   {
     
-    path: "superuser", component: AppNavBarComponent, canActivate: [RoleGuardService], data: { role: "admin" }, children: [
+    path: "superuser", component: AppNavBarComponent, canActivate: [RoleGuardService], data: { role: "superuser" }, children: [
       {
         path: "", redirectTo: "home", pathMatch: "full"
       },
