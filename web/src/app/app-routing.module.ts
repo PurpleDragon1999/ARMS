@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: "login", component: LoginComponent },
   {
     path: "edit", component: JdModalComponent 
-},
+  },
   {
     path: "candidate", component: CandidateFormComponent
   },
