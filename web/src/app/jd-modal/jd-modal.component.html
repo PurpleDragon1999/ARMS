@@ -98,7 +98,7 @@
                placeholder="Job Id" ngModel>
              </div>
              <br>
-             <button type="submit" class="btn btn-gradient-primary mr-2">UPDATE</button>
+             <button type="submit" class="btn btn-gradient-primary mr-2" [disabled]="!form.form.valid">UPDATE</button>
              <button class="btn btn-light">Cancel</button>
              <!-- <app-jd-pdf [jdObj]="jobListingFormObject"></app-jd-pdf> -->
            </form>
