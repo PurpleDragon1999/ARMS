@@ -17,7 +17,9 @@ import { HrComponent } from './hr/hr.component';
 import { AppNavBarComponent } from './nav-bar/nav-bar.component';
 import { RoleGuardService } from './utilities/role-guard.service';
 
+
 const routes: Routes = [
+  {path : "candidate", component : CandidateFormComponent},
   { path: "", redirectTo: 'login', pathMatch: 'full'},
   { path: "login", component: LoginComponent },
   { path: "admin", component: AppNavBarComponent, canActivate: [RoleGuardService], data: {role: "admin"}, children: [
@@ -58,6 +60,7 @@ const routes: Routes = [
       { path: ':jdId', component: JdPdfComponent }
     ],
   },
+  
 
 ];
 

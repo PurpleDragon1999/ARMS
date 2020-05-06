@@ -82,12 +82,10 @@ class Candidate extends Base{
   }
 
   async get(req, res){
-    console.log("inside get func")
       try{
         let candidateId = req.params.id
         let candidateObj = await candidateModel.get({_id : candidateId})
 
-        console.log(candidateObj, "candidateDetails")
         let candidateDetails = { ...(await candidateObj).toObject(), cv : fs.readFileSync(candidateObj.cv)}
   
         res.status(200).send({

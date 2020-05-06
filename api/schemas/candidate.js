@@ -13,6 +13,7 @@ module.exports={
         multipleOf:0.5,
         maximum:30
    },
+   
    email:{
        type:String,
        required:true,
