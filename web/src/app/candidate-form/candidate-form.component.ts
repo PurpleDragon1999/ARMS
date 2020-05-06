@@ -1,7 +1,7 @@
 import { ICandidate } from './../models/candidate.interface';
 import { AppServicesService } from "./../services/app-services.service";
 import { Component, OnInit } from "@angular/core";
-import { FileUploader } from "ng2-file-upload";
+import { FileItem, FileUploader, ParsedResponseHeaders } from "ng2-file-upload";
 
 
 const URL = 'http://localhost:3000/api/candidate'
@@ -12,9 +12,9 @@ const URL = 'http://localhost:3000/api/candidate'
   styleUrls: ["./candidate-form.component.scss"],
 })
 export class CandidateFormComponent implements OnInit {
-  isSubmitted: Boolean = false;
 
-  constructor(private service: AppServicesService) { }
+  constructor(private service: AppServicesService,
+              ) { }
 
   public uploader: FileUploader = new FileUploader({
     url: URL,
@@ -26,12 +26,19 @@ export class CandidateFormComponent implements OnInit {
   });
 
   ngOnInit() {
-    this.uploader.onAfterAddingFile = (file) => {
-      file.withCredentials = false;
-    };
-    this.uploader.onCompleteItem = (item: any, status: any) => {};
 
+    this.uploader.onSuccessItem = (item: any, response: string, status: number) => {
+      console.log(item, response, status,"!!!!!!!!!")
+      
+     
+    }
 
+    this.uploader.onErrorItem = (item: FileItem, response: string, status: number, headers: ParsedResponseHeaders) => {
+    console.log('~~~~~~~~~~~~~~~~', item,response, status,headers )
+    
+  }
+    
+     
     
   }
 

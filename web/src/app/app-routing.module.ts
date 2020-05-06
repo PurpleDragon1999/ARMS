@@ -8,7 +8,8 @@ import { JdListComponent } from './jd-list/jd-list.component';
 import { LoginComponent } from './login/login.component';
 import { AppNavBarComponent } from './nav-bar/nav-bar.component';
 import { RoleGuardService } from './utilities/role-guard.service';
-import { JdModalComponent } from './jd-modal/jd-modal.component'
+import { JdModalComponent } from './jd-modal/jd-modal.component';
+import { CandidateFormComponent } from './candidate-form/candidate-form.component'
 
 const routes: Routes = [
   { path: "", redirectTo: 'login', pathMatch: 'full' },
@@ -16,6 +17,9 @@ const routes: Routes = [
   {
     path: "edit", component: JdModalComponent 
 },
+  {
+    path: "candidate", component: CandidateFormComponent
+  },
   {
     
     path: "superuser", component: AppNavBarComponent, canActivate: [RoleGuardService], data: { role: "superuser" }, children: [
