@@ -1,20 +1,20 @@
-<div class="modal-dialog" role="document">
+
+<div class="modal-dialog" role="document" style="overflow-y: initial !important;">
   <div class="modal-content">
     <div class="modal-header">
-      <h5 class="modal-title" id="exampleModalLabel">Update Job Description</h5>
+      <h4 class="modal-title" id="exampleModalLabel"><b>Update Job Description</b></h4>
+     
     </div>
-    <div class="modal-body">
+    <div class="modal-body" style="max-height: 30rem; overflow-y: auto;">
            <form class="forms-sample" #form="ngForm" (ngSubmit)="sendUpdateRequest(form.value)" novalidate>
              <div class="form-group">
                <label for="jobId">Job ID</label>
-               
                <div class="input-group col-xs-12">
                  <span class="input-group-append btn btn-gradient-primary span">
                    CYGJID
                  </span>
                  <input name="jdId" [ngModel]="jdId" type="text" required class="form-control" id="jdId"
-                 placeholder="Job Id" #jobId="ngModel" ngModel>
-                 
+                 placeholder="Job Id" #jobId="ngModel" ngModel  maxlength="4">
                </div>
              </div>
              <div class="form-group">
@@ -98,8 +98,8 @@
                placeholder="Job Id" ngModel>
              </div>
              <br>
-             <button type="submit" class="btn btn-gradient-primary mr-2" [disabled]="!form.form.valid">UPDATE</button>
-             <button class="btn btn-light">Cancel</button>
+             <button type="submit" class="btn btn-gradient-primary mr-2" [disabled]="!form.valid">UPDATE</button>
+             <button type="button" class="btn btn-light" (click)="modalClose(false)">Cancel</button>
              <!-- <app-jd-pdf [jdObj]="jobListingFormObject"></app-jd-pdf> -->
            </form>
            </div>
