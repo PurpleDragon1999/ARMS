@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const candidateSchema = new mongoose.Schema(schema.candidate, {
   versionKey: false,
 });
+
 candidateSchema.set("toObject", { getters: true });
 
 class Candidate {

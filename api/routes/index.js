@@ -1,29 +1,9 @@
 const controller = require('../controllers');
 const roleChecker = require('../middlewares/roleChecker');
 const authorize = require('../middlewares/tokenVerifier');
-var multer  = require('multer');
-var fs  = require('fs');
-var fileName;
-const dir = './cvUploads';
 const upload = require('../middlewares/csvUpload');
-
-// let storage = multer.diskStorage({
-//     destination: (req, file, callback) => {
-//       if (!fs.existsSync(dir)){
-//        fs.mkdirSync(dir);
-//       }
-//       callback(null, dir);
-//     },
-//     filename: (req, file, callback) => {
-//         fileName = Date.now() + '-' + file.originalname;
-//         callback(null, fileName);
-//     }
-// });
-// let upload = multer({storage: storage});
-
 module.exports = (app) => {
   //Employee
-  // app.get("/api/employeeBySearch/:searchBy", (req, res)=>controller.employee.searchRecord(req, res));
   app.post("/api/employee", (req, res) => controller.employee.save(req, res));
   
   app.get("/api/employeeSearch", (req, res) =>
@@ -66,18 +46,21 @@ module.exports = (app) => {
   app.delete("/api/jobDescription/:id", (req, res) =>
     controller.jobDescription.remove(req, res)
   );
+
   //Routes for Candidate
   app.get("/api/candidates", (req, res) =>
     controller.candidate.getPaginatedResult(req, res)
   );
-  app.get("/api/candidate/search/:searchBy", (req, res) =>
+  app.get("/api/candidateSearch", (req, res) =>
     controller.candidate.searchRecord(req, res)
   );
+  app.get("/api/candidate/:id", (req,res)=> controller.candidate.get(req,res));
+  app.put("/api/candidate", (req,res)=> controller.candidate.modify(req, res))
 
   app.post("/api/checkvalidemployee", (req, res) => 
     controller.login.checkValidEmployee(req, res)
   );
-  // app.post('/api/candidate',upload.single('file'), (req,res)=> controller.candidate.uploadDetails(req,res));
+  //app.post('/api/candidate',upload.single('file'), (req,res)=> controller.candidate.save(req,res));
   //login route
   app.post("/api/checkvalidemployee",controller.login.checkValidEmployee);
 };
