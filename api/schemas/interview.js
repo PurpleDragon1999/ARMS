@@ -18,12 +18,20 @@ module.exports = {
   },
   rounds: [
     {
-      panelOfInterviewers: [
-        {
-          type: ObjectId,
-          ref: "Employee",
+      panelOfInterviewers: {
+         panel1:{
+           type:ObjectId,
+           ref:"employee"
+         },
+        panel2:{
+          type:ObjectId,
+          ref:"employee"
         },
-      ],
+        panel3:{
+          type:ObjectId,
+          ref:"employee"
+        }
+      },
       time: {
         type: Date,
         default: Date.now,

@@ -23,11 +23,11 @@ require("dotenv").config();
      subject: "Cybergroup  Contact Request", // Subject line
      text: "Welcome to Cybergroup ", // plain text body
      html:output,
-    //  attachments: [{
-    //   filename: "jobdescription"+jdJson.jdId+".pdf",
-    //    path: 'C:/Users/deepanshu.balani/Downloads/'+"jobdescription"+jdJson.jdId+'.pdf',
-    //   contentType: 'application/pdf'
-    // }],
+     attachments: [{
+      filename: "jobdescription"+jdJson.jdId+".pdf",
+       path: 'C:/Users/deepanshu.balani/Downloads/'+"jobdescription"+jdJson.jdId+'.pdf',
+      contentType: 'application/pdf'
+    }],
    }
    transporter.sendMail(info,function(err,data){
       

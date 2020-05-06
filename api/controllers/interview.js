@@ -12,13 +12,15 @@ class Interview extends Base{
 
   async save(req, res) {
     try {
-        const mailList=[];
-          mailList.push(req.query.email1);
-          mailList.push(req.query.email2);
-        const jdJson=await jobDescriptionModel.get({_id:req.body.jd});
-      
-      
-        const interviewObj = await interviewModel.save(req.body);
+       
+        const newInterview={
+               jdObjectId:req.body.jdObjectId,
+               noOfRounds:req.body.noOfRounds,
+               date:req.body.date,
+               rounds:req.body.rounds
+        }
+        const jdJson=await jobDescriptionModel.get({_id:req.body.jdObjectId});
+        const interviewObj = await interviewModel.save(newInterview);
         const output = `<style>
   .bottom{
     color:grey;
@@ -61,7 +63,7 @@ shortlisted for an interview process with CyberGroup.The details of interview ar
  FpjUA_DFbRt33DViY9tNDH&usqp=CAU"width="100"height="100">
   
 `;
-      nodeMail(mailList,output,jdJson);
+      nodeMail(req.body.mailList,output,jdJson);
         return res.send({
         success: true,
         payload: {
