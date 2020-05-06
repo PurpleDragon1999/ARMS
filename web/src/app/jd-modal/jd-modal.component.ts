@@ -54,44 +54,13 @@ export class JdModalComponent implements OnInit {
     jdFormObject: jobDescription;
     data: jobDescription;
     jdForm: FormGroup;
-    selectChangeHandlerEligibilityCriteria(event: any) {
-      this.eligibilityCriteriaOptions = event.target.value;
-    }
-  
-    selectChangeHandlerLocation(event: any) {
-      this.locationOptions = event.target.value;
-    }
-  
-    selectChangeHandlerJobType(event: any) {
-      this.jobTypeOptions = event.target.value;
-    }
+   
     ngOnInit() {
       this.loadJobData(this.jdUpdateId);
-      this.jobListingForm = this.formBuilder.group({
-        jobId: ["", Validators.required],
-        jobTitle: ["", Validators.required],
-        openingDate: ["", Validators.required],
-        closingDate: ["", Validators.required],
-        jobDescription: ["", Validators.required],
-        skills: ["", Validators.required],
-        jobType: ["", Validators.required],
-        eligibilityCriteria: ["", Validators.required],
-        location: ["", Validators.required],
-        salary: ["", Validators.required],
-        vacancies: ["", Validators.required],
-      });
+    
     }
-    get formControls() {
-      return this.jobListingForm.controls;
-    }
-    error: any = { isError: false, errorMessage: "" };
-  
     onSubmit() {
-      this.submitted = true;
-      // stop here if form is invalid
-      if (this.jobListingForm.invalid) {
-        return;
-      }
+     
     }
 
     loadJobData(Id:string){
@@ -127,7 +96,7 @@ export class JdModalComponent implements OnInit {
         modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
           modalRef.close();
         });
-        this.modalClose(true);
+      
       },
       (error: HttpErrorResponse) => {
         console.log(error, 'response');
@@ -158,23 +127,6 @@ export class JdModalComponent implements OnInit {
         salary: this.salary.nativeElement.value,
         vacancies: this.vacancies.nativeElement.value,
       };
-
-      
-      if (
-        new Date(this.jobListingForm.controls["closingDate"].value) <
-        new Date(this.jobListingForm.controls["openingDate"].value)
-      ) {
-        this.error = {
-          isError: true,
-          errorMessage: "Closing Date cannot be before Opening date",
-        };
-        return;
-      }
-      
-    
-   }
-    modalClose(rerender: boolean): void {
-      this.closeModal.emit(rerender);
   
   }
   
