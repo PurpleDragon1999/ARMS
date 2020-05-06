@@ -1,24 +1,26 @@
-var multer  = require('multer');
-var fs  = require('fs');
-var fileName;
-const dir = './cvUploads';
-
-let storage = multer.diskStorage({
-    destination: (req, file, callback) => {
-      if (!fs.existsSync(dir)){
-       fs.mkdirSync(dir);
-      }
-      callback(null, dir);
-    },
-    filename: (req, file, callback) => {
-        fileName = Date.now() + '-' + file.originalname;
-        callback(null, fileName);
-    }
-});
-
-let upload = multer({storage: storage});
 const Base = require("./base");
 const candidateModel = require("../models/candidate");
+var fs = require("fs")
+
+async function validateCandidate(candidate){
+  let emailExists = await candidateModel.get({email : candidate.email})
+  if (emailExists){
+    throw new Error("This Email is already registered.")
+    return
+  }
+  
+  let aadharExists = await candidateModel.get({aadhar : candidate.aadhar})
+  if (aadharExists){
+    throw new Error("This Aadhar number is already registered")
+    return
+  }
+
+  if (!req.body.cv){
+    throw new Error("CV is Required")
+    return
+  }
+
+}
 
 class Candidate extends Base{
     constructor(){
@@ -36,10 +38,14 @@ class Candidate extends Base{
         name: req.body.name,
         experience: req.body.experience,
         email: req.body.email,
+        aadhar : req.body.aadhar,
         cv: path,
         skills: req.body.skills,
         appliedFor: req.body.appliedFor,
       };
+
+      await validateCandidate(objToCreate)
+
       let createdObj = await this.model.save(objToCreate);
       return res.send({
         success: true,
@@ -61,6 +67,7 @@ class Candidate extends Base{
   async modify(req, res){
       let message = "Application Updated Successfully"
       try{
+          await validateCandidate(req.body)
           super.modify(req,res, message)
       }
       catch(err){
@@ -75,11 +82,13 @@ class Candidate extends Base{
   }
 
   async get(req, res){
+    console.log("inside get func")
       try{
         let candidateId = req.params.id
-        let candidateObj = await candidateModel.get(candidateId)
+        let candidateObj = await candidateModel.get({_id : candidateId})
 
-        let candidateDetails = { ...(await candidateObj).toObject(), CV : fs.readFileSync(candidateObj.cv)}
+        console.log(candidateObj, "candidateDetails")
+        let candidateDetails = { ...(await candidateObj).toObject(), cv : fs.readFileSync(candidateObj.cv)}
   
         res.status(200).send({
             success : true,
@@ -90,6 +99,7 @@ class Candidate extends Base{
         })
       }
       catch(err){
+        console.log(err)
           res.send({
               success : false,
               payload : {
@@ -97,6 +107,26 @@ class Candidate extends Base{
               }
           })
       }
+  }
+
+  async getAll(req, res){
+    try{
+      let candidatesList = await candidateModel.getAll()
+      candidatesList = await Promise.all(candidatesList.map(async (candidate)=>{
+      return { ...candidate.toObject(), cv : fs.readFileSync(candidate.cv)}
+    }))
+    req.body.records = candidatesList
+    super.getPaginatedResult(req, res)
+    }
+    catch(err){
+      console.log(err)
+      res.send({
+        success : false,
+        payload : {
+          message : err.message
+        }
+      })
+    }
   }
 
 }

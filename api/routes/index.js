@@ -2,6 +2,27 @@ const controller = require('../controllers');
 const roleChecker = require('../middlewares/roleChecker');
 const authorize = require('../middlewares/tokenVerifier');
 const upload = require('../middlewares/csvUpload');
+var multer  = require('multer');
+var fs  = require('fs');
+var fileName;
+const dir = './cvUploads';
+
+let storage = multer.diskStorage({
+    destination: (req, file, callback) => {
+      if (!fs.existsSync(dir)){
+       fs.mkdirSync(dir);
+      }
+      callback(null, dir);
+    },
+    filename: (req, file, callback) => {
+        fileName = Date.now() + '-' + file.originalname;
+        callback(null, fileName);
+    }
+});
+
+let fileUpload = multer({storage: storage});
+
+
 module.exports = (app) => {
   //Employee
   app.post("/api/employee", (req, res) => controller.employee.save(req, res));
@@ -49,18 +70,20 @@ module.exports = (app) => {
 
   //Routes for Candidate
   app.get("/api/candidates", (req, res) =>
-    controller.candidate.getPaginatedResult(req, res)
+    controller.candidate.getAll(req, res)
   );
+
   app.get("/api/candidateSearch", (req, res) =>
     controller.candidate.searchRecord(req, res)
   );
+
   app.get("/api/candidate/:id", (req,res)=> controller.candidate.get(req,res));
-  app.put("/api/candidate", (req,res)=> controller.candidate.modify(req, res))
+  app.put("/api/candidate/:id", (req,res)=> controller.candidate.modify(req, res))
 
   app.post("/api/checkvalidemployee", (req, res) => 
     controller.login.checkValidEmployee(req, res)
   );
-  //app.post('/api/candidate',upload.single('file'), (req,res)=> controller.candidate.save(req,res));
+  app.post('/api/candidate',fileUpload.single('file'), (req,res)=> controller.candidate.save(req,res));
   //login route
   app.post("/api/checkvalidemployee",controller.login.checkValidEmployee);
 };
