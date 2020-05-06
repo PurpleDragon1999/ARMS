@@ -13,21 +13,21 @@
                    CYGJID
                  </span>
                  <input name="jdId" [ngModel]="jdId" type="text" required class="form-control" id="jdId"
-                 placeholder="Job Id" #jobId="ngModel">
+                 placeholder="Job Id" #jobId="ngModel" ngModel>
                  
                </div>
              </div>
              <div class="form-group">
                <label for="jobTitle">Job Title </label>
                <input name="jdTitle" [ngModel]="jdTitle" type="text" required class="form-control" id="jdTitle"
-               placeholder="Job Title" #jobTitle="ngModel" >
+               placeholder="Job Title" #jobTitle="ngModel" ngModel >
                
              </div>
   
              <div class="form-group">
                <label for="jobDescription">Job Description </label>
                <textarea name="jobDescription" [ngModel]="jobProfileDescription" type="text" required class="form-control" id="jobDescription"
-               placeholder="Job Description" #jobDescription="ngModel" >
+               placeholder="Job Description" #jobDescription="ngModel" ngModel>
                </textarea>
                
              </div>
