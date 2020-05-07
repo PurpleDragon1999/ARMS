@@ -25,11 +25,10 @@ import { AppNavBarComponent } from './nav-bar/nav-bar.component';
 import { ListComponent } from './reusable-components/list/list.component';
 import { ModalComponent } from './reusable-components/modal/modal.component';
 import { ScheduleInterviewComponent } from './schedule-interview/schedule-interview.component';
-import { JdModalComponent } from './jd-modal/jd-modal.component'
+import { JdModalComponent } from './jd-modal/jd-modal.component';
 
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
-
 
 
 
@@ -53,6 +52,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     HrComponent,
     JdListComponent,
     ScheduleInterviewComponent,
+    AppComponent,
     JdPdfComponent,
     JdModalComponent,
   ],
