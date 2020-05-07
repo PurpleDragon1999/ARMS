@@ -1,8 +1,5 @@
-<<<<<<< HEAD
 import { CandidateFormComponent } from './candidate-form/candidate-form.component';
-=======
 import { ProgressTrackerComponent } from './progress-tracker/progress-tracker.component';
->>>>>>> 4f481fa255eb4f70a5d9624350ec1bb916feda90
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EmployeeComponent } from './employee/containers/employee/employee.component';
@@ -16,17 +13,17 @@ import { RoleGuardService } from './utilities/role-guard.service';
 import { JdModalComponent } from './jd-modal/jd-modal.component';
 
 const routes: Routes = [
-  {path : "candidate", component : CandidateFormComponent},
-  { path: "", redirectTo: 'login', pathMatch: 'full'},
+  { path: "candidate", component: CandidateFormComponent },
+  { path: "", redirectTo: 'login', pathMatch: 'full' },
   { path: "login", component: LoginComponent },
   {
-    path: "edit", component: JdModalComponent 
+    path: "edit", component: JdModalComponent
   },
   {
     path: "candidate", component: CandidateFormComponent
   },
   {
-    
+
     path: "superuser", component: AppNavBarComponent, canActivate: [RoleGuardService], data: { role: "superuser" }, children: [
       {
         path: "", redirectTo: "home", pathMatch: "full"
@@ -34,7 +31,7 @@ const routes: Routes = [
       {
         path: "home", component: HrComponent
       },
-     
+
       {
         path: "employee", component: EmployeeComponent
       }
@@ -71,13 +68,10 @@ const routes: Routes = [
       { path: ':jdId', component: JdPdfComponent }
     ],
   },
-<<<<<<< HEAD
-  
-=======
+
   {
-    path:"progressTracker", component: ProgressTrackerComponent
+    path: "progressTracker", component: ProgressTrackerComponent
   }
->>>>>>> 4f481fa255eb4f70a5d9624350ec1bb916feda90
 
 ];
 
