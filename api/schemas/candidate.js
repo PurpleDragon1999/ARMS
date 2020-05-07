@@ -20,6 +20,10 @@ module.exports={
        minlength:2,
        maxlength:100
     },
+    aadhar:{
+       type:String,
+       required:true,
+    },
     cv:{
       type:String,//to keep file type or string
       required:true,
@@ -31,7 +35,7 @@ module.exports={
     }],
     selection:{
        type:String,
-       enum:["applied-for","in-progress","selected","rejected"]
+       enum:["applied","in-progress","selected","rejected"]
     },
     appliedFor:{
        type:objectId,

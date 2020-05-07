@@ -26,19 +26,18 @@ class Candidate extends Base{
     constructor(){
         super(candidateModel);
     }
-    
-  async save(req, res) {
+
+async save(req, res) {
     try {
       let path = "";
       if (req.file) {
         path = req.file.path;
       }
-
       let objToCreate = {
         name: req.body.name,
         experience: req.body.experience,
         email: req.body.email,
-        aadhar : req.body.aadhar,
+        aadhar: req.body.aadhar,
         cv: path,
         skills: req.body.skills,
         appliedFor: req.body.appliedFor,
