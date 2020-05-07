@@ -11,7 +11,9 @@ describe('ProgressTrackerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProgressTrackerComponent ]
+      declarations: [ ProgressTrackerComponent ],
+      imports: [ CandidateFormComponent ]
+
     })
     .compileComponents();
   }));
