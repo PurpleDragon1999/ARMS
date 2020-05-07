@@ -13,7 +13,7 @@ module.exports={
         multipleOf:0.5,
         maximum:30
    },
-   
+
    email:{
        type:String,
        required:true,
@@ -35,7 +35,11 @@ module.exports={
     }],
     selection:{
        type:String,
-       enum:["applied","in-progress","selected","rejected"]
+       enum:["selected","rejected"]
+    },
+    status:{
+       type: String,
+       enum:["0", "1", "2","3", "4"]
     },
     appliedFor:{
        type:objectId,

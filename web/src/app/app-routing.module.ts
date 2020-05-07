@@ -1,4 +1,5 @@
 import { CandidateFormComponent } from './candidate-form/candidate-form.component';
+import { ProgressTrackerComponent } from './progress-tracker/progress-tracker.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EmployeeComponent } from './employee/containers/employee/employee.component';
@@ -17,9 +18,6 @@ const routes: Routes = [
   { path: "login", component: LoginComponent },
   {
     path: "edit", component: JdModalComponent 
-  },
-  {
-    path: "candidate", component: CandidateFormComponent
   },
   {
     
@@ -67,7 +65,9 @@ const routes: Routes = [
       { path: ':jdId', component: JdPdfComponent }
     ],
   },
-  
+  {
+    path:"progressTracker", component: ProgressTrackerComponent
+  }
 
 ];
 
