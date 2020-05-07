@@ -54,6 +54,7 @@ export class JdModalComponent implements OnInit {
     jdFormObject: jobDescription;
     data: jobDescription;
     jdForm: FormGroup;
+
     selectChangeHandlerEligibilityCriteria(event: any) {
       this.eligibilityCriteriaOptions = event.target.value;
     }
@@ -93,6 +94,8 @@ export class JdModalComponent implements OnInit {
         return;
       }
     }
+    
+   
 
     loadJobData(Id:string){
       this._service.getJobsById(Id).subscribe((res:any) =>{
@@ -105,8 +108,8 @@ export class JdModalComponent implements OnInit {
     setJobData(){
       this.jdId = this.jobArray.jdId;
       this.jdTitle = this.jobArray.jdTitle;
-      this.openingDate = this.jobArray.openingDate;
-      this.closingDate = this.jobArray.closingDate;
+      this.openingDate = this.jobArray.openingDate.slice(0,10);
+      this.closingDate = this.jobArray.closingDate.slice(0,10);
       this.jobProfileDescription = this.jobArray.jobProfileDescription;
       this.skills = this.jobArray.skills;
       this.jobType = this.jobArray.jobType;
@@ -114,23 +117,35 @@ export class JdModalComponent implements OnInit {
       this.location = this.jobArray.location;
       this.salary = this.jobArray.salary;
       this.vacancies = this.jobArray.vacancies;
-    }
+    };
+    
 
     sendUpdateRequest(jdFormObject: any ){
-      console.log(jdFormObject.value,"YYEEEHHHHHHHH")
-   
-      this._service.updateJobInfo(jdFormObject,jdFormObject.jobId).subscribe((res:any) =>  {
-        if(res.success == 200){
-          this. jobArray= res.payload.data;
-          this.jdFormData();
-            setTimeout(()=> { 
-              this._router.navigate(["/edit"]);
-            }, 1000);
-        }
-        else if(res.status == 401){
-          this._router.navigate(['/login']);
-        }
-      });
+      console.log(jdFormObject)
+        this._service.updateJobInfo(jdFormObject,this.jobArray._id).subscribe((res: any) => {
+        console.log(res, 'response');
+        const modalRef= this.modalService.open(ModalComponent);
+        modalRef.componentInstance.shouldConfirm = false;
+        modalRef.componentInstance.success = res.success;
+        modalRef.componentInstance.message = res.payload.message;
+        modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+          modalRef.close();
+        });
+      
+      },
+      (error: HttpErrorResponse) => {
+        console.log(error, 'response');
+        const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
+        modalRef.componentInstance.shouldConfirm = false;
+        modalRef.componentInstance.success = error.error.success;
+        modalRef.componentInstance.message = error.error.payload.message;
+        modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+          modalRef.close();
+        });
+        this.data = error.error.payload.data;
+        this.router.navigate(["/jd-pdf", this.data.jdId]);
+      }
+      ); 
     }
   
     jdFormData() {
@@ -147,8 +162,6 @@ export class JdModalComponent implements OnInit {
         salary: this.salary.nativeElement.value,
         vacancies: this.vacancies.nativeElement.value,
       };
-
-      
       if (
         new Date(this.jobListingForm.controls["closingDate"].value) <
         new Date(this.jobListingForm.controls["openingDate"].value)
@@ -159,35 +172,11 @@ export class JdModalComponent implements OnInit {
         };
         return;
       }
-      this._service.jdFormData(this.jdFormObject).subscribe((res: any) => {
-        console.log(res, 'response');
-        const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
-        modalRef.componentInstance.shouldConfirm = false;
-        modalRef.componentInstance.success = res.body.success;
-        modalRef.componentInstance.message = res.body.payload.message;
-        modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
-          modalRef.close();
-        });
-        this.modalClose(true);
-      },
-      (error: HttpErrorResponse) => {
-        console.log(error, 'response');
-        const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
-        modalRef.componentInstance.shouldConfirm = false;
-        modalRef.componentInstance.success = error.error.success;
-        modalRef.componentInstance.message = error.error.payload.message;
-        modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
-          modalRef.close();
-        });
-        this.data = error.error.payload.data;
-        this.router.navigate(["/jd-pdf", this.data.jdId]);
-      }
-      ); 
-    
-   }
-    modalClose(rerender: boolean): void {
-      this.closeModal.emit(rerender);
   
+  }
+
+  modalClose(rerender: boolean){
+    this.closeModal.emit(rerender);
   }
   
   

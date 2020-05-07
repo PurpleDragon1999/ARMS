@@ -138,11 +138,13 @@ export class JdFormComponent implements OnInit {
       
     }
     ); 
+  }
+    modalClose(rerender: boolean): void {
+      this.closeModal.emit(rerender);
   
-}
-  modalClose(rerender: boolean): void {
-    this.closeModal.emit(rerender);
+    }
+  }
 
-}
-}
+
+
 
