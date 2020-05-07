@@ -67,10 +67,14 @@ const routes: Routes = [
     ],
   },
   {
-    path:"progressTracker", component: ProgressTrackerComponent
+    path:"progressTracker",children:[
+     {path:":candidateId",component: ProgressTrackerComponent }
+    ]
   },
   {
-    path:"candidate-form",component:CandidateFormComponent
+    path:"candidateForm",children:[
+     { path:':jdId',component:CandidateFormComponent}
+    ]
   }
 
 ];

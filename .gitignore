@@ -8,3 +8,6 @@ yarn.lock
 .vscode/
 
 **/*/*.csv
+
+cvUploads
+jobDescriptions

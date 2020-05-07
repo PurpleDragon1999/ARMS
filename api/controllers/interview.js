@@ -18,10 +18,14 @@ class Interview extends Base{
                jdObjectId:req.body.jdObjectId,
                noOfRounds:req.body.noOfRounds,
                date:req.body.date,
-               rounds:req.body.rounds
+               rounds:req.body.rounds,
+               candidateObjIds:req.body.candidateObjIds
         }
         const jdJson=await jobDescriptionModel.get({_id:req.body.jdObjectId});
         const interviewObj = await interviewModel.save(newInterview);
+        let candidates=interviewObj.candidateObjIds;
+   
+        for (let candidateId of candidates){
         const output = `<style>
   .bottom{
     color:grey;
@@ -32,7 +36,7 @@ class Interview extends Base{
      }
 </style>
 <p>Dear Mr/Ms.</p><b>Deepanshu Balani,</b>We are pleased to inform you that you have been
-shortlisted for an interview process with CyberGroup.The details of interview are as below:
+shortlisted for an interview process with CyberGroup.The details of interview will be communicated soon.
 </p>
 <table>
    <tr>
@@ -43,20 +47,12 @@ shortlisted for an interview process with CyberGroup.The details of interview ar
      <td><b>Job Type:</b></td>
      <td>${jdJson.jobType}</td>
    </tr>
-   <tr>
-     <td ><b>No Of Rounds:</b></td>
-     <td>${interviewObj.noOfRounds}</td>
-   </tr>
-   <tr>
-     <td><b>Date/Time:</b></td>
-     <td>${interviewObj.date}</td>
-   </tr>
-   <tr>
+    <tr>
    <td ><b>Address:</b></td>
    <td> B-9, Block B, Sector 3, Noida, Uttar Pradesh 201301</td>
  </tr>
 </table>
-<a href="#">Please signup if you wish to accept and proceed with our process</a>
+<a href="http://localhost:4200/progressTracker/${candidateId}">Please click here to track your progress</a>
 <br>
 <em class="bottom">This is automatically generated email,please do not reply</em>
 <p>Thanks</p>
@@ -64,8 +60,10 @@ shortlisted for an interview process with CyberGroup.The details of interview ar
  FpjUA_DFbRt33DViY9tNDH&usqp=CAU"width="100"height="100">
   
 `;
-      nodeMail(req.body.mailList,output,jdJson);
-        return res.send({
+ const candidateObj=await model.candidate.get({_id:candidateId},{email:1});
+     nodeMail(candidateObj.email,output,jdJson);
+    }
+      return res.send({
         success: true,
         payload: {
           data:interviewObj,

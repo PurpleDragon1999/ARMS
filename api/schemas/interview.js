@@ -19,18 +19,18 @@ module.exports = {
   rounds: [
     {
       panelOfInterviewers: {
-         panel1:{
+         panel1:[{
            type:ObjectId,
            ref:"Employee"
-         },
-        panel2:{
+         }],
+        panel2:[{
           type:ObjectId,
           ref:"Employee"
-        },
-        panel3:{
+        }],
+        panel3:[{
           type:ObjectId,
           ref:"Employee"
-        }
+        }]
       },
       time: {
         type: Date,
@@ -47,4 +47,8 @@ module.exports = {
     type: Date,
     required: true,
   },
+  candidateObjIds:[{
+    type:ObjectId,
+    ref:"Candidate"
+  }]
 };

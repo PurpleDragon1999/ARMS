@@ -34,7 +34,7 @@ class JobDescription extends Base {
     
     <p>Please signup if you wish to accept and proceed with our process</p>
    
-    <a href="#">Link To Form</a>
+    <a href="http://localhost:4200/candidateForm/${data.jdId}">Link To Form</a>
     <p>Regards,</p>
    
     <p>HR,</p>
