@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { CandidateFormComponent } from './candidate-form/candidate-form.component';
+=======
+import { ProgressTrackerComponent } from './progress-tracker/progress-tracker.component';
+>>>>>>> 4f481fa255eb4f70a5d9624350ec1bb916feda90
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EmployeeComponent } from './employee/containers/employee/employee.component';
@@ -67,7 +71,13 @@ const routes: Routes = [
       { path: ':jdId', component: JdPdfComponent }
     ],
   },
+<<<<<<< HEAD
   
+=======
+  {
+    path:"progressTracker", component: ProgressTrackerComponent
+  }
+>>>>>>> 4f481fa255eb4f70a5d9624350ec1bb916feda90
 
 ];
 
