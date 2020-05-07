@@ -88,6 +88,6 @@ deleteJd(jobObjId): Observable<IResponse>{
 
   getCandidate(id:string):Observable<IResponse>{
     console.log("inside service", id)
-    return this.http.get<IResponse>(`${USER_DOMAIN}/api/candidate/${id}`)
+    return this.http.get<IResponse>(`${USER_DOMAIN}/api/candidate/${id}`, this.options)
   }
 }
