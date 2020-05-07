@@ -1,5 +1,4 @@
 import { IResponse } from 'src/app/models/response.interface';
-  
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { HttpClient, HttpResponse, HttpHeaders, HttpParams } from '@angular/common/http';
@@ -87,8 +86,8 @@ deleteJd(jobObjId): Observable<IResponse>{
     return this.http.get<any>(`${USER_DOMAIN}/api/jobDescription`,  {headers: this.headers, observe: 'response'} );
   }
 
-  getCandidate(id:string):Observable<any>{
+  getCandidate(id:string):Observable<IResponse>{
     console.log("inside service", id)
-    return this.http.get<any>(`${USER_DOMAIN}/api/candidate/${id}`)
+    return this.http.get<IResponse>(`${USER_DOMAIN}/api/candidate/${id}`)
   }
 }
