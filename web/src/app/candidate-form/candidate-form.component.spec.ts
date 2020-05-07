@@ -1,7 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FileSelectDirective } from 'ng2-file-upload';
-import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -16,8 +15,7 @@ describe('CandidateFormComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ CandidateFormComponent ],
-      imports : [ FileSelectDirective, NgbActiveModal, NgbModule, FormsModule,
-                  BrowserModule, ReactiveFormsModule, HttpClientTestingModule,
+      imports : [ FormsModule, ReactiveFormsModule, BrowserModule, HttpClientTestingModule,
                   RouterTestingModule.withRoutes([])]
     })
     .compileComponents();
@@ -32,9 +30,16 @@ describe('CandidateFormComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  
+
   afterEach(() => {
         TestBed.resetTestingModule();
       })
   
 });
+
+
+
+
+
+
+  
