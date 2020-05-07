@@ -15,10 +15,10 @@ async function validateCandidate(candidate){
     return
   }
 
-  if (!req.body.cv){
-    throw new Error("CV is Required")
-    return
-  }
+  // if (req.body.cv == null){
+  //   throw new Error("CV is Required")
+  //   return
+  // }
 
 }
 
@@ -41,12 +41,15 @@ async save(req, res) {
         cv: path,
         skills: req.body.skills,
         appliedFor: req.body.appliedFor,
+        status : "applied"
       };
 
       await validateCandidate(objToCreate)
 
       let createdObj = await this.model.save(objToCreate);
+      console.log("success")
       return res.send({
+        
         success: true,
         payload: {
           body: createdObj,
@@ -54,7 +57,7 @@ async save(req, res) {
         },
       });
     } catch (error) {
-      res.send({
+      res.status(400).send({
         success: false,
         payload: {
           message: error.message,

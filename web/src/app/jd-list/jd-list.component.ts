@@ -90,7 +90,7 @@ export class JdListComponent implements OnInit {
   }
   downloadPdf(jdId) {
     this.convertToPDF();
-    // this.router.navigate(["/jd-pdf", jdId]);
+    this.router.navigate(["/jd-pdf", jdId]);
   }
 
   datecheck(closingDate) {

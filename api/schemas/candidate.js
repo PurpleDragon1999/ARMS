@@ -39,7 +39,8 @@ module.exports={
     },
     status:{
        type: String,
-       enum:["0", "1", "2","3", "4"]
+       default : "notApplied",
+       enum:["notApplied", "applied", "interviewScheduled","round1", "round2", "round3", "round4", "round5"]
     },
     appliedFor:{
        type:objectId,

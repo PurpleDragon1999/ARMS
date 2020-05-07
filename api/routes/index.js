@@ -63,14 +63,14 @@ module.exports = (app) => {
 
   app.get("/api/candidate/:id", (req,res)=> controller.candidate.get(req,res));
   app.put("/api/candidate/:id", (req,res)=> controller.candidate.modify(req, res))
-
-  app.post("/api/checkvalidemployee", (req, res) => 
-    controller.login.checkValidEmployee(req, res)
-  );
-  // app.post('/api/candidate',upload.single('file'), (req,res)=> controller.candidate.uploadDetails(req,res));
   app.post("/api/candidate", fileUpload, (req, res) =>
     controller.candidate.save(req,res)
   );
+  
+  app.post("/api/checkvalidemployee", (req, res) => 
+    controller.login.checkValidEmployee(req, res)
+  );
+  
   //login route
   app.post("/api/checkvalidemployee", controller.login.checkValidEmployee);
 };
