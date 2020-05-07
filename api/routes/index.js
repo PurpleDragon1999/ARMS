@@ -2,6 +2,7 @@ const controller = require('../controllers');
 const roleChecker = require('../middlewares/roleChecker');
 const authorize = require('../middlewares/tokenVerifier');
 const upload = require('../middlewares/csvUpload');
+const fileUpload = require('../middlewares/fileUpload');
 
 module.exports = (app) => {
   //Employee
@@ -33,9 +34,12 @@ module.exports = (app) => {
   app.patch("/api/interview/:id", (req, res) =>
     controller.interview.modify(req, res)
   );
-  // app.delete('/api/interview/:id', (req, res) => controller.interview.delete(req, res));
+  app.delete('/api/interview/:id', (req, res) => controller.interview.remove(req, res));
   app.get("/api/interview/:id", (req, res) =>
     controller.interview.get(req, res)
+  );
+  app.get("/api/interview", (req, res) =>
+    controller.interview.index(req, res)
   );
 
   //Routes for Job Description
@@ -60,6 +64,9 @@ module.exports = (app) => {
     controller.login.checkValidEmployee(req, res)
   );
   // app.post('/api/candidate',upload.single('file'), (req,res)=> controller.candidate.uploadDetails(req,res));
+  app.post("/api/candidate", fileUpload, (req, res) =>
+    controller.candidate.save(req,res)
+  );
   //login route
   app.post("/api/checkvalidemployee", controller.login.checkValidEmployee);
 };

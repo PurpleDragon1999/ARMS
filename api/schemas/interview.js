@@ -21,7 +21,7 @@ module.exports = {
       panelOfInterviewers: [
         {
           type: ObjectId,
-          ref: "employee",
+          ref: "Employee",
         },
       ],
       time: {

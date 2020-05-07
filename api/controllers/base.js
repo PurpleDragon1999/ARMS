@@ -45,13 +45,13 @@ class Base {
     }
   }
 
-  async remove(req, res) {
+  async remove(req, res, successMessage) {
     try {
       await this.model.remove(req.params.id);
       return res.send({
         success: true,
         payload: {
-          message: "Removed Successfully",
+          message: successMessage || "Removed Successfully",
         },
       });
     } catch (e) {
@@ -64,15 +64,14 @@ class Base {
     }
   }
 
-  async get(req, res) {
+  async get(req, res, successMessage) {
     try {
       const data = await this.model.get(req.params.id);
-
       return res.send({
         success: true,
         payload: {
           data,
-          message: "Retrieved Successfully",
+          message:  successMessage || "Retrieved Successfully",
         },
       });
     } catch (e) {
@@ -105,41 +104,7 @@ class Base {
     }
   }
 
-  // DONT MAKE YOUR TWIN/CAMOUFLAGED METHODS HERE!!!
-
-  //THIS IS NO PLACE FOR ADDING upload details here!!!
-  // async uploadDetails(req, res) {
-  //   try {
-  //     let path = "";
-  //     if (req.file) {
-  //       path = req.file.path;
-  //     }
-  //     let objToCreate = {
-  //       name: req.body.name,
-  //       experience: req.body.experience,
-  //       email: req.body.email,
-  //       cv: path,
-  //       skills: req.body.skills,
-  //       appliedFor: req.body.appliedFor,
-  //     };
-  //     let createdObj = await this.model.save(objToCreate);
-  //     return res.send({
-  //       success: true,
-  //       payload: {
-  //         body: createdObj,
-  //         message: "Record created successfully!!",
-  //       },
-  //     });
-  //   } catch (error) {
-  //     res.send({
-  //       success: false,
-  //       payload: {
-  //         message: error.message,
-  //       },
-  //     });
-  //   }
-  // }
-
+  
   async searchRecord(req, res) {
     try {
       let queryObject = {

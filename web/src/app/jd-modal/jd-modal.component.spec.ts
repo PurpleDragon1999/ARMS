@@ -12,7 +12,7 @@ describe('JdModalComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ JdModalComponent ],
-      imports: [ FormsModule, ReactiveFormsModule,BrowserModule,  HttpClientTestingModule,
+      imports: [ FormsModule, ReactiveFormsModule,BrowserModule, HttpClientTestingModule,
         RouterTestingModule.withRoutes([])], 
   
     })

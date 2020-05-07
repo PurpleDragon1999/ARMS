@@ -35,8 +35,9 @@ export class ModalComponent implements OnInit {
     this.shouldConfirm = false;
     this.emitPerformRequest.emit();
   }
-
+  
   modalClose(rerender: boolean): void {
     this.closeModal.emit(rerender);
   }
+ 
 }

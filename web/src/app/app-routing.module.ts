@@ -1,4 +1,8 @@
+
 import { CreateInterviewComponent } from './create-interview/create-interview.component';
+
+import { ProgressTrackerComponent } from './progress-tracker/progress-tracker.component';
+
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EmployeeComponent } from './employee/containers/employee/employee.component';
@@ -9,18 +13,21 @@ import { JdListComponent } from './jd-list/jd-list.component';
 import { LoginComponent } from './login/login.component';
 import { AppNavBarComponent } from './nav-bar/nav-bar.component';
 import { RoleGuardService } from './utilities/role-guard.service';
-import { JdModalComponent } from './jd-modal/jd-modal.component'
+import { JdModalComponent } from './jd-modal/jd-modal.component';
+import { CandidateFormComponent } from './candidate-form/candidate-form.component'
 
 const routes: Routes = [
   { path: "", redirectTo: 'login', pathMatch: 'full' },
   { path: "login", component: LoginComponent },
   {
     path: "edit", component: JdModalComponent 
-},
-
+  },
+  {
+    path: "candidate", component: CandidateFormComponent
+  },
   {
     
-    path: "superuser", component: AppNavBarComponent, canActivate: [RoleGuardService], data: { role: "admin" }, children: [
+    path: "superuser", component: AppNavBarComponent, canActivate: [RoleGuardService], data: { role: "superuser" }, children: [
       {
         path: "", redirectTo: "home", pathMatch: "full"
       },
@@ -67,6 +74,9 @@ const routes: Routes = [
       { path: ':jdId', component: JdPdfComponent }
     ],
   },
+  {
+    path:"progressTracker", component: ProgressTrackerComponent
+  }
 
 ];
 
