@@ -19,6 +19,10 @@ module.exports={
        minlength:2,
        maxlength:100
     },
+    aadhar:{
+       type:String,
+       required:true,
+    },
     cv:{
       type:String,//to keep file type or string
       required:true,

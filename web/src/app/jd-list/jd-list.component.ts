@@ -1,19 +1,18 @@
+import { IResponse } from 'src/app/models/response.interface';
 import { JdModalComponent } from '../jd-modal/jd-modal.component';
 import { Component, OnInit,EventEmitter, Output, Input} from "@angular/core";
 import { AppServicesService } from "src/app/services/app-services.service";
 import { NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
 import html2canvas from 'html2canvas';
-import * as jsPDF from 'jspdf'
-import { Router, ActivatedRoute, Params } from "@angular/router";
-import { switchMap } from "rxjs/operators";
-// import {jobDescription} from '../../models/jobDescription.interface'
-// import{AppServicesService} from '../../services/app-services.service'
-
+import * as jsPDF from 'jspdf';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { ModalComponent } from 'src/app/reusable-components/modal/modal.component';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
-  selector: "app-jd-list",
-  templateUrl: "./jd-list.component.html",
-  styleUrls: ["./jd-list.component.scss"],
+  selector: 'app-jd-list',
+  templateUrl: './jd-list.component.html',
+  styleUrls: ['./jd-list.component.scss'],
 })
 
 
@@ -22,8 +21,8 @@ export class JdListComponent implements OnInit {
   jobsList: any;
   jdObject: any;
 
-  constructor(private _service: AppServicesService, private router: Router, 
-    private modalService:NgbModal) {}
+  constructor(private _service: AppServicesService, private router: Router,
+              private modalService: NgbModal) {}
 
   ngOnInit() {
     this.loadJds();
@@ -45,9 +44,24 @@ export class JdListComponent implements OnInit {
 
 
   deleteJd(jobObjId: string) {
-    this._service.deleteJd(jobObjId).subscribe((res) => {
-      this.loadJds();
+    const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
+
+    modalRef.componentInstance.shouldConfirm = true;
+
+    modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+      modalRef.close();
     });
+    modalRef.componentInstance.emitPerformRequest.subscribe(() => {
+      this._service.deleteJd(jobObjId).subscribe((res: IResponse) => {
+        this.loadJds();
+        modalRef.componentInstance.success = res.success;
+        modalRef.componentInstance.message = res.payload.message;
+        }, (error: HttpErrorResponse) => {
+          modalRef.componentInstance.success = error.error.success;
+          modalRef.componentInstance.message = error.error.payload.message;
+    });
+  });
+
   }
 
 
@@ -57,10 +71,10 @@ export class JdListComponent implements OnInit {
   }
 
   datecheck(closingDate) {
-    let currentDate = new Date().toISOString();
-    if (closingDate <= currentDate)
+    const currentDate = new Date().toISOString();
+    if (closingDate <= currentDate) {
       return 1;
-    else return 0;
+    } else { return 0; }
   }
 
  

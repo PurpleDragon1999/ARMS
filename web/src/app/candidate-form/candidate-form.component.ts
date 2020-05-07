@@ -1,7 +1,8 @@
 import { ICandidate } from './../models/candidate.interface';
-import { AppServicesService } from "./../services/app-services.service";
 import { Component, OnInit } from "@angular/core";
-import { FileUploader } from "ng2-file-upload";
+import { FileItem, FileUploader, ParsedResponseHeaders } from "ng2-file-upload";
+import { NgbModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
+import { ModalComponent } from "../reusable-components/modal/modal.component"
 
 
 const URL = 'http://localhost:3000/api/candidate'
@@ -12,9 +13,9 @@ const URL = 'http://localhost:3000/api/candidate'
   styleUrls: ["./candidate-form.component.scss"],
 })
 export class CandidateFormComponent implements OnInit {
-  isSubmitted: Boolean = false;
 
-  constructor(private service: AppServicesService) { }
+  constructor(private modalService : NgbModal,
+              ) { }
 
   public uploader: FileUploader = new FileUploader({
     url: URL,
@@ -29,9 +30,39 @@ export class CandidateFormComponent implements OnInit {
     this.uploader.onAfterAddingFile = (file) => {
       file.withCredentials = false;
     };
-    this.uploader.onCompleteItem = (item: any, status: any) => {};
 
+    this.uploader.onSuccessItem = (item: any, response: string, status: number) => {
+      let data = JSON.parse(response);
+      const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
 
+      modalRef.componentInstance.shouldConfirm = false;
+
+      modalRef.componentInstance.success = data.success;
+      modalRef.componentInstance.message = data.payload.message;
+
+      modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+        modalRef.close();
+      });
+      
+     
+    }
+
+    this.uploader.onErrorItem = (item: FileItem, response: string, status: number, headers: ParsedResponseHeaders) => {
+    let data = JSON.parse(response);
+    const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
+
+    modalRef.componentInstance.shouldConfirm = false;
+
+    modalRef.componentInstance.success = data.success;
+    modalRef.componentInstance.message = data.payload.message;
+
+    modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+      modalRef.close();
+    });
+    
+  }
+    
+     
     
   }
 

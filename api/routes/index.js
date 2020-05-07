@@ -2,6 +2,7 @@ const controller = require('../controllers');
 const roleChecker = require('../middlewares/roleChecker');
 const authorize = require('../middlewares/tokenVerifier');
 const upload = require('../middlewares/csvUpload');
+const fileUpload = require('../middlewares/fileUpload');
 
 module.exports = (app) => {
   //Employee
@@ -63,6 +64,9 @@ module.exports = (app) => {
     controller.login.checkValidEmployee(req, res)
   );
   // app.post('/api/candidate',upload.single('file'), (req,res)=> controller.candidate.uploadDetails(req,res));
+  app.post("/api/candidate", fileUpload, (req, res) =>
+    controller.candidate.save(req,res)
+  );
   //login route
   app.post("/api/checkvalidemployee", controller.login.checkValidEmployee);
 };
