@@ -16,12 +16,12 @@ import { analyzeAndValidateNgModules } from '@angular/compiler';
 export class LoginComponent implements OnInit {
   isIframe = false;
   loggedIn = false;
-  profile:any;
-  message:string;
-  employeeData={};
+  profile: any;
+  message: string;
+  employeeData = {};
 
-  constructor(  
-    private broadcastService: BroadcastService, 
+  constructor(
+    private broadcastService: BroadcastService,
     private authService: MsalService,
     private http: HttpClient,
     private loginService: LoginService,
@@ -58,11 +58,11 @@ export class LoginComponent implements OnInit {
   getProfile() {
     this.http.get(GRAPH_ENDPOINT).toPromise()
       .then(profile => {
-          this.profile = profile;
-          
+        this.profile = profile;
+
       });
   }
-  
+
   async loginFunction() {
     const isIE =
       window.navigator.userAgent.indexOf("MSIE ") > -1 ||
@@ -74,7 +74,7 @@ export class LoginComponent implements OnInit {
     }
     const idToken = window.localStorage.getItem("msal.idtoken");
 
-     this.loginService.checkPermissions(idToken).subscribe(
+    this.loginService.checkPermissions(idToken).subscribe(
       res => {
         if (res != null) {
           window.localStorage.setItem(
@@ -82,13 +82,13 @@ export class LoginComponent implements OnInit {
             `${res.payload.data["x-auth-token"]}`
           );
           let role = this.loginService.tokenDecoder().role;
-          if(role == this._env.ADMIN){
+          if (role == this._env.ADMIN) {
             this._router.navigate(['/admin']);
           }
-          else if(role == this._env.HR){
+          else if (role == this._env.SUPERUSER) {
             this._router.navigate(['/hr']);
           }
-          else if(role == this._env.INTERVIEWER){
+          else if (role == this._env.EMPLOYEE) {
             this._router.navigate(['/user']);
           }
         }
