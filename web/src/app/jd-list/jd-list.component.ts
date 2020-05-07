@@ -1,8 +1,8 @@
 import { IResponse } from 'src/app/models/response.interface';
 import { JdModalComponent } from '../jd-modal/jd-modal.component';
-import { Component, OnInit, EventEmitter, Output, Input} from '@angular/core';
-import { AppServicesService } from 'src/app/services/app-services.service';
-import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnInit,EventEmitter, Output, Input} from "@angular/core";
+import { AppServicesService } from "src/app/services/app-services.service";
+import { NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
 import html2canvas from 'html2canvas';
 import * as jsPDF from 'jspdf';
 import { Router, ActivatedRoute, Params } from '@angular/router';
@@ -34,10 +34,13 @@ export class JdListComponent implements OnInit {
     });
   }
 
-  jdUpdateModal(id: string) {
-    const modalRef = this.modalService.open(JdModalComponent);
+  jdUpdateModal(id:string){
+    const modalRef: NgbModalRef =this.modalService.open(JdModalComponent)
     modalRef.componentInstance.jdUpdateId = id;
-  }
+    modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+      modalRef.close();
+    })
+  };
 
 
   deleteJd(jobObjId: string) {
