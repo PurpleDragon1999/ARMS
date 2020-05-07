@@ -3,6 +3,8 @@ import { Component, OnInit } from "@angular/core";
 import { FileItem, FileUploader, ParsedResponseHeaders } from "ng2-file-upload";
 import { NgbModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
 import { ModalComponent } from "../reusable-components/modal/modal.component"
+import { Router, ActivatedRoute, Params,NavigationEnd } from "@angular/router";
+import { loadavg } from 'os';
 
 const URL = 'http://localhost:3000/api/candidate'
 
@@ -14,6 +16,7 @@ const URL = 'http://localhost:3000/api/candidate'
 export class CandidateFormComponent implements OnInit {
 
   constructor(private modalService : NgbModal,
+              private router: Router,
               ) { }
 
   public uploader: FileUploader = new FileUploader({
@@ -61,7 +64,10 @@ export class CandidateFormComponent implements OnInit {
       modalRef.close();
     });
   
-  }         
+    }
+    
+    this.setJdId();
+  
  }
 
   model: any = {};
@@ -94,4 +100,8 @@ export class CandidateFormComponent implements OnInit {
       }
     }
   }
+
+  setJdId(){
+    this.model.appliedFor = this.router.url.split("/")[2];
+     }
 }

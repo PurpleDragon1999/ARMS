@@ -6,7 +6,7 @@
           
           <div class="form-group pt-4">
             <label for="Name">Full Name<span class="asterick">*</span></label>
-            <input type="text" name="name" class="form-control" [(ngModel)]="model.name"  placeholder="Name" #name="ngModel" [ngClass]="{ 'is-invalid': f.submitted && name.invalid }" required>
+            <input type="text" name="name" class="form-control" [(ngModel)]="model.name"  placeholder="Name" #name="ngModel" id="name" [ngClass]="{ 'is-invalid': f.submitted && name.invalid }" required>
             <div *ngIf="f.submitted && name.invalid" class="invalid-feedback">
               <div *ngIf="name.errors.required"><i class="mdi mdi-alert-outline"></i>Name is required</div>
             </div>
@@ -69,7 +69,11 @@
 
           <div class="form-group">
             <label for="appliedFor">Applied for Position<span class="asterick">*</span></label>
-            <input type="text" class="form-control" ngModel id="appliedFor" rows="4" placeholder="JD referral" name="appliedFor" #appliedFor="ngModel" [ngClass]="{ 'is-invalid': f.submitted && appliedFor.invalid }" required>
+            <input [readOnly] type="text" name="appliedFor" class="form-control" [(ngModel)]="model.appliedFor" 
+             placeholder="JD referral" #appliedFor="ngModel" id="appliedFor"
+             [ngClass]="{ 'is-invalid': f.submitted && appliedFor.invalid }" required>
+      
+
             <div *ngIf="f.submitted && appliedFor.invalid" class="invalid-feedback">
               <div *ngIf="appliedFor.errors.required"><i class="mdi mdi-alert-outline"></i>Applied For field is required</div>
             </div>

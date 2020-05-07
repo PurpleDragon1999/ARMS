@@ -13,7 +13,6 @@ import { RoleGuardService } from './utilities/role-guard.service';
 import { JdModalComponent } from './jd-modal/jd-modal.component';
 
 const routes: Routes = [
-  {path : "candidate", component : CandidateFormComponent},
   { path: "", redirectTo: 'login', pathMatch: 'full'},
   { path: "login", component: LoginComponent },
   {
