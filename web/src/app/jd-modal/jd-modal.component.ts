@@ -54,6 +54,7 @@ export class JdModalComponent implements OnInit {
     jdFormObject: jobDescription;
     data: jobDescription;
     jdForm: FormGroup;
+
     selectChangeHandlerEligibilityCriteria(event: any) {
       this.eligibilityCriteriaOptions = event.target.value;
     }
@@ -93,6 +94,8 @@ export class JdModalComponent implements OnInit {
         return;
       }
     }
+    
+   
 
     loadJobData(Id:string){
       this._service.getJobsById(Id).subscribe((res:any) =>{
@@ -114,7 +117,8 @@ export class JdModalComponent implements OnInit {
       this.location = this.jobArray.location;
       this.salary = this.jobArray.salary;
       this.vacancies = this.jobArray.vacancies;
-    }
+    };
+    
 
     sendUpdateRequest(jdFormObject: any ){
       console.log(jdFormObject)
@@ -127,7 +131,7 @@ export class JdModalComponent implements OnInit {
         modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
           modalRef.close();
         });
-        this.modalClose(true);
+      
       },
       (error: HttpErrorResponse) => {
         console.log(error, 'response');
@@ -158,8 +162,6 @@ export class JdModalComponent implements OnInit {
         salary: this.salary.nativeElement.value,
         vacancies: this.vacancies.nativeElement.value,
       };
-
-      
       if (
         new Date(this.jobListingForm.controls["closingDate"].value) <
         new Date(this.jobListingForm.controls["openingDate"].value)
@@ -170,12 +172,11 @@ export class JdModalComponent implements OnInit {
         };
         return;
       }
-      
-    
-   }
-    modalClose(rerender: boolean): void {
-      this.closeModal.emit(rerender);
   
+  }
+
+  modalClose(rerender: boolean){
+    this.closeModal.emit(rerender);
   }
   
   

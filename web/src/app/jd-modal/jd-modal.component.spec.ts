@@ -1,6 +1,8 @@
-// import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+// import { BrowserModule } from '@angular/platform-browser';
+// import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 // import { JdModalComponent } from './jd-modal.component';
+// import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // describe('JdModalComponent', () => {
 //   let component: JdModalComponent;
@@ -8,7 +10,9 @@
 
 //   beforeEach(async(() => {
 //     TestBed.configureTestingModule({
-//       declarations: [ JdModalComponent ]
+//       declarations: [ JdModalComponent ],
+//       imports: [ FormsModule, ReactiveFormsModule,BrowserModule], 
+  
 //     })
 //     .compileComponents();
 //   }));
@@ -22,4 +26,7 @@
 //   it('should create', () => {
 //     expect(component).toBeTruthy();
 //   });
+//   afterEach(() => {
+//     TestBed.resetTestingModule();
+//   })
 // });

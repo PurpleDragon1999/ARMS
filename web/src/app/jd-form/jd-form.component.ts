@@ -121,7 +121,6 @@ export class JdFormComponent implements OnInit {
       modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
         modalRef.close();
       });
-      this.modalClose(true);
     },
     (error: HttpErrorResponse) => {
       console.log(error, 'response');
@@ -137,11 +136,13 @@ export class JdFormComponent implements OnInit {
       this.router.navigate(["/jd-pdf", this.data.jdId]);
     }
     ); 
+  }
+    modalClose(rerender: boolean): void {
+      this.closeModal.emit(rerender);
   
-}
-  modalClose(rerender: boolean): void {
-    this.closeModal.emit(rerender);
+    }
+  }
 
-}
-}
+
+
 
