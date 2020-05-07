@@ -1,6 +1,9 @@
+import { CandidateFormComponent } from './../candidate-form/candidate-form.component';
+
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProgressTrackerComponent } from './progress-tracker.component';
+
 
 describe('ProgressTrackerComponent', () => {
   let component: ProgressTrackerComponent;
