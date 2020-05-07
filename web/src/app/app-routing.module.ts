@@ -1,3 +1,4 @@
+import { CreateInterviewComponent } from './create-interview/create-interview.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EmployeeComponent } from './employee/containers/employee/employee.component';
@@ -16,6 +17,7 @@ const routes: Routes = [
   {
     path: "edit", component: JdModalComponent 
 },
+
   {
     
     path: "superuser", component: AppNavBarComponent, canActivate: [RoleGuardService], data: { role: "admin" }, children: [
@@ -35,6 +37,9 @@ const routes: Routes = [
     path: "admin", component: AppNavBarComponent, canActivate: [RoleGuardService], data: { role: "admin" }, children: [
       {
         path: "", redirectTo: "home", pathMatch: "full"
+      },
+      {
+        path: "create", component: CreateInterviewComponent 
       },
       {
         path: "home", component: HrComponent
