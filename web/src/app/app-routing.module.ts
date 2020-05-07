@@ -70,9 +70,11 @@ const routes: Routes = [
     ],
   },
   {
-    path:"progressTracker", component: ProgressTrackerComponent
-  }
-
+    path: 'progressTracker', children: [
+      { path: ':candidateId', component: ProgressTrackerComponent }
+    ],
+  },
+  
 ];
 
 @NgModule({

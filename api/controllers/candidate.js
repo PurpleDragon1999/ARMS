@@ -88,12 +88,12 @@ async save(req, res) {
         let candidateId = req.params.id
         let candidateObj = await candidateModel.get({_id : candidateId})
 
-        let candidateDetails = { ...(await candidateObj).toObject(), cv : fs.readFileSync(candidateObj.cv)}
+        let data = { ...(await candidateObj).toObject(), cv : fs.readFileSync(candidateObj.cv)}
   
         res.status(200).send({
             success : true,
             payload : {
-              candidateDetails,
+              data,
               message : "Candidate Details returned Successfully!!"
             }
         })

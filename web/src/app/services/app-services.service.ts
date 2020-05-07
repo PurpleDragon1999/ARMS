@@ -59,22 +59,22 @@ export class AppServicesService {
   
   createInterview(user: ICreate): Observable<HttpResponse<any>>{
     return this.http.post<any>(`${USER_DOMAIN}/api/interview`, user, { ...this.options, observe: 'response' });
-}   
-getAllJobs(): Observable<HttpResponse<any>>{
-    return this.http.get<any>(`${USER_DOMAIN}/api/jobDescription`, this.options);
-}
-getJobsById(Id): Observable<HttpResponse<any>>{
-  return this.http.get<any>(`${USER_DOMAIN}/api/jobDescription/${Id}`, this.options);
-}
+  }   
+  getAllJobs(): Observable<HttpResponse<any>>{
+      return this.http.get<any>(`${USER_DOMAIN}/api/jobDescription`, this.options);
+  }
+  getJobsById(Id): Observable<HttpResponse<any>>{
+    return this.http.get<any>(`${USER_DOMAIN}/api/jobDescription/${Id}`, this.options);
+  }
 
-updateJobInfo(jobFormObject,jobId): Observable<HttpResponse<any>>{
-  return this.http.put<any>(`${USER_DOMAIN}/api/jobDescription/${jobId}`,jobFormObject, this.options);
-}
+  updateJobInfo(jobFormObject,jobId): Observable<HttpResponse<any>>{
+    return this.http.put<any>(`${USER_DOMAIN}/api/jobDescription/${jobId}`,jobFormObject, this.options);
+  }
 
 
-deleteJd(jobObjId): Observable<IResponse>{
-  return this.http.delete<any>(`${USER_DOMAIN}/api/jobDescription/${jobObjId}`, this.options);
-}  
+  deleteJd(jobObjId): Observable<IResponse>{
+    return this.http.delete<any>(`${USER_DOMAIN}/api/jobDescription/${jobObjId}`, this.options);
+  }  
 
   jdFormData(jdFormObject): Observable<any>{
     return this.http.post<any>(`${USER_DOMAIN}/api/jobDescription`, jdFormObject, { ...this.options, observe: 'response' });
@@ -85,5 +85,9 @@ deleteJd(jobObjId): Observable<IResponse>{
 
   jdList(): Observable<any>{
     return this.http.get<any>(`${USER_DOMAIN}/api/jobDescription`,  {headers: this.headers, observe: 'response'} );
+  }
+
+  getCandidate(candidateId): Observable<any>{
+    return this.http.get<any>(`${USER_DOMAIN}/api/candidate/${candidateId}`, this.options);
   }
 }

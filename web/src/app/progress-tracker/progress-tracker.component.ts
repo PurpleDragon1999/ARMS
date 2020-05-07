@@ -15,6 +15,7 @@ export class ProgressTrackerComponent implements OnInit {
     progressTrackerDemo.init();
   }
 
+
 }
 var progressTrackerDemo = (function() {
 
@@ -86,5 +87,7 @@ var progressTrackerDemo = (function() {
   return {
     init: init
   };
+
+  
 
 })();
