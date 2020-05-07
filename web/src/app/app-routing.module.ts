@@ -66,6 +66,11 @@ const routes: Routes = [
     ],
   },
   {
+    path: 'candidate', children: [
+      { path: ':jdId', component: CandidateFormComponent }
+    ],
+  },
+  {
     path:"progressTracker", component: ProgressTrackerComponent
   }
 

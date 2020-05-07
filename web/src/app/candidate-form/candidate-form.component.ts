@@ -4,7 +4,6 @@ import { FileItem, FileUploader, ParsedResponseHeaders } from "ng2-file-upload";
 import { NgbModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
 import { ModalComponent } from "../reusable-components/modal/modal.component"
 
-
 const URL = 'http://localhost:3000/api/candidate'
 
 @Component({
@@ -61,10 +60,9 @@ export class CandidateFormComponent implements OnInit {
     modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
       modalRef.close();
     });
-    
-  } 
-  }
-
+  
+  }         
+ }
 
   model: any = {};
 
