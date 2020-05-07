@@ -86,4 +86,9 @@ deleteJd(jobObjId): Observable<IResponse>{
   jdList(): Observable<any>{
     return this.http.get<any>(`${USER_DOMAIN}/api/jobDescription`,  {headers: this.headers, observe: 'response'} );
   }
+
+  getCandidate(id:string):Observable<any>{
+    console.log("inside service", id)
+    return this.http.get<any>(`${USER_DOMAIN}/api/candidate/${id}`)
+  }
 }

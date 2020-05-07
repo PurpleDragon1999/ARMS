@@ -84,6 +84,7 @@ async save(req, res) {
   }
 
   async get(req, res){
+    console.log("inside api")
       try{
         let candidateId = req.params.id
         let candidateObj = await candidateModel.get({_id : candidateId})
@@ -93,7 +94,7 @@ async save(req, res) {
         res.status(200).send({
             success : true,
             payload : {
-              candidateDetails,
+              data : candidateDetails,
               message : "Candidate Details returned Successfully!!"
             }
         })
