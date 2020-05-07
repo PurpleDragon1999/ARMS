@@ -1,3 +1,4 @@
+import { FileSelectDirective } from 'ng2-file-upload';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProgressTrackerComponent } from './progress-tracker.component';
@@ -16,7 +17,7 @@ describe('ProgressTrackerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProgressTrackerComponent, CandidateFormComponent ],
+      declarations: [ ProgressTrackerComponent, CandidateFormComponent, FileSelectDirective],
       imports : [ FormsModule, ReactiveFormsModule, BrowserModule,
         HttpClientTestingModule, RouterTestingModule.withRoutes([])]
 

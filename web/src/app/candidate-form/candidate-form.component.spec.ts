@@ -14,8 +14,8 @@ describe('CandidateFormComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CandidateFormComponent ],
-      imports : [ FormsModule, ReactiveFormsModule, BrowserModule, FileSelectDirective,
+      declarations: [ CandidateFormComponent, FileSelectDirective ],
+      imports : [ FormsModule, ReactiveFormsModule, BrowserModule,
                   HttpClientTestingModule, RouterTestingModule.withRoutes([])]
     })
     .compileComponents();
