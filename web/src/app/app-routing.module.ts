@@ -1,5 +1,5 @@
 
-import { CreateInterviewComponent } from './create-interview/create-interview.component';
+//import { CreateInterviewComponent } from './create-interview/create-interview.component';
 
 import { CandidateFormComponent } from './candidate-form/candidate-form.component';
 import { ProgressTrackerComponent } from './progress-tracker/progress-tracker.component';
@@ -43,9 +43,9 @@ const routes: Routes = [
       {
         path: "", redirectTo: "home", pathMatch: "full"
       },
-      {
-        path: "create", component: CreateInterviewComponent 
-      },
+      // {
+      //   path: "create", component: CreateInterviewComponent 
+      // },
       {
         path: "home", component: HrComponent
       },
