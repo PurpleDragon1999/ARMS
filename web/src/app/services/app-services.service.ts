@@ -42,35 +42,28 @@ export class AppServicesService {
     const helper = new JwtHelperService();
     return helper.decodeToken(this.getToken());
   }
-  // headers: HttpHeaders = new HttpHeaders({
-  //   'Content-Type': 'application/json',
-  //   // Authorization: localStorage.getItem("Authorization")
-  // });
-  // httpOptions = {
-  //   headers: this.headers
-  // };
-
-  //return helper.decodeToken(localStorage.getItem(''));
   
-
-
-  // For making HTTP calls
+  //For searching with pagination
+  searchCandidates(name: string, pagination: string){
+    return this.http.get<any>(`${USER_DOMAIN}/api/employeeSearch/?character=${name}&pagination=${pagination}`, this.options);
+  }
   
   createInterview(user: ICreate): Observable<HttpResponse<any>>{
     return this.http.post<any>(`${USER_DOMAIN}/api/interview`, user, { ...this.options, observe: 'response' });
-}   
+  }   
 
   getAllJobs(): Observable<HttpResponse<any>>{
     return this.http.get<any>(`${USER_DOMAIN}/api/jobDescription`, this.options);
-}
+  }
 
-deleteJd(jobObjId): Observable<HttpResponse<any>>{
-  return this.http.delete<any>(`${USER_DOMAIN}/api/jobDescription/${jobObjId}`, this.options);
-}  
+  deleteJd(jobObjId): Observable<HttpResponse<any>>{
+    return this.http.delete<any>(`${USER_DOMAIN}/api/jobDescription/${jobObjId}`, this.options);
+  }  
 
   jdFormData(jdFormObject): Observable<any>{
     return this.http.post<any>(`${USER_DOMAIN}/api/jobDescription`, jdFormObject, { ...this.options, observe: 'response' });
   }
+
   getJdData(jdId):Observable<any>{
     return this.http.get<any>(`${USER_DOMAIN}/api/jobDescription/${jdId}`)
   }

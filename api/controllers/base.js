@@ -149,7 +149,20 @@ class Base {
       
       const searchedRecords = await this.model.getAll({ name: queryObject });
       req.body.searchedRecords = searchedRecords;
-      return this.getPaginatedResult(req, res);
+      if(req.query.pagination === "true"){
+        return this.getPaginatedResult(req, res);
+      }
+      else{
+        res.status(200).send({
+          success: true,
+          payload: {
+            data: {
+              data: searchedRecords
+            },
+            message: "Records returned successfully!!",
+          },
+        });
+      }
     } catch (err) {
       res.status(500).send({
         success: false,

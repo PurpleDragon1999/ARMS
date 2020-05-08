@@ -70,7 +70,7 @@ module.exports = (app) => {
   app.get("/api/candidates", (req, res) =>
     controller.candidate.getPaginatedResult(req, res)
   );
-  app.get("/api/candidate/search/:searchBy", (req, res) =>
+  app.get("/api/candidate/search", (req, res) =>
     controller.candidate.searchRecord(req, res)
   );
 
