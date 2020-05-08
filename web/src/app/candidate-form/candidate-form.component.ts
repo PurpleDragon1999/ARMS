@@ -111,10 +111,8 @@ export class CandidateFormComponent implements OnInit {
       this.service.getCandidate(candidateId).subscribe(
         (res: IResponse) =>{
           this.model = res.payload.data;
-          console.log(this.model)
         },
         (error: HttpErrorResponse) => {
-          console.log(error)
         }
       )}
     else if(this.router.url.split("/")[1]=="candidate"){
