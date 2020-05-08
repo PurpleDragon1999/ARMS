@@ -1,8 +1,10 @@
+import { ICandidate } from './../models/candidate.interface';
 import { IResponse } from 'src/app/models/response.interface';
 import { Router } from '@angular/router';
 import { AppServicesService } from 'src/app/services/app-services.service';
 import { element } from 'protractor';
 import { Component, OnInit } from '@angular/core';
+
 
 
 
@@ -15,6 +17,8 @@ import { Component, OnInit } from '@angular/core';
 export class ProgressTrackerComponent implements OnInit {
 
   flag : number = 0
+  candidatedata : ICandidate
+
   constructor(private _service : AppServicesService, private _route : Router) { }
 
   ngOnInit() {
@@ -24,11 +28,10 @@ export class ProgressTrackerComponent implements OnInit {
 
   loadcandidateStatus(){
     let candidateId = this._route.url.split("/")[2]
-    console.log(candidateId)
     this._service.getCandidate(candidateId).subscribe((res:IResponse)=>{
       
-      let candidateData = res.payload.data
-      this.flag = candidateData.flag      
+      this.candidatedata = res.payload.data
+      this.flag = this.candidatedata.flag     
       
     })
     

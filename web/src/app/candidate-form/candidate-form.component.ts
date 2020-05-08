@@ -49,7 +49,6 @@ export class CandidateFormComponent implements OnInit {
     }
 
     this.uploader.onErrorItem = (item: FileItem, response: string, status: number, headers: ParsedResponseHeaders) => {
-    console.log("error displayed")
     let data = JSON.parse(response);
     const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
 
@@ -95,5 +94,7 @@ export class CandidateFormComponent implements OnInit {
         this.uploader.uploadAll();
       }
     }
+
+    
   }
 }

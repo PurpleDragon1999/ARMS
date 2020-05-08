@@ -7,4 +7,6 @@ export interface ICandidate {
     skills: string;
     selection: string;
     appliedFor: string;
+    status : string;
+    flag : number
   }
