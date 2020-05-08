@@ -12,3 +12,13 @@
 .progress-marker::after{
     z-index: 10;
 }
+
+
+
+.progress-step.is-complete .progress-marker::before{
+    background-color: green;
+}
+
+.progress-step.is-active .progress-marker::before{
+    background-color: greenyellow;
+}

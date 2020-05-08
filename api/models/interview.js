@@ -25,8 +25,12 @@ class Interview{
     async index(criteria = {}, columns = {}) {
         let fields = 'jdId jdTitle openingDate closingDate vacancies salary skills eligibilityCriteria jobType location jobProfileDescription';
         let panelFields= 'name designation role employeeId email profileImageURL'
+        let candidateFields='name experience email aadhar cv skills selection appliedFor'
         let data = await this.model.find(criteria, columns).populate('jdObjectId', fields)
-            .populate('rounds.panelOfInterviewers',panelFields);
+        .populate('rounds.panelOfInterviewers.panel1',panelFields)
+        .populate('rounds.panelOfInterviewers.panel2',panelFields)
+        .populate('rounds.panelOfInterviewers.panel3',panelFields)
+        .populate('candidateObjIds',candidateFields);
         return (data);
       }
 
@@ -34,7 +38,9 @@ class Interview{
         let jdFields = 'jdId jdTitle openingDate closingDate vacancies salary skills eligibilityCriteria jobType location jobProfileDescription';
         let panelFields= 'name designation role employeeId email profileImageURL'
         let data = await this.model.find({_id: criteria}, columns).populate('jdObjectId', jdFields)
-            .populate('rounds.panelOfInterviewers',panelFields);
+            .populate('rounds.panelOfInterviewers.panel1',panelFields)
+            .populate('rounds.panelOfInterviewers.panel2',panelFields)
+            .populate('rounds.panelOfInterviewers.panel3',panelFields);
         return (data);
     }
            

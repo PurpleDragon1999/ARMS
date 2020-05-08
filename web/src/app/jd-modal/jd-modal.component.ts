@@ -10,6 +10,7 @@ import { jobDescription } from "../models/jobDescription.interface";
 import html2canvas from "html2canvas";
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { NgbModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
+import { DynamicGrid } from "../grid.model";
 
 @Component({
   selector: 'app-jd-modal',
@@ -27,6 +28,8 @@ export class JdModalComponent implements OnInit {
     private modalService:NgbModal,
     private _router:Router) {}
 
+    dynamicArray: Array<DynamicGrid> = [];
+    newDynamic: any = {};
 
     @Output()
     closeModal: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -45,6 +48,7 @@ export class JdModalComponent implements OnInit {
     @ViewChild("vacancies", { static: false }) vacancies: ElementRef;
     @ViewChild("content", { static: true }) content: ElementRef;
     
+    
     jobArray:any;
     eligibilityCriteriaOptions: String;
     locationOptions: String;
@@ -53,7 +57,7 @@ export class JdModalComponent implements OnInit {
     submitted = false;
     jdFormObject: jobDescription;
     data: jobDescription;
-    jdForm: FormGroup;
+   
 
     selectChangeHandlerEligibilityCriteria(event: any) {
       this.eligibilityCriteriaOptions = event.target.value;
@@ -82,9 +86,10 @@ export class JdModalComponent implements OnInit {
         vacancies: ["", Validators.required],
       });
     }
-    get formControls() {
+    get f() {
       return this.jobListingForm.controls;
     }
+    
     error: any = { isError: false, errorMessage: "" };
   
     onSubmit() {
@@ -93,6 +98,7 @@ export class JdModalComponent implements OnInit {
       if (this.jobListingForm.invalid) {
         return;
       }
+      alert("SUCCESS!! :-)\n\n" + JSON.stringify(this.jobListingForm.value));
     }
     
    
@@ -172,12 +178,21 @@ export class JdModalComponent implements OnInit {
         };
         return;
       }
+      
   
   }
-
+  deleteRow(index) {
+    if (this.dynamicArray.length == 1) {
+      return false;
+    } else {
+      this.dynamicArray.splice(index, 1);
+      return true;
+    }
+  }
   modalClose(rerender: boolean){
     this.closeModal.emit(rerender);
   }
+ 
   
   
 }

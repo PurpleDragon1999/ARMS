@@ -35,6 +35,7 @@ export class JdPdfComponent implements OnInit {
        
      return this.appService.getJdData(params.jdId);
       })
+      
     )
     .subscribe((res) => {
       this.jdObject = res.payload.data;
@@ -44,7 +45,7 @@ export class JdPdfComponent implements OnInit {
   public convertToPDF()
   {
   var data = document.getElementById('content');
-   html2canvas(data).then(canvas => {
+  html2canvas(data).then(canvas => {
   // Few necessary setting options
   var imgWidth = 208;
   var pageHeight = 295;
@@ -54,7 +55,7 @@ export class JdPdfComponent implements OnInit {
   const contentDataURL = canvas.toDataURL('image/png')
   let pdf = new jsPDF('p', 'mm', 'a4'); // A4 size page of PDF
   var position = 0;
-  pdf.addImage(contentDataURL, 'PNG', 0, position, 2*imgWidth, 2*imgHeight)
+  pdf.addImage(contentDataURL, 'PNG', 0, position, 1.6*imgWidth, 1.6*imgHeight)
   // pdf.setTextColor(255,0,0);
   // pdf.setFillColor(135, 124,45,0);
   // pdf.setFontType("italic");

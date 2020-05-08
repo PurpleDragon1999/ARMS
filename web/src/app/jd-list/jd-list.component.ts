@@ -3,8 +3,6 @@ import { JdModalComponent } from '../jd-modal/jd-modal.component';
 import { Component, OnInit,EventEmitter, Output, Input} from "@angular/core";
 import { AppServicesService } from "src/app/services/app-services.service";
 import { NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
-import html2canvas from 'html2canvas';
-import * as jsPDF from 'jspdf';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ModalComponent } from 'src/app/reusable-components/modal/modal.component';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -65,32 +63,9 @@ export class JdListComponent implements OnInit {
   }
 
 
-  public convertToPDF() {
-    let data = document.getElementById('content');
-    html2canvas(data).then(canvas => {
-      // Few necessary setting options
-      let imgWidth = 208;
-      let pageHeight = 295;
-      let imgHeight = canvas.height * imgWidth / canvas.width;
-      let heightLeft = imgHeight;
-
-      const contentDataURL = canvas.toDataURL('image/png');
-      const pdf = new jsPDF('p', 'mm', 'a4'); // A4 size page of PDF
-      let position = 0;
-      pdf.addImage(contentDataURL, 'PNG', 0, position, 2 * imgWidth, 2 * imgHeight);
-      // pdf.setTextColor(255,0,0);
-      // pdf.setFillColor(135, 124,45,0);
-      // pdf.setFontType("italic");
-      // pdf.text("Copyright © 2020  CyberGroup . All rights reserved.", 10, 280)
-      pdf.save('jobdescription' + this.jdObject.jdId + '.pdf'); // Generated PDF
-    });
-    setTimeout(() => {
-      this.navigation();
-    }, 5000);
-  }
+  
   downloadPdf(jdId) {
-    this.convertToPDF();
-    // this.router.navigate(["/jd-pdf", jdId]);
+   this.router.navigate(["/jd-pdf", jdId]);
   }
 
   datecheck(closingDate) {
@@ -100,7 +75,5 @@ export class JdListComponent implements OnInit {
     } else { return 0; }
   }
 
-  navigation() {
-    this.router.navigate(['/admin/job-desc']);
-  }
+ 
 }
