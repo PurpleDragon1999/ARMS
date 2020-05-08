@@ -66,7 +66,14 @@ const routes: Routes = [
     ],
   },
   {
-    path:"progressTracker/:id", component: ProgressTrackerComponent
+    path:"progressTracker",children:[
+     {path:":candidateId",component: ProgressTrackerComponent }
+    ]
+  },
+  {
+    path:"candidateForm",children:[
+     { path:':jdId',component:CandidateFormComponent}
+    ]
   }
 
 ];
