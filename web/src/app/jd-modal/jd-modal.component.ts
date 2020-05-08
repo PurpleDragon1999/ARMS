@@ -28,7 +28,8 @@ export class JdModalComponent implements OnInit {
     private modalService:NgbModal,
     private _router:Router) {}
 
-    
+    dynamicArray: Array<DynamicGrid> = [];
+    newDynamic: any = {};
 
     @Output()
     closeModal: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -47,8 +48,7 @@ export class JdModalComponent implements OnInit {
     @ViewChild("vacancies", { static: false }) vacancies: ElementRef;
     @ViewChild("content", { static: true }) content: ElementRef;
     
-    dynamicArray: Array<DynamicGrid> = [];
-    newDynamic: any = {};
+    
     jobArray:any;
     eligibilityCriteriaOptions: String;
     locationOptions: String;
@@ -73,11 +73,11 @@ export class JdModalComponent implements OnInit {
     ngOnInit() {
       this.loadJobData(this.jdUpdateId);
       this.jobListingForm = this.formBuilder.group({
-        jdId: ["", Validators.required],
-        jdTitle: ["", Validators.required],
+        jobId: ["", Validators.required],
+        jobTitle: ["", Validators.required],
         openingDate: ["", Validators.required],
         closingDate: ["", Validators.required],
-        jobProfileDescription: ["", Validators.required],
+        jobDescription: ["", Validators.required],
         skills: ["", Validators.required],
         jobType: ["", Validators.required],
         eligibilityCriteria: ["", Validators.required],
@@ -181,10 +181,6 @@ export class JdModalComponent implements OnInit {
       
   
   }
- 
-  modalClose(rerender: boolean){
-    this.closeModal.emit(rerender);
-  }
   deleteRow(index) {
     if (this.dynamicArray.length == 1) {
       return false;
@@ -193,6 +189,10 @@ export class JdModalComponent implements OnInit {
       return true;
     }
   }
+  modalClose(rerender: boolean){
+    this.closeModal.emit(rerender);
+  }
+ 
   
   
 }
