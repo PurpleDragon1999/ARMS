@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import{HttpClient,HttpHeaders} from '@angular/common/http'
 import { JwtHelperService } from '@auth0/angular-jwt';
 
-const LOGIN_API="http://localhost:3000/api/checkvalidemployee"
+const LOGIN_API="http://localhost:3000/api/checkValidEmployee"
 @Injectable({
   providedIn: 'root'
 })
