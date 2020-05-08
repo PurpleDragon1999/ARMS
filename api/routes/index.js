@@ -72,5 +72,7 @@ module.exports = (app) => {
   );
   
   //login route
-  app.post("/api/checkvalidemployee", controller.login.checkValidEmployee);
+  app.post("/api/checkValidEmployee", controller.login.checkValidEmployee);
+  // route to send email to candidates who have applied to job
+  app.post("/api/jdEmail",(req,res)=>controller.email.sendEmail(req,res));
 };
