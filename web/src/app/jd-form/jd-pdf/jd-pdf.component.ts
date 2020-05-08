@@ -5,6 +5,7 @@ import { Router, ActivatedRoute, Params } from "@angular/router";
 import { switchMap } from "rxjs/operators";
 import {jobDescription} from '../../models/jobDescription.interface'
 import{AppServicesService} from '../../services/app-services.service'
+import { stringify } from 'querystring';
 
 @Component({
   selector: 'app-jd-pdf',
@@ -44,23 +45,25 @@ export class JdPdfComponent implements OnInit {
 
   public convertToPDF()
   {
+    
   var data = document.getElementById('content');
   html2canvas(data).then(canvas => {
-  // Few necessary setting options
-  var imgWidth = 208;
-  var pageHeight = 295;
-  var imgHeight = canvas.height * imgWidth / canvas.width;
-  var heightLeft = imgHeight;
    
-  const contentDataURL = canvas.toDataURL('image/png')
-  let pdf = new jsPDF('p', 'mm', 'a4'); // A4 size page of PDF
-  var position = 0;
-   pdf.addImage(contentDataURL, 'PNG', 0, position, 1.5*imgWidth, 1.4*imgHeight)
-  // pdf.setTextColor(255,0,0);
-  // pdf.setFillColor(135, 124,45,0);
-  // pdf.setFontType("italic");
-  // pdf.text("Copyright © 2020  CyberGroup . All rights reserved.", 10, 280)
-   pdf.save("jobdescription"+this.jdObject.jdId+'.pdf'); // Generated PDF
+  // Few necessary setting options
+  var width = canvas.width;
+  var height = canvas.height;
+  var millimeters = {width,height};
+  millimeters.width = Math.floor(width * 0.50);
+  millimeters.height = Math.floor(height*0.80);
+
+  var imgData = canvas.toDataURL(
+      'image/png');
+  var pdf = new jsPDF("p", "mm", "a4");
+  pdf.deletePage(1);
+  pdf.addPage(millimeters.width, millimeters.height);
+  pdf.addImage(imgData, 'PNG', 0, 0);
+  pdf.save("jobdescription"+this.jdObject.jdId+'.pdf'); // Generated PDF
+ 
   });
   setTimeout(() => {
     this.navigation();
@@ -69,8 +72,6 @@ export class JdPdfComponent implements OnInit {
   
   }
   navigation(){
-    this.router.navigate(["/hr/job-desc"]);
+    this.router.navigate(["/admin/job-desc"]);
   }
-  
-
 }
