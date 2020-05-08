@@ -104,7 +104,6 @@ class Base {
     }
   }
 
-  
   async searchRecord(req, res) {
     try {
       let queryObject = {
@@ -113,9 +112,22 @@ class Base {
       };
       
       const searchedRecords = await this.model.getAll({ name: queryObject });
-      req.body.searchedRecords = searchedRecords;
-      return this.getPaginatedResult(req, res);
+      req.body.records = searchedRecords;
+
+      if (req.query.pagination==="true"){
+        return this.getPaginatedResult(req, res);
+      }
+      else{
+        res.status(200).send({
+          payload:{
+            data : searchedRecords,
+            message :"Records Returned Successfull"
+          }
+        })
+      }
+      
     } catch (err) {
+      console.log(err, "error")
       res.status(500).send({
         success: false,
         payload: {
@@ -128,7 +140,7 @@ class Base {
   async getPaginatedResult(req, res) {
     try {
       const recordList =
-        req.body.searchedRecords || (await this.model.getAll());
+        req.body.records || (await this.model.getAll());
       const page = parseInt(req.query.page) || 1;
       const pageSize = 5;
       const pager = await pagination.paginate(
@@ -151,6 +163,7 @@ class Base {
         },
       });
     } catch (err) {
+      console.log(err, "error!!!")
       return res.status(500).send({
         success: false,
         payload: {

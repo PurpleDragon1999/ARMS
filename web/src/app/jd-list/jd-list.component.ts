@@ -3,8 +3,6 @@ import { JdModalComponent } from '../jd-modal/jd-modal.component';
 import { Component, OnInit,EventEmitter, Output, Input} from "@angular/core";
 import { AppServicesService } from "src/app/services/app-services.service";
 import { NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
-import html2canvas from 'html2canvas';
-import * as jsPDF from 'jspdf';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ModalComponent } from 'src/app/reusable-components/modal/modal.component';
 import { HttpErrorResponse } from '@angular/common/http';
