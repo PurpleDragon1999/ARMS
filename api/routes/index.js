@@ -61,28 +61,20 @@ module.exports = (app) => {
     controller.candidate.getAll(req, res)
   );
 
-<<<<<<< HEAD
   app.get("/api/candidate/:id", (req, res) => controller.candidate.get(req, res));
   app.put("/api/candidate/:id", (req, res) => controller.candidate.modify(req, res))
-=======
-  app.get("/api/candidate/:id", (req,res)=> controller.candidate.get(req,res));
-  app.put("/api/candidate/:id", (req,res)=> controller.candidate.modify(req, res))
   app.post("/api/candidate", fileUpload, (req, res) =>
     controller.candidate.save(req,res)
   );
->>>>>>> da377f39f009a9e258b047771fabb48d772491d5
 
   app.post("/api/checkvalidemployee", (req, res) =>
     controller.login.checkValidEmployee(req, res)
   );
-<<<<<<< HEAD
   // app.post('/api/candidate',upload.single('file'), (req,res)=> controller.candidate.uploadDetails(req,res));
   app.post("/api/candidate", fileUpload, (req, res) =>
     controller.candidate.save(req, res)
   );
-=======
   
->>>>>>> da377f39f009a9e258b047771fabb48d772491d5
   //login route
   app.post("/api/checkValidEmployee", controller.login.checkValidEmployee);
   // route to send email to candidates who have applied to job
