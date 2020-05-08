@@ -13,7 +13,6 @@ import { RoleGuardService } from './utilities/role-guard.service';
 import { JdModalComponent } from './jd-modal/jd-modal.component';
 
 const routes: Routes = [
-  {path : "candidate", component : CandidateFormComponent},
   { path: "", redirectTo: 'login', pathMatch: 'full'},
   { path: "login", component: LoginComponent },
   {
@@ -66,16 +65,16 @@ const routes: Routes = [
     ],
   },
   {
-    path:"progressTracker",children:[
-     {path:":candidateId",component: ProgressTrackerComponent }
-    ]
+    path: 'candidateForm', children: [
+      { path: ':jdId', component: CandidateFormComponent }
+    ],
   },
   {
-    path:"candidateForm",children:[
-     { path:':jdId',component:CandidateFormComponent}
-    ]
-  }
-
+    path: 'progressTracker', children: [
+      { path: ':candidateId', component: ProgressTrackerComponent }
+    ],
+  },
+  
 ];
 
 @NgModule({

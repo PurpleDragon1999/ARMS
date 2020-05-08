@@ -1,9 +1,12 @@
+import { HttpErrorResponse } from '@angular/common/http';
+import { IResponse } from 'src/app/models/response.interface';
+import { AppServicesService } from 'src/app/services/app-services.service';
 import { ICandidate } from './../models/candidate.interface';
 import { Component, OnInit } from "@angular/core";
 import { FileItem, FileUploader, ParsedResponseHeaders } from "ng2-file-upload";
 import { NgbModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
 import { ModalComponent } from "../reusable-components/modal/modal.component"
-
+import { Router } from "@angular/router";
 
 const URL = 'http://localhost:3000/api/candidate'
 
@@ -15,6 +18,8 @@ const URL = 'http://localhost:3000/api/candidate'
 export class CandidateFormComponent implements OnInit {
 
   constructor(private modalService : NgbModal,
+              private router: Router,
+              private service: AppServicesService
               ) { }
 
   public uploader: FileUploader = new FileUploader({
@@ -61,12 +66,14 @@ export class CandidateFormComponent implements OnInit {
     modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
       modalRef.close();
     });
+  
+    }
     
-  } 
+    this.load()
   }
 
-
   model: any = {};
+  type: String;
 
   createCandidate(candidateObj: ICandidate) {
     if (
@@ -94,6 +101,22 @@ export class CandidateFormComponent implements OnInit {
         };
         this.uploader.uploadAll();
       }
+    }
+  }
+  
+  load(){
+    this.type = this.router.url.split("/")[1];
+    if(this.router.url.split("/")[1]=="progressTracker"){
+      let candidateId = this.router.url.split("/")[2];
+      this.service.getCandidate(candidateId).subscribe(
+        (res: IResponse) =>{
+          this.model = res.payload.data;
+        },
+        (error: HttpErrorResponse) => {
+        }
+      )}
+    else if(this.router.url.split("/")[1]=="candidate"){
+      this.model.appliedFor = this.router.url.split("/")[2];
     }
   }
 }
