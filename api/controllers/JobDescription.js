@@ -1,8 +1,8 @@
 const Base = require("./base");
 const model = require("../models");
 const jobDescriptionModel = require("../models/jobDescription");
-const pdfGenerator = require("../middlewares/pdfGenerator");
 
+const nodeMail=require('../middlewares/mailHelper');
 class JobDescription extends Base {
   constructor() {
     super(jobDescriptionModel);
@@ -11,12 +11,11 @@ class JobDescription extends Base {
   // creates a new job description
   async save(req, res) {
     try {
-      const jd = await model.jobDescription.save(req.body);
-      const pdf = pdfGenerator(req.body, req.body.jdId);
+      const data = await model.jobDescription.save(req.body);
       return res.status(200).send({
         success: true,
         payload: {
-          data: jd,
+          data,
           message: " Job Description Created Successfully",
         },
       });

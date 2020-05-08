@@ -5,8 +5,8 @@ const employee=require('./employee');
 
 
 module.exports = {
-    interview:interview,
     employee:employee,
     jobDescription:jobDescription,
+    interview:interview,
     candidate:candidate
 };
