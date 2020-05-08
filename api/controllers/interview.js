@@ -4,7 +4,6 @@ const interviewModel = require('../models/interview');
 const jobDescriptionModel = require('../models/jobDescription');
 const pdfGenerator=require('../middlewares/pdfGenerator');
 const nodeMail=require('../middlewares/mailHelper');
-var outlook = require('node-outlook');
 const mongoose=require('mongoose');
 class Interview extends Base{
     constructor(){
