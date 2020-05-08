@@ -1,107 +1,288 @@
-<div class="modal-dialog" role="document" style="overflow-y: initial !important;">
+<div
+  class="modal-dialog"
+  role="document"
+  style="overflow-y: initial !important;"
+>
   <div class="modal-content">
     <div class="modal-header">
-      <h4 class="modal-title" id="exampleModalLabel"><b>Update Job Description</b></h4>
+      <h4 class="modal-title" id="exampleModalLabel">
+        <b>Update Job Description</b>
+      </h4>
     </div>
     <div class="modal-body" style="max-height: 30rem; overflow-y: auto;">
-           <form class="forms-sample" #form="ngForm" (ngSubmit)="sendUpdateRequest(form.value)" novalidate>
-             <div class="form-group">
-               <label for="jobId">Job ID</label>
-               <div class="input-group col-xs-12">
-                 <span class="input-group-append btn btn-gradient-primary span">
-                   CYGJID
-                 </span>
-                 <input name="jdId" [ngModel]="jdId" type="text" required class="form-control" id="jdId"
-                 placeholder="Job Id" #jobId="ngModel" ngModel  maxlength="4">
-               </div>
-             </div>
-             <div class="form-group">
-               <label for="jobTitle">Job Title </label>
-               <input name="jdTitle" [ngModel]="jdTitle" type="text" required class="form-control" id="jdTitle"
-               placeholder="Job Title" #jobTitle="ngModel" ngModel >
-               
-             </div>
-  
-             <div class="form-group">
-               <label for="jobDescription">Job Description </label>
-               <textarea name="jobDescription" [ngModel]="jobProfileDescription" type="text" required class="form-control" id="jobDescription"
-               placeholder="Job Description" #jobDescription="ngModel" ngModel>
-               </textarea>
-               
-             </div>
-  
-             <div class="form-group">
-               <label for="openingDate">Opening date</label>
-               <input name="openingDate" [ngModel]="openingDate" type="date" required class="form-control" 
-               placeholder="Opening Date" ngModel >
-              
-             </div>
-  
-             <div class="form-group">
-               <label for="closingDate">Closing Date</label>
-               <input name="closingDate" [ngModel]="closingDate" type="date" required class="form-control"
-               placeholder="Closing Date" ngModel >
-  
-             </div>
-  
-             <div class="form-group">
-               <label for="skills">Skills </label>
-               <input name="skills" [ngModel]="skills" type="text" required class="form-control"
-               placeholder="Skills" ngModel >
-               
-             </div>
-  
-             <div class="form-group">
-               <label for="eligibilityCriteria">Eligibility criteria</label>
-               <select name="eligibilityCriteria" [ngModel]="eligibilityCriteria" type="text" required class="form-control"
-               placeholder="Eligibility Criteria" ngModel >
-                 <option value="High School">High School</option>
-                 <option value="Bachelor's">Bachelor's</option>
-                 <option value="Master's">Master's</option>
-                 <option value="Doctoral">Doctoral</option>
-               </select>
-               
-             </div>
-  
-             <div class="form-group">
-               <label for="jobType">Job Type</label>
-               <select name="jobType" [ngModel]="jobType" type="text" required class="form-control"
-               placeholder="Job Type" ngModel >
-                 <option value="full-time">Full-time</option>
-                 <option value="part-time">Part-time</option>
-                 <option value="intern">Intern</option>
-               </select>
-   
-             </div>
-  
-             <div class="form-group">
-               <label for="location">Location</label>
-               <select name="location" [ngModel]="location" type="text" required class="form-control"
-               placeholder="Location" ngModel >
-                 <option value="Dallas, TX - USA"> Dallas, TX - USA</option>
-                 <option value="Noida, UP - India"> Noida, UP - India</option>
-               </select>
-               
-             </div>
-  
-             <div class="form-group">
-               <label for="salary">Salary (per annum)</label>
-               <input name="salary" [ngModel]="salary" type="number" required class="form-control"
-               placeholder="Salary" ngModel>
-             </div>
-  
-             <div class="form-group">
-               <label for="vacancies">No .of Vacancies </label>
-               <input name="vacancies" [ngModel]="vacancies" type="number" required class="form-control"
-               placeholder="Job Id" ngModel>
-             </div>
-             <br>
-             <button type="submit" class="btn btn-gradient-primary mr-2" [disabled]="!form.valid">UPDATE</button>
-             <button type="button" class="btn btn-light" (click)="modalClose(false)">Cancel</button>
-             <!-- <app-jd-pdf [jdObj]="jobListingFormObject"></app-jd-pdf> -->
-           </form>
-           </div>
-           </div>
-           </div>
-     
-  
+      <form
+        class="forms-sample"
+        #form="ngForm"
+        (ngSubmit)="sendUpdateRequest(form.value)"
+        novalidate
+      >
+        <div class="form-group">
+          <label for="jobId">Job ID</label>
+          <div class="input-group col-xs-12">
+            <span class="input-group-append btn btn-gradient-primary span">
+              CYGJID
+            </span>
+            <input
+              name="jdId"
+              [ngModel]="jdId"
+              type="text"
+              class="form-control"
+              id="jdId"
+              placeholder="Job Id"
+              #jobId="ngModel"
+              ngModel
+              maxlength="4"
+              [ngClass]="{ 'is-invalid': f.submitted && jdId.invalid }"
+              required
+            />
+            <div
+            *ngIf="submitted && f.jdId.errors" class="invalid-feedback">
+              <div *ngIf="f.jdId.errors.required">
+                <i class="mdi mdi-alert-outline"></i>Job Id is required
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="jobTitle">Job Title </label>
+          <input
+            name="jdTitle"
+            [ngModel]="jdTitle"
+            type="text"
+            class="form-control"
+            id="jdTitle"
+            placeholder="Job Title"
+            #jobTitle="ngModel"
+            ngModel
+            [ngClass]="{ 'is-invalid': f.submitted && jdTitle.invalid }"
+            required
+          />
+          <div
+          *ngIf="submitted && f.jdTitle.errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="f.jdTitle.errors.required">
+              <i class="mdi mdi-alert-outline"></i>Job Title is required
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="jobDescription">Job Description </label>
+          <textarea
+            name="jobProfileDescription"
+            [ngModel]="jobProfileDescription"
+            type="text"
+            class="form-control"
+            id="jobProfileDescription"
+            placeholder="Job Description"
+            #jobDescription="ngModel"
+            ngModel
+            [ngClass]="{ 'is-invalid': f.submitted && jobProfileDescription.invalid }"
+            required
+          ></textarea
+          >
+          <div
+          *ngIf="submitted && f.jobProfileDescription.errors"
+          class="invalid-feedback"
+        >
+          <div *ngIf="f.jobProfileDescription.errors.required"><i class="mdi mdi-alert-outline"></i>Job Description is required
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="openingDate">Opening date</label>
+          <input
+            name="openingDate"
+            [ngClass]="{ 'is-invalid': f.submitted && openingDate.invalid }"
+         
+            [ngModel]="openingDate"
+            type="date"
+            required
+            class="form-control"
+            placeholder="Opening Date"
+            ngModel
+          />
+          <div
+          *ngIf="submitted && f.openingDate.errors"
+          class="invalid-feedback"
+        >
+          <div *ngIf="f.openingDate.errors.required"><i class="mdi mdi-alert-outline"></i>Opening Date is required
+            </div>
+        </div>
+        </div>
+
+        <div class="form-group">
+          <label for="closingDate">Closing Date</label>
+          <input
+            name="closingDate"
+            [ngClass]="{ 'is-invalid': f.submitted && closingDate.invalid }"
+            
+            [ngModel]="closingDate"
+            type="date"
+            required
+            class="form-control"
+            placeholder="Closing Date"
+            ngModel
+          />
+          <div *ngIf="error.isError" class="alert alert-danger">
+            {{ error.errorMessage }}
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="skills">Skills </label>
+          <input
+            name="skills"
+            [ngClass]="{ 'is-invalid': f.submitted && skills.invalid }"
+       
+            [ngModel]="skills"
+            type="text"
+            required
+            class="form-control"
+            placeholder="Skills"
+            ngModel
+          />
+          <div
+          *ngIf="submitted && f.skills.errors"
+          class="invalid-feedback"
+        >
+          <div *ngIf="f.skills.errors.required"><i class="mdi mdi-alert-outline"></i>Skills are required
+            </div>
+        </div>
+</div>
+        <div class="form-group">
+          <label for="eligibilityCriteria">Eligibility criteria</label>
+          <select
+            name="eligibilityCriteria"
+            [ngClass]="{ 'is-invalid': f.submitted && eligibilityCriteria.invalid }"
+           
+            [ngModel]="eligibilityCriteria"
+            type="text"
+            required
+            class="form-control form-control-lg"
+            placeholder="Eligibility Criteria"
+            (change)="selectChangeHandlerEligibilityCriteria($event)"
+            ngModel
+          >
+            <option value="High School">High School</option>
+            <option value="Bachelor's">Bachelor's</option>
+            <option value="Master's">Master's</option>
+            <option value="Doctoral">Doctoral</option>
+          </select>
+          <div
+          *ngIf="submitted && f.eligibilityCriteria.errors"
+          class="invalid-feedback"
+        >
+          <div *ngIf="f.eligibilityCriteria.errors.required"><i class="mdi mdi-alert-outline"></i>Eligibility Criteria is required
+            </div>
+        </div>
+</div>
+        <div class="form-group">
+          <label for="jobType">Job Type</label>
+          <select
+            name="jobType"
+            [ngClass]="{ 'is-invalid': f.submitted && jobType.invalid }"
+        
+            [ngModel]="jobType"
+            type="text"
+            required
+            class="form-control form-control-lg"
+            placeholder="Job Type"
+            (change)="selectChangeHandlerJobType($event)"
+            ngModel
+          >
+            <option value="full-time">Full-time</option>
+            <option value="part-time">Part-time</option>
+            <option value="intern">Intern</option>
+          </select>
+          <div
+          *ngIf="submitted && f.jobType.errors"
+          class="invalid-feedback"
+        >
+          <div *ngIf="f.jobType.errors.required"><i class="mdi mdi-alert-outline"></i>Job Type is required
+            </div>
+        </div>
+</div>
+        <div class="form-group">
+          <label for="location">Location</label>
+          <select
+            name="location"
+            [ngClass]="{ 'is-invalid': f.submitted && location.invalid }"
+          
+            [ngModel]="location"
+            type="text"
+            required
+            class="form-control form-control-lg"
+            placeholder="Location"
+            (change)="selectChangeHandlerLocation($event)"
+            ngModel
+          >
+            <option value="Dallas, TX - USA"> Dallas, TX - USA</option>
+            <option value="Noida, UP - India"> Noida, UP - India</option>
+          </select>
+          <div
+          *ngIf="submitted && f.location.errors"
+          class="invalid-feedback"
+        >
+          <div *ngIf="f.location.errors.required"><i class="mdi mdi-alert-outline"></i>Location is required
+            </div>
+        </div>
+</div>
+        <div class="form-group">
+          <label for="salary">Salary (per annum)</label>
+          <input
+            name="salary"
+            [ngClass]="{ 'is-invalid': f.submitted && salary.invalid }"
+           
+            [ngModel]="salary"
+            type="number"
+            required
+            class="form-control"
+            placeholder="Salary"
+            ngModel
+          />
+          <div
+          *ngIf="submitted && f.salary.errors"
+          class="invalid-feedback"
+        >
+          <div *ngIf="f.salary.errors.required"><i class="mdi mdi-alert-outline"></i>Salary is required
+            </div>
+        </div>
+</div>
+        <div class="form-group">
+          <label for="vacancies">No .of Vacancies </label>
+          <input
+            name="vacancies"
+            [ngClass]="{ 'is-invalid': f.submitted && vacancies.invalid }"
+            [ngModel]="vacancies"
+            type="number"
+            required
+            class="form-control"
+            placeholder="Job Id"
+            ngModel
+          />  
+          <div
+          *ngIf="submitted && f.vacancies.errors"
+          class="invalid-feedback"
+        >
+          <div *ngIf="f.vacancies.errors.required"><i class="mdi mdi-alert-outline"></i>Vacancy is required
+            </div>
+        </div>
+        </div>
+        <br />
+        <button
+          type="submit"
+          class="btn btn-gradient-primary mr-2"
+          [disabled]="!form.valid"
+        >
+          UPDATE
+        </button>
+        <button type="button" class="btn btn-light" (click)="modalClose(false)">
+          Cancel
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
