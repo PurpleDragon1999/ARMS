@@ -16,7 +16,7 @@
                   </a>
                 </li>
 
-                <li class="progress-step anim--path is-complete">
+                <li class="progress-step anim--path " [ngClass]="{'is-active': flag==0, 'is-complete': flag >= 1}">
                   <a href="">
                     <div class="progress-marker" data-text="1"></div>
                     <div class="progress-text">
@@ -25,7 +25,7 @@
                   </a>
                 </li>
   
-                <li class="progress-step anim--path">
+                <li class="progress-step anim--path " [ngClass]="{'is-active': flag==1, 'is-complete': flag >= 2}">
                   <a href="#/">
                     <div class="progress-marker" data-text="2"></div>
                     <div class="progress-text">
@@ -34,7 +34,7 @@
                   </a>
                 </li>
   
-                <li class="progress-step anim--path " aria-current="step">
+                <li class="progress-step anim--path " [ngClass]="{'is-active': flag==2}" [ngClass]="{'is-active': flag==2, 'is-complete': flag >= 3}" aria-current="step">
                   <a href="form">
                     <div class="progress-marker" data-text="3"></div>
                     <div class="progress-text">
@@ -43,7 +43,7 @@
                   </a>
                 </li>
   
-                <li class="progress-step anim--path">
+                <li class="progress-step anim--path " [ngClass]="{'is-active': flag==3}" [ngClass]="{'is-active': flag==3, 'is-complete': flag >= 4}">
                   <a href="#/">
                     <div class="progress-marker" data-text="4"></div>
                     <div class="progress-text">
@@ -52,7 +52,7 @@
                   </a>
                 </li>
   
-                <li class="progress-step anim--path">
+                <li class="progress-step anim--path" [ngClass]="{'is-active': flag==4}" [ngClass]="{'is-active': flag==4, 'is-complete': flag >= 5}">
                   <a href="#/">
                     <div class="progress-marker" data-text="5"></div>
                     <div class="progress-text">

@@ -93,7 +93,7 @@ async save(req, res) {
         res.status(200).send({
             success : true,
             payload : {
-              data,
+              data : candidateDetails,
               message : "Candidate Details returned Successfully!!"
             }
         })

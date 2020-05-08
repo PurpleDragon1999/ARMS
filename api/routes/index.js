@@ -66,7 +66,7 @@ module.exports = (app) => {
   app.post("/api/candidate", fileUpload, (req, res) =>
     controller.candidate.save(req,res)
   );
-  
+
   app.post("/api/checkvalidemployee", (req, res) => 
     controller.login.checkValidEmployee(req, res)
   );

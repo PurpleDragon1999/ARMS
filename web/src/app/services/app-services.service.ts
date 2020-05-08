@@ -1,5 +1,4 @@
 import { IResponse } from 'src/app/models/response.interface';
-  
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { HttpClient, HttpResponse, HttpHeaders, HttpParams } from '@angular/common/http';
@@ -87,7 +86,7 @@ export class AppServicesService {
     return this.http.get<any>(`${USER_DOMAIN}/api/jobDescription`,  {headers: this.headers, observe: 'response'} );
   }
 
-  getCandidate(candidateId): Observable<any>{
-    return this.http.get<any>(`${USER_DOMAIN}/api/candidate/${candidateId}`, this.options);
+  getCandidate(id:string):Observable<IResponse>{
+    return this.http.get<IResponse>(`${USER_DOMAIN}/api/candidate/${id}`, this.options)
   }
 }
