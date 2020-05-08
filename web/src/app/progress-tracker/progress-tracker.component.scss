@@ -1,4 +1,4 @@
-// @import "node_modules/progress-tracker/src/styles/progress-tracker.scss";
+@import "node_modules/progress-tracker/src/styles/progress-tracker.scss";
 
 .title{
     margin-top: 2rem;
@@ -13,9 +13,7 @@
     z-index: 10;
 }
 
-// .is-complete{
-//     background-color: green !important;
-// }
+
 
 .progress-step.is-complete .progress-marker::before{
     background-color: green;
