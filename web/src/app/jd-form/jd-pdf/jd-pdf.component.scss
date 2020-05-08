@@ -20,6 +20,7 @@
 .heading-holder{
     display:flex;
     margin-bottom:8px;
+  
 }
 .card-title{
     font-size:30px;
@@ -42,9 +43,6 @@
 .date{
     color:#20B2AA;
 }
-.para{
-    font-size:10px;
-}
 .bottom{
     margin-left:10px;
 }
@@ -55,4 +53,8 @@
 }
 .list-item{
     display:flex;
+}
+.text-muted{
+    font-weight:bolder;
+    color:#343a40;
 }

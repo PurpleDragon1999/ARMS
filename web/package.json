@@ -26,6 +26,7 @@
     "@ng-bootstrap/ng-bootstrap": "^5.3.1",
     "angular-progress-http": "^1.0.0",
     "chart.js": "^2.9.3",
+    "html2canvas": "^1.0.0-rc.5",
     "jspdf": "^1.5.3",
     "moment": "2.24.0",
     "msal": "^1.2.2",
