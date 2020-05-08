@@ -86,7 +86,7 @@ export class ScheduleInterviewComponent implements OnInit {
   search(input: string){
     if(input != ""){
       this._appService.searchCandidates(input, "false").subscribe(res => {
-        this.searchData = res.payload.data.data;
+        this.searchData = res.payload.data;
       });
     }
     else if(input === ""){

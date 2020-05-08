@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const candidateSchema = new mongoose.Schema(schema.candidate, {
   versionKey: false,
 });
+
 candidateSchema.set("toObject", { getters: true });
 
 class Candidate {
@@ -14,8 +15,8 @@ class Candidate {
     return this.Model.find(criteria, columns).sort({ name: 1 });
   }
 
-  async get(id) {
-    return this.Model.findOne({ _id: id });
+  async get(criteria={}, columns={}) {
+    return this.Model.findOne(criteria);
   }
 
   async modify(id, data) {

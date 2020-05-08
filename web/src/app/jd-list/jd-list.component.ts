@@ -1,16 +1,26 @@
-import { Component, OnInit } from "@angular/core";
+import { IResponse } from 'src/app/models/response.interface';
+import { JdModalComponent } from '../jd-modal/jd-modal.component';
+import { Component, OnInit,EventEmitter, Output, Input} from "@angular/core";
 import { AppServicesService } from "src/app/services/app-services.service";
-import { Router } from "@angular/router";
+import { NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { ModalComponent } from 'src/app/reusable-components/modal/modal.component';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
-  selector: "app-jd-list",
-  templateUrl: "./jd-list.component.html",
-  styleUrls: ["./jd-list.component.scss"],
+  selector: 'app-jd-list',
+  templateUrl: './jd-list.component.html',
+  styleUrls: ['./jd-list.component.scss'],
 })
-export class JdListComponent implements OnInit {
-  jobsList: string[];
 
-  constructor(private _service: AppServicesService, private router: Router) {}
+
+
+export class JdListComponent implements OnInit {
+  jobsList: any;
+  jdObject: any;
+
+  constructor(private _service: AppServicesService, private router: Router,
+              private modalService: NgbModal) {}
 
   ngOnInit() {
     this.loadJds();
@@ -22,20 +32,48 @@ export class JdListComponent implements OnInit {
     });
   }
 
+  jdUpdateModal(id:string){
+    const modalRef: NgbModalRef =this.modalService.open(JdModalComponent)
+    modalRef.componentInstance.jdUpdateId = id;
+    modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+      modalRef.close();
+    })
+  };
+
+
   deleteJd(jobObjId: string) {
-    this._service.deleteJd(jobObjId).subscribe((res) => {
-      this.loadJds();
+    const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
+
+    modalRef.componentInstance.shouldConfirm = true;
+
+    modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+      modalRef.close();
     });
+    modalRef.componentInstance.emitPerformRequest.subscribe(() => {
+      this._service.deleteJd(jobObjId).subscribe((res: IResponse) => {
+        this.loadJds();
+        modalRef.componentInstance.success = res.success;
+        modalRef.componentInstance.message = res.payload.message;
+        }, (error: HttpErrorResponse) => {
+          modalRef.componentInstance.success = error.error.success;
+          modalRef.componentInstance.message = error.error.payload.message;
+    });
+  });
+
   }
 
+
+  
   downloadPdf(jdId) {
-    this.router.navigate(["/jd-pdf", jdId]);
+   this.router.navigate(["/jd-pdf", jdId]);
   }
 
-  datecheck(closingDate){
-    let currentDate = new Date().toISOString();
-    if(closingDate <= currentDate)
+  datecheck(closingDate) {
+    const currentDate = new Date().toISOString();
+    if (closingDate <= currentDate) {
       return 1;
-    else return 0;
+    } else { return 0; }
   }
+
+ 
 }
