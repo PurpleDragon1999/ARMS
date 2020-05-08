@@ -1,6 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { IResponse } from 'src/app/models/response.interface';
-import { AppServicesService } from 'src/app/services/app-services.service';
 import { ICandidate } from './../models/candidate.interface';
 import { AppServicesService } from "../services/app-services.service";
 import { Component, OnInit } from "@angular/core";
@@ -18,15 +17,10 @@ const URL = 'http://localhost:3000/api/candidate'
 })
 export class CandidateFormComponent implements OnInit {
 
-<<<<<<< HEAD
   constructor(private modalService: NgbModal,
+    private router: Router,
+    private service: AppServicesService
   ) { }
-=======
-  constructor(private modalService : NgbModal,
-              private router: Router,
-              private service: AppServicesService
-              ) { }
->>>>>>> da377f39f009a9e258b047771fabb48d772491d5
 
   public uploader: FileUploader = new FileUploader({
     url: URL,
@@ -60,41 +54,20 @@ export class CandidateFormComponent implements OnInit {
     }
 
     this.uploader.onErrorItem = (item: FileItem, response: string, status: number, headers: ParsedResponseHeaders) => {
-<<<<<<< HEAD
+      console.log("error displayed")
       let data = JSON.parse(response);
       const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
 
-      modalRef.componentInstance.shouldConfirm = false;
 
-      modalRef.componentInstance.success = data.success;
-      modalRef.componentInstance.message = data.payload.message;
 
       modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
         modalRef.close();
       });
 
     }
-=======
-    console.log("error displayed")
-    let data = JSON.parse(response);
-    const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
->>>>>>> da377f39f009a9e258b047771fabb48d772491d5
 
-
-
-<<<<<<< HEAD
-  }
-
-=======
-    modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
-      modalRef.close();
-    });
-  
-    }
-    
     this.load()
   }
->>>>>>> da377f39f009a9e258b047771fabb48d772491d5
 
   model: any = {};
   type: String;
@@ -127,19 +100,20 @@ export class CandidateFormComponent implements OnInit {
       }
     }
   }
-  
-  load(){
+
+  load() {
     this.type = this.router.url.split("/")[1];
-    if(this.router.url.split("/")[1]=="progressTracker"){
+    if (this.router.url.split("/")[1] == "progressTracker") {
       let candidateId = this.router.url.split("/")[2];
       this.service.getCandidate(candidateId).subscribe(
-        (res: IResponse) =>{
+        (res: IResponse) => {
           this.model = res.payload.data;
         },
         (error: HttpErrorResponse) => {
         }
-      )}
-    else if(this.router.url.split("/")[1]=="candidate"){
+      )
+    }
+    else if (this.router.url.split("/")[1] == "candidate") {
       this.model.appliedFor = this.router.url.split("/")[2];
     }
   }

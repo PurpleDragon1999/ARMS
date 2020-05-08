@@ -15,17 +15,10 @@ async function validateCandidate(candidate) {
     return
   }
 
-<<<<<<< HEAD
   if (!candidate.cv) {
     throw new Error("CV is Required")
     return
   }
-=======
-  // if (req.body.cv == null){
-  //   throw new Error("CV is Required")
-  //   return
-  // }
->>>>>>> da377f39f009a9e258b047771fabb48d772491d5
 
 }
 
@@ -48,7 +41,7 @@ class Candidate extends Base {
         cv: path,
         skills: req.body.skills,
         appliedFor: req.body.appliedFor,
-        status : "applied"
+        status: "applied"
       };
 
       await validateCandidate(objToCreate)
@@ -56,7 +49,7 @@ class Candidate extends Base {
       let createdObj = await this.model.save(objToCreate);
       console.log("success")
       return res.send({
-        
+
         success: true,
         payload: {
           body: createdObj,
@@ -90,18 +83,17 @@ class Candidate extends Base {
     }
   }
 
-<<<<<<< HEAD
   async get(req, res) {
     try {
       let candidateId = req.params.id
       let candidateObj = await candidateModel.get({ _id: candidateId })
 
-      let candidateDetails = { ...(await candidateObj).toObject(), cv: fs.readFileSync(candidateObj.cv) }
+      let data = { ...(await candidateObj).toObject(), cv: fs.readFileSync(candidateObj.cv) }
 
       res.status(200).send({
         success: true,
         payload: {
-          candidateDetails,
+          data,
           message: "Candidate Details returned Successfully!!"
         }
       })
@@ -115,32 +107,6 @@ class Candidate extends Base {
         }
       })
     }
-=======
-  async get(req, res){
-      try{
-        let candidateId = req.params.id
-        let candidateObj = await candidateModel.get({_id : candidateId})
-
-        let data = { ...(await candidateObj).toObject(), cv : fs.readFileSync(candidateObj.cv)}
-  
-        res.status(200).send({
-            success : true,
-            payload : {
-              data ,
-              message : "Candidate Details returned Successfully!!"
-            }
-        })
-      }
-      catch(err){
-        console.log(err)
-          res.send({
-              success : false,
-              payload : {
-                  message : err.message
-              }
-          })
-      }
->>>>>>> da377f39f009a9e258b047771fabb48d772491d5
   }
 
   async getAll(req, res) {

@@ -1,14 +1,9 @@
-<<<<<<< HEAD
-import { CandidateFormComponent } from './candidate-form/candidate-form.component';
-import { ProgressTrackerComponent } from './progress-tracker/progress-tracker.component';
-=======
 
 //import { CreateInterviewComponent } from './create-interview/create-interview.component';
 
 import { CandidateFormComponent } from './candidate-form/candidate-form.component';
 import { ProgressTrackerComponent } from './progress-tracker/progress-tracker.component';
 
->>>>>>> da377f39f009a9e258b047771fabb48d772491d5
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EmployeeComponent } from './employee/containers/employee/employee.component';
@@ -23,11 +18,7 @@ import { JdModalComponent } from './jd-modal/jd-modal.component';
 import { CandidateComponent } from './candidate/candidate.component';
 
 const routes: Routes = [
-<<<<<<< HEAD
   { path: "", redirectTo: 'login', pathMatch: 'full' },
-=======
-  { path: "", redirectTo: 'login', pathMatch: 'full'},
->>>>>>> da377f39f009a9e258b047771fabb48d772491d5
   { path: "login", component: LoginComponent },
   {
     path: "edit", component: JdModalComponent
@@ -40,16 +31,11 @@ const routes: Routes = [
     ]
   },
   {
-<<<<<<< HEAD
     path: 'candidate/form', component: CandidateFormComponent
   },
   {
 
     path: "superuser", component: AppNavBarComponent, data: { role: "superuser" }, children: [
-=======
-    
-    path: "superuser", component: AppNavBarComponent, canActivate: [RoleGuardService], data: { role: "superuser" }, children: [
->>>>>>> da377f39f009a9e258b047771fabb48d772491d5
       {
         path: "", redirectTo: "home", pathMatch: "full"
       },
@@ -96,13 +82,6 @@ const routes: Routes = [
       { path: ':jdId', component: JdPdfComponent }
     ],
   },
-<<<<<<< HEAD
-
-  {
-    path: "progressTracker", component: ProgressTrackerComponent
-  }
-
-=======
   {
     path: 'candidateForm', children: [
       { path: ':jdId', component: CandidateFormComponent }
@@ -113,8 +92,7 @@ const routes: Routes = [
       { path: ':candidateId', component: ProgressTrackerComponent }
     ],
   },
-  
->>>>>>> da377f39f009a9e258b047771fabb48d772491d5
+
 ];
 
 @NgModule({
