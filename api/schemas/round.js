@@ -31,7 +31,7 @@ module.exports = {
     // },
     //--------------------------------------------------
     
-    communiation: {
+    communication: {
         marks: {
             type:Number,
             required:true
@@ -101,6 +101,7 @@ module.exports = {
             required:true
         }
     },
+    
     other_values: [
         {
             name: String,
@@ -120,11 +121,13 @@ module.exports = {
         minlength:2,
         maxlength:20
     },
+
     feedback: {
         type:String,
         minlength:2,
         maxlength:100
     },
+
     roundResult: {
         type:String,
         enum:['success','failure','un-clear']
