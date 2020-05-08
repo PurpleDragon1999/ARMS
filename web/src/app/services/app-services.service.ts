@@ -51,14 +51,12 @@ export class AppServicesService {
   // };
 
   //return helper.decodeToken(localStorage.getItem(''));
-  
 
 
   // For making HTTP calls
-  
   createInterview(user: ICreate): Observable<HttpResponse<any>>{
     return this.http.post<any>(`${USER_DOMAIN}/api/interview`, user, { ...this.options, observe: 'response' });
-  }   
+  }
   getAllJobs(): Observable<HttpResponse<any>>{
       return this.http.get<any>(`${USER_DOMAIN}/api/jobDescription`, this.options);
   }
@@ -73,12 +71,13 @@ export class AppServicesService {
 
   deleteJd(jobObjId): Observable<IResponse>{
     return this.http.delete<any>(`${USER_DOMAIN}/api/jobDescription/${jobObjId}`, this.options);
-  }  
+  }
 
   jdFormData(jdFormObject): Observable<any>{
     return this.http.post<any>(`${USER_DOMAIN}/api/jobDescription`, jdFormObject, { ...this.options, observe: 'response' });
   }
-  getJdData(jdId):Observable<any>{
+
+  getJdData(jdId): Observable<any>{
     return this.http.get<any>(`${USER_DOMAIN}/api/jobDescription/${jdId}`)
   }
 
@@ -86,7 +85,11 @@ export class AppServicesService {
     return this.http.get<any>(`${USER_DOMAIN}/api/jobDescription`,  {headers: this.headers, observe: 'response'} );
   }
 
-  getCandidate(id:string):Observable<IResponse>{
+  getCandidate(id: string): Observable<IResponse>{
     return this.http.get<IResponse>(`${USER_DOMAIN}/api/candidate/${id}`, this.options)
+  }
+
+  sendMails(mailingList): Observable<any> {
+    return this.http.post<any>(`${USER_DOMAIN}//api/jdEmail`, mailingList, { ...this.options, observe: 'response' });
   }
 }

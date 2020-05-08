@@ -20,7 +20,7 @@ import { DynamicGrid } from "../grid.model";
 export class JdModalComponent implements OnInit {
 
   @Input()
-  jdUpdateId : string
+  jdUpdateId: string;
 
   constructor( private formBuilder: FormBuilder,
     private _service: AppServicesService,
@@ -49,7 +49,7 @@ export class JdModalComponent implements OnInit {
     @ViewChild("content", { static: true }) content: ElementRef;
     
     
-    jobArray:any;
+    jobArray: any;
     eligibilityCriteriaOptions: String;
     locationOptions: String;
     jobTypeOptions: String;
@@ -57,7 +57,6 @@ export class JdModalComponent implements OnInit {
     submitted = false;
     jdFormObject: jobDescription;
     data: jobDescription;
-   
 
     selectChangeHandlerEligibilityCriteria(event: any) {
       this.eligibilityCriteriaOptions = event.target.value;
@@ -103,15 +102,15 @@ export class JdModalComponent implements OnInit {
     
    
 
-    loadJobData(Id:string){
-      this._service.getJobsById(Id).subscribe((res:any) =>{
-        if(res.success){
-          this.jobArray= res.payload.data;
+    loadJobData(Id:string) {
+      this._service.getJobsById(Id).subscribe((res: any) => {
+        if (res.success) {
+          this.jobArray = res.payload.data;
           this.setJobData();
         }
       });
     }
-    setJobData(){
+    setJobData() {
       this.jdId = this.jobArray.jdId;
       this.jdTitle = this.jobArray.jdTitle;
       this.openingDate = this.jobArray.openingDate.slice(0,10);
@@ -123,14 +122,14 @@ export class JdModalComponent implements OnInit {
       this.location = this.jobArray.location;
       this.salary = this.jobArray.salary;
       this.vacancies = this.jobArray.vacancies;
-    };
+    }
     
 
-    sendUpdateRequest(jdFormObject: any ){
+    sendUpdateRequest(jdFormObject: any ) {
       console.log(jdFormObject)
-        this._service.updateJobInfo(jdFormObject,this.jobArray._id).subscribe((res: any) => {
+      this._service.updateJobInfo(jdFormObject, this.jobArray._id).subscribe((res: any) => {
         console.log(res, 'response');
-        const modalRef= this.modalService.open(ModalComponent);
+        const modalRef = this.modalService.open(ModalComponent);
         modalRef.componentInstance.shouldConfirm = false;
         modalRef.componentInstance.success = res.success;
         modalRef.componentInstance.message = res.payload.message;
@@ -151,7 +150,7 @@ export class JdModalComponent implements OnInit {
         this.data = error.error.payload.data;
         this.router.navigate(["/jd-pdf", this.data.jdId]);
       }
-      ); 
+      );
     }
   
     jdFormData() {

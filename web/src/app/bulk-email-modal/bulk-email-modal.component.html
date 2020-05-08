@@ -1,0 +1,65 @@
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Send Job Description</h5>
+      </div>
+      <div class="modal-body">
+        <!-- <form (ngSubmit)="handleSubmit(form.value)" class="forms-sample" #form="ngForm"
+          novalidate>
+      
+          <div class="form-group">
+            <label for="email">Email : </label>
+            <input name="email"
+            [ngModel]="employee?.email" type="email"
+              pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" required class="form-control"
+              id="email" placeholder="Email" #email="ngModel" [ngClass]="{ 'is-invalid': email.dirty && email.invalid }">
+            <div *ngIf="email.dirty && email.errors?.required" class="invalid-feedback">
+              <div><i class="mdi mdi-alert-outline"></i>Email is required</div>
+            </div>
+            <div *ngIf="email.dirty && email.errors?.pattern" class="invalid-feedback">
+              <div><i class="mdi mdi-alert-outline"></i>Enter valid email address</div>
+            </div>
+          </div>
+        
+          <div class="d-flex flex-row-reverse">
+            <button class="btn btn-light" (click)="modalClose(false)">Cancel</button>
+            <button type="submit"
+              class="btn btn-gradient-primary mr-2">Send</button>
+          </div>
+        </form> -->
+
+
+        <form [formGroup]="sendEmailForm" (ngSubmit)="onSubmit($event)">
+          <div class="form-group required">
+            <span class="label label-primary">Email(s):</span>
+            <input
+            (ngModelChange)="extractEmailList($event)"
+              type="text"
+              [formControl]="sendEmailForm.controls['toAddress']"            
+              value=""
+              maxlength="150"
+              name="toAddress"
+              class="form-control"
+            />
+          </div>
+          <small
+          *ngIf="sendEmailForm.controls['toAddress'].hasError('required') && sendEmailForm.controls['toAddress'].touched"
+          class="form-error-msg">
+          Valid email is required to send an invitation.
+        </small>
+          <small
+          *ngIf="sendEmailForm.controls['toAddress'].hasError('pattern') && sendEmailForm.controls['toAddress'].touched"
+          class="form-error-msg">
+          Please enter comma separated list of valid email addresses without spaces in between. No comma is required after last email.
+        </small>
+        
+        <div class="d-flex flex-row-reverse">
+            <button class="btn btn-light" (click)="modalClose(false)">Cancel</button>
+            <button type="submit" [disabled]="!sendEmailForm.valid" class="btn btn-gradient-primary mr-2">Send</button>
+        </div>
+            <small class="form-error-msg">{{emailList.length}} email(s) will be sent.</small>
+        </form>
+
+      </div>
+    </div>
+  </div>

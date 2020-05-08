@@ -16,6 +16,10 @@
               class="mdi mdi-delete float-right"
               (click)="deleteJd(job._id)"
             ></i>
+            <i *ngIf="datecheck(job.closingDate)==0"
+            class="mdi mdi-send float-right"
+            (click)="sendBulkEmail(job.jdId)"
+          ></i>
             <i
               class="mdi mdi-download float-right"
               (click)="downloadPdf(job.jdId)"
@@ -33,12 +37,14 @@
 
           <h6 class="font-weight-normal" [style.visibility]="job.closingDate ? 'visible' : 'hidden'">
             Closing Date : {{ job.closingDate | date }}
-          </h6>
 
-          <label *ngIf="datecheck(job.closingDate)==1"
+            <label *ngIf="datecheck(job.closingDate)==1"
             class="badge badge-gradient-danger float-right mb-0">CLOSED</label>
           <label *ngIf="datecheck(job.closingDate)==0"
             class="badge badge-gradient-success float-right mb-0">OPEN</label>
+
+          </h6>
+
         </div>
       </div>
     </div>

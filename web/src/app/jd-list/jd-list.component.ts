@@ -1,8 +1,9 @@
+import { BulkEmailModalComponent } from '../bulk-email-modal/bulk-email-modal.component';
 import { IResponse } from 'src/app/models/response.interface';
 import { JdModalComponent } from '../jd-modal/jd-modal.component';
-import { Component, OnInit,EventEmitter, Output, Input} from "@angular/core";
-import { AppServicesService } from "src/app/services/app-services.service";
-import { NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
+import { Component, OnInit, EventEmitter, Output, Input} from '@angular/core';
+import { AppServicesService } from 'src/app/services/app-services.service';
+import { NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ModalComponent } from 'src/app/reusable-components/modal/modal.component';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -12,8 +13,6 @@ import { HttpErrorResponse } from '@angular/common/http';
   templateUrl: './jd-list.component.html',
   styleUrls: ['./jd-list.component.scss'],
 })
-
-
 
 export class JdListComponent implements OnInit {
   jobsList: any;
@@ -32,14 +31,21 @@ export class JdListComponent implements OnInit {
     });
   }
 
-  jdUpdateModal(id:string){
-    const modalRef: NgbModalRef =this.modalService.open(JdModalComponent)
+  jdUpdateModal(id: string) {
+    const modalRef: NgbModalRef = this.modalService.open(JdModalComponent)
     modalRef.componentInstance.jdUpdateId = id;
     modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
       modalRef.close();
-    })
-  };
+    });
+  }
 
+  sendBulkEmail(jobObjId: string) {
+    const modalRef: NgbModalRef = this.modalService.open(BulkEmailModalComponent);
+    modalRef.componentInstance.jdUpdateId = jobObjId;
+    modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+      modalRef.close();
+    });
+  }
 
   deleteJd(jobObjId: string) {
     const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
@@ -62,8 +68,6 @@ export class JdListComponent implements OnInit {
 
   }
 
-
-  
   downloadPdf(jdId) {
    this.router.navigate(["/jd-pdf", jdId]);
   }
@@ -74,6 +78,4 @@ export class JdListComponent implements OnInit {
       return 1;
     } else { return 0; }
   }
-
- 
 }
