@@ -29,7 +29,7 @@
         </form> -->
 
 
-        <form [formGroup]="sendEmailForm" (ngSubmit)="onSubmit($event)">
+        <form [formGroup]="sendEmailForm" (ngSubmit)="onSubmit(form.value)">
           <div class="form-group required">
             <span class="label label-primary">Email(s):</span>
             <input

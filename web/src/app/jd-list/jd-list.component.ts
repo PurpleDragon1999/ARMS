@@ -42,9 +42,9 @@ export class JdListComponent implements OnInit {
   sendBulkEmail(jobObjId: string) {
     const modalRef: NgbModalRef = this.modalService.open(BulkEmailModalComponent);
     modalRef.componentInstance.jdUpdateId = jobObjId;
-    modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
-      modalRef.close();
-    });
+    // modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+    //   modalRef.close();
+    // });
   }
 
   deleteJd(jobObjId: string) {
