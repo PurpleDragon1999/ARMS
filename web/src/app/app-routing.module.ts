@@ -11,20 +11,27 @@ import { LoginComponent } from './login/login.component';
 import { AppNavBarComponent } from './nav-bar/nav-bar.component';
 import { RoleGuardService } from './utilities/role-guard.service';
 import { JdModalComponent } from './jd-modal/jd-modal.component';
+import { CandidateComponent } from './candidate/candidate.component';
 
 const routes: Routes = [
-  { path: "candidate", component: CandidateFormComponent },
   { path: "", redirectTo: 'login', pathMatch: 'full' },
   { path: "login", component: LoginComponent },
   {
     path: "edit", component: JdModalComponent
   },
   {
-    path: "candidate", component: CandidateFormComponent
+    path: "candidate", component: AppNavBarComponent, children: [
+      {
+        path: '', component: CandidateComponent
+      },
+    ]
+  },
+  {
+    path: 'candidate/form', component: CandidateFormComponent
   },
   {
 
-    path: "superuser", component: AppNavBarComponent, canActivate: [RoleGuardService], data: { role: "superuser" }, children: [
+    path: "superuser", component: AppNavBarComponent, data: { role: "superuser" }, children: [
       {
         path: "", redirectTo: "home", pathMatch: "full"
       },
@@ -38,7 +45,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: "admin", component: AppNavBarComponent, canActivate: [RoleGuardService], data: { role: "admin" }, children: [
+    path: "admin", component: AppNavBarComponent, data: { role: "superuser" }, children: [
       {
         path: "", redirectTo: "home", pathMatch: "full"
       },
@@ -54,7 +61,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: "employee", component: AppNavBarComponent, canActivate: [RoleGuardService], data: { role: "employee" }, children: [
+    path: "employee", component: AppNavBarComponent, data: { role: "employee" }, children: [
       {
         path: "", redirectTo: "home", pathMatch: "full"
       },
