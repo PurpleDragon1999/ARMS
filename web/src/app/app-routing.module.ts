@@ -1,3 +1,4 @@
+import { CandidateFormComponent } from './candidate-form/candidate-form.component';
 import { ProgressTrackerComponent } from './progress-tracker/progress-tracker.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -10,16 +11,13 @@ import { LoginComponent } from './login/login.component';
 import { AppNavBarComponent } from './nav-bar/nav-bar.component';
 import { RoleGuardService } from './utilities/role-guard.service';
 import { JdModalComponent } from './jd-modal/jd-modal.component';
-import { CandidateFormComponent } from './candidate-form/candidate-form.component'
 
 const routes: Routes = [
-  { path: "", redirectTo: 'login', pathMatch: 'full' },
+  {path : "candidate", component : CandidateFormComponent},
+  { path: "", redirectTo: 'login', pathMatch: 'full'},
   { path: "login", component: LoginComponent },
   {
     path: "edit", component: JdModalComponent 
-  },
-  {
-    path: "candidate", component: CandidateFormComponent
   },
   {
     
@@ -68,7 +66,7 @@ const routes: Routes = [
     ],
   },
   {
-    path:"progressTracker", component: ProgressTrackerComponent
+    path:"progressTracker/:id", component: ProgressTrackerComponent
   }
 
 ];

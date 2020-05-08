@@ -6,7 +6,6 @@ const fileUpload = require('../middlewares/fileUpload');
 
 module.exports = (app) => {
   //Employee
-  // app.get("/api/employeeBySearch/:searchBy", (req, res)=>controller.employee.searchRecord(req, res));
   app.post("/api/employee", (req, res) => controller.employee.save(req, res));
 
   app.get("/api/employeeSearch", (req, res) =>
@@ -52,21 +51,26 @@ module.exports = (app) => {
   app.delete("/api/jobDescription/:id", (req, res) =>
     controller.jobDescription.remove(req, res)
   );
+
   //Routes for Candidate
   app.get("/api/candidates", (req, res) =>
-    controller.candidate.getPaginatedResult(req, res)
+    controller.candidate.getAll(req, res)
   );
-  app.get("/api/candidate/search/:searchBy", (req, res) =>
+
+  app.get("/api/candidateSearch", (req, res) =>
     controller.candidate.searchRecord(req, res)
   );
 
-  app.post("/api/checkvalidemployee", (req, res) =>
-    controller.login.checkValidEmployee(req, res)
-  );
-  // app.post('/api/candidate',upload.single('file'), (req,res)=> controller.candidate.uploadDetails(req,res));
+  app.get("/api/candidate/:id", (req,res)=> controller.candidate.get(req,res));
+  app.put("/api/candidate/:id", (req,res)=> controller.candidate.modify(req, res))
   app.post("/api/candidate", fileUpload, (req, res) =>
     controller.candidate.save(req,res)
   );
+
+  app.post("/api/checkvalidemployee", (req, res) => 
+    controller.login.checkValidEmployee(req, res)
+  );
+  
   //login route
   app.post("/api/checkvalidemployee", controller.login.checkValidEmployee);
 };

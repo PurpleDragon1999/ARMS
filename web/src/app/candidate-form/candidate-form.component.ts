@@ -32,6 +32,7 @@ export class CandidateFormComponent implements OnInit {
     };
 
     this.uploader.onSuccessItem = (item: any, response: string, status: number) => {
+      console.log("successfull")
       let data = JSON.parse(response);
       const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
 
@@ -48,6 +49,7 @@ export class CandidateFormComponent implements OnInit {
     }
 
     this.uploader.onErrorItem = (item: FileItem, response: string, status: number, headers: ParsedResponseHeaders) => {
+    console.log("error displayed")
     let data = JSON.parse(response);
     const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
 
@@ -60,11 +62,9 @@ export class CandidateFormComponent implements OnInit {
       modalRef.close();
     });
     
+  } 
   }
-    
-     
-    
-  }
+
 
   model: any = {};
 
