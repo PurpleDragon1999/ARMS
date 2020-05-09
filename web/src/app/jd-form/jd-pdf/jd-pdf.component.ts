@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, AfterViewChecked} from '@angular/core';
 import html2canvas from 'html2canvas';  
 import * as jsPDF from 'jspdf'
 import { Router, ActivatedRoute, Params } from "@angular/router";
@@ -15,7 +15,7 @@ import { stringify } from 'querystring';
 export class JdPdfComponent implements OnInit {
   jdObject:jobDescription;
   obj:any;
-
+ 
   constructor(
     private route: ActivatedRoute,
     private router:Router,
@@ -43,35 +43,63 @@ export class JdPdfComponent implements OnInit {
     });
   }
 
-  public convertToPDF()
-  {
+  //Earlier  function achieved which sets all the content into one page and increases page height
+  // public convertToPDF()
+  // {
     
-  var data = document.getElementById('content');
-  html2canvas(data).then(canvas => {
+  // var data = document.getElementById('content');
+  // html2canvas(data).then(canvas => {
    
-  // Few necessary setting options
-  var width = canvas.width;
-  var height = canvas.height;
-  var millimeters = {width,height};
-  millimeters.width = Math.floor(width * 0.50);
-  millimeters.height = Math.floor(height*0.80);
+  // // Few necessary setting options
+  // var width = canvas.width;
+  // var height = canvas.height;
+  // var millimeters = {width,height};
+  // millimeters.width = Math.floor(width * 0.50);
+  // millimeters.height = Math.floor(height*0.80);
 
-  var imgData = canvas.toDataURL(
-      'image/png');
-  var pdf = new jsPDF("p", "mm", "a4");
-  pdf.deletePage(1);
-  pdf.addPage(millimeters.width, millimeters.height);
-  pdf.addImage(imgData, 'PNG', 0, 0);
-  pdf.save("jobdescription"+this.jdObject.jdId+'.pdf'); // Generated PDF
+  // var imgData = canvas.toDataURL(
+  //     'image/png');
+  // var pdf = new jsPDF("p", "mm", "a4");
+  // pdf.deletePage(1);
+  // pdf.addPage([millimeters.width, millimeters.height]);
+  // pdf.addImage(imgData, 'PNG', 0, 0);
+  // pdf.save("jobdescription"+this.jdObject.jdId+'.pdf'); // Generated PDF
  
-  });
-  setTimeout(() => {
-    this.navigation();
-  }, 5000); 
+  // });
+  // setTimeout(() => {
+  //   this.navigation();
+  // }, 5000); 
  
   
-  }
-  navigation(){
+  // }
+  //later achieved function which divides the content into pagers too but not able to set top margins
+  convertToPDF() {
+    var data = document.getElementById('content');
+    html2canvas(data, { allowTaint: true }).then(canvas => {
+       let HTML_Width = canvas.width;
+       let HTML_Height = canvas.height;
+       let top_left_margin = 15;
+       let PDF_Width = HTML_Width*0.45 + (top_left_margin * 2);
+       let PDF_Height = (PDF_Width * 1.6 ) + (top_left_margin * 2);
+       let canvas_image_width = HTML_Width;
+       let canvas_image_height = HTML_Height;
+       let totalPDFPages = Math.ceil(HTML_Height / PDF_Height) - 1;
+       canvas.getContext('2d');
+       let imgData = canvas.toDataURL("image/png",1.0);
+       let pdf = new jsPDF('p', 'pt', 'a4');
+       pdf.addImage(imgData, 'PNG', top_left_margin, top_left_margin, canvas_image_width*0.79, canvas_image_height*0.90);
+       for (let i = 1; i <= totalPDFPages; i++) {
+          pdf.addPage('a4', 'p');
+          pdf.addImage(imgData, 'PNG',top_left_margin, -(PDF_Height * i) + (top_left_margin * 4)  ,canvas_image_width*0.79, canvas_image_height*0.90);
+        }
+         pdf.save("HTML-Document.pdf");
+      });
+   setTimeout(() => {
+      this.navigation();
+     }, 5000);
+ }
+  navigation()
+  {
     this.router.navigate(["/admin/job-desc"]);
   }
 }
