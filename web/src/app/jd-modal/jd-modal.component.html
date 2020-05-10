@@ -25,7 +25,7 @@
             <input
               name="jdId"
               [ngModel]="jdId"
-              type="text"
+              type="number"
               class="form-control"
               id="jdId"
               placeholder="Job Id"
@@ -157,7 +157,7 @@
           <select
             name="eligibilityCriteria"
             [ngClass]="{ 'is-invalid': f.submitted && eligibilityCriteria.invalid }"
-           
+
             [ngModel]="eligibilityCriteria"
             type="text"
             required
@@ -271,7 +271,9 @@
             </div>
         </div>
         </div>
-        <br />
+        <br />    <button type="button" class="btn btn-light" (click)="modalClose(false)">
+          Cancel
+        </button>
         <button
           type="submit"
           class="btn btn-gradient-primary mr-2"
@@ -279,9 +281,7 @@
         >
           UPDATE
         </button>
-        <button type="button" class="btn btn-light" (click)="modalClose(false)">
-          Cancel
-        </button>
+    
       </form>
     </div>
   </div>
