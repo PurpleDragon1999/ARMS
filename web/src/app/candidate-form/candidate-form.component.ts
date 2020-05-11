@@ -74,6 +74,7 @@ export class CandidateFormComponent implements OnInit {
 
   model: any = {};
   type: String;
+  jdObjectId: String;
 
   createCandidate(candidateObj: ICandidate) {
     if (
@@ -91,7 +92,7 @@ export class CandidateFormComponent implements OnInit {
           form.append("email", candidateObj.email);
           form.append("aadhar", candidateObj.aadhar);
           form.append("skills", candidateObj.skills);
-          form.append("appliedFor", candidateObj.appliedFor);
+          form.append("appliedFor", this.jdObjectId);
           item.formData = candidateObj.name;
           item.formData = candidateObj.experience;
           item.formData = candidateObj.email;
@@ -104,19 +105,28 @@ export class CandidateFormComponent implements OnInit {
     }
   }
   
-  load(){
+  load(){   
     this.type = this.router.url.split("/")[1];
     if(this.router.url.split("/")[1]=="progressTracker"){
       let candidateId = this.router.url.split("/")[2];
       this.service.getCandidate(candidateId).subscribe(
         (res: IResponse) =>{
           this.model = res.payload.data;
+          this.model.appliedForPosition = this.model.appliedFor.jdTitle
+          this.model.appliedForJdId = this.model.appliedFor.jdId
         },
         (error: HttpErrorResponse) => {
         }
       )}
-    else if(this.router.url.split("/")[1]=="candidate"){
-      this.model.appliedFor = this.router.url.split("/")[2];
+    else if(this.router.url.split("/")[1]=="candidateForm"){
+      this.model.appliedFor = this.router.url.split("/")[2];  
+      this.service.getJdData(this.model.appliedForJdId).subscribe((res : IResponse)=>{
+        let jdObject = res.payload.data
+        console.log(jdObject)
+        this.model.appliedForPosition = jdObject.jdTitle;
+        this.jdObjectId = jdObject._id;
+
+      })    
     }
   }
 }

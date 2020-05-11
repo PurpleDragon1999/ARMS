@@ -35,7 +35,7 @@
         </thead>
         <tbody>
           <div>
-            <small class="p-2" *ngIf="data.length==0"> No Match Found</small>
+            <!-- <small class="p-2" *ngIf="data.length==0"> No Match Found</small> -->
           </div>
           <tr *ngFor="let entry of data">
             <td *ngFor="let columnName of columns;">
@@ -98,7 +98,7 @@
       </form>
     </div>
     <div>
-      <small class="p-2" *ngIf="data.length==0"> No Match Found</small>
+      <!-- <small class="p-2" *ngIf="data.length==0"> No Match Found</small> -->
     </div>
     <div class="mt-4 userCard" *ngFor="let entry of data">
       <ngb-accordion [closeOthers]="true" activeIds="collapse-1">

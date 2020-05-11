@@ -22,3 +22,7 @@
 .progress-step.is-active .progress-marker::before{
     background-color: greenyellow;
 }
+
+li:focus{
+    outline: none;
+}

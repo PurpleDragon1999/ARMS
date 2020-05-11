@@ -1,7 +1,7 @@
 <div class="main-panel">
     <div class="content-wrapper">
       <div class="page-header">
-        <h3 class="page-title">Candidate Progress Tracker</h3>
+        <h3 class="page-title"><b>Candidate Progress Tracker</b></h3>
       </div>
       <div class="row">
         <div class="col-md-6 col-lg-12 grid-margin">
@@ -16,8 +16,8 @@
                   </a>
                 </li>
 
-                <li class="progress-step anim--path " [ngClass]="{'is-active': flag==0, 'is-complete': flag >= 1}">
-                  <a href="">
+                <li class="progress-step anim--path " routerLink="applied" [ngClass]="{'is-active': flag==0, 'is-complete': flag >= 1}">
+                  <a>
                     <div class="progress-marker" data-text="1"></div>
                     <div class="progress-text">
                       Applied Successfully
@@ -61,7 +61,7 @@
                   </a>
                 </li>
               </ul>
-              <app-candidate-form></app-candidate-form>
+              <router-outlet></router-outlet>
         </div>
       </div>
     </div>
