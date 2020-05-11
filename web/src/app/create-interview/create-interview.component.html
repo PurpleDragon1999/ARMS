@@ -132,6 +132,7 @@
               <div *ngIf="f.date.errors.required"><i class="mdi mdi-alert-outline"></i>Date is required</div>
               </div>
             </div>
+            <div class="d-flex flex-row-reverse">
             <button
               type="submit"
               class="btn btn-gradient-primary mr-2"
@@ -140,6 +141,12 @@
             >
               Create
             </button>
+            <button
+            type="button"
+            class="btn btn-light"
+            (click)="modalClose(false)"
+          >Cancel</button>
+          </div>
           </form>
         </div>
       </div>
