@@ -27,6 +27,7 @@
           </div>
         </div>
       </div>
+      
       <table class="table table-striped">
         <thead>
           <tr>
@@ -34,9 +35,7 @@
           </tr>
         </thead>
         <tbody>
-          <div class="noMatch">
-            <p class="p-2" *ngIf="data.length==0"> No Match Found</p>
-          </div>
+          
           <tr *ngFor="let entry of data">
             <td *ngFor="let columnName of columns;">
               {{ entry[columnName] }}
@@ -46,7 +45,9 @@
           </tr>
         </tbody>
       </table>
-
+      <div class="noMatch">
+        <p class="p-2" *ngIf="data.length==0"> No Match Found</p>
+      </div>
     </div>
 
     <div class="card paginationDiv">
