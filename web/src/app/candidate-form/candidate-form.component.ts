@@ -89,12 +89,12 @@ export class CandidateFormComponent implements OnInit {
           form.append("aadhar", candidateObj.aadhar);
           form.append("skills", candidateObj.skills);
           form.append("appliedFor", candidateObj.appliedFor);
-          // item.formData = candidateObj.name;
-          // item.formData = candidateObj.experience;
-          // item.formData = candidateObj.email;
-          // item.formData = candidateObj.aadhar;
-          // item.formData = candidateObj.skills;
-          // item.formData = candidateObj.appliedFor;
+          item.formData = candidateObj.name;
+          item.formData = candidateObj.experience;
+          item.formData = candidateObj.email;
+          item.formData = candidateObj.aadhar;
+          item.formData = candidateObj.skills;
+          item.formData = candidateObj.appliedFor;
         };
         this.uploader.uploadAll();
       }
