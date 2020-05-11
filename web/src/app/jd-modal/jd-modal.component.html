@@ -17,7 +17,7 @@
         novalidate
       >
         <div class="form-group">
-          <label for="jobId">Job ID</label>
+          <label for="jobId"><b>Job ID</b></label>
           <div class="input-group col-xs-12">
             <span class="input-group-append btn btn-gradient-primary span">
               CYGJID
@@ -44,7 +44,7 @@
           </div>
         </div>
         <div class="form-group">
-          <label for="jobTitle">Job Title </label>
+          <label for="jobTitle"><b>Job Title </b></label>
           <input
             name="jdTitle"
             [ngModel]="jdTitle"
@@ -68,7 +68,7 @@
         </div>
 
         <div class="form-group">
-          <label for="jobDescription">Job Description </label>
+          <label for="jobDescription"><b>Job Description</b></label>
           <textarea
             name="jobProfileDescription"
             [ngModel]="jobProfileDescription"
@@ -92,7 +92,7 @@
         </div>
 
         <div class="form-group">
-          <label for="openingDate">Opening date</label>
+          <label for="openingDate"><b>Opening date</b></label>
           <input
             name="openingDate"
             [ngClass]="{ 'is-invalid': f.submitted && openingDate.invalid }"
@@ -114,7 +114,7 @@
         </div>
 
         <div class="form-group">
-          <label for="closingDate">Closing Date</label>
+          <label for="closingDate"><b>Closing Date</b></label>
           <input
             name="closingDate"
             [ngClass]="{ 'is-invalid': f.submitted && closingDate.invalid }"
@@ -132,7 +132,7 @@
         </div>
 
         <div class="form-group">
-          <label for="skills">Skills </label>
+          <label for="skills"><b>Skills</b></label>
           <input
             name="skills"
             [ngClass]="{ 'is-invalid': f.submitted && skills.invalid }"
@@ -153,7 +153,7 @@
         </div>
 </div>
         <div class="form-group">
-          <label for="eligibilityCriteria">Eligibility criteria</label>
+          <label for="eligibilityCriteria"><b>Eligibility criteria</b></label>
           <select
             name="eligibilityCriteria"
             [ngClass]="{ 'is-invalid': f.submitted && eligibilityCriteria.invalid }"
@@ -180,7 +180,7 @@
         </div>
 </div>
         <div class="form-group">
-          <label for="jobType">Job Type</label>
+          <label for="jobType"><b>Job Type</b></label>
           <select
             name="jobType"
             [ngClass]="{ 'is-invalid': f.submitted && jobType.invalid }"
@@ -206,7 +206,7 @@
         </div>
 </div>
         <div class="form-group">
-          <label for="location">Location</label>
+          <label for="location"><b>Location</b></label>
           <select
             name="location"
             [ngClass]="{ 'is-invalid': f.submitted && location.invalid }"
@@ -231,7 +231,7 @@
         </div>
 </div>
         <div class="form-group">
-          <label for="salary">Salary (per annum)</label>
+          <label for="salary"><b>Salary (per annum)</b></label>
           <input
             name="salary"
             [ngClass]="{ 'is-invalid': f.submitted && salary.invalid }"
@@ -252,7 +252,7 @@
         </div>
 </div>
         <div class="form-group">
-          <label for="vacancies">No .of Vacancies </label>
+          <label for="vacancies"><b>No .of Vacancies </b></label>
           <input
             name="vacancies"
             [ngClass]="{ 'is-invalid': f.submitted && vacancies.invalid }"
@@ -271,17 +271,19 @@
             </div>
         </div>
         </div>
-        <br />    <button type="button" class="btn btn-light" (click)="modalClose(false)">
-          Cancel
-        </button>
+        <br />    
+        <div class="d-flex flex-row-reverse">
         <button
           type="submit"
           class="btn btn-gradient-primary mr-2"
           [disabled]="!form.valid"
         >
-          UPDATE
+          <b>UPDATE</b>
         </button>
-    
+        <button type="button" class="btn btn-light" (click)="modalClose(false)">
+          <b>Cancel</b>
+        </button>
+      </div>
       </form>
     </div>
   </div>

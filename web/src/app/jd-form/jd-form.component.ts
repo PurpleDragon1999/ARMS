@@ -86,6 +86,9 @@ export class JdFormComponent implements OnInit {
     if (this.jobListingForm.invalid) {
       return;
     }
+    else{
+      this.jdFormData();
+    }
   }
 
   jdFormData() {
