@@ -3,7 +3,7 @@ import { IResponse } from 'src/app/models/response.interface';
 import { JdModalComponent } from '../jd-modal/jd-modal.component';
 import { Component, OnInit, EventEmitter, Output, Input} from '@angular/core';
 import { AppServicesService } from 'src/app/services/app-services.service';
-import { NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalRef, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ModalComponent } from 'src/app/reusable-components/modal/modal.component';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -17,6 +17,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class JdListComponent implements OnInit {
   jobsList: any;
   jdObject: any;
+  @Input() jobObjId: any;
 
   constructor(private _service: AppServicesService, private router: Router,
               private modalService: NgbModal) {}
@@ -39,12 +40,30 @@ export class JdListComponent implements OnInit {
     });
   }
 
-  sendBulkEmail(jobObjId: string) {
+  sendBulkEmail(jobObjId) {
     const modalRef: NgbModalRef = this.modalService.open(BulkEmailModalComponent);
-    modalRef.componentInstance.jdUpdateId = jobObjId;
+    modalRef.componentInstance.jdObjId = jobObjId;
     // modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
     //   modalRef.close();
     // });
+    // modalRef.componentInstance.handle.subscribe((receivedEntry) => {
+    //   console.log(receivedEntry);
+    //   })
+    modalRef.result.then((result) => {
+      if (result) {
+      console.log(result);
+      }
+      });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
   }
 
   deleteJd(jobObjId: string) {

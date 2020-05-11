@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Validators, AbstractControl, FormControl, FormGroup } from '@angular/forms';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Validators, AbstractControl, FormControl, FormGroup, FormsModule } from '@angular/forms';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-bulk-email-modal',
@@ -7,34 +8,43 @@ import { Validators, AbstractControl, FormControl, FormGroup } from '@angular/fo
   styleUrls: ['./bulk-email-modal.component.scss']
 })
 export class BulkEmailModalComponent implements OnInit {
+  ngForm: any;
 
-  constructor() { }
-  sendEmailForm: FormGroup;
+  constructor(public activeModal: NgbActiveModal) { }
 
   emailList: string [];
 
+  @Output() handle: EventEmitter<any> = new EventEmitter();
+
   ngOnInit(): void {
     this.emailList = [];
-    const toAddress = new FormControl('', [
-      Validators.required,
-      Validators.pattern(/^([\w+-.%]+@[\w-.]+\.[A-Za-z]{2,4},?)+$/)
-    ]);
+    // const toAddress = new FormControl('', [
+    //   Validators.required,
+    //   Validators.pattern(/^([\w+-.%]+@[\w-.]+\.[A-Za-z]{2,4},?)+$/)
+    // ]);
 
-    this.sendEmailForm = new FormGroup({
-      toAddress: toAddress
-    });
+    // this.sendEmailForm = new FormGroup({
+    //   toAddress: toAddress
+    // });
   }
+  handleSubmit() {
+    this.activeModal.close(this.emailList);
+    }
 
+    ModalClose() {
+      this.activeModal.close();
+    }
+    
   extractEmailList(e) {
+    console.log("here");
     this.emailList = [];
-    if (this.sendEmailForm.valid) {
-      let emails = e.split(',');
-      emails.forEach(email => {
+    const emails = e.split(',');
+    emails.forEach(email => {
         if (email && email.length > 0) {
           this.emailList.push(email);
-        }
-      });
-    }
+      }
+    });
+  
     console.log(this.emailList);
   }
 
