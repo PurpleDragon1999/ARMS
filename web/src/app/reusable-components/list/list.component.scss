@@ -141,3 +141,8 @@ ngb-accordion ::ng-deep .card:hover{
 th{
     font-weight: bold !important;
 }
+
+.noMatch, .paginationDiv{
+    display: flex;
+    justify-content: center;
+ }

@@ -50,3 +50,11 @@ i:hover{
 .search-field{
     padding-bottom: 1em;
 }
+ a{
+     cursor: pointer;
+ }
+
+ .noMatch, .paginationDiv{
+    display: flex;
+    justify-content: center;
+ }

@@ -15,6 +15,10 @@
     </form>
   </div>
 
+  <div class="noMatch">
+    <p class="p-2" *ngIf="jobsList.length==0"> No Match Found</p>
+  </div>
+
   <div class="row">
     <div class="col-md-6 grid-margin stretch-card" *ngFor="let job of jobsList">
       <div class="card">
