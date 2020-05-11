@@ -125,7 +125,6 @@ export class JdFormComponent implements OnInit {
       this.router.navigate(["/jd-pdf", this.data.jdId]);
     },
     (error: HttpErrorResponse) => {
-      console.log(error, 'response');
       const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
       modalRef.componentInstance.shouldConfirm = false;
       modalRef.componentInstance.success = error.error.success;

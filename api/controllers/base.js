@@ -111,7 +111,7 @@ class Base {
         $options: "i",
       };
       
-      const searchedRecords = await this.model.getAll({ name: queryObject });
+      const searchedRecords = await this.model.getAll({ $or : [{name: queryObject}, {jdTitle: queryObject}] });
       req.body.records = searchedRecords;
 
       if (req.query.pagination==="true"){

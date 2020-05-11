@@ -18,12 +18,13 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class JdListComponent implements OnInit {
   jobsList: any;
   jdObject: any;
+  pager : IPager
 
   constructor(private _service: AppServicesService, private router: Router,
               private modalService: NgbModal) {}
 
   ngOnInit() {
-    this.loadJds();
+    this.searchJd();
   }
 
   loadJds() {
@@ -59,7 +60,6 @@ export class JdListComponent implements OnInit {
           modalRef.componentInstance.message = error.error.payload.message;
     });
   });
-
   }
 
 
@@ -73,6 +73,13 @@ export class JdListComponent implements OnInit {
     if (closingDate <= currentDate) {
       return 1;
     } else { return 0; }
+  }
+
+  searchJd(character?: string, page?: number){
+    this._service.search(character, page).subscribe(res=>{
+      this.jobsList = res.payload.data.dataList
+      this.pager = res.payload.data.pager
+    })
   }
 
  

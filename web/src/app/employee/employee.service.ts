@@ -50,7 +50,7 @@ export class EmployeeService {
   }
 
   searchEmployee(page: number = 1, character: string = '') {
-    const params: HttpParams = new HttpParams().set('character', character).set('page', page.toString());
+    const params: HttpParams = new HttpParams().set('character', character).set('page', page.toString()).set("pagination", "true");
 
     return this.http.get<IResponse>(
       EMPLOYEE_SEARCH,

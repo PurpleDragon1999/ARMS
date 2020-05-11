@@ -37,7 +37,6 @@ export class CandidateFormComponent implements OnInit {
     };
 
     this.uploader.onSuccessItem = (item: any, response: string, status: number) => {
-      console.log("successfull")
       let data = JSON.parse(response);
       const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
 

@@ -11,7 +11,7 @@
           <input name="name" [ngModel]="employee?.name" type="text" required class="form-control" id="name"
             placeholder="Name" #name="ngModel" [ngClass]="{ 'is-invalid': name.dirty && name.invalid }">
           <div *ngIf="name.dirty && name.errors?.required" class="invalid-feedback">
-            <div><i class="mdqi mdi-alert-outline"></i>Name is required</div>
+            <div><i class="mdi mdi-alert-outline"></i>Name is required</div>
           </div>
         </div>
         <div class="form-group">
@@ -44,7 +44,7 @@
           </div>
         </div>
         <div class="form-group">
-          <label for="email">Email address</label>
+          <label for="email">Email Address</label>
           <input name="email" [ngModel]="employee?.email" type="email"
             pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" required class="form-control"
             id="email" placeholder="Email" #email="ngModel" [ngClass]="{ 'is-invalid': email.dirty && email.invalid }">
@@ -71,9 +71,9 @@
           </div>
         </div>
         <div class="d-flex flex-row-reverse">
-          <button class="btn btn-light" (click)="modalClose(false)">Cancel</button>
           <button type="submit" [disabled]="form.invalid" *ngIf="formType !== 'read'"
             class="btn btn-gradient-primary mr-2">{{ formType | titlecase }}</button>
+          <button class="btn btn-light" (click)="modalClose(false)">Cancel</button>
         </div>
       </form>
     </div>

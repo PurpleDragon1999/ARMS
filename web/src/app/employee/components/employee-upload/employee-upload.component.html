@@ -1,7 +1,7 @@
 <div class="modal-dialog" role="document">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Create through file upload</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Create Through File Upload</h5>
         </div>
         <div class="modal-body">
 
@@ -13,10 +13,10 @@
                             accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
                             name="csv" class="form-control file-upload-info" ng2FileSelect [uploader]="uploader" ngModel
                             #csv="ngModel" [ngClass]="{ 'is-invalid': csv.dirty && csv.invalid }" required>
-                        <label for="file" class="file-upload-browse btn btn-gradient-primary">Upload file</label>
+                        <label for="file" class="file-upload-browse btn btn-gradient-primary">Upload File</label>
                         <div *ngIf="csv.dirty && csv.invalid" class="invalid-feedback">
-                            <div *ngIf="csv.errors?.required"><i class="mdi mdi-alert-outline"></i>File of type .csv is
-                                required</div>
+                            <div *ngIf="csv.errors?.required"><i class="mdi mdi-alert-outline"></i>File of Type .csv is
+                                Required</div>
                         </div>
                     </div>
                     <div class="progress mt-3" style="height: 1.5rem">
@@ -27,9 +27,10 @@
                     </div>
                 </div>
                 <div class="d-flex flex-row-reverse">
-                    <button class="btn btn-light" (click)="modalClose(false)">Cancel</button>
+                    
                     <button [disabled]="f.invalid" type="submit" class="btn btn-gradient-primary mr-2"
                         (click)=" uploader.uploadAll(); f.resetForm()">Create</button>
+                    <button class="btn btn-light" (click)="modalClose(false)">Cancel</button>
                 </div>
             </form>
         </div>
