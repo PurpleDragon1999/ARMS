@@ -7,6 +7,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ModalComponent } from 'src/app/reusable-components/modal/modal.component';
 import { HttpErrorResponse } from '@angular/common/http';
 
+
 @Component({
   selector: 'app-jd-list',
   templateUrl: './jd-list.component.html',
@@ -18,7 +19,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class JdListComponent implements OnInit {
   jobsList: any;
   jdObject: any;
-  pager : IPager
+  pager : any
 
   constructor(private _service: AppServicesService, private router: Router,
               private modalService: NgbModal) {}

@@ -58,3 +58,7 @@ i:hover{
     display: flex;
     justify-content: center;
  }
+
+ .mdi-pencil:hover, .mdi-delete:hover, .mdi-download:hover{
+    color: rgb(182, 109, 255);
+}
