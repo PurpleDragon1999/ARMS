@@ -21,21 +21,23 @@
                     <div class="progress-marker" data-text="1"></div>
                     <div class="progress-text">
                       Applied Successfully
+                      <i *ngIf="flag>='1'" class="mdi mdi-checkbox-marked-circle-outline"></i>
                     </div>
                   </a>
                 </li>
   
                 <li class="progress-step anim--path " [ngClass]="{'is-active': flag==1, 'is-complete': flag >= 2}">
-                  <a href="#/">
+                  <a>
                     <div class="progress-marker" data-text="2"></div>
                     <div class="progress-text">
                       Interview Scheduled
+                      <i *ngIf="flag>='2'" class="mdi mdi-checkbox-marked-circle-outline"></i>
                     </div>
                   </a>
                 </li>
   
                 <li class="progress-step anim--path " [ngClass]="{'is-active': flag==2}" [ngClass]="{'is-active': flag==2, 'is-complete': flag >= 3}" aria-current="step">
-                  <a href="form">
+                  <a>
                     <div class="progress-marker" data-text="3"></div>
                     <div class="progress-text">
                       Round 1
@@ -44,7 +46,7 @@
                 </li>
   
                 <li class="progress-step anim--path " [ngClass]="{'is-active': flag==3}" [ngClass]="{'is-active': flag==3, 'is-complete': flag >= 4}">
-                  <a href="#/">
+                  <a>
                     <div class="progress-marker" data-text="4"></div>
                     <div class="progress-text">
                       Round 2
@@ -53,7 +55,7 @@
                 </li>
   
                 <li class="progress-step anim--path" [ngClass]="{'is-active': flag==4}" [ngClass]="{'is-active': flag==4, 'is-complete': flag >= 5}">
-                  <a href="#/">
+                  <a>
                     <div class="progress-marker" data-text="5"></div>
                     <div class="progress-text">
                       Round 3
