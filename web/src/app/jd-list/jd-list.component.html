@@ -16,7 +16,7 @@
   </div>
 
   <div class="noMatch">
-    <p class="p-2" *ngIf="jobsList.length==0"> No Match Found</p>
+    <p class="p-2" *ngIf="jobsList?.length==0"> No Match Found</p>
   </div>
 
   <div class="row">
@@ -59,7 +59,7 @@
 </div>
 
   <div class="paginationDiv">
-    <ul *ngIf="pager?.pages && pager?.pages.length" class="pagination">
+    <ul *ngIf="pager?.pages && pager?.pages?.length" class="pagination">
       <li [ngClass]="{ disabled: pager.currentPage == 1 }" class="page-item previous-item">
         <a (click)="searchJd(searchInput.value, pager.currentPage - 1)" class="page-link"><i
             class="mdi mdi-chevron-left arrow"></i></a>
