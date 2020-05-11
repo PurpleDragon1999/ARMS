@@ -1,9 +1,12 @@
+import { HttpErrorResponse } from '@angular/common/http';
+import { IResponse } from 'src/app/models/response.interface';
+import { AppServicesService } from 'src/app/services/app-services.service';
 import { ICandidate } from './../models/candidate.interface';
 import { Component, OnInit } from "@angular/core";
 import { FileItem, FileUploader, ParsedResponseHeaders } from "ng2-file-upload";
 import { NgbModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
 import { ModalComponent } from "../reusable-components/modal/modal.component"
-
+import { Router } from "@angular/router";
 
 const URL = 'http://localhost:3000/api/candidate'
 
@@ -15,6 +18,8 @@ const URL = 'http://localhost:3000/api/candidate'
 export class CandidateFormComponent implements OnInit {
 
   constructor(private modalService : NgbModal,
+              private router: Router,
+              private service: AppServicesService
               ) { }
 
   public uploader: FileUploader = new FileUploader({
@@ -60,12 +65,15 @@ export class CandidateFormComponent implements OnInit {
     modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
       modalRef.close();
     });
+  
+    }
     
-  } 
+    this.load()
   }
 
-
   model: any = {};
+  type: String;
+  jdObjectId : String
 
   createCandidate(candidateObj: ICandidate) {
     if (
@@ -73,8 +81,7 @@ export class CandidateFormComponent implements OnInit {
       candidateObj.email &&
       candidateObj.aadhar&&
       candidateObj.file &&
-      candidateObj.skills&&
-      candidateObj.appliedFor
+      candidateObj.skills
     ) {
       if (this.uploader.getNotUploadedItems().length != 0) {
         this.uploader.onBuildItemForm = (item, form) => {
@@ -83,7 +90,7 @@ export class CandidateFormComponent implements OnInit {
           form.append("email", candidateObj.email);
           form.append("aadhar", candidateObj.aadhar);
           form.append("skills", candidateObj.skills);
-          form.append("appliedFor", candidateObj.appliedFor);
+          form.append("appliedFor", this.jdObjectId);
           item.formData = candidateObj.name;
           item.formData = candidateObj.experience;
           item.formData = candidateObj.email;
@@ -96,5 +103,29 @@ export class CandidateFormComponent implements OnInit {
     }
 
     
+  }
+  
+  load(){
+    this.type = this.router.url.split("/")[1];
+    if(this.router.url.split("/")[1]=="progressTracker"){
+      let candidateId = this.router.url.split("/")[2];
+      this.service.getCandidate(candidateId).subscribe(
+        (res: IResponse) =>{
+          this.model = res.payload.data;
+          this.model.appliedForPosition = this.model.appliedFor.jdTitle
+          this.model.appliedForJdId = this.model.appliedFor.jdId
+        },
+        (error: HttpErrorResponse) => {
+        }
+      )}
+    else if(this.router.url.split("/")[1]=="candidateForm"){
+      this.model.appliedForJdId = this.router.url.split("/")[2];
+      this.service.getJdData(this.model.appliedForJdId).subscribe((res : IResponse)=>{
+        let jdObject = res.payload.data
+        this.model.appliedForPosition = jdObject.jdTitle;
+        this.jdObjectId = jdObject._id;
+
+      })
+    }
   }
 }

@@ -5,9 +5,6 @@ import { AppServicesService } from 'src/app/services/app-services.service';
 import { element } from 'protractor';
 import { Component, OnInit } from '@angular/core';
 
-
-
-
 @Component({
   selector: 'app-progress-tracker',
   templateUrl: './progress-tracker.component.html',
@@ -29,7 +26,6 @@ export class ProgressTrackerComponent implements OnInit {
   loadcandidateStatus(){
     let candidateId = this._route.url.split("/")[2]
     this._service.getCandidate(candidateId).subscribe((res:IResponse)=>{
-      
       this.candidatedata = res.payload.data
       this.flag = this.candidatedata.flag     
       

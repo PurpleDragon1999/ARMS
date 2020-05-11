@@ -3,7 +3,7 @@ export interface ICandidate {
     experience: number;
     email: string;
     aadhar: string;
-    file: string;
+    file : string;
     skills: string;
     selection: string;
     appliedFor: string;
