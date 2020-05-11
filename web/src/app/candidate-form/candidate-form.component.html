@@ -101,9 +101,9 @@
           </div>  
 
           <div class="d-flex flex-row-reverse" *ngIf="type !== 'progressTracker'" >
-            <button class="btn btn-light" (click)="f.resetForm()"><b>Cancel</b></button>
             <button type="submit" [disabled]="f.invalid" class="btn btn-gradient-primary mr-2" 
             (click)="f.form.valid; createCandidate(f.value); f.resetForm()"><b>Submit</b></button>
+            <button class="btn btn-light" (click)="f.resetForm()"><b>Cancel</b></button>
           </div>
           
         </form>

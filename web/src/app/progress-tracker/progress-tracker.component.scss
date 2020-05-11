@@ -5,8 +5,9 @@
     padding-left: 4rem;
 }
 
-.page-title{
-    text-align: center !important;
+.header{
+    margin: auto;
+    font-size: x-large;
 }
 
 .main-panel{
@@ -40,14 +41,16 @@ li:focus{
 }
 
 .mdi{
-    font-size: 1.2rem
+    font-size: 1.1rem
 }
 
 
 .progress-text{
     font-weight: bold;
+    font-size: larger;
 }
 
 a{
     cursor: pointer;
 }
+
