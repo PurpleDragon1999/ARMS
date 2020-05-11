@@ -11,7 +11,7 @@
       <div *ngIf="shouldConfirm" class="modal-body text-center">
         <div *ngIf="submitted === false">
           <h2><b>Are you sure?</b></h2>
-          <p>Do you really want to delete these records? This process cannot be undone.</p>
+          <p>This process cannot be undone.</p>
           <span>
             <button class=" btn btn-outline-primary btn-fw mr-2" (click)="modalClose(false)">Cancel</button>
             <button class=" btn btn-outline-primary btn-fw" (click)="performRequest()">OK</button>

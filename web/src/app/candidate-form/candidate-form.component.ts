@@ -74,7 +74,6 @@ export class CandidateFormComponent implements OnInit {
 
   model: any = {};
   type: String;
-  jdObjectId: String;
 
   createCandidate(candidateObj: ICandidate) {
     if (
@@ -92,7 +91,7 @@ export class CandidateFormComponent implements OnInit {
           form.append("email", candidateObj.email);
           form.append("aadhar", candidateObj.aadhar);
           form.append("skills", candidateObj.skills);
-          form.append("appliedFor", this.jdObjectId);
+          form.append("appliedFor", candidateObj.appliedFor);
           item.formData = candidateObj.name;
           item.formData = candidateObj.experience;
           item.formData = candidateObj.email;
@@ -112,21 +111,12 @@ export class CandidateFormComponent implements OnInit {
       this.service.getCandidate(candidateId).subscribe(
         (res: IResponse) =>{
           this.model = res.payload.data;
-          this.model.appliedForPosition = this.model.appliedFor.jdTitle
-          this.model.appliedForJdId = this.model.appliedFor.jdId
         },
         (error: HttpErrorResponse) => {
         }
       )}
     else if(this.router.url.split("/")[1]=="candidateForm"){
-      this.model.appliedFor = this.router.url.split("/")[2];  
-      this.service.getJdData(this.model.appliedForJdId).subscribe((res : IResponse)=>{
-        let jdObject = res.payload.data
-        console.log(jdObject)
-        this.model.appliedForPosition = jdObject.jdTitle;
-        this.jdObjectId = jdObject._id;
-
-      })    
+      this.model.appliedFor = this.router.url.split("/")[2];
     }
   }
 }
