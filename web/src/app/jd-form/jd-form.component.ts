@@ -86,9 +86,7 @@ export class JdFormComponent implements OnInit {
     if (this.jobListingForm.invalid) {
       return;
     }
-    else{
-      this.jdFormData();
-    }
+  
   }
 
   jdFormData() {
@@ -125,7 +123,7 @@ export class JdFormComponent implements OnInit {
         modalRef.close();
       });
       this.modalClose(true);
-      this.router.navigate(["/jd-pdf", this.data.jdId]);
+      // this.router.navigate(["/jd-pdf", this.data.jdId]);
     },
     (error: HttpErrorResponse) => {
       console.log(error, 'response');
