@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { Validators, AbstractControl, FormControl, FormGroup, FormsModule } from '@angular/forms';
+// import { Validators, AbstractControl, FormControl, FormGroup, FormsModule } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -8,8 +8,6 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./bulk-email-modal.component.scss']
 })
 export class BulkEmailModalComponent implements OnInit {
-  ngForm: any;
-
   constructor(public activeModal: NgbActiveModal) { }
 
   emailList: string [];
@@ -34,18 +32,17 @@ export class BulkEmailModalComponent implements OnInit {
     ModalClose() {
       this.activeModal.close();
     }
-    
+
   extractEmailList(e) {
-    console.log("here");
-    this.emailList = [];
-    const emails = e.split(',');
-    emails.forEach(email => {
+   this.emailList = [];
+   const emails = e.split(',');
+   emails.forEach(email => {
         if (email && email.length > 0) {
           this.emailList.push(email);
       }
     });
-  
-    console.log(this.emailList);
+
+   console.log(this.emailList);
   }
 
 }

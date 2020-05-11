@@ -1,20 +1,26 @@
 <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Send Job Description</h5>
+        <h4 class="modal-title" id="exampleModalLabel"><b>Send Job Description</b></h4>
       </div>
       <div class="modal-body">
         <form (ngSubmit)="handleSubmit($event)" class="forms-sample" #form="ngForm"
           novalidate>
       
           <div class="form-group">
-            <label for="email">Email(s) : </label>
+            <label for="email"><strong>Email(s) :</strong></label>
             <input name="email"
+            required 
             [ngModel]="email?.value"
             (ngModelChange)="extractEmailList($event)"
-             type="text"
-              pattern="^([\w+-.%]+@[\w-.]+\.[A-Za-z]{2,4},?)+$" required class="form-control"
-              id="email" placeholder="Email" #email="ngModel" [ngClass]="{ 'is-invalid': email.dirty && email.invalid }">
+            type="text"
+            pattern="^([\w+-.%]+@[\w-.]+\.[A-Za-z]{2,4},?)+$" 
+            class="form-control mt-2"
+            placeholder="Enter email addresses" 
+            #email="ngModel" 
+            [ngClass]="{ 'is-invalid': email.dirty && email.invalid }"
+            spellcheck="false">
+
             <div *ngIf="email.dirty && email.errors?.required" class="invalid-feedback">
               <div><i class="mdi mdi-alert-outline"></i>Email is required</div>
             </div>
@@ -24,9 +30,9 @@
           </div>
         
           <div class="d-flex flex-row-reverse">
-            <button class="btn btn-light" (click)="ModalClose()">Cancel</button>
-            <button type="submit"
+            <button type="submit" [disabled]="!form.valid"
               class="btn btn-gradient-primary mr-2">Send</button>
+            <button class="btn btn-light" (click)="ModalClose()">Cancel</button>
           </div>
         </form>
 
