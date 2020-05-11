@@ -22,15 +22,29 @@ input[type="date"]::-webkit-inner-spin-button{
     -webkit-appearance: none;
 }
 
+.search-field{
+    width: 50%;
+}
+
 .panel-select{
-    border: #FC4C02;
+    border: gray;
     border-style: solid;
     border-width: 1px;
-    padding: 0.5rem;
+    padding: 1rem;
+    margin-left: 20px;
+}
+
+.panel-select ul {
+    background-color: #F2EDF3;
+}
+
+.panel-select li:hover {
+    cursor: pointer;
 }
 
 .search-field li{
-    padding-left: 3px;
+    height: 46px;
+    padding: 15px 22px;
 }
 
 .search-field li:hover{
@@ -39,16 +53,28 @@ input[type="date"]::-webkit-inner-spin-button{
 }
 
 .search-field ul{
-    border: #FC4C02;
+    background-color: #ffffff;
+    border: #80bdff;
+    border-top: white;
+    height: fit-content;
     border-style: solid;
     border-width: 0.5px;
-    height: 6rem;
-    overflow-y: scroll;
+    max-height: 10rem;
+    margin-left: 39px;
+    overflow-y: auto;
 }
 
 @media only screen and (max-width: 600px) {
     .card .card-body{
         padding: 1rem;
+    }
+
+    .search-field{
+        width: 100%;
+    }
+
+    .search-field li{
+        font-size: 10px !important;
     }
   }
 
