@@ -14,8 +14,6 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./jd-list.component.scss'],
 })
 
-
-
 export class JdListComponent implements OnInit {
   jobsList: any;
   jdObject: any;
@@ -82,6 +80,5 @@ export class JdListComponent implements OnInit {
       this.pager = res.payload.data.pager
     })
   }
-
  
 }
