@@ -27,6 +27,7 @@ import { ModalComponent } from './reusable-components/modal/modal.component';
 import { ScheduleInterviewComponent } from './schedule-interview/schedule-interview.component';
 import { JdModalComponent } from './jd-modal/jd-modal.component';
 import { ProgressTrackerComponent } from './progress-tracker/progress-tracker.component';
+import { InterviewListComponent } from './interview-list/interview-list.component';
 
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
@@ -57,6 +58,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     JdPdfComponent,
     JdModalComponent,
     ProgressTrackerComponent,
+    InterviewListComponent,
   ],
   imports: [
     ReactiveFormsModule,

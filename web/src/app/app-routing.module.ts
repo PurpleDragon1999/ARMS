@@ -1,3 +1,4 @@
+import { InterviewListComponent } from './interview-list/interview-list.component';
 
 //import { CreateInterviewComponent } from './create-interview/create-interview.component';
 
@@ -34,7 +35,8 @@ const routes: Routes = [
      
       {
         path: "employee", component: EmployeeComponent
-      }
+      },
+      {path:'interviews',component:InterviewListComponent}
     ]
   },
   {
@@ -53,7 +55,9 @@ const routes: Routes = [
       },
       {
         path: "job-desc/new", component: JdFormComponent
-      }
+      },
+      {path:'interviews',component:InterviewListComponent}
+  
     ]
   },
   {

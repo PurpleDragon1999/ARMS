@@ -103,6 +103,39 @@ class Base {
       });
     }
   }
+  async searchInterviewRecord(req, res) {
+    try {
+      let queryObject = {
+        $regex: ".*^" + req.query.character + ".*",
+        $options: "i",
+      };
+      
+      const searchedRecords = await this.model.index({ });
+      req.body.records = searchedRecords;
+
+      if (req.query.pagination==="true"){
+        return this.getPaginatedResult(req, res);
+      }
+      else{
+        res.status(200).send({
+          payload:{
+            data : searchedRecords,
+            message :"Records Returned Successfull"
+          }
+        })
+      }
+      
+    } catch (err) {
+      console.log(err, "error")
+      res.status(500).send({
+        success: false,
+        payload: {
+          message: err.message,
+        },
+      });
+    }
+  }
+
 
   async searchRecord(req, res) {
     try {

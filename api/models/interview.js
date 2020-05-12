@@ -5,11 +5,10 @@ class Interview{
     constructor(){
         this.model = mongoose.model('Interview', interviewSchema)
     }
-    
     async save(interviewObj){
         return this.model.create(interviewObj);
     }
-
+    
     async findOne(criteria={}){
         return this.model.findOne(criteria);
     }

@@ -18,7 +18,6 @@ export class EmployeeComponent implements OnInit {
   employees: IEmployee[] = [];
   columns: Array<String> = [];
   pager: IPager;
-
   constructor(
     private employeeService: EmployeeService,
     private modalService: NgbModal
@@ -75,7 +74,7 @@ export class EmployeeComponent implements OnInit {
 
   searchEmployee(event: IModelForPagination) {
     this.employeeService.searchEmployee(event.page, event.character).subscribe((res) => {
-      this.employees = res.payload.data.dataList;
+      this.employees = res.payload.data;
       this.columns = ["name", "email", "employeeId", "designation", "role"];
       this.pager = res.payload.data.pager;
     });

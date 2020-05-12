@@ -2,7 +2,7 @@
   <div class="card">
     <div class="card-body">
 
-
+      <!-- <div>{{data|json}}</div> -->
       <div class="itemsDiv">
         <div class="search-field  d-md-block ">
           <form class="d-flex align-items-center h-100" action="#">
@@ -39,7 +39,10 @@
           </div>
           <tr *ngFor="let entry of data">
             <td *ngFor="let columnName of columns;">
-              {{ entry[columnName] }}
+              <div *ngIf="columnName=='date';else otherCol">{{ entry[columnName]|date}}</div>
+              <ng-template #otherCol>
+                {{ entry[columnName]}}
+              </ng-template>
             </td>
             <td><a (click)="openModal('update', entry)"><i class="mdi mdi-pencil"></i></a></td>
             <td><a (click)="deleteEntry(entry)"><i class="mdi mdi-delete"></i></a> </td>
@@ -140,7 +143,7 @@
       </ngb-accordion>
     </div>
   </div>
-
+ 
   <div class="paginationDiv">
 
     <ul *ngIf="pager?.pages && pager?.pages.length" class="pagination">
