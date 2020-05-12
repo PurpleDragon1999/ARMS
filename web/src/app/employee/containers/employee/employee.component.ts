@@ -8,7 +8,7 @@ import { EmployeeUploadComponent } from '../../components/employee-upload/employ
 import { EmployeeService } from "../../employee.service";
 import { IEmployee } from "../../models/employee.interface";
 import { IModelForPagination } from 'src/app/models/modelPagination.interface';
-
+import {IPager} from 'src/app/models/pager.interface';
 @Component({
   selector: "app-employee",
   styleUrls: ["employee.component.scss"],

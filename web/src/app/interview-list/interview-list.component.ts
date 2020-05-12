@@ -5,7 +5,7 @@ import { InterviewService } from '../services/interview.service';
 import { NgbModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
 import { ModalComponent } from "src/app/reusable-components/modal/modal.component";
 import { HttpErrorResponse } from '@angular/common/http';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { IPager } from '../models/pager.interface';
 @Component({
   selector: 'app-interview-list',
   templateUrl: './interview-list.component.html',
@@ -13,7 +13,7 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 })
 export class InterviewListComponent implements OnInit {
   columns: Array<String> = [];
-  //pager: IPager;
+  pager: IPager;
   interviews:any=[];
   constructor(
    private interviewService:InterviewService,
@@ -27,7 +27,7 @@ export class InterviewListComponent implements OnInit {
     this.interviewService.searchInterview(event.page, event.character).subscribe((res) => {
       this.interviews = res.payload.data;
       this.columns = ["noOfRounds", "date","jdObjectId.jdId","jdObjectId.jdTitle"];
-      //this.pager = res.payload.data.pager;
+      this.pager = res.payload.data.pager;
     });
   }
   deleteInterview(interview:any) {

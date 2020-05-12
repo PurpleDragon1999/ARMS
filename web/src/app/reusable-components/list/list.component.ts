@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { IModelForPagination } from 'src/app/models/modelPagination.interface';
-
+import {IPager} from 'src/app/models/pager.interface';
 @Component({
   selector: "app-list",
   templateUrl: "./list.component.html",
