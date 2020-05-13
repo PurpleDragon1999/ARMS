@@ -28,6 +28,8 @@ import { ScheduleInterviewComponent } from './schedule-interview/schedule-interv
 import { JdModalComponent } from './jd-modal/jd-modal.component';
 import { ProgressTrackerComponent } from './progress-tracker/progress-tracker.component';
 import { BulkEmailModalComponent } from './bulk-email-modal/bulk-email-modal.component';
+import { CandidateComponent } from './candidate/candidate.component';
+
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -58,6 +60,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     JdModalComponent,
     ProgressTrackerComponent,
     BulkEmailModalComponent,
+    CandidateComponent
   ],
   imports: [
     ReactiveFormsModule,
