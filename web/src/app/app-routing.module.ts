@@ -1,9 +1,5 @@
-
-//import { CreateInterviewComponent } from './create-interview/create-interview.component';
-
 import { CandidateFormComponent } from './candidate-form/candidate-form.component';
 import { ProgressTrackerComponent } from './progress-tracker/progress-tracker.component';
-
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EmployeeComponent } from './employee/containers/employee/employee.component';
@@ -35,7 +31,7 @@ const routes: Routes = [
   },
   {
 
-    path: "superuser", component: AppNavBarComponent, data: { role: "superuser" }, children: [
+    path: "superuser", component: AppNavBarComponent, canActivate: [RoleGuardService], data: { role: "superuser" }, children: [
       {
         path: "", redirectTo: "home", pathMatch: "full"
       },
@@ -49,7 +45,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: "admin", component: AppNavBarComponent, data: { role: "superuser" }, children: [
+    path: "admin", component: AppNavBarComponent, canActivate: [RoleGuardService], data: { role: "admin" }, children: [
       {
         path: "", redirectTo: "home", pathMatch: "full"
       },
@@ -68,7 +64,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: "employee", component: AppNavBarComponent, data: { role: "employee" }, children: [
+    path: "employee", component: AppNavBarComponent, canActivate: [RoleGuardService], data: { role: "employee" }, children: [
       {
         path: "", redirectTo: "home", pathMatch: "full"
       },
