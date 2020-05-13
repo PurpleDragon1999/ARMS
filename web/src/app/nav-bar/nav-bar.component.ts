@@ -25,8 +25,8 @@ export class AppNavBarComponent implements OnInit {
 
   ngOnInit() {
     let data = this._service.tokenDecoder();
-    this.name = data.name;
-    this.role = data.role;
+    // this.name = data.name;
+    // this.role = data.role;
     if (this.role == this._env.SUPERUSER) {
       this.adminBool = true;
     }

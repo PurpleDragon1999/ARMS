@@ -1,7 +1,6 @@
 import { ScheduleInterviewComponent } from './schedule-interview/schedule-interview.component';
 import { CandidateFormComponent } from './candidate-form/candidate-form.component';
 import { ProgressTrackerComponent } from './progress-tracker/progress-tracker.component';
-
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EmployeeComponent } from './employee/containers/employee/employee.component';
@@ -14,16 +13,27 @@ import { AppNavBarComponent } from './nav-bar/nav-bar.component';
 import { RoleGuardService } from './utilities/role-guard.service';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { JdModalComponent } from './jd-modal/jd-modal.component';
+import { CandidateComponent } from './candidate/candidate.component';
 
 const routes: Routes = [
-  { path: "", redirectTo: 'login', pathMatch: 'full'},
+  { path: "", redirectTo: 'login', pathMatch: 'full' },
   { path: "login", component: LoginComponent },
   { path: "404", component: ErrorPageComponent},
   {
-    path: "edit", component: JdModalComponent 
+    path: "edit", component: JdModalComponent
   },
   {
-    
+    path: "candidate", component: AppNavBarComponent, children: [
+      {
+        path: '', component: CandidateComponent
+      },
+    ]
+  },
+  {
+    path: 'candidate/form', component: CandidateFormComponent
+  },
+  {
+
     path: "superuser", component: AppNavBarComponent, canActivate: [RoleGuardService], data: { role: "superuser" }, children: [
       {
         path: "", redirectTo: "home", pathMatch: "full"
@@ -31,7 +41,7 @@ const routes: Routes = [
       {
         path: "home", component: HrComponent
       },
-     
+
       {
         path: "employee", component: EmployeeComponent
       }
@@ -81,7 +91,7 @@ const routes: Routes = [
       { path: ':candidateId', component: ProgressTrackerComponent }
     ],
   },
-  
+
 ];
 
 @NgModule({
