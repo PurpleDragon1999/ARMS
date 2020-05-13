@@ -34,8 +34,7 @@
         </thead>
         <tbody>
           <div>
-          
-            <small class="p-2" *ngIf="data.length==0"> No Match Found</small>
+            <small class="p-2" *ngIf="data?.length==0"> No Match Found</small>
           </div>
           <tr *ngFor="let entry of data">
             <td *ngFor="let columnName of columns;">
@@ -43,6 +42,9 @@
               <ng-template #otherCol>
                 {{ entry[columnName]}}
               </ng-template>
+            </td>
+            <td *ngIf="title === 'candidate'"><button type="button" (click)="showPdf(entry['pdf'])"><i
+                  class="fa fa-file-pdf-o"></i>Show CV</button>
             </td>
             <td><a (click)="openModal('update', entry)"><i class="mdi mdi-pencil"></i></a></td>
             <td><a (click)="deleteEntry(entry)"><i class="mdi mdi-delete"></i></a> </td>
@@ -54,7 +56,7 @@
 
     <div class="card paginationDiv">
       <div>
-        <ul *ngIf="pager?.pages && pager?.pages.length" class="pagination">
+        <ul *ngIf="pager?.pages && pager?.pages?.length" class="pagination">
 
           <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item previous-item">
             <a (click)="setPageForPagination(searchInput.value, pager.currentPage - 1)" class="page-link"><i
@@ -101,7 +103,7 @@
       </form>
     </div>
     <div>
-      <small class="p-2" *ngIf="data.length==0"> No Match Found</small>
+      <small class="p-2" *ngIf="data?.length==0"> No Match Found</small>
     </div>
     <div class="mt-4 userCard" *ngFor="let entry of data">
       <ngb-accordion [closeOthers]="true" activeIds="collapse-1">
@@ -146,7 +148,7 @@
  
   <div class="paginationDiv">
 
-    <ul *ngIf="pager?.pages && pager?.pages.length" class="pagination">
+    <ul *ngIf="pager?.pages && pager?.pages?.length" class="pagination">
       <li [ngClass]="{ disabled: pager.currentPage == 1 }" class="page-item previous-item">
         <a (click)="setPageForPagination(searchInputForSmallDevice.value, pager.currentPage - 1)" class="page-link"><i
             class="mdi mdi-chevron-left arrow"></i></a>

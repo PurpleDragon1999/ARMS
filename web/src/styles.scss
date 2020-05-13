@@ -12527,7 +12527,8 @@ dl {
     vertical-align: middle;
     font-size: 0.875rem;
     line-height: 1;
-    white-space: nowrap; }
+    white-space: pre-wrap;
+    max-width: 10rem !important;}
     .table th img,
     .table td img {
       width: 36px;

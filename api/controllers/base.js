@@ -122,7 +122,7 @@ class Base {
         res.status(200).send({
           payload:{
             data : searchedRecords,
-            message :"Records Returned Successfull"
+            message :"Records Returned Successfully"
           }
         })
       }
