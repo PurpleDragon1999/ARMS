@@ -11,7 +11,7 @@
           <input name="name" [ngModel]="employee?.name" type="text" required class="form-control" id="name"
             placeholder="Name" #name="ngModel" [ngClass]="{ 'is-invalid': name.dirty && name.invalid }">
           <div *ngIf="name.dirty && name.errors?.required" class="invalid-feedback">
-            <div><i class="mdqi mdi-alert-outline"></i>Name is required</div>
+            <div><i class="mdi mdi-alert-outline"></i>Name is required</div>
           </div>
         </div>
         <div class="form-group">

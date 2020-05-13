@@ -1,9 +1,12 @@
+
 import { Component, OnInit } from "@angular/core";
 import { AppServicesService } from "../services/app-services.service";
-import { Router, ActivatedRoute } from "@angular/router";
+import { Router} from "@angular/router";
 import { ICreate } from "../models/create.interface";
-import { DynamicGrid } from "../grid.model";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { IResponse} from "../models/response.interface";
+import { NgbModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
+import { ModalComponent } from "../reusable-components/modal/modal.component";
+import { HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: "app-create-interview",
@@ -11,73 +14,52 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
   styleUrls: ["./create-interview.component.scss"],
 })
 export class CreateInterviewComponent implements OnInit {
-  interview: ICreate = {
-    jd: "",
-    email: "",
-    date: "",
-    time: "",
-    roundType: "",
-    panelOfInterviews: "",
-    noOfRounds: 3,
-  };
+  // interview: ICreate = {
+  //   jdId: "",
+  //   jd: "",
+  //   date: "",
+  //   time: "",
+  //   venue:"",
+  //   noOfRounds: 5,
+  // };
 
   constructor(
     private AppServicesService: AppServicesService,
     private router: Router,
-    private route: ActivatedRoute,
-    private formBuilder: FormBuilder
+    private modalService : NgbModal,
   ) {}
 
-  dynamicArray: Array<DynamicGrid> = [];
-  newDynamic: any = {};
-
-  registerForm: FormGroup;
-  submitted = false;
-
-  ngOnInit() {
-    this.registerForm = this.formBuilder.group({
-      Name: ["", Validators.required],
-      email: ["", Validators.required],
-      noOfRounds: ["", Validators.required],
-      panelOfInterviewers: ["", Validators.required],
-      roundType: ["", Validators.required],
-      date: ["", Validators.required],
-      time: ["", Validators.required],
-    });
-  }
-
-  get f() {
-    return this.registerForm.controls;
-  }
-
-  onSubmit() {
-    this.submitted = true;
-
-    // stop here if form is invalid
-    if (this.registerForm.invalid) {
-      return;
-    }
-
-    alert("SUCCESS!! :-)\n\n" + JSON.stringify(this.registerForm.value));
-  }
+  ngOnInit() {}
+  interview: any = {}
 
   createInterview(interview: ICreate) {
     let interviewObj = interview;
-    this.AppServicesService.createInterview(interview).subscribe((res) => {
-      if (res.status == 200) {
-        alert("interview Created");
-      } else {
-        alert("some error occurred");
+    this.AppServicesService.createInterview(interview).subscribe((res: any) => {
+        const modalRef = this.modalService.open(ModalComponent);
+        modalRef.componentInstance.shouldConfirm = false;
+        modalRef.componentInstance.success = res.body.success;
+        modalRef.componentInstance.message = res.body.payload.message;
+        modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+          modalRef.close();
+        
+        });
+    },
+    
+      (error: HttpErrorResponse) => {
+        console.log(error, "response");
+        const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
+        modalRef.componentInstance.shouldConfirm = false;
+        modalRef.componentInstance.success = error.error.success;
+        modalRef.componentInstance.message = error.error.payload.message;
+        modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+          modalRef.close();
+        });
+        // this.data = error.error.payload.data;
+        // this.router.navigate(["/jd-pdf", this.data.jdId]);
       }
-    });
+    );
   }
 
-  deleteRow(index) {
-    if (this.dynamicArray.length == 1) {
-      return false;
-    } else {
-      this.dynamicArray.splice(index, 1);
-      return true;
-    }
-  }
+
+
 }

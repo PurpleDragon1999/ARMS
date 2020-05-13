@@ -1,6 +1,10 @@
 
+
+import { CreateInterviewComponent } from './create-interview/create-interview.component';
+
 import { CandidateFormComponent } from './candidate-form/candidate-form.component';
 import { ProgressTrackerComponent } from './progress-tracker/progress-tracker.component';
+
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EmployeeComponent } from './employee/containers/employee/employee.component';
@@ -16,6 +20,9 @@ import { JdModalComponent } from './jd-modal/jd-modal.component';
 const routes: Routes = [
   
   { path: "", redirectTo: 'login', pathMatch: 'full'},
+  {
+    path: "create", component: CreateInterviewComponent 
+  },
   { path: "login", component: LoginComponent },
   {
     path: "edit", component: JdModalComponent 
@@ -40,6 +47,7 @@ const routes: Routes = [
       {
         path: "", redirectTo: "home", pathMatch: "full"
       },
+     
     
       {
         path: "home", component: HrComponent
