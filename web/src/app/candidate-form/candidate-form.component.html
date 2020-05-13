@@ -86,6 +86,10 @@
               <div *ngIf="file.errors.required"><i class="mdi mdi-alert-outline"></i>Resume is required</div>
             </div>
           </div>
+          <div *ngIf="aadhar.dirty && aadhar.errors?.pattern" class="invalid-feedback">
+            <div><i class="mdi mdi-alert-outline"></i>Enter valid Aadhar Card Number</div>
+          </div>
+        </div>
 
           <div *ngIf="type == 'progressTracker'" class="input-group col-xs-12">
             <input [readOnly]="type == 'progressTracker'" type="text" name="file" class="form-control"
