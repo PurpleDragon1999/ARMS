@@ -31,6 +31,9 @@ export class ListComponent {
   @Output()
   emitPaginatedResult: EventEmitter<IModelForPagination> = new EventEmitter<IModelForPagination>();
 
+  @Output()
+  emitDownloadPdf: EventEmitter<string> = new EventEmitter<string>();
+
   openModal(formType: IDataModal["formType"], data: IDataModal["data"]) {
     this.emitOpenModal.emit({ formType, data });
   }
@@ -45,5 +48,9 @@ export class ListComponent {
 
   setPageForPagination(character: string, page: number) {
     this.emitPaginatedResult.emit({ page, character });
+  }
+
+  showPdf(pdf: string): void {
+    this.emitDownloadPdf.emit(pdf);
   }
 }
