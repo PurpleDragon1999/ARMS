@@ -1,2 +1,2 @@
 <app-list title='interview' [data]="interviews" [columns]="columns" [pager]="pager" 
-          (emitDelete)="deleteInterview($event)" ></app-list>
+          (emitDelete)="deleteInterview($event)" (emitPaginatedResult)="searchInterview($event)"></app-list>

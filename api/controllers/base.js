@@ -103,39 +103,7 @@ class Base {
       });
     }
   }
-  async searchInterviewRecord(req, res) {
-    try {
-      let queryObject = {
-        $regex: ".*^" + req.query.character + ".*",
-        $options: "i",
-      };
-      
-      const searchedRecords = await this.model.index({ });
-      req.body.records = searchedRecords;
-
-      if (req.query.pagination==="true"){
-        return this.getPaginatedResult(req, res);
-      }
-      else{
-        res.status(200).send({
-          payload:{
-            data : searchedRecords,
-            message :"Records Returned Successfull"
-          }
-        })
-      }
-      
-    } catch (err) {
-      console.log(err, "error")
-      res.status(500).send({
-        success: false,
-        payload: {
-          message: err.message,
-        },
-      });
-    }
-  }
-
+  
 
   async searchRecord(req, res) {
     try {
@@ -144,9 +112,9 @@ class Base {
         $options: "i",
       };
       
-      const searchedRecords = await this.model.getAll({ name: queryObject });
+      const searchedRecords = await this.model.getAll({$or: [{ name: queryObject }, {}]});
       req.body.records = searchedRecords;
-
+    
       if (req.query.pagination==="true"){
         return this.getPaginatedResult(req, res);
       }
@@ -171,11 +139,12 @@ class Base {
   }
 
   async getPaginatedResult(req, res) {
+   
     try {
       const recordList =
         req.body.records || (await this.model.getAll());
       const page = parseInt(req.query.page) || 1;
-      const pageSize = 5;
+      const pageSize = 2;
       const pager = await pagination.paginate(
         recordList.length,
         page,
@@ -185,6 +154,7 @@ class Base {
         pager.startIndex,
         pager.endIndex + 1
       );
+      
       return res.status(200).send({
         success: true,
         payload: {

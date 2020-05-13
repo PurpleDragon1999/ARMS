@@ -41,7 +41,7 @@ module.exports = (app) => {
     controller.interview.index(req, res)
   );
   app.get("/api/interviewSearch", (req, res) =>
-    controller.interview.searchInterviewRecord(req, res)
+    controller.interview.searchRecord(req, res)
   );
 
   //Routes for Job Description

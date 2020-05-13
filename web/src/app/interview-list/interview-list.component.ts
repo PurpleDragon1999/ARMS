@@ -24,9 +24,9 @@ export class InterviewListComponent implements OnInit {
     this.searchInterview({ page: 1, character: '' });
   }
   searchInterview(event: IModelForPagination) {
-    this.interviewService.searchInterview(event.page, event.character).subscribe((res) => {
-      this.interviews = res.payload.data;
-      this.columns = ["noOfRounds", "date","jdObjectId.jdId","jdObjectId.jdTitle"];
+      this.interviewService.searchInterview(event.page, event.character).subscribe((res) => {
+      this.interviews = res.payload.data.dataList;
+      this.columns = ["noOfRounds", "date"];
       this.pager = res.payload.data.pager;
     });
   }

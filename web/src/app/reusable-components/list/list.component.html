@@ -1,8 +1,7 @@
 <div class="col-lg-12 stretch-card desktopView">
   <div class="card">
     <div class="card-body">
-
-      <!-- <div>{{data|json}}</div> -->
+  
       <div class="itemsDiv">
         <div class="search-field  d-md-block ">
           <form class="d-flex align-items-center h-100" action="#">
@@ -35,6 +34,7 @@
         </thead>
         <tbody>
           <div>
+          
             <small class="p-2" *ngIf="data.length==0"> No Match Found</small>
           </div>
           <tr *ngFor="let entry of data">
