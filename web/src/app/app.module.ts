@@ -99,6 +99,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
       multi: true,
     },
   ],
+  exports: [ListComponent],
   entryComponents: [EmployeeFormComponent, ModalComponent, EmployeeUploadComponent],
   bootstrap: [AppComponent],
 })

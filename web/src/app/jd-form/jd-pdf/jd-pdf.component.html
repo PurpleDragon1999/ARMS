@@ -10,17 +10,17 @@
       <img src={{imageUrl}} class="image" alt="cyg">
    </div>
    <button  class="pull-right btn btn-primary"style="float:right"(click)="convertToPDF()">Download</button>
-  <div class="card"style=" height:240px;" >
+  <div class="card"style=" height:240px;">
    <div class="card-body">
       <div class="heading-holder">
         <i class="fa fa-suitcase"></i>
         <h5 class="card-title">Job Description</h5>
       </div>
         <h6 class="card-subtitle mb-2 text-muted">Job Title:</h6>
-     <p class="card-text">{{jdObject?.jdTitle}}</p>
+        <p class="card-text">{{jdObject?.jdTitle}}</p>
     <div class="date-holder">
      <i class="fa fa-calendar"></i><h5 class="date-label">Opening Date</h5><p class="date">{{jdObject?.openingDate|date}}</p>
-   </div>
+    </div>
      <div class="date-holder">
       <i class="fa fa-calendar"></i><h5 class="date-label">Closing Date</h5><p class="date">{{jdObject?.closingDate|date}}</p>
      </div>
@@ -32,7 +32,7 @@
      <div class="heading-holder">
       <h5 class="card-subtitle mb-2 text-muted">Responsibilities and Duties</h5>
      </div>
-      <div>
+     <div>
         <p>{{jdObject?.jobProfileDescription}}</p>
       </div>
       <div class="heading-holder">
@@ -47,7 +47,6 @@
             <p class="make-bold">Skills Required:&nbsp;&nbsp;&nbsp;&nbsp;</p>
             <p>{{jdObject?.skills}}</p>
           </div>
-          
         </div>
         <div class="heading-holder">
           <h5 class="card-subtitle mb-2 text-muted">Other Details about job</h5>
@@ -65,19 +64,17 @@
               <p class="make-bold">Cost To Company:&nbsp;&nbsp;&nbsp;&nbsp;</p>
               <p>{{jdObject?.salary}}</p>
             </div>
-                      
-          </div>
+         </div>
+    </div>
   </div>
-</div>
 
-<footer class="page-footer font-small">
+  <footer class="page-footer font-small">
 
   <!-- Copyright -->
   <div class="footer-copyright  py-3 bottom">Copyright © 2020
     <a href="www.cygrp.com"target="blank">CyberGroup</a> All rights reserved
   </div>
   <!-- Copyright -->
-
-</footer>
+  </footer>
 <!-- Footer -->
 </div>

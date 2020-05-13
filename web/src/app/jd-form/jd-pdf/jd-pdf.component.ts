@@ -87,13 +87,15 @@ export class JdPdfComponent implements OnInit {
        canvas.getContext('2d');
        let imgData = canvas.toDataURL("image/png",1.0);
        let pdf = new jsPDF('p', 'pt', 'a4');
-       pdf.addImage(imgData, 'PNG', top_left_margin, top_left_margin+20, canvas_image_width*0.79, canvas_image_height*0.90);
+       pdf.addImage(imgData, 'PNG', top_left_margin, top_left_margin, canvas_image_width*0.79,
+                    canvas_image_height*0.90);
      
        for (let i = 1; i <= totalPDFPages; i++) {
           pdf.addPage('a4', 'p');
           pdf.setPage(i+1);
           pdf.text("cyg", 400,1200 );
-          pdf.addImage(imgData, 'PNG',top_left_margin, -(PDF_Height * i) + (top_left_margin * 4)  ,canvas_image_width*0.79, canvas_image_height*0.90);
+          pdf.addImage(imgData, 'PNG',top_left_margin, -(PDF_Height * i) + (top_left_margin * 4)  ,
+                       canvas_image_width*0.79, canvas_image_height*0.90);
         }
          pdf.save("jobdescription"+this.jdObject.jdId+'.pdf');
       });
