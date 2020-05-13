@@ -20,6 +20,9 @@ export class EmployeeComponent implements OnInit {
   columns: Array<String> = [];
   pager: IPager;
 
+  // @Output()
+  // emitPaginatedResult: EventEmitter<IModelForPagination> = new EventEmitter<IModelForPagination>();
+
   constructor(
     private employeeService: EmployeeService,
     private modalService: NgbModal
@@ -79,6 +82,7 @@ export class EmployeeComponent implements OnInit {
       this.employees = res.payload.data.dataList;
       this.columns = ["name", "email", "employeeId", "designation", "role"];
       this.pager = res.payload.data.pager;
+
     });
   }
 

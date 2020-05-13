@@ -1,3 +1,4 @@
+import { HrInterviewAssessementComponent } from './hr-interview-assessement/hr-interview-assessement.component';
 
 //import { CreateInterviewComponent } from './create-interview/create-interview.component';
 
@@ -17,6 +18,7 @@ import { RoleGuardService } from './utilities/role-guard.service';
 import { JdModalComponent } from './jd-modal/jd-modal.component';
 
 const routes: Routes = [
+  {path : "assessment", component : HrInterviewAssessementComponent},
   { path: "", redirectTo: 'login', pathMatch: 'full'},
   { path: "login", component: LoginComponent },
   {

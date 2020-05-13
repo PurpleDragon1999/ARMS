@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Component, EventEmitter, Input, Output, OnInit } from "@angular/core";
 import { IModelForPagination } from 'src/app/models/modelPagination.interface';
 
 
@@ -7,7 +7,7 @@ import { IModelForPagination } from 'src/app/models/modelPagination.interface';
   templateUrl: "./list.component.html",
   styleUrls: ["./list.component.scss"],
 })
-export class ListComponent {
+export class ListComponent  {
   @Input()
   title: string = '';
 
