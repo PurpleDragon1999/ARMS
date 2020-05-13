@@ -46,8 +46,8 @@ module.exports = (app) => {
   app.get("/api/jobDescription", (req, res) =>
     controller.jobDescription.index(req, res)
   );
-  app.get("/api/jobDescription/:id", (req, res) =>controller.jobDescription.get(req, res));
-  app.put("/api/jobDescription/:id", (req, res) =>controller.jobDescription.modify(req, res));
+  app.get("/api/jobDescription/:id", (req, res) => controller.jobDescription.get(req, res));
+  app.put("/api/jobDescription/:id", (req, res) => controller.jobDescription.modify(req, res));
   app.delete("/api/jobDescription/:id", (req, res) =>
     controller.jobDescription.remove(req, res)
   );
@@ -58,17 +58,21 @@ module.exports = (app) => {
   );
 
   app.get("/api/candidateSearch", (req, res) =>
-    controller.candidate.searchRecord(req, res)
+    controller.candidate.getAll(req, res)
   );
 
-  app.get("/api/candidate/:id", (req,res)=> controller.candidate.get(req,res));
-  app.put("/api/candidate/:id", (req,res)=> controller.candidate.modify(req, res))
+  app.get("/api/candidate/:id", (req, res) => controller.candidate.get(req, res));
+  app.put("/api/candidate/:id", (req, res) => controller.candidate.modify(req, res))
   app.post("/api/candidate", fileUpload, (req, res) =>
     controller.candidate.save(req,res)
   );
 
-  app.post("/api/checkvalidemployee", (req, res) => 
+  app.post("/api/checkvalidemployee", (req, res) =>
     controller.login.checkValidEmployee(req, res)
+  );
+  // app.post('/api/candidate',upload.single('file'), (req,res)=> controller.candidate.uploadDetails(req,res));
+  app.post("/api/candidate", fileUpload, (req, res) =>
+    controller.candidate.save(req, res)
   );
   
   //login route
