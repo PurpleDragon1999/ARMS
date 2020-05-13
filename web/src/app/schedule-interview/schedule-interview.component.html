@@ -1,12 +1,12 @@
 <div class="card">
     <div class="card-body">
-        <h4 class="card-title">Schedule Interview</h4>
+        <h2>Schedule Interview</h2>
 
         <form class="forms-sample" [formGroup]="scheduleForm" novalidate>
             <div class="form-group mt-3">
                 <label class="col-sm-3 col-form-label"><b>Date of Inteview</b></label>
                 <div class="col-sm-9">
-                    <input type="date" class="form-control" formControlName="interviewDate" #interviewDate placeholder="Enter Interview Date" [ngClass]="{ 'is-invalid': submitted && formControls.interviewDate.errors }" min="{{currentDate}}"/>
+                    <input type="date" class="form-control" formControlName="interviewDate" #interviewDate placeholder="DD/MM/YYYY" onfocus="(this.type='date')" onblur="(this.type='text')" [ngClass]="{ 'is-invalid': submitted && formControls.interviewDate.errors }" min="{{currentDate}}"/>
                     <div *ngIf="submitted && formControls.interviewDate.errors" class="invalid-feedback">
                         <div *ngIf="formControls.interviewDate.errors.required"><i class="mdi mdi-alert-outline"></i> Date is required</div>
                     </div>

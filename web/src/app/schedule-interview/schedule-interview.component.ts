@@ -62,6 +62,9 @@ export class ScheduleInterviewComponent implements OnInit {
       };
       return;  
     }
+    else{
+      console.log("Inside Else");
+    }
   }
 
   changeActive(panelNo: number){
