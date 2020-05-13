@@ -8,5 +8,6 @@ export interface ICandidate {
     selection: string;
     appliedFor: string;
     status : string;
-    flag : number
+    flag : number,
+    cv: string;
   }

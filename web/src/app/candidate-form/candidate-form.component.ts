@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { IResponse } from 'src/app/models/response.interface';
-import { AppServicesService } from 'src/app/services/app-services.service';
 import { ICandidate } from './../models/candidate.interface';
+import { AppServicesService } from "../services/app-services.service";
 import { Component, OnInit } from "@angular/core";
 import { FileItem, FileUploader, ParsedResponseHeaders } from "ng2-file-upload";
 import { NgbModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
@@ -17,17 +17,17 @@ const URL = 'http://localhost:3000/api/candidate'
 })
 export class CandidateFormComponent implements OnInit {
 
-  constructor(private modalService : NgbModal,
-              private router: Router,
-              private service: AppServicesService
-              ) { }
+  constructor(private modalService: NgbModal,
+    private router: Router,
+    private service: AppServicesService
+  ) { }
 
   public uploader: FileUploader = new FileUploader({
     url: URL,
     itemAlias: "file",
     allowedMimeType: ["application/msword",
-                      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-                      "application/pdf"]
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "application/pdf"]
 
   });
 
@@ -48,25 +48,22 @@ export class CandidateFormComponent implements OnInit {
       modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
         modalRef.close();
       });
-      
-     
+
+
     }
 
     this.uploader.onErrorItem = (item: FileItem, response: string, status: number, headers: ParsedResponseHeaders) => {
     let data = JSON.parse(response);
     const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
 
-    modalRef.componentInstance.shouldConfirm = false;
 
-    modalRef.componentInstance.success = data.success;
-    modalRef.componentInstance.message = data.payload.message;
 
-    modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
-      modalRef.close();
-    });
-  
+      modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+        modalRef.close();
+      });
+
     }
-    
+
     this.load()
   }
 
@@ -78,7 +75,7 @@ export class CandidateFormComponent implements OnInit {
     if (
       candidateObj.name &&
       candidateObj.email &&
-      candidateObj.aadhar&&
+      candidateObj.aadhar &&
       candidateObj.file &&
       candidateObj.skills
     ) {
@@ -103,13 +100,13 @@ export class CandidateFormComponent implements OnInit {
 
     
   }
-  
-  load(){
+
+  load() {
     this.type = this.router.url.split("/")[1];
-    if(this.router.url.split("/")[1]=="progressTracker"){
+    if (this.router.url.split("/")[1] == "progressTracker") {
       let candidateId = this.router.url.split("/")[2];
       this.service.getCandidate(candidateId).subscribe(
-        (res: IResponse) =>{
+        (res: IResponse) => {
           this.model = res.payload.data;
           this.model.appliedForPosition = this.model.appliedFor.jdTitle
           this.model.appliedForJdId = this.model.appliedFor.jdId

@@ -14,9 +14,12 @@ only screen and (max-width: 1220px),
 .mdi-pencil, .mdi-delete{
     color: #212529;
     font-size: large;
+    padding-left: 0em;
+    padding-right: 0.3em;
+
 }
 
-.mdi-pencil:hover, .mdi-delete:hover{
+.mdi-pencil:hover, .mdi-delete:hover, .fa:hover{
     color: rgb(182, 109, 255);
 }
 
@@ -31,7 +34,6 @@ button{
 
 .stretch-card, .smallCard{
     background-color: #f2edf3;
-    // padding: 4em;
 }
 
 .mobileView{
@@ -113,10 +115,6 @@ a {
 }
 
 ngb-accordion ::ng-deep .card-header{
-    // padding: 1em;
-    // -webkit-box-shadow: 6px 4px 5px 6px #ccc;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
-    //     -moz-box-shadow:    3px 3px 5px 6px #ccc;  /* Firefox 3.5 - 3.6 */
-    //     box-shadow:         3px 3px 5px 6px #ccc;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
         background-color: white;
 }
 
@@ -145,4 +143,9 @@ th{
 .noMatch, .paginationDiv{
     display: flex;
     justify-content: center;
+ }
+
+ td, th{
+     padding-right: 0em;
+     padding-left: 0em;
  }
