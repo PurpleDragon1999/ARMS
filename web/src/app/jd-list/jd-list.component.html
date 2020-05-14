@@ -50,6 +50,11 @@
                   (click)="jdUpdateModal(job.jdId)"
                   ></i>
                 </a>
+                <a  class="w3-bar-item w3-button">
+                  <i class="mdi mdi-send float-right"
+                  (click)="sendBulkEmail(job.jdId)"
+                  ></i>
+                </a>
               </div>
             </div>
             <!--large screens-->
@@ -58,7 +63,7 @@
               (click)="deleteJd(job._id)"
             ></i>
             <i *ngIf="datecheck(job.closingDate)==0"
-            class="mdi mdi-send float-right"
+            class="mdi mdi-send float-right d-none d-lg-block"
             (click)="sendBulkEmail(job.jdId)"
           ></i>
             <i

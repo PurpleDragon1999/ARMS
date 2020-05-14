@@ -47,15 +47,6 @@ export class JdListComponent implements OnInit {
     modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
       modalRef.close();
     });
-    // // modalRef.componentInstance.handle.subscribe((receivedEntry) => {
-    // //   console.log(receivedEntry);
-    // //   })
-    // modalRef.result.then((result) => {
-    //   if (result) {
-    //   console.log(result);
-    //   }
-    //   });
-
   }
 
   deleteJd(jobObjId: string) {
