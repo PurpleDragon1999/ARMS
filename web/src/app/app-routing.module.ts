@@ -87,8 +87,8 @@ const routes: Routes = [
     ],
   },
   {
-    path: 'progressTracker', children: [
-      { path: ':candidateId', component: ProgressTrackerComponent }
+    path: 'progressTracker/:candidateId', component: ProgressTrackerComponent, children: [
+      { path: 'applied', component: CandidateFormComponent}
     ],
   },
 
