@@ -1,10 +1,23 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <div class="main-panel">
   <div class="page-header">
-    <h3 class="page-title">Job Listing</h3>
-    <button class="add btn btn-gradient-light font-weight-bold float-right" id="addbtn" routerLink="/admin/job-desc/new">
-      Add<i class="mdi mdi-file-plus"></i>
-    </button>
+    <h3 >Job Listing</h3>
+    <button class="float-right btn btn-outline-primary btn-fw" id="addbtn" routerLink="/admin/job-desc/new">Add <i class="mdi mdi-file-plus"></i> </button>
+  </div>
+  <div class="search-field d-md-block">
+    <form class="h-100" action="#">
+      <div class="input-group w-25">
+        <div class="input-group-prepend bg-transparent card">
+          <i class="input-group-text border-0 mdi mdi-magnify"></i>
+        </div>
+        <input #searchInput (input)="searchJd(searchInput.value)" type="text"
+          class="form-control " placeholder="Search " />
+      </div>
+    </form>
+  </div>
+
+  <div class="noMatch">
+    <p class="p-2" *ngIf="jobsList?.length==0"> No Match Found</p>
   </div>
 
   <div class="row">
@@ -71,9 +84,22 @@
   </div>
 </div>
 
-
-
-
+  <div class="paginationDiv">
+    <ul *ngIf="pager?.pages && pager?.pages?.length" class="pagination">
+      <li [ngClass]="{ disabled: pager.currentPage == 1 }" class="page-item previous-item">
+        <a (click)="searchJd(searchInput.value, pager.currentPage - 1)" class="page-link"><i
+            class="mdi mdi-chevron-left arrow"></i></a>
+      </li>
+      <li *ngFor="let page of pager.pages" [ngClass]="{ active: pager.currentPage === page }"
+        class="page-item number-item">
+        <a (click)="searchJd(searchInput.value, page)" class="page-link">{{ page }}</a>
+      </li>
+      <li [ngClass]="{ disabled: pager.currentPage == pager.totalPages }" class="page-item next-item">
+        <a (click)="searchJd(searchInput.value, pager.currentPage + 1)" class="page-link"><i
+            class="mdi mdi-chevron-right arrow"></i></a>
+      </li>
+    </ul>
+  </div>
 
 
 

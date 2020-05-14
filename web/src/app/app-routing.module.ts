@@ -1,3 +1,4 @@
+import { HrInterviewAssessementComponent } from './hr-interview-assessement/hr-interview-assessement.component';
 import { InterviewListComponent } from './interview-list/interview-list.component';
 //import { CreateInterviewComponent } from './create-interview/create-interview.component';
 import { ScheduleInterviewComponent } from './schedule-interview/schedule-interview.component';
@@ -18,7 +19,8 @@ import { JdModalComponent } from './jd-modal/jd-modal.component';
 import { CandidateComponent } from './candidate/candidate.component';
 
 const routes: Routes = [
-  { path: "", redirectTo: 'login', pathMatch: 'full' },
+  {path : "assessment", component : HrInterviewAssessementComponent},
+  { path: "", redirectTo: 'login', pathMatch: 'full'},
   { path: "login", component: LoginComponent },
   { path: "404", component: ErrorPageComponent},
   {

@@ -54,6 +54,8 @@ module.exports = (app) => {
   app.delete("/api/jobDescription/:id", (req, res) =>
     controller.jobDescription.remove(req, res)
   );
+  app.get("/api/jobDescriptionSearch", (req, res) =>controller.jobDescription.searchRecord(req, res));
+
 
   //Routes for Candidate
   app.get("/api/candidates", (req, res) =>

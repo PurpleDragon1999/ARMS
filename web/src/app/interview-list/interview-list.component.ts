@@ -5,7 +5,7 @@ import { InterviewService } from '../services/interview.service';
 import { NgbModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
 import { ModalComponent } from "src/app/reusable-components/modal/modal.component";
 import { HttpErrorResponse } from '@angular/common/http';
-import { IPager } from '../models/pager.interface';
+
 @Component({
   selector: 'app-interview-list',
   templateUrl: './interview-list.component.html',
@@ -13,7 +13,7 @@ import { IPager } from '../models/pager.interface';
 })
 export class InterviewListComponent implements OnInit {
   columns: Array<String> = [];
-  pager: IPager;
+  pager: any;
   interviews:any=[];
   constructor(
    private interviewService:InterviewService,

@@ -39,7 +39,7 @@ module.exports={
     },
     status:{
        type: String,
-       default : "notApplied",
+       default : "applied",
        enum:["notApplied", "applied", "interviewScheduled","round1", "round2", "round3", "round4", "round5"]
     },
     flag:{

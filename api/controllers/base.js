@@ -112,9 +112,8 @@ class Base {
         $options: "i",
       };
       
-      const searchedRecords = await this.model.getAll({$or: [{ name: queryObject }, {}]});
+      const searchedRecords = await this.model.getAll({ $or : [{name: queryObject}, {jdTitle: queryObject}, {}] });
       req.body.records = searchedRecords;
-    
       if (req.query.pagination==="true"){
         return this.getPaginatedResult(req, res);
       }
@@ -144,7 +143,7 @@ class Base {
       const recordList =
         req.body.records || (await this.model.getAll());
       const page = parseInt(req.query.page) || 1;
-      const pageSize = 2;
+      const pageSize = 6;
       const pager = await pagination.paginate(
         recordList.length,
         page,

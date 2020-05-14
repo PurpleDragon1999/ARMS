@@ -7,23 +7,23 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ModalComponent } from 'src/app/reusable-components/modal/modal.component';
 import { HttpErrorResponse } from '@angular/common/http';
 
+
 @Component({
   selector: 'app-jd-list',
   templateUrl: './jd-list.component.html',
   styleUrls: ['./jd-list.component.scss'],
 })
 
-
-
 export class JdListComponent implements OnInit {
   jobsList: any;
   jdObject: any;
+  pager : any
 
   constructor(private _service: AppServicesService, private router: Router,
               private modalService: NgbModal) {}
 
   ngOnInit() {
-    this.loadJds();
+    this.searchJd();
   }
 
   loadJds() {
@@ -59,7 +59,6 @@ export class JdListComponent implements OnInit {
           modalRef.componentInstance.message = error.error.payload.message;
     });
   });
-
   }
 
 
@@ -75,5 +74,13 @@ export class JdListComponent implements OnInit {
     } else { return 0; }
   }
 
+  searchJd(character?: string, page?: number){
+    console.log(character, "character")
+    this._service.search(character, page).subscribe(res=>{
+      this.jobsList = res.payload.data.dataList
+      this.pager = res.payload.data.pager
+      console.log(this.jobsList, "listttttt!!!!!!")
+    })
+  }
  
 }

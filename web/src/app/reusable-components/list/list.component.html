@@ -38,9 +38,7 @@
           </tr>
         </thead>
         <tbody>
-          <div>
-            <small class="p-2" *ngIf="data?.length==0"> No Match Found</small>
-          </div>
+          
           <tr *ngFor="let entry of data">
             <td *ngFor="let columnName of columns;">
               <ng-container [ngSwitch]="true">
@@ -57,10 +55,12 @@
           </tr>
         </tbody>
       </table>
-
+      <div class="noMatch">
+        <p class="p-2" *ngIf="data?.length==0"> No Match Found</p>
+      </div>
     </div>
 
-    <div class="card paginationDiv">
+    <div class="card paginationDiv" *ngIf="pager?.totalPages > 1 ">
       <div>
         <ul *ngIf="pager?.pages && pager?.pages?.length" class="pagination">
 
@@ -83,8 +83,6 @@
 </div>
 
 <div class="row mobileView">
-  <!-- <div class="col-lg-6 grid-margin stretch-card">
-    <div class="card"> -->
   <div class="card-body justify-content-between">
     <div ngbDropdown class="addEmployee addMobile">
       <button class="btn btn-outline-primary" id="addOption" ngbDropdownToggle><i class="mdi mdi-account-plus"></i>Add
@@ -108,8 +106,8 @@
         </div>
       </form>
     </div>
-    <div>
-      <small class="p-2" *ngIf="data?.length==0"> No Match Found</small>
+    <div class="noMatch">
+      <p class="p-2" *ngIf="data?.length==0"> No Match Found</p>
     </div>
     <div class="mt-4 userCard" *ngFor="let entry of data">
       <ngb-accordion [closeOthers]="true" activeIds="collapse-1">
@@ -152,7 +150,7 @@
     </div>
   </div>
  
-  <div class="paginationDiv">
+  <div class="paginationDiv" *ngIf="pager?.totalPages > 1">
 
     <ul *ngIf="pager?.pages && pager?.pages?.length" class="pagination">
       <li [ngClass]="{ disabled: pager.currentPage == 1 }" class="page-item previous-item">
@@ -170,6 +168,5 @@
     </ul>
 
   </div>
-  <!-- </div>
-  </div> -->
+ 
 </div>

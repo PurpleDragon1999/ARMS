@@ -8,8 +8,7 @@ import { EmployeeUploadComponent } from '../../components/employee-upload/employ
 import { EmployeeService } from "../../employee.service";
 import { IEmployee } from "../../models/employee.interface";
 import { IModelForPagination } from 'src/app/models/modelPagination.interface';
-import {IPager} from 'src/app/models/pager.interface';
-import{IDataModal} from 'src/app/models/dataModal.interface';
+
 @Component({
   selector: "app-employee",
   styleUrls: ["employee.component.scss"],
@@ -18,7 +17,7 @@ import{IDataModal} from 'src/app/models/dataModal.interface';
 export class EmployeeComponent implements OnInit {
   employees: IEmployee[] = [];
   columns: Array<String> = [];
-  pager: IPager;
+  pager: any;
   constructor(
     private employeeService: EmployeeService,
     private modalService: NgbModal
@@ -28,7 +27,7 @@ export class EmployeeComponent implements OnInit {
     this.searchEmployee({ page: 1, character: '' });
   }
 
-  openModal(dataModal: IDataModal) {
+  openModal(dataModal: any) {
     var copyDataModal = JSON.parse(JSON.stringify(dataModal));
 
     if (dataModal.formType === "update" && dataModal.data.employeeId) {
@@ -75,9 +74,10 @@ export class EmployeeComponent implements OnInit {
 
   searchEmployee(event: IModelForPagination) {
     this.employeeService.searchEmployee(event.page, event.character).subscribe((res) => {
-      this.employees = res.payload.data;
+      this.employees = res.payload.data.dataList;
       this.columns = ["name", "email", "employeeId", "designation", "role"];
       this.pager = res.payload.data.pager;
+
     });
   }
 

@@ -16,7 +16,8 @@ class Candidate {
   }
 
   async get(criteria={}, columns={}) {
-    return this.Model.findOne(criteria);
+    let fields = "jdTitle jdId"
+    return this.Model.findOne(criteria).populate('appliedFor', fields);
   }
 
   async modify(id, data) {

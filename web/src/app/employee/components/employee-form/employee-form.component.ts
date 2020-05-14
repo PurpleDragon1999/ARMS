@@ -5,7 +5,7 @@ import { IResponse } from "src/app/models/response.interface";
 import { ModalComponent } from "../../../reusable-components/modal/modal.component";
 import { EmployeeService } from "../../employee.service";
 import { IEmployee } from "../../models/employee.interface";
-import{IDataModal} from 'src/app/models/dataModal.interface';
+
 @Component({
   selector: "app-employee-form",
   styleUrls: ["employee-form.component.scss"],
@@ -19,7 +19,7 @@ export class EmployeeFormComponent {
   data: IEmployee;
 
   @Input()
-  formType: IDataModal["formType"];
+  formType: any["formType"];
 
   constructor(
     private employeeService: EmployeeService,

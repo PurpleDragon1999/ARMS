@@ -5,7 +5,7 @@ import { IModelForPagination } from '../models/modelPagination.interface';
 import { ICandidate } from '../models/candidate.interface';
 import { HttpErrorResponse } from '@angular/common/http';
 import { BufferToPdf } from '../utils/bufferToPdf';
-import {IPager} from'../models/pager.interface'
+
 @Component({
     selector: 'app-candidate',
     templateUrl: 'candidate.component.html',
@@ -15,7 +15,7 @@ import {IPager} from'../models/pager.interface'
 export class CandidateComponent implements OnInit {
     candidates: ICandidate[];
     columns: Array<string>;
-    pager: IPager;
+    pager: any;
 
     constructor(private candidateService: CandidateService, private bufferToPdf: BufferToPdf) { }
 

@@ -1,13 +1,12 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Component, EventEmitter, Input, Output, OnInit } from "@angular/core";
 import { IModelForPagination } from 'src/app/models/modelPagination.interface';
-import {IPager} from 'src/app/models/pager.interface';
-import {IDataModal} from 'src/app/models/dataModal.interface';
+
 @Component({
   selector: "app-list",
   templateUrl: "./list.component.html",
   styleUrls: ["./list.component.scss"],
 })
-export class ListComponent {
+export class ListComponent  {
   @Input()
   title: string = '';
 
@@ -18,13 +17,13 @@ export class ListComponent {
   data: Array<any> = [];
 
   @Output()
-  emitOpenModal: EventEmitter<IDataModal> = new EventEmitter<IDataModal>();
+  emitOpenModal: EventEmitter<any> = new EventEmitter<any>();
 
   @Input()
-  pager: IPager;
+  pager: any;
 
   @Output()
-  emitDelete: EventEmitter<IDataModal["data"]> = new EventEmitter<IDataModal["data"]>();
+  emitDelete: EventEmitter<any["data"]> = new EventEmitter<any["data"]>();
 
   @Output()
   emitOpenFileUploadModal: EventEmitter<void> = new EventEmitter<void>();
@@ -35,7 +34,7 @@ export class ListComponent {
   @Output()
   emitDownloadPdf: EventEmitter<string> = new EventEmitter<string>();
 
-  openModal(formType: IDataModal["formType"], data: IDataModal["data"]) {
+  openModal(formType: any["formType"], data: any["data"]) {
     this.emitOpenModal.emit({ formType, data });
   }
 
