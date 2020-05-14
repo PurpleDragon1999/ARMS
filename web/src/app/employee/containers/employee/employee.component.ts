@@ -8,7 +8,8 @@ import { EmployeeUploadComponent } from '../../components/employee-upload/employ
 import { EmployeeService } from "../../employee.service";
 import { IEmployee } from "../../models/employee.interface";
 import { IModelForPagination } from 'src/app/models/modelPagination.interface';
-
+import {IPager} from 'src/app/models/pager.interface';
+import{IDataModal} from 'src/app/models/dataModal.interface';
 @Component({
   selector: "app-employee",
   styleUrls: ["employee.component.scss"],
@@ -18,7 +19,6 @@ export class EmployeeComponent implements OnInit {
   employees: IEmployee[] = [];
   columns: Array<String> = [];
   pager: IPager;
-
   constructor(
     private employeeService: EmployeeService,
     private modalService: NgbModal
@@ -75,7 +75,7 @@ export class EmployeeComponent implements OnInit {
 
   searchEmployee(event: IModelForPagination) {
     this.employeeService.searchEmployee(event.page, event.character).subscribe((res) => {
-      this.employees = res.payload.data.dataList;
+      this.employees = res.payload.data;
       this.columns = ["name", "email", "employeeId", "designation", "role"];
       this.pager = res.payload.data.pager;
     });

@@ -84,7 +84,6 @@ class JobDescription extends Base {
         req.body
       );
       const filename = "Updated".concat(req.body.jdId);
-      const pdf = pdfGenerator(req.body, filename);
       return res.status(200).send({
         success: true,
         payload: {

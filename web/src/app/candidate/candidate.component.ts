@@ -5,7 +5,7 @@ import { IModelForPagination } from '../models/modelPagination.interface';
 import { ICandidate } from '../models/candidate.interface';
 import { HttpErrorResponse } from '@angular/common/http';
 import { BufferToPdf } from '../utils/bufferToPdf';
-
+import {IPager} from'../models/pager.interface'
 @Component({
     selector: 'app-candidate',
     templateUrl: 'candidate.component.html',
