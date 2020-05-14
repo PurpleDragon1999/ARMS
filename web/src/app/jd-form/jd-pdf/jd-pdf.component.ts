@@ -1,10 +1,11 @@
-import { Component, OnInit, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, AfterViewChecked} from '@angular/core';
 import html2canvas from 'html2canvas';  
 import * as jsPDF from 'jspdf'
 import { Router, ActivatedRoute, Params } from "@angular/router";
 import { switchMap } from "rxjs/operators";
 import {jobDescription} from '../../models/jobDescription.interface'
 import{AppServicesService} from '../../services/app-services.service'
+import { stringify } from 'querystring';
 
 @Component({
   selector: 'app-jd-pdf',
@@ -14,7 +15,7 @@ import{AppServicesService} from '../../services/app-services.service'
 export class JdPdfComponent implements OnInit {
   jdObject:jobDescription;
   obj:any;
-
+ 
   constructor(
     private route: ActivatedRoute,
     private router:Router,
@@ -42,34 +43,68 @@ export class JdPdfComponent implements OnInit {
     });
   }
 
-  public convertToPDF()
-  {
-  var data = document.getElementById('content');
-  html2canvas(data).then(canvas => {
-  // Few necessary setting options
-  var imgWidth = 208;
-  var pageHeight = 295;
-  var imgHeight = canvas.height * imgWidth / canvas.width;
-  var heightLeft = imgHeight;
+  //Earlier  function achieved which sets all the content into one page and increases page height
+  // public convertToPDF()
+  // {
+    
+  // var data = document.getElementById('content');
+  // html2canvas(data).then(canvas => {
    
-  const contentDataURL = canvas.toDataURL('image/png')
-  let pdf = new jsPDF('p', 'mm', 'a4'); // A4 size page of PDF
-  var position = 0;
-  pdf.addImage(contentDataURL, 'PNG', 0, position, 1.6*imgWidth, 1.6*imgHeight)
-  // pdf.setTextColor(255,0,0);
-  // pdf.setFillColor(135, 124,45,0);
-  // pdf.setFontType("italic");
-  // pdf.text("Copyright © 2020  CyberGroup . All rights reserved.", 10, 280)
-   pdf.save("jobdescription"+this.jdObject.jdId+'.pdf'); // Generated PDF
-  });
-  setTimeout(() => {
-    this.navigation();
-  }, 5000); 
+  // // Few necessary setting options
+  // var width = canvas.width;
+  // var height = canvas.height;
+  // var millimeters = {width,height};
+  // millimeters.width = Math.floor(width * 0.50);
+  // millimeters.height = Math.floor(height*0.80);
+
+  // var imgData = canvas.toDataURL(
+  //     'image/png');
+  // var pdf = new jsPDF("p", "mm", "a4");
+  // pdf.deletePage(1);
+  // pdf.addPage([millimeters.width, millimeters.height]);
+  // pdf.addImage(imgData, 'PNG', 0, 0);
+  // pdf.save("jobdescription"+this.jdObject.jdId+'.pdf'); // Generated PDF
+ 
+  // });
+  // setTimeout(() => {
+  //   this.navigation();
+  // }, 5000); 
  
   
+  // }
+  //later achieved function which divides the content into pagers too but not able to set top margins
+  convertToPDF() {
+    var data = document.getElementById('content');
+    html2canvas(data, { allowTaint: true }).then(canvas => {
+       let HTML_Width = canvas.width;
+       let HTML_Height = canvas.height;
+       let top_left_margin = 15;
+       let PDF_Width = HTML_Width*0.45 + (top_left_margin * 2);
+       let PDF_Height = (PDF_Width * 1.6 ) + (top_left_margin * 2);
+       let canvas_image_width = HTML_Width;
+       let canvas_image_height = HTML_Height;
+       let totalPDFPages = Math.ceil(HTML_Height / PDF_Height) - 1;
+       canvas.getContext('2d');
+       let imgData = canvas.toDataURL("image/png",1.0);
+       let pdf = new jsPDF('p', 'pt', 'a4');
+       pdf.addImage(imgData, 'PNG', top_left_margin, top_left_margin, canvas_image_width*0.79,
+                    canvas_image_height*0.90);
+     
+       for (let i = 1; i <= totalPDFPages; i++) {
+          pdf.addPage('a4', 'p');
+          pdf.setPage(i+1);
+          pdf.text("cyg", 400,1200 );
+          pdf.addImage(imgData, 'PNG',top_left_margin, -(PDF_Height * i) + (top_left_margin * 4)  ,
+                       canvas_image_width*0.79, canvas_image_height*0.90);
+        }
+         pdf.save("jobdescription"+this.jdObject.jdId+'.pdf');
+      });
+   setTimeout(() => {
+      this.navigation();
+     }, 5000);
+ }
+  navigation()
+  {
+    this.router.navigate(["/admin/job-desc"]);
   }
-  navigation(){
-    this.router.navigate(["/hr/job-desc"]);
-  }
-
 }

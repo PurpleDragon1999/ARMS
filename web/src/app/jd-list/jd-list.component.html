@@ -1,9 +1,23 @@
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <div class="main-panel">
   <div class="page-header">
-    <h3 class="page-title">Job Listing</h3>
-    <button class="add btn btn-gradient-light font-weight-bold float-right" id="addbtn" routerLink="/admin/job-desc/new">
-      Add<i class="mdi mdi-file-plus"></i>
-    </button>
+    <h3 >Job Listing</h3>
+    <button class="float-right btn btn-outline-primary btn-fw" id="addbtn" routerLink="/admin/job-desc/new">Add <i class="mdi mdi-file-plus"></i> </button>
+  </div>
+  <div class="search-field d-md-block">
+    <form class="h-100" action="#">
+      <div class="input-group w-25">
+        <div class="input-group-prepend bg-transparent card">
+          <i class="input-group-text border-0 mdi mdi-magnify"></i>
+        </div>
+        <input #searchInput (input)="searchJd(searchInput.value)" type="text"
+          class="form-control " placeholder="Search " />
+      </div>
+    </form>
+  </div>
+
+  <div class="noMatch">
+    <p class="p-2" *ngIf="jobsList?.length==0"> No Match Found</p>
   </div>
 
   <div class="row">
@@ -12,26 +26,51 @@
         <div class="card-body">
           <h4 class="font-weight-normal mb-2">
             Job ID: {{ job.jdId }}
+            <!--mobile view three dot icon-->
+            <div class="w3-dropdown-hover d-lg-none float-right">
+              <button class="w3-button">
+                <span class="more-dot"></span>
+                <span class="more-dot"></span>
+                <span class="more-dot"></span>
+              </button>
+              <div class="w3-dropdown-content w3-bar-block">
+                <a  class="w3-bar-item w3-button">  <i
+                  class="mdi mdi-delete float-right"
+                  (click)="deleteJd(job._id)"
+                ></i>
+                </a>
+                <a  class="w3-bar-item w3-button">
+                  <i
+                  class="mdi mdi-download float-right"
+                  (click)="downloadPdf(job.jdId)"
+                ></i>
+                </a>
+                <a  class="w3-bar-item w3-button">
+                  <i class="mdi mdi-pencil float-right"
+                  (click)="jdUpdateModal(job.jdId)"
+                  ></i>
+                </a>
+              </div>
+            </div>
+            <!--large screens-->
             <i
-              class="mdi mdi-delete float-right"
+              class="mdi mdi-delete float-right d-none d-lg-block"
               (click)="deleteJd(job._id)"
             ></i>
             <i
-              class="mdi mdi-download float-right"
+              class="mdi mdi-download float-right d-none d-lg-block"
               (click)="downloadPdf(job.jdId)"
             ></i>
-            <i class="mdi mdi-pencil float-right"
+            <i class="mdi mdi-pencil float-right d-none d-lg-block"
             (click)="jdUpdateModal(job.jdId)"
             ></i>
+          
           </h4>
-
-          <h3 class="mb-3">{{ job.jdTitle }}</h3>
-
-          <h6 class="font-weight-normal">
+           <h3 class="mb-3">{{ job.jdTitle }}</h3>
+           <h6 class="font-weight-normal">
             Opening Date : {{ job.openingDate | date }}
-          </h6>
-
-          <h6 class="font-weight-normal" [style.visibility]="job.closingDate ? 'visible' : 'hidden'">
+           </h6>
+            <h6 class="font-weight-normal" [style.visibility]="job.closingDate ? 'visible' : 'hidden'">
             Closing Date : {{ job.closingDate | date }}
           </h6>
 
@@ -45,6 +84,22 @@
   </div>
 </div>
 
+  <div class="paginationDiv">
+    <ul *ngIf="pager?.pages && pager?.pages?.length" class="pagination">
+      <li [ngClass]="{ disabled: pager.currentPage == 1 }" class="page-item previous-item">
+        <a (click)="searchJd(searchInput.value, pager.currentPage - 1)" class="page-link"><i
+            class="mdi mdi-chevron-left arrow"></i></a>
+      </li>
+      <li *ngFor="let page of pager.pages" [ngClass]="{ active: pager.currentPage === page }"
+        class="page-item number-item">
+        <a (click)="searchJd(searchInput.value, page)" class="page-link">{{ page }}</a>
+      </li>
+      <li [ngClass]="{ disabled: pager.currentPage == pager.totalPages }" class="page-item next-item">
+        <a (click)="searchJd(searchInput.value, pager.currentPage + 1)" class="page-link"><i
+            class="mdi mdi-chevron-right arrow"></i></a>
+      </li>
+    </ul>
+  </div>
 
 
 
@@ -61,81 +116,3 @@
 
 
 
-
-
-
-<div class="w3-content w3-margin-top" style="max-width:1400px; display: none;" id="content" #content>
-  <!-- The Grid -->
-  <div class="w3-row-padding">
-    <!-- Right Column -->
-
-    <button (click)="convertToPDF()" class="pull-right btn btn-primary">Download</button>
-    <div class="image">
-      <img src="" class="image" alt="cyg">
-    </div>
-    <div class="w3-container w3-card w3-white w3-margin-bottom">
-      <h2 class="w3-text-grey "><i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Job
-        Description</h2>
-      <div class="w3-container">
-        <h5 class="w3-opacity"><b>Job Title</b></h5>
-        <p>{{jdObject?.jdTitle}}</p>
-        <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>
-          <p class="w3-tag w3-teal w3-round">Opening Date</p><span class="date">{{jdObject?.openingDate|date}}</span>
-        </h6>
-        <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>
-          <p class="w3-tag w3-teal w3-round">Closing Date</p><span class="date">{{jdObject?.closingDate|date}}</span>
-        </h6>
-        <hr>
-      </div>
-      <div class="w3-container">
-        <h5 class="w3-opacity"><b>Responsibilities and Duties</b></h5>
-        <p>{{jdObject?.jobProfileDescription}}</p>
-        <hr>
-      </div>
-      <div class="w3-container">
-        <h5 class="w3-opacity"><b>Skills And Qualifications</b></h5>
-        <div class="display">
-          <label class="make-bold">Eligibilty Criteria:</label>
-          <p>{{jdObject?.eligibilityCriteria}}</p>
-        </div>
-        <div class="display">
-          <label class="make-bold">Skills Required:</label>
-          <p>{{jdObject?.skills}}</p>
-        </div>
-      </div>
-    </div>
-    <div class="w3-container w3-card w3-white">
-      <div class="w3-container">
-        <h5 class="w3-opacity"><b>Other Details About Job</b></h5>
-        <div class="display">
-          <label class="make-bold">Employment Type:</label>
-          <p>{{jdObject?.jobType}}</p>
-        </div>
-        <div class="display">
-          <label class="make-bold">Location:</label>
-          <p>{{jdObject?.location}}</p>
-        </div>
-        <div class="display">
-          <label class="make-bold">Cost To Company:</label>
-          <p>{{jdObject?.salary}}</p>
-        </div>
-        <!-- End Right Column -->
-      </div>
-      <!-- End Grid -->
-    </div>
-    <!-- End Page Container -->
-
-
-
-
-    <footer class="w3-container w3-teal w3-center w3-margin-top foot">
-      <div class="bottom">
-        <p></p>
-
-      </div>
-      <div class="d-sm-flex justify-content-center justify-content-sm-between">
-        <span class="text">Copyright © 2020 <a href="https://www.cygrp.com/" target="_blank">CyberGroup</a>. All rights
-          reserved.</span>
-
-      </div>
-    </footer>

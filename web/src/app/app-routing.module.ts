@@ -1,3 +1,6 @@
+import { HrInterviewAssessementComponent } from './hr-interview-assessement/hr-interview-assessement.component';
+import { InterviewListComponent } from './interview-list/interview-list.component';
+//import { CreateInterviewComponent } from './create-interview/create-interview.component';
 import { ScheduleInterviewComponent } from './schedule-interview/schedule-interview.component';
 import { CandidateFormComponent } from './candidate-form/candidate-form.component';
 import { ProgressTrackerComponent } from './progress-tracker/progress-tracker.component';
@@ -16,7 +19,8 @@ import { JdModalComponent } from './jd-modal/jd-modal.component';
 import { CandidateComponent } from './candidate/candidate.component';
 
 const routes: Routes = [
-  { path: "", redirectTo: 'login', pathMatch: 'full' },
+  {path : "assessment", component : HrInterviewAssessementComponent},
+  { path: "", redirectTo: 'login', pathMatch: 'full'},
   { path: "login", component: LoginComponent },
   { path: "404", component: ErrorPageComponent},
   {
@@ -44,7 +48,8 @@ const routes: Routes = [
 
       {
         path: "employee", component: EmployeeComponent
-      }
+      },
+      {path:'interviews',component:InterviewListComponent}
     ]
   },
   {
@@ -61,6 +66,8 @@ const routes: Routes = [
       {
         path: "job-desc/new", component: JdFormComponent
       },
+      {path:'interviews',component:InterviewListComponent},
+  
       {
         path: "interview/schedule", component: ScheduleInterviewComponent
       }
@@ -87,8 +94,8 @@ const routes: Routes = [
     ],
   },
   {
-    path: 'progressTracker', children: [
-      { path: ':candidateId', component: ProgressTrackerComponent }
+    path: 'progressTracker/:candidateId', component: ProgressTrackerComponent, children: [
+      { path: 'applied', component: CandidateFormComponent}
     ],
   },
 

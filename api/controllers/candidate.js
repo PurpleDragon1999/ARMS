@@ -14,6 +14,10 @@ async function validateCandidate(candidate) {
     throw new Error("This Aadhar number is already registered")
     return
   }
+  if(validator.isvalid(candidate.aadhar)){
+      throw new Error("This aadhar number is not valid");
+      return
+  }
 
   if (!candidate.cv) {
     throw new Error("CV is Required")
