@@ -1,0 +1,38 @@
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="exampleModalLabel"><b>Send Job Description</b></h4>
+      </div>
+      <div class="modal-body">
+       
+        <form [formGroup]="userEmails" (ngSubmit)="handleSubmit()">
+    
+          <div class="form-group">
+            <label>Email(s):</label>
+            <input [class.is-invalid]="inputEmail.invalid && inputEmail.touched" 
+            type="text" class="form-control"
+            formControlName="primaryEmail" 
+            placeholder="Enter comma separated email addresses"
+            spellcheck="false"
+            (ngModelChange)="extractEmailList($event)"
+            />
+      
+            <div *ngIf="(inputEmail.invalid && inputEmail.touched) || inputEmail.dirty">
+              <div *ngIf="inputEmail.errors?.required" class="text-danger">
+                <div><i class="mdi mdi-alert-outline"></i>Email is required</div></div>
+              <div *ngIf="inputEmail.errors?.pattern" class="text-danger">
+                <div><i class="mdi mdi-alert-outline"></i>Please enter comma separated list of valid email addresses without spaces in between.</div></div>
+            </div>
+      
+          </div>
+          <div class="d-flex flex-row-reverse">
+            <button type="submit"
+              class="btn btn-gradient-primary mr-2">Send</button>
+            <button class="btn btn-light" (click)="ModalClose()">Cancel</button>
+          </div>
+      
+        </form>
+
+      </div>
+    </div>
+  </div>

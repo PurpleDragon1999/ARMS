@@ -90,6 +90,6 @@ export class AppServicesService {
   }
 
   sendMails(mailingList): Observable<any> {
-    return this.http.post<any>(`${USER_DOMAIN}//api/jdEmail`, mailingList, { ...this.options, observe: 'response' });
+    return this.http.post<any>(`${USER_DOMAIN}/api/jdEmail`, mailingList, { ...this.options, observe: 'response' });
   }
 }

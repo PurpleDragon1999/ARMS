@@ -1,4 +1,4 @@
-import { BulkEmailModalComponent } from '../bulk-email-modal/bulk-email-modal.component';
+import { EmailListModalComponent } from './../email-list-modal/email-list-modal.component';
 import { IResponse } from 'src/app/models/response.interface';
 import { JdModalComponent } from '../jd-modal/jd-modal.component';
 import { Component, OnInit, EventEmitter, Output, Input} from '@angular/core';
@@ -41,7 +41,7 @@ export class JdListComponent implements OnInit {
   }
 
   sendBulkEmail(jobObjId) {
-    const modalRef: NgbModalRef = this.modalService.open(BulkEmailModalComponent);
+    const modalRef: NgbModalRef = this.modalService.open(EmailListModalComponent);
     modalRef.componentInstance.jdObjId = jobObjId;
     // modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
     //   modalRef.close();
@@ -54,16 +54,6 @@ export class JdListComponent implements OnInit {
       console.log(result);
       }
       });
-  }
-
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return  `with: ${reason}`;
-    }
   }
 
   deleteJd(jobObjId: string) {

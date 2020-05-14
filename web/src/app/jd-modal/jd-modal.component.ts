@@ -177,8 +177,7 @@ export class JdModalComponent implements OnInit {
         };
         return;
       }
-      
-  
+
   }
   deleteRow(index) {
     if (this.dynamicArray.length == 1) {
@@ -191,7 +190,5 @@ export class JdModalComponent implements OnInit {
   modalClose(rerender: boolean){
     this.closeModal.emit(rerender);
   }
- 
-  
-  
+
 }
