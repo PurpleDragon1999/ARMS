@@ -18,7 +18,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class JdListComponent implements OnInit {
   jobsList: any;
   jdObject: any;
-  @Input() jobObjId: any;
   pager: any;
 
   constructor(private _service: AppServicesService, private router: Router,
@@ -42,20 +41,21 @@ export class JdListComponent implements OnInit {
     });
   }
 
-  sendBulkEmail(jobObjId) {
+  sendBulkEmail(jobObjId: string) {
     const modalRef: NgbModalRef = this.modalService.open(EmailListModalComponent);
     modalRef.componentInstance.jdObjId = jobObjId;
-    // modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
-    //   modalRef.close();
-    // });
-    // modalRef.componentInstance.handle.subscribe((receivedEntry) => {
-    //   console.log(receivedEntry);
-    //   })
-    modalRef.result.then((result) => {
-      if (result) {
-      console.log(result);
-      }
-      });
+    modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+      modalRef.close();
+    });
+    // // modalRef.componentInstance.handle.subscribe((receivedEntry) => {
+    // //   console.log(receivedEntry);
+    // //   })
+    // modalRef.result.then((result) => {
+    //   if (result) {
+    //   console.log(result);
+    //   }
+    //   });
+
   }
 
   deleteJd(jobObjId: string) {

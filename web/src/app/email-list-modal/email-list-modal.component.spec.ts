@@ -2,6 +2,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EmailListModalComponent } from './email-list-modal.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 describe('EmailListModalComponent', () => {
   let component: EmailListModalComponent;
@@ -10,7 +12,9 @@ describe('EmailListModalComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ EmailListModalComponent ],
-      imports: [ReactiveFormsModule] // Also add it to 'imports' array
+      imports: [ReactiveFormsModule,
+                NgbModule,
+                HttpClientTestingModule]
     })
     .compileComponents();
   }));

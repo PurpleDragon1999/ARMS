@@ -28,7 +28,7 @@ export class AppServicesService {
   };
 
   options = {
-    headers: this.createHeader  
+    headers: this.createHeader
   }
 
   constructor(private http: HttpClient) { }
@@ -85,10 +85,14 @@ export class AppServicesService {
     return this.http.get<IResponse>(`${USER_DOMAIN}/api/candidate/${id}`, this.options)
   }
 
-  sendMails(mailingList): Observable<any> {
-    return this.http.post<any>(`${USER_DOMAIN}/api/jdEmail`, mailingList, { ...this.options, observe: 'response' });
+  sendMails(mailingList,jdId): Observable<any> {
+    let mailObj= {
+      jdId: jdId,
+      mailList: mailingList
+    }
+    return this.http.post<any>(`${USER_DOMAIN}/api/jdEmail`, mailObj, { ...this.options, observe: 'response' });
   }
-  
+
   search(character: string = "", page: number = 1): Observable<IResponse>{
     const params: HttpParams = new HttpParams().set('character', character).set("pagination", "true").set("page", page.toString());
     return this.http.get<IResponse>(`${USER_DOMAIN}/api/jobDescriptionSearch`, {...this.options, params})

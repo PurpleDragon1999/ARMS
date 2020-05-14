@@ -25,7 +25,7 @@ require("dotenv").config();
      html:output,
      attachments: [{
       filename: "jobdescription"+jdJson.jdId+".pdf",
-       path: 'C:/Users/deepanshu.balani/Downloads/'+"jobdescription"+jdJson.jdId+'.pdf',
+      path: 'C:/Users/kritika.sachdeva/Downloads/'+"jobdescription"+jdJson.jdId+'.pdf',
       contentType: 'application/pdf'
     }],
    }

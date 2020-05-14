@@ -1,6 +1,9 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { AppServicesService } from '../services/app-services.service';
+import { ModalComponent } from '../reusable-components/modal/modal.component';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-email-list-modal',
@@ -9,17 +12,23 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class EmailListModalComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _service: AppServicesService,
+              private modalService: NgbModal) { }
+
+  @Input()
+  jdObjId: string;
+
+  @Output()
+  closeModal: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  emailList: string [];
+  submitted = false;
 
   get inputEmail() {
     return this.userEmails.get('primaryEmail');
     }
 
-  emailList: string [];
-  submitted = false;
-
-
-    userEmails = new FormGroup({
+  userEmails = new FormGroup({
     primaryEmail: new FormControl('', [
       Validators.required,
       Validators.pattern(/^([\w+-.%]+@[\w-.]+\.[A-Za-z]{2,4},?)+$/)])
@@ -30,29 +39,42 @@ export class EmailListModalComponent implements OnInit {
   }
 
     handleSubmit() {
-      this.submitted = true;
+      this._service.sendMails(this.emailList, this.jdObjId).subscribe((res: any) => {
+      const modalRef = this.modalService.open(ModalComponent);
+      modalRef.componentInstance.shouldConfirm = false;
+      modalRef.componentInstance.success = res.success;
+      modalRef.componentInstance.message = res.body.payload.message;
+      modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+        modalRef.close();
+      });
 
-    // stop here if form is invalid
-      if (this.userEmails.invalid) {
-      return;
+    },
+    (error: HttpErrorResponse) => {
+      const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
+      modalRef.componentInstance.shouldConfirm = false;
+      modalRef.componentInstance.success = error.error.success;
+      modalRef.componentInstance.message = error.error.payload.message;
+      modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+        modalRef.close();
+      });
     }
-
-      alert("SUCCESS!! :-)\n\n" + JSON.stringify(this.userEmails.value));
-    }
-
-    ModalClose() {
-      alert("Modal close here");
-    }
+    );
+  }
 
   // extracting list of emails
   extractEmailList(e) {
-   this.emailList = [];
-   const emails = e.split(',');
-   emails.forEach(email => {
+    this.emailList = [];
+    const emails = e.split(',');
+    emails.forEach(email => {
         if (email && email.length > 0) {
           this.emailList.push(email);
-      }
+        }
     });
   }
+
+  modalClose(rerender: boolean){
+    this.closeModal.emit(rerender);
+  }
+
 
 }

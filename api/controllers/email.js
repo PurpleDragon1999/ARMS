@@ -16,8 +16,7 @@ class Email {
             font-weight:bolder;
           }
       </style>
-       <p>Hello</p><b>Deepanshu Balani,
-       </b>
+       <p>Hello</p>
   
        <p>Thank You for expressing your Interest for the position of ${jdObject.jdId}(${jdObject.jdTitle})
          ,You can read more about us on our company career page </p>
