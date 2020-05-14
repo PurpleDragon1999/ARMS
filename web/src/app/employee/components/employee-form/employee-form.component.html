@@ -59,7 +59,7 @@
           <label for="employeeId"><b>Employee Id</b></label>
 
           <div class="input-group col-xs-12">
-            <span class="input-group-append btn btn-gradient-primary">
+            <span class="input-group-append btn btn-gradient-danger">
               CYG
             </span>
             <input [readOnly]="formType !== 'create'" name="employeeId" [ngModel]="employee?.employeeId" type="number"
@@ -73,7 +73,7 @@
         <div class="d-flex flex-row-reverse">
           <button class="btn btn-light" (click)="modalClose(false)"><b>Cancel</b></button>
           <button type="submit" [disabled]="form.invalid" *ngIf="formType !== 'read'"
-            class="btn btn-gradient-primary mr-2"><b>{{ formType | titlecase }}</b></button>
+            class="btn btn-gradient-danger"><b>{{ formType | titlecase }}</b></button>
         </div>
       </form>
     </div>

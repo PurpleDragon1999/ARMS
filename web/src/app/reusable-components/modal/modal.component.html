@@ -5,7 +5,7 @@
         <h2 *ngIf="success === true"><b>Successful!</b></h2>
         <h2 *ngIf="success === false"><b>Error alert!</b></h2>
         <p>{{ message }}.</p>
-        <button class=" btn btn-outline-primary btn-fw" (click)="modalClose(false)">OK</button>
+        <button class=" btn btn-gradient-danger btn-fw" (click)="modalClose(false)">OK</button>
       </div>
 
       <div *ngIf="shouldConfirm" class="modal-body text-center">
@@ -13,8 +13,8 @@
           <h2><b>Are you sure?</b></h2>
           <p>This process cannot be undone.</p>
           <span>
-            <button class=" btn btn-outline-primary btn-fw mr-2" (click)="modalClose(false)">Cancel</button>
-            <button class=" btn btn-outline-primary btn-fw" (click)="performRequest()">OK</button>
+            <button class=" btn btn-gradient-danger btn-fw mr-2" (click)="modalClose(false)">Cancel</button>
+            <button class=" btn btn-gradient-danger btn-fw" (click)="performRequest()">OK</button>
           </span>
         </div>
 
