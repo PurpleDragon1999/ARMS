@@ -112,9 +112,8 @@ class Base {
       };
       
       const searchedRecords = await this.model.getAll({ name: queryObject });
-      req.body.records = searchedRecords;
-
-      if (req.query.pagination==="true"){
+      req.body.searchedRecords = searchedRecords;
+      if(req.query.pagination === "true"){
         return this.getPaginatedResult(req, res);
       }
       else{
