@@ -16,7 +16,7 @@
               CYGJID
             </span>
             <input
-                type="number"
+                type="text"
                 name="jdId"
                 [ngModel]="interview.jdId"
                 class="form-control"
@@ -51,18 +51,17 @@
             </div>
             <div class="form-group">
               <label for="date">Date</label>
-              <div class="input-group">
-                <input class="form-control" placeholder="yyyy-mm-dd"
-                       name="date" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker"
-                       [placement]="placement" [positionTarget]="buttonEl"  [ngModel]="interview.date" id="date"
-                       #date="ngModel"
-                       [ngClass]="{ 'is-invalid': date.dirty && date.invalid }" required>
-                <div class="input-group-append">
-                  <button #buttonEl class="btn btn-gradient-danger calendar"  (click)="d.toggle()" type="button">
-                    <i class="mdi mdi-calendar"></i>
-                  </button>
-                </div>
-              </div>
+              <input
+                name="date"
+                type="date"
+                [(ngModel)]="interview.date"
+                class="form-control"
+                id="date"
+                #date="ngModel"
+                [ngClass]="{ 'is-invalid': date.dirty && date.invalid }"
+                placeholder="Date"
+                required
+              >
               <div *ngIf="date.dirty && date.errors?.required" class="invalid-feedback">
                 <div><i class="mdi mdi-alert-outline"></i>Date is required</div>
               </div>
@@ -130,7 +129,7 @@
             </div>
             <button
             class="btn btn-gradient-danger mr-2"
-            routerLink=""
+            routerLink="/admin/interview/schedule"
             >
             Go To Select Panel
             <i class= "mdi mdi-chevron-double-right">
