@@ -1,3 +1,4 @@
+import { JdFormComponent } from './../jd-form/jd-form.component';
 import { Component, OnInit, EventEmitter, Output, Input } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AppServicesService } from "../services/app-services.service";
@@ -81,6 +82,7 @@ export class JdModalComponent implements OnInit {
   }
 
   sendUpdateRequest(jdFormObject: any) {
+    jdFormObject.jdId = `CYGJID${jdFormObject.jdId}`;
     this._service.updateJobInfo(jdFormObject, this.jobArray._id).subscribe(
       (res: any) => {
         const modalRef = this.modalService.open(ModalComponent);
@@ -90,9 +92,9 @@ export class JdModalComponent implements OnInit {
         modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
           modalRef.close();
         });
+       this.modalClose();
       },
       (error: HttpErrorResponse) => {
-        console.log(error, "response");
         const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
         modalRef.componentInstance.shouldConfirm = false;
         modalRef.componentInstance.success = error.error.success;
@@ -106,23 +108,7 @@ export class JdModalComponent implements OnInit {
     );
   }
 
-  jdFormData() {
-    this.jdFormObject = {
-      jdId: `CYGJID${this.jdId.nativeElement.value}`,
-      jdTitle: this.jdTitle.nativeElement.value,
-      openingDate: this.openingDate.nativeElement.value,
-      closingDate: this.closingDate.nativeElement.value,
-      jobProfileDescription: this.jobProfileDescription.nativeElement.value,
-      skills: this.skills.nativeElement.value,
-      jobType: this.jobType.nativeElement.value,
-      eligibilityCriteria: this.eligibilityCriteria.nativeElement.value,
-      location: this.location.nativeElement.value,
-      salary: this.salary.nativeElement.value,
-      vacancies: this.vacancies.nativeElement.value,
-    };
-  }
-
-  modalClose(rerender: boolean) {
-    this.closeModal.emit(rerender);
+  modalClose() {
+    this.closeModal.emit();
   }
 }
