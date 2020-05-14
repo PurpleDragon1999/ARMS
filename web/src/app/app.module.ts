@@ -28,6 +28,7 @@ import { ScheduleInterviewComponent } from './schedule-interview/schedule-interv
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { JdModalComponent } from './jd-modal/jd-modal.component';
 import { ProgressTrackerComponent } from './progress-tracker/progress-tracker.component';
+import { InterviewListComponent } from './interview-list/interview-list.component';
 import { CandidateComponent } from './candidate/candidate.component';
 
 
@@ -60,6 +61,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     ErrorPageComponent,
     JdModalComponent,
     ProgressTrackerComponent,
+    InterviewListComponent,
     CandidateComponent
   ],
   imports: [
@@ -101,6 +103,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
       multi: true,
     },
   ],
+  exports: [ListComponent],
   entryComponents: [EmployeeFormComponent, ModalComponent, EmployeeUploadComponent],
   bootstrap: [AppComponent],
 })

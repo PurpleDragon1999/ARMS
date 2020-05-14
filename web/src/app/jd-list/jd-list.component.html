@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <div class="main-panel">
   <div class="page-header">
     <h3 >Job Listing</h3>
@@ -25,26 +26,51 @@
         <div class="card-body">
           <h4 class="font-weight-normal mb-2">
             Job ID: {{ job.jdId }}
+            <!--mobile view three dot icon-->
+            <div class="w3-dropdown-hover d-lg-none float-right">
+              <button class="w3-button">
+                <span class="more-dot"></span>
+                <span class="more-dot"></span>
+                <span class="more-dot"></span>
+              </button>
+              <div class="w3-dropdown-content w3-bar-block">
+                <a  class="w3-bar-item w3-button">  <i
+                  class="mdi mdi-delete float-right"
+                  (click)="deleteJd(job._id)"
+                ></i>
+                </a>
+                <a  class="w3-bar-item w3-button">
+                  <i
+                  class="mdi mdi-download float-right"
+                  (click)="downloadPdf(job.jdId)"
+                ></i>
+                </a>
+                <a  class="w3-bar-item w3-button">
+                  <i class="mdi mdi-pencil float-right"
+                  (click)="jdUpdateModal(job.jdId)"
+                  ></i>
+                </a>
+              </div>
+            </div>
+            <!--large screens-->
             <i
-              class="mdi mdi-delete float-right"
+              class="mdi mdi-delete float-right d-none d-lg-block"
               (click)="deleteJd(job._id)"
             ></i>
             <i
-              class="mdi mdi-download float-right"
+              class="mdi mdi-download float-right d-none d-lg-block"
               (click)="downloadPdf(job.jdId)"
             ></i>
-            <i class="mdi mdi-pencil float-right"
+            <i class="mdi mdi-pencil float-right d-none d-lg-block"
             (click)="jdUpdateModal(job.jdId)"
             ></i>
+          
           </h4>
-
-          <h3 class="mb-3">{{ job.jdTitle }}</h3>
-
-          <h6 class="font-weight-normal">
+           <h3 class="mb-3">{{ job.jdTitle }}</h3>
+           <h6 class="font-weight-normal">
             Opening Date : {{ job.openingDate | date }}
-          </h6>
-
-          <h6 class="font-weight-normal" [style.visibility]="job.closingDate ? 'visible' : 'hidden'">
+           </h6>
+            <h6 class="font-weight-normal" [style.visibility]="job.closingDate ? 'visible' : 'hidden'">
             Closing Date : {{ job.closingDate | date }}
           </h6>
 

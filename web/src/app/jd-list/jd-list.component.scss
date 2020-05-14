@@ -62,3 +62,20 @@ i:hover{
  .mdi-pencil:hover, .mdi-delete:hover, .mdi-download:hover{
     color: rgb(182, 109, 255);
 }
+.more-dot {
+    background-color: black;
+    margin: 0 auto;
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-right: 2px;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+.w3-button{
+ background-color:white;
+ cursor: pointer;
+}
+.w3-dropdown-content{
+    min-width:40px;
+}

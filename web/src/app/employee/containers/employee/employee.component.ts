@@ -9,7 +9,6 @@ import { EmployeeService } from "../../employee.service";
 import { IEmployee } from "../../models/employee.interface";
 import { IModelForPagination } from 'src/app/models/modelPagination.interface';
 
-
 @Component({
   selector: "app-employee",
   styleUrls: ["employee.component.scss"],
@@ -18,11 +17,7 @@ import { IModelForPagination } from 'src/app/models/modelPagination.interface';
 export class EmployeeComponent implements OnInit {
   employees: IEmployee[] = [];
   columns: Array<String> = [];
-  pager: IPager;
-
-  // @Output()
-  // emitPaginatedResult: EventEmitter<IModelForPagination> = new EventEmitter<IModelForPagination>();
-
+  pager: any;
   constructor(
     private employeeService: EmployeeService,
     private modalService: NgbModal
@@ -32,7 +27,7 @@ export class EmployeeComponent implements OnInit {
     this.searchEmployee({ page: 1, character: '' });
   }
 
-  openModal(dataModal: IDataModal) {
+  openModal(dataModal: any) {
     var copyDataModal = JSON.parse(JSON.stringify(dataModal));
 
     if (dataModal.formType === "update" && dataModal.data.employeeId) {

@@ -19,7 +19,7 @@ export class EmployeeFormComponent {
   data: IEmployee;
 
   @Input()
-  formType: IDataModal["formType"];
+  formType: any["formType"];
 
   constructor(
     private employeeService: EmployeeService,

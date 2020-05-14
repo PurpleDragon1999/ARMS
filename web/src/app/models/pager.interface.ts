@@ -1,4 +1,4 @@
-interface IPager {
+export interface IPager {
     totalItems: number;
     currentPage: number;
     pageSize: number;

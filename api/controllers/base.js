@@ -103,6 +103,7 @@ class Base {
       });
     }
   }
+  
 
   async searchRecord(req, res) {
     try {
@@ -120,7 +121,7 @@ class Base {
         res.status(200).send({
           payload:{
             data : searchedRecords,
-            message :"Records Returned Successfull"
+            message :"Records Returned Successfully"
           }
         })
       }
@@ -137,11 +138,12 @@ class Base {
   }
 
   async getPaginatedResult(req, res) {
+   
     try {
       const recordList =
         req.body.records || (await this.model.getAll());
       const page = parseInt(req.query.page) || 1;
-      const pageSize = 5;
+      const pageSize = 6;
       const pager = await pagination.paginate(
         recordList.length,
         page,
@@ -151,6 +153,7 @@ class Base {
         pager.startIndex,
         pager.endIndex + 1
       );
+      
       return res.status(200).send({
         success: true,
         payload: {
