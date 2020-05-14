@@ -26,18 +26,16 @@ export class AppNavBarComponent implements OnInit {
 
   ngOnInit() {
     let data = this._service.tokenDecoder();
-    console.log(data);
     this.name = data.name;
     this.role = data.role;
     if (this.role == this._env.SUPERUSER) {
       this.adminBool = true;
     }
     else if (this.role == this._env.ADMIN) {
-      console.log("Inside");
       this.hrBool = true;
     }
   }
-  
+
   toggle() {
     if (this.classNameForToggle == "active")
       this.classNameForToggle = "";

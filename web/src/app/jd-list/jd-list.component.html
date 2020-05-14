@@ -24,8 +24,8 @@
     <div class="col-md-6 grid-margin stretch-card" *ngFor="let job of jobsList">
       <div class="card">
         <div class="card-body">
-          <h4 class="font-weight-normal mb-2">
-            Job ID: {{ job.jdId }}
+          <h5 class="font-weight-normal mb-2"><b>
+            Job ID: </b> {{ job.jdId }} 
             <!--mobile view three dot icon-->
             <div class="w3-dropdown-hover d-lg-none float-right">
               <button class="w3-button">
@@ -69,13 +69,13 @@
             (click)="jdUpdateModal(job.jdId)"
             ></i>
           
-          </h4>
-           <h3 class="mb-3">{{ job.jdTitle }}</h3>
+          </h5>
+           <h4 class="mb-3">{{ job.jdTitle }}</h4>
            <h6 class="font-weight-normal">
-            Opening Date : {{ job.openingDate | date }}
+           <b> Opening Date : </b>{{ job.openingDate | date }}
            </h6>
             <h6 class="font-weight-normal" [style.visibility]="job.closingDate ? 'visible' : 'hidden'">
-            Closing Date : {{ job.closingDate | date }}
+            <b> Date : </b>{{ job.closingDate | date }}
 
             <label *ngIf="datecheck(job.closingDate)==1"
             class="badge badge-gradient-danger float-right mb-0">CLOSED</label>
