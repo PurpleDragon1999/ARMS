@@ -81,10 +81,8 @@ export class JdModalComponent implements OnInit {
   }
 
   sendUpdateRequest(jdFormObject: any) {
-    console.log(jdFormObject);
     this._service.updateJobInfo(jdFormObject, this.jobArray._id).subscribe(
       (res: any) => {
-        console.log(res, "response");
         const modalRef = this.modalService.open(ModalComponent);
         modalRef.componentInstance.shouldConfirm = false;
         modalRef.componentInstance.success = res.success;

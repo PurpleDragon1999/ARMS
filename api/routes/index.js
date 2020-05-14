@@ -40,6 +40,9 @@ module.exports = (app) => {
   app.get("/api/interview", (req, res) =>
     controller.interview.index(req, res)
   );
+  app.get("/api/interviewSearch", (req, res) =>
+    controller.interview.searchRecord(req, res)
+  );
 
   //Routes for Job Description
   app.post("/api/jobDescription", controller.jobDescription.save);
@@ -51,6 +54,8 @@ module.exports = (app) => {
   app.delete("/api/jobDescription/:id", (req, res) =>
     controller.jobDescription.remove(req, res)
   );
+  app.get("/api/jobDescriptionSearch", (req, res) =>controller.jobDescription.searchRecord(req, res));
+
 
   //Routes for Candidate
   app.get("/api/candidates", (req, res) =>

@@ -1,11 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { FileSelectDirective } from 'ng2-file-upload';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-
 import { CandidateFormComponent } from './candidate-form.component';
 
 describe('CandidateFormComponent', () => {
@@ -25,6 +23,7 @@ describe('CandidateFormComponent', () => {
     fixture = TestBed.createComponent(CandidateFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+  
   });
 
   it('should create', () => {

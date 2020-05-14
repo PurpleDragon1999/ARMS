@@ -25,8 +25,10 @@ import { AppNavBarComponent } from './nav-bar/nav-bar.component';
 import { ListComponent } from './reusable-components/list/list.component';
 import { ModalComponent } from './reusable-components/modal/modal.component';
 import { ScheduleInterviewComponent } from './schedule-interview/schedule-interview.component';
+import { ErrorPageComponent } from './error-page/error-page.component';
 import { JdModalComponent } from './jd-modal/jd-modal.component';
 import { ProgressTrackerComponent } from './progress-tracker/progress-tracker.component';
+import { InterviewListComponent } from './interview-list/interview-list.component';
 import { CandidateComponent } from './candidate/candidate.component';
 
 
@@ -56,8 +58,10 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     ScheduleInterviewComponent,
     AppComponent,
     JdPdfComponent,
+    ErrorPageComponent,
     JdModalComponent,
     ProgressTrackerComponent,
+    InterviewListComponent,
     CandidateComponent
   ],
   imports: [
@@ -99,6 +103,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
       multi: true,
     },
   ],
+  exports: [ListComponent],
   entryComponents: [EmployeeFormComponent, ModalComponent, EmployeeUploadComponent],
   bootstrap: [AppComponent],
 })

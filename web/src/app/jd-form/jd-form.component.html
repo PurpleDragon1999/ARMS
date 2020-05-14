@@ -13,7 +13,7 @@
            <div class="form-group">
              <label for="jobId"><b>Job ID</b></label>
              <div class="input-group col-xs-12">
-               <span class="input-group-append btn btn-gradient-primary span">
+               <span class="input-group-append btn btn-gradient-danger span">
                  CYGJID
                </span>
                <input type="text" class="form-control" id="jobId" #jobId placeholder="Job ID" maxlength="4"
@@ -133,13 +133,12 @@
            </div>
            <br>
            <div class="d-flex flex-row-reverse">
-           <button type="submit" class="btn btn-gradient-primary mr-2" (click)="jdFormData() " ><b>ADD</b></button>
+           <button type="submit" class="btn btn-gradient-danger mr-2" (click)="jdFormData() " ><b>ADD</b></button>
            <button type="button" class="btn btn-light" routerLink="/admin/job-desc">
            <b> Cancel</b>
           </button>
           </div>
          </form>
-      
        </div>
      </div>
    </div>

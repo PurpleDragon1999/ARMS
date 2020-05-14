@@ -1,6 +1,6 @@
 type FormType = "create" | "update" | "read"; 
 
-interface IDataModal {
+export interface IDataModal {
   formType: FormType,
   data: any; 
 }

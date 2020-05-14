@@ -5,6 +5,11 @@
     padding-left: 4rem;
 }
 
+.header{
+    margin: auto;
+    font-size: x-large;
+}
+
 .main-panel{
     width: inherit !important;
 }
@@ -13,12 +18,39 @@
     z-index: 10;
 }
 
-
-
 .progress-step.is-complete .progress-marker::before{
-    background-color: green;
+    background-color: rgb(248, 164, 8);
+}
+
+.progress-step.is-complete .progress-marker::after{
+    background: rgb(248, 164, 8);
 }
 
 .progress-step.is-active .progress-marker::before{
-    background-color: greenyellow;
+    border: 2px solid rgb(248, 164, 8) ;
+    background-color: white;
+    color: black;
 }
+
+li:focus{
+    outline: none;
+}
+
+.progress-step:hover  .progress-marker::before{
+    background-color: rgb(248, 164, 8);
+}
+
+.mdi{
+    font-size: 1.1rem
+}
+
+
+.progress-text{
+    font-weight: bold;
+    font-size: larger;
+}
+
+a{
+    cursor: pointer;
+}
+
