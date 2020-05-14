@@ -84,7 +84,7 @@ export class AppServicesService {
   }
 
   search(character: string = "", page : number = 1):Observable<IResponse>{
-    console.log("shivvvvvaaannniiiijiii",character)
+    
     const params: HttpParams = new HttpParams().set('character', character).set("pagination", "true").set("page", page.toString());
     return this.http.get<IResponse>(`${USER_DOMAIN}/api/jobDescriptionSearch`, {...this.options, params})
   }
