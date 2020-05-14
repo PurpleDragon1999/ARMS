@@ -75,9 +75,11 @@ export class JdListComponent implements OnInit {
   }
 
   searchJd(character?: string, page?: number){
+    console.log(character, "character")
     this._service.search(character, page).subscribe(res=>{
       this.jobsList = res.payload.data.dataList
       this.pager = res.payload.data.pager
+      console.log(this.jobsList, "listttttt!!!!!!")
     })
   }
  

@@ -100,8 +100,8 @@ export class CandidateFormComponent implements OnInit {
 
     
   }
-
-  load() {
+  
+  load(){   
     this.type = this.router.url.split("/")[1];
     if (this.router.url.split("/")[1] == "progressTracker") {
       let candidateId = this.router.url.split("/")[2];
