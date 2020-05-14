@@ -67,7 +67,7 @@ export class JdModalComponent implements OnInit {
     });
   }
   setJobData() {
-    this.jdId = this.jobArray.jdId;
+    this.jdId = this.jobArray.jdId.slice(6, 11);
     this.jdTitle = this.jobArray.jdTitle;
     this.openingDate = this.jobArray.openingDate.slice(0, 10);
     this.closingDate = this.jobArray.closingDate.slice(0, 10);

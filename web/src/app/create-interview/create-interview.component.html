@@ -11,8 +11,12 @@
           >
           <div class="form-group top">
             <label for="jdId">Jd Id</label>
+            <div class="input-group col-xs-12">
+            <span class="input-group-append btn btn-gradient-primary span">
+              CYGJID
+            </span>
             <input
-                type="text"
+                type="number"
                 name="jdId"
                 [ngModel]="interview.jdId"
                 class="form-control"
@@ -20,12 +24,14 @@
                 id="jdId"
                 [ngClass]="{ 'is-invalid': jdId.dirty && jdId.invalid }"
                 placeholder="Jd ID"
+                maxlength="4"
                 required
               >
-            <div *ngIf="jd.dirty && jdId.errors?.required" class="invalid-feedback">
+            <div *ngIf="jdId.dirty && jdId.errors?.required"  class="invalid-feedback">
               <div><i class="mdi mdi-alert-outline"></i>JD Id is required</div>
             </div>
           </div>
+        </div>
             <div class="form-group">
               <label for="jd">Job Title</label>
               <input
@@ -121,13 +127,16 @@
                 <div><i class="mdi mdi-alert-outline"></i>Venue is required</div>
               </div>
             </div>
-            <div class="d-flex flex-row-reverse">
             <button
             class="btn btn-gradient-primary mr-2"
             routerLink=""
             >
-            Schedule Interview
+            Go To Select Panel
+            <i class= "mdi mdi-chevron-double-right">
+            </i>
             </button>
+            <div class="d-flex flex-row-reverse">
+            
             <button
             type="submit"
             class="btn btn-gradient-primary mr-2"

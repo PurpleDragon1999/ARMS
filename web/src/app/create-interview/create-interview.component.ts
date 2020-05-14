@@ -54,8 +54,7 @@ export class CreateInterviewComponent implements OnInit {
         modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
           modalRef.close();
         });
-        // this.data = error.error.payload.data;
-        // this.router.navigate(["/jd-pdf", this.data.jdId]);
+        
       }
     );
   }

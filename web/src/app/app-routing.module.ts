@@ -1,5 +1,5 @@
 
-//import { CreateInterviewComponent } from './create-interview/create-interview.component';
+import { CreateInterviewComponent } from './create-interview/create-interview.component';
 import { CandidateFormComponent } from './candidate-form/candidate-form.component';
 import { ProgressTrackerComponent } from './progress-tracker/progress-tracker.component';
 import { NgModule } from '@angular/core';
@@ -18,9 +18,7 @@ import { CandidateComponent } from './candidate/candidate.component';
 const routes: Routes = [
   
   { path: "", redirectTo: 'login', pathMatch: 'full'},
-  // {
-  //   path: "create", component: CreateInterviewComponent 
-  // },
+ 
 
   { path: "login", component: LoginComponent },
   {
@@ -56,7 +54,9 @@ const routes: Routes = [
       {
         path: "", redirectTo: "home", pathMatch: "full"
       },
-     
+      {
+        path: "create-interview", component: CreateInterviewComponent 
+      },
     
       {
         path: "home", component: HrComponent
