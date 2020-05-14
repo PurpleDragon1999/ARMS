@@ -78,10 +78,15 @@
 .banner-text p {
   color: #fff;
 }
+
 .logo-design{
-    width: 200px;  
-    margin-left:5%; 
+    width: 200px;   
 }
+
+.logo-design:hover{
+  cursor: pointer;
+}
+
 @media only screen and (max-width: 600px) {
     .login-block {
       padding: 0;
