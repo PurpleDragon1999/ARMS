@@ -29,7 +29,12 @@
       <table class="table table-striped">
         <thead>
           <tr>
-            <th *ngFor="let columnName of columns; let i = index">{{columnName | uppercase}}</th>
+            <th *ngFor="let columnName of columns; let i = index">
+              <div *ngIf="columnName=='jdObjectId';else otherCol">
+               JOB TITLE          
+            </div>
+              <ng-template #otherCol>{{columnName | uppercase}}</ng-template>
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -38,10 +43,11 @@
           </div>
           <tr *ngFor="let entry of data">
             <td *ngFor="let columnName of columns;">
-              <div *ngIf="columnName=='date';else otherCol">{{ entry[columnName]|date}}</div>
-              <ng-template #otherCol>
-                {{ entry[columnName]}}
-              </ng-template>
+              <ng-container [ngSwitch]="true">
+                <div *ngSwitchCase="columnName=='date'">{{entry[columnName]|date}}</div>
+                <div *ngSwitchCase="columnName=='jdObjectId'">{{entry[columnName].jdTitle}}</div>
+                <div *ngSwitchDefault>{{entry[columnName]}}</div>
+              </ng-container>
             </td>
             <td *ngIf="title === 'candidate'"><button type="button" (click)="showPdf(entry['pdf'])"><i
                   class="fa fa-file-pdf-o"></i>Show CV</button>
