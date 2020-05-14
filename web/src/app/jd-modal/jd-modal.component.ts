@@ -123,13 +123,11 @@ export class JdModalComponent implements OnInit {
       this.salary = this.jobArray.salary;
       this.vacancies = this.jobArray.vacancies;
     }
-    
 
-    sendUpdateRequest(jdFormObject: any ) {
-      console.log(jdFormObject)
-      this._service.updateJobInfo(jdFormObject, this.jobArray._id).subscribe((res: any) => {
-        console.log(res, 'response');
-        const modalRef = this.modalService.open(ModalComponent);
+
+    sendUpdateRequest(jdFormObject: any ){
+        this._service.updateJobInfo(jdFormObject,this.jobArray._id).subscribe((res: any) => {
+        const modalRef= this.modalService.open(ModalComponent);
         modalRef.componentInstance.shouldConfirm = false;
         modalRef.componentInstance.success = res.success;
         modalRef.componentInstance.message = res.payload.message;
@@ -139,7 +137,6 @@ export class JdModalComponent implements OnInit {
       
       },
       (error: HttpErrorResponse) => {
-        console.log(error, 'response');
         const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
         modalRef.componentInstance.shouldConfirm = false;
         modalRef.componentInstance.success = error.error.success;

@@ -15,7 +15,7 @@ import { BufferToPdf } from '../utils/bufferToPdf';
 export class CandidateComponent implements OnInit {
     candidates: ICandidate[];
     columns: Array<string>;
-    pager: IPager;
+    pager: any;
 
     constructor(private candidateService: CandidateService, private bufferToPdf: BufferToPdf) { }
 

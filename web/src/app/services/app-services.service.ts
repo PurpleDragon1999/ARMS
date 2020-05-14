@@ -42,18 +42,14 @@ export class AppServicesService {
     const helper = new JwtHelperService();
     return helper.decodeToken(this.getToken());
   }
-  // headers: HttpHeaders = new HttpHeaders({
-  //   'Content-Type': 'application/json',
-  //   // Authorization: localStorage.getItem("Authorization")
-  // });
-  // httpOptions = {
-  //   headers: this.headers
-  // };
-
-  //return helper.decodeToken(localStorage.getItem(''));
-
 
   // For making HTTP calls
+  
+  //For searching with pagination
+  searchCandidates(name: string, pagination: string){
+    return this.http.get<any>(`${USER_DOMAIN}/api/employeeSearch/?character=${name}&pagination=${pagination}`, this.options);
+  }
+  
   createInterview(user: ICreate): Observable<HttpResponse<any>>{
     return this.http.post<any>(`${USER_DOMAIN}/api/interview`, user, { ...this.options, observe: 'response' });
   }
@@ -77,7 +73,7 @@ export class AppServicesService {
     return this.http.post<any>(`${USER_DOMAIN}/api/jobDescription`, jdFormObject, { ...this.options, observe: 'response' });
   }
 
-  getJdData(jdId): Observable<any>{
+  getJdData(jdId):Observable<any>{
     return this.http.get<any>(`${USER_DOMAIN}/api/jobDescription/${jdId}`)
   }
 
@@ -92,4 +88,9 @@ export class AppServicesService {
   sendMails(mailingList): Observable<any> {
     return this.http.post<any>(`${USER_DOMAIN}/api/jdEmail`, mailingList, { ...this.options, observe: 'response' });
   }
+  search(character: string = "", page: number = 1): Observable<IResponse>{
+    const params: HttpParams = new HttpParams().set('character', character).set("pagination", "true").set("page", page.toString());
+    return this.http.get<IResponse>(`${USER_DOMAIN}/api/jobDescriptionSearch`, {...this.options, params})
+  }
+
 }
