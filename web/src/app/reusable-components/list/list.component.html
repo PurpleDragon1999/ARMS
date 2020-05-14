@@ -60,7 +60,7 @@
       </div>
     </div>
 
-    <div class="card paginationDiv">
+    <div class="card paginationDiv" *ngIf="pager?.totalPages > 1 ">
       <div>
         <ul *ngIf="pager?.pages && pager?.pages?.length" class="pagination">
 
@@ -150,7 +150,7 @@
     </div>
   </div>
  
-  <div class="paginationDiv">
+  <div class="paginationDiv" *ngIf="pager?.totalPages > 1">
 
     <ul *ngIf="pager?.pages && pager?.pages?.length" class="pagination">
       <li [ngClass]="{ disabled: pager.currentPage == 1 }" class="page-item previous-item">
