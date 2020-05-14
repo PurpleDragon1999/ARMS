@@ -1,3 +1,4 @@
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { FileUploader } from 'ng2-file-upload';
 import { AppServicesService } from 'src/app/services/app-services.service';
 import { Component, OnInit, Renderer2 } from '@angular/core';
@@ -25,6 +26,7 @@ export class AppNavBarComponent implements OnInit {
 
   ngOnInit() {
     let data = this._service.tokenDecoder();
+    console.log(data);
     this.name = data.name;
     this.role = data.role;
     if (this.role == this._env.SUPERUSER) {
@@ -35,7 +37,7 @@ export class AppNavBarComponent implements OnInit {
       this.hrBool = true;
     }
   }
-
+  
   toggle() {
     if (this.classNameForToggle == "active")
       this.classNameForToggle = "";
