@@ -11557,17 +11557,17 @@ code {
     color: #ffffff; }
     .btn-gradient-warning:not(.btn-gradient-light):hover, .btn-gradient-warning:not(.btn-gradient-light):focus, .btn-gradient-warning:not(.btn-gradient-light):active {
       color: #ffffff; }
-
+// #fc8b02  #FC4C02 |\  #fd5914  #fe834f
 .btn-gradient-danger {
-  background: -webkit-gradient(linear, left top, right top, from(#ffbf96), to(#fe7096));
-  background: linear-gradient(to right, #ffbf96, #fe7096);
+  background: -webkit-gradient(linear, left top, right top, from(#fd5914), to(#fe834f));
+  background: linear-gradient(to right, #fd5914, #fe834f);
   border: 0;
   -webkit-transition: opacity 0.3s ease;
   transition: opacity 0.3s ease; }
   .btn-gradient-danger:not([disabled]):not(.disabled):active, .btn-gradient-danger:not([disabled]):not(.disabled).active,
   .show > .btn-gradient-danger.dropdown-toggle {
-    background: -webkit-gradient(linear, left top, right top, from(#ffbf96), to(#fe7096));
-    background: linear-gradient(to right, #ffbf96, #fe7096); }
+    background: -webkit-gradient(linear, left top, right top, from(#fd5914), to(#fe834f));
+    background: linear-gradient(to right, #fd5914, #fe834f); }
   .btn-gradient-danger:hover {
     opacity: .8; }
   .btn-gradient-danger:not(.btn-gradient-light) {
