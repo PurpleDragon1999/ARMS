@@ -1,8 +1,9 @@
+import { EmailListModalComponent } from './../email-list-modal/email-list-modal.component';
 import { IResponse } from 'src/app/models/response.interface';
 import { JdModalComponent } from '../jd-modal/jd-modal.component';
-import { Component, OnInit,EventEmitter, Output, Input} from "@angular/core";
-import { AppServicesService } from "src/app/services/app-services.service";
-import { NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
+import { Component, OnInit, EventEmitter, Output, Input} from '@angular/core';
+import { AppServicesService } from 'src/app/services/app-services.service';
+import { NgbModal, NgbModalRef, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ModalComponent } from 'src/app/reusable-components/modal/modal.component';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -17,7 +18,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class JdListComponent implements OnInit {
   jobsList: any;
   jdObject: any;
-  pager : any
+  pager: any;
 
   constructor(private _service: AppServicesService, private router: Router,
               private modalService: NgbModal) {}
@@ -32,14 +33,21 @@ export class JdListComponent implements OnInit {
     });
   }
 
-  jdUpdateModal(id:string){
-    const modalRef: NgbModalRef =this.modalService.open(JdModalComponent)
+  jdUpdateModal(id: string) {
+    const modalRef: NgbModalRef = this.modalService.open(JdModalComponent)
     modalRef.componentInstance.jdUpdateId = id;
     modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
       modalRef.close();
-    })
-  };
+    });
+  }
 
+  sendBulkEmail(jobObjId: string) {
+    const modalRef: NgbModalRef = this.modalService.open(EmailListModalComponent);
+    modalRef.componentInstance.jdObjId = jobObjId;
+    modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+      modalRef.close();
+    });
+  }
 
   deleteJd(jobObjId: string) {
     const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
@@ -61,8 +69,6 @@ export class JdListComponent implements OnInit {
   });
   }
 
-
-  
   downloadPdf(jdId) {
    this.router.navigate(["/jd-pdf", jdId]);
   }
@@ -75,11 +81,9 @@ export class JdListComponent implements OnInit {
   }
 
   searchJd(character?: string, page?: number){
-    console.log(character, "character")
-    this._service.search(character, page).subscribe(res=>{
+    this._service.search(character, page).subscribe(res=> {
       this.jobsList = res.payload.data.dataList
       this.pager = res.payload.data.pager
-      console.log(this.jobsList, "listttttt!!!!!!")
     })
   }
  
