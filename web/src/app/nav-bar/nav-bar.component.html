@@ -1,56 +1,69 @@
 <div class="container-scroller">
-
-  <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
-    
-    <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-      <a class="navbar-brand brand-logo"><img src="../../assets/images/logo.png">  ARMS</a>
-      <a class="navbar-brand brand-logo-mini" href="#"><img src="../../assets/images/logo.png" class="nav-profile-image"></a>
+  <nav
+    class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row"
+  >
+    <div
+      class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center"
+    >
+      <a class="navbar-brand brand-logo"
+        ><img src="../../assets/images/logo.png" /> ARMS</a
+      >
+      <a class="navbar-brand brand-logo-mini" href="#"
+        ><img src="../../assets/images/logo.png" class="nav-profile-image"
+      /></a>
     </div>
-    
+
     <div class="navbar-menu-wrapper d-flex align-items-stretch">
-      
-      <button class="navbar-toggler navbar-toggler align-self-center" type="button" (click)="toggleBig()" data-toggle="minimize">
+      <button
+        class="navbar-toggler navbar-toggler align-self-center"
+        type="button"
+        (click)="toggleBig()"
+        data-toggle="minimize"
+      >
         <span class="fas fa-bars"></span>
       </button>
-      
+
       <ul class="navbar-nav navbar-nav-right">
-        
         <li class="nav-item nav-profile">
           <a class="nav-link">
-            
             <div class="nav-profile-img">
-              <img src="../../assets/images/customers-icon-3.png" alt="image">
+              <img src="../../assets/images/customers-icon-3.png" alt="image" />
             </div>
-            
+
             <div class="nav-profile-text text pt-0">
-              <p class="mb-1 text-black">{{name}}</p>
-              <span class="text-secondary text-small">{{role | uppercase}}</span>
+              <p class="mb-1 text-black">{{ name }}</p>
+              <span class="text-secondary text-small">{{
+                role | uppercase
+              }}</span>
             </div>
           </a>
         </li>
 
         <li class="nav-item nav-logout d-none d-lg-block">
-          <a class="nav-link" href="#"(click)="logout()">
+          <a class="nav-link" href="#" (click)="logout()">
             <i class="fas fa-sign-out-alt"></i>
           </a>
         </li>
-
       </ul>
 
-      <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" (click)="toggle()" data-toggle="offcanvas">
+      <button
+        class="navbar-toggler navbar-toggler-right d-lg-none align-self-center"
+        type="button"
+        (click)="toggle()"
+        data-toggle="offcanvas"
+      >
         <span class="fas fa-bars"></span>
       </button>
-
     </div>
-
   </nav>
 
   <div class="container-fluid page-body-wrapper">
-
-    <nav class="sidebar sidebar-offcanvas" [ngClass]="classNameForToggle" id="sidebar">
-      
+    <nav
+      class="sidebar sidebar-offcanvas"
+      [ngClass]="classNameForToggle"
+      id="sidebar"
+    >
       <ul class="nav">
-        
         <!-- <li class="nav-item nav-profile" routerLink="profile">
           <a class="nav-link">
             <div class="nav-profile-text d-flex flex-column">
@@ -67,53 +80,59 @@
           </a>
         </li>
 
-        <li class="nav-item" *ngIf="hrBool" routerLinkActive="active">
+        <li class="nav-item" *ngIf="adminBool" routerLinkActive="active">
           <a class="nav-link" [routerLink]="['job-desc']">
             <span class="menu-title">Job Descriptions</span>
             <i class="fas fa-file-alt menu-icon"></i>
           </a>
         </li>
-        
-        <li class="nav-item" *ngIf="hrBool" routerLinkActive="active">
+
+        <li class="nav-item" *ngIf="adminBool" routerLinkActive="active">
           <a class="nav-link" [routerLink]="['interview/schedule']">
             <span class="menu-title">Schedule Interview</span>
             <i class="fas fa-hourglass-half menu-icon"></i>
           </a>
         </li>
-        
-        <li class="nav-item" *ngIf="adminBool" routerLinkActive="active">
+
+        <li class="nav-item" *ngIf="superuserBool" routerLinkActive="active">
           <a class="nav-link" [routerLink]="['employee']">
-            <span  class="menu-title">Employees</span>
+            <span class="menu-title">Employees</span>
             <i class="fas fa-users menu-icon"></i>
           </a>
         </li>
 
         <li class="nav-item d-lg-none">
           <a class="nav-link" href="#">
-            <span class="menu-title"(click)="logout()">Log Out</span>
+            <span class="menu-title" (click)="logout()">Log Out</span>
             <i class="fas fa-sign-out-alt menu-icon"></i>
           </a>
         </li>
-
       </ul>
-
     </nav>
 
     <div class="main-panel">
-      
       <div class="content-wrapper">
         <router-outlet></router-outlet>
       </div>
-      
+
       <footer class="footer">
-        <div class="d-sm-flex justify-content-center justify-content-sm-between">
-          <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2020 <a href="https://www.cygrp.com/" target="_blank">CyberGroup</a>. All rights reserved.</span>
-          <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with CyberGroup<i class="mdi mdi-heart text-danger"></i></span>
+        <div
+          class="d-sm-flex justify-content-center justify-content-sm-between"
+        >
+          <span
+            class="text-muted text-center text-sm-left d-block d-sm-inline-block"
+            >Copyright © 2020
+            <a href="https://www.cygrp.com/" target="_blank">CyberGroup</a>. All
+            rights reserved.</span
+          >
+          <span
+            class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"
+            >Hand-crafted & made with CyberGroup<i
+              class="mdi mdi-heart text-danger"
+            ></i
+          ></span>
         </div>
       </footer>
-    
     </div>
-
   </div>
-
 </div>
