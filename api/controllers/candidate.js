@@ -3,7 +3,6 @@ const candidateModel = require("../models/candidate");
 var fs = require("fs")
 var validator= require("aadhaar-validator")
 
-
 async function validateCandidate(candidate) {
   let emailExists = await candidateModel.get({ email: candidate.email })
   if (emailExists) {

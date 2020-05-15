@@ -51,7 +51,7 @@ const routes: Routes = [
       {
         path: "employee", component: EmployeeComponent
       },
-      {path:'interviews',component:InterviewListComponent}
+      {path:'interviews', component: InterviewListComponent}
     ]
   },
   {
@@ -72,8 +72,8 @@ const routes: Routes = [
       {
         path: "job-desc/new", component: JdFormComponent
       },
-      {path:'interviews',component:InterviewListComponent},
-  
+      {path: 'interviews', component: InterviewListComponent},
+
       {
         path: "interview/schedule", component: ScheduleInterviewComponent
       }
