@@ -2,9 +2,19 @@
     width: inherit !important;
 }
 
+h4{
+    font-family: "ubuntu-medium", sans-serif !important;
+    margin-top: 0 !important;
+    font-size: 1.2rem !important;
+}
+
 i{
     margin-left: 0.2em;
     margin-right: 0.2em;
+}
+
+*,*::before,*::after {
+    box-sizing: border-box !important;
 }
 
 i:hover{
@@ -55,7 +65,7 @@ i:hover{
     justify-content: center;
  }
 
- .mdi-pencil:hover, .mdi-delete:hover, .mdi-download:hover{
+ .mdi:hover{
     color: #FC4C02;
 }
 
@@ -63,16 +73,29 @@ i:hover{
     background-color: black;
     margin: 0 auto;
     display: inline-block;
-    width: 7px;
-    height: 7px;
-    margin-right: 2px;
+    width: 4px;
+    height: 4px;
+    margin-right: 1px;
     border-radius: 50%;
     transition: background-color 0.3s;
 }
 .w3-button{
- background-color:white;
  cursor: pointer;
+ background-color: white;
 }
 .w3-dropdown-content{
-    min-width:40px;
+    min-width:20px;
+    background-color:lightgrey;
 }
+
+.w3-dropdown-content:hover{
+    background-color: lightgrey;
+}
+
+/* Typography */
+body {
+    font-size: 1rem !important;
+    font-family: "ubuntu-medium", sans-serif !important;
+    font-weight: initial;
+    line-height: normal !important;
+    -webkit-font-smoothing: antialiased; }

@@ -40,12 +40,13 @@ export class EmailListModalComponent implements OnInit {
 
     handleSubmit() {
       this._service.sendMails(this.emailList, this.jdObjId).subscribe((res: any) => {
+      this.modalClose(true);
       const modalRef = this.modalService.open(ModalComponent);
       modalRef.componentInstance.shouldConfirm = false;
       modalRef.componentInstance.success = res.success;
       modalRef.componentInstance.message = res.body.payload.message;
       modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
-        modalRef.close();
+      modalRef.close();
       });
 
     },
