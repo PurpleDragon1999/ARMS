@@ -4,7 +4,7 @@ require("dotenv").config();
 // node function which sends email to new user create
 
  nodeMail=async function(mailList,output,jdJson){
- 
+    const username="deepanshu.balani";
    try{
      let testAccount = await nodemailer.createTestAccount();
       
@@ -25,7 +25,7 @@ require("dotenv").config();
      html:output,
      attachments: [{
       filename: "jobdescription"+jdJson.jdId+".pdf",
-      path: 'C:/Users/kritika.sachdeva/Downloads/'+"jobdescription"+jdJson.jdId+'.pdf',
+      path: 'C:/Users/'+username+'/Downloads/'+"jobdescription"+jdJson.jdId+'.pdf',
       contentType: 'application/pdf'
     }],
    }

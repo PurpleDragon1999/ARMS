@@ -43,7 +43,7 @@
             <td *ngFor="let columnName of columns;">
               <ng-container [ngSwitch]="true">
                 <div *ngSwitchCase="columnName=='date'">{{entry[columnName]|date}}</div>
-                <div *ngSwitchCase="columnName=='jdObjectId'">{{entry[columnName].jdTitle}}</div>
+                <div *ngSwitchCase="columnName=='jdObjectId'">{{entry[columnName]?.jdTitle}}</div>
                 <div *ngSwitchDefault>{{entry[columnName]}}</div>
               </ng-container>
             </td>
@@ -141,7 +141,11 @@
                 </b>
               </div>
               <div>
-                {{ entry[columnName] }}
+                <ng-container [ngSwitch]="true">
+                  <div *ngSwitchCase="columnName=='date'">{{entry[columnName]|date}}</div>
+                  <div *ngSwitchCase="columnName=='jdObjectId'">{{entry[columnName]?.jdTitle}}</div>
+                  <div *ngSwitchDefault>{{entry[columnName]}}</div>
+                </ng-container>
               </div>
             </div>
           </ng-template>
