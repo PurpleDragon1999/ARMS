@@ -114,13 +114,12 @@ export class CandidateFormComponent implements OnInit {
         (error: HttpErrorResponse) => {
         }
       )}
-    else if(this.router.url.split("/")[1]=="candidateForm"){
+    else if(this.router.url.split("/")[1]=="candidateForm"){     
       this.model.appliedForJdId = this.router.url.split("/")[2];
       this.service.getJdData(this.model.appliedForJdId).subscribe((res : IResponse)=>{
         let jdObject = res.payload.data
         this.model.appliedForPosition = jdObject.jdTitle;
         this.jdObjectId = jdObject._id;
-
       })
     }
   }

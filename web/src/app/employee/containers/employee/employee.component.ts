@@ -77,7 +77,6 @@ export class EmployeeComponent implements OnInit {
       this.employees = res.payload.data.dataList;
       this.columns = ["name", "email", "employeeId", "designation", "role"];
       this.pager = res.payload.data.pager;
-
     });
   }
 
