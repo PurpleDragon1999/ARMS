@@ -159,3 +159,9 @@ th{
 //     transform: translateY(0);
 //     transition: all .5s ease-in;
 // }
+
+.change-color{
+    &:hover{
+        color: #FC4C02;
+    }   
+}

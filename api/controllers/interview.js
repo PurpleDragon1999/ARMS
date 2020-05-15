@@ -147,6 +147,47 @@ shortlisted for an interview process with CyberGroup.The details of interview wi
     }
   }
 
+  async searchRecord(req, res){
+    try {
+      let queryObject = {
+        $regex: ".*^" + req.query.character + ".*",
+        $options: "i",
+      };
+      
+      const searchedRecords = await this.model.getAll();
+      searchedRecords.sort((a, b) => {
+        if (a > b){
+          return -1;
+        }
+        if(a < b){
+          return 1;
+        }
+        return 0;
+      });
+      req.body.records = searchedRecords;
+      if (req.query.pagination==="true"){
+        return this.getPaginatedResult(req, res);
+      }
+      else{
+        res.status(200).send({
+          payload:{
+            data : searchedRecords,
+            message :"Records Returned Successfully"
+          }
+        })
+      }
+      
+    } catch (err) {
+      console.log(err, "error")
+      res.status(500).send({
+        success: false,
+        payload: {
+          message: err.message,
+        },
+      });
+    }
+  }
+
 
   
 }

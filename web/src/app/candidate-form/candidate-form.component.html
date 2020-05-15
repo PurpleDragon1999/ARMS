@@ -5,7 +5,7 @@
         <form name="form" #f="ngForm" >
 
           <div class="form-group">
-            <label for="appliedForJdId"><b>Applied for JD</b><span class="asterick">*</span></label>
+            <label for="appliedForJdId">Applied for JD<span class="asterick">*</span></label>
             <input [readOnly]="type == 'progressTracker' || 'candidate'" type="text" name="appliedForJdId" class="form-control" [(ngModel)]="model.appliedForJdId" 
              placeholder="JD referral" #appliedForJdId="ngModel" id="appliedForJdId"
              [ngClass]="{ 'is-invalid': f.submitted && appliedForJdId.invalid }" required>
@@ -25,7 +25,7 @@
           </div>
 
           <div class="form-group">
-            <label for="Name"><b>Full Name</b><span class="asterick">*</span></label>
+            <label for="Name">Full Name<span class="asterick">*</span></label>
             <input [readOnly]="type == 'progressTracker'" type="text" name="name" class="form-control" 
              [(ngModel)]="model.name"  placeholder="Name" #name="ngModel" id="name" 
              [ngClass]="{ 'is-invalid': name.dirty && name.invalid}" required>
@@ -35,7 +35,7 @@
           </div>
 
           <div class="form-group">
-            <label for="Experience"><b>Experience</b></label>            
+            <label for="Experience">Experience</label>            
             <input [readOnly]="type == 'progressTracker'" type="text" name="experience" placeholder="Experience" 
              class="form-control" id="experience" [(ngModel)]="model.experience" #experience="ngModel" 
              pattern="^(0?[0-9]|[12][0-9]|3[00])$" [ngClass]="{ 'is-invalid': experience.dirty && experience.invalid}">
@@ -45,7 +45,7 @@
           </div>          
 
           <div class="form-group">
-            <label for="email"><b>Email Address</b><span class="asterick">*</span></label>
+            <label for="email">Email Address<span class="asterick">*</span></label>
             <input [readOnly]="type == 'progressTracker'" type="email" name="email" placeholder="Email" 
              class="form-control" id="email" [(ngModel)]="model.email" #email="ngModel" 
              pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" 
@@ -59,7 +59,7 @@
           </div>
 
           <div class="form-group">
-            <label for="aadhar"><b>Aadhar Card Number</b><span class="asterick">*</span></label>
+            <label for="aadhar">Aadhar Card Number<span class="asterick">*</span></label>
             <input [readOnly]="type == 'progressTracker'"type="text" name="aadhar" placeholder="0000 0000 0000" 
              class="form-control" id="aadhar" [(ngModel)]="model.aadhar" #aadhar="ngModel" pattern="^\d{4}\s\d{4}\s\d{4}$"
              [ngClass]="{ 'is-invalid': aadhar.dirty && aadhar.invalid}" required>
@@ -72,7 +72,7 @@
           </div>
 
           <div class="form-group">
-            <label><b>Resume</b><span class="asterick">*</span></label>
+            <label>Resume<span class="asterick">*</span></label>
             <div *ngIf="type !== 'progressTracker'" class="input-group col-xs-12">           
               <input type="file" accept=".pdf, .doc, .docx" name="file" id="file" class="form-control file-upload-info inputfile"
                ng2FileSelect [uploader]="uploader" ngModel #file="ngModel" 
@@ -90,7 +90,7 @@
           </div>  
          
           <div class="form-group">
-            <label for="Skills"><b>Skills</b><span class="asterick">*</span></label>
+            <label for="Skills">Skills<span class="asterick">*</span></label>
             <textarea [readOnly]="type == 'progressTracker'" name="skills" class="form-control" [(ngModel)]="model.skills"
              id="skills" rows="4" placeholder="Skills"  #skills="ngModel" 
              [ngClass]="{ 'is-invalid': skills.dirty && skills.invalid }" required></textarea>

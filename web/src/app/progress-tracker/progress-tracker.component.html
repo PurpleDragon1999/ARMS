@@ -62,6 +62,16 @@
                     </div>
                   </a>
                 </li>
+
+                <li class="progress-step anim--path" [ngClass]="{'is-active': flag==4}" [ngClass]="{'is-active': flag==4, 'is-complete': flag >= 5}">
+                  <a>
+                    <div class="progress-marker" data-text="6"></div>
+                    <div class="progress-text">
+                      Result
+                    </div>
+                  </a>
+                </li>
+
               </ul>
               <router-outlet></router-outlet>
         </div>
