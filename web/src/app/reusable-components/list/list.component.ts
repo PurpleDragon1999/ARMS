@@ -1,11 +1,12 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Component, EventEmitter, Input, Output, OnInit } from "@angular/core";
+import { IModelForPagination } from 'src/app/models/modelPagination.interface';
 
 @Component({
   selector: "app-list",
   templateUrl: "./list.component.html",
   styleUrls: ["./list.component.scss"],
 })
-export class ListComponent {
+export class ListComponent  {
   @Input()
   title: string = '';
 
@@ -16,24 +17,24 @@ export class ListComponent {
   data: Array<any> = [];
 
   @Output()
-  emitOpenModal: EventEmitter<IDataModal> = new EventEmitter<IDataModal>();
+  emitOpenModal: EventEmitter<any> = new EventEmitter<any>();
 
   @Input()
-  pager: any = {};
+  pager: any;
 
   @Output()
-  emitDelete: EventEmitter<IDataModal["data"]> = new EventEmitter<IDataModal["data"]>();
-
-  @Output()
-  emitSearch: EventEmitter<string> = new EventEmitter<string>();
+  emitDelete: EventEmitter<any["data"]> = new EventEmitter<any["data"]>();
 
   @Output()
   emitOpenFileUploadModal: EventEmitter<void> = new EventEmitter<void>();
 
   @Output()
-  emitPaginatedResult: EventEmitter<string> = new EventEmitter<string>();
+  emitPaginatedResult: EventEmitter<IModelForPagination> = new EventEmitter<IModelForPagination>();
 
-  openModal(formType: IDataModal["formType"], data: IDataModal["data"]) {
+  @Output()
+  emitDownloadPdf: EventEmitter<string> = new EventEmitter<string>();
+
+  openModal(formType: any["formType"], data: any["data"]) {
     this.emitOpenModal.emit({ formType, data });
   }
 
@@ -41,16 +42,15 @@ export class ListComponent {
     this.emitOpenFileUploadModal.emit();
   }
 
-  search(character: string) {
-    this.emitSearch.emit(character);
-  }
-
   deleteEntry(entry: any) {
     this.emitDelete.emit(entry);
   }
 
-  setPageForPagination(page: number) {
+  setPageForPagination(character: string, page: number) {
+    this.emitPaginatedResult.emit({ page, character });
+  }
 
-    this.emitPaginatedResult.emit(page.toString());
+  showPdf(pdf: string): void {
+    this.emitDownloadPdf.emit(pdf);
   }
 }

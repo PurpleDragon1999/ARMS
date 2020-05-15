@@ -2,9 +2,19 @@
     width: inherit !important;
 }
 
+h4{
+    font-family: "ubuntu-medium", sans-serif !important;
+    margin-top: 0 !important;
+    font-size: 1.2rem !important;
+}
+
 i{
     margin-left: 0.2em;
     margin-right: 0.2em;
+}
+
+*,*::before,*::after {
+    box-sizing: border-box !important;
 }
 
 i:hover{
@@ -15,14 +25,77 @@ i:hover{
     padding: 1.5rem 2rem !important;
 }
 
-#addbtn{
-    padding-left: 1rem;
-    padding-right: 0.5rem;
-    outline: auto darkgrey;
-}
-
 .card-body:hover{
     cursor: pointer;
     border: 0px outset #999;
     box-shadow: 5px 5px 15px rgba(0,0,0,0.4);
 }
+
+.btn.btn-fw {
+    min-width: 133px;
+}
+
+.paginationDiv ::ng-deep{
+    .page-item.active .page-link {
+        // z-index: 1;
+        color: #fff;
+        background-color:#FC4C02;
+        border-color: #FC4C02;
+        outline: none !important;
+        border: none !important;
+    }
+}
+
+
+.paginationDiv{
+        .arrow{
+            font-size: 13px;
+        }
+}
+
+.search-field{
+    padding-bottom: 1em;
+}
+ a{
+     cursor: pointer;
+ }
+
+ .noMatch, .paginationDiv{
+    display: flex;
+    justify-content: center;
+ }
+
+ .mdi:hover{
+    color: #FC4C02;
+}
+
+.more-dot {
+    background-color: black;
+    margin: 0 auto;
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    margin-right: 1px;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+.w3-button{
+ cursor: pointer;
+ background-color: white;
+}
+.w3-dropdown-content{
+    min-width:20px;
+    background-color:lightgrey;
+}
+
+.w3-dropdown-content:hover{
+    background-color: lightgrey;
+}
+
+/* Typography */
+body {
+    font-size: 1rem !important;
+    font-family: "ubuntu-medium", sans-serif !important;
+    font-weight: initial;
+    line-height: normal !important;
+    -webkit-font-smoothing: antialiased; }

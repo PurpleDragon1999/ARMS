@@ -1,8 +1,6 @@
 <div class="main-panel">
-  <div class="content-wrapper">
-
   <div class="page-header">
-   <h3 class="page-title"> Job Listing Form </h3>
+   <h2 class="page-title"> <b>Job Listing Form </b> </h2>
  </div>
  <div class="row">
    <div class="col-md-6 col-lg-12 grid-margin stretch-card">
@@ -11,9 +9,9 @@
          <br>
          <form class="forms-sample" [formGroup]="jobListingForm" (ngSubmit)="onSubmit()" novalidate>
            <div class="form-group">
-             <label for="jobId">Job ID</label>
+             <label for="jobId"><b>Job ID</b></label>
              <div class="input-group col-xs-12">
-               <span class="input-group-append btn btn-gradient-primary span">
+               <span class="input-group-append btn btn-gradient-danger span">
                  CYGJID
                </span>
                <input type="text" class="form-control" id="jobId" #jobId placeholder="Job ID" maxlength="4"
@@ -26,7 +24,7 @@
              </div>
            </div>
            <div class="form-group">
-             <label for="jobTitle">Job Title </label>
+             <label for="jobTitle"><b>Job Title </b></label>
              <input type="text" class="form-control" placeholder="Job Title" #jobTitle maxlength="40"
                formControlName="jobTitle" [ngClass]="{ 'is-invalid': submitted && formControls.jobTitle.errors }" />
              <div *ngIf="submitted && formControls.jobTitle.errors" class="invalid-feedback">
@@ -36,7 +34,7 @@
            </div>
 
            <div class="form-group">
-             <label for="jobDescription">Job Description </label>
+             <label for="jobDescription"><b>Job Description </b></label>
              <textarea class="form-control" #jobDescription rows="10" placeholder="Job Description"
                formControlName="jobDescription"
                [ngClass]="{ 'is-invalid': submitted && formControls.jobDescription.errors }"></textarea>
@@ -47,7 +45,7 @@
            </div>
 
            <div class="form-group">
-             <label for="openingDate">Opening date </label>
+             <label for="openingDate"><b>Opening date </b></label>
              <input type="date" #openingDate class="form-control" formControlName="openingDate"
                [ngClass]="{ 'is-invalid': submitted && formControls.openingDate.errors }" />
              <div *ngIf="submitted && formControls.openingDate.errors" class="invalid-feedback">
@@ -57,7 +55,7 @@
            </div>
 
            <div class="form-group">
-             <label for="closingDate">Closing Date </label>
+             <label for="closingDate"><b>Closing Date </b></label>
              <input type="date" #closingDate class="form-control" formControlName="closingDate" />
              <div *ngIf="error.isError" class="alert alert-danger">
                {{ error.errorMessage }}
@@ -65,7 +63,7 @@
            </div>
 
            <div class="form-group">
-             <label for="skills">Skills </label>
+             <label for="skills"><b>Skills </b></label>
              <input type="text" class="form-control" placeholder="Skills" #skills maxlength="30"
                formControlName="skills" [ngClass]="{ 'is-invalid': submitted && formControls.skills.errors }" />
              <div *ngIf="submitted && formControls.skills.errors" class="invalid-feedback">
@@ -75,7 +73,7 @@
            </div>
 
            <div class="form-group">
-             <label for="eligibilityCriteria">Eligibility criteria </label>
+             <label for="eligibilityCriteria"><b>Eligibility criteria </b></label>
              <select class="form-control form-control-lg" placeholder="Criteria" #eligibilityCriteria
                (change)="selectChangeHandlerEligibilityCriteria($event)" formControlName="eligibilityCriteria"
                [ngClass]="{ 'is-invalid': submitted && formControls.eligibilityCriteria.errors }">
@@ -92,7 +90,7 @@
            </div>
 
            <div class="form-group">
-             <label for="jobType">Job Type </label>
+             <label for="jobType"><b>Job Type </b></label>
              <select class="form-control form-control-lg" placeholder="Criteria" #jobType
                (change)="selectChangeHandlerJobType($event)" formControlName="jobType"
                [ngClass]="{ 'is-invalid': submitted && formControls.jobType.errors }">
@@ -108,7 +106,7 @@
            </div>
 
            <div class="form-group">
-             <label for="location">Location </label>
+             <label for="location"><b>Location </b></label>
              <select class="form-control form-control-lg" placeholder="Criteria" #location
                (change)="selectChangeHandlerLocation($event)" formControlName="location"
                [ngClass]="{ 'is-invalid': submitted && formControls.location.errors }">
@@ -123,22 +121,24 @@
            </div>
 
            <div class="form-group">
-             <label for="salary">Salary (per annum)</label>
+             <label for="salary"><b>Salary (per annum)</b></label>
              <input type="number" class="form-control" placeholder="Salary" #salary />
            </div>
 
            <div class="form-group">
-             <label for="vacancies">No .of Vacancies </label>
+             <label for="vacancies"><b>No .of Vacancies </b></label>
              <input type="number" class="form-control" placeholder="Vacancies" #vacancies />
            </div>
            <br>
-           <button type="submit" class="btn btn-gradient-primary mr-2" (click)="jdFormData()">ADD</button>
-           <button class="btn btn-light">Cancel</button>
-           <!-- <app-jd-pdf [jdObj]="jobListingFormObject"></app-jd-pdf> -->
+           <div class="d-flex flex-row-reverse">
+           <button type="submit" class="btn btn-gradient-danger mr-2" (click)="jdFormData() " ><b>ADD</b></button>
+           <button type="button" class="btn btn-light" routerLink="/admin/job-desc">
+           <b> Cancel</b>
+          </button>
+          </div>
          </form>
        </div>
      </div>
    </div>
  </div>
-</div>
 </div>

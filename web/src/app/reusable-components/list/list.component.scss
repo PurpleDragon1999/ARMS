@@ -14,10 +14,13 @@ only screen and (max-width: 1220px),
 .mdi-pencil, .mdi-delete{
     color: #212529;
     font-size: large;
+    padding-left: 0em;
+    padding-right: 0.3em;
+
 }
 
-.mdi-pencil:hover, .mdi-delete:hover{
-    color: rgb(182, 109, 255);
+.mdi-pencil:hover, .mdi-delete:hover, .fa:hover{
+    color: #FC4C02;
 }
 
 button{
@@ -31,7 +34,6 @@ button{
 
 .stretch-card, .smallCard{
     background-color: #f2edf3;
-    // padding: 4em;
 }
 
 .mobileView{
@@ -58,8 +60,8 @@ ngb-pagination ::ng-deep ul > li:not(.active) > a {
     .page-item.active .page-link {
         // z-index: 1;
         color: #fff;
-        background-color:rgb(182, 109, 255);;
-        border-color: rgb(182, 109, 255);;
+        background-color:#FC4C02;
+        border-color: #FC4C02;
         outline: none !important;
         border: none !important;
     }
@@ -85,7 +87,7 @@ ngb-pagination ::ng-deep ul > li:not(.active) > a {
     }
     ngb-accordion.collapse.show{
         h5, button{
-            color: rgb(182, 109, 255);
+            color: #FC4C02;
         }
     }
 }
@@ -96,7 +98,7 @@ select{
 }
 
 .mdi-account-plus{
-    color: rgb(182, 109, 255);
+    color: #FC4C02;
 }
 
 .itemsDiv{
@@ -113,10 +115,6 @@ a {
 }
 
 ngb-accordion ::ng-deep .card-header{
-    // padding: 1em;
-    // -webkit-box-shadow: 6px 4px 5px 6px #ccc;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
-    //     -moz-box-shadow:    3px 3px 5px 6px #ccc;  /* Firefox 3.5 - 3.6 */
-    //     box-shadow:         3px 3px 5px 6px #ccc;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
         background-color: white;
 }
 
@@ -137,3 +135,27 @@ ngb-accordion ::ng-deep .card:hover{
       height: 32px;
       border-radius: 100%; 
     }
+
+th{
+    font-weight: bold !important;
+}
+
+.noMatch, .paginationDiv{
+    display: flex;
+    justify-content: center;
+ }
+
+ td, th{
+     padding-right: 0em;
+     padding-left: .7em;
+ }
+
+ 
+.mdi-account-plus{
+    color: #fff;
+}
+
+// .customised-dropdown-parent{
+//     transform: translateY(0);
+//     transition: all .5s ease-in;
+// }

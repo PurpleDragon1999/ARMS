@@ -22,6 +22,10 @@ class JobDescription {
   async remove(id) {
     return this.model.deleteOne({ _id: id });
   }
+
+  async getAll(criteria = {}, columns = {}) {
+    return this.model.find(criteria, columns);
+  }
   //to get all the JDs
   async index(criteria = {}, columns = {}) {
     return this.model.find(criteria, columns);

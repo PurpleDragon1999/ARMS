@@ -19,7 +19,7 @@ export class EmployeeFormComponent {
   data: IEmployee;
 
   @Input()
-  formType: IDataModal["formType"];
+  formType: any["formType"];
 
   constructor(
     private employeeService: EmployeeService,
@@ -35,13 +35,22 @@ export class EmployeeFormComponent {
     this.employeeService.createEmployee(employee).subscribe(
       (res: IResponse) => {
         const modalRef = this.modalService.open(ModalComponent);
+        modalRef.componentInstance.shouldConfirm = false;
+        modalRef.componentInstance.success = res.success;
         modalRef.componentInstance.message = res.payload.message;
-        this.modalClose(true);
+        modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+          modalRef.close();
+        });
+        this.modalClose( );
       },
       (error: HttpErrorResponse) => {
-
         const modalRef = this.modalService.open(ModalComponent);
-        modalRef.componentInstance.message = error.error;
+        modalRef.componentInstance.shouldConfirm = false;
+        modalRef.componentInstance.success = error.error.success;
+        modalRef.componentInstance.message = error.error.payload.message;
+        modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+          modalRef.close();
+        });
       }
     );
   }
@@ -51,17 +60,31 @@ export class EmployeeFormComponent {
     this.employeeService.updateEmployee(updatedEmployee).subscribe(
       (res: IResponse) => {
         const modalRef = this.modalService.open(ModalComponent);
-        modalRef.componentInstance.message = res;
-        this.modalClose(true);
+        modalRef.componentInstance.shouldConfirm = false;
+        modalRef.componentInstance.success = res.success;
+        modalRef.componentInstance.message = res.payload.message;
+        modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+          modalRef.close();
+        });
+        this.modalClose( );
       },
       (error: HttpErrorResponse) => {
         const modalRef = this.modalService.open(ModalComponent);
-        modalRef.componentInstance.message = error.error;
+        modalRef.componentInstance.shouldConfirm = false;
+        modalRef.componentInstance.success = error.error.success;
+        modalRef.componentInstance.message = error.error.payload.message;
+        modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+          modalRef.close();
+        });
       }
     );
   }
 
-  modalClose(rerender: boolean): void {
-    this.closeModal.emit(rerender);
+  // modalClose(rerender: boolean): void {
+  //   this.closeModal.emit(rerender);
+  // }
+  
+  modalClose() {
+    this.closeModal.emit();
   }
 }

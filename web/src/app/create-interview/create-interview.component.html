@@ -1,148 +1,156 @@
-<div class="container">
-  <div class="row">
-    <div class="col-12 grid-margin stretch-card">
+<div class="page-header">
+  <h4 class="page-title myclass" ><b>Create Interview</b></h4>
+</div>
       <div class="card">
         <div class="card-body">
-          <h4 class="card-title myclass" ><b>Create Interview</b></h4>
           <form
             class="forms-sample"
             #form="ngForm"
-            [formGroup]="registerForm"
             (ngSubmit)="createInterview(form.value)"
           >
-            <div class="form-group">
-              <label for="jobDescription">Job Description</label>
-              <textarea
-                name="Name" id="Name"
-                formControlName="Name"
-                class="form-control" 
-                [ngClass]="{ 'is-invalid': submitted && f.Name.errors }"
-                placeholder="Job Description"
-                rows="2"
-                maxlength="500"
-                required
-              ></textarea>
-              <div *ngIf="submitted && f.Name.errors" class="invalid-feedback">
-              <div *ngIf="f.Name.errors.required"><i class="mdi mdi-alert-outline"></i>Job description is required</div>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input
+          <div class="form-group top">
+            <label for="jdId">Jd Id <span class="asterick">*</span></label>
+            <div class="input-group col-xs-12">
+            <span class="input-group-append btn btn-gradient-danger span">
+              CYGJID
+            </span>
+            <input
                 type="text"
-                name="email" id="email"
-                formControlName="email"
-                class="form-control" 
-                [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
-                placeholder="Email"
+                name="jdId"
+                [ngModel]="interview.jdId"
+                class="form-control"
+                #jdId="ngModel"
+                id="jdId"
+                [ngClass]="{ 'is-invalid': jdId.dirty && jdId.invalid }"
+                placeholder="Jd ID"
+                maxlength="4"
+                required
               >
-              <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-              <div *ngIf="f.email.errors.required"><i class="mdi mdi-alert-outline"></i>Email is required</div>
+            <div *ngIf="jdId.dirty && jdId.errors?.required"  class="invalid-feedback">
+              <div><i class="mdi mdi-alert-outline"></i>JD Id is required</div>
+            </div>
+          </div>
+        </div>
+            <div class="form-group">
+              <label for="jd">Job Title<span class="asterick">*</span></label>
+              <input
+                name="jd"
+                type="text"
+                [(ngModel)]="interview.jd"
+                class="form-control"
+                id="jd"
+                #jd="ngModel"
+                [ngClass]="{ 'is-invalid': jd.dirty && jd.invalid }"
+                placeholder="Job Title"
+                required
+              >
+              <div *ngIf="jd.dirty && jd.errors?.required" class="invalid-feedback">
+                <div><i class="mdi mdi-alert-outline"></i>Job Title is required</div>
               </div>
             </div>
             <div class="form-group">
-              <label for="noOfRounds">Number of Rounds</label>
-              <select
-              name="noOfRounds" id="noOfRounds"
-              formControlName="noOfRounds"
+              <label for="date">Date<span class="asterick">*</span></label>
+              <input
+                name="date"
+                type="date"
+                [(ngModel)]="interview.date"
                 class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && f.noOfRounds.errors }" 
-                placeholder="Number of Rounds"
+                id="date"
+                #date="ngModel"
+                [ngClass]="{ 'is-invalid': date.dirty && date.invalid }"
+                placeholder="Date"
+                required
+              >
+              <div *ngIf="date.dirty && date.errors?.required" class="invalid-feedback">
+                <div><i class="mdi mdi-alert-outline"></i>Date is required</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="time">Time<span class="asterick">*</span></label>
+              <input
+                name="time"
+                type="datetime"
+                [ngModel]="interview.time"
+                class="form-control"
+                id="time"
+                #time="ngModel"
+                [ngClass]="{ 'is-invalid': time.dirty && time.invalid }"
+                placeholder="Time"
+                required
+              >
+              <div *ngIf="time.dirty && time.errors?.required" class="invalid-feedback">
+                <div><i class="mdi mdi-alert-outline"></i>Time is required</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="noOfRounds">Number of Rounds<span class="asterick">*</span></label>
+              <select
+                name="noOfRounds"
+                type="number"
+                [ngModel]="interview.noOfRounds"
+                class="form-control"
+                id="noOfRounds"
+                #noOfRounds="ngModel"
+                [ngClass]="{ 'is-invalid': noOfRounds.dirty && noOfRounds.invalid }" 
                 min="3"
                 max="5"
                 required
               >
+                <option value="selectRounds" disabled>Select Rounds</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
                 <option value="5">5</option>
               </select>
-              <div *ngIf="submitted && f.noOfRounds.errors" class="invalid-feedback">
-                <div *ngIf="f.noOfRounds.errors.required"><i class="mdi mdi-alert-outline"></i>Number of rounds is required</div>
-                </div>
-            </div>
-            <div class="form-group">
-              <label for="panelOfInterviewers">Panel of Interviewers</label>
-              <div class="input-group">
-                <input
-                  type="text"
-                  name="panelOfInterviewers" id="panelOfInterviewers"
-                  formControlName="panelOfInterviewers"
-                  class="form-control" 
-                  [ngClass]="{ 'is-invalid': submitted && f.panelOfInterviewers.errors }"
-                  placeholder="Panel of Interviewers"
-                  aria-label="Recipient's username"
-                  aria-describedby="basic-addon2"
-                  required
-                />
-                <div *ngIf="submitted && f.panelOfInterviewers.errors" class="invalid-feedback">
-                  <div *ngIf="f.panelOfInterviewers.errors.required"><i class="mdi mdi-alert-outline"></i>Interviewer name is required</div>
-                  </div>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="roundType">Round Type</label>
-              <select
-              name="roundType" id="roundType"
-              formControlName="roundType"
-              class="form-control" 
-              [ngClass]="{ 'is-invalid': submitted && f.roundType.errors }"
-              placeholder="Round Type"
-              required
-              >
-                <option value="Written">Written</option>
-                <option value="Group Discussion">Group Discussion</option>
-                <option value="Technical">Technical</option>
-                <option value="HR">HR</option>
-                <option value="Behavioural">Behavioural</option>
-              </select>
-              <div *ngIf="submitted && f.roundType.errors" class="invalid-feedback">
-                <div *ngIf="f.roundType.errors.required"><i class="mdi mdi-alert-outline"></i>Round type is required</div>
-                </div>
-            </div>
-            <div class="form-group">
-              <label for="time">Time of Interview</label>
-              <input
-              type="datetime"
-              name="time" id="time"
-              formControlName="time"
-              class="form-control" 
-              [ngClass]="{ 'is-invalid': submitted && f.time.errors }"
-              placeholder="Time"
-              required
-              />
-              <div *ngIf="submitted && f.time.errors" class="invalid-feedback">
-              <div *ngIf="f.time.errors.required"><i class="mdi mdi-alert-outline"></i>Time is required</div>
+              <div *ngIf="noOfRounds.dirty && noOfRounds.errors?.required" class="invalid-feedback">
+                <div><i class="mdi mdi-alert-outline"></i>No. of rounds is required</div>
               </div>
             </div>
             <div class="form-group">
-              <label for="date">Date of Interview</label>
+              <label for="venue">Venue<span class="asterick">*</span></label>
               <input
-              type="date"
-              name="date" id="date"
-              formControlName="date"
-              class="form-control" 
-              [ngClass]="{ 'is-invalid': submitted && f.date.errors }"
-                placeholder="Date"
+                name="venue"
+                type="text"
+                [ngModel]="interview.venue"
+                class="form-control"
+                id="venue"
+                #venue="ngModel"
+                [ngClass]="{ 'is-invalid': venue.dirty && venue.invalid }"
+                placeholder="Venue"
                 required
-              />
-              <div *ngIf="submitted && f.date.errors" class="invalid-feedback">
-              <div *ngIf="f.date.errors.required"><i class="mdi mdi-alert-outline"></i>Date is required</div>
+              >
+              <div *ngIf="venue.dirty && venue.errors?.required" class="invalid-feedback">
+                <div><i class="mdi mdi-alert-outline"></i>Venue is required</div>
               </div>
             </div>
             <button
-              type="submit"
-              class="btn btn-gradient-primary mr-2"
-              (click)="onSubmit()"
-              required
+            class="btn btn-gradient-danger mr-2"
+            routerLink="/admin/interview/schedule"
             >
-              Submit
+            Go To Select Panel
+            <i class= "mdi mdi-chevron-double-right">
+            </i>
             </button>
+            <div class="d-flex flex-row-reverse">
+            
+            <button
+            type="submit"
+            class="btn btn-gradient-danger mr-2"
+            [disabled]="!form.valid"
+            >
+            Create
+            </button>
+            <button
+            type="button"
+            class="btn btn-light"
+            (click)="form.resetForm()"
+          >Cancel</button>
+          </div>
           </form>
         </div>
       </div>
-    </div>
-  </div>
-</div>
+   
+

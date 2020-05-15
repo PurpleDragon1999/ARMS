@@ -2,6 +2,7 @@
 const Joi = require("@hapi/joi");
 const fs = require("fs");
 const csv = require("csv-parser");
+
 //Custom Modules
 const Base = require("./base");
 const model = require("../models");
@@ -36,7 +37,7 @@ function validateEmployee(employee) {
         "manager"
       )
       .required(),
-    role: Joi.string().valid("admin", "hr", "interviewer").required(),
+    role: Joi.string().valid("superuser", "admin", "employee").required(),
     profileImageURL: Joi.optional(),
     _id: Joi.optional(),
   });
@@ -66,7 +67,9 @@ class Employee extends Base {
       if (error)
         return res.status(400).send({
           success: false,
-          error: error.details[0].message,
+          payload: {
+            message: error.details[0].message
+          }
         });
 
       req.body = value;
@@ -91,7 +94,9 @@ class Employee extends Base {
       if (error)
         return res.status(400).send({
           success: false,
-          error: error.details[0].message,
+          payload: {
+            message: error.details[0].message
+          }
         });
 
       delete value["employeeId"];

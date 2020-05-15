@@ -1,60 +1,111 @@
-<div class="col-12 grid-margin stretch-card">
+<div class="col-12 stretch-card">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Candidate form details</h4>
-        <form name="form" #f="ngForm" novalidate>
-          <div class="form-group pt-4">
-            <label for="Name">Name<span class="asterick">*</span></label>
-            <input type="text" name="name" class="form-control" [(ngModel)]="model.name"  placeholder="Name" #name="ngModel" [ngClass]="{ 'is-invalid': f.submitted && name.invalid }" required>
+        <h4 class= "top"><b>Job Application</b></h4>
+        <form name="form" #f="ngForm" >
 
-            <div *ngIf="f.submitted && name.invalid" class="invalid-feedback">
-              <div *ngIf="name.errors.required"><i class="mdi-alert-outline"></i>Name is required</div>
-           </div>
-          </div>
           <div class="form-group">
-            <label for="Experience">Experience</label>
-            <input type="number" name="experience" class="form-control" [(ngModel)]="model.experience" placeholder="Experience" #experience="ngModel" [ngClass]="{ 'is-invalid': f.submitted && experience.invalid }" min=0 max=30 > 
-            <div *ngIf="f.submitted && experience.invalid" class="invalid-feedback">
-              <div *ngIf="experience.errors?.customMin"> 
-                Minimum required number is 15.
-              </div>	
-              <div *ngIf="experience.errors?.customMax"> 
-                    Maximum number can be 50.
-              </div> 
+            <label for="appliedForJdId"><b>Applied for JD</b><span class="asterick">*</span></label>
+            <input [readOnly]="type == 'progressTracker' || 'candidate'" type="text" name="appliedForJdId" class="form-control" [(ngModel)]="model.appliedForJdId" 
+             placeholder="JD referral" #appliedForJdId="ngModel" id="appliedForJdId"
+             [ngClass]="{ 'is-invalid': f.submitted && appliedForJdId.invalid }" required>
+            <div *ngIf="f.submitted && appliedForJdId.invalid" class="invalid-feedback">
+              <div *ngIf="appliedForJdId.errors.required"><i class="mdi mdi-alert-outline"></i>Applied For JD ID field is required</div>
             </div>
           </div>
+
           <div class="form-group">
-            <label for="Email">Email<span class="asterick">*</span></label>
-            <input type="email" name="email" class="form-control" [(ngModel)]="model.email" placeholder="Email"  #email="ngModel" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" required email>
-            <div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
-              <div *ngIf="email.errors.required"><i class="mdi mdi-alert-outline"></i>Email is required</div>
-              <div *ngIf="email.errors.email"><i class="mdi mdi-alert-outline"></i>Email must be a valid email address</div>
+            <label for="appliedForPosition"><b>Applied for Position</b><span class="asterick">*</span></label>
+            <input [readOnly]="type == 'progressTracker' || 'candidate'" type="text" name="appliedForPosition" class="form-control" [(ngModel)]="model.appliedForPosition" 
+             placeholder="JD referral" #appliedForPosition="ngModel" id="appliedForPosition"
+             [ngClass]="{ 'is-invalid': f.submitted && appliedForPosition.invalid }" required>
+            <div *ngIf="f.submitted && appliedForPosition.invalid" class="invalid-feedback">
+              <div *ngIf="appliedForPosition.errors.required"><i class="mdi mdi-alert-outline"></i>Applied For Position is required</div>
+            </div>
           </div>
-          </div>
+
           <div class="form-group">
-            <label>CV<span class="asterick">*</span></label>
-            <div class="input-group col-xs-12">              
-              <input type="file" name="cv" class="form-control file-upload-info"  ng2FileSelect [uploader]="uploader" ngModel #cv="ngModel" [ngClass]="{ 'is-invalid': f.submitted && cv.invalid }" required>
-              <label for="files" class="file-upload-browse btn btn-gradient-primary">Upload CV</label>
-              <div *ngIf="f.submitted && cv.invalid" class="invalid-feedback">
-                <div *ngIf="cv.errors.required"><i class="mdi mdi-alert-outline"></i>CV is required</div>
+            <label for="Name"><b>Full Name</b><span class="asterick">*</span></label>
+            <input [readOnly]="type == 'progressTracker'" type="text" name="name" class="form-control" 
+             [(ngModel)]="model.name"  placeholder="Name" #name="ngModel" id="name" 
+             [ngClass]="{ 'is-invalid': name.dirty && name.invalid}" required>
+            <div *ngIf="name.dirty && name.errors?.required" class="invalid-feedback">
+              <div *ngIf="name.errors.required"><i class="mdi mdi-alert-outline"></i>Name is required</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="Experience"><b>Experience</b></label>            
+            <input [readOnly]="type == 'progressTracker'" type="text" name="experience" placeholder="Experience" 
+             class="form-control" id="experience" [(ngModel)]="model.experience" #experience="ngModel" 
+             pattern="^(0?[0-9]|[12][0-9]|3[00])$" [ngClass]="{ 'is-invalid': experience.dirty && experience.invalid}">
+            <div *ngIf="experience.dirty && experience.errors?.pattern" class="invalid-feedback">
+              <div><i class="mdi mdi-alert-outline"></i>Experience cannot be more than 30</div>
+            </div>
+          </div>          
+
+          <div class="form-group">
+            <label for="email"><b>Email Address</b><span class="asterick">*</span></label>
+            <input [readOnly]="type == 'progressTracker'" type="email" name="email" placeholder="Email" 
+             class="form-control" id="email" [(ngModel)]="model.email" #email="ngModel" 
+             pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" 
+             [ngClass]="{ 'is-invalid': email.dirty && email.invalid }" required>
+            <div *ngIf="email.dirty && email.errors?.required" class="invalid-feedback">
+              <div><i class="mdi mdi-alert-outline"></i>Email is required</div>
+            </div>
+            <div *ngIf="email.dirty && email.errors?.pattern" class="invalid-feedback">
+              <div><i class="mdi mdi-alert-outline"></i>Enter valid email</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="aadhar"><b>Aadhar Card Number</b><span class="asterick">*</span></label>
+            <input [readOnly]="type == 'progressTracker'"type="text" name="aadhar" placeholder="0000 0000 0000" 
+             class="form-control" id="aadhar" [(ngModel)]="model.aadhar" #aadhar="ngModel" pattern="^\d{4}\s\d{4}\s\d{4}$"
+             [ngClass]="{ 'is-invalid': aadhar.dirty && aadhar.invalid}" required>
+            <div *ngIf="aadhar.dirty && aadhar.errors?.required" class="invalid-feedback">
+              <div><i class="mdi mdi-alert-outline"></i>Aadhar Card Number is required</div>
+            </div>
+            <div *ngIf="aadhar.dirty && aadhar.errors?.pattern" class="invalid-feedback">
+              <div><i class="mdi mdi-alert-outline"></i>Enter valid Aadhar Card Number</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label><b>Resume</b><span class="asterick">*</span></label>
+            <div *ngIf="type !== 'progressTracker'" class="input-group col-xs-12">           
+              <input type="file" accept=".pdf, .doc, .docx" name="file" id="file" class="form-control file-upload-info inputfile"
+               ng2FileSelect [uploader]="uploader" ngModel #file="ngModel" 
+               [ngClass]="{ 'is-invalid': file.dirty && file.invalid}" required>
+              <label for="file" class="file-upload-browse btn btn-gradient-danger mr-2">Upload Resume</label>
+              <div *ngIf="file.dirty  && file.errors?.required" class="invalid-feedback">
+                <div><i class="mdi mdi-alert-outline"></i>Resume is required</div>
               </div>
             </div>
-          </div>   
-          <div class="form-group">
-            <label for="Skills">Skills<span class="asterick">*</span></label>
-            <textarea class="form-control" name="skills"  ngModel rows="4" placeholder="Skills"  #skills="ngModel" [ngClass]="{ 'is-invalid': f.submitted && skills.invalid }" required></textarea>
-            <div *ngIf="f.submitted && skills.invalid" class="invalid-feedback">
-              <div *ngIf="skills.errors.required"><i class="mdi mdi-alert-outline"></i>Skills is required</div>
+
+            <div *ngIf="type == 'progressTracker'" class="input-group col-xs-12"> 
+              <input [readOnly]="type == 'progressTracker'" type="text" name="file" class="form-control"
+              placeholder="CV will be shown here"> 
             </div>
           </div>  
+         
           <div class="form-group">
-            <label for="appliedFor">Applied for</label>
-            <input type="text" class="form-control" ngModel id="appliedFor" rows="4" placeholder="JD referral" name="appliedFor" #appliedFor="ngModel">
-          </div>      
-          <button type="submit" class="btn btn-gradient-primary mr-2" (click)="f.form.valid; createCandidate(f.value); f.resetForm()">Submit</button>
-          <button class="btn btn-light" (click)="f.resetForm()">Cancel</button>
+            <label for="Skills"><b>Skills</b><span class="asterick">*</span></label>
+            <textarea [readOnly]="type == 'progressTracker'" name="skills" class="form-control" [(ngModel)]="model.skills"
+             id="skills" rows="4" placeholder="Skills"  #skills="ngModel" 
+             [ngClass]="{ 'is-invalid': skills.dirty && skills.invalid }" required></textarea>
+            <div *ngIf="skills.dirty && skills.errors?.required" class="invalid-feedback">
+              <div><i class="mdi mdi-alert-outline"></i>Skills is required</div>
+            </div>
+          </div>  
+
+          <div class="d-flex flex-row-reverse" *ngIf="type !== 'progressTracker'" >
+            <button type="submit" [disabled]="f.invalid" class="btn btn-gradient-danger mr-2" 
+            (click)="f.form.valid; createCandidate(f.value); f.resetForm()"><b>Submit</b></button>
+            <button class="btn btn-light" (click)="f.resetForm()"><b>Cancel</b></button>
+          </div>
+          
         </form>
-      </div>
     </div>
   </div>
+</div>
