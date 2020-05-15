@@ -15,6 +15,7 @@ async function validateCandidate(candidate) {
     throw new Error("This Aadhar number is already registered")
     return
   }
+
   if(validator.isValidNumber(candidate.aadhar)){
       throw new Error("This aadhar number is not valid");
       return
@@ -114,17 +115,26 @@ class Candidate extends Base {
     }
   }
 
-  async getAll(req, res) {
+  async searchRecord(req, res) {
     try {
-      let candidatesList = await candidateModel.getAll()
-      candidatesList = await Promise.all(candidatesList.map(async (candidate) => {
-        return { ...candidate.toObject(), cv: fs.readFileSync(candidate.cv) }
-      }))
-      req.body.records = candidatesList
+      let queryObject = {
+        $regex: ".*^" + req.query.character + ".*",
+        $options: "i",
+      };
+
+      let candidateList = await candidateModel.getAll({ $or: [{ name: queryObject }] });
+
+      candidateList = await Promise.all(candidateList.map(async (candidate) => {
+        if (fs.existsSync(candidate.cv)) {
+          return { ...candidate.toObject(), cv: fs.readFileSync(candidate.cv) };
+        }
+        return { ...candidate.toObject() };
+      }));
+
+      req.body.records = candidateList;
       super.getPaginatedResult(req, res)
     }
     catch (err) {
-      console.log(err)
       res.send({
         success: false,
         payload: {
