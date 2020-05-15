@@ -8,3 +8,7 @@
 .text{
     padding-top: 2em;
 }
+
+*,*::before,*::after {
+    box-sizing: border-box !important;
+}
