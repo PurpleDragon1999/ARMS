@@ -117,9 +117,15 @@ export class CandidateFormComponent implements OnInit {
     else if(this.router.url.split("/")[1]=="candidateForm"){     
       this.model.appliedForJdId = this.router.url.split("/")[2];
       this.service.getJdData(this.model.appliedForJdId).subscribe((res : IResponse)=>{
+        if(res.success==false){
+        this.router.navigate(['/404'])
+        console.log("!!!!!!!!!!!!!!!!!!")
+        }
+        else{
         let jdObject = res.payload.data
         this.model.appliedForPosition = jdObject.jdTitle;
         this.jdObjectId = jdObject._id;
+       }
       })
     }
   }

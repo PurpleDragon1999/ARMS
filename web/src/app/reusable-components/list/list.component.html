@@ -14,7 +14,7 @@
             </div>
           </form>
         </div>
-        <div ngbDropdown class="addEmployee">
+        <div *ngIf="title == employee" ngbDropdown class="addEmployee">
           <button class="btn btn-gradient-danger" id="addOption" ngbDropdownToggle><i
               class="mdi mdi-account-plus"></i>Add {{ title | titlecase }}(s)
           </button>
@@ -60,7 +60,7 @@
       </div>
     </div>
 
-    <div class="card paginationDiv" *ngIf="pager?.totalPages > 1 ">
+    <div class="card paginationDiv" *ngIf="pager?.totalPages >= 1 ">
       <div>
         <ul *ngIf="pager?.pages && pager?.pages?.length" class="pagination">
 
@@ -119,7 +119,12 @@
                   <div class="pt-2">
                     <img class="nav-profile-img" src="../../assets/images/customers-icon-3.png" alt="image">
                   </div>
-                  <h5 class="m-0 p-3">{{ entry[columns[0]] }}</h5>
+                  <ng-container [ngSwitch]="true">                    
+                    <h5 *ngSwitchCase="columnName=='jdObjectId'" class="m-0 p-3">{{entry[columnName].jdTitle}}
+                    </h5>
+                    <h5 *ngSwitchDefault  class="m-0 p-3">{{ entry[columns[0]] }}</h5>
+                  </ng-container>
+                
                 </div>
                 <div class="d-flex">
                   <div class="p-3">
@@ -140,9 +145,13 @@
                   {{ columnName | uppercase }}
                 </b>
               </div>
-              <div>
+              <!-- <div>
                 {{ entry[columnName] }}
-              </div>
+              </div> -->
+              <ng-container [ngSwitch]="true">
+                <div *ngSwitchCase="columnName=='date'">{{entry[columnName]|date}}</div>
+                <div *ngSwitchDefault>{{entry[columnName]}}</div>
+              </ng-container>
             </div>
           </ng-template>
         </ngb-panel>
@@ -150,7 +159,7 @@
     </div>
   </div>
 
-  <div class="paginationDiv" *ngIf="pager?.totalPages > 1">
+  <div class="paginationDiv" *ngIf="pager?.totalPages >= 1">
 
     <ul *ngIf="pager?.pages && pager?.pages?.length" class="pagination">
       <li [ngClass]="{ disabled: pager.currentPage == 1 }" class="page-item previous-item">

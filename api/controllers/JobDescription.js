@@ -33,13 +33,25 @@ class JobDescription extends Base {
   async get(req, res) {
     try {
       const data = await model.jobDescription.get({jdId: req.params.id });
-      return res.send({
-        success: true,
-        payload: {
-          data,
-          message: "Job Retrieved Successfully",
-        },
-      });
+      if(data!=null){
+        return res.send({
+          success: true,
+          payload: {
+            data,
+            message: "Job Retrieved Successfully",
+          },
+        });
+     }
+      else{
+        return res.send({
+          success: false,
+          payload: {
+            data,
+            message: "No id",
+          },
+        });
+      }
+
     } catch (e) {
       return res.status(500).send({
         success: false,

@@ -93,6 +93,7 @@ class Candidate extends Base {
     try {
       let candidateId = req.params.id
       let candidateObj = await candidateModel.get({ _id: candidateId })
+      console.log(candidateId, candidateObj)
 
       let data = { ...(await candidateObj).toObject(), cv: fs.readFileSync(candidateObj.cv) }
 
