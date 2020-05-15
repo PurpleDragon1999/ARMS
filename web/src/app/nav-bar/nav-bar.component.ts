@@ -1,3 +1,4 @@
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { FileUploader } from 'ng2-file-upload';
 import { AppServicesService } from 'src/app/services/app-services.service';
 import { Component, OnInit, Renderer2 } from '@angular/core';
@@ -31,7 +32,6 @@ export class AppNavBarComponent implements OnInit {
       this.adminBool = true;
     }
     else if (this.role == this._env.ADMIN) {
-      console.log("Inside");
       this.hrBool = true;
     }
   }

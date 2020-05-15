@@ -54,7 +54,7 @@ module.exports = (app) => {
   app.delete("/api/jobDescription/:id", (req, res) =>
     controller.jobDescription.remove(req, res)
   );
-  app.get("/api/jobDescriptionSearch", (req, res) =>controller.jobDescription.searchRecord(req, res));
+  app.get("/api/jobDescriptionSearch", (req, res) => controller.jobDescription.searchRecord(req, res));
 
 
   //Routes for Candidate
@@ -63,13 +63,13 @@ module.exports = (app) => {
   );
 
   app.get("/api/candidateSearch", (req, res) =>
-    controller.candidate.getAll(req, res)
+    controller.candidate.searchRecord(req, res)
   );
 
   app.get("/api/candidate/:id", (req, res) => controller.candidate.get(req, res));
   app.put("/api/candidate/:id", (req, res) => controller.candidate.modify(req, res))
   app.post("/api/candidate", fileUpload, (req, res) =>
-    controller.candidate.save(req,res)
+    controller.candidate.save(req, res)
   );
 
   app.post("/api/checkvalidemployee", (req, res) =>
@@ -79,9 +79,9 @@ module.exports = (app) => {
   app.post("/api/candidate", fileUpload, (req, res) =>
     controller.candidate.save(req, res)
   );
-  
+
   //login route
   app.post("/api/checkValidEmployee", controller.login.checkValidEmployee);
   // route to send email to candidates who have applied to job
-  app.post("/api/jdEmail",(req,res)=>controller.email.sendEmail(req,res));
+  app.post("/api/jdEmail", (req, res) => controller.email.sendEmail(req, res));
 };

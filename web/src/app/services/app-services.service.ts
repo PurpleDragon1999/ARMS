@@ -28,7 +28,7 @@ export class AppServicesService {
   };
 
   options = {
-    headers: this.createHeader  
+    headers: this.createHeader
   }
 
   constructor(private http: HttpClient) { }
@@ -42,6 +42,8 @@ export class AppServicesService {
     const helper = new JwtHelperService();
     return helper.decodeToken(this.getToken());
   }
+
+  // For making HTTP calls
   
   //For searching with pagination
   searchCandidates(name: string, pagination: string){
@@ -50,7 +52,7 @@ export class AppServicesService {
   
   createInterview(user: ICreate): Observable<HttpResponse<any>>{
     return this.http.post<any>(`${USER_DOMAIN}/api/interview`, user, { ...this.options, observe: 'response' });
-  }   
+  }
   getAllJobs(): Observable<HttpResponse<any>>{
       return this.http.get<any>(`${USER_DOMAIN}/api/jobDescription`, this.options);
   }
@@ -65,7 +67,7 @@ export class AppServicesService {
 
   deleteJd(jobObjId): Observable<IResponse>{
     return this.http.delete<any>(`${USER_DOMAIN}/api/jobDescription/${jobObjId}`, this.options);
-  }  
+  }
 
   jdFormData(jdFormObject): Observable<any>{
     return this.http.post<any>(`${USER_DOMAIN}/api/jobDescription`, jdFormObject, { ...this.options, observe: 'response' });
@@ -79,11 +81,19 @@ export class AppServicesService {
     return this.http.get<any>(`${USER_DOMAIN}/api/jobDescription`,  {headers: this.headers, observe: 'response'} );
   }
 
-  getCandidate(id:string):Observable<IResponse>{
+  getCandidate(id: string): Observable<IResponse>{
     return this.http.get<IResponse>(`${USER_DOMAIN}/api/candidate/${id}`, this.options)
   }
 
-  search(character: string = "", page : number = 1):Observable<IResponse>{
+  sendMails(mailingList,jdId): Observable<any> {
+    let mailObj= {
+      jdId: jdId,
+      mailList: mailingList
+    }
+    return this.http.post<any>(`${USER_DOMAIN}/api/jdEmail`, mailObj, { ...this.options, observe: 'response' });
+  }
+
+  search(character: string = "", page: number = 1): Observable<IResponse> {
     const params: HttpParams = new HttpParams().set('character', character).set("pagination", "true").set("page", page.toString());
     return this.http.get<IResponse>(`${USER_DOMAIN}/api/jobDescriptionSearch`, {...this.options, params})
   }

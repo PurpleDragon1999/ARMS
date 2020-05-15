@@ -16,8 +16,7 @@ class Email {
             font-weight:bolder;
           }
       </style>
-       <p>Hello</p><b>Deepanshu Balani,
-       </b>
+       <p>Hello</p>
   
        <p>Thank You for expressing your Interest for the position of ${jdObject.jdId}(${jdObject.jdTitle})
          ,You can read more about us on our company career page </p>
@@ -26,7 +25,7 @@ class Email {
   
          <p>Please signup if you wish to accept and proceed with our process</p>
  
-         <a href="http://localhost:4200/candidateForm/${jdObject.jdId}">Link To Form</a>
+         <a href="http://localhost:4200/candidateForm/${jdObject.jdId}">Click here to apply.</a>
          <p>Regards,</p>
  
          <p>HR,</p>
@@ -41,7 +40,7 @@ class Email {
          res.status(200).send({
                succcess:true,
                payload:{
-                  message:"email to candidates sent successfully"
+                  message:"Email to candidates sent successfully."
                 }
             })
 

@@ -1,8 +1,8 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <div class="main-panel">
   <div class="page-header">
-    <h3 >Job Listing</h3>
-    <button class="float-right btn btn-outline-primary btn-fw" id="addbtn" routerLink="/admin/job-desc/new">Add <i class="mdi mdi-file-plus"></i> </button>
+    <h4><b>Job Listing</b></h4>
+    <button class="float-right btn btn-gradient-danger btn-fw" id="addbtn" routerLink="/admin/job-desc/new">Add <i class="mdi mdi-file-plus"></i> </button>
   </div>
   <div class="search-field d-md-block">
     <form class="h-100" action="#">
@@ -24,8 +24,8 @@
     <div class="col-md-6 grid-margin stretch-card" *ngFor="let job of jobsList">
       <div class="card">
         <div class="card-body">
-          <h4 class="font-weight-normal mb-2">
-            Job ID: {{ job.jdId }}
+          <h5 class="font-weight-normal mb-2"><b>
+            Job ID: </b> {{ job.jdId }} 
             <!--mobile view three dot icon-->
             <div class="w3-dropdown-hover d-lg-none float-right">
               <button class="w3-button">
@@ -50,6 +50,11 @@
                   (click)="jdUpdateModal(job.jdId)"
                   ></i>
                 </a>
+                <a  class="w3-bar-item w3-button">
+                  <i class="mdi mdi-send float-right"
+                  (click)="sendBulkEmail(job.jdId)"
+                  ></i>
+                </a>
               </div>
             </div>
             <!--large screens-->
@@ -57,6 +62,10 @@
               class="mdi mdi-delete float-right d-none d-lg-block"
               (click)="deleteJd(job._id)"
             ></i>
+            <i *ngIf="datecheck(job.closingDate)==0"
+            class="mdi mdi-send float-right d-none d-lg-block"
+            (click)="sendBulkEmail(job.jdId)"
+          ></i>
             <i
               class="mdi mdi-download float-right d-none d-lg-block"
               (click)="downloadPdf(job.jdId)"
@@ -65,19 +74,21 @@
             (click)="jdUpdateModal(job.jdId)"
             ></i>
           
-          </h4>
-           <h3 class="mb-3">{{ job.jdTitle }}</h3>
+          </h5>
+           <h4 class="mb-3">{{ job.jdTitle }}</h4>
            <h6 class="font-weight-normal">
-            Opening Date : {{ job.openingDate | date }}
+           <b> Opening Date : </b>{{ job.openingDate | date }}
            </h6>
             <h6 class="font-weight-normal" [style.visibility]="job.closingDate ? 'visible' : 'hidden'">
-            Closing Date : {{ job.closingDate | date }}
-          </h6>
+            <b> Date : </b>{{ job.closingDate | date }}
 
-          <label *ngIf="datecheck(job.closingDate)==1"
+            <label *ngIf="datecheck(job.closingDate)==1"
             class="badge badge-gradient-danger float-right mb-0">CLOSED</label>
           <label *ngIf="datecheck(job.closingDate)==0"
             class="badge badge-gradient-success float-right mb-0">OPEN</label>
+
+          </h6>
+
         </div>
       </div>
     </div>

@@ -62,8 +62,9 @@
             <span class="input-group-append btn btn-gradient-danger">
               CYG
             </span>
-            <input min="1" max ="10000" [readOnly]="formType !== 'create'" name="employeeId" [ngModel]="employee?.employeeId" type="number"
-              required class="form-control" id="employeeId" placeholder="Employee Id" #employeeId="ngModel"
+            <input min="1" max="10000" [readOnly]="formType !== 'create'" name="employeeId"
+              [ngModel]="employee?.employeeId" type="number" required class="form-control" id="employeeId"
+              placeholder="Employee Id" #employeeId="ngModel"
               [ngClass]="{ 'is-invalid': employeeId.dirty && employeeId.invalid }">
             <div *ngIf="employeeId.dirty && employeeId.errors?.required" class="invalid-feedback">
               <div><i class="mdi mdi-alert-outline"></i>Employee Id is required</div>
@@ -73,7 +74,7 @@
         <div class="d-flex flex-row-reverse">
           <button type="submit" [disabled]="form.invalid" *ngIf="formType !== 'read'"
             class="btn btn-gradient-danger"><b>{{ formType | titlecase }}</b></button>
-          <button class="btn btn-light" (click)="modalClose(false)"><b>Cancel</b></button>
+          <button class="btn btn-light mr-2" (click)="modalClose(false)"><b>Cancel</b></button>
         </div>
       </form>
     </div>

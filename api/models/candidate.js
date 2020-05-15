@@ -12,10 +12,10 @@ class Candidate {
   }
 
   async getAll(criteria = {}, columns = {}) {
-    return this.Model.find(criteria, columns).sort({ name: 1 });
+    return this.Model.find(criteria, columns).sort({ name: 1 }).populate('appliedFor', 'jdTitle');
   }
 
-  async get(criteria={}, columns={}) {
+  async get(criteria = {}, columns = {}) {
     let fields = "jdTitle jdId"
     return this.Model.findOne(criteria).populate('appliedFor', fields);
   }

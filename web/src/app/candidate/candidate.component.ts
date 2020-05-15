@@ -28,6 +28,8 @@ export class CandidateComponent implements OnInit {
             this.candidates = res.payload.data.dataList;
             this.candidates.forEach((candidate: any) => {
                 candidate.pdf = this.bufferToPdf.bufferToPdf(candidate.cv.data);
+                if (candidate.appliedFor)
+                    candidate.appliedFor = candidate.appliedFor.jdTitle;
             });
             this.columns = ["name", "email", "appliedFor", "experience"];
             this.pager = res.payload.data.pager;

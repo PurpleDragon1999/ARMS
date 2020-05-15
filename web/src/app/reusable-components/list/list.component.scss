@@ -20,7 +20,7 @@ only screen and (max-width: 1220px),
 }
 
 .mdi-pencil:hover, .mdi-delete:hover, .fa:hover{
-    color: rgb(182, 109, 255);
+    color: #FC4C02;
 }
 
 button{
@@ -60,8 +60,8 @@ ngb-pagination ::ng-deep ul > li:not(.active) > a {
     .page-item.active .page-link {
         // z-index: 1;
         color: #fff;
-        background-color:rgb(182, 109, 255);;
-        border-color: rgb(182, 109, 255);;
+        background-color:#FC4C02;
+        border-color: #FC4C02;
         outline: none !important;
         border: none !important;
     }
@@ -87,7 +87,7 @@ ngb-pagination ::ng-deep ul > li:not(.active) > a {
     }
     ngb-accordion.collapse.show{
         h5, button{
-            color: rgb(182, 109, 255);
+            color: #FC4C02;
         }
     }
 }
@@ -98,7 +98,7 @@ select{
 }
 
 .mdi-account-plus{
-    color: rgb(182, 109, 255);
+    color: #FC4C02;
 }
 
 .itemsDiv{
@@ -147,10 +147,15 @@ th{
 
  td, th{
      padding-right: 0em;
-     padding-left: 0em;
+     padding-left: .7em;
  }
 
  
 .mdi-account-plus{
     color: #fff;
 }
+
+// .customised-dropdown-parent{
+//     transform: translateY(0);
+//     transition: all .5s ease-in;
+// }

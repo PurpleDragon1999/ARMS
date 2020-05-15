@@ -1,7 +1,9 @@
 const Base = require("./base");
 const candidateModel = require("../models/candidate");
-var fs = require("fs")
-
+var fs = require("fs");
+var validator=require('aadhaar-validator');
+const jobDescriptionModel=require('../models/jobDescription');
+const nodeMail=require('../middlewares/mailHelper');
 async function validateCandidate(candidate) {
   let emailExists = await candidateModel.get({ email: candidate.email })
   if (emailExists) {
@@ -14,7 +16,8 @@ async function validateCandidate(candidate) {
     throw new Error("This Aadhar number is already registered")
     return
   }
-  if(validator.isvalid(candidate.aadhar)){
+
+  if(validator.isValidNumber(candidate.aadhar)){
       throw new Error("This aadhar number is not valid");
       return
   }
@@ -49,9 +52,47 @@ class Candidate extends Base {
       };
 
       await validateCandidate(objToCreate)
-
       let createdObj = await this.model.save(objToCreate);
-      console.log("success")
+      let jdJson=await jobDescriptionModel.get({_id:createdObj.appliedFor});
+      const output = `<style>
+      .bottom{
+        color:grey;
+        font-size:0.8rem;
+         }
+         .bold{
+             font-weight:bolder;
+         }
+    </style>
+    <p>Dear Mr/Ms.</p><b>${createdObj.name},</b>We are pleased to inform you that you have 
+    successfully registered for an interview process with CyberGroup.The details of interview will be communicated soon.
+    </p>
+    <table>
+       <tr>
+         <td><b>Job ID:</b></td>
+         <td>${jdJson.jdId}</td>
+       </tr>
+       <tr>
+       <td><b>Job Title:</b></td>
+       <td>${jdJson.jdTitle}</td>
+     </tr>
+       <tr>
+         <td><b>Job Type:</b></td>
+         <td>${jdJson.jobType}</td>
+       </tr>
+        <tr>
+       <td ><b>Address:</b></td>
+       <td> B-9, Block B, Sector 3, Noida, Uttar Pradesh 201301</td>
+     </tr>
+    </table>
+    <a href="http://localhost:4200/progressTracker/${createdObj._id}">Please click here to track your progress</a>
+    <br>
+    <em class="bottom">This is automatically generated email,please do not reply</em>
+    <p>Thanks</p>
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRCUuWWhu0HByWgdDAp2cA1TDf-a_
+     FpjUA_DFbRt33DViY9tNDH&usqp=CAU"width="100"height="100">
+      
+    `;
+      nodeMail(createdObj.email,output,jdJson);
       return res.send({
 
         success: true,
@@ -113,17 +154,26 @@ class Candidate extends Base {
     }
   }
 
-  async getAll(req, res) {
+  async searchRecord(req, res) {
     try {
-      let candidatesList = await candidateModel.getAll()
-      candidatesList = await Promise.all(candidatesList.map(async (candidate) => {
-        return { ...candidate.toObject(), cv: fs.readFileSync(candidate.cv) }
-      }))
-      req.body.records = candidatesList
+      let queryObject = {
+        $regex: ".*^" + req.query.character + ".*",
+        $options: "i",
+      };
+
+      let candidateList = await candidateModel.getAll({ $or: [{ name: queryObject }] });
+
+      candidateList = await Promise.all(candidateList.map(async (candidate) => {
+        if (fs.existsSync(candidate.cv)) {
+          return { ...candidate.toObject(), cv: fs.readFileSync(candidate.cv) };
+        }
+        return { ...candidate.toObject() };
+      }));
+
+      req.body.records = candidateList;
       super.getPaginatedResult(req, res)
     }
     catch (err) {
-      console.log(err)
       res.send({
         success: false,
         payload: {
