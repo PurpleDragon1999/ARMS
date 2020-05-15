@@ -1,7 +1,7 @@
 <div class="col-lg-12 stretch-card desktopView">
   <div class="card">
     <div class="card-body">
-  
+
       <div class="itemsDiv">
         <div class="search-field  d-md-block ">
           <form class="d-flex align-items-center h-100" action="#">
@@ -18,7 +18,7 @@
           <button class="btn btn-gradient-danger" id="addOption" ngbDropdownToggle><i
               class="mdi mdi-account-plus"></i>Add {{ title | titlecase }}(s)
           </button>
-          <div ngbDropdownMenu>
+          <div ngbDropdownMenu class="customised-dropdown-parent">
             <button ngbDropdownItem class="btn btn-gradient-danger btn-fw" (click)="openModal('create')"><i
                 class="mdi mdi-account-plus"></i> Add {{ title | titlecase }}</button>
             <button ngbDropdownItem class="btn btn-gradient-danger btn-fw" (click)="openFileUploadModal()"><i
@@ -31,14 +31,14 @@
           <tr>
             <th *ngFor="let columnName of columns; let i = index">
               <div *ngIf="columnName=='jdObjectId';else otherCol">
-               JOB TITLE          
-            </div>
+                JOB TITLE
+              </div>
               <ng-template #otherCol>{{columnName | uppercase}}</ng-template>
             </th>
           </tr>
         </thead>
         <tbody>
-          
+
           <tr *ngFor="let entry of data">
             <td *ngFor="let columnName of columns;">
               <ng-container [ngSwitch]="true">
@@ -149,7 +149,7 @@
       </ngb-accordion>
     </div>
   </div>
- 
+
   <div class="paginationDiv" *ngIf="pager?.totalPages > 1">
 
     <ul *ngIf="pager?.pages && pager?.pages?.length" class="pagination">
@@ -168,6 +168,5 @@
     </ul>
 
   </div>
- 
 </div>
 
