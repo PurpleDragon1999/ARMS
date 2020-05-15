@@ -73,7 +73,10 @@ export class EmployeeComponent implements OnInit {
   }
 
   searchEmployee(event: IModelForPagination) {
-    this.employeeService.searchEmployee(event.page, event.character).subscribe((res) => {
+    this.employeeService.searchEmployee(event.page, event.character).subscribe((res:any) => {
+      // this.employees = res.payload.data.datalist;
+      // this.columns = ["name", "email", "employeeId", "designation", "role"];
+      // this.pager = res.payload.data.pager;
       this.employees = res.payload.data.dataList;
       this.columns = ["name", "email", "employeeId", "designation", "role"];
       this.pager = res.payload.data.pager;

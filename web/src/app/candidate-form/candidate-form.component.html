@@ -1,10 +1,10 @@
 <div class="col-12 stretch-card">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title"><b>Job Application</b></h4>
+        <h4 class= "top"><b>Job Application</b></h4>
         <form name="form" #f="ngForm" >
 
-          <div class="form-group pt-4">
+          <div class="form-group">
             <label for="appliedForJdId">Applied for JD<span class="asterick">*</span></label>
             <input [readOnly]="type == 'progressTracker' || 'candidate'" type="text" name="appliedForJdId" class="form-control" [(ngModel)]="model.appliedForJdId" 
              placeholder="JD referral" #appliedForJdId="ngModel" id="appliedForJdId"
@@ -15,12 +15,12 @@
           </div>
 
           <div class="form-group">
-            <label for="appliedForPosition">Applied for Position<span class="asterick">*</span></label>
+            <label for="appliedForPosition"><b>Applied for Position</b><span class="asterick">*</span></label>
             <input [readOnly]="type == 'progressTracker' || 'candidate'" type="text" name="appliedForPosition" class="form-control" [(ngModel)]="model.appliedForPosition" 
              placeholder="JD referral" #appliedForPosition="ngModel" id="appliedForPosition"
-             [ngClass]="{ 'is-invalid': appliedForPosition.dirty && appliedForPosition.invalid }" required>
-            <div *ngIf="appliedForPosition.dirty && appliedForPosition.errors?.required" class="invalid-feedback">
-              <div><i class="mdi mdi-alert-outline"></i>Applied For field is required</div>
+             [ngClass]="{ 'is-invalid': f.submitted && appliedForPosition.invalid }" required>
+            <div *ngIf="f.submitted && appliedForPosition.invalid" class="invalid-feedback">
+              <div *ngIf="appliedForPosition.errors.required"><i class="mdi mdi-alert-outline"></i>Applied For Position is required</div>
             </div>
           </div>
 

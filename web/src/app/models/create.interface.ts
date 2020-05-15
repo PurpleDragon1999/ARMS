@@ -1,10 +1,9 @@
 export interface ICreate {
+    jdId: string;
     jd: string;
-    email: string;
     date: string;
     time: string;
-    roundType: string;
-    panelOfInterviews: string;
+    venue: string;
     noOfRounds:number;
   }
   

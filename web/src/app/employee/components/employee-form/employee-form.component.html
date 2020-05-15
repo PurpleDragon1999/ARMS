@@ -72,8 +72,8 @@
         </div>
         <div class="d-flex flex-row-reverse">
           <button type="submit" [disabled]="form.invalid" *ngIf="formType !== 'read'"
-            class="btn btn-gradient-danger mr-2"><b>{{ formType | titlecase }}</b></button>
-          <button class="btn btn-light" (click)="modalClose(false)"><b>Cancel</b></button>
+            class="btn btn-gradient-danger"><b>{{ formType | titlecase }}</b></button>
+          <button class="btn btn-light mr-2" (click)="modalClose(false)"><b>Cancel</b></button>
         </div>
       </form>
     </div>

@@ -85,13 +85,13 @@
 <div class="row mobileView">
   <div class="card-body justify-content-between">
     <div ngbDropdown class="addEmployee addMobile">
-      <button class="btn btn-outline-primary" id="addOption" ngbDropdownToggle><i class="mdi mdi-account-plus"></i>Add
+      <button class="btn btn-gradient-danger" id="addOption" ngbDropdownToggle><i class="mdi mdi-account-plus"></i>Add
         {{ title | titlecase }}(s)
       </button>
       <div ngbDropdownMenu>
-        <button ngbDropdownItem class="btn btn-outline-primary btn-fw" (click)="openModal('create')"><i
+        <button ngbDropdownItem class="btn btn-gradient-danger" (click)="openModal('create')"><i
             class="mdi mdi-account-plus"></i>Add {{ title | titlecase }} </button>
-        <button ngbDropdownItem class="btn btn-outline-primary btn-fw" (click)="openFileUploadModal()"><i
+        <button ngbDropdownItem class="btn btn-gradient-danger" (click)="openFileUploadModal()"><i
             class="mdi mdi-account-plus"></i> Add through file upload</button>
       </div>
     </div>
