@@ -84,7 +84,7 @@ export class JdListComponent implements OnInit {
     this._service.search(character, page).subscribe(res=> {
       this.jobsList = res.payload.data.dataList
       this.pager = res.payload.data.pager
-    })
+    });
   }
- 
+
 }

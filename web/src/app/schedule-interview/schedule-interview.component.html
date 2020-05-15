@@ -1,10 +1,10 @@
 <div class="page-header">
-    <h3 class="page-title">Schedule Interview</h3>
+    <h4><b> Interview</b></h4>
 </div>
 <div class="card">
     <div class="card-body">
         <form class="forms-sample" [formGroup]="scheduleForm" novalidate>
-            <div class="form-group mt-3">
+            <div class="form-group ">
                 <label class="col-sm-3 col-form-label"><b>Date of Inteview</b></label>
                 <div class="col-sm-9">
                     <input type="date" class="form-control" formControlName="interviewDate" #interviewDate placeholder="DD/MM/YYYY" onfocus="(this.type='date')" onblur="(this.type='text')" [ngClass]="{ 'is-invalid': submitted && formControls.interviewDate.errors }" min="{{currentDate}}"/>
@@ -27,7 +27,7 @@
                 </div>
             </div>
 
-            <div class="form-group mt-3">
+            <div class="form-group ">
                 <label class="col-sm-3 col-form-label"><b>Select Profile</b></label>
                 <div class="col-sm-9">
                     <select class="form-control" id="jdList">
@@ -68,7 +68,7 @@
                 </ul>
             </div>
     
-            <div class="table-responsive d-none d-lg-block mt-3">
+            <div class="table-responsive d-none d-lg-block ">
                 <table class="table table-striped table-bordered">
                     <thead #thead>
                         <tr>
