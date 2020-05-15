@@ -1,3 +1,4 @@
+
 import { JdFormComponent } from './../jd-form/jd-form.component';
 import { Component, OnInit, EventEmitter, Output, Input } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
@@ -31,20 +32,18 @@ export class JdModalComponent implements OnInit {
   @Output()
   closeModal: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  @ViewChild("jdId", { static: false }) jdId: ElementRef;
-  @ViewChild("jdTitle", { static: false }) jdTitle: ElementRef;
-  @ViewChild("openingDate", { static: false }) openingDate: ElementRef;
-  @ViewChild("closingDate", { static: false }) closingDate: ElementRef;
-  @ViewChild("jobProfileDescription", { static: false })
-  jobProfileDescription: ElementRef;
-  @ViewChild("skills", { static: false }) skills: ElementRef;
-  @ViewChild("jobType", { static: false }) jobType: ElementRef;
-  @ViewChild("eligibilityCriteria", { static: false })
-  eligibilityCriteria: ElementRef;
-  @ViewChild("location", { static: false }) location: ElementRef;
-  @ViewChild("salary", { static: false }) salary: ElementRef;
-  @ViewChild("vacancies", { static: false }) vacancies: ElementRef;
-  @ViewChild("content", { static: true }) content: ElementRef;
+
+  jdId: string;
+  jdTitle: string;
+  openingDate: string;
+  closingDate: string; 
+  jobProfileDescription: string; 
+  skills: string; 
+  jobType: string;
+  eligibilityCriteria: string;
+  location: string;
+  salary: string;
+  vacancies: string;
 
   jobArray: any;
   eligibilityCriteriaOptions: String;
