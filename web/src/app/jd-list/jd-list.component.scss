@@ -65,7 +65,7 @@ i:hover{
     justify-content: center;
  }
 
- .mdi-pencil:hover, .mdi-delete:hover, .mdi-download:hover{
+ .mdi:hover{
     color: #FC4C02;
 }
 
@@ -80,11 +80,16 @@ i:hover{
     transition: background-color 0.3s;
 }
 .w3-button{
- background-color:white;
  cursor: pointer;
+ background-color: white;
 }
 .w3-dropdown-content{
-    min-width:40px;
+    min-width:20px;
+    background-color:lightgrey;
+}
+
+.w3-dropdown-content:hover{
+    background-color: lightgrey;
 }
 
 /* Typography */
