@@ -1,6 +1,7 @@
 const Base = require("./base");
 const candidateModel = require("../models/candidate");
 var fs = require("fs")
+var validator= require("aadhaar-validator")
 
 async function validateCandidate(candidate) {
   let emailExists = await candidateModel.get({ email: candidate.email })
@@ -14,7 +15,7 @@ async function validateCandidate(candidate) {
     throw new Error("This Aadhar number is already registered")
     return
   }
-  if(validator.isvalid(candidate.aadhar)){
+  if(validator.isValidNumber(candidate.aadhar)){
       throw new Error("This aadhar number is not valid");
       return
   }

@@ -30,7 +30,7 @@ import { JdModalComponent } from './jd-modal/jd-modal.component';
 import { ProgressTrackerComponent } from './progress-tracker/progress-tracker.component';
 import { InterviewListComponent } from './interview-list/interview-list.component';
 import { CandidateComponent } from './candidate/candidate.component';
-
+import { EmailListModalComponent } from './email-list-modal/email-list-modal.component';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -61,8 +61,9 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     ErrorPageComponent,
     JdModalComponent,
     ProgressTrackerComponent,
-    InterviewListComponent,
-    CandidateComponent
+    CandidateComponent,
+    EmailListModalComponent,
+    InterviewListComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -104,7 +105,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     },
   ],
   exports: [ListComponent],
-  entryComponents: [EmployeeFormComponent, ModalComponent, EmployeeUploadComponent],
+  entryComponents: [EmployeeFormComponent, ModalComponent, EmployeeUploadComponent, EmailListModalComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
