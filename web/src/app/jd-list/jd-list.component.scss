@@ -25,16 +25,12 @@ i:hover{
     min-width: 133px;
 }
 
-.page-header h3{
-    font-weight: bolder;
-}
-
 .paginationDiv ::ng-deep{
     .page-item.active .page-link {
         // z-index: 1;
         color: #fff;
-        background-color:rgb(182, 109, 255);;
-        border-color: rgb(182, 109, 255);;
+        background-color:#FC4C02;
+        border-color: #FC4C02;
         outline: none !important;
         border: none !important;
     }
@@ -60,8 +56,9 @@ i:hover{
  }
 
  .mdi-pencil:hover, .mdi-delete:hover, .mdi-download:hover{
-    color: rgb(182, 109, 255);
+    color: #FC4C02;
 }
+
 .more-dot {
     background-color: black;
     margin: 0 auto;

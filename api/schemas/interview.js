@@ -10,6 +10,11 @@ module.exports = {
     type: ObjectId,
     ref: "jobDescription",
   },
+  venue:{
+    type: String,
+    // required: true,
+  },
+  
   noOfRounds: {
     type: Number,
     required: true,

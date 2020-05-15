@@ -1,11 +1,11 @@
 <div class="col-12 stretch-card">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Job Application</h4>
+        <h4 class= "top"><b>Job Application</b></h4>
         <form name="form" #f="ngForm" >
 
           <div class="form-group">
-            <label for="appliedForJdId">Applied for JD<span class="asterick">*</span></label>
+            <label for="appliedForJdId"><b>Applied for JD</b><span class="asterick">*</span></label>
             <input [readOnly]="type == 'progressTracker' || 'candidate'" type="text" name="appliedForJdId" class="form-control" [(ngModel)]="model.appliedForJdId" 
              placeholder="JD referral" #appliedForJdId="ngModel" id="appliedForJdId"
              [ngClass]="{ 'is-invalid': f.submitted && appliedForJdId.invalid }" required>
@@ -15,7 +15,7 @@
           </div>
 
           <div class="form-group">
-            <label for="appliedForPosition">Applied for Position<span class="asterick">*</span></label>
+            <label for="appliedForPosition"><b>Applied for Position</b><span class="asterick">*</span></label>
             <input [readOnly]="type == 'progressTracker' || 'candidate'" type="text" name="appliedForPosition" class="form-control" [(ngModel)]="model.appliedForPosition" 
              placeholder="JD referral" #appliedForPosition="ngModel" id="appliedForPosition"
              [ngClass]="{ 'is-invalid': f.submitted && appliedForPosition.invalid }" required>

@@ -93,7 +93,7 @@ export class AppServicesService {
     return this.http.post<any>(`${USER_DOMAIN}/api/jdEmail`, mailObj, { ...this.options, observe: 'response' });
   }
 
-  search(character: string = "", page: number = 1): Observable<IResponse>{
+  search(character: string = "", page: number = 1): Observable<IResponse> {
     const params: HttpParams = new HttpParams().set('character', character).set("pagination", "true").set("page", page.toString());
     return this.http.get<IResponse>(`${USER_DOMAIN}/api/jobDescriptionSearch`, {...this.options, params})
   }
