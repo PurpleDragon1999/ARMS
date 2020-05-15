@@ -27,7 +27,7 @@ export class ProgressTrackerComponent implements OnInit {
     let candidateId = this._route.url.split("/")[2]
     this._service.getCandidate(candidateId).subscribe((res:IResponse)=>{    
       let candidateData = res.payload.data
-      // this.flag = candidateData.flag     
+      this.flag = candidateData.flag     
       console.log(res,"!!!!!") 
       console.log(candidateData, this.flag, res)
     })

@@ -17,7 +17,7 @@ async function validateCandidate(candidate) {
     return
   }
   if(validator.isValidNumber(candidate.aadhar)){
-    throw new Error("This aadhar number is not valid");
+      throw new Error("This aadhar number is not valid");
       return
   }
 
