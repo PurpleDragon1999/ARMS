@@ -60,6 +60,9 @@ const routes: Routes = [
         path: "", redirectTo: "home", pathMatch: "full"
       },
       {
+        path: "candidate", component: CandidateComponent
+      },
+      {
         path: "create-interview", component: CreateInterviewComponent 
       },
     
