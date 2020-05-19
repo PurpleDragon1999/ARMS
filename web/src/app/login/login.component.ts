@@ -97,7 +97,7 @@ export class LoginComponent implements OnInit {
 
 
       }, err => {
-        this.message = err.error.payload.message
+        this.message = err.error.message
       }
     )
 
