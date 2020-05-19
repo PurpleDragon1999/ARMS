@@ -13389,7 +13389,12 @@ option{
 .select-css option {
 	font-weight:normal;
 }
-
+select option:checked {
+	padding-left: 25px;
+	width: 270px;
+    color: #EC6F66 !important;
+  
+}
 
 
 /*# sourceMappingURL=style.css.map */
