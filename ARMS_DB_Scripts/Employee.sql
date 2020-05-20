@@ -11,10 +11,3 @@ Email varchar(400) not null unique ,
 ProfileImage varchar(8000),
 
 )
-
-insert into Employee (Name,Designation, Role, Email)
-values ('Shivani', 'Associate 2','SuperUser','shivani.bansal@cygrp.com');
-
-select * from Employee;
-
-GO
