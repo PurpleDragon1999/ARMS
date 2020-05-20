@@ -21,8 +21,3 @@ OverallRemarks varchar(255) not null,
 RoundResult bit not null,
 )
 
-insert into Round(Interview_id, RoundType, [time], RoundNumber)
-values ('CYGIID1003','Written','4:15',5)
-
-Select * from Round
-
