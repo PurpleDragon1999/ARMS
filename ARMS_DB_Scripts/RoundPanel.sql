@@ -1,4 +1,4 @@
-create table Round_panel(
+create table RoundPanel(
 Round_Panel_Id int identity(1000,1) primary key,
 Round_Id varchar(206),
 constraint FK_Round_Panel foreign key (Round_Id)  references Round(Round_Id),
@@ -8,9 +8,9 @@ constraint FK_Panel_Member foreign key (Panel_Member_Id) references Employee(Emp
 
 )
 
-insert into Round_panel (Round_Id, Panel_Member_Id)
+insert into RoundPanel (Round_Id, Panel_Member_Id)
 values ('CYGRID1009','CYG1001')
 
-select * from Round_panel
+select * from RoundPanel
 
 
