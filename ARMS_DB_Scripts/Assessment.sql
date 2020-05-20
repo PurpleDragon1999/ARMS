@@ -18,6 +18,6 @@ Interviewer2 varchar(103),
 constraint FK_Assessment_Interviewer2 foreign key (Interviewer2) references Employee(EmployeeId),
 
 OverallRemarks varchar(255) not null,
-RoundResult bit not null,
+RoundResult bit check(RoundResult=0 OR RoundResult=1) not null,
 )
 
