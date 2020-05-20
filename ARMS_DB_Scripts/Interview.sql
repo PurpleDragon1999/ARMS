@@ -9,8 +9,3 @@ JD_Id varchar(8000) not null,
 constraint FK_Interview foreign key (JD_Id) references JobDescription(JD_Id),
 
 )
-
-insert into Interview (Date, Time, Venue,NoOfRounds, JD_Id)
-values ('2020-05-22','4:15:00', 'Noida',6,'CYGJID1003')
-
-select * from Interview
