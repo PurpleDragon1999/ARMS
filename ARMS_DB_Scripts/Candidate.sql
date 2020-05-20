@@ -20,11 +20,3 @@ constraint FK_Candidate foreign key (AppliedFor) references JobDescriptions(JD_I
 Shortlisted bit check(Shortlisted=0 OR Shortlisted=1)
 
 )
-
-insert into Candidate (Email, Aadhar, [Name], Cv, AppliedFor)
-values ('abc@gmail.com','7777 7777 7777', 'Shivani','dcuments/Cv','CYGJID1000')
-
-delete from Candidate where Email='abc@gmail.com'
-
-
-select * from Candidate
