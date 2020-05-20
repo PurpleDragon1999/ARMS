@@ -11,7 +11,7 @@ constraint FK_Assessment_Candidate foreign key (Candidate_Email, Candidate_Aadha
 Round_Id varchar(206) not null,
 constraint FK_Assessment_Round foreign key (Round_Id) references Round(Round_Id),
 
-Interviewer1 varchar(103),
+Interviewer1 varchar(103) not null,
 constraint FK_Assessment_Interviewer1 foreign key (Interviewer1) references Employee(EmployeeId),
 
 Interviewer2 varchar(103),
