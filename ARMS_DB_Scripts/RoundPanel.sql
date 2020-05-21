@@ -1,16 +1,19 @@
 create table RoundPanel(
-Round_Panel_Id int identity(1000,1) primary key,
-Round_Id varchar(206),
-constraint FK_Round_Panel foreign key (Round_Id)  references Round(Round_Id),
+createdAt datetime2(3) default (sysdatetime()),
+modifiedAt datetime2(3) default (sysdatetime()),
+id int identity(1000,1) primary key,
+roundId varchar(206),
+constraint FK_Round_Panel foreign key (roundId)  references Round(id),
 
-Panel_Member_Id varchar(103),
-constraint FK_Panel_Member foreign key (Panel_Member_Id) references Employee(EmployeeId)
+panelMemberID varchar(103),
+constraint FK_Panel_Member foreign key (panelMemberID) references Employee(id)
 
 )
 
-insert into RoundPanel (Round_Id, Panel_Member_Id)
-values ('CYGRID1009','CYG1001')
-
-select * from RoundPanel
-
-
+CREATE TRIGGER trg_UpdateRoundPanel
+ON RoundPanel
+AFTER UPDATE
+AS
+    UPDATE RoundPanel
+    SET modifiedAt  = sysdatetime()
+    WHERE id IN (SELECT DISTINCT id FROM Inserted)
