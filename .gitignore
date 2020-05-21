@@ -10,4 +10,5 @@ yarn.lock
 *.csv
 
 jobDescriptions
+.idea
 
