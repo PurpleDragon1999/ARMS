@@ -4,7 +4,7 @@ require("dotenv").config();
 // node function which sends email to new user create
 
  nodeMail=async function(mailList,output,jdJson){
-    const username='deepanshu.balani';
+    const username='chetna.mongmaw';
    try{
      let testAccount = await nodemailer.createTestAccount();
       
