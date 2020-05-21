@@ -1,22 +1,33 @@
 create table Candidate (
-Email varchar(255) not null unique,
+createdAt datetime2(3) default (sysdatetime()),
+modifiedAt datetime2(3) default (sysdatetime()),
+email varchar(255) not null unique,
 
-Aadhar varchar(255) not null unique,
-constraint PK_Candidate primary key (Email, Aadhar),
+aadhar varchar(255) not null unique,
+constraint PK_Candidate primary key (email, aadhar),
 
-[Name] nvarchar(255) not null,
-Experience decimal(18,1) default 0,
+[name] nvarchar(255) not null,
+experience decimal(18,1) default 0,
 
-Cv nvarchar(500) not null,
-Selected bit check(Selected=0 OR Selected=1),
+cv nvarchar(500) not null,
+selected bit check(selected=0 OR selected=1),
 
-[Status] varchar(200) check (Status in ('AppliedSuccessfully', 'InterviewScheduled', 'InProgress', 'ResultDeclared' )) default 'AppliedSuccessfully',
-CurrentRoundNumber int ,
-Flag int check(Flag in (1,2,3,4)) default 1,
+[status] varchar(200) check (Status in ('AppliedSuccessfully', 'InterviewScheduled', 'InProgress', 'ResultDeclared' )) default 'AppliedSuccessfully',
+currentRoundNumber int ,
+flag int check(flag in (1,2,3,4)) default 1,
 
-AppliedFor varchar(8000) not null,
-constraint FK_Candidate foreign key (AppliedFor) references JobDescriptions(JD_Id),
+appliedFor varchar(106) not null,
+constraint FK_Candidate foreign key (appliedFor) references JobDescription(id),
 
-Shortlisted bit check(Shortlisted=0 OR Shortlisted=1)
+shortlisted bit check(shortlisted=0 OR shortlisted=1)
 
 )
+
+CREATE TRIGGER trg_UpdateCandidate
+ON Candidate
+AFTER UPDATE
+AS
+    UPDATE Candidate
+    SET modifiedAt  = sysdatetime()
+    WHERE email IN (SELECT DISTINCT email FROM Inserted)
+
