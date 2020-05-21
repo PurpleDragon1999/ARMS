@@ -18,11 +18,11 @@
         <li class="nav-item nav-profile">
           <a class="nav-link">
             
-            <div class="nav-profile-img">
+            <div class="nav-profile-img pt-0">
               <img src="../../assets/images/customers-icon-3.png" alt="image">
             </div>
             
-            <div class="nav-profile-text text">
+            <div class="nav-profile-text text pt-0">
               <p class="mb-1 text-black">{{name}}</p>
               <span class="text-secondary text-small">{{role | uppercase}}</span>
             </div>
@@ -70,6 +70,20 @@
         <li class="nav-item" *ngIf="hrBool" routerLinkActive="active">
           <a class="nav-link" [routerLink]="['job-desc']">
             <span class="menu-title">Job Descriptions</span>
+            <i class="fas fa-file-alt menu-icon"></i>
+          </a>
+        </li>
+
+        <li class="nav-item"  routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['candidate']">
+            <span class="menu-title">Applied Candidates</span>
+            <i class="fas fa-users menu-icon"></i>
+          </a>
+        </li>
+
+        <li class="nav-item" *ngIf="hrBool" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['interviews']">
+            <span class="menu-title">Upcoming Interviews</span>
             <i class="fas fa-file-alt menu-icon"></i>
           </a>
         </li>
