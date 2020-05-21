@@ -33,6 +33,7 @@
               <div *ngIf="columnName=='jdObjectId';else otherCol">
                 JOB TITLE
               </div>
+              
               <ng-template #otherCol>{{columnName | uppercase}}</ng-template>
             </th>
           </tr>
