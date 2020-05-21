@@ -1,16 +1,26 @@
 create table JobDescription (
-JD_Number int identity(1000,1) ,
-JD_Id as 'CYGJID' + cast(JD_Number as varchar(8000)) persisted primary key ,
-Title varchar(255) unique not null ,
-OpeningDate date not null ,
-ClosingDate date not null,
-Vacancies int ,
-Salary bigint not null,
-Skills varchar(500) ,
-[Location] varchar(255) not null ,
-[Description] varchar(1500) not null
+createdAt datetime2(3) default (sysdatetime()),
+modifiedAt datetime2(3) default (sysdatetime()),
+jobdescriptionNumber int identity(1000,1) ,
+id as 'CYGJID' + cast(jobdescriptionNumber as varchar(100)) persisted primary key ,
+title varchar(255) unique not null ,
+openingDate date not null ,
+closingDate date not null,
+vacancies int ,
+salary bigint not null,
+skills varchar(500) ,
+[location] varchar(255) not null ,
+[description] varchar(1500) not null
 
 )
+
+CREATE TRIGGER trg_UpdateJD
+ON JobDescription
+AFTER UPDATE
+AS
+    UPDATE JobDescription
+    SET modifiedAt  = sysdatetime()
+    WHERE id IN (SELECT DISTINCT id FROM Inserted)
 
 insert into JobDescription (Title, OpeningDate, ClosingDate,salary, [Location], [Description])
 values ('Software Developer Junior 1','2020-05-22', '2020-05-31',6,'Noida','Require logical skills')
