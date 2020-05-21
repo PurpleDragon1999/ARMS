@@ -1,23 +1,32 @@
 create table Assessment(
+createdAt datetime2(3) default (sysdatetime()),
+modifiedAt datetime2(3) default (sysdatetime()),
 
-Assessment_Number int identity(1000,1),
-Assessment_Id as 'CYGAID'+ cast(Assessment_Number as varchar(100)) persisted primary key,
+asssessmentNumber int identity(1000,1),
+id as 'CYGAID'+ cast(asssessmentNumber as varchar(100)) persisted primary key,
 
-Candidate_Email varchar(255) not null,
+candidateEmail varchar(255) not null,
 
-Candidate_Aadhar varchar(255) not null,
-constraint FK_Assessment_Candidate foreign key (Candidate_Email, Candidate_Aadhar) references Candidate(Email, Aadhar),
+candidateAadhar varchar(255) not null,
+constraint FK_Assessment_Candidate foreign key (candidateEmail, candidateAadhar) references Candidate(email, aadhar),
 
-Round_Id varchar(206) not null,
-constraint FK_Assessment_Round foreign key (Round_Id) references Round(Round_Id),
+roundId varchar(206) not null,
+constraint FK_Assessment_Round foreign key (roundId) references Round(id),
 
-Interviewer1 varchar(103) not null,
-constraint FK_Assessment_Interviewer1 foreign key (Interviewer1) references Employee(EmployeeId),
+interviewer1 varchar(103) not null,
+constraint FK_Assessment_Interviewer1 foreign key (interviewer1) references Employee(id),
 
-Interviewer2 varchar(103),
-constraint FK_Assessment_Interviewer2 foreign key (Interviewer2) references Employee(EmployeeId),
+interviewer2 varchar(103),
+constraint FK_Assessment_Interviewer2 foreign key (interviewer2) references Employee(id),
 
-OverallRemarks varchar(255) not null,
-RoundResult bit check(RoundResult=0 OR RoundResult=1) not null,
+overallRemarks varchar(255) not null,
+roundResult bit check(RoundResult=0 OR RoundResult=1) not null,
 )
 
+CREATE TRIGGER trg_UpdateAssessment
+ON Assessment
+AFTER UPDATE
+AS
+    UPDATE Assessment
+    SET modifiedAt  = sysdatetime()
+    WHERE id IN (SELECT DISTINCT id FROM Inserted)
