@@ -1,7 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-
+import { RouterTestingModule } from '@angular/router/testing';
+import { BrowserModule } from '@angular/platform-browser';
 import { HrInterviewAssessementComponent } from './hr-interview-assessement.component';
 
 describe('HrInterviewAssessementComponent', () => {
@@ -11,7 +13,8 @@ describe('HrInterviewAssessementComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ HrInterviewAssessementComponent ],
-      imports: [ ReactiveFormsModule, HttpClientTestingModule ]
+      imports: [FormsModule, ReactiveFormsModule,BrowserModule,NgbModule, HttpClientTestingModule,
+        RouterTestingModule.withRoutes([]) ]
     })
     .compileComponents();
   }));
@@ -25,4 +28,8 @@ describe('HrInterviewAssessementComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  afterEach(() => {
+    TestBed.resetTestingModule();
+  })
 });
+
