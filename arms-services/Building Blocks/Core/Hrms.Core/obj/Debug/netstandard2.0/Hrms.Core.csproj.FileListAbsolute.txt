@@ -1,0 +1,9 @@
+C:\Users\anchal.hora\Desktop\ARMS\arms-services\Building Blocks\Core\Hrms.Core\bin\Debug\netstandard2.0\Hrms.Core.deps.json
+C:\Users\anchal.hora\Desktop\ARMS\arms-services\Building Blocks\Core\Hrms.Core\bin\Debug\netstandard2.0\Hrms.Core.dll
+C:\Users\anchal.hora\Desktop\ARMS\arms-services\Building Blocks\Core\Hrms.Core\bin\Debug\netstandard2.0\Hrms.Core.pdb
+C:\Users\anchal.hora\Desktop\ARMS\arms-services\Building Blocks\Core\Hrms.Core\obj\Debug\netstandard2.0\Hrms.Core.csprojAssemblyReference.cache
+C:\Users\anchal.hora\Desktop\ARMS\arms-services\Building Blocks\Core\Hrms.Core\obj\Debug\netstandard2.0\Hrms.Core.csproj.CoreCompileInputs.cache
+C:\Users\anchal.hora\Desktop\ARMS\arms-services\Building Blocks\Core\Hrms.Core\obj\Debug\netstandard2.0\Hrms.Core.AssemblyInfoInputs.cache
+C:\Users\anchal.hora\Desktop\ARMS\arms-services\Building Blocks\Core\Hrms.Core\obj\Debug\netstandard2.0\Hrms.Core.AssemblyInfo.cs
+C:\Users\anchal.hora\Desktop\ARMS\arms-services\Building Blocks\Core\Hrms.Core\obj\Debug\netstandard2.0\Hrms.Core.dll
+C:\Users\anchal.hora\Desktop\ARMS\arms-services\Building Blocks\Core\Hrms.Core\obj\Debug\netstandard2.0\Hrms.Core.pdb
