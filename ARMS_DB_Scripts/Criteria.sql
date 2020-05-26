@@ -1,20 +1,36 @@
-create table Criteria (
-createdAt datetime2(3) default (sysdatetime()),
-modifiedAt datetime2(3) default (sysdatetime()),
-criteriaNumber int identity(1000,1),
-id as 'CYGCID' + cast(criteriaNumber as varchar(200)) persisted primary key,
-roundId varchar(206) not null,
-constraint FK_Criteria_Round foreign key (roundId) references Round(id),
-criteria varchar(500) not null,
+IF OBJECT_ID('ARMS.Criteria') IS NULL
+BEGIN
+	CREATE TABLE ARMS.Criteria(
+	[id] int identity(1,1) not null,
+	[marks] int not null,
+	[remarks] nvarchar(max) not null,
+	[createdAt] datetime default (sysdatetime()) not null,
+	[createdBy] nvarchar(255) not null,
+	[modifiedAt] datetime default (sysdatetime()) not null,
+	[modifiedBy] nvarchar(255) not null,
+	[criteriaTypeId] int not null,
+	[assessmentId] int not null,
+	constraint PK_Criteria primary key (id),
+	constraint FK_Criteria_ArmsCriteriaType foreign key ([criteriaTypeId]) references ARMS.CriteriaType(id),
+	constraint FK_CRiteria_ArmsAssessment foreign key ([assessmentId]) references ARMS.Assessment(id)
 
-marks int not null,
-remarks varchar(200) not null
-)
+	)
+
+END
+
+GO
 
 CREATE TRIGGER trg_UpdateCriteria
-ON Criteria
+ON ARMS.Criteria
 AFTER UPDATE
 AS
-    UPDATE Criteria
-    SET modifiedAt  = sysdatetime()
+    UPDATE ARMS.Criteria
+    SET [modifiedAt]  = sysdatetime()
     WHERE id IN (SELECT DISTINCT id FROM Inserted)
+
+GO
+insert into ARMS.Criteria ([marks],[remarks],[criteriaTypeId],[assessmentId],[createdBy],[modifiedBy] )
+values (34, 'good','2','','shivani','shivani');
+
+select * from ARMS.Criteria;
+

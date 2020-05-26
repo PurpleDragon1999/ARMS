@@ -3,7 +3,7 @@
     <div class="modal-body">
       <div class="modal-body text-center" *ngIf="!shouldConfirm">
         <h2 *ngIf="success === true"><b>Successful!</b></h2>
-        <h2 *ngIf="success === false"><b>Error alert!</b></h2>
+        <h2 *ngIf="success === false"><b>Error!!</b></h2>
         <p>{{ message }}.</p>
         <button class=" btn btn-gradient-danger btn-fw" (click)="modalClose(false)">OK</button>
       </div>
