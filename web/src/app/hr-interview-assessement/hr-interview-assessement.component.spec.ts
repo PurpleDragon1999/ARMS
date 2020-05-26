@@ -4,7 +4,7 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { BrowserModule } from '@angular/platform-browser';
-import { HrInterviewAssessementComponent } from './hr-interview-assessement.component';
+import { HrInterviewAssessementComponent } from './hr-interview-assessment.component';
 
 describe('HrInterviewAssessementComponent', () => {
   let component: HrInterviewAssessementComponent;
