@@ -1,0 +1,9 @@
+E:\arms\ARMS\arms-services\Building Blocks\Core\Hrms.EntityFrameworkCore\bin\Release\netstandard2.0\Hrms.EntityFrameworkCore.deps.json
+E:\arms\ARMS\arms-services\Building Blocks\Core\Hrms.EntityFrameworkCore\bin\Release\netstandard2.0\Hrms.EntityFrameworkCore.dll
+E:\arms\ARMS\arms-services\Building Blocks\Core\Hrms.EntityFrameworkCore\bin\Release\netstandard2.0\Hrms.EntityFrameworkCore.pdb
+E:\arms\ARMS\arms-services\Building Blocks\Core\Hrms.EntityFrameworkCore\obj\Release\netstandard2.0\Hrms.EntityFrameworkCore.csprojAssemblyReference.cache
+E:\arms\ARMS\arms-services\Building Blocks\Core\Hrms.EntityFrameworkCore\obj\Release\netstandard2.0\Hrms.EntityFrameworkCore.csproj.CoreCompileInputs.cache
+E:\arms\ARMS\arms-services\Building Blocks\Core\Hrms.EntityFrameworkCore\obj\Release\netstandard2.0\Hrms.EntityFrameworkCore.AssemblyInfoInputs.cache
+E:\arms\ARMS\arms-services\Building Blocks\Core\Hrms.EntityFrameworkCore\obj\Release\netstandard2.0\Hrms.EntityFrameworkCore.AssemblyInfo.cs
+E:\arms\ARMS\arms-services\Building Blocks\Core\Hrms.EntityFrameworkCore\obj\Release\netstandard2.0\Hrms.EntityFrameworkCore.dll
+E:\arms\ARMS\arms-services\Building Blocks\Core\Hrms.EntityFrameworkCore\obj\Release\netstandard2.0\Hrms.EntityFrameworkCore.pdb

@@ -1,0 +1,12 @@
+E:\arms\ARMS\arms-services\Building Blocks\Core\Hrms.Web\bin\Release\netstandard2.0\Hrms.Web.deps.json
+E:\arms\ARMS\arms-services\Building Blocks\Core\Hrms.Web\bin\Release\netstandard2.0\Hrms.Web.dll
+E:\arms\ARMS\arms-services\Building Blocks\Core\Hrms.Web\bin\Release\netstandard2.0\Hrms.Web.pdb
+E:\arms\ARMS\arms-services\Building Blocks\Core\Hrms.Web\bin\Release\netstandard2.0\Hrms.Core.dll
+E:\arms\ARMS\arms-services\Building Blocks\Core\Hrms.Web\bin\Release\netstandard2.0\Hrms.Core.pdb
+E:\arms\ARMS\arms-services\Building Blocks\Core\Hrms.Web\obj\Release\netstandard2.0\Hrms.Web.csprojAssemblyReference.cache
+E:\arms\ARMS\arms-services\Building Blocks\Core\Hrms.Web\obj\Release\netstandard2.0\Hrms.Web.csproj.CoreCompileInputs.cache
+E:\arms\ARMS\arms-services\Building Blocks\Core\Hrms.Web\obj\Release\netstandard2.0\Hrms.Web.AssemblyInfoInputs.cache
+E:\arms\ARMS\arms-services\Building Blocks\Core\Hrms.Web\obj\Release\netstandard2.0\Hrms.Web.AssemblyInfo.cs
+E:\arms\ARMS\arms-services\Building Blocks\Core\Hrms.Web\obj\Release\netstandard2.0\Hrms.Web.csproj.CopyComplete
+E:\arms\ARMS\arms-services\Building Blocks\Core\Hrms.Web\obj\Release\netstandard2.0\Hrms.Web.dll
+E:\arms\ARMS\arms-services\Building Blocks\Core\Hrms.Web\obj\Release\netstandard2.0\Hrms.Web.pdb
