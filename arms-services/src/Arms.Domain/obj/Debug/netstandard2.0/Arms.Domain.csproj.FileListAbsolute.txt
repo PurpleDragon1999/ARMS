@@ -1,0 +1,12 @@
+C:\Users\chetna.mongmaw\Desktop\cyg\ARMS\arms-services\src\Arms.Domain\bin\Debug\netstandard2.0\Arms.Domain.deps.json
+C:\Users\chetna.mongmaw\Desktop\cyg\ARMS\arms-services\src\Arms.Domain\bin\Debug\netstandard2.0\Arms.Domain.dll
+C:\Users\chetna.mongmaw\Desktop\cyg\ARMS\arms-services\src\Arms.Domain\bin\Debug\netstandard2.0\Arms.Domain.pdb
+C:\Users\chetna.mongmaw\Desktop\cyg\ARMS\arms-services\src\Arms.Domain\bin\Debug\netstandard2.0\Hrms.Core.dll
+C:\Users\chetna.mongmaw\Desktop\cyg\ARMS\arms-services\src\Arms.Domain\bin\Debug\netstandard2.0\Hrms.Core.pdb
+C:\Users\chetna.mongmaw\Desktop\cyg\ARMS\arms-services\src\Arms.Domain\obj\Debug\netstandard2.0\Arms.Domain.csprojAssemblyReference.cache
+C:\Users\chetna.mongmaw\Desktop\cyg\ARMS\arms-services\src\Arms.Domain\obj\Debug\netstandard2.0\Arms.Domain.csproj.CoreCompileInputs.cache
+C:\Users\chetna.mongmaw\Desktop\cyg\ARMS\arms-services\src\Arms.Domain\obj\Debug\netstandard2.0\Arms.Domain.AssemblyInfoInputs.cache
+C:\Users\chetna.mongmaw\Desktop\cyg\ARMS\arms-services\src\Arms.Domain\obj\Debug\netstandard2.0\Arms.Domain.AssemblyInfo.cs
+C:\Users\chetna.mongmaw\Desktop\cyg\ARMS\arms-services\src\Arms.Domain\obj\Debug\netstandard2.0\Arms.Domain.csproj.CopyComplete
+C:\Users\chetna.mongmaw\Desktop\cyg\ARMS\arms-services\src\Arms.Domain\obj\Debug\netstandard2.0\Arms.Domain.dll
+C:\Users\chetna.mongmaw\Desktop\cyg\ARMS\arms-services\src\Arms.Domain\obj\Debug\netstandard2.0\Arms.Domain.pdb

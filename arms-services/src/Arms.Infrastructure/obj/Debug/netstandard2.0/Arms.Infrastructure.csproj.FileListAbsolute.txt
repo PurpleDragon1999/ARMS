@@ -1,0 +1,16 @@
+C:\Users\chetna.mongmaw\Desktop\cyg\ARMS\arms-services\src\Arms.Infrastructure\bin\Debug\netstandard2.0\Arms.Infrastructure.deps.json
+C:\Users\chetna.mongmaw\Desktop\cyg\ARMS\arms-services\src\Arms.Infrastructure\bin\Debug\netstandard2.0\Arms.Infrastructure.dll
+C:\Users\chetna.mongmaw\Desktop\cyg\ARMS\arms-services\src\Arms.Infrastructure\bin\Debug\netstandard2.0\Arms.Infrastructure.pdb
+C:\Users\chetna.mongmaw\Desktop\cyg\ARMS\arms-services\src\Arms.Infrastructure\bin\Debug\netstandard2.0\Arms.Domain.dll
+C:\Users\chetna.mongmaw\Desktop\cyg\ARMS\arms-services\src\Arms.Infrastructure\bin\Debug\netstandard2.0\Hrms.Core.dll
+C:\Users\chetna.mongmaw\Desktop\cyg\ARMS\arms-services\src\Arms.Infrastructure\bin\Debug\netstandard2.0\Hrms.EntityFrameworkCore.dll
+C:\Users\chetna.mongmaw\Desktop\cyg\ARMS\arms-services\src\Arms.Infrastructure\bin\Debug\netstandard2.0\Hrms.Core.pdb
+C:\Users\chetna.mongmaw\Desktop\cyg\ARMS\arms-services\src\Arms.Infrastructure\bin\Debug\netstandard2.0\Hrms.EntityFrameworkCore.pdb
+C:\Users\chetna.mongmaw\Desktop\cyg\ARMS\arms-services\src\Arms.Infrastructure\bin\Debug\netstandard2.0\Arms.Domain.pdb
+C:\Users\chetna.mongmaw\Desktop\cyg\ARMS\arms-services\src\Arms.Infrastructure\obj\Debug\netstandard2.0\Arms.Infrastructure.csprojAssemblyReference.cache
+C:\Users\chetna.mongmaw\Desktop\cyg\ARMS\arms-services\src\Arms.Infrastructure\obj\Debug\netstandard2.0\Arms.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\chetna.mongmaw\Desktop\cyg\ARMS\arms-services\src\Arms.Infrastructure\obj\Debug\netstandard2.0\Arms.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\chetna.mongmaw\Desktop\cyg\ARMS\arms-services\src\Arms.Infrastructure\obj\Debug\netstandard2.0\Arms.Infrastructure.AssemblyInfo.cs
+C:\Users\chetna.mongmaw\Desktop\cyg\ARMS\arms-services\src\Arms.Infrastructure\obj\Debug\netstandard2.0\Arms.Infrastructure.csproj.CopyComplete
+C:\Users\chetna.mongmaw\Desktop\cyg\ARMS\arms-services\src\Arms.Infrastructure\obj\Debug\netstandard2.0\Arms.Infrastructure.dll
+C:\Users\chetna.mongmaw\Desktop\cyg\ARMS\arms-services\src\Arms.Infrastructure\obj\Debug\netstandard2.0\Arms.Infrastructure.pdb
