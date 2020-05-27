@@ -1,9 +1,0 @@
-C:\Users\chetna.mongmaw\Desktop\cyg\ARMS\arms-services\Building Blocks\Core\Hrms.EntityFrameworkCore\bin\Debug\netstandard2.0\Hrms.EntityFrameworkCore.deps.json
-C:\Users\chetna.mongmaw\Desktop\cyg\ARMS\arms-services\Building Blocks\Core\Hrms.EntityFrameworkCore\bin\Debug\netstandard2.0\Hrms.EntityFrameworkCore.dll
-C:\Users\chetna.mongmaw\Desktop\cyg\ARMS\arms-services\Building Blocks\Core\Hrms.EntityFrameworkCore\bin\Debug\netstandard2.0\Hrms.EntityFrameworkCore.pdb
-C:\Users\chetna.mongmaw\Desktop\cyg\ARMS\arms-services\Building Blocks\Core\Hrms.EntityFrameworkCore\obj\Debug\netstandard2.0\Hrms.EntityFrameworkCore.csprojAssemblyReference.cache
-C:\Users\chetna.mongmaw\Desktop\cyg\ARMS\arms-services\Building Blocks\Core\Hrms.EntityFrameworkCore\obj\Debug\netstandard2.0\Hrms.EntityFrameworkCore.csproj.CoreCompileInputs.cache
-C:\Users\chetna.mongmaw\Desktop\cyg\ARMS\arms-services\Building Blocks\Core\Hrms.EntityFrameworkCore\obj\Debug\netstandard2.0\Hrms.EntityFrameworkCore.AssemblyInfoInputs.cache
-C:\Users\chetna.mongmaw\Desktop\cyg\ARMS\arms-services\Building Blocks\Core\Hrms.EntityFrameworkCore\obj\Debug\netstandard2.0\Hrms.EntityFrameworkCore.AssemblyInfo.cs
-C:\Users\chetna.mongmaw\Desktop\cyg\ARMS\arms-services\Building Blocks\Core\Hrms.EntityFrameworkCore\obj\Debug\netstandard2.0\Hrms.EntityFrameworkCore.dll
-C:\Users\chetna.mongmaw\Desktop\cyg\ARMS\arms-services\Building Blocks\Core\Hrms.EntityFrameworkCore\obj\Debug\netstandard2.0\Hrms.EntityFrameworkCore.pdb
