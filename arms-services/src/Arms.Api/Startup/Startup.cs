@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
+using Arms.Api.Models;
 using Arms.Application;
+using Arms.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
@@ -36,7 +39,9 @@ namespace Arms.Api.Startup
                 .AddCustomMvc()
                 .AddCustomAuthentication(Configuration)
                 .AddCustomSwagger(Configuration)
-                .AddArmsApplicationServices(Configuration);
+                .AddArmsApplicationServices(Configuration)
+                .AddCustomDatabaseService(Configuration)
+                .AddCustomInjections();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -126,6 +131,20 @@ namespace Arms.Api.Startup
                     TermsOfService = "Terms of Service"
                 });
             });
+
+            return services;
+        }
+
+        public static IServiceCollection AddCustomDatabaseService(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddDbContextPool<ArmsDbContext>(options => options.UseSqlServer(configuration["Db"]));
+            
+            return services;
+        }
+
+        public static IServiceCollection AddCustomInjections(this IServiceCollection services)
+        {
+            services.AddScoped<IAssessmentRepository, AssessmentRepository>();
 
             return services;
         }
