@@ -15,7 +15,7 @@
           </div>
 
           <div class="form-group">
-            <label for="appliedForPosition"><b>Applied for Position</b><span class="asterick">*</span></label>
+            <label for="appliedForPosition">Applied for Position<span class="asterick">*</span></label>
             <input [readOnly]="type == 'progressTracker' || 'candidate'" type="text" name="appliedForPosition" class="form-control" [(ngModel)]="model.appliedForPosition" 
              placeholder="JD referral" #appliedForPosition="ngModel" id="appliedForPosition"
              [ngClass]="{ 'is-invalid': f.submitted && appliedForPosition.invalid }" required>

@@ -13,6 +13,24 @@ jobDescriptions
 .idea
 
 Building Blocks/
-.vs/
 bin/
 obj/
+.vs/
+
+*.exe
+
+*.pdb
+
+*.manifest
+
+*.cache
+*.g.props
+*.g.targets
+
+*/**/bin/Debug
+
+*/**/bin/Release
+
+*/**/obj/Debug
+
+*/**/obj/Release

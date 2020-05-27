@@ -1,28 +1,50 @@
-create table JobDescription (
-createdAt datetime2(3) default (sysdatetime()),
-modifiedAt datetime2(3) default (sysdatetime()),
-jobdescriptionNumber int identity(1000,1) ,
-id as 'CYGJID' + cast(jobdescriptionNumber as varchar(100)) persisted primary key ,
-title varchar(255) unique not null ,
-openingDate date not null ,
-closingDate date not null,
-vacancies int ,
-salary bigint not null,
-skills varchar(500) ,
-[location] varchar(255) not null ,
-[description] varchar(1500) not null
-
+--creation of jobDescription table
+IF NOT EXISTS (SELECT * FROM sys.schemas WHERE name='ARMS')
+BEGIN
+EXEC('CREATE SCHEMA ARMS')
+END
+IF OBJECT_ID('ARMS.JobDescription') IS NULL
+BEGIN
+CREATE TABLE ARMS.JobDescription(
+id int identity(1,1) primary key,
+[code] as 'CYGJID' + cast(id as varchar(100)),
+[jobTitle] varchar(60) NOT NULL unique,
+[openingDate] datetime2 NOT NULL,
+[closingDate] datetime2 NOT NULL,
+[description] nvarchar(MAX) NOT NULL,
+[location] varchar(50) NOT NULL,
+[salary] bigint NULL,
+[vacancies] int NULL,
+[pdfBlobData] varBinary(MAX),
+[createdAt] datetime2  default (sysdatetime()) NOT NULL,
+[createdBy] varchar(50) NULL,
+[modifiedAt] datetime2  default (sysdatetime()) NOT NULL,
+[modifiedBy] varchar(50) NULL
 )
-
-CREATE TRIGGER trg_UpdateJD
-ON JobDescription
+END
+GO
+--trigger on any update
+CREATE TRIGGER trg_UpdateJobDescription
+ON ARMS.JobDescription
 AFTER UPDATE
 AS
-    UPDATE JobDescription
+    UPDATE ARMS.JobDescription
     SET modifiedAt  = sysdatetime()
     WHERE id IN (SELECT DISTINCT id FROM Inserted)
+GO
+--insert command for jobDescription
+Insert into ARMS.JobDescription([jobTitle],[openingDate],[closingDate],[description],[location],pdfBlobData)
+SELECT 'Software Developer','2020-09-02','2020-09-09','require a logically strong person like himanshu','Delhi', BulkColumn
+ FROM OPENROWSET(Bulk 'C:\Users\deepanshu.balani\Pictures\anal2.jpg', SINGLE_BLOB) AS BLOB
+ 
+ 
 
-insert into JobDescription (Title, OpeningDate, ClosingDate,salary, [Location], [Description])
-values ('Software Developer Junior 1','2020-05-22', '2020-05-31',6,'Noida','Require logical skills')
+Select * FROM ARMS.JobDescription
+--update command for jobDescription
+UPDATE ARMS.JobDescription
+SET jobTitle='python developer'
+WHERE id = 1;
+SELECT * FROM ARMS.JobDescription
 
-select * from JobDescription
+--To get Object id of ARMS.JobDescription
+Select OBJECT_Id('ARMS.JobDescription')
