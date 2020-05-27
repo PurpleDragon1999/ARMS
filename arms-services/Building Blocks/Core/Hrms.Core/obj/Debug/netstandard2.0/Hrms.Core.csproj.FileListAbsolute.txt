@@ -1,0 +1,9 @@
+E:\codebase\ARMS\arms-services\Building Blocks\Core\Hrms.Core\bin\Debug\netstandard2.0\Hrms.Core.deps.json
+E:\codebase\ARMS\arms-services\Building Blocks\Core\Hrms.Core\bin\Debug\netstandard2.0\Hrms.Core.dll
+E:\codebase\ARMS\arms-services\Building Blocks\Core\Hrms.Core\bin\Debug\netstandard2.0\Hrms.Core.pdb
+E:\codebase\ARMS\arms-services\Building Blocks\Core\Hrms.Core\obj\Debug\netstandard2.0\Hrms.Core.csprojAssemblyReference.cache
+E:\codebase\ARMS\arms-services\Building Blocks\Core\Hrms.Core\obj\Debug\netstandard2.0\Hrms.Core.csproj.CoreCompileInputs.cache
+E:\codebase\ARMS\arms-services\Building Blocks\Core\Hrms.Core\obj\Debug\netstandard2.0\Hrms.Core.AssemblyInfoInputs.cache
+E:\codebase\ARMS\arms-services\Building Blocks\Core\Hrms.Core\obj\Debug\netstandard2.0\Hrms.Core.AssemblyInfo.cs
+E:\codebase\ARMS\arms-services\Building Blocks\Core\Hrms.Core\obj\Debug\netstandard2.0\Hrms.Core.dll
+E:\codebase\ARMS\arms-services\Building Blocks\Core\Hrms.Core\obj\Debug\netstandard2.0\Hrms.Core.pdb
