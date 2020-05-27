@@ -12,8 +12,10 @@ yarn.lock
 jobDescriptions
 .idea
 
-.vs/
 Building Blocks/
+bin/
+obj/
+.vs/
 
 *.exe
 
@@ -32,7 +34,3 @@ Building Blocks/
 */**/obj/Debug
 
 */**/obj/Release
-
-
-
-
