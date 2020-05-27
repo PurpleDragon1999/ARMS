@@ -35,7 +35,10 @@ namespace Arms.Api.Startup
         {
             string connString = this.Configuration.GetConnectionString("db");
             services.AddDbContext<Arms.Infrastructure.ArmsDbContext>(o => o.UseSqlServer(connString));
+<<<<<<< HEAD
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+=======
+>>>>>>> 06349e6069436c403404b6cb6369cb82ab911093
             services
                 .AddCustomMvc()
                 .AddCustomAuthentication(Configuration)

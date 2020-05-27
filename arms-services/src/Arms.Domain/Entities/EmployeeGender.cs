@@ -1,4 +1,6 @@
-namespace Arms.Domain.Entities
+using Hrms.Core.Domains.Entities;
+
+namespace Arms.Domain.Entities 
 {
     public enum EmployeeGender
     {

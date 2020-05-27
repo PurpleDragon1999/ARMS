@@ -8328,23 +8328,39 @@
     ]
   },
   "packageFolders": {
+<<<<<<< HEAD
     "C:\\Users\\deepanshu.balani\\.nuget\\packages\\": {},
+=======
+    "C:\\Users\\shivani.bansal\\.nuget\\packages\\": {},
+>>>>>>> 06349e6069436c403404b6cb6369cb82ab911093
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
       "projectUniqueName": "E:\\arms\\ARMS\\arms-services\\src\\Arms.Application\\Arms.Application.csproj",
       "projectName": "Arms.Application",
       "projectPath": "E:\\arms\\ARMS\\arms-services\\src\\Arms.Application\\Arms.Application.csproj",
       "packagesPath": "C:\\Users\\deepanshu.balani\\.nuget\\packages\\",
       "outputPath": "E:\\arms\\ARMS\\arms-services\\src\\Arms.Application\\obj\\",
+=======
+      "projectUniqueName": "E:\\codebase\\ARMS\\arms-services\\src\\Arms.Application\\Arms.Application.csproj",
+      "projectName": "Arms.Application",
+      "projectPath": "E:\\codebase\\ARMS\\arms-services\\src\\Arms.Application\\Arms.Application.csproj",
+      "packagesPath": "C:\\Users\\shivani.bansal\\.nuget\\packages\\",
+      "outputPath": "E:\\codebase\\ARMS\\arms-services\\src\\Arms.Application\\obj\\",
+>>>>>>> 06349e6069436c403404b6cb6369cb82ab911093
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
+<<<<<<< HEAD
         "C:\\Users\\deepanshu.balani\\AppData\\Roaming\\NuGet\\NuGet.Config",
+=======
+        "C:\\Users\\shivani.bansal\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> 06349e6069436c403404b6cb6369cb82ab911093
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -8357,11 +8373,19 @@
       "frameworks": {
         "netcoreapp2.2": {
           "projectReferences": {
+<<<<<<< HEAD
             "E:\\arms\\ARMS\\arms-services\\Building Blocks\\Core\\Hrms.Web\\Hrms.Web.csproj": {
               "projectPath": "E:\\arms\\ARMS\\arms-services\\Building Blocks\\Core\\Hrms.Web\\Hrms.Web.csproj"
             },
             "E:\\arms\\ARMS\\arms-services\\src\\Arms.Infrastructure\\Arms.Infrastructure.csproj": {
               "projectPath": "E:\\arms\\ARMS\\arms-services\\src\\Arms.Infrastructure\\Arms.Infrastructure.csproj"
+=======
+            "E:\\codebase\\ARMS\\arms-services\\Building Blocks\\Core\\Hrms.Web\\Hrms.Web.csproj": {
+              "projectPath": "E:\\codebase\\ARMS\\arms-services\\Building Blocks\\Core\\Hrms.Web\\Hrms.Web.csproj"
+            },
+            "E:\\codebase\\ARMS\\arms-services\\src\\Arms.Infrastructure\\Arms.Infrastructure.csproj": {
+              "projectPath": "E:\\codebase\\ARMS\\arms-services\\src\\Arms.Infrastructure\\Arms.Infrastructure.csproj"
+>>>>>>> 06349e6069436c403404b6cb6369cb82ab911093
             }
           }
         }

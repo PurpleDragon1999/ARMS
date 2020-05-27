@@ -10,8 +10,13 @@ code as 'CYGIID' + cast(id as varchar(100)),
 [jobId] int NOT NULL,
 constraint FK_Jobdescription foreign key(jobId) references ARMS.JobDescription(id),
 [createdAt] datetime2  default (sysdatetime()) NOT NULL,
+<<<<<<< HEAD
 [createdBy] varchar(50) NULL,
 [modifiedAt] datetime2  default (sysdatetime()) NOT NULL,
+=======
+[modifiedAt] datetime2  default (sysdatetime()) NOT NULL,
+[createdBy] varchar(50) NULL,
+>>>>>>> 06349e6069436c403404b6cb6369cb82ab911093
 [modifiedBy] varchar(50) NULL,
 )
 END
