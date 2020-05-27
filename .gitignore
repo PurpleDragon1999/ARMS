@@ -15,3 +15,14 @@ jobDescriptions
 .vs/
 Building Blocks/
 
+*.exe
+*.pdb
+*.manifest
+*.cache
+
+*/**/bin/Debug
+*/**/bin/Release
+*/**/obj/Debug
+*/**/obj/Release
+
+
