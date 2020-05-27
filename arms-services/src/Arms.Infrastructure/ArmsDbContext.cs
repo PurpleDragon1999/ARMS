@@ -1,3 +1,4 @@
+using Arms.Domain.Entities;
 using Arms.Infrastructure.EntityTypeConfigurations;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,5 +16,7 @@ namespace Arms.Infrastructure
             modelBuilder.ApplyConfiguration(new EmployeeEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new EmployeeDetailEntityTypeConfiguration());
         }
+
+        public DbSet<Assessment> Assessments;
     }
 }
