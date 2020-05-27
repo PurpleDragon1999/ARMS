@@ -25,7 +25,6 @@ export class CreateInterviewComponent implements OnInit {
 
   createInterview(interview: ICreate) {
     let interviewObj = interview;
-    console.log(interviewObj, "obj")
     interviewObj.jdId = "CYGJID" + interviewObj.jdId
     this.AppServicesService.createInterview(interview).subscribe((res: any) => {
         const modalRef = this.modalService.open(ModalComponent);
@@ -39,7 +38,6 @@ export class CreateInterviewComponent implements OnInit {
     },
     
       (error: HttpErrorResponse) => {
-        console.log(error, "response");
         const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
         modalRef.componentInstance.shouldConfirm = false;
         modalRef.componentInstance.success = error.error.success;

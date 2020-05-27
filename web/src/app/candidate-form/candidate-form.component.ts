@@ -55,7 +55,6 @@ export class CandidateFormComponent implements OnInit {
     this.uploader.onErrorItem = (item: FileItem, response: string, status: number, headers: ParsedResponseHeaders) => {
     
     let data = JSON.parse(response);
-    console.log(data, "data")
     const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
 
     modalRef.componentInstance.shouldConfirm = false;
@@ -125,7 +124,6 @@ export class CandidateFormComponent implements OnInit {
         
         if(res.success==false){
         this.router.navigate(['/404'])
-        console.log("!!!!!!!!!!!!!!!!!!")
         }
         else{
         let jdObject = res.payload.data
