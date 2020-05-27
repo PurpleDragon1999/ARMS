@@ -42,6 +42,7 @@ class Interview{
         .populate('rounds.panelOfInterviewers.panel2',panelFields)
         .populate('rounds.panelOfInterviewers.panel3',panelFields)
         .populate('candidateObjIds',candidateFields);
+        console.log(data, "data")
         return (data);
       }
 

@@ -1,33 +1,45 @@
-create table Candidate (
-createdAt datetime2(3) default (sysdatetime()),
-modifiedAt datetime2(3) default (sysdatetime()),
-email varchar(255) not null unique,
+if not exists (select * from sys.schemas where name = 'arms')
+begin
+	exec('create schema arms')
+end
 
-aadhar varchar(255) not null unique,
-constraint PK_Candidate primary key (email, aadhar),
+if OBJECT_ID('arms.Candidate') is null
+begin 
+	create table arms.Candidate
+	(
+		[id] int identity(1,1) ,
+		[code] as 'CYGCDID'+ cast(id as nvarchar(50)) persisted,
+		[name] nvarchar (50) not null,
+		[email] nvarchar (50) not null,
+		[phone] nvarchar (22) not null,
+		[idProofTypeId] int not null,
+		[identificationNo] nvarchar (50) unique not null,
+		[createdAt] datetime2 not null default (sysdatetime()),
+		[createdBy] nvarchar(50) not null,
+		[modifiedAt] datetime2 not null default (sysdatetime()),
+		[modifiedBy] nvarchar(50) not null,
+		constraint PK_Candidate primary key (id),
+		constraint FK_CandidateIdProofType foreign key (idProofTypeId) references arms.IdProofType(id)
 
-[name] nvarchar(255) not null,
-experience decimal(18,1) default 0,
+	)
+end
 
-cv nvarchar(500) not null,
-selected bit check(selected=0 OR selected=1),
+go
 
-[status] varchar(200) check (Status in ('AppliedSuccessfully', 'InterviewScheduled', 'InProgress', 'ResultDeclared' )) default 'AppliedSuccessfully',
-currentRoundNumber int ,
-flag int check(flag in (1,2,3,4)) default 1,
-
-appliedFor varchar(106) not null,
-constraint FK_Candidate foreign key (appliedFor) references JobDescription(id),
-
-shortlisted bit check(shortlisted=0 OR shortlisted=1)
-
-)
-
-CREATE TRIGGER trg_UpdateCandidate
-ON Candidate
+CREATE TRIGGER arms.trg_UpdateCandidate
+ON arms.Candidate
 AFTER UPDATE
 AS
-    UPDATE Candidate
+    UPDATE arms.Candidate
     SET modifiedAt  = sysdatetime()
-    WHERE email IN (SELECT DISTINCT email FROM Inserted)
+    WHERE id IN (SELECT DISTINCT id FROM Inserted)
+
+
+insert into arms.Candidate(name, email, phone, idProofTypeId, identificationNo, createdBy, modifiedBy)
+values ('chetna', 'nangchetnamaw@gmail.com','9207868601',1,'8907 4567 3637', 'anna', 'anna')
+
+update arms.Candidate set phone = '8575249081' where [name] = 'chetna'
+
+select * from arms.Candidate
+
 
