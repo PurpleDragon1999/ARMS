@@ -70,7 +70,7 @@
               <label for="time">Time<span class="asterick">*</span></label>
               <input
                 name="time"
-                type="datetime"
+                type="time"
                 [ngModel]="interview.time"
                 class="form-control"
                 id="time"
@@ -99,11 +99,11 @@
                 required
               >
                 <option value="selectRounds" disabled>Select Rounds</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
+                <option class="select-css" value="1">1</option>
+                <option class="select-css"value="2">2</option>
+                <option class="select-css"value="3">3</option>
+                <option class="select-css"value="4">4</option>
+                <option class="select-css"value="5">5</option>
               </select>
               <div *ngIf="noOfRounds.dirty && noOfRounds.errors?.required" class="invalid-feedback">
                 <div><i class="mdi mdi-alert-outline"></i>No. of rounds is required</div>

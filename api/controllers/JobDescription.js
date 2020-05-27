@@ -33,13 +33,25 @@ class JobDescription extends Base {
   async get(req, res) {
     try {
       const data = await model.jobDescription.get({jdId: req.params.id });
-      return res.send({
-        success: true,
-        payload: {
-          data,
-          message: "Job Retrieved Successfully",
-        },
-      });
+      if(data!=null){
+        return res.send({
+          success: true,
+          payload: {
+            data,
+            message: "Job Retrieved Successfully",
+          },
+        });
+     }
+      else{
+        return res.send({
+          success: false,
+          payload: {
+            data,
+            message: "No id",
+          },
+        });
+      }
+
     } catch (e) {
       return res.status(500).send({
         success: false,
@@ -110,6 +122,38 @@ class JobDescription extends Base {
         success: false,
         payload: {
           message: e.message,
+        },
+      });
+    }
+  }
+
+  async searchRecord(req, res){
+    try {
+      let queryObject = {
+        $regex: ".*^" + req.query.character + ".*",
+        $options: "i",
+      };
+      
+      const searchedRecords = await this.model.getAll({ $or: [{name:queryObject}, {jdTitle:queryObject}]})
+      req.body.records = searchedRecords;
+      if (req.query.pagination==="true"){
+        return this.getPaginatedResult(req, res);
+      }
+      else{
+        res.status(200).send({
+          payload:{
+            data : searchedRecords,
+            message :"Records Returned Successfully"
+          }
+        })
+      }
+      
+    } catch (err) {
+      console.log(err, "error")
+      res.status(500).send({
+        success: false,
+        payload: {
+          message: err.message,
         },
       });
     }

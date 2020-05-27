@@ -87,9 +87,23 @@
           </a>
         </li>
 
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['candidate']">
+            <span class="menu-title">Applied Candidates</span>
+            <i class="fas fa-users menu-icon"></i>
+          </a>
+        </li>
+
         <li class="nav-item" *ngIf="adminBool" routerLinkActive="active">
-          <a class="nav-link" [routerLink]="['interview/schedule']">
-            <span class="menu-title">Schedule Interview</span>
+          <a class="nav-link" [routerLink]="['interviews']">
+            <span class="menu-title">Upcoming Interviews</span>
+            <i class="fas fa-file-alt menu-icon"></i>
+          </a>
+        </li>
+
+        <li class="nav-item" *ngIf="adminBool" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['create-interview']">
+            <span class="menu-title">Create Interview</span>
             <i class="fas fa-hourglass-half menu-icon"></i>
           </a>
         </li>
