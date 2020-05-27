@@ -1,3 +1,4 @@
+import { IAssessment } from './../models/assessment.interface';
 import { IResponse } from 'src/app/models/response.interface';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -12,6 +13,9 @@ const USER_DOMAIN = 'http://localhost:3000';
 })
 
 export class AppServicesService {
+  // createAssessment(assessment: any) {
+  //   throw new Error("Method not implemented.");
+  // }
   headers: HttpHeaders = new HttpHeaders({
     'Content-Type': 'application/json',
     Authorization: localStorage.getItem("Authorization")
@@ -52,6 +56,10 @@ export class AppServicesService {
   
   createInterview(user: ICreate): Observable<HttpResponse<any>>{
     return this.http.post<any>(`${USER_DOMAIN}/api/interview`, user, { ...this.options, observe: 'response' });
+  }
+
+  createAssessment(user: IAssessment): Observable<HttpResponse<any>>{
+    return this.http.post<any>(`${USER_DOMAIN}/api/assessment`, user, { ...this.options, observe: 'response' });
   }
   getAllJobs(): Observable<HttpResponse<any>>{
       return this.http.get<any>(`${USER_DOMAIN}/api/jobDescription`, this.options);

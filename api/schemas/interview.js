@@ -44,7 +44,7 @@ module.exports = {
       roundType: {
         type: String,
         required: true,
-        enum: ["non-technical", "technical", "hr"],
+        enum: ["written", "group-discussion", "technical","hr","behavioural"],
       },
     },
   ],

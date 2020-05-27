@@ -14,7 +14,7 @@ module.exports = {
         ref: "candidate"
     },
 
-    recommendedBy: [{
+    panel: [{
         type: objectId,
         ref: "employee"
     }],
@@ -41,7 +41,7 @@ module.exports = {
             required:true
         }
     },
-    flexibility: {
+    logical: {
         marks: {
             type:Number,
             required:true
@@ -51,7 +51,7 @@ module.exports = {
             required:true
         }
     },
-    reasoning: {
+    aptitude: {
         marks: {
             type:Number,
             required:true
