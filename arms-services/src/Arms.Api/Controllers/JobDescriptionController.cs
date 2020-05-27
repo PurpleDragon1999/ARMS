@@ -21,10 +21,11 @@ namespace Arms.Api.Controllers
             _context = armsContext;
         }
         [HttpGet]
-        public IActionResult GetJds()
+        public IEnumerable<JobDescription> GetJds()
         {
             List<JobDescription> jobDescriptions = _context.JobDescription.ToList();
-            return Ok(jobDescriptions);
+            return jobDescriptions;
+    
         }
         [HttpGet("{id}")]
         public IActionResult GetJd(int id)

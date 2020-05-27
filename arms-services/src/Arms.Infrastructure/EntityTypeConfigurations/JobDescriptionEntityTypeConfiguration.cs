@@ -18,8 +18,7 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .HasName("UQ__JobDescr__151D087A2951D1F8")
                 .IsUnique();
 
-            builder.Property(e => e.Id).HasColumnName("Id")
-                 .ValueGeneratedNever(); 
+            builder.Property(e => e.Id).ValueGeneratedOnAdd();
 
             builder.Property(e => e.closingDate).HasColumnName("closingDate");
 
