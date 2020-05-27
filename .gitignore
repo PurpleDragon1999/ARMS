@@ -22,6 +22,8 @@ Building Blocks/
 *.manifest
 
 *.cache
+*.g.props
+*.g.targets
 
 */**/bin/Debug
 
