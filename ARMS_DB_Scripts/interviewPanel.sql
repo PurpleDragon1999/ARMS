@@ -5,8 +5,8 @@ id int identity(1,1) primary key ,
 [roundId] int NOT NULL,
 constraint FK_round foreign key(roundId) references ARMS.Round(id),
 [createdAt] datetime2  default (sysdatetime()) NOT NULL,
-[modifiedAt] datetime2  default (sysdatetime()) NOT NULL,
 [createdBy] varchar(50) NULL,
+[modifiedAt] datetime2  default (sysdatetime()) NOT NULL,
 [modifiedBy] varchar(50) NULL
 )
 END

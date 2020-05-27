@@ -6,8 +6,8 @@ interviewPanelId int	NOT NULL,
 constraint FK_interviewPanel foreign key(interviewPanelId) references ARMS.InterviewPanel(id),
 employeeId int NOT NULL,
 createdAt datetime2  default (sysdatetime()) NOT NULL,
-modifiedAt datetime2  default (sysdatetime()) NOT NULL,
 createdBy varchar(50) NULL,
+modifiedAt datetime2  default (sysdatetime()) NOT NULL,
 modifiedBy varchar(50) NULL
 )
 END

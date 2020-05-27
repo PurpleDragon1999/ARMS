@@ -8,11 +8,11 @@ CREATE TABLE ARMS.HRMS_Employee
  [designation] varchar(300) check (Designation in ('Intern', 'Consultant 1', 'Consultant 2', 'Associate 1',
 'Associate 2')) default 'Consultant 1' not null,
 
-[role] varchar(255) check (Role in ('SuperUser', 'Admin', 'Employee')) default 'Employee',
-[email] varchar(400) not null unique ,
+ [role] varchar(255) check (Role in ('SuperUser', 'Admin', 'Employee')) default 'Employee',
+ [email] varchar(400) not null unique ,
  [createdAt]   datetime2(7)  default (sysdatetime()) NOT NULL ,
- [modifiedAt]  datetime2(7)  default (sysdatetime()) NOT NULL ,
  [createdBy]   varchar(50)  NULL ,
+ [modifiedAt]  datetime2(7)  default (sysdatetime()) NOT NULL ,
  [modifiedBy]  varchar(50)  NULL ,
 )
 END

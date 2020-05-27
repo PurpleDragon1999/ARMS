@@ -17,8 +17,8 @@ id int identity(1,1) primary key,
 [vacancies] int NULL,
 [pdfBlobData] varBinary(MAX),
 [createdAt] datetime2  default (sysdatetime()) NOT NULL,
-[modifiedAt] datetime2  default (sysdatetime()) NOT NULL,
 [createdBy] varchar(50) NULL,
+[modifiedAt] datetime2  default (sysdatetime()) NOT NULL,
 [modifiedBy] varchar(50) NULL
 )
 END

@@ -5,8 +5,8 @@ CREATE TABLE ARMS.RoundType(
 id  int identity(1,1) primary key,
 [name] varchar(50),
 [createdAt] datetime2  default (sysdatetime()) NOT NULL,
-[modifiedAt] datetime2  default (sysdatetime()) NOT NULL,
 [createdBy] varchar(50) NULL,
+[modifiedAt] datetime2  default (sysdatetime()) NOT NULL,
 [modifiedBy] varchar(50) NULL
 )
 END

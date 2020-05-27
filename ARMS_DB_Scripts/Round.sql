@@ -5,10 +5,11 @@ id int identity(1,1) primary key,
 roundTypeId int NOT NULL,
 constraint FK_roundType foreign key(roundTypeId) references ARMS.RoundType(id),
 interviewId int NOT NULL,
-createdAt datetime2  default (sysdatetime()) NOT NULL,
+
 constraint FK_Interview foreign key(interviewId) references ARMS.Interview(id),
-modifiedAt datetime2  default (sysdatetime()) NOT NULL,
+createdAt datetime2  default (sysdatetime()) NOT NULL,
 createdBy varchar(50) NULL,
+modifiedAt datetime2  default (sysdatetime()) NOT NULL,
 modifiedBy varchar(50) NULL
 )
 END
