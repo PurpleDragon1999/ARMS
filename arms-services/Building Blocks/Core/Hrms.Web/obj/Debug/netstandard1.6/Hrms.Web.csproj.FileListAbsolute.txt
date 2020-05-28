@@ -1,0 +1,4 @@
+C:\Users\abha.rana\Desktop\ARMS\arms-services\Building Blocks\Core\Hrms.Web\bin\Debug\netstandard1.6\Hrms.Web.deps.json
+C:\Users\abha.rana\Desktop\ARMS\arms-services\Building Blocks\Core\Hrms.Web\obj\Debug\netstandard1.6\Hrms.Web.csprojAssemblyReference.cache
+C:\Users\abha.rana\Desktop\ARMS\arms-services\Building Blocks\Core\Hrms.Web\obj\Debug\netstandard1.6\Hrms.Web.csproj.CoreCompileInputs.cache
+C:\Users\abha.rana\Desktop\ARMS\arms-services\Building Blocks\Core\Hrms.Web\obj\Debug\netstandard1.6\Hrms.Web.AssemblyInfo.cs

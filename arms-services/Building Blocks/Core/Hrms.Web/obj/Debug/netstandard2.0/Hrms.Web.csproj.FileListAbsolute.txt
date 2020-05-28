@@ -1,0 +1,12 @@
+C:\Users\abha.rana\Desktop\ARMS\arms-services\Building Blocks\Core\Hrms.Web\bin\Debug\netstandard2.0\Hrms.Web.deps.json
+C:\Users\abha.rana\Desktop\ARMS\arms-services\Building Blocks\Core\Hrms.Web\bin\Debug\netstandard2.0\Hrms.Web.dll
+C:\Users\abha.rana\Desktop\ARMS\arms-services\Building Blocks\Core\Hrms.Web\bin\Debug\netstandard2.0\Hrms.Web.pdb
+C:\Users\abha.rana\Desktop\ARMS\arms-services\Building Blocks\Core\Hrms.Web\bin\Debug\netstandard2.0\Hrms.Core.dll
+C:\Users\abha.rana\Desktop\ARMS\arms-services\Building Blocks\Core\Hrms.Web\bin\Debug\netstandard2.0\Hrms.Core.pdb
+C:\Users\abha.rana\Desktop\ARMS\arms-services\Building Blocks\Core\Hrms.Web\obj\Debug\netstandard2.0\Hrms.Web.csprojAssemblyReference.cache
+C:\Users\abha.rana\Desktop\ARMS\arms-services\Building Blocks\Core\Hrms.Web\obj\Debug\netstandard2.0\Hrms.Web.csproj.CoreCompileInputs.cache
+C:\Users\abha.rana\Desktop\ARMS\arms-services\Building Blocks\Core\Hrms.Web\obj\Debug\netstandard2.0\Hrms.Web.AssemblyInfoInputs.cache
+C:\Users\abha.rana\Desktop\ARMS\arms-services\Building Blocks\Core\Hrms.Web\obj\Debug\netstandard2.0\Hrms.Web.AssemblyInfo.cs
+C:\Users\abha.rana\Desktop\ARMS\arms-services\Building Blocks\Core\Hrms.Web\obj\Debug\netstandard2.0\Hrms.Web.csproj.CopyComplete
+C:\Users\abha.rana\Desktop\ARMS\arms-services\Building Blocks\Core\Hrms.Web\obj\Debug\netstandard2.0\Hrms.Web.dll
+C:\Users\abha.rana\Desktop\ARMS\arms-services\Building Blocks\Core\Hrms.Web\obj\Debug\netstandard2.0\Hrms.Web.pdb
