@@ -7,9 +7,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Arms.Infrastructure.EntityTypeConfigurations
 {
-    internal class ResumeEntityTypeConfiguration: IEntityTypeConfiguration<Employee>
+    internal class ResumeEntityTypeConfiguration: IEntityTypeConfiguration<Resume>
     {
-        public void Configure(EntityTypeBuilder<Employee> builder)
+        public void Configure(EntityTypeBuilder<Resume> builder)
         {
             builder.ToTable("Resume", "ARMS");
 

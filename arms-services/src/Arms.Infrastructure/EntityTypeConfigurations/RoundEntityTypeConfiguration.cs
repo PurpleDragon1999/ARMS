@@ -7,9 +7,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Arms.Infrastructure.EntityTypeConfigurations
 {
-    internal class RoundEntityTypeConfiguration: IEntityTypeConfiguration<Employee>
+    internal class RoundEntityTypeConfiguration: IEntityTypeConfiguration<Round>
     {
-        public void Configure(EntityTypeBuilder<Employee> builder)
+        public void Configure(EntityTypeBuilder<Round> builder)
         {
             builder.ToTable("Round", "ARMS");
 

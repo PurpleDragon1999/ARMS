@@ -7,9 +7,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Arms.Infrastructure.EntityTypeConfigurations
 {
-    internal class ImagesEntityTypeConfiguration: IEntityTypeConfiguration<Employee>
+    internal class ImagesEntityTypeConfiguration: IEntityTypeConfiguration<Images>
     {
-        public void Configure(EntityTypeBuilder<Employee> builder)
+        public void Configure(EntityTypeBuilder<Images> builder)
         {
             builder.ToTable("Images", "ARMS");
 
@@ -39,11 +39,11 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .HasMaxLength(255)
                 .IsUnicode(false);
 
-            builder.HasOne(d => d.Employee)
+            /*builder.HasOne(d => d.Employee)
                 .WithMany(p => p.Images)
                 .HasForeignKey(d => d.EmployeeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Employee");
+                .HasConstraintName("FK_Employee");*/
         }
     }
 }

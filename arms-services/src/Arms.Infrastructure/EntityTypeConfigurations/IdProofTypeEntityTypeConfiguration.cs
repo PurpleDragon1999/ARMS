@@ -7,9 +7,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Arms.Infrastructure.EntityTypeConfigurations
 {
-    internal class IdProofTypeEntityTypeConfiguration: IEntityTypeConfiguration<Employee>
+    internal class IdProofTypeEntityTypeConfiguration: IEntityTypeConfiguration<IdProofType>
     {
-        public void Configure(EntityTypeBuilder<Employee> builder)
+        public void Configure(EntityTypeBuilder<IdProofType> builder)
         {
             builder.ToTable("IdProofType", "ARMS");
 

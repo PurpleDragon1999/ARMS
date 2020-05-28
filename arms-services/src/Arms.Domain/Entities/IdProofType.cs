@@ -1,26 +1,24 @@
-using Hrms.Core.Domains.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Arms.Domain.Entities
 {
-    public partial class CriteriaType
+    public partial class IdProofType
     {
-        public CriteriaType()
+        public IdProofType()
         {
-            Criteria = new HashSet<Criteria>();
+            Candidate = new HashSet<Candidate>();
         }
 
         public int Id { get; set; }
         public string Code { get; set; }
-        public string CriteriaName { get; set; }
+        public string Name { get; set; }
         public DateTime CreatedAt { get; set; }
         public string CreatedBy { get; set; }
         public DateTime ModifiedAt { get; set; }
         public string ModifiedBy { get; set; }
-        public int RoundTypeId { get; set; }
 
-        public RoundType RoundType { get; set; }
-        public ICollection<Criteria> Criteria { get; set; }
+        public ICollection<Candidate> Candidate { get; set; }
     }
 }
