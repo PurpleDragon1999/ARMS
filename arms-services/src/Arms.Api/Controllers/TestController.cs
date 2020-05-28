@@ -14,11 +14,11 @@ namespace Arms.Api.Controllers
         }
 
         [HttpGet]
-        [Route("")]
+        [Route("getData")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public string Index()
         {
-            return "Test";
+            return "Shubham Sharma";
         }
     }
 }

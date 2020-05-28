@@ -7,12 +7,12 @@ namespace Arms.Domain.Extensions
     {
         public static bool IsDallasEmployee(this Employee employee)
         {
-            return employee.Location.Name.ToUpper() == "US";
+            return employee.Location.LocationName.ToUpper() == "US";
         }
 
         public static bool IsIndiaEmployee(this Employee employee)
         {
-            return employee.Location.Name.ToUpper() == "INDIA";
+            return employee.Location.LocationName.ToUpper() == "INDIA";
         }
 
         public static string GetFullName(this Employee employee)

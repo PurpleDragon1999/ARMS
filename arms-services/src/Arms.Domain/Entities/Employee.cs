@@ -3,7 +3,7 @@ using Hrms.Core.Domains.Entities;
 
 namespace Arms.Domain.Entities
 {
-    public class Employee : Entity
+    public partial class Employee
     {
         public int? EmployeeDetailId { get; set; }
         public string FirstName { get; set; }

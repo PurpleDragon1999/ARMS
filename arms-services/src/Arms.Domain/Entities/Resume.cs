@@ -1,17 +1,20 @@
 ﻿using System;
-using Hrms.Core.Domains.Entities;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Arms.Domain.Entities
 {
-    public class Resume: Entity
+    public partial class Resume
     {
+        public int Id { get; set; }
         public string Name { get; set; }
-        public byte CV { get; set; }
-        public string CreatedBy { get; set; }
-        public string ModifiedBy { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public DateTime ModifiedAt { get; set; }
+        public byte[] Cv { get; set; }
         public int ApplicationId { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public string CreatedBy { get; set; }
+        public DateTime ModifiedAt { get; set; }
+        public string ModifiedBy { get; set; }
 
+        public Application Application { get; set; }
     }
 }
