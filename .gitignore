@@ -20,5 +20,10 @@ obj/
 bin/
 
 
-
+*.exe
+*.pdb
+*.manifest
+*.cache
+*.g.props
+*.g.targets
 
