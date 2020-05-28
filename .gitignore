@@ -12,10 +12,13 @@ yarn.lock
 jobDescriptions
 .idea
 
-Building Blocks/
-bin/
-obj/
+
 .vs/
+Building Blocks/
+
+obj/
+bin/
+
 
 *.exe
 *.pdb
@@ -23,6 +26,4 @@ obj/
 *.cache
 *.g.props
 *.g.targets
-
-
 
