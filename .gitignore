@@ -37,7 +37,8 @@ x86/
 build/
 bld/
 [Bb]in/
-[Oo]bj/
+[Oo]bj/Debug
+*.nuget.*
 msbuild.log
 msbuild.err
 msbuild.wrn
