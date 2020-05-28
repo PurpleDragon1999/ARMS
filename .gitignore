@@ -57,6 +57,4 @@ Building Blocks/
 
 bin/
 obj/
-appsettings.json
-appsettings.*.json
 mono_*
