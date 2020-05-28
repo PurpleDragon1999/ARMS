@@ -27,5 +27,6 @@ namespace Arms.Domain.Entities
         public InterviewPanel InterviewPanel { get; set; }
         public Round Round { get; set; }
         public ICollection<Criteria> Criteria { get; set; }
+
     }
 }

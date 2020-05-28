@@ -31,5 +31,6 @@ namespace Arms.Domain.Entities
         public JobDescription Job { get; set; }
         public ICollection<Assessment> Assessment { get; set; }
         public ICollection<Resume> Resume { get; set; }
+
     }
 }

@@ -47,3 +47,10 @@ msbuild.wrn
 .vs/
 
 Building Blocks/
+
+*.exe
+*.pdb
+*.manifest
+*.cache
+*.g.props
+*.g.targets

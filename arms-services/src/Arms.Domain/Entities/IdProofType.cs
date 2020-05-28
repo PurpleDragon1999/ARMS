@@ -20,5 +20,6 @@ namespace Arms.Domain.Entities
         public string ModifiedBy { get; set; }
 
         public ICollection<Candidate> Candidate { get; set; }
+
     }
 }

@@ -25,5 +25,6 @@ namespace Arms.Domain.Entities
 
         public IdProofType IdProofType { get; set; }
         public ICollection<Application> Application { get; set; }
+
     }
 }
