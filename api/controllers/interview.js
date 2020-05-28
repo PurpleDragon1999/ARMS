@@ -11,6 +11,7 @@ class Interview extends Base{
     }
 
   async save(req, res) {
+    req.body.jdObjectId = await jobDescriptionModel.get({jdId : req.body.jdId})
     try {
        
         const newInterview={

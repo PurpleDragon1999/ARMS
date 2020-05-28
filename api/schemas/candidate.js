@@ -50,6 +50,11 @@ module.exports={
     appliedFor:{
        type:objectId,
        ref:"jobDescription"
+    },
+
+    feedback:{
+       type:String,
+       required:true,
     }
 
    
