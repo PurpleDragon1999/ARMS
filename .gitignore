@@ -54,3 +54,9 @@ Building Blocks/
 *.cache
 *.g.props
 *.g.targets
+
+bin/
+obj/
+appsettings.json
+appsettings.*.json
+mono_*

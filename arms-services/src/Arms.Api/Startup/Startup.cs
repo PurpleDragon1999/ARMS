@@ -139,7 +139,7 @@ namespace Arms.Api.Startup
 
         public static IServiceCollection AddCustomDatabaseService(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContextPool<ArmsDbContext>(options => options.UseSqlServer(configuration["Db"]));
+            services.AddDbContextPool<ArmsDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("Db"), b => b.MigrationsAssembly("Arms.Api")));
             
             return services;
         }

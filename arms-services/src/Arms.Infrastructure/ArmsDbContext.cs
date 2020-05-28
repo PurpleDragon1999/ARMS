@@ -11,6 +11,8 @@ namespace Arms.Infrastructure
         {
         }
 
+        public DbSet<Assessment> Assessments { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new EmployeeEntityTypeConfiguration());
@@ -32,7 +34,5 @@ namespace Arms.Infrastructure
             modelBuilder.ApplyConfiguration(new RoundEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new RoundTypeEntityTypeConfiguration());
         }
-
-        public DbSet<Assessment> Assessments;
     }
 }
