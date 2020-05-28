@@ -14,15 +14,6 @@ import { HttpErrorResponse} from "@angular/common/http";
   styleUrls: ["./create-interview.component.scss"],
 })
 export class CreateInterviewComponent implements OnInit {
-  // interview: ICreate = {
-  //   jdId: "",
-  //   jd: "",
-  //   date: "",
-  //   time: "",
-  //   venue:"",
-  //   noOfRounds: 5,
-  // };
-
   constructor(
     private AppServicesService: AppServicesService,
     private router: Router,
@@ -34,6 +25,7 @@ export class CreateInterviewComponent implements OnInit {
 
   createInterview(interview: ICreate) {
     let interviewObj = interview;
+    interviewObj.jdId = "CYGJID" + interviewObj.jdId
     this.AppServicesService.createInterview(interview).subscribe((res: any) => {
         const modalRef = this.modalService.open(ModalComponent);
         modalRef.componentInstance.shouldConfirm = false;
@@ -46,7 +38,6 @@ export class CreateInterviewComponent implements OnInit {
     },
     
       (error: HttpErrorResponse) => {
-        console.log(error, "response");
         const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
         modalRef.componentInstance.shouldConfirm = false;
         modalRef.componentInstance.success = error.error.success;
@@ -58,7 +49,4 @@ export class CreateInterviewComponent implements OnInit {
       }
     );
   }
-
-
-
 }

@@ -1,32 +1,40 @@
-create table Assessment(
-createdAt datetime2(3) default (sysdatetime()),
-modifiedAt datetime2(3) default (sysdatetime()),
 
-asssessmentNumber int identity(1000,1),
-id as 'CYGAID'+ cast(asssessmentNumber as varchar(100)) persisted primary key,
+IF OBJECT_ID('ARMS.Assessment') IS NULL
+BEGIN
+	CREATE TABLE ARMS.Assessment(
+	[id] int identity(1,1) not null,
+	[code] as 'CYGAID' + cast([id] as nvarchar(50)) persisted,
+	[feedback] nvarchar(max) not null,
+	[Result] bit not null,
+	[createdAt] datetime2 default (sysdatetime()) not null,
+	[createdBy] nvarchar(255) not null,
+	[modifiedAt] datetime2 default (sysdatetime()) not null,
+	[modifiedBy] nvarchar(255) not null,
+	[roundId] int not null,
+	[applicationId] int not null,
+	[interviewPanelId] int not null,
+	constraint PK_Assessment primary key (id),
+	constraint FK_Assessment_ArmsRound foreign key ([roundId]) references ARMS.Round(id),
+	constraint FK_Assessment_ArmsApplication foreign key ([applicationId]) references ARMS.Application(id),
+	constraint FK_Assessment_ArmsInterviewPanel foreign key ([interviewPanelId]) references ARMS.InterviewPanel(id)
+	)
 
-candidateEmail varchar(255) not null,
+END
 
-candidateAadhar varchar(255) not null,
-constraint FK_Assessment_Candidate foreign key (candidateEmail, candidateAadhar) references Candidate(email, aadhar),
-
-roundId varchar(206) not null,
-constraint FK_Assessment_Round foreign key (roundId) references Round(id),
-
-interviewer1 varchar(103) not null,
-constraint FK_Assessment_Interviewer1 foreign key (interviewer1) references Employee(id),
-
-interviewer2 varchar(103),
-constraint FK_Assessment_Interviewer2 foreign key (interviewer2) references Employee(id),
-
-overallRemarks varchar(255) not null,
-roundResult bit check(RoundResult=0 OR RoundResult=1) not null,
-)
-
+GO
 CREATE TRIGGER trg_UpdateAssessment
-ON Assessment
+ON ARMS.Assessment
 AFTER UPDATE
 AS
-    UPDATE Assessment
-    SET modifiedAt  = sysdatetime()
+    UPDATE ARMS.Assessment
+    SET [modifiedAt]  = sysdatetime()
     WHERE id IN (SELECT DISTINCT id FROM Inserted)
+
+GO
+insert into ARMS.Assessment ([feedback],[result],[roundId],[applicationId],[interviewPanelId], [createdBy],[modifiedBy])
+values ('good', 0,'2','1','2','shivani','shivani');
+
+select * from ARMS.Assessment;
+
+
+
