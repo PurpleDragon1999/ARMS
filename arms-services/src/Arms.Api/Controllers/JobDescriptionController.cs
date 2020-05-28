@@ -43,9 +43,25 @@ namespace Arms.Api.Controllers
         public IActionResult GetJd(int id)
         {
           JobDescription job=_context.JobDescription.SingleOrDefault(c => c.Id == id);
+          
+           
             if (job == null)
-                return NotFound();
-            var response = new
+            {
+                var resNull = new 
+                {
+                    success = "true",
+                    payload = new
+                    {
+                       
+                        message = "This Jobdescription does not exist with this ID"
+                    }
+
+                };
+                return Ok(resNull);
+
+            }
+                
+             var response = new 
             {
                 success = "true",
                 payload = new
@@ -89,7 +105,20 @@ namespace Arms.Api.Controllers
         {
             JobDescription jobInDb = _context.JobDescription.SingleOrDefault(c => c.Id == id);
             if (jobInDb == null)
-                return NotFound();
+            {
+                var resNull = new
+                {
+                    success = "true",
+                    payload = new
+                    {
+
+                        message = "This Jobdescription does not exist with this ID"
+                    }
+
+                };
+                return Ok(resNull);
+            }
+               
             jobInDb.openingDate = job.openingDate;
             jobInDb.closingDate = job.closingDate;
             jobInDb.locationId = job.locationId;
@@ -117,7 +146,19 @@ namespace Arms.Api.Controllers
         {
             JobDescription jobInDb = _context.JobDescription.SingleOrDefault(c => c.Id == id);
             if (jobInDb == null)
-                return NotFound();
+            {
+                var resNull = new
+                {
+                    success = "true",
+                    payload = new
+                    {
+
+                        message = "This Jobdescription does not exist with this ID"
+                    }
+
+                };
+                return Ok(resNull);
+            }
             _context.JobDescription.Remove(jobInDb);
             _context.SaveChanges();
             var response = new
