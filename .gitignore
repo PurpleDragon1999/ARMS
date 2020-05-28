@@ -13,6 +13,9 @@ jobDescriptions
 .idea
 
 
+Building Blocks/
+bin/
+obj/
 .vs/
 
 *.exe
