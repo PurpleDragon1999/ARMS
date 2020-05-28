@@ -7,7 +7,7 @@ namespace Arms.Domain.Entities
         public int Id { get; set; }
         public string Code { get; set; }
         public DateTime Date { get; set; }   
-        public DateTime Time { get; set; }
+        public TimeSpan Time { get; set; }
         public string Venue { get; set; }
         public int JobId { get; set; }
         public int NoOfRounds { get; set; }
@@ -15,5 +15,7 @@ namespace Arms.Domain.Entities
         public string CreatedBy { get; set; }
         public DateTime ModifiedAt { get; set; }
         public string ModifiedBy { get; set; }
+        public JobDescription JobDescription { get; set; }
+
     }
 }

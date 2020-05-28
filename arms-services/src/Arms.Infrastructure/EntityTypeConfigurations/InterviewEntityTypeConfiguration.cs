@@ -54,11 +54,13 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .HasMaxLength(50)
                 .IsUnicode(false);
 
-            builder.HasOne(d => d.Job)
+            builder.HasOne(d => d.JobDescription)
                 .WithMany(p => p.Interview)
                 .HasForeignKey(d => d.JobId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Jobdescription");
+
+            builder.Property(e => e.JobId).HasColumnName("jobId");
         }
 
         

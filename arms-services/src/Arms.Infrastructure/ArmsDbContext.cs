@@ -10,7 +10,9 @@ namespace Arms.Infrastructure
             : base(options)
         {
         }
-        public virtual DbSet<Interview> Interview { get; set; }
+        public DbSet<JobDescription> JobDescription { get; set; }
+
+        public DbSet<Interview> Interview { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
