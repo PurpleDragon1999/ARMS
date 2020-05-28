@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Arms.Application.Services.Users;
 using Arms.Domain.Entities;
 using Arms.Infrastructure;
+using System.Web.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 namespace Arms.Api.Controllers
@@ -21,19 +22,40 @@ namespace Arms.Api.Controllers
             _context = armsContext;
         }
         [HttpGet]
-        public IEnumerable<JobDescription> GetJds()
+        public IActionResult GetJds()
         {
             List<JobDescription> jobDescriptions = _context.JobDescription.ToList();
-            return jobDescriptions;
-    
+            var response = new
+            {
+                success = "true",
+                payload = new
+                {
+                    data=jobDescriptions,
+                    message = "Job Descriptions Retrieved Successfully"
+                }
+
+            };
+            return Ok(response);
+            
         }
         [HttpGet("{id}")]
+        
         public IActionResult GetJd(int id)
         {
           JobDescription job=_context.JobDescription.SingleOrDefault(c => c.Id == id);
             if (job == null)
                 return NotFound();
-            return Ok(job);
+            var response = new
+            {
+                success = "true",
+                payload = new
+                {
+                    data=job,
+                    message = "Job Description Retrieved Successfully"
+                }
+
+            };
+            return Ok(response);
         }
         [HttpPost]
         public IActionResult WriteJd(JobDescription job)
@@ -47,20 +69,27 @@ namespace Arms.Api.Controllers
                 jobTitle=job.jobTitle,
                 vacancies=job.vacancies,
                 salary=job.salary,
-
-
-                
-
             };
             _context.JobDescription.Add(newJob);
             _context.SaveChanges();
-            return Ok(newJob);
+            var response = new
+            {    
+                success="true",
+                payload=new{
+                data=newJob,
+                message = "Job Description Created Successfully"
+               }
+
+            };
+            return Ok(response);
 
         }
         [HttpPut("{id}")]
         public IActionResult UpdateJd(int id,JobDescription job)
         {
             JobDescription jobInDb = _context.JobDescription.SingleOrDefault(c => c.Id == id);
+            if (jobInDb == null)
+                return NotFound();
             jobInDb.openingDate = job.openingDate;
             jobInDb.closingDate = job.closingDate;
             jobInDb.locationId = job.locationId;
@@ -71,17 +100,36 @@ namespace Arms.Api.Controllers
 
             _context.JobDescription.Update(jobInDb);
             _context.SaveChanges();
-            return Ok(jobInDb);
+            var response = new
+            {
+                success = "true",
+                payload = new
+                {
+                    data=jobInDb,
+                    message = "Job Description Updated Successfully"
+                }
+
+            };
+            return Ok(response);
         }
         [HttpDelete("{id}")]
         public IActionResult UpdateJd(int id)
         {
             JobDescription jobInDb = _context.JobDescription.SingleOrDefault(c => c.Id == id);
-         
-
+            if (jobInDb == null)
+                return NotFound();
             _context.JobDescription.Remove(jobInDb);
             _context.SaveChanges();
-            return Ok("record deleted");
+            var response = new
+            {
+                success = "true",
+                payload = new
+                {
+                  message = "Job Description Deleted Successfully"
+                }
+
+            };
+            return Ok(response);
         }
     }
 }
