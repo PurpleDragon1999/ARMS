@@ -21,7 +21,7 @@ namespace Arms.Domain.Entities
         public int ? vacancies { get; set; }
         public DateTime createdAt{get;set; }
         public DateTime modifiedAt { get; set; }
-
+        public Location location { get; set; }
         public Byte[] pdfBlobData { get; set; }
         public string createdBy { get; set; }
         public string modifiedBy { get; set; }
