@@ -31,7 +31,7 @@ namespace Arms.Api.Controllers
         {
             try
             {
-                List<JobDescription> jobDescriptions = _context.JobDescription.Include(l => l.location).ToList();
+                List<JobDescription> jobDescriptions = _context.JobDescription.Include(l=>l.loc).ToList();
                 var response = new
                 {
                     success = "true",
@@ -66,7 +66,7 @@ namespace Arms.Api.Controllers
         
         public IActionResult GetJd(int id)
         {
-          JobDescription job=_context.JobDescription.SingleOrDefault(c => c.Id == id);
+          JobDescription job=_context.JobDescription.Include(l => l.loc).SingleOrDefault(c => c.Id == id);
             try
             {
                 if (job == null)

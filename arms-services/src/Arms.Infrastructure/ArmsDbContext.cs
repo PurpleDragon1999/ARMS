@@ -13,6 +13,7 @@ namespace Arms.Infrastructure
         {
         }
         public virtual DbSet<JobDescription> JobDescription { get; set; }
+      
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -20,7 +21,8 @@ namespace Arms.Infrastructure
             modelBuilder.ApplyConfiguration(new EmployeeEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new EmployeeDetailEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new JobDescriptionEntityTypeConfiguration());
-           
+            modelBuilder.ApplyConfiguration(new LocEntityTypeConfiguration());
+
         }
     }
 }

@@ -47,11 +47,12 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .HasMaxLength(60)
                 .IsUnicode(false);
 
-            builder.Property(e => e.locationId)
-                .IsRequired()
-                .HasColumnName("location")
-                .HasMaxLength(50)
-                .IsUnicode(false);
+            //builder.Property(e => e.locationId)
+            //    .IsRequired()
+            //    .HasColumnName("locationId")
+            //    .HasMaxLength(50)
+            //    .IsUnicode(false);
+               
 
             builder.Property(e => e.modifiedAt)
                 .HasColumnName("modifiedAt")
@@ -61,6 +62,7 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .HasColumnName("modifiedBy")
                 .HasMaxLength(50)
                 .IsUnicode(false);
+            builder.Property(e => e.locationId).HasColumnName("locationId");
 
             builder.Property(e => e.openingDate).HasColumnName("openingDate");
 
@@ -69,6 +71,13 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
             builder.Property(e => e.salary).HasColumnName("salary");
 
             builder.Property(e => e.vacancies).HasColumnName("vacancies");
+
+            builder.HasOne(d => d.loc)
+              .WithMany()
+              .HasForeignKey(d => d.locationId)
+              .OnDelete(DeleteBehavior.ClientSetNull)
+              .HasConstraintName("FK_location");
         }
     }
-}
+   }
+
