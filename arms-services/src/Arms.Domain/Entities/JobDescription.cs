@@ -12,9 +12,13 @@ namespace Arms.Domain.Entities
     {
         public int Id { get; set; }
         public string code { get; set; }
-       
+       public int eligibilityCriteriaId { get; set; }
+        public EligibilityCriteria eligibilityCriteria { get; set; }
         public int locationId { get; set; }
         public Loc loc { get; set; }
+        public int employmentTypeId { get; set;}
+        public EmploymentType employmentType { get; set; }
+        
         public DateTime openingDate { get; set; }
         public DateTime closingDate { get; set; }
         public string description { get; set; }

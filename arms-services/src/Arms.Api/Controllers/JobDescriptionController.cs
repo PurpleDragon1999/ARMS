@@ -66,9 +66,15 @@ namespace Arms.Api.Controllers
         
         public IActionResult GetJd(int id)
         {
-          JobDescription job=_context.JobDescription.Include(l => l.loc).SingleOrDefault(c => c.Id == id);
+         
             try
             {
+                JobDescription job = _context.JobDescription.Include(l => l.loc).Include(l =>l.eligibilityCriteria).
+                    Include(l => l.employmentType).
+                    SingleOrDefault(c => c.Id == id);
+
+
+
                 if (job == null)
                 {
                     var resNull = new
@@ -138,11 +144,14 @@ namespace Arms.Api.Controllers
                     openingDate = job.openingDate,
                     closingDate = job.closingDate,
                     locationId = job.locationId,
+                    employmentTypeId=job.employmentTypeId,
+                    eligibilityCriteriaId=job.eligibilityCriteriaId,
                     description = job.description,
                     jobTitle = job.jobTitle,
                     vacancies = job.vacancies,
                     salary = job.salary,
-                    pdfBlobData = job.pdfBlobData
+                    pdfBlobData = job.pdfBlobData,
+
                 };
                 _context.JobDescription.Add(newJob);
                 _context.SaveChanges();
@@ -204,7 +213,7 @@ namespace Arms.Api.Controllers
                 jobInDb.vacancies = job.vacancies;
                 jobInDb.salary = job.salary;
 
-                _context.JobDescription.Update(jobInDb);
+                _context.JobDescription.Update(job);
                 _context.SaveChanges();
                 var response = new
                 {

@@ -22,6 +22,8 @@ namespace Arms.Infrastructure
             modelBuilder.ApplyConfiguration(new EmployeeDetailEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new JobDescriptionEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new LocEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new EmploymentTypeEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new EligibilityCriteriaEntityTypeConfiguration());
 
         }
     }
