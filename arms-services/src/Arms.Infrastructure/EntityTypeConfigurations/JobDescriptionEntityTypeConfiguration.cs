@@ -91,6 +91,12 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
              .HasForeignKey(d => d.eligibilityCriteriaId)
              .OnDelete(DeleteBehavior.ClientSetNull)
              .HasConstraintName("FK_eligibilityCriteria");
+          
+            //builder.HasOne(d => d.eligibilityCriteria)
+            //      .WithMany(p => p.JobDescription)
+            //      .HasForeignKey(d => d.eligibilityCriteriaId)
+            //      .OnDelete(DeleteBehavior.ClientSetNull)
+            //      .HasConstraintName("FK_eligibilityCriteria");
         }
     }
    }

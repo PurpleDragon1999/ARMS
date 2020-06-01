@@ -8,6 +8,7 @@ namespace Arms.Domain.Entities
 {
    public  class EmploymentType:Entity
     {
+
         [Key]
         public int id { get; set; }
      

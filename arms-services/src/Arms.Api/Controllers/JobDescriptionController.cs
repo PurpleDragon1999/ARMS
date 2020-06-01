@@ -31,7 +31,8 @@ namespace Arms.Api.Controllers
         {
             try
             {
-                List<JobDescription> jobDescriptions = _context.JobDescription.Include(l=>l.loc).ToList();
+                List<JobDescription> jobDescriptions = _context.JobDescription.Include(l=>l.employmentType).
+                    Include(l => l.eligibilityCriteria).Include(l => l.loc).ToList();
                 var response = new
                 {
                     success = "true",
@@ -69,8 +70,8 @@ namespace Arms.Api.Controllers
          
             try
             {
-                JobDescription job = _context.JobDescription.Include(l => l.loc).Include(l =>l.eligibilityCriteria).
-                    Include(l => l.employmentType).
+                JobDescription job = _context.JobDescription.Include(l => l.employmentType).
+                    Include(l => l.eligibilityCriteria).Include(l => l.loc).
                     SingleOrDefault(c => c.Id == id);
 
 

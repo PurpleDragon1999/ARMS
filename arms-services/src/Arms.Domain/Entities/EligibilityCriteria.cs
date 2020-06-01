@@ -8,7 +8,7 @@ namespace Arms.Domain.Entities
 {
     public class EligibilityCriteria:Entity
     {
-        [Key]
+      [Key]
         public int id { get; set; }
 
         public string eligibilityCriteriaName { get; set; }
@@ -16,5 +16,6 @@ namespace Arms.Domain.Entities
         public DateTime modifiedAt { get; set; }
         public string createdBy { get; set; }
         public string modifiedBy { get; set; }
+      
     }
 }

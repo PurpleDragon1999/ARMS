@@ -13,7 +13,10 @@ namespace Arms.Infrastructure
         {
         }
         public virtual DbSet<JobDescription> JobDescription { get; set; }
-      
+        public virtual DbSet<EmploymentType> employmentType  { get; set; }
+        public virtual DbSet<EligibilityCriteria>eligibilityCriteria { get; set; }
+
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

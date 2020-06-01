@@ -21,11 +21,7 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .HasColumnName("createdAt")
                 .HasDefaultValueSql("(sysdatetime())");
 
-            builder.Property(e => e.createdBy)
-                .IsRequired()
-                .HasColumnName("createdBy")
-                .HasMaxLength(255)
-                .IsUnicode(false);
+          
 
 
 
@@ -38,12 +34,16 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .HasColumnName("modifiedAt")
                 .HasDefaultValueSql("(sysdatetime())");
 
+            builder.Property(e => e.createdBy)
+                     .HasColumnName("createdBy")
+                     .HasMaxLength(255);
             builder.Property(e => e.modifiedBy)
-                .IsRequired()
-                .HasColumnName("modifiedBy")
-                .HasMaxLength(255)
-                .IsUnicode(false);
+                   .HasColumnName("modifiedBy")
+                   .HasMaxLength(255);
         }
+
+
+
 
     }
 }

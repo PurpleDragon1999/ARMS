@@ -16,33 +16,33 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
             builder.Property(e => e.id).HasColumnName("id");
 
             //builder.Property(e => e.id).ValueGeneratedOnAdd();
-          
+
             builder.Property(e => e.createdAt)
                 .HasColumnName("createdAt")
                 .HasDefaultValueSql("(sysdatetime())");
 
             builder.Property(e => e.createdBy)
-                .IsRequired()
+
                 .HasColumnName("createdBy")
-                .HasMaxLength(255)
-                .IsUnicode(false);
+                .HasMaxLength(255);
+
 
 
 
             builder.Property(e => e.employmentTypeName)
-                .HasColumnName("employmentTypeName")
-                .HasMaxLength(255)
-                .IsUnicode(false);
+                   .IsRequired()
+                   .HasColumnName("employmentTypeName")
+                   .HasMaxLength(255)
+                   .IsUnicode(false);
 
             builder.Property(e => e.modifiedAt)
                 .HasColumnName("modifiedAt")
                 .HasDefaultValueSql("(sysdatetime())");
 
+
             builder.Property(e => e.modifiedBy)
-                .IsRequired()
                 .HasColumnName("modifiedBy")
-                .HasMaxLength(255)
-                .IsUnicode(false);
+                .HasMaxLength(255);
         }
 
     }
