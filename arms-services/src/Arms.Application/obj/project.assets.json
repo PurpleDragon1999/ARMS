@@ -4467,6 +4467,7 @@
       "path": "runtime.native.system/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/netstandard1.0/_._",
@@ -4495,6 +4496,7 @@
       "path": "runtime.native.system.io.compression/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/netstandard1.0/_._",
@@ -4508,6 +4510,7 @@
       "path": "runtime.native.system.net.http/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/netstandard1.0/_._",
@@ -6259,6 +6262,7 @@
       "path": "system.reflection.emit/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -6294,6 +6298,7 @@
       "path": "system.reflection.emit.ilgeneration/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -6338,6 +6343,7 @@
       "path": "system.reflection.emit.lightweight/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -6510,6 +6516,7 @@
       "path": "system.reflection.typeextensions/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -7178,6 +7185,7 @@
       "path": "system.security.cryptography.csp/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -7249,6 +7257,7 @@
       "path": "system.security.cryptography.openssl/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/netstandard1.6/System.Security.Cryptography.OpenSsl.dll",
@@ -8214,6 +8223,7 @@
       "path": "system.xml.xpath/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -8252,6 +8262,7 @@
       "path": "system.xml.xpath.xdocument/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -8321,23 +8332,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\shubham.sharma\\.nuget\\packages\\": {},
+    "C:\\Users\\kritika.sachdeva\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\ARMS\\ARMS\\arms-services\\src\\Arms.Application\\Arms.Application.csproj",
+      "projectUniqueName": "C:\\Users\\kritika.sachdeva\\Desktop\\projects\\ARMS\\arms-services\\src\\Arms.Application\\Arms.Application.csproj",
       "projectName": "Arms.Application",
-      "projectPath": "D:\\ARMS\\ARMS\\arms-services\\src\\Arms.Application\\Arms.Application.csproj",
-      "packagesPath": "C:\\Users\\shubham.sharma\\.nuget\\packages\\",
-      "outputPath": "D:\\ARMS\\ARMS\\arms-services\\src\\Arms.Application\\obj\\",
+      "projectPath": "C:\\Users\\kritika.sachdeva\\Desktop\\projects\\ARMS\\arms-services\\src\\Arms.Application\\Arms.Application.csproj",
+      "packagesPath": "C:\\Users\\kritika.sachdeva\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\kritika.sachdeva\\Desktop\\projects\\ARMS\\arms-services\\src\\Arms.Application\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\shubham.sharma\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\kritika.sachdeva\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -8350,11 +8361,11 @@
       "frameworks": {
         "netcoreapp2.2": {
           "projectReferences": {
-            "D:\\ARMS\\ARMS\\arms-services\\Building Blocks\\Core\\Hrms.Web\\Hrms.Web.csproj": {
-              "projectPath": "D:\\ARMS\\ARMS\\arms-services\\Building Blocks\\Core\\Hrms.Web\\Hrms.Web.csproj"
+            "C:\\Users\\kritika.sachdeva\\Desktop\\projects\\ARMS\\arms-services\\Building Blocks\\Core\\Hrms.Web\\Hrms.Web.csproj": {
+              "projectPath": "C:\\Users\\kritika.sachdeva\\Desktop\\projects\\ARMS\\arms-services\\Building Blocks\\Core\\Hrms.Web\\Hrms.Web.csproj"
             },
-            "D:\\ARMS\\ARMS\\arms-services\\src\\Arms.Infrastructure\\Arms.Infrastructure.csproj": {
-              "projectPath": "D:\\ARMS\\ARMS\\arms-services\\src\\Arms.Infrastructure\\Arms.Infrastructure.csproj"
+            "C:\\Users\\kritika.sachdeva\\Desktop\\projects\\ARMS\\arms-services\\src\\Arms.Infrastructure\\Arms.Infrastructure.csproj": {
+              "projectPath": "C:\\Users\\kritika.sachdeva\\Desktop\\projects\\ARMS\\arms-services\\src\\Arms.Infrastructure\\Arms.Infrastructure.csproj"
             }
           }
         }

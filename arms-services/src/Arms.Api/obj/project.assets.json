@@ -12520,23 +12520,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\shubham.sharma\\.nuget\\packages\\": {},
+    "C:\\Users\\kritika.sachdeva\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\ARMS\\ARMS\\arms-services\\src\\Arms.Api\\Arms.Api.csproj",
+      "projectUniqueName": "C:\\Users\\kritika.sachdeva\\Desktop\\projects\\ARMS\\arms-services\\src\\Arms.Api\\Arms.Api.csproj",
       "projectName": "Arms.Api",
-      "projectPath": "D:\\ARMS\\ARMS\\arms-services\\src\\Arms.Api\\Arms.Api.csproj",
-      "packagesPath": "C:\\Users\\shubham.sharma\\.nuget\\packages\\",
-      "outputPath": "D:\\ARMS\\ARMS\\arms-services\\src\\Arms.Api\\obj\\",
+      "projectPath": "C:\\Users\\kritika.sachdeva\\Desktop\\projects\\ARMS\\arms-services\\src\\Arms.Api\\Arms.Api.csproj",
+      "packagesPath": "C:\\Users\\kritika.sachdeva\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\kritika.sachdeva\\Desktop\\projects\\ARMS\\arms-services\\src\\Arms.Api\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\shubham.sharma\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\kritika.sachdeva\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -12549,8 +12549,8 @@
       "frameworks": {
         "netcoreapp2.2": {
           "projectReferences": {
-            "D:\\ARMS\\ARMS\\arms-services\\src\\Arms.Application\\Arms.Application.csproj": {
-              "projectPath": "D:\\ARMS\\ARMS\\arms-services\\src\\Arms.Application\\Arms.Application.csproj"
+            "C:\\Users\\kritika.sachdeva\\Desktop\\projects\\ARMS\\arms-services\\src\\Arms.Application\\Arms.Application.csproj": {
+              "projectPath": "C:\\Users\\kritika.sachdeva\\Desktop\\projects\\ARMS\\arms-services\\src\\Arms.Application\\Arms.Application.csproj"
             }
           }
         }
