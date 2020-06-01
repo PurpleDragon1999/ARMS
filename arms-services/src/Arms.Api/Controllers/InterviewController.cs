@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Arms.Infrastructure;
 using Arms.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Arms.Domain.CustomEntities;
 
 namespace Arms.Api.Controllers
 {
@@ -40,11 +41,11 @@ namespace Arms.Api.Controllers
                     }
 
                 };
-                return Ok(response);
+                return StatusCode(200, response);
             }
             catch(Exception e)
             {
-                return Ok(e.Message);
+                return StatusCode(400, e.Message);
             }
         }
 
@@ -53,45 +54,68 @@ namespace Arms.Api.Controllers
         public IActionResult GetInterview(int id)
         {
             var interview = _context.Interview.Include(c => c.JobDescription).SingleOrDefault(c => c.Id == id);
-            if (interview != null)
+            try
             {
-                var response = new
+                if (interview != null)
                 {
-                    success = "true",
-                    payload = new
+                    var response = new
                     {
-                        data = interview,
-                        message = "Interview Record Retrieved Successfully"
-                    }
+                        success = "true",
+                        payload = new
+                        {
+                            data = interview,
+                            message = "Interview Record Retrieved Successfully"
+                        }
 
-                };
-                return Ok(response);
+                    };
+                    return StatusCode(200, response);
 
+                }
+                else
+                {
+                    var response = new
+                    {
+                        success = "true",
+                        payload = new
+                        {
+                            message = "Interview Record with this ID does not exist"
+                        }
+
+                    };
+                    return StatusCode(404,response);
+                }
             }
-            else
+            catch(Exception e)
             {
-                var response = new
-                {
-                    success = "true",
-                    payload = new
-                    {
-                        message = "Interview Record with this ID does not exist"
-                    }
-
-                };
-
-
-                return Ok(response);
+                return StatusCode(400, e.Message);
             }
         }
 
         [HttpPost]
-        public IActionResult CreateInterview([FromBody] Interview interview)
+        public IActionResult CreateInterview([FromBody] CustomInterview customDTO)
         {
-            var InterviewObj = interview;
-            _context.Interview.Add(InterviewObj);
+            var interviewObj = new Interview
+            {
+                Date = customDTO.Date,
+                Time = customDTO.Time,
+                Venue = customDTO.Venue,
+                JobId = customDTO.JobId,
+                NoOfRounds =customDTO.NoOfRounds,
+                CreatedAt = customDTO.CreatedAt,
+                CreatedBy = customDTO.CreatedBy,
+                ModifiedAt = customDTO.ModifiedAt,
+                ModifiedBy = customDTO.ModifiedBy
+            };
+            
+            foreach (Round round in customDTO.Round)
+            {
+                var roundObj = round;
+                _context.Round.Add(roundObj);
+
+            }
+            _context.Interview.Add(interviewObj);
             _context.SaveChanges();
-            return Ok(InterviewObj);
+            return Ok("created");
         }
 
 
@@ -132,33 +156,40 @@ namespace Arms.Api.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteInterview(int id)
         {
-            var interview = _context.Interview.SingleOrDefault(c => c.Id == id);           
-            if (interview != null)
+            var interview = _context.Interview.SingleOrDefault(c => c.Id == id);
+            try
             {
-                _context.Interview.Remove(interview);
-                _context.SaveChanges();
-                var response = new
+                if (interview != null)
                 {
-                    success = "true",
-                    payload = new
+                    _context.Interview.Remove(interview);
+                    _context.SaveChanges();
+                    var response = new
                     {
-                        message = "Interview Record Deleted Successfully"
-                    }
-                };
-                return Ok(response);
+                        success = "true",
+                        payload = new
+                        {
+                            message = "Interview Record Deleted Successfully"
+                        }
+                    };
+                    return StatusCode(200, response);
+                }
+                else
+                {
+                    var response = new
+                    {
+                        success = "true",
+                        payload = new
+                        {
+                            message = "Interview Record with this ID does not exist"
+                        }
+                    };
+                    return StatusCode(404 , response);
+                }
             }
-            else
+            catch(Exception e)
             {
-                var response = new
-                {
-                    success = "true",
-                    payload = new
-                    {
-                        message = "Interview Record with this ID does not exist"
-                    }
-                };
-                return Ok(response);
-            }      
+                return StatusCode(400, e.Message);
+            }
         }
 
 

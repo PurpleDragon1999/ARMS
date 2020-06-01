@@ -13,6 +13,7 @@ namespace Arms.Infrastructure
         public DbSet<JobDescription> JobDescription { get; set; }
 
         public DbSet<Interview> Interview { get; set; }
+        public DbSet<Round> Round { get; set; }
     
 
 
@@ -22,6 +23,7 @@ namespace Arms.Infrastructure
             modelBuilder.ApplyConfiguration(new EmployeeDetailEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new InterviewEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new JobDescriptionEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new RoundEntityTypeConfiguration());
         }
     }
 }
