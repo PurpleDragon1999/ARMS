@@ -13,6 +13,7 @@ namespace Arms.Infrastructure
         public DbSet<JobDescription> JobDescription { get; set; }
 
         public DbSet<Interview> Interview { get; set; }
+    
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -20,6 +21,7 @@ namespace Arms.Infrastructure
             modelBuilder.ApplyConfiguration(new EmployeeEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new EmployeeDetailEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new InterviewEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new JobDescriptionEntityTypeConfiguration());
         }
     }
 }

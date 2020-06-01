@@ -7,6 +7,7 @@ using Arms.Application.Services.Users;
 using Microsoft.AspNetCore.Http;
 using Arms.Infrastructure;
 using Arms.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Arms.Api.Controllers
 {
@@ -26,15 +27,32 @@ namespace Arms.Api.Controllers
         [HttpGet]
         public IActionResult GetInterviews()
         {
-            List<Interview> interviews = _context.Interview.ToList();
-            return Ok(interviews);
+            List<Interview> interviews = _context.Interview.Include(c => c.JobDescription).ToList();
+            try
+            {
+                var response = new
+                {
+                    success = "true",
+                    payload = new
+                    {
+                        data = interviews,
+                        message = "Interview Record Retrieved Successfully"
+                    }
+
+                };
+                return Ok(response);
+            }
+            catch(Exception e)
+            {
+                return Ok(e.Message);
+            }
         }
 
 
         [HttpGet("{id}")]
         public IActionResult GetInterview(int id)
         {
-            var interview = _context.Interview.SingleOrDefault(c => c.Id == id);
+            var interview = _context.Interview.Include(c => c.JobDescription).SingleOrDefault(c => c.Id == id);
             if (interview != null)
             {
                 var response = new
@@ -114,7 +132,7 @@ namespace Arms.Api.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteInterview(int id)
         {
-            var interview = _context.Interview.SingleOrDefault(c => c.Id == id);
+            var interview = _context.Interview.SingleOrDefault(c => c.Id == id);           
             if (interview != null)
             {
                 _context.Interview.Remove(interview);
@@ -140,11 +158,8 @@ namespace Arms.Api.Controllers
                     }
                 };
                 return Ok(response);
-            }
-
+            }      
         }
-
-
 
 
     }
