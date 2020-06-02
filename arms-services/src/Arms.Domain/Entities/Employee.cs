@@ -1,12 +1,13 @@
 ﻿using System;
 using Hrms.Core.Domains.Entities;
-
+using System.ComponentModel.DataAnnotations;
 namespace Arms.Domain.Entities
 {
     public partial class Employee
     {
         public int? EmployeeDetailId { get; set; }
         public string FirstName { get; set; }
+        [Key]
         public Guid UserGuid { get; set; }
         public string LastName { get; set; }
         public string Username { get; set; }

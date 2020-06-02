@@ -43,11 +43,11 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Interview");
 
-            builder.HasOne(d => d.RoundType)
+            /*builder.HasOne(d => d.RoundType)
                 .WithMany(p => p.Round)
                 .HasForeignKey(d => d.RoundTypeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_roundType");
+                .HasConstraintName("FK_roundType");*/
         }
     }
 }

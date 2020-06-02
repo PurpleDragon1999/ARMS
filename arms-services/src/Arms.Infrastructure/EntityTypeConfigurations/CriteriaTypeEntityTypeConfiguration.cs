@@ -51,11 +51,11 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
 
             builder.Property(e => e.RoundTypeId).HasColumnName("roundTypeId");
 
-            builder.HasOne(d => d.RoundType)
+           /* builder.HasOne(d => d.RoundType)
                 .WithMany(p => p.CriteriaType)
                 .HasForeignKey(d => d.RoundTypeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_CT_ArmsRoundType");
+                .HasConstraintName("FK_CT_ArmsRoundType");*/
         }
     }
 }

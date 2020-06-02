@@ -1,3 +1,4 @@
+using Arms.Domain.Entities;
 using Arms.Infrastructure.EntityTypeConfigurations;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,6 +10,7 @@ namespace Arms.Infrastructure
             : base(options)
         {
         }
+        public virtual DbSet <RoundType> RoundType { get;set ;}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

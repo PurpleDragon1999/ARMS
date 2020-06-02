@@ -6,11 +6,6 @@ namespace Arms.Domain.Entities
 {
     public partial class RoundType
     {
-        public RoundType()
-        {
-            CriteriaType = new HashSet<CriteriaType>();
-            Round = new HashSet<Round>();
-        }
 
         public int Id { get; set; }
         public string Name { get; set; }
@@ -18,8 +13,5 @@ namespace Arms.Domain.Entities
         public DateTime ModifiedAt { get; set; }
         public string CreatedBy { get; set; }
         public string ModifiedBy { get; set; }
-
-        public ICollection<CriteriaType> CriteriaType { get; set; }
-        public ICollection<Round> Round { get; set; }
     }
 }
