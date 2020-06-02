@@ -13,6 +13,10 @@ namespace Arms.Infrastructure
         {
         }
         public virtual DbSet<JobDescription> JobDescription { get; set; }
+        public virtual DbSet<EmploymentType> employmentType  { get; set; }
+        public virtual DbSet<EligibilityCriteria>eligibilityCriteria { get; set; }
+
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -20,7 +24,10 @@ namespace Arms.Infrastructure
             modelBuilder.ApplyConfiguration(new EmployeeEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new EmployeeDetailEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new JobDescriptionEntityTypeConfiguration());
-           
+            modelBuilder.ApplyConfiguration(new LocEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new EmploymentTypeEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new EligibilityCriteriaEntityTypeConfiguration());
+
         }
     }
 }

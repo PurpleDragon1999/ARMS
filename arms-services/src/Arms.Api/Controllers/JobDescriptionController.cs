@@ -8,6 +8,10 @@ using Arms.Infrastructure;
 using System.Web.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.IO;
+using System.Reflection.Metadata;
+using Microsoft.EntityFrameworkCore;
+
 namespace Arms.Api.Controllers
 {
     [Route("api/[controller]")]
@@ -21,156 +25,271 @@ namespace Arms.Api.Controllers
             _identityService = identityService;
             _context = armsContext;
         }
+        //GET:api/jobDescriptions
         [HttpGet]
         public IActionResult GetJds()
         {
-            List<JobDescription> jobDescriptions = _context.JobDescription.ToList();
-            var response = new
+            try
             {
-                success = "true",
-                payload = new
+                List<JobDescription> jobDescriptions = _context.JobDescription.Include(l=>l.employmentType).
+                    Include(l => l.eligibilityCriteria).Include(l => l.loc).ToList();
+                var response = new
                 {
-                    data=jobDescriptions,
-                    message = "Job Descriptions Retrieved Successfully"
-                }
+                    success = "true",
+                    payload = new
+                    {
+                        data = jobDescriptions,
+                        message = "Job Descriptions Retrieved Successfully"
+                    }
 
-            };
-            return Ok(response);
-            
+                };
+                return StatusCode(200, response);
+            }
+            catch (Exception ex)
+            {
+              var response = new
+                {
+                    success = "false",
+                    payload = new
+                    {
+                        message = ex.Message
+                    }
+
+                };
+                return StatusCode(500, response);
+            }
+           
         }
+
+     
+        //GET:api/jobDescription/id
         [HttpGet("{id}")]
         
         public IActionResult GetJd(int id)
         {
-          JobDescription job=_context.JobDescription.SingleOrDefault(c => c.Id == id);
-          
-           
-            if (job == null)
+         
+            try
             {
-                var resNull = new 
+                JobDescription job = _context.JobDescription.Include(l => l.employmentType).
+                    Include(l => l.eligibilityCriteria).Include(l => l.loc).
+                    SingleOrDefault(c => c.Id == id);
+
+
+
+                if (job == null)
                 {
-                    success = "true",
+                    var resNull = new
+                    {
+                        success = "false",
+                        payload = new
+                        {
+                            message = "This Jobdescription does not exist"
+                        }
+                    };
+                    return StatusCode(404, resNull);
+                }
+                else
+                {
+
+                    var response = new
+                    {
+                        success = "true",
+                        payload = new
+                        {
+                            data = job,
+                            message = "Job Description Retrieved Successfully"
+                        }
+                       
+                    };
+                    return StatusCode(200,response);
+                }
+            }
+            catch (Exception ex)
+            {
+                var response = new
+                  {
+                    success = "false",
                     payload = new
                     {
-                       
-                        message = "This Jobdescription does not exist with this ID"
+                        message = ex.Message
                     }
 
-                };
-                return Ok(resNull);
-
+                  };
+                return StatusCode(500, response);
             }
-                
-             var response = new 
-            {
-                success = "true",
-                payload = new
-                {
-                    data=job,
-                    message = "Job Description Retrieved Successfully"
-                }
 
-            };
-            return Ok(response);
         }
+
+        //POST:api/jobDescription
         [HttpPost]
         public IActionResult WriteJd(JobDescription job)
         {
-            JobDescription newJob = new JobDescription
-            {  
-                openingDate=job.openingDate,
-                closingDate=job.closingDate,
-                locationId=job.locationId,
-                description=job.description,
-                jobTitle=job.jobTitle,
-                vacancies=job.vacancies,
-                salary=job.salary,
-            };
-            _context.JobDescription.Add(newJob);
-            _context.SaveChanges();
-            var response = new
-            {    
-                success="true",
-                payload=new{
-                data=newJob,
-                message = "Job Description Created Successfully"
-               }
+            try
+            {
+                JobDescription checkinDb = _context.JobDescription.SingleOrDefault(c => c.jobTitle == job.jobTitle);
+                if (checkinDb!=null)
+                {
+                    var resAlreadyExists = new
+                    {
+                        success = "false",
+                        payload = new
+                        {
+                          message = "Job with this Job Title already exists"
+                        }
 
-            };
-            return Ok(response);
+                    };
+                    return StatusCode(400, resAlreadyExists);
+                }
+                JobDescription newJob = new JobDescription
+                {
+                    openingDate = job.openingDate,
+                    closingDate = job.closingDate,
+                    locationId = job.locationId,
+                    employmentTypeId=job.employmentTypeId,
+                    eligibilityCriteriaId=job.eligibilityCriteriaId,
+                    description = job.description,
+                    jobTitle = job.jobTitle,
+                    vacancies = job.vacancies,
+                    salary = job.salary,
+                    pdfBlobData = job.pdfBlobData,
 
+                };
+                _context.JobDescription.Add(newJob);
+                _context.SaveChanges();
+                var response = new
+                {   
+                    success = "true",
+                    payload = new
+                    {
+                        data = newJob,
+                        message = "Job Description Created Successfully"
+                    }
+
+                };
+                return StatusCode(201,response);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.GetType().FullName);
+                Console.WriteLine(ex.Message);
+                var response = new
+                {
+                    success = "false",
+                    payload = new
+                    {
+                       message = ex.Message
+                    }
+
+                };
+                return StatusCode(500, response);
+            }
         }
+        //PUT:api/jobdescription/id
         [HttpPut("{id}")]
         public IActionResult UpdateJd(int id,JobDescription job)
         {
-            JobDescription jobInDb = _context.JobDescription.SingleOrDefault(c => c.Id == id);
-            if (jobInDb == null)
+            try
             {
-                var resNull = new
+                JobDescription jobInDb = _context.JobDescription.SingleOrDefault(c => c.Id == id);
+                if (jobInDb == null)
                 {
-                    success = "true",
+                    var resNull = new
+                    {
+                        success = "false",
+                        payload = new
+                        {
+
+                            message = "This Jobdescription does not exist"
+                        }
+
+                    };
+                    return StatusCode(404, resNull);
+                }
+
+                jobInDb.openingDate = job.openingDate;
+                jobInDb.closingDate = job.closingDate;
+                jobInDb.locationId = job.locationId;
+                jobInDb.description = job.description;
+                jobInDb.jobTitle = job.jobTitle;
+                jobInDb.vacancies = job.vacancies;
+                jobInDb.salary = job.salary;
+
+                _context.JobDescription.Update(job);
+                _context.SaveChanges();
+                var response = new
+                {
+                    success = "false",
                     payload = new
                     {
-
-                        message = "This Jobdescription does not exist with this ID"
+                        data = jobInDb,
+                        message = "Job Description Updated Successfully"
                     }
 
                 };
-                return Ok(resNull);
+                return StatusCode(200, response);
             }
-               
-            jobInDb.openingDate = job.openingDate;
-            jobInDb.closingDate = job.closingDate;
-            jobInDb.locationId = job.locationId;
-            jobInDb.description = job.description;
-            jobInDb.jobTitle = job.jobTitle;
-            jobInDb.vacancies = job.vacancies;
-            jobInDb.salary = job.salary;
-
-            _context.JobDescription.Update(jobInDb);
-            _context.SaveChanges();
-            var response = new
+            catch (Exception ex)
             {
-                success = "true",
-                payload = new
+              var response = new
                 {
-                    data=jobInDb,
-                    message = "Job Description Updated Successfully"
-                }
+                    success = "false",
+                    payload = new
+                    {
+                        message = ex.Message
+                    }
 
-            };
-            return Ok(response);
+                };
+                return StatusCode(500, response);
+            }
         }
+        //DELETE:/api/jobdescription/id
         [HttpDelete("{id}")]
-        public IActionResult UpdateJd(int id)
+        public IActionResult DeleteJd(int id)
         {
-            JobDescription jobInDb = _context.JobDescription.SingleOrDefault(c => c.Id == id);
-            if (jobInDb == null)
+            try
             {
-                var resNull = new
+                JobDescription jobInDb = _context.JobDescription.SingleOrDefault(c => c.Id == id);
+                if (jobInDb == null)
+                {
+                    var resNull = new
+                    {
+                        success = "false",
+                        payload = new
+                        {
+
+                            message = "This Jobdescription does not exist"
+                        }
+
+                    };
+                    return StatusCode(404, resNull);
+                }
+                _context.JobDescription.Remove(jobInDb);
+                _context.SaveChanges();
+                var response = new
                 {
                     success = "true",
                     payload = new
                     {
-
-                        message = "This Jobdescription does not exist with this ID"
+                        message = "Job Description Deleted Successfully"
                     }
 
                 };
-                return Ok(resNull);
+                return StatusCode(200, response);
             }
-            _context.JobDescription.Remove(jobInDb);
-            _context.SaveChanges();
-            var response = new
+            catch (Exception ex)
             {
-                success = "true",
-                payload = new
+                var response = new
                 {
-                  message = "Job Description Deleted Successfully"
-                }
+                    success = "false",
+                    payload = new
+                    {
+                        message = ex.Message
+                    }
 
-            };
-            return Ok(response);
+                };
+                return StatusCode(500, response);
+            }
         }
+       
     }
 }

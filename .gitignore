@@ -24,4 +24,4 @@ obj/
 *.cache
 *.g.props
 *.g.targets
-
+*/**/appsettings.json
