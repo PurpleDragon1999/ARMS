@@ -145,8 +145,8 @@ namespace Arms.Api.Controllers
                     openingDate = job.openingDate,
                     closingDate = job.closingDate,
                     locationId = job.locationId,
-                    employmentTypeId=job.employmentTypeId,
-                    eligibilityCriteriaId=job.eligibilityCriteriaId,
+                    employmentTypeId = job.employmentTypeId,
+                    eligibilityCriteriaId = job.eligibilityCriteriaId,
                     description = job.description,
                     jobTitle = job.jobTitle,
                     vacancies = job.vacancies,
@@ -170,8 +170,7 @@ namespace Arms.Api.Controllers
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.GetType().FullName);
-                Console.WriteLine(ex.Message);
+             
                 var response = new
                 {
                     success = "false",
@@ -186,7 +185,7 @@ namespace Arms.Api.Controllers
         }
         //PUT:api/jobdescription/id
         [HttpPut("{id}")]
-        public IActionResult UpdateJd(int id,JobDescription job)
+        public IActionResult UpdateJd(int id,[FromBody]JobDescription job)
         {
             try
             {
@@ -205,20 +204,32 @@ namespace Arms.Api.Controllers
                     };
                     return StatusCode(404, resNull);
                 }
+                if (job.openingDate != null)
+                    jobInDb.openingDate = job.openingDate;
 
-                jobInDb.openingDate = job.openingDate;
-                jobInDb.closingDate = job.closingDate;
-                jobInDb.locationId = job.locationId;
-                jobInDb.description = job.description;
-                jobInDb.jobTitle = job.jobTitle;
-                jobInDb.vacancies = job.vacancies;
-                jobInDb.salary = job.salary;
+                if (job.closingDate != null)
+                    jobInDb.closingDate = job.closingDate;
 
-                _context.JobDescription.Update(job);
+                if (job.locationId != 0)
+                    jobInDb.locationId = job.locationId;
+
+                if (job.description!=null)
+                  jobInDb.description = job.description;
+
+                if (job.jobTitle != null)
+                    jobInDb.jobTitle = job.jobTitle;
+
+                if (job.vacancies != 0)
+                    jobInDb.vacancies = job.vacancies;
+
+                if (job.salary != 0)
+                    jobInDb.salary = job.salary;
+
+                _context.JobDescription.Update(jobInDb);
                 _context.SaveChanges();
                 var response = new
                 {
-                    success = "false",
+                    success = "true",
                     payload = new
                     {
                         data = jobInDb,

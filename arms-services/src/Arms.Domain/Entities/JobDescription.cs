@@ -9,7 +9,7 @@ using System.Text;
 namespace Arms.Domain.Entities
 {
     public class JobDescription : Entity
-    {
+    {  
         public int Id { get; set; }
         public string code { get; set; }
        public int eligibilityCriteriaId { get; set; }
