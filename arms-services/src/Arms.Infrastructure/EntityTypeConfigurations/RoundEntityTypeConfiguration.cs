@@ -14,6 +14,7 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
             builder.ToTable("Round", "ARMS");
 
             builder.Property(e => e.Id).HasColumnName("id");
+            builder.Property(e => e.RoundNumber).HasColumnName("roundNumber");
             builder.Property(e => e.RoundDate).HasColumnName("roundDate");
             builder.Property(e => e.RoundTime).HasColumnName("roundTime");
 

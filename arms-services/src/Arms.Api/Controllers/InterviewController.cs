@@ -31,21 +31,46 @@ namespace Arms.Api.Controllers
             List<Interview> interviews = _context.Interview.Include(c => c.JobDescription).ToList();
             try
             {
-                var response = new
+                if (interviews != null)
                 {
-                    success = "true",
-                    payload = new
+                    var response = new
                     {
-                        data = interviews,
-                        message = "Interview Record Retrieved Successfully"
-                    }
+                        success = true,
+                        payload = new
+                        {
+                            data = interviews,
+                            message = "Interview Records Retrieved Successfully"
+                        }
 
-                };
-                return StatusCode(200, response);
+                    };
+                    return StatusCode(200, response);
+                }
+                else
+                {
+                    var response = new
+                    {
+                        success = false,
+                        payload = new
+                        {
+                            message = "The Interview Records you are looking for do not exist"
+                        }
+
+                    };
+                    return StatusCode(404, response);
+                }
             }
             catch(Exception e)
             {
-                return StatusCode(400, e.Message);
+                var response = new
+                {
+                    success = false,
+                    payload = new
+                    {
+                        message = e.InnerException.Message
+                    }
+
+                };
+                return StatusCode(500, response);
             }
         }
 
@@ -60,7 +85,7 @@ namespace Arms.Api.Controllers
                 {
                     var response = new
                     {
-                        success = "true",
+                        success = true,
                         payload = new
                         {
                             data = interview,
@@ -75,10 +100,10 @@ namespace Arms.Api.Controllers
                 {
                     var response = new
                     {
-                        success = "true",
+                        success = false,
                         payload = new
                         {
-                            message = "Interview Record with this ID does not exist"
+                            message = "The Interview Record you are looking for does not exist"
                         }
 
                     };
@@ -87,35 +112,69 @@ namespace Arms.Api.Controllers
             }
             catch(Exception e)
             {
-                return StatusCode(400, e.Message);
+                var response = new
+                {
+                    success = false,
+                    payload = new
+                    {
+                        message = e.InnerException.Message
+                    }
+
+                };
+                return StatusCode(500, response);
             }
         }
 
         [HttpPost]
         public IActionResult CreateInterview([FromBody] CustomInterview customDTO)
         {
-            var interviewObj = new Interview
+            try
             {
-                Date = customDTO.Date,
-                Time = customDTO.Time,
-                Venue = customDTO.Venue,
-                JobId = customDTO.JobId,
-                NoOfRounds =customDTO.NoOfRounds,
-                CreatedAt = customDTO.CreatedAt,
-                CreatedBy = customDTO.CreatedBy,
-                ModifiedAt = customDTO.ModifiedAt,
-                ModifiedBy = customDTO.ModifiedBy
-            };
-            
-            foreach (Round round in customDTO.Round)
-            {
-                var roundObj = round;
-                _context.Round.Add(roundObj);
+                var interviewObj = new Interview
+                {
+                    Date = customDTO.Date,
+                    Time = customDTO.Time,
+                    Venue = customDTO.Venue,
+                    JobId = customDTO.JobId,
+                    NoOfRounds = customDTO.NoOfRounds,
+                    CreatedBy = customDTO.CreatedBy,
+                    ModifiedBy = customDTO.ModifiedBy
+                };
+                _context.Interview.Add(interviewObj);
+                _context.SaveChanges();
+                int id = interviewObj.Id;
 
+                foreach (Round round in customDTO.Round)
+                {
+                    var roundObj = round;
+                    roundObj.InterviewId = id; 
+                    _context.Round.Add(roundObj);
+                    _context.SaveChanges();
+                }
+                var response = new
+                {
+                    success = true,
+                    payload = new
+                    {
+                        message = "Interview Record Created Successfully"
+                    }
+
+                };
+                return StatusCode(200, response);
             }
-            _context.Interview.Add(interviewObj);
-            _context.SaveChanges();
-            return Ok("created");
+            catch(Exception e)
+            {
+                var response = new
+                {
+                    success = false,
+                    payload = new
+                    {
+                        message = e.InnerException.Message
+                    }
+
+                };
+                return StatusCode(500, response);
+            }
         }
 
 
@@ -123,32 +182,66 @@ namespace Arms.Api.Controllers
         public IActionResult UpdateInterview(int id, [FromBody] Interview interviewObj)
         {
             var interview = _context.Interview.SingleOrDefault(c => c.Id == id);
-            if (interview != null)
+            try
             {
-                _context.Interview.Update(interviewObj);
-                _context.SaveChanges();
-                var response = new
+                if (interview != null)
                 {
-                    success = "true",
-                    payload = new
-                    {
-                        data = interviewObj,
-                        message = "Interview Record Updated Successfully"
+                    if (interviewObj.Date != null){
+                        interview.Date = interviewObj.Date;
                     }
-                };
-                return Ok(response);
+                    if(interviewObj.Time != null)
+                    {
+                        interview.Time = interviewObj.Time;
+                    }
+                    if(interviewObj.Venue != null)
+                    {
+                        interview.Venue = interviewObj.Venue;
+                    }
+                    if(interviewObj.JobId != 0)
+                    {
+                        interview.JobId = interviewObj.JobId;
+                    }
+                    if(interviewObj.NoOfRounds != 0)
+                    {
+                        interview.NoOfRounds = interviewObj.NoOfRounds;
+                    }
+                    _context.Interview.Update(interview);
+                    _context.SaveChanges();
+                    var response = new
+                    {
+                        success = true,
+                        payload = new
+                        {
+                            message = "Interview Record Updated Successfully"
+                        }
+                    };
+                    return StatusCode(200, response);
+                }
+                else
+                {
+                    var response = new
+                    {
+                        success = false,
+                        payload = new
+                        {
+                            message = "The Interview Record you are looking for does not exist"
+                        }
+                    };
+                    return StatusCode(404,response);
+                }
             }
-            else
+            catch(Exception e)
             {
                 var response = new
                 {
-                    success = "true",
+                    success = false,
                     payload = new
                     {
-                        message = "Interview Record with this ID does not exist"
+                        message = e.InnerException.Message
                     }
+
                 };
-                return Ok(response);
+                return StatusCode(500, response);
             }
         }
 
@@ -165,10 +258,10 @@ namespace Arms.Api.Controllers
                     _context.SaveChanges();
                     var response = new
                     {
-                        success = "true",
+                        success = true,
                         payload = new
                         {
-                            message = "Interview Record Deleted Successfully"
+                            message = "Interview record deleted successfully"
                         }
                     };
                     return StatusCode(200, response);
@@ -177,10 +270,10 @@ namespace Arms.Api.Controllers
                 {
                     var response = new
                     {
-                        success = "true",
+                        success = false,
                         payload = new
                         {
-                            message = "Interview Record with this ID does not exist"
+                            message = "The Interview Record you are looking for does not exist"
                         }
                     };
                     return StatusCode(404 , response);
@@ -188,7 +281,16 @@ namespace Arms.Api.Controllers
             }
             catch(Exception e)
             {
-                return StatusCode(400, e.Message);
+                var response = new
+                {
+                    success = false,
+                    payload = new
+                    {
+                        message = e.InnerException.Message
+                    }
+
+                };
+                return StatusCode(500, response);
             }
         }
 
