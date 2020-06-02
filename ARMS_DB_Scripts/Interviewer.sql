@@ -1,3 +1,9 @@
+USE arms_db
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
 IF OBJECT_ID('ARMS.Interviewer') IS NULL
 BEGIN
 CREATE TABLE ARMS.Interviewer(
@@ -23,8 +29,8 @@ AS
     WHERE id IN (SELECT DISTINCT id FROM Inserted)
 --new batch
 	GO
-Insert into ARMS.Interviewer(interviewPanelId,employeeId)
-Values('1','1')
+--Insert into ARMS.Interviewer(interviewPanelId,employeeId)
+--Values('1','1')
 
 SELECT * from ARMS.Interviewer
 

@@ -1,3 +1,9 @@
+USE arms_db
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
 IF OBJECT_ID('ARMS.Criteria') IS NULL
 BEGIN
 	CREATE TABLE ARMS.Criteria(
@@ -29,8 +35,8 @@ AS
     WHERE id IN (SELECT DISTINCT id FROM Inserted)
 
 GO
-insert into ARMS.Criteria ([marks],[remarks],[criteriaTypeId],[assessmentId],[createdBy],[modifiedBy] )
-values (34, 'good','2','','shivani','shivani');
+--insert into ARMS.Criteria ([marks],[remarks],[criteriaTypeId],[assessmentId],[createdBy],[modifiedBy] )
+--values (34, 'good','2','','shivani','shivani');
 
 select * from ARMS.Criteria;
 

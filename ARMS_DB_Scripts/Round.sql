@@ -1,11 +1,17 @@
- IF OBJECT_ID('ARMS.Round') IS NULL
+USE arms_db
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+IF OBJECT_ID('ARMS.Round') IS NULL
 BEGIN
 CREATE TABLE ARMS.Round(
 id int identity(1,1) primary key,
 roundTypeId int NOT NULL,
-constraint FK_roundType foreign key(roundTypeId) references ARMS.RoundType(id),
 interviewId int NOT NULL,
-
+constraint FK_roundType foreign key(roundTypeId) references ARMS.RoundType(id),
 constraint FK_Interview foreign key(interviewId) references ARMS.Interview(id),
 createdAt datetime2  default (sysdatetime()) NOT NULL,
 createdBy varchar(50) NULL,
@@ -28,8 +34,8 @@ AS
 GO 
 --insert command
 
-Insert into ARMS.Round(roundTypeId,interviewId)
-Values('2','1')
+--Insert into ARMS.Round(roundTypeId,interviewId)
+--Values('2','1')
 
 --Select command
 select * FROM ARMS.Round

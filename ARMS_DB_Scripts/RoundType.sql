@@ -1,3 +1,9 @@
+USE arms_db
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
 --RoundType Table creation
 IF OBJECT_ID('ARMS.RoundType') IS NULL
 BEGIN

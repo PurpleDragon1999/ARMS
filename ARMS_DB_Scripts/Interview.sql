@@ -1,3 +1,12 @@
+USE arms_db
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+Truncate TABLE JobDescription
+GO
+
 IF OBJECT_ID('ARMS.Interview') IS NULL
 BEGIN
 CREATE TABLE ARMS.Interview (
@@ -27,8 +36,8 @@ AS
 
 GO
 --Insert command for interview
-Insert into ARMS.Interview([date],[time],[venue],[noOfRounds],[jobId])
-Values('2020-02-09','12:00','delhi','5','1')
+--Insert into ARMS.Interview([date],[time],[venue],[noOfRounds],[jobId])
+--Values('2020-02-09','12:00','delhi','5','1')
 
 --display command for interview
 

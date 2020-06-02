@@ -1,3 +1,11 @@
+USE arms_db
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SELECT * FROM ARMS.Round
+GO
 
 IF OBJECT_ID('ARMS.Assessment') IS NULL
 BEGIN
@@ -22,6 +30,9 @@ BEGIN
 END
 
 GO
+
+IF OBJECT_ID('ARMS.Assessment') IS NULL
+BEGIN
 CREATE TRIGGER trg_UpdateAssessment
 ON ARMS.Assessment
 AFTER UPDATE
@@ -29,10 +40,10 @@ AS
     UPDATE ARMS.Assessment
     SET [modifiedAt]  = sysdatetime()
     WHERE id IN (SELECT DISTINCT id FROM Inserted)
-
+END
 GO
-insert into ARMS.Assessment ([feedback],[result],[roundId],[applicationId],[interviewPanelId], [createdBy],[modifiedBy])
-values ('good', 0,'2','1','2','shivani','shivani');
+--insert into ARMS.Assessment ([feedback],[result],[roundId],[applicationId],[interviewPanelId], [createdBy],[modifiedBy])
+--values ('good', 0,'2','1','2','shivani','shivani');
 
 select * from ARMS.Assessment;
 

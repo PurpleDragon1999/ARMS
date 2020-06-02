@@ -9,7 +9,7 @@ namespace Arms.Api.Models
         Assessment GetAssessment(int id);
         IEnumerable<Assessment> GetAllAssessments();
         Assessment Add(Assessment assessment);
-        Assessment Update(Assessment assessmentChanges);
+        Assessment Update(Assessment changedAssessment);
         Assessment Delete(int id);
     }
 }

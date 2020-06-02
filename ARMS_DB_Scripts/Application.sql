@@ -1,11 +1,17 @@
-if not exists (select * from sys.schemas where name = 'arms')
+USE arms_db
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+if not exists (select * from sys.schemas where name = 'ARMS')
 begin
-	exec('create schema arms')
+	exec('create schema ARMS')
 end
 
-if OBJECT_ID('arms.Application') is null
+if OBJECT_ID('ARMS.Application') is null
 begin 
-	create table arms.Application
+	create table ARMS.Application
 	(
 		[id] int identity(1,1),
 		[code] as 'CYGAPID'+ cast(id as nvarchar(50)) persisted, 
@@ -21,29 +27,29 @@ begin
 		[modifiedAt] datetime2 not null default (sysdatetime()),
 		[modifiedBy] nvarchar(50) not null,
 		constraint PK_Application primary key (id),
-		constraint FK_ApplicationCandidate foreign key (candidateId) references arms.Candidate(id),
-		constraint FK_ApplicationJob foreign key (jobId) references arms.JobDescription(id),
-		constraint FK_ApplicationStatusTypeId foreign key (applicationStatusTypeId) references arms.ApplicationStatusType(id)
+		constraint FK_ApplicationCandidate foreign key (candidateId) references ARMS.Candidate(id),
+		constraint FK_ApplicationJob foreign key (jobId) references ARMS.JobDescription(id),
+		constraint FK_ApplicationStatusTypeId foreign key (applicationStatusTypeId) references ARMS.ApplicationStatusType(id)
 	)
 end
 
 GO
 
-CREATE TRIGGER arms.trg_UpdateApplication
-ON arms.Application
+CREATE TRIGGER ARMS.trg_UpdateApplication
+ON ARMS.Application
 AFTER UPDATE
 AS
-    UPDATE arms.Application
+    UPDATE ARMS.Application
     SET modifiedAt  = sysdatetime()
     WHERE id IN (SELECT DISTINCT id FROM Inserted)
 
 
-insert into arms.Application(dateOfApplication, education, experience, statusChangedAt, candidateId, jobId,
+insert into ARMS.Application(dateOfApplication, education, experience, statusChangedAt, candidateId, jobId,
 applicationStatusTypeId, createdBy, modifiedBy)
 values ('2020-05-19', 'Downtown University', '1','2020-05-19', 1, 1, 2, 'anna', 'anna')
 
-update arms.Application
+update ARMS.Application
 set education = 'Northill University'
 where id= 1
 
-select * from arms.Application
+select * from ARMS.Application

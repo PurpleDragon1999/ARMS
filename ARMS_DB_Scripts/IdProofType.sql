@@ -1,11 +1,17 @@
-if not exists (select * from sys.schemas where name = 'arms')
+USE arms_db
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+if not exists (select * from sys.schemas where name = 'ARMS')
 begin
-	exec('create schema arms')
+	exec('create schema ARMS')
 end
 
-if OBJECT_ID('arms.IdProofType') is null
+if OBJECT_ID('ARMS.IdProofType') is null
 begin 
-	create table arms.IdProofType
+	create table ARMS.IdProofType
 	(
 		[id] int identity(1,1),
 		[code] as 'CYGPFID'+ cast(id as nvarchar(50)) persisted,
@@ -20,19 +26,19 @@ end
 
 GO
 
-CREATE TRIGGER arms.trg_IdProofType
-ON arms.IdProofType
+CREATE TRIGGER ARMS.trg_IdProofType
+ON ARMS.IdProofType
 AFTER UPDATE
 AS
-    UPDATE arms.IdProofType
+    UPDATE ARMS.IdProofType
     SET modifiedAt  = sysdatetime()
     WHERE id IN (SELECT DISTINCT id FROM Inserted)
 
 
 
-insert into arms.IdProofType ([name], createdBy, modifiedBy) 
+insert into ARMS.IdProofType ([name], createdBy, modifiedBy) 
 values ('social security number', 'anna', 'anna')
 
-update arms.IdProofType set [name]='PAN card' where id=1
+update ARMS.IdProofType set [name]='PAN card' where id=1
 
-select * from arms.IdProofType
+select * from ARMS.IdProofType

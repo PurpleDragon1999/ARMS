@@ -1,3 +1,9 @@
+USE arms_db
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
 IF NOT EXISTS (SELECT * FROM sys.schemas WHERE name ='ARMS')
 BEGIN
 EXEC('CREATE SCHEMA ARMS')
@@ -21,6 +27,9 @@ BEGIN
 END
 
 GO
+
+IF OBJECT_ID('ARMS.CriteriaType') IS NULL
+BEGIN
 CREATE TRIGGER trg_UpdateCriteriaType
 ON ARMS.CriteriaType
 AFTER UPDATE
@@ -28,9 +37,9 @@ AS
     UPDATE ARMS.CriteriaType
     SET [modifiedAt]  = sysdatetime()
     WHERE id IN (SELECT DISTINCT id FROM Inserted)
-
+END
 GO
-insert into ARMS.CriteriaType ([criteriaName],[roundTypeId],[createdBy],[modifiedBy])
-values ('HTML, CSS', 1, 'shivani','shivani');
+--insert into ARMS.CriteriaType ([criteriaName],[roundTypeId],[createdBy],[modifiedBy])
+--values ('HTML, CSS', 1, 'shivani','shivani');
 select * from ARMS.CriteriaType;
 

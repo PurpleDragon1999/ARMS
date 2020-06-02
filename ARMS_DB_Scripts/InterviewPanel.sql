@@ -1,4 +1,10 @@
- IF OBJECT_ID('ARMS.InterviewPanel') IS NULL
+USE arms_db
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+IF OBJECT_ID('ARMS.InterviewPanel') IS NULL
 BEGIN
 CREATE TABLE ARMS.InterviewPanel(
 id int identity(1,1) primary key ,
@@ -24,8 +30,8 @@ AS
 GO 
 --insert command
 
-Insert into ARMS.InterviewPanel([roundId])
-Values('2')
+--Insert into ARMS.InterviewPanel([roundId])
+--Values('2')
 
 --Select command
 select * FROM ARMS.InterviewPanel

@@ -1,3 +1,10 @@
+USE arms_db
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
 IF OBJECT_ID('ARMS.ApplicationStatusType') IS NULL
 BEGIN
 	CREATE TABLE ARMS.ApplicationStatusType(

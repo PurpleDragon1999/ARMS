@@ -12,6 +12,7 @@ namespace Arms.Infrastructure
         }
 
         public DbSet<Assessment> Assessments { get; set; }
+        public DbSet<Assessment> Criteria { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

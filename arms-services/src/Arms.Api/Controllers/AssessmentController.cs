@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Arms.Api.Models;
 using Arms.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -15,38 +16,108 @@ namespace Arms.Api.Controllers
         }
 
         [HttpGet("")]
-        public JsonResult Index()
+        public IActionResult Index()
         {
-            var model = _assessmentRepository.GetAllAssessments();
-            return Json(model);
+            Response<IEnumerable<Assessment>> response;
+            IEnumerable<Assessment> data = null;
+            try
+            {
+                data = _assessmentRepository.GetAllAssessments();
+                response = new Response<IEnumerable<Assessment>>(true, data, "Assessments retrieved successfully");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                response = new Response<IEnumerable<Assessment>>(false, null, "Something went wrong");
+
+                return StatusCode(500, response);
+            }
+            
+            return Ok(response);
         }
         
         [HttpGet("{id}")]
-        public JsonResult Show(int id)
+        public IActionResult Show(int id)
         {
-            var model = _assessmentRepository.GetAssessment(id);
-            return Json(model);
+            Response<Assessment> response;
+            Assessment data = null;
+            try
+            {
+                data = _assessmentRepository.GetAssessment(id);
+                response = new Response<Assessment>(true, data, "Assessment retrieved successfully");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                response = new Response<Assessment>(false, null, "Something went wrong");
+
+                return StatusCode(500, response);
+            }
+            
+            return Ok(response);
         }
         
         [HttpPost("")]
-        public JsonResult Create([FromBody] Assessment assessment)
+        public IActionResult Create([FromBody] Assessment assessment)
         {
-            var model = _assessmentRepository.Add(assessment);
-            return Json(model);
+            Response<Assessment> response;
+            Assessment data = null;
+            try
+            {
+                data = _assessmentRepository.Add(assessment);
+                response = new Response<Assessment>(true, data, "Assessment Created successfully");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                response = new Response<Assessment>(false, null, "Something went wrong");
+
+                return StatusCode(500, response);
+            }
+            
+            return Ok(response);
         }
         
         [HttpPut("")]
-        public JsonResult Modify([FromBody] Assessment assessment)
+        public IActionResult Modify([FromBody] Assessment assessment)
         {
-            var model = _assessmentRepository.Update(assessment);
-            return Json(model);
+            Response<Assessment> response;
+            Assessment data = null;
+            try
+            {
+                data = _assessmentRepository.Update(assessment);
+                response = new Response<Assessment>(true, data, "Assessment Updated successfully");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                response = new Response<Assessment>(false, null, "Something went wrong");
+
+                return StatusCode(500, response);
+            }
+            
+            return Ok(response);
         }
         
         [HttpDelete("{id}")]
-        public JsonResult Remove(int id)
+        public IActionResult Remove(int id)
         {
-            var model = _assessmentRepository.Delete(id);
-            return Json(model);
+            Response<Assessment> response;
+            Assessment data = null;
+            try
+            {
+                data = _assessmentRepository.Delete(id);
+                response = new Response<Assessment>(true, data, "Assessment Deleted successfully");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                response = new Response<Assessment>(false, null, "Something went wrong");
+
+                return StatusCode(500, response);
+            }
+            
+            return Ok(response);
         }
     }
 }

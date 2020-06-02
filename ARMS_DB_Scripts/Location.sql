@@ -1,3 +1,13 @@
+USE arms_db
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.schemas WHERE name='ARMS')
+BEGIN
+EXEC('CREATE SCHEMA ARMS')
+END
 
 IF OBJECT_ID('ARMS.Location') IS NULL
 BEGIN
@@ -13,11 +23,11 @@ BEGIN
 	constraint PK_Location primary key (id),
 	constraint FK_Location_JobId foreign key ([jobId]) references ARMS.JobDescription(id)
 	)
-
 END
-
-
 GO
+
+IF OBJECT_ID('ARMS.Location') IS NULL
+BEGIN
 CREATE TRIGGER trg_UpdateLocation
 ON ARMS.Location
 AFTER UPDATE
@@ -25,10 +35,11 @@ AS
     UPDATE ARMS.Location
     SET [modifiedAt]  = sysdatetime()
     WHERE id IN (SELECT DISTINCT id FROM Inserted)
-
+END
 GO
-insert into ARMS.Location ([locationName],[jobId],[createdBy],[modifiedBy])
-values ('Dallas', 1, 'shivani','shivani');
+
+--insert into ARMS.Location ([locationName],[jobId],[createdBy],[modifiedBy])
+--values ('Dallas', 1, 'shivani','shivani');
 
 select * from ARMS.Location;
 
