@@ -27,7 +27,7 @@ namespace Arms.Api.Controllers
         }
         //GET:api/roundType
         [HttpGet]
-        public IActionResult GetGetRoundTypes()
+        public IActionResult GetRoundTypes()
         {
             try
             {
@@ -76,7 +76,7 @@ namespace Arms.Api.Controllers
                         success = "false",
                         payload = new
                         {
-                            message = "This RoundType does not exist"
+                            message = "No such round type exists"
                         }
                     };
                     return StatusCode(404, resNull);
@@ -122,6 +122,7 @@ namespace Arms.Api.Controllers
                 RoundType newround = new RoundType
                 {
                     Name = round.Name,
+                    CreatedBy=round.CreatedBy,
                 };
                 _context.RoundType.Add(newround);
                 _context.SaveChanges();
@@ -168,7 +169,7 @@ namespace Arms.Api.Controllers
                         payload = new
                         {
 
-                            message = "This RoundType does not exist"
+                            message = "Round type does not exist"
                         }
 
                     };
@@ -176,6 +177,7 @@ namespace Arms.Api.Controllers
                 }
 
                 roundInDb.Name = round.Name;
+                roundInDb.ModifiedBy = round.ModifiedBy;
                 _context.RoundType.Update(roundInDb);
                 _context.SaveChanges();
                 var response = new
@@ -219,7 +221,7 @@ namespace Arms.Api.Controllers
                         payload = new
                         {
 
-                            message = "This RoundType does not exist"
+                            message = "Such round type does not exist"
                         }
 
                     };
@@ -232,7 +234,7 @@ namespace Arms.Api.Controllers
                     success = "true",
                     payload = new
                     {
-                        message = "Round Type Deleted Successfully"
+                        message = "Round type Deleted Successfully"
                     }
 
                 };
