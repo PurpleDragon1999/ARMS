@@ -12,29 +12,29 @@ namespace Arms.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EmploymentTypeController : BaseController
+    public class EligibilityCriteriaController : BaseController
     {
         private readonly IIdentityService _identityService;
         ArmsDbContext _context;
-        public EmploymentTypeController(IIdentityService identityService, ArmsDbContext armsContext)
+        public EligibilityCriteriaController(IIdentityService identityService, ArmsDbContext armsContext)
         {
             _identityService = identityService;
             _context = armsContext;
         }
-        //GET:api/employementType
+        //GET:api/eligibilityCriteria
         [HttpGet]
-        public IActionResult GetEmploymentTypes()
+        public IActionResult GetEligibilityCriterias()
         {
             try
             {
-                List<EmploymentType> employmentTypes = _context.employmentType.ToList();
+                List<EligibilityCriteria> eligibilityCriterias = _context.eligibilityCriteria.ToList();
                 var response = new
                 {
                     success = "true",
                     payload = new
                     {
-                        data = employmentTypes,
-                        message = "Employment Types Retrieved Successfully"
+                        data = eligibilityCriterias,
+                        message = "Eligibility Criterias Retrieved Successfully"
                     }
 
                 };
@@ -54,20 +54,21 @@ namespace Arms.Api.Controllers
                 return StatusCode(500, response);
             }
         }
+        //GET:api/eligibilityCriteira/id
         [HttpGet("{id}")]
-        public IActionResult GetEmploymentTypeById(int id)
+        public IActionResult GetEligibilityCriteriaById(int id)
         {
             try
             {
-                EmploymentType employmentType = _context.employmentType.SingleOrDefault(c => c.Id == id);
-                if (employmentType == null)
+                EligibilityCriteria eligibilityCriteria = _context.eligibilityCriteria.SingleOrDefault(c => c.Id == id);
+                if (eligibilityCriteria == null)
                 {
                     var resNull = new
                     {
                         success = "false",
                         payload = new
                         {
-                            message = "This Employment Type does not exist"
+                            message = "This Eligibility Criteria does not exist"
                         }
                     };
                     return StatusCode(404, resNull);
@@ -77,8 +78,8 @@ namespace Arms.Api.Controllers
                     success = "true",
                     payload = new
                     {
-                        data = employmentType,
-                        message = "Employment Type Retrieved Successfully"
+                        data = eligibilityCriteria,
+                        message = "Eligibility Criterias Retrieved Successfully"
                     }
 
                 };
@@ -98,39 +99,40 @@ namespace Arms.Api.Controllers
                 return StatusCode(500, response);
             }
         }
+        //POST:api/eligibilityCriteria
         [HttpPost]
-        public IActionResult CreateEmploymentType(EmploymentType employmentType)
+        public IActionResult CreateEligibilityCriteria(EligibilityCriteria eligibility)
         {
             try
             {
-                EmploymentType empType = _context.employmentType.SingleOrDefault
-                    (c => c.employmentTypeName == employmentType.employmentTypeName);
-                if (empType != null)
+                EligibilityCriteria checkinDb = _context.eligibilityCriteria.SingleOrDefault
+                    (c => c.eligibilityCriteriaName == eligibility.eligibilityCriteriaName);
+                if (checkinDb != null)
                 {
                     var resAlreadyExists = new
                     {
                         success = "false",
                         payload = new
                         {
-                            message = "This Employment Type already exists"
+                            message = "This Eligibility Criteria already exists"
                         }
 
                     };
                     return StatusCode(400, resAlreadyExists);
                 }
-                EmploymentType newEmploymentType = new EmploymentType
-                {
-                    employmentTypeName = employmentType.employmentTypeName
+                EligibilityCriteria newEligibilityCriteria=new EligibilityCriteria
+               {
+                    eligibilityCriteriaName = eligibility.eligibilityCriteriaName
                 };
-                _context.employmentType.Add(newEmploymentType);
+                _context.eligibilityCriteria.Add(newEligibilityCriteria);
                 _context.SaveChanges();
                 var response = new
                 {
                     success = "true",
                     payload = new
                     {
-                        data = newEmploymentType,
-                        message = "Employment Type Created Successfully"
+                        data = newEligibilityCriteria,
+                        message = "Eligibility Criteria Created Successfully"
                     }
 
                 };
@@ -153,34 +155,34 @@ namespace Arms.Api.Controllers
 
         //PUT:api/employmentType/id
         [HttpPut("{id}")]
-        public IActionResult UpdateEmploymentType(int id, [FromBody]EmploymentType employmentType)
+        public IActionResult UpdateEligibilityCriteria(int id, [FromBody]EligibilityCriteria eligibility)
         {
             try
             {
-                EmploymentType empTypeInDb = _context.employmentType.SingleOrDefault(c => c.Id == id);
-                if (empTypeInDb == null)
+                EligibilityCriteria checkInDb = _context.eligibilityCriteria.SingleOrDefault(c => c.Id == id);
+                if (checkInDb == null)
                 {
                     var resNull = new
                     {
                         success = "false",
                         payload = new
                         {
-                            message = "This Employment Type does not exist"
+                            message = "This Eligibility Criteiria does not exist"
                         }
                     };
                     return StatusCode(404, resNull);
 
                 }
-                empTypeInDb.employmentTypeName = employmentType.employmentTypeName;
-                _context.employmentType.Update(empTypeInDb);
+                checkInDb.eligibilityCriteriaName = eligibility.eligibilityCriteriaName;
+                _context.eligibilityCriteria.Update(checkInDb);
                 _context.SaveChanges();
                 var response = new
                 {
                     success = "true",
                     payload = new
                     {
-                        data = empTypeInDb,
-                        message = "Employment Type Updated Successfully"
+                        data = checkInDb,
+                        message = "Eligibility Criteria Updated Successfully"
                     }
 
                 };
@@ -201,26 +203,26 @@ namespace Arms.Api.Controllers
             }
         }
         [HttpDelete("{id}")]
-        public IActionResult DeleteEmploymentType(int id)
+        public IActionResult DeleteEligibilityCriteria(int id)
         {
             try
             {
-                EmploymentType empTypeInDb = _context.employmentType.SingleOrDefault(c => c.Id == id);
-                if (empTypeInDb == null)
+                EligibilityCriteria checkInDb = _context.eligibilityCriteria.SingleOrDefault(c => c.Id == id);
+                if (checkInDb == null)
                 {
                     var resNull = new
                     {
                         success = "false",
                         payload = new
                         {
-                            message = "This Employment Type does not exist"
+                            message = "This Eligibility Criteria does not exist"
                         }
                     };
                     return StatusCode(404, resNull);
 
                 }
 
-                _context.employmentType.Remove(empTypeInDb);
+                _context.eligibilityCriteria.Remove(checkInDb);
                 _context.SaveChanges();
                 var response = new
                 {
@@ -228,7 +230,7 @@ namespace Arms.Api.Controllers
                     payload = new
                     {
 
-                        message = "Employment Type Deleted Successfully"
+                        message = "Eligibility Criteria Deleted Successfully"
                     }
 
                 };
@@ -251,5 +253,4 @@ namespace Arms.Api.Controllers
 
         }
     }
-
 }
