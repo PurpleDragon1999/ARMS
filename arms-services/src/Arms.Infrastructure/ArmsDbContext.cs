@@ -1,5 +1,6 @@
 using Arms.Infrastructure.EntityTypeConfigurations;
 using Microsoft.EntityFrameworkCore;
+using Arms.Domain.Entities;
 
 namespace Arms.Infrastructure
 {
@@ -9,6 +10,8 @@ namespace Arms.Infrastructure
             : base(options)
         {
         }
+
+        public virtual DbSet<ApplicationStatusType> ApplicationStatusType { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
