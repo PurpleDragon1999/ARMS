@@ -21,10 +21,6 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .HasColumnName("createdAt")
                 .HasDefaultValueSql("(sysdatetime())");
 
-          
-
-
-
             builder.Property(e => e.eligibilityCriteriaName)
                 .HasColumnName("eligibilityCriteriaName")
                 .HasMaxLength(255)

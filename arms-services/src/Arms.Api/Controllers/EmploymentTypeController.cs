@@ -47,7 +47,7 @@ namespace Arms.Api.Controllers
                     success = "false",
                     payload = new
                     {
-                        message = ex.Message
+                        message = ex.InnerException.Message
                     }
 
                 };
@@ -91,7 +91,7 @@ namespace Arms.Api.Controllers
                     success = "false",
                     payload = new
                     {
-                        message = ex.Message
+                        message = ex.InnerException.Message
                     }
 
                 };
@@ -143,7 +143,7 @@ namespace Arms.Api.Controllers
                     success = "false",
                     payload = new
                     {
-                        message = ex.Message
+                        message = ex.InnerException.Message
                     }
 
                 };
@@ -193,7 +193,7 @@ namespace Arms.Api.Controllers
                     success = "false",
                     payload = new
                     {
-                        message = ex.Message
+                        message = ex.InnerException.Message
                     }
 
                 };
@@ -241,7 +241,7 @@ namespace Arms.Api.Controllers
                     success = "false",
                     payload = new
                     {
-                        message = ex.Message
+                        message = ex.InnerException.Message
                     }
 
                 };
