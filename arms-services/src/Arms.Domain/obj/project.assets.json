@@ -881,23 +881,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\shubham.sharma\\.nuget\\packages\\": {},
+    "C:\\Users\\anchal.hora\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\ARMS\\ARMS\\arms-services\\src\\Arms.Domain\\Arms.Domain.csproj",
+      "projectUniqueName": "C:\\Users\\anchal.hora\\Desktop\\ARMS\\arms-services\\src\\Arms.Domain\\Arms.Domain.csproj",
       "projectName": "Arms.Domain",
-      "projectPath": "D:\\ARMS\\ARMS\\arms-services\\src\\Arms.Domain\\Arms.Domain.csproj",
-      "packagesPath": "C:\\Users\\shubham.sharma\\.nuget\\packages\\",
-      "outputPath": "D:\\ARMS\\ARMS\\arms-services\\src\\Arms.Domain\\obj\\",
+      "projectPath": "C:\\Users\\anchal.hora\\Desktop\\ARMS\\arms-services\\src\\Arms.Domain\\Arms.Domain.csproj",
+      "packagesPath": "C:\\Users\\anchal.hora\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\anchal.hora\\Desktop\\ARMS\\arms-services\\src\\Arms.Domain\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\shubham.sharma\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\anchal.hora\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -910,8 +910,8 @@
       "frameworks": {
         "netstandard2.0": {
           "projectReferences": {
-            "D:\\ARMS\\ARMS\\arms-services\\Building Blocks\\Core\\Hrms.Core\\Hrms.Core.csproj": {
-              "projectPath": "D:\\ARMS\\ARMS\\arms-services\\Building Blocks\\Core\\Hrms.Core\\Hrms.Core.csproj"
+            "C:\\Users\\anchal.hora\\Desktop\\ARMS\\arms-services\\Building Blocks\\Core\\Hrms.Core\\Hrms.Core.csproj": {
+              "projectPath": "C:\\Users\\anchal.hora\\Desktop\\ARMS\\arms-services\\Building Blocks\\Core\\Hrms.Core\\Hrms.Core.csproj"
             }
           }
         }

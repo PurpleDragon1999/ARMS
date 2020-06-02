@@ -1,3 +1,8 @@
+if not exists (select * from sys.schemas where name = 'arms')
+begin
+	exec('create schema arms')
+end
+
 IF OBJECT_ID('ARMS.HRMS_Employee') IS NULL
 BEGIN
 CREATE TABLE ARMS.HRMS_Employee

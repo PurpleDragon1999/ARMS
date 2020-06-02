@@ -1701,11 +1701,11 @@
           "lib/netstandard1.3/Microsoft.DotNet.PlatformAbstractions.dll": {}
         }
       },
-      "Microsoft.EntityFrameworkCore/2.2.3": {
+      "Microsoft.EntityFrameworkCore/2.2.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.EntityFrameworkCore.Abstractions": "2.2.3",
-          "Microsoft.EntityFrameworkCore.Analyzers": "2.2.3",
+          "Microsoft.EntityFrameworkCore.Abstractions": "2.2.0",
+          "Microsoft.EntityFrameworkCore.Analyzers": "2.2.0",
           "Microsoft.Extensions.Caching.Memory": "2.2.0",
           "Microsoft.Extensions.DependencyInjection": "2.2.0",
           "Microsoft.Extensions.Logging": "2.2.0",
@@ -1722,7 +1722,7 @@
           "lib/netstandard2.0/Microsoft.EntityFrameworkCore.dll": {}
         }
       },
-      "Microsoft.EntityFrameworkCore.Abstractions/2.2.3": {
+      "Microsoft.EntityFrameworkCore.Abstractions/2.2.0": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/Microsoft.EntityFrameworkCore.Abstractions.dll": {}
@@ -1731,7 +1731,7 @@
           "lib/netstandard2.0/Microsoft.EntityFrameworkCore.Abstractions.dll": {}
         }
       },
-      "Microsoft.EntityFrameworkCore.Analyzers/2.2.3": {
+      "Microsoft.EntityFrameworkCore.Analyzers/2.2.0": {
         "type": "package"
       },
       "Microsoft.EntityFrameworkCore.Design/2.2.0": {
@@ -1762,10 +1762,10 @@
           "lib/netstandard2.0/Microsoft.EntityFrameworkCore.InMemory.dll": {}
         }
       },
-      "Microsoft.EntityFrameworkCore.Relational/2.2.3": {
+      "Microsoft.EntityFrameworkCore.Relational/2.2.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.EntityFrameworkCore": "2.2.3"
+          "Microsoft.EntityFrameworkCore": "2.2.0"
         },
         "compile": {
           "lib/netstandard2.0/Microsoft.EntityFrameworkCore.Relational.dll": {}
@@ -1774,10 +1774,10 @@
           "lib/netstandard2.0/Microsoft.EntityFrameworkCore.Relational.dll": {}
         }
       },
-      "Microsoft.EntityFrameworkCore.SqlServer/2.2.3": {
+      "Microsoft.EntityFrameworkCore.SqlServer/2.2.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.EntityFrameworkCore.Relational": "2.2.3",
+          "Microsoft.EntityFrameworkCore.Relational": "2.2.0",
           "System.Data.SqlClient": "4.6.0"
         },
         "compile": {
@@ -4607,7 +4607,7 @@
         "framework": ".NETCoreApp,Version=v2.2",
         "dependencies": {
           "Arms.Infrastructure": "1.0.0",
-          "Hrms.Web": "1.0.0",
+          "C:\\Users\\anchal.hora\\Desktop\\ARMS\\arms-services\\Building Blocks\\Core\\Hrms.Web\\Hrms.Web.csproj": "1.0.0",
           "Microsoft.Extensions.Configuration.Abstractions": "2.2.0",
           "Microsoft.Extensions.Configuration.Binder": "2.2.4",
           "Microsoft.Extensions.DependencyInjection": "2.2.0"
@@ -4637,8 +4637,8 @@
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
           "Arms.Domain": "1.0.0",
-          "Hrms.Core": "1.0.0",
-          "Hrms.EntityFrameworkCore": "1.0.0"
+          "C:\\Users\\anchal.hora\\Desktop\\ARMS\\arms-services\\Building Blocks\\Core\\Hrms.EntityFrameworkCore\\Hrms.EntityFrameworkCore.csproj": "1.0.0",
+          "Hrms.Core": "1.0.0"
         },
         "compile": {
           "bin/placeholder/Arms.Infrastructure.dll": {}
@@ -4660,36 +4660,6 @@
         },
         "runtime": {
           "bin/placeholder/Hrms.Core.dll": {}
-        }
-      },
-      "Hrms.EntityFrameworkCore/1.0.0": {
-        "type": "project",
-        "framework": ".NETStandard,Version=v2.0",
-        "dependencies": {
-          "Microsoft.EntityFrameworkCore": "2.2.3",
-          "Microsoft.EntityFrameworkCore.SqlServer": "2.2.3"
-        },
-        "compile": {
-          "bin/placeholder/Hrms.EntityFrameworkCore.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Hrms.EntityFrameworkCore.dll": {}
-        }
-      },
-      "Hrms.Web/1.0.0": {
-        "type": "project",
-        "framework": ".NETStandard,Version=v2.0",
-        "dependencies": {
-          "Hrms.Core": "1.0.0",
-          "Microsoft.AspNetCore.Mvc": "2.2.0",
-          "Microsoft.Extensions.Configuration.Abstractions": "2.2.0",
-          "Microsoft.Extensions.Configuration.Binder": "2.2.4"
-        },
-        "compile": {
-          "bin/placeholder/Hrms.Web.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Hrms.Web.dll": {}
         }
       }
     }
@@ -6163,41 +6133,41 @@
         "microsoft.dotnet.platformabstractions.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore/2.2.3": {
-      "sha512": "GUiOOYMUiaXK6G/RqgBgI2NsHJLKSFrHuOVnpXQrC7VgmFGG7sFyQmh/j5cMJT5XeGCymNY3wnDlewZ1GEFYJg==",
+    "Microsoft.EntityFrameworkCore/2.2.0": {
+      "sha512": "xfDHe+J94oz2d+ESDU8u+96iSfsiPwpgYGPRSp/bato0Ekjz5kYs61u9mS0GN5t8n/wxc5P3uEJm1x7TfROxhQ==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore/2.2.3",
+      "path": "microsoft.entityframeworkcore/2.2.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "lib/netstandard2.0/Microsoft.EntityFrameworkCore.dll",
         "lib/netstandard2.0/Microsoft.EntityFrameworkCore.xml",
-        "microsoft.entityframeworkcore.2.2.3.nupkg.sha512",
+        "microsoft.entityframeworkcore.2.2.0.nupkg.sha512",
         "microsoft.entityframeworkcore.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore.Abstractions/2.2.3": {
-      "sha512": "89dSjkZmLVnsbIoiQyMDdMBakTrgiY+1mfu4MRfWRX1ysSx+nGfcPPZ8QfRKLq+i7EIqylUNVJSHi7bHTwL9LQ==",
+    "Microsoft.EntityFrameworkCore.Abstractions/2.2.0": {
+      "sha512": "/js/H09B8MQGoPDFzJoaAealyL66g4vKf7DVcdBYcxgKztkttjZbRzSWKF9PZZFyfBl9Ia/BiStM70t7kjgMpg==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore.abstractions/2.2.3",
+      "path": "microsoft.entityframeworkcore.abstractions/2.2.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "lib/netstandard2.0/Microsoft.EntityFrameworkCore.Abstractions.dll",
         "lib/netstandard2.0/Microsoft.EntityFrameworkCore.Abstractions.xml",
-        "microsoft.entityframeworkcore.abstractions.2.2.3.nupkg.sha512",
+        "microsoft.entityframeworkcore.abstractions.2.2.0.nupkg.sha512",
         "microsoft.entityframeworkcore.abstractions.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore.Analyzers/2.2.3": {
-      "sha512": "+7DQd8xaq1kh2szcVkMJAN4/TvjFt5gK4fIsRHcPvZrc10p9Rhhitd44xGTGs9e0RRVijz0+OVI7jPvKaVfwAQ==",
+    "Microsoft.EntityFrameworkCore.Analyzers/2.2.0": {
+      "sha512": "/1rw3toRCal80Ch51lIjuf/0WfW9ZGB4eRY1y6GOcOoOvnMXXXt+4xMRw/0k0kIwHsWUNXUpw73jf40/Pe+ZYA==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore.analyzers/2.2.3",
+      "path": "microsoft.entityframeworkcore.analyzers/2.2.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "analyzers/dotnet/cs/Microsoft.EntityFrameworkCore.Analyzers.dll",
-        "microsoft.entityframeworkcore.analyzers.2.2.3.nupkg.sha512",
+        "microsoft.entityframeworkcore.analyzers.2.2.0.nupkg.sha512",
         "microsoft.entityframeworkcore.analyzers.nuspec"
       ]
     },
@@ -6231,29 +6201,29 @@
         "microsoft.entityframeworkcore.inmemory.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore.Relational/2.2.3": {
-      "sha512": "gwB+FOVqI+lwTl9MCtH5iI6Zfes0JlCDBuxCQ3ngLMzSqFFzgLANmmgA/cl+D2WOZ01TXivpRSzNMrnDfOJljA==",
+    "Microsoft.EntityFrameworkCore.Relational/2.2.0": {
+      "sha512": "CRJHHp/GqmXByeeODgbDgMDWId9kKT9TDRzHF8voWHFNTajBQl0U4jaMrHxjIP6hJ2olF8n+5GYmQv+v3bUVKQ==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore.relational/2.2.3",
+      "path": "microsoft.entityframeworkcore.relational/2.2.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "lib/netstandard2.0/Microsoft.EntityFrameworkCore.Relational.dll",
         "lib/netstandard2.0/Microsoft.EntityFrameworkCore.Relational.xml",
-        "microsoft.entityframeworkcore.relational.2.2.3.nupkg.sha512",
+        "microsoft.entityframeworkcore.relational.2.2.0.nupkg.sha512",
         "microsoft.entityframeworkcore.relational.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore.SqlServer/2.2.3": {
-      "sha512": "O8eGpT3wDfMz1YHf0h5ph3eW+bkcoqaptqztcNxWyfZ76UJw4j8ohqj7leaDbuZh2W3HIK4O89N3A4a8pHNQ9g==",
+    "Microsoft.EntityFrameworkCore.SqlServer/2.2.0": {
+      "sha512": "rCGBF6Hab9633Dh2xtiAcJnDxf2CjaBrGyoagoCoYHH5Ftbdw5zX/e9ABgif5ngzh7DsrBcgxK/3gHBZ2n+TGA==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore.sqlserver/2.2.3",
+      "path": "microsoft.entityframeworkcore.sqlserver/2.2.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "lib/netstandard2.0/Microsoft.EntityFrameworkCore.SqlServer.dll",
         "lib/netstandard2.0/Microsoft.EntityFrameworkCore.SqlServer.xml",
-        "microsoft.entityframeworkcore.sqlserver.2.2.3.nupkg.sha512",
+        "microsoft.entityframeworkcore.sqlserver.2.2.0.nupkg.sha512",
         "microsoft.entityframeworkcore.sqlserver.nuspec"
       ]
     },
@@ -12495,16 +12465,6 @@
       "type": "project",
       "path": "../../Building Blocks/Core/Hrms.Core/Hrms.Core.csproj",
       "msbuildProject": "../../Building Blocks/Core/Hrms.Core/Hrms.Core.csproj"
-    },
-    "Hrms.EntityFrameworkCore/1.0.0": {
-      "type": "project",
-      "path": "../../Building Blocks/Core/Hrms.EntityFrameworkCore/Hrms.EntityFrameworkCore.csproj",
-      "msbuildProject": "../../Building Blocks/Core/Hrms.EntityFrameworkCore/Hrms.EntityFrameworkCore.csproj"
-    },
-    "Hrms.Web/1.0.0": {
-      "type": "project",
-      "path": "../../Building Blocks/Core/Hrms.Web/Hrms.Web.csproj",
-      "msbuildProject": "../../Building Blocks/Core/Hrms.Web/Hrms.Web.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -12520,23 +12480,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\shubham.sharma\\.nuget\\packages\\": {},
+    "C:\\Users\\anchal.hora\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\ARMS\\ARMS\\arms-services\\src\\Arms.Api\\Arms.Api.csproj",
+      "projectUniqueName": "C:\\Users\\anchal.hora\\Desktop\\ARMS\\arms-services\\src\\Arms.Api\\Arms.Api.csproj",
       "projectName": "Arms.Api",
-      "projectPath": "D:\\ARMS\\ARMS\\arms-services\\src\\Arms.Api\\Arms.Api.csproj",
-      "packagesPath": "C:\\Users\\shubham.sharma\\.nuget\\packages\\",
-      "outputPath": "D:\\ARMS\\ARMS\\arms-services\\src\\Arms.Api\\obj\\",
+      "projectPath": "C:\\Users\\anchal.hora\\Desktop\\ARMS\\arms-services\\src\\Arms.Api\\Arms.Api.csproj",
+      "packagesPath": "C:\\Users\\anchal.hora\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\anchal.hora\\Desktop\\ARMS\\arms-services\\src\\Arms.Api\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\shubham.sharma\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\anchal.hora\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -12549,8 +12509,8 @@
       "frameworks": {
         "netcoreapp2.2": {
           "projectReferences": {
-            "D:\\ARMS\\ARMS\\arms-services\\src\\Arms.Application\\Arms.Application.csproj": {
-              "projectPath": "D:\\ARMS\\ARMS\\arms-services\\src\\Arms.Application\\Arms.Application.csproj"
+            "C:\\Users\\anchal.hora\\Desktop\\ARMS\\arms-services\\src\\Arms.Application\\Arms.Application.csproj": {
+              "projectPath": "C:\\Users\\anchal.hora\\Desktop\\ARMS\\arms-services\\src\\Arms.Application\\Arms.Application.csproj"
             }
           }
         }
@@ -12605,5 +12565,25 @@
         "warn": true
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1105",
+      "level": "Error",
+      "message": "Unable to find project information for 'C:\\Users\\anchal.hora\\Desktop\\ARMS\\arms-services\\Building Blocks\\Core\\Hrms.Web\\Hrms.Web.csproj'. Inside Visual Studio, this may be because the project is unloaded or not part of current solution. Otherwise the project file may be invalid or missing targets required for restore.",
+      "libraryId": "C:\\Users\\anchal.hora\\Desktop\\ARMS\\arms-services\\Building Blocks\\Core\\Hrms.Web\\Hrms.Web.csproj",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v2.2"
+      ]
+    },
+    {
+      "code": "NU1105",
+      "level": "Error",
+      "message": "Unable to find project information for 'C:\\Users\\anchal.hora\\Desktop\\ARMS\\arms-services\\Building Blocks\\Core\\Hrms.EntityFrameworkCore\\Hrms.EntityFrameworkCore.csproj'. Inside Visual Studio, this may be because the project is unloaded or not part of current solution. Otherwise the project file may be invalid or missing targets required for restore.",
+      "libraryId": "C:\\Users\\anchal.hora\\Desktop\\ARMS\\arms-services\\Building Blocks\\Core\\Hrms.EntityFrameworkCore\\Hrms.EntityFrameworkCore.csproj",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v2.2"
+      ]
+    }
+  ]
 }
