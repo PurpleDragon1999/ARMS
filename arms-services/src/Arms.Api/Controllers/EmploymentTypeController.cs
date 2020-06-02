@@ -25,152 +25,231 @@ namespace Arms.Api.Controllers
         [HttpGet]
         public IActionResult GetEmploymentTypes()
         {
-            List<EmploymentType> employmentTypes = _context.employmentType.ToList();
-            var response = new
+            try
             {
-                success = "true",
-                payload = new
+                List<EmploymentType> employmentTypes = _context.employmentType.ToList();
+                var response = new
                 {
-                    data = employmentTypes,
-                    message = "Employment Types Retrieved Successfully"
-                }
+                    success = "true",
+                    payload = new
+                    {
+                        data = employmentTypes,
+                        message = "Employment Types Retrieved Successfully"
+                    }
 
-            };
-            return StatusCode(200, response);
+                };
+                return StatusCode(200, response);
+            }
+            catch (Exception ex)
+            {
+                var response = new
+                {
+                    success = "false",
+                    payload = new
+                    {
+                        message = ex.Message
+                    }
 
+                };
+                return StatusCode(500, response);
+            }
         }
         [HttpGet("{id}")]
         public IActionResult GetEmploymentTypeById(int id)
         {
-            EmploymentType employmentType = _context.employmentType.SingleOrDefault(c => c.Id == id);
-            if (employmentType == null)
+            try
             {
-                var resNull = new
+                EmploymentType employmentType = _context.employmentType.SingleOrDefault(c => c.Id == id);
+                if (employmentType == null)
+                {
+                    var resNull = new
+                    {
+                        success = "false",
+                        payload = new
+                        {
+                            message = "This Employment Type does not exist"
+                        }
+                    };
+                    return StatusCode(404, resNull);
+                }
+                var response = new
+                {
+                    success = "true",
+                    payload = new
+                    {
+                        data = employmentType,
+                        message = "Employment Type Retrieved Successfully"
+                    }
+
+                };
+                return StatusCode(200, response);
+            }
+            catch (Exception ex)
+            {
+                var response = new
                 {
                     success = "false",
                     payload = new
                     {
-                        message = "This Employment Type does not exist"
+                        message = ex.Message
                     }
+
                 };
-                return StatusCode(404, resNull);
+                return StatusCode(500, response);
             }
-            var response = new
-            {
-                success = "true",
-                payload = new
-                {
-                    data = employmentType,
-                    message = "Employment Type Retrieved Successfully"
-                }
-
-            };
-            return StatusCode(200, response);
-
         }
         [HttpPost]
         public IActionResult CreateEmploymentType(EmploymentType employmentType)
         {
-            EmploymentType empType = _context.employmentType.SingleOrDefault
-                (c => c.employmentTypeName == employmentType.employmentTypeName);
-            if (empType != null)
+            try
             {
-                var resAlreadyExists = new
+                EmploymentType empType = _context.employmentType.SingleOrDefault
+                    (c => c.employmentTypeName == employmentType.employmentTypeName);
+                if (empType != null)
+                {
+                    var resAlreadyExists = new
+                    {
+                        success = "false",
+                        payload = new
+                        {
+                            message = "Employment Type with this Name already exists"
+                        }
+
+                    };
+                    return StatusCode(400, resAlreadyExists);
+                }
+                EmploymentType newEmploymentType = new EmploymentType
+                {
+                    employmentTypeName = employmentType.employmentTypeName
+                };
+                _context.employmentType.Add(newEmploymentType);
+                _context.SaveChanges();
+                var response = new
+                {
+                    success = "true",
+                    payload = new
+                    {
+                        data = newEmploymentType,
+                        message = "Employment Type Created Successfully"
+                    }
+
+                };
+                return StatusCode(201, response);
+            }
+            catch (Exception ex)
+            {
+                var response = new
                 {
                     success = "false",
                     payload = new
                     {
-                        message = "Employment Type with this Name already exists"
+                        message = ex.Message
                     }
 
                 };
-                return StatusCode(400, resAlreadyExists);
+                return StatusCode(500, response);
             }
-            EmploymentType newEmploymentType = new EmploymentType
-            {
-                employmentTypeName = employmentType.employmentTypeName
-            };
-            _context.employmentType.Add(newEmploymentType);
-            _context.SaveChanges();
-            var response = new
-            {
-                success = "true",
-                payload = new
-                {
-                    data = newEmploymentType,
-                    message = "Employment Type Created Successfully"
-                }
-
-            };
-            return StatusCode(201, response);
         }
 
         //PUT:api/employmentType/id
         [HttpPut("{id}")]
         public IActionResult UpdateEmploymentType(int id, [FromBody]EmploymentType employmentType)
         {
-            EmploymentType empTypeInDb = _context.employmentType.SingleOrDefault(c => c.Id == id);
-            if (empTypeInDb == null)
+            try
             {
-                var resNull = new
+                EmploymentType empTypeInDb = _context.employmentType.SingleOrDefault(c => c.Id == id);
+                if (empTypeInDb == null)
+                {
+                    var resNull = new
+                    {
+                        success = "false",
+                        payload = new
+                        {
+                            message = "This Employment Type does not exist"
+                        }
+                    };
+                    return StatusCode(404, resNull);
+
+                }
+                empTypeInDb.employmentTypeName = employmentType.employmentTypeName;
+                _context.employmentType.Update(empTypeInDb);
+                _context.SaveChanges();
+                var response = new
+                {
+                    success = "true",
+                    payload = new
+                    {
+                        data = empTypeInDb,
+                        message = "Employment Type Updated Successfully"
+                    }
+
+                };
+                return StatusCode(200, response);
+            }
+            catch (Exception ex)
+            {
+                var response = new
                 {
                     success = "false",
                     payload = new
                     {
-                        message = "This Employment Type does not exist"
+                        message = ex.Message
                     }
+
                 };
-                return StatusCode(404, resNull);
-
+                return StatusCode(500, response);
             }
-            empTypeInDb.employmentTypeName = employmentType.employmentTypeName;
-            _context.employmentType.Update(empTypeInDb);
-            _context.SaveChanges();
-            var response = new
-            {
-                success = "true",
-                payload = new
-                {
-                    data = empTypeInDb,
-                    message = "Employment Type Updated Successfully"
-                }
-
-            };
-            return StatusCode(200, response);
         }
         [HttpDelete("{id}")]
-     public IActionResult DeleteEmploymentType(int id)
+        public IActionResult DeleteEmploymentType(int id)
         {
-            EmploymentType empTypeInDb = _context.employmentType.SingleOrDefault(c => c.Id == id);
-            if (empTypeInDb == null)
+            try
             {
-                var resNull = new
+                EmploymentType empTypeInDb = _context.employmentType.SingleOrDefault(c => c.Id == id);
+                if (empTypeInDb == null)
+                {
+                    var resNull = new
+                    {
+                        success = "false",
+                        payload = new
+                        {
+                            message = "This Employment Type does not exist"
+                        }
+                    };
+                    return StatusCode(404, resNull);
+
+                }
+
+                _context.employmentType.Remove(empTypeInDb);
+                _context.SaveChanges();
+                var response = new
+                {
+                    success = "true",
+                    payload = new
+                    {
+
+                        message = "Employment Type Deleted Successfully"
+                    }
+
+                };
+                return StatusCode(200, response);
+            }
+            catch (Exception ex)
+            {
+                var response = new
                 {
                     success = "false",
                     payload = new
                     {
-                        message = "This Employment Type does not exist"
+                        message = ex.Message
                     }
+
                 };
-                return StatusCode(404, resNull);
-
+                return StatusCode(500, response);
             }
-            
-            _context.employmentType.Remove(empTypeInDb);
-            _context.SaveChanges();
-            var response = new
-            {
-                success = "true",
-                payload = new
-                {
-                   
-                    message = "Employment Type Deleted Successfully"
-                }
 
-            };
-            return StatusCode(200, response);
+
         }
-
-       
     }
+
 }
