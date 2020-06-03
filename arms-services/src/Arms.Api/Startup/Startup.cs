@@ -35,8 +35,8 @@ namespace Arms.Api.Startup
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            string connString = this.Configuration.GetConnectionString("db");
-            services.AddDbContext<Arms.Infrastructure.ArmsDbContext>(o => o.UseSqlServer(connString));
+            // string connString = this.Configuration.GetConnectionString("db");
+            // services.AddDbContext<Arms.Infrastructure.ArmsDbContext>(o => o.UseSqlServer(connString));
             services
                 .AddCustomMvc()
                 .AddCustomAuthentication(Configuration)
@@ -139,7 +139,8 @@ namespace Arms.Api.Startup
 
         public static IServiceCollection AddCustomDatabaseService(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContextPool<ArmsDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("Db"), b => b.MigrationsAssembly("Arms.Api")));
+            Console.WriteLine(configuration.GetConnectionString("Db"));
+            services.AddDbContextPool<ArmsDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("Db")));
             
             return services;
         }

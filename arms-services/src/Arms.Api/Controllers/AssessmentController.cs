@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Arms.Api.Models;
 using Arms.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -15,14 +16,14 @@ namespace Arms.Api.Controllers
             this._assessmentRepository = assessmentRepository;
         }
 
-        [HttpGet("")]
+        [HttpGet]
         public IActionResult Index()
         {
             Response<IEnumerable<Assessment>> response;
-            IEnumerable<Assessment> data = null;
+            
             try
             {
-                data = _assessmentRepository.GetAllAssessments();
+                IEnumerable<Assessment> data = _assessmentRepository.GetAllAssessments();
                 response = new Response<IEnumerable<Assessment>>(true, data, "Assessments retrieved successfully");
             }
             catch (Exception e)
@@ -40,10 +41,10 @@ namespace Arms.Api.Controllers
         public IActionResult Show(int id)
         {
             Response<Assessment> response;
-            Assessment data = null;
+            
             try
             {
-                data = _assessmentRepository.GetAssessment(id);
+                Assessment data = _assessmentRepository.GetAssessment(id);
                 response = new Response<Assessment>(true, data, "Assessment retrieved successfully");
             }
             catch (Exception e)
@@ -61,10 +62,10 @@ namespace Arms.Api.Controllers
         public IActionResult Create([FromBody] Assessment assessment)
         {
             Response<Assessment> response;
-            Assessment data = null;
+            
             try
             {
-                data = _assessmentRepository.Add(assessment);
+                Assessment data = _assessmentRepository.Add(assessment);
                 response = new Response<Assessment>(true, data, "Assessment Created successfully");
             }
             catch (Exception e)
@@ -82,10 +83,9 @@ namespace Arms.Api.Controllers
         public IActionResult Modify([FromBody] Assessment assessment)
         {
             Response<Assessment> response;
-            Assessment data = null;
             try
             {
-                data = _assessmentRepository.Update(assessment);
+                Assessment data = _assessmentRepository.Update(assessment);
                 response = new Response<Assessment>(true, data, "Assessment Updated successfully");
             }
             catch (Exception e)
@@ -103,10 +103,9 @@ namespace Arms.Api.Controllers
         public IActionResult Remove(int id)
         {
             Response<Assessment> response;
-            Assessment data = null;
             try
             {
-                data = _assessmentRepository.Delete(id);
+                Assessment data = _assessmentRepository.Delete(id);
                 response = new Response<Assessment>(true, data, "Assessment Deleted successfully");
             }
             catch (Exception e)
