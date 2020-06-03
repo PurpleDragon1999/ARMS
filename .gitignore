@@ -37,7 +37,7 @@ x86/
 build/
 bld/
 [Bb]in/
-[Oo]bj/Debug
+[Oo]bj/
 *.nuget.*
 msbuild.log
 msbuild.err
