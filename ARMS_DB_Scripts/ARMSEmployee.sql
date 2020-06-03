@@ -24,7 +24,7 @@ END
 --creating the trigger for any update of interview
 --new batch for trigger
 GO
-CREATE TRIGGER trg_UpdateEmployee
+CREATE TRIGGER trg_UpdateARMSEmployee
 ON ARMS.HRMS_Employee
 AFTER UPDATE
 AS

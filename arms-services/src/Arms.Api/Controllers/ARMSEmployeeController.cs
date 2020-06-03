@@ -29,17 +29,17 @@ namespace Arms.Api.Controllers
         [HttpGet]
         public IActionResult GetARMSEmployee()
         {
-            List<ARMSEmployee> employee = _context.ARMSEmployee;
+            List<ARMSEmployee> employees = _context.ARMSEmployee.ToList();
             try
             {
-                if (employee != null)
+                if (employees != null)
                 {
                     var response = new
                     {
                         success = true,
                         payload = new
                         {
-                            data = employee,
+                            data = employees,
                             message = "Employee Records Retrieved Successfully"
                         }
 
@@ -79,7 +79,7 @@ namespace Arms.Api.Controllers
         [HttpGet("{id}")]
         public IActionResult GetEmployee(int id)
         {
-            var employee = _context.Interview.SingleOrDefault(c => c.Id == id);
+            var employee = _context.ARMSEmployee.SingleOrDefault(c => c.Id == id);
             try
             {
                 if (employee != null)
@@ -131,7 +131,7 @@ namespace Arms.Api.Controllers
         {
             try
             {
-                var employeeObj = new Employee
+                var employeeObj = new ARMSEmployee
                 {
                     Id = customDTO.Id,
                     Name = customDTO.Name,
@@ -144,7 +144,7 @@ namespace Arms.Api.Controllers
                     CreatedAt = customDTO.ModifiedAt,
                     ModifiedAt = customDTO.ModifiedAt,
                 };
-                _context.Employee.Add(employeeObj);
+                _context.ARMSEmployee.Add(employeeObj);
                 _context.SaveChanges();
                 int id = employeeObj.Id;
                 var response = new
@@ -175,9 +175,9 @@ namespace Arms.Api.Controllers
 
 
         [HttpPatch("{id}")]
-        public IActionResult UpdateEmployee(int id, [FromBody] Employee employeeObj)
+        public IActionResult UpdateEmployee(int id, [FromBody] CustomEmployee employeeObj)
         {
-            var employee = _context.Employee.SingleOrDefault(c => c.Id == id);
+            var employee = _context.ARMSEmployee.SingleOrDefault(c => c.Id == id);
             try
             {
                 if (employee != null)
@@ -194,19 +194,19 @@ namespace Arms.Api.Controllers
                     {
                         employee.Code = employeeObj.Code;
                     }
-                    if (employeeObj.Designation != 0)
+                    if (employeeObj.Designation != null)
                     {
                         employee.Designation = employeeObj.Designation;
                     }
-                    if (employeeObj.Role != 0)
+                    if (employeeObj.Role != null)
                     {
                         employee.Role = employeeObj.Role;
                     }
-                    if (employeeObj.Email != 0)
+                    if (employeeObj.Email != null)
                     {
                         employee.Email = employeeObj.Email;
                     }
-                    _context.Employee.Update(employee);
+                    _context.ARMSEmployee.Update(employee);
                     _context.SaveChanges();
                     var response = new
                     {
@@ -250,12 +250,12 @@ namespace Arms.Api.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteEmployee(int id)
         {
-            var employee = _context.Employee.SingleOrDefault(c => c.Id == id);
+            var employee = _context.ARMSEmployee.SingleOrDefault(c => c.Id == id);
             try
             {
                 if (employee != null)
                 {
-                    _context.Employee.Remove(employee);
+                    _context.ARMSEmployee.Remove(employee);
                     _context.SaveChanges();
                     var response = new
                     {
