@@ -35,15 +35,14 @@ namespace Arms.Api.Startup
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            // string connString = this.Configuration.GetConnectionString("db");
+            // string connString = this.Configuration.GetConnectionString("Db");
             // services.AddDbContext<Arms.Infrastructure.ArmsDbContext>(o => o.UseSqlServer(connString));
             services
+                .AddCustomDatabaseService(Configuration)
                 .AddCustomMvc()
                 .AddCustomAuthentication(Configuration)
                 .AddCustomSwagger(Configuration)
-                .AddArmsApplicationServices(Configuration)
-                .AddCustomDatabaseService(Configuration)
-                .AddCustomInjections();
+                .AddArmsApplicationServices(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -142,13 +141,6 @@ namespace Arms.Api.Startup
             Console.WriteLine(configuration.GetConnectionString("Db"));
             services.AddDbContextPool<ArmsDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("Db")));
             
-            return services;
-        }
-
-        public static IServiceCollection AddCustomInjections(this IServiceCollection services)
-        {
-            services.AddScoped<IAssessmentRepository, AssessmentRepository>();
-
             return services;
         }
     }

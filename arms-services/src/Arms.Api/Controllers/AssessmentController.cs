@@ -1,19 +1,22 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using Arms.Api.Models;
+using Arms.Application.Services.Users;
 using Arms.Domain.Entities;
+using Arms.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Arms.Api.Controllers
 {
     public class AssessmentController : BaseController
     {
-        private readonly IAssessmentRepository _assessmentRepository;
+        private readonly ArmsDbContext _context;
         
-        AssessmentController(IAssessmentRepository assessmentRepository)
+        private AssessmentController(ArmsDbContext context)
         {
-            this._assessmentRepository = assessmentRepository;
+            this._context = context;
         }
 
         [HttpGet]
@@ -23,7 +26,7 @@ namespace Arms.Api.Controllers
             
             try
             {
-                IEnumerable<Assessment> data = _assessmentRepository.GetAllAssessments();
+                List<Assessment> data = _context.Assessment.ToList();
                 response = new Response<IEnumerable<Assessment>>(true, data, "Assessments retrieved successfully");
             }
             catch (Exception e)
@@ -44,7 +47,7 @@ namespace Arms.Api.Controllers
             
             try
             {
-                Assessment data = _assessmentRepository.GetAssessment(id);
+                Assessment data = _context.Assessment.SingleOrDefault(assessment => assessment.Id == id);
                 response = new Response<Assessment>(true, data, "Assessment retrieved successfully");
             }
             catch (Exception e)
@@ -65,7 +68,21 @@ namespace Arms.Api.Controllers
             
             try
             {
-                Assessment data = _assessmentRepository.Add(assessment);
+                Assessment data = new Assessment()
+                {
+                    Application = assessment.Application,
+                    Code = assessment.Code,
+                    Criteria = assessment.Criteria,
+                    Feedback = assessment.Feedback,
+                    Result = assessment.Result,
+                    Round = assessment.Round,
+                    ApplicationId = assessment.ApplicationId,
+                    InterviewPanel = assessment.InterviewPanel,
+                    InterviewPanelId = assessment.InterviewPanelId,
+                    RoundId = assessment.RoundId
+                };
+                _context.Assessment.Add(data);
+                _context.SaveChanges();
                 response = new Response<Assessment>(true, data, "Assessment Created successfully");
             }
             catch (Exception e)
@@ -80,12 +97,19 @@ namespace Arms.Api.Controllers
         }
         
         [HttpPut("")]
-        public IActionResult Modify([FromBody] Assessment assessment)
+        public IActionResult Modify([FromBody] Assessment changedAssessment)
         {
             Response<Assessment> response;
             try
             {
-                Assessment data = _assessmentRepository.Update(assessment);
+                Assessment data = _context.Assessment.SingleOrDefault(assessment => assessment.Id == changedAssessment.Id);
+
+                if (data != null)
+                {
+                    data = changedAssessment;
+                    _context.Assessment.Update(changedAssessment);
+                    _context.SaveChanges();
+                }
                 response = new Response<Assessment>(true, data, "Assessment Updated successfully");
             }
             catch (Exception e)
@@ -105,7 +129,14 @@ namespace Arms.Api.Controllers
             Response<Assessment> response;
             try
             {
-                Assessment data = _assessmentRepository.Delete(id);
+                Assessment data = _context.Assessment.SingleOrDefault(ass => ass.Id == id);
+            
+                if (data != null)
+                {
+                    _context.Assessment.Remove(data);
+                    _context.SaveChanges();
+                }
+
                 response = new Response<Assessment>(true, data, "Assessment Deleted successfully");
             }
             catch (Exception e)
