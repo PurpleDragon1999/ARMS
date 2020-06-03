@@ -38,7 +38,6 @@ namespace Arms.Infrastructure
             modelBuilder.ApplyConfiguration(new InterviewEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new InterviewerEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new InterviewPanelEntityTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new LocationEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new ResumeEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new RoundEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new RoundTypeEntityTypeConfiguration());
