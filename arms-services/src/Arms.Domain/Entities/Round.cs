@@ -1,5 +1,6 @@
 using Hrms.Core.Domains.Entities;
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Arms.Domain.Entities
 {

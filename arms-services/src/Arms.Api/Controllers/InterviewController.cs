@@ -179,43 +179,78 @@ namespace Arms.Api.Controllers
 
 
         [HttpPatch("{id}")]
-        public IActionResult UpdateInterview(int id, [FromBody] Interview interviewObj)
+        public IActionResult UpdateInterview(int id, [FromBody] CustomInterview customDTO, int roundID = 0)
         {
             var interview = _context.Interview.SingleOrDefault(c => c.Id == id);
             try
             {
                 if (interview != null)
                 {
-                    if (interviewObj.Date != null){
-                        interview.Date = interviewObj.Date;
-                    }
-                    if(interviewObj.Time != null)
+                    if (roundID == 0)
                     {
-                        interview.Time = interviewObj.Time;
-                    }
-                    if(interviewObj.Venue != null)
-                    {
-                        interview.Venue = interviewObj.Venue;
-                    }
-                    if(interviewObj.JobId != 0)
-                    {
-                        interview.JobId = interviewObj.JobId;
-                    }
-                    if(interviewObj.NoOfRounds != 0)
-                    {
-                        interview.NoOfRounds = interviewObj.NoOfRounds;
-                    }
-                    _context.Interview.Update(interview);
-                    _context.SaveChanges();
-                    var response = new
-                    {
-                        success = true,
-                        payload = new
+                        if (customDTO.Date != System.DateTime.MinValue)
                         {
-                            message = "Interview Record Updated Successfully"
+                            interview.Date = customDTO.Date;
                         }
-                    };
-                    return StatusCode(200, response);
+                        if (customDTO.Time != System.TimeSpan.Zero)
+                        {
+                            interview.Time = customDTO.Time;
+                        }
+                        if (customDTO.Venue != null)
+                        {
+                            interview.Venue = customDTO.Venue;
+                        }
+                        if (customDTO.JobId != 0)
+                        {
+                            interview.JobId = customDTO.JobId;
+                        }
+                        if (customDTO.NoOfRounds != 0)
+                        {
+                            interview.NoOfRounds = customDTO.NoOfRounds;
+                        }
+                        _context.Interview.Update(interview);
+                        _context.SaveChanges();
+                        var response = new
+                        {
+                            success = true,
+                            payload = new
+                            {
+                                message = "Interview Record Updated Successfully"
+                            }
+                        };
+                        return StatusCode(200, response);
+                    }
+                    else
+                    {
+                        var round = _context.Round.SingleOrDefault(c => c.Id == roundID);
+                        if (customDTO.Round[0].RoundNumber != 0)
+                        {
+                            round.RoundNumber = customDTO.Round[0].RoundNumber;
+                        }
+                        if (customDTO.Round[0].RoundTypeId != 0)
+                        {
+                            round.RoundTypeId = customDTO.Round[0].RoundTypeId;
+                        }
+                        if (customDTO.Round[0].RoundDate != System.DateTime.MinValue)
+                        {
+                            round.RoundDate = customDTO.Round[0].RoundDate;
+                        }
+                        if (customDTO.Round[0].RoundTime != System.TimeSpan.Zero)
+                        {
+                            round.RoundTime = customDTO.Round[0].RoundTime;
+                        }
+                        _context.Round.Update(round);
+                        _context.SaveChanges();
+                        var response = new
+                        {
+                            success = true,
+                            payload = new
+                            {
+                                message = "Round Record Updated Successfully"
+                            }
+                        };
+                        return StatusCode(200, response);
+                    }
                 }
                 else
                 {
