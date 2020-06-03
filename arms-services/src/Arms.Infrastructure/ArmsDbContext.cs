@@ -27,6 +27,21 @@ namespace Arms.Infrastructure
             modelBuilder.ApplyConfiguration(new LocEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new EmploymentTypeEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new EligibilityCriteriaEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new ApplicationEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new ApplicationStatusTypeEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new AssessmentEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new CandidateEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new CriteriaEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new CriteriaTypeEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new IdProofTypeEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new ImagesEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new InterviewEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new InterviewerEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new InterviewPanelEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new LocationEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new ResumeEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new RoundEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new RoundTypeEntityTypeConfiguration());
 
         }
     }
