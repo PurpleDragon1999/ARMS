@@ -1,21 +1,22 @@
-﻿
+﻿using System;
 using Hrms.Core.Domains.Entities;
 
 namespace Arms.Domain.Entities
 {
-    class Candidate :Entity
+    public class Candidate :Entity
     {
-        public int id { get; set; }
-        public string code { get; set; }
-        public string name {get; set;}
-        public string email { get; set; }
-        public string phone { get; set; }
-        public string idProofTypeId { get; set; }
-        public string identificationNo { get; set; }
-        public DateTime createdAt { get; set; }
-        public string createdBy { get; set; }
-        public DateTime modifiedAt { get; set; }
-        public DateTime modifiedBy { get; set; }
-       
+        public int Id { get; set; }
+        public string Code { get; set; }
+        public string Name {get; set;}
+        public string Email { get; set; }
+        public string Phone { get; set; }
+        public int IdProofTypeId { get; set; }
+        public IdProofType IdProofType { get; set; }
+        public string IdentificationNo { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public string CreatedBy { get; set; }
+        public DateTime ModifiedAt { get; set; }
+        public string ModifiedBy { get; set; }    
+        
     }
 }

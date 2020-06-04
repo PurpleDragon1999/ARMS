@@ -4,6 +4,7 @@ var fs = require("fs");
 var validator=require('aadhaar-validator');
 const jobDescriptionModel=require('../models/jobDescription');
 const nodeMail=require('../middlewares/mailHelper');
+
 async function validateCandidate(candidate) {
   console.log(candidate)
   let emailExists = await candidateModel.get({ email: candidate.email })

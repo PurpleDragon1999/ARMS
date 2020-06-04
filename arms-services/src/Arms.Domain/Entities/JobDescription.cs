@@ -13,6 +13,6 @@ namespace Arms.Domain.Entities
         public int Salary { get; set; }
         public string JobTitle { get; set; }
         public int Vacancies { get; set; }
-        public IFormFile JdPdf { get; set; }
+        public byte[] JdPdf { get; set; }
     }
 }

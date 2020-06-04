@@ -7,18 +7,15 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Arms.Infrastructure.EntityTypeConfigurations
 {
-    internal class IdProofTypeEntityTypeConfiguration : IEntityTypeConfiguration<IdProofType>
+    internal class ResumeEntityTypeConfiguration : IEntityTypeConfiguration<Resume>
     {
-        public void Configure(EntityTypeBuilder<IdProofType> builder)
+        public void Configure(EntityTypeBuilder<Resume> builder)
         {
-            builder.ToTable("IdProofType", "ARMS");
+            builder.ToTable("Resume", "ARMS");
 
             builder.Property(e => e.Id).HasColumnName("id");
 
-            builder.Property(e => e.Code)
-                .HasColumnName("code")
-                .HasMaxLength(57)
-                .HasComputedColumnSql("('CYGPFID'+CONVERT([nvarchar](50),[id]))");
+            builder.Property(e => e.ApplicationId).HasColumnName("applicationId");
 
             builder.Property(e => e.CreatedAt)
                 .HasColumnName("createdAt")
@@ -28,6 +25,10 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .IsRequired()
                 .HasColumnName("createdBy")
                 .HasMaxLength(50);
+
+            builder.Property(e => e.Cv)
+                .IsRequired()
+                .HasColumnName("cv");
 
             builder.Property(e => e.ModifiedAt)
                 .HasColumnName("modifiedAt")
@@ -41,8 +42,13 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
             builder.Property(e => e.Name)
                 .IsRequired()
                 .HasColumnName("name")
-                .HasMaxLength(50)
-                .IsUnicode(false);
+                .HasMaxLength(50);
+
+            builder.HasOne(d => d.Application)
+                .WithMany(p => p.Resume)
+                .HasForeignKey(d => d.ApplicationId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ResumeApplication");
         }
     }
 }
