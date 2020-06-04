@@ -55,8 +55,4 @@ Building Blocks/
 *.g.props
 *.g.targets
 
-
-*/**/appsettings.json
-*/**/Arms.Api.csproj.user
-*/**/Arms.Api.csproj
 */**/Desktop.ini
