@@ -7,13 +7,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Arms.Infrastructure.EntityTypeConfigurations
 {
-
-    internal class RoundTypeEntityTypeConfiguration : IEntityTypeConfiguration<RoundType>
-
+    internal class InterviewPanelEntityTypeConfiguration: IEntityTypeConfiguration<InterviewPanel>
     {
-        public void Configure(EntityTypeBuilder<RoundType> builder)
+        public void Configure(EntityTypeBuilder<InterviewPanel> builder)
         {
-            builder.ToTable("RoundType", "ARMS");
+            builder.ToTable("InterviewPanel", "ARMS");
 
             builder.Property(e => e.Id).HasColumnName("id");
 
@@ -35,12 +33,13 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .HasMaxLength(50)
                 .IsUnicode(false);
 
-            builder.Property(e => e.Name)
-                .HasColumnName("name")
-                .HasMaxLength(50)
-                .IsUnicode(false);
+            builder.Property(e => e.RoundId).HasColumnName("roundId");
+
+            builder.HasOne(d => d.Round)
+                .WithMany(p => p.InterviewPanel)
+                .HasForeignKey(d => d.RoundId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_round");
         }
     }
-
 }
-

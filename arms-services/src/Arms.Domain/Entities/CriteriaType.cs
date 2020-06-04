@@ -1,11 +1,11 @@
-﻿using Hrms.Core.Domains.Entities;
+using Hrms.Core.Domains.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Arms.Domain.Entities
 {
-   public  class CriteriaType : Entity
+    public class CriteriaType : Entity
     {
         [Key]
         public int id { get; set; }

@@ -18,7 +18,8 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .HasName("UQ__JobDescr__151D087A2951D1F8")
                 .IsUnique();
 
-            builder.Property(e => e.Id).ValueGeneratedOnAdd();
+            //builder.Property(e => e.Id).ValueGeneratedOnAdd();
+            builder.Property(e => e.Id).HasColumnName("id").ValueGeneratedOnAdd();
 
             builder.Property(e => e.closingDate).HasColumnName("closingDate");
 
@@ -47,14 +48,7 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .HasMaxLength(60)
                 .IsUnicode(false);
 
-            //builder.Property(e => e.locationId)
-            //    .IsRequired()
-            //    .HasColumnName("locationId")
-            //    .HasMaxLength(50)
-            //    .IsUnicode(false);
-               
-
-            builder.Property(e => e.modifiedAt)
+           builder.Property(e => e.modifiedAt)
                 .HasColumnName("modifiedAt")
                 .HasDefaultValueSql("(sysdatetime())");
 
@@ -91,13 +85,8 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
              .HasForeignKey(d => d.eligibilityCriteriaId)
              .OnDelete(DeleteBehavior.ClientSetNull)
              .HasConstraintName("FK_eligibilityCriteria");
-          
-            //builder.HasOne(d => d.eligibilityCriteria)
-            //      .WithMany(p => p.JobDescription)
-            //      .HasForeignKey(d => d.eligibilityCriteriaId)
-            //      .OnDelete(DeleteBehavior.ClientSetNull)
-            //      .HasConstraintName("FK_eligibilityCriteria");
+
+           
         }
     }
-   }
-
+}

@@ -5,41 +5,36 @@ using System.Threading.Tasks;
 using Arms.Application.Services.Users;
 using Arms.Domain.Entities;
 using Arms.Infrastructure;
-using System.Web.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.IO;
-using System.Reflection.Metadata;
-using Microsoft.EntityFrameworkCore;
 
 namespace Arms.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class JobDescriptionController : BaseController
+    public class EmploymentTypeController : BaseController
     {
         private readonly IIdentityService _identityService;
         ArmsDbContext _context;
-        public JobDescriptionController(IIdentityService identityService, ArmsDbContext armsContext)
+        public EmploymentTypeController(IIdentityService identityService, ArmsDbContext armsContext)
         {
             _identityService = identityService;
             _context = armsContext;
         }
-        //GET:api/jobDescriptions
+        //GET:api/employementType
         [HttpGet]
-        public IActionResult GetJds()
+        public IActionResult GetEmploymentTypes()
         {
             try
             {
-                List<JobDescription> jobDescriptions = _context.JobDescription.Include(l=>l.employmentType).
-                    Include(l => l.eligibilityCriteria).Include(l => l.loc).ToList();
+                List<EmploymentType> employmentTypes = _context.employmentType.ToList();
                 var response = new
                 {
                     success = "true",
                     payload = new
                     {
-                        data = jobDescriptions,
-                        message = "Job Descriptions Retrieved Successfully"
+                        data = employmentTypes,
+                        message = "Employment Types Retrieved Successfully"
                     }
 
                 };
@@ -47,7 +42,7 @@ namespace Arms.Api.Controllers
             }
             catch (Exception ex)
             {
-              var response = new
+                var response = new
                 {
                     success = "false",
                     payload = new
@@ -58,182 +53,134 @@ namespace Arms.Api.Controllers
                 };
                 return StatusCode(500, response);
             }
-           
         }
-
-     
-        //GET:api/jobDescription/id
         [HttpGet("{id}")]
-        
-        public IActionResult GetJd(int id)
+        public IActionResult GetEmploymentTypeById(int id)
         {
-         
             try
             {
-                JobDescription job = _context.JobDescription.Include(l => l.employmentType).
-                    Include(l => l.eligibilityCriteria).Include(l => l.loc).
-                    SingleOrDefault(c => c.Id == id);
-
-
-
-                if (job == null)
+                EmploymentType employmentType = _context.employmentType.SingleOrDefault(c => c.Id == id);
+                if (employmentType == null)
                 {
                     var resNull = new
                     {
                         success = "false",
                         payload = new
                         {
-                            message = "This Jobdescription does not exist"
+                            message = "This Employment Type does not exist"
                         }
                     };
                     return StatusCode(404, resNull);
                 }
-                else
+                var response = new
                 {
-
-                    var response = new
+                    success = "true",
+                    payload = new
                     {
-                        success = "true",
-                        payload = new
-                        {
-                            data = job,
-                            message = "Job Description Retrieved Successfully"
-                        }
-                       
-                    };
-                    return StatusCode(200,response);
-                }
+                        data = employmentType,
+                        message = "Employment Type Retrieved Successfully"
+                    }
+
+                };
+                return StatusCode(200, response);
             }
             catch (Exception ex)
             {
                 var response = new
-                  {
+                {
                     success = "false",
                     payload = new
                     {
                         message = ex.InnerException.Message
                     }
 
-                  };
+                };
                 return StatusCode(500, response);
             }
-
         }
-
-        //POST:api/jobDescription
         [HttpPost]
-        public IActionResult WriteJd(JobDescription job)
+        public IActionResult CreateEmploymentType(EmploymentType employmentType)
         {
             try
             {
-                JobDescription checkinDb = _context.JobDescription.SingleOrDefault(c => c.jobTitle == job.jobTitle);
-                if (checkinDb!=null)
+                EmploymentType empType = _context.employmentType.SingleOrDefault
+                    (c => c.employmentTypeName == employmentType.employmentTypeName);
+                if (empType != null)
                 {
                     var resAlreadyExists = new
                     {
                         success = "false",
                         payload = new
                         {
-                          message = "Job with this Job Title already exists"
+                            message = "This Employment Type already exists"
                         }
 
                     };
                     return StatusCode(400, resAlreadyExists);
                 }
-                JobDescription newJob = new JobDescription
+                EmploymentType newEmploymentType = new EmploymentType
                 {
-                    openingDate = job.openingDate,
-                    closingDate = job.closingDate,
-                    locationId = job.locationId,
-                    employmentTypeId = job.employmentTypeId,
-                    eligibilityCriteriaId = job.eligibilityCriteriaId,
-                    description = job.description,
-                    jobTitle = job.jobTitle,
-                    vacancies = job.vacancies,
-                    salary = job.salary,
-                    pdfBlobData = job.pdfBlobData,
-
+                    employmentTypeName = employmentType.employmentTypeName
                 };
-                _context.JobDescription.Add(newJob);
+                _context.employmentType.Add(newEmploymentType);
                 _context.SaveChanges();
                 var response = new
-                {   
+                {
                     success = "true",
                     payload = new
                     {
-                        data = newJob,
-                        message = "Job Description Created Successfully"
+                        data = newEmploymentType,
+                        message = "Employment Type Created Successfully"
                     }
 
                 };
-                return StatusCode(201,response);
+                return StatusCode(201, response);
             }
             catch (Exception ex)
             {
-             
                 var response = new
                 {
                     success = "false",
                     payload = new
                     {
-                       message = ex.InnerException.Message
+                        message = ex.InnerException.Message
                     }
 
                 };
                 return StatusCode(500, response);
             }
         }
-        //PUT:api/jobdescription/id
+
+        //PUT:api/employmentType/id
         [HttpPut("{id}")]
-        public IActionResult UpdateJd(int id,[FromBody]JobDescription job)
+        public IActionResult UpdateEmploymentType(int id, [FromBody]EmploymentType employmentType)
         {
             try
             {
-                JobDescription jobInDb = _context.JobDescription.SingleOrDefault(c => c.Id == id);
-                if (jobInDb == null)
+                EmploymentType empTypeInDb = _context.employmentType.SingleOrDefault(c => c.Id == id);
+                if (empTypeInDb == null)
                 {
                     var resNull = new
                     {
                         success = "false",
                         payload = new
                         {
-
-                            message = "This Jobdescription does not exist"
+                            message = "This Employment Type does not exist"
                         }
-
                     };
                     return StatusCode(404, resNull);
+
                 }
-                if (job.openingDate != null)
-                    jobInDb.openingDate = job.openingDate;
-
-                if (job.closingDate != null)
-                    jobInDb.closingDate = job.closingDate;
-
-                if (job.locationId != 0)
-                    jobInDb.locationId = job.locationId;
-
-                if (job.description!=null)
-                  jobInDb.description = job.description;
-
-                if (job.jobTitle != null)
-                    jobInDb.jobTitle = job.jobTitle;
-
-                if (job.vacancies != 0)
-                    jobInDb.vacancies = job.vacancies;
-
-                if (job.salary != 0)
-                    jobInDb.salary = job.salary;
-
-                _context.JobDescription.Update(jobInDb);
+                empTypeInDb.employmentTypeName = employmentType.employmentTypeName;
+                _context.employmentType.Update(empTypeInDb);
                 _context.SaveChanges();
                 var response = new
                 {
                     success = "true",
                     payload = new
                     {
-                        data = jobInDb,
-                        message = "Job Description Updated Successfully"
+                        data = empTypeInDb,
+                        message = "Employment Type Updated Successfully"
                     }
 
                 };
@@ -241,7 +188,7 @@ namespace Arms.Api.Controllers
             }
             catch (Exception ex)
             {
-              var response = new
+                var response = new
                 {
                     success = "false",
                     payload = new
@@ -253,35 +200,35 @@ namespace Arms.Api.Controllers
                 return StatusCode(500, response);
             }
         }
-        //DELETE:/api/jobdescription/id
         [HttpDelete("{id}")]
-        public IActionResult DeleteJd(int id)
+        public IActionResult DeleteEmploymentType(int id)
         {
             try
             {
-                JobDescription jobInDb = _context.JobDescription.SingleOrDefault(c => c.Id == id);
-                if (jobInDb == null)
+                EmploymentType empTypeInDb = _context.employmentType.SingleOrDefault(c => c.Id == id);
+                if (empTypeInDb == null)
                 {
                     var resNull = new
                     {
                         success = "false",
                         payload = new
                         {
-
-                            message = "This Jobdescription does not exist"
+                            message = "This Employment Type does not exist"
                         }
-
                     };
                     return StatusCode(404, resNull);
+
                 }
-                _context.JobDescription.Remove(jobInDb);
+
+                _context.employmentType.Remove(empTypeInDb);
                 _context.SaveChanges();
                 var response = new
                 {
                     success = "true",
                     payload = new
                     {
-                        message = "Job Description Deleted Successfully"
+
+                        message = "Employment Type Deleted Successfully"
                     }
 
                 };
@@ -300,7 +247,9 @@ namespace Arms.Api.Controllers
                 };
                 return StatusCode(500, response);
             }
+
+
         }
-       
     }
+
 }

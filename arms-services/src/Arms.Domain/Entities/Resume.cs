@@ -1,19 +1,20 @@
-using Hrms.Core.Domains.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using System.Text;
 
 namespace Arms.Domain.Entities
 {
-    public class RoundType : Entity
+    public partial class Resume
     {
-
         public int Id { get; set; }
         public string Name { get; set; }
+        public byte[] Cv { get; set; }
+        public int ApplicationId { get; set; }
         public DateTime CreatedAt { get; set; }
-        public DateTime ModifiedAt { get; set; }
         public string CreatedBy { get; set; }
+        public DateTime ModifiedAt { get; set; }
         public string ModifiedBy { get; set; }
 
+        public Application Application { get; set; }
     }
 }

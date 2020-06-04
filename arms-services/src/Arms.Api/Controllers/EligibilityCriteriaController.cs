@@ -5,41 +5,36 @@ using System.Threading.Tasks;
 using Arms.Application.Services.Users;
 using Arms.Domain.Entities;
 using Arms.Infrastructure;
-using System.Web.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.IO;
-using System.Reflection.Metadata;
-using Microsoft.EntityFrameworkCore;
 
 namespace Arms.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class JobDescriptionController : BaseController
+    public class EligibilityCriteriaController : BaseController
     {
         private readonly IIdentityService _identityService;
         ArmsDbContext _context;
-        public JobDescriptionController(IIdentityService identityService, ArmsDbContext armsContext)
+        public EligibilityCriteriaController(IIdentityService identityService, ArmsDbContext armsContext)
         {
             _identityService = identityService;
             _context = armsContext;
         }
-        //GET:api/jobDescriptions
+        //GET:api/eligibilityCriteria
         [HttpGet]
-        public IActionResult GetJds()
+        public IActionResult GetEligibilityCriterias()
         {
             try
             {
-                List<JobDescription> jobDescriptions = _context.JobDescription.Include(l=>l.employmentType).
-                    Include(l => l.eligibilityCriteria).Include(l => l.loc).ToList();
+                List<EligibilityCriteria> eligibilityCriterias = _context.eligibilityCriteria.ToList();
                 var response = new
                 {
                     success = "true",
                     payload = new
                     {
-                        data = jobDescriptions,
-                        message = "Job Descriptions Retrieved Successfully"
+                        data = eligibilityCriterias,
+                        message = "Eligibility Criterias Retrieved Successfully"
                     }
 
                 };
@@ -47,7 +42,7 @@ namespace Arms.Api.Controllers
             }
             catch (Exception ex)
             {
-              var response = new
+                var response = new
                 {
                     success = "false",
                     payload = new
@@ -58,182 +53,136 @@ namespace Arms.Api.Controllers
                 };
                 return StatusCode(500, response);
             }
-           
         }
-
-     
-        //GET:api/jobDescription/id
+        //GET:api/eligibilityCriteira/id
         [HttpGet("{id}")]
-        
-        public IActionResult GetJd(int id)
+        public IActionResult GetEligibilityCriteriaById(int id)
         {
-         
             try
             {
-                JobDescription job = _context.JobDescription.Include(l => l.employmentType).
-                    Include(l => l.eligibilityCriteria).Include(l => l.loc).
-                    SingleOrDefault(c => c.Id == id);
-
-
-
-                if (job == null)
+                EligibilityCriteria eligibilityCriteria = _context.eligibilityCriteria.SingleOrDefault(c => c.Id == id);
+                if (eligibilityCriteria == null)
                 {
                     var resNull = new
                     {
                         success = "false",
                         payload = new
                         {
-                            message = "This Jobdescription does not exist"
+                            message = "This Eligibility Criteria does not exist"
                         }
                     };
                     return StatusCode(404, resNull);
                 }
-                else
+                var response = new
                 {
-
-                    var response = new
+                    success = "true",
+                    payload = new
                     {
-                        success = "true",
-                        payload = new
-                        {
-                            data = job,
-                            message = "Job Description Retrieved Successfully"
-                        }
-                       
-                    };
-                    return StatusCode(200,response);
-                }
+                        data = eligibilityCriteria,
+                        message = "Eligibility Criterias Retrieved Successfully"
+                    }
+
+                };
+                return StatusCode(200, response);
             }
             catch (Exception ex)
             {
                 var response = new
-                  {
+                {
                     success = "false",
                     payload = new
                     {
                         message = ex.InnerException.Message
                     }
 
-                  };
+                };
                 return StatusCode(500, response);
             }
-
         }
-
-        //POST:api/jobDescription
+        //POST:api/eligibilityCriteria
         [HttpPost]
-        public IActionResult WriteJd(JobDescription job)
+        public IActionResult CreateEligibilityCriteria(EligibilityCriteria eligibility)
         {
             try
             {
-                JobDescription checkinDb = _context.JobDescription.SingleOrDefault(c => c.jobTitle == job.jobTitle);
-                if (checkinDb!=null)
+                EligibilityCriteria checkinDb = _context.eligibilityCriteria.SingleOrDefault
+                    (c => c.eligibilityCriteriaName == eligibility.eligibilityCriteriaName);
+                if (checkinDb != null)
                 {
                     var resAlreadyExists = new
                     {
                         success = "false",
                         payload = new
                         {
-                          message = "Job with this Job Title already exists"
+                            message = "This Eligibility Criteria already exists"
                         }
 
                     };
                     return StatusCode(400, resAlreadyExists);
                 }
-                JobDescription newJob = new JobDescription
-                {
-                    openingDate = job.openingDate,
-                    closingDate = job.closingDate,
-                    locationId = job.locationId,
-                    employmentTypeId = job.employmentTypeId,
-                    eligibilityCriteriaId = job.eligibilityCriteriaId,
-                    description = job.description,
-                    jobTitle = job.jobTitle,
-                    vacancies = job.vacancies,
-                    salary = job.salary,
-                    pdfBlobData = job.pdfBlobData,
-
+                EligibilityCriteria newEligibilityCriteria=new EligibilityCriteria
+               {
+                    eligibilityCriteriaName = eligibility.eligibilityCriteriaName
                 };
-                _context.JobDescription.Add(newJob);
+                _context.eligibilityCriteria.Add(newEligibilityCriteria);
                 _context.SaveChanges();
                 var response = new
-                {   
+                {
                     success = "true",
                     payload = new
                     {
-                        data = newJob,
-                        message = "Job Description Created Successfully"
+                        data = newEligibilityCriteria,
+                        message = "Eligibility Criteria Created Successfully"
                     }
 
                 };
-                return StatusCode(201,response);
+                return StatusCode(201, response);
             }
             catch (Exception ex)
             {
-             
                 var response = new
                 {
                     success = "false",
                     payload = new
                     {
-                       message = ex.InnerException.Message
+                        message = ex.InnerException.Message
                     }
 
                 };
                 return StatusCode(500, response);
             }
         }
-        //PUT:api/jobdescription/id
+
+        //PUT:api/employmentType/id
         [HttpPut("{id}")]
-        public IActionResult UpdateJd(int id,[FromBody]JobDescription job)
+        public IActionResult UpdateEligibilityCriteria(int id, [FromBody]EligibilityCriteria eligibility)
         {
             try
             {
-                JobDescription jobInDb = _context.JobDescription.SingleOrDefault(c => c.Id == id);
-                if (jobInDb == null)
+                EligibilityCriteria checkInDb = _context.eligibilityCriteria.SingleOrDefault(c => c.Id == id);
+                if (checkInDb == null)
                 {
                     var resNull = new
                     {
                         success = "false",
                         payload = new
                         {
-
-                            message = "This Jobdescription does not exist"
+                            message = "This Eligibility Criteiria does not exist"
                         }
-
                     };
                     return StatusCode(404, resNull);
+
                 }
-                if (job.openingDate != null)
-                    jobInDb.openingDate = job.openingDate;
-
-                if (job.closingDate != null)
-                    jobInDb.closingDate = job.closingDate;
-
-                if (job.locationId != 0)
-                    jobInDb.locationId = job.locationId;
-
-                if (job.description!=null)
-                  jobInDb.description = job.description;
-
-                if (job.jobTitle != null)
-                    jobInDb.jobTitle = job.jobTitle;
-
-                if (job.vacancies != 0)
-                    jobInDb.vacancies = job.vacancies;
-
-                if (job.salary != 0)
-                    jobInDb.salary = job.salary;
-
-                _context.JobDescription.Update(jobInDb);
+                checkInDb.eligibilityCriteriaName = eligibility.eligibilityCriteriaName;
+                _context.eligibilityCriteria.Update(checkInDb);
                 _context.SaveChanges();
                 var response = new
                 {
                     success = "true",
                     payload = new
                     {
-                        data = jobInDb,
-                        message = "Job Description Updated Successfully"
+                        data = checkInDb,
+                        message = "Eligibility Criteria Updated Successfully"
                     }
 
                 };
@@ -241,7 +190,7 @@ namespace Arms.Api.Controllers
             }
             catch (Exception ex)
             {
-              var response = new
+                var response = new
                 {
                     success = "false",
                     payload = new
@@ -253,35 +202,35 @@ namespace Arms.Api.Controllers
                 return StatusCode(500, response);
             }
         }
-        //DELETE:/api/jobdescription/id
         [HttpDelete("{id}")]
-        public IActionResult DeleteJd(int id)
+        public IActionResult DeleteEligibilityCriteria(int id)
         {
             try
             {
-                JobDescription jobInDb = _context.JobDescription.SingleOrDefault(c => c.Id == id);
-                if (jobInDb == null)
+                EligibilityCriteria checkInDb = _context.eligibilityCriteria.SingleOrDefault(c => c.Id == id);
+                if (checkInDb == null)
                 {
                     var resNull = new
                     {
                         success = "false",
                         payload = new
                         {
-
-                            message = "This Jobdescription does not exist"
+                            message = "This Eligibility Criteria does not exist"
                         }
-
                     };
                     return StatusCode(404, resNull);
+
                 }
-                _context.JobDescription.Remove(jobInDb);
+
+                _context.eligibilityCriteria.Remove(checkInDb);
                 _context.SaveChanges();
                 var response = new
                 {
                     success = "true",
                     payload = new
                     {
-                        message = "Job Description Deleted Successfully"
+
+                        message = "Eligibility Criteria Deleted Successfully"
                     }
 
                 };
@@ -300,7 +249,8 @@ namespace Arms.Api.Controllers
                 };
                 return StatusCode(500, response);
             }
+
+
         }
-       
     }
 }

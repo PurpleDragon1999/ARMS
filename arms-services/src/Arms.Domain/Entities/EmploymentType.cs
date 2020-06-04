@@ -10,7 +10,7 @@ namespace Arms.Domain.Entities
     {
 
         [Key]
-        public int id { get; set; }
+        public int Id { get; set; }
      
         public string employmentTypeName { get; set; }
         public DateTime createdAt { get; set; }

@@ -13,17 +13,13 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
         {
             builder.ToTable("EligibilityCriteria", "ARMS");
 
-            builder.Property(e => e.id).HasColumnName("id");
+           // builder.Property(e => e.id).HasColumnName("id");
 
-            //builder.Property(e => e.id).ValueGeneratedOnAdd();
+           builder.Property(e => e.Id).ValueGeneratedOnAdd();
 
             builder.Property(e => e.createdAt)
                 .HasColumnName("createdAt")
                 .HasDefaultValueSql("(sysdatetime())");
-
-          
-
-
 
             builder.Property(e => e.eligibilityCriteriaName)
                 .HasColumnName("eligibilityCriteriaName")

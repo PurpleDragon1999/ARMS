@@ -13,9 +13,9 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
         {
             builder.ToTable("EmploymentType", "ARMS");
 
-            builder.Property(e => e.id).HasColumnName("id");
+           // builder.Property(e => e.Id).HasColumnName("id");
 
-            //builder.Property(e => e.id).ValueGeneratedOnAdd();
+            builder.Property(e => e.Id).ValueGeneratedOnAdd();
 
             builder.Property(e => e.createdAt)
                 .HasColumnName("createdAt")

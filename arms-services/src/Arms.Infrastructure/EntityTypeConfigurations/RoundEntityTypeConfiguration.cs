@@ -7,13 +7,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Arms.Infrastructure.EntityTypeConfigurations
 {
-
-    internal class RoundTypeEntityTypeConfiguration : IEntityTypeConfiguration<RoundType>
-
+    internal class RoundEntityTypeConfiguration: IEntityTypeConfiguration<Round>
     {
-        public void Configure(EntityTypeBuilder<RoundType> builder)
+        public void Configure(EntityTypeBuilder<Round> builder)
         {
-            builder.ToTable("RoundType", "ARMS");
+            builder.ToTable("Round", "ARMS");
 
             builder.Property(e => e.Id).HasColumnName("id");
 
@@ -26,6 +24,8 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .HasMaxLength(50)
                 .IsUnicode(false);
 
+            builder.Property(e => e.InterviewId).HasColumnName("interviewId");
+
             builder.Property(e => e.ModifiedAt)
                 .HasColumnName("modifiedAt")
                 .HasDefaultValueSql("(sysdatetime())");
@@ -35,12 +35,19 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .HasMaxLength(50)
                 .IsUnicode(false);
 
-            builder.Property(e => e.Name)
-                .HasColumnName("name")
-                .HasMaxLength(50)
-                .IsUnicode(false);
+            builder.Property(e => e.RoundTypeId).HasColumnName("roundTypeId");
+
+            builder.HasOne(d => d.Interview)
+                .WithMany(p => p.Round)
+                .HasForeignKey(d => d.InterviewId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Interview");
+
+            builder.HasOne(d => d.RoundType)
+                .WithMany(p => p.Round)
+                .HasForeignKey(d => d.RoundTypeId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_roundType");
         }
     }
-
 }
-
