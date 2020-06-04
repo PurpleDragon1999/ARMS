@@ -62,7 +62,5 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
 
             builder.Property(e => e.JobId).HasColumnName("jobId");
         }
-
-        
     }
 }

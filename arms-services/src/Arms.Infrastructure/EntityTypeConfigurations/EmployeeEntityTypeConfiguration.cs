@@ -8,13 +8,13 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
     {
         public void Configure(EntityTypeBuilder<Employee> builder)
         {
-            builder.ToTable("Employees", "dbo");
+            /*
             builder.HasKey(m => m.Id);
             builder.Property(m => m.LocationId).HasColumnName("Location");
 
             builder.HasOne(o => o.EmployeeDetail)
                 .WithMany()
-                .HasForeignKey(m => m.EmployeeDetailId);
+                .HasForeignKey(m => m.EmployeeDetailId);*/
         }
     }
 }

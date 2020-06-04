@@ -101,7 +101,7 @@ namespace Arms.Api.Controllers
                     {
                         List<Round> rounds = _context.Round
                                                      .Include(c => c.Interview)
-                                                     .Include(c =>c.RoundType)
+                                                     .Include(c => c.RoundType)
                                                      .Where(c => c.InterviewId == id)
                                                      .ToList();  
                         var response = new
@@ -170,7 +170,7 @@ namespace Arms.Api.Controllers
                 foreach (Round round in customDTO.Round)
                 {
                     var roundObj = round;
-                    roundObj.InterviewId = id; 
+                    roundObj.InterviewId = id;
                     _context.Round.Add(roundObj);
                     _context.SaveChanges();
                 }
@@ -192,7 +192,7 @@ namespace Arms.Api.Controllers
                     success = false,
                     payload = new
                     {
-                        message = e.InnerException.Message
+                        message = e.InnerException
                     }
 
                 };

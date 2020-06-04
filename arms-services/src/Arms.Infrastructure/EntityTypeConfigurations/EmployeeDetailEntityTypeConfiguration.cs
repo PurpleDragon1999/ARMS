@@ -8,8 +8,8 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
     {
         public void Configure(EntityTypeBuilder<EmployeeDetail> builder)
         {
-            builder.ToTable("EmployeeDetails");
-            builder.HasKey(e => e.Id);
+            /*builder.ToTable("EmployeeDetails");
+            builder.HasKey(e => e.Id);*/
         }
     }
 }

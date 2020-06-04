@@ -1,10 +1,11 @@
 using Hrms.Core.Domains.Entities;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace Arms.Domain.Entities
 {
-    public class Round: Entity
+    public partial class Round
     {
         public int Id { get; set; }
         public int RoundTypeId { get; set; }
@@ -17,6 +18,7 @@ namespace Arms.Domain.Entities
         public DateTime ModifiedAt { get; set; }
         public string ModifiedBy { get; set; }
         public Interview Interview { get; set; }
-        public RoundType RoundType { get; set; }
+        public RoundType RoundType { get; set; }       
+        
     }
 }

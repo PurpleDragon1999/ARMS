@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace Arms.Domain.Entities
 {
@@ -17,6 +18,5 @@ namespace Arms.Domain.Entities
         public DateTime ModifiedAt { get; set; }
         public string ModifiedBy { get; set; }
         public JobDescription JobDescription { get; set; }
-
-    }
+   }
 }

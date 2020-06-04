@@ -16,7 +16,6 @@ namespace Arms.Domain.CustomEntities
         public string Venue { get; set; }
         public int JobId { get; set; }
         public int NoOfRounds { get; set; }
-        
         public DateTime CreatedAt { get; set; }
         public string CreatedBy { get; set; }
         public DateTime ModifiedAt { get; set; }

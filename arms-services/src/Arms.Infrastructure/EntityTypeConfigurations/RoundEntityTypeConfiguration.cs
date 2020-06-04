@@ -53,4 +53,5 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .HasConstraintName("FK_roundType");
         }
     }
+
 }

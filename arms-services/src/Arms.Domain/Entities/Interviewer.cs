@@ -1,10 +1,18 @@
 using Hrms.Core.Domains.Entities;
+using System;
 
 namespace Arms.Domain.Entities
 {
-    public class Interviewer: Entity
+    public partial class Interviewer
     {
+        public int Id { get; set; }
+        public int InterviewPanelId { get; set; }
         public int EmployeeId { get; set; }
-        public int PanelId { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime ModifiedAt { get; set; }
+        public string CreatedBy { get; set; }
+        public string ModifiedBy { get; set; }
+
+        public InterviewPanel InterviewPanel { get; set; }
     }
 }

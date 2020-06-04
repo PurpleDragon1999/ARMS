@@ -9,6 +9,5 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Extensions\" />
-    <Folder Include="Entities\" />
   </ItemGroup>
 </Project>
