@@ -34,16 +34,16 @@ namespace Arms.Api.Controllers
                 if (interviews != null)
                 {
                     var response = new
-                    {
-                        success = true,
-                        payload = new
                         {
-                            data = interviews,
-                            message = "Interview Records Retrieved Successfully"
-                        }
+                            success = true,
+                            payload = new
+                            {
+                                data = interviews,
+                                message = "Interview Records Retrieved Successfully"
+                            }
 
-                    };
-                    return StatusCode(200, response);
+                        };
+                        return StatusCode(200, response);
                 }
                 else
                 {
@@ -76,24 +76,38 @@ namespace Arms.Api.Controllers
 
 
         [HttpGet("{id}")]
-        public IActionResult GetInterview(int id)
+        public IActionResult GetInterview(int id, int append=0)
         {
             var interview = _context.Interview.Include(c => c.JobDescription).SingleOrDefault(c => c.Id == id);
             try
             {
                 if (interview != null)
                 {
-                    var response = new
+                    if (append == 0)
                     {
-                        success = true,
-                        payload = new
+                        var response = new
                         {
-                            data = interview,
-                            message = "Interview Record Retrieved Successfully"
-                        }
+                            success = true,
+                            payload = new
+                            {
+                                data = interview,
+                                message = "Interview Record Retrieved Successfully"
+                            }
 
-                    };
-                    return StatusCode(200, response);
+                        };
+                        return StatusCode(200, response);
+                    }
+                    else
+                    {
+                        List<Round> rounds = _context.Round
+                                                     //.Include(c => c.RoundTypeId)
+                                                     .Where(c => c.InterviewId == id)
+                                                     .ToList();
+                     
+                       
+                        return Ok(rounds);
+                       
+                    }
 
                 }
                 else
