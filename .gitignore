@@ -12,14 +12,6 @@ yarn.lock
 jobDescriptions
 .idea
 
-<<<<<<< HEAD
-
-.vs/
-Building Blocks/
-obj/
-bin/
-
-=======
 *.swp
 *.*~
 project.lock.json
@@ -53,7 +45,6 @@ msbuild.wrn
 
 # Visual Studio 2015
 .vs/
->>>>>>> 579d2d87f35a4adbc8d943666953c0e3958f422b
 
 Building Blocks/
 
@@ -64,10 +55,8 @@ Building Blocks/
 *.g.props
 *.g.targets
 
-<<<<<<< HEAD
 
-
-
-=======
 */**/appsettings.json
->>>>>>> 579d2d87f35a4adbc8d943666953c0e3958f422b
+*/**/Arms.Api.csproj.user
+*/**/Arms.Api.csproj
+*/**/Desktop.ini
