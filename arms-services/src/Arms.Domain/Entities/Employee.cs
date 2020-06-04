@@ -6,7 +6,7 @@ namespace Arms.Domain.Entities
 {
     public partial class Employee
     {   [Key]
-        public int EmployeeDetailId { get; set; }
+        public int? EmployeeDetailId { get; set; }
         public string FirstName { get; set; }
         public Guid UserGuid { get; set; }
         public string LastName { get; set; }

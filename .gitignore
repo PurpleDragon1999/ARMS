@@ -54,5 +54,4 @@ Building Blocks/
 *.cache
 *.g.props
 *.g.targets
-**/appsettings.*.json
-**/appsettings.json
+*/**/appsettings.json

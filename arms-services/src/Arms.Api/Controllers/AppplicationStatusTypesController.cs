@@ -16,7 +16,7 @@ namespace Arms.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ApplicationStatusTypesController : ControllerBase
+    public class ApplicationStatusTypesController : BaseController
     {
         private readonly IIdentityService _identityService;
         ArmsDbContext _context;
