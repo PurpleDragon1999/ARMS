@@ -35,7 +35,7 @@ GO
 --insert command for jobDescription
 Insert into ARMS.JobDescription([jobTitle],[openingDate],[closingDate],[description],[location],pdfBlobData)
 SELECT 'Software Developer','2020-09-02','2020-09-09','require a logically strong person like himanshu','Delhi', BulkColumn
- FROM OPENROWSET(Bulk 'C:\Users\deepanshu.balani\Pictures\anal2.jpg', SINGLE_BLOB) AS BLOB
+ FROM OPENROWSET(Bulk 'C:\Users\shubham.sharma\Downloads\jobdescriptionCYG2000 (1).pdf', SINGLE_BLOB) AS BLOB
  
  
 

@@ -29,7 +29,7 @@ GO
 --insert command
 
 Insert into ARMS.Round(roundTypeId,interviewId)
-Values('2','1')
+Values('2','2')
 
 --Select command
 select * FROM ARMS.Round

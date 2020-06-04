@@ -1,14 +1,15 @@
-import { EnvVarService } from './../utilities/env-var.service';
-import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
-import { BroadcastService, MsalService } from '@azure/msal-angular';
-import { Logger, CryptoUtils } from 'msal';
+import { EnvVarService } from "./../utilities/env-var.service";
+import { Router } from "@angular/router";
+import { Component, OnInit } from "@angular/core";
+import { BroadcastService, MsalService } from "@azure/msal-angular";
+import { Logger, CryptoUtils } from "msal";
 
-const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
+const GRAPH_ENDPOINT = "https://graph.microsoft.com/v1.0/me";
 
-import { HttpClient } from '@angular/common/http';
-import { LoginService } from '../services/login.service'
-import { analyzeAndValidateNgModules } from '@angular/compiler';
+import { HttpClient } from "@angular/common/http";
+import { LoginService } from "../services/login.service";
+import { analyzeAndValidateNgModules } from "@angular/compiler";
+
 @Component({
   selector: "app-login",
   templateUrl: "./login.component.html",
@@ -27,7 +28,8 @@ export class LoginComponent implements OnInit {
     private http: HttpClient,
     private loginService: LoginService,
     private _router: Router,
-    private _env: EnvVarService) { }
+    private _env: EnvVarService,
+  ) {}
 
   ngOnInit() {
     this.isIframe = window !== window.parent && !window.opener;
@@ -45,10 +47,10 @@ export class LoginComponent implements OnInit {
       }
     });
     this.authService.setLogger(
-      new Logger((logLevel, message, piiEnabled) => { }, {
+      new Logger((logLevel, message, piiEnabled) => {}, {
         correlationId: CryptoUtils.createNewGuid(),
         piiLoggingEnabled: false,
-      })
+      }),
     );
   }
 
@@ -58,13 +60,14 @@ export class LoginComponent implements OnInit {
 
   getProfile() {
     this.http.get(GRAPH_ENDPOINT).toPromise()
-      .then(profile => {
-          this.profile = profile;
-        });
+      .then((profile) => {
+        this.profile = profile;
+      });
   }
 
   async loginFunction() {
-    const isIE =
+    this.loginService.login().subscribe((res) => console.log(res));
+    /*const isIE =
       window.navigator.userAgent.indexOf("MSIE ") > -1 ||
       window.navigator.userAgent.indexOf("Trident/") > -1;
     if (isIE) {
@@ -99,8 +102,6 @@ export class LoginComponent implements OnInit {
       }, err => {
         this.message = err.error.message
       }
-    )
-
+    )*/
   }
-  
 }

@@ -1,3 +1,4 @@
+using Arms.Domain.Entities;
 using Arms.Infrastructure.EntityTypeConfigurations;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,6 +10,25 @@ namespace Arms.Infrastructure
             : base(options)
         {
         }
+
+        public virtual DbSet<Employee> Employee { get; set; }
+        public virtual DbSet<EmployeeDetail> EmployeeDetail { get; set; }
+        public virtual DbSet<JobDescription> JobDescription { get; set; }
+        public virtual DbSet<Application> Application { get; set; }
+        public virtual DbSet<ApplicationStatusType> ApplicationStatusType { get; set; }
+        public virtual DbSet<Assessment> Assessment { get; set; }
+        public virtual DbSet<Candidate> Candidate { get; set; }
+        public virtual DbSet<Criteria> Criteria { get; set; }
+        public virtual DbSet<CriteriaType> CriteriaType { get; set; }
+        public virtual DbSet<IdProofType> IdProofType { get; set; }
+        public virtual DbSet<Images> Images { get; set; }
+        public virtual DbSet<Interview> Interview { get; set; }
+        public virtual DbSet<Interviewer> Interviewer { get; set; }
+        public virtual DbSet<InterviewPanel> InterviewPanel { get; set; }
+        public virtual DbSet<Location> Location { get; set; }
+        public virtual DbSet<Resume> Resume { get; set; }
+        public virtual DbSet<Round> Round { get; set; }
+        public virtual DbSet<RoundType> RoundType { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

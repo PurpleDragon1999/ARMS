@@ -1,6 +1,7 @@
 using Hrms.Core.Domains.Entities;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Arms.Domain.Entities
 {
@@ -12,6 +13,7 @@ namespace Arms.Domain.Entities
             InterviewPanel = new HashSet<InterviewPanel>();
         }
 
+        [Key]
         public int Id { get; set; }
         public int RoundTypeId { get; set; }
         public int InterviewId { get; set; }
