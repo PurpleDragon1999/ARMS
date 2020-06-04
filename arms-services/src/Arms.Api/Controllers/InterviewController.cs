@@ -100,13 +100,22 @@ namespace Arms.Api.Controllers
                     else
                     {
                         List<Round> rounds = _context.Round
-                                                     //.Include(c => c.RoundTypeId)
+                                                     .Include(c => c.Interview)
+                                                     .Include(c =>c.RoundType)
                                                      .Where(c => c.InterviewId == id)
-                                                     .ToList();
-                     
-                       
-                        return Ok(rounds);
-                       
+                                                     .ToList();  
+                        var response = new
+                        {
+                            success = true,
+                            payload = new
+                            {
+                                data = rounds,
+                                message = "Round Records Retrieved Successfully"
+                            }
+
+                        };
+                        return StatusCode(200, response);
+                                              
                     }
 
                 }
