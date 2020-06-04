@@ -282,24 +282,43 @@ namespace Arms.Api.Controllers
 
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteInterview(int id)
+        public IActionResult DeleteInterview(int id, int roundID = 0)
         {
             var interview = _context.Interview.SingleOrDefault(c => c.Id == id);
             try
             {
                 if (interview != null)
                 {
-                    _context.Interview.Remove(interview);
-                    _context.SaveChanges();
-                    var response = new
+                    if (roundID == 0)
                     {
-                        success = true,
-                        payload = new
+                        _context.Interview.Remove(interview);
+                        _context.SaveChanges();
+                        var response = new
                         {
-                            message = "Interview record deleted successfully"
-                        }
-                    };
-                    return StatusCode(200, response);
+                            success = true,
+                            payload = new
+                            {
+                                message = "Interview Record Deleted Successfully"
+                            }
+                        };
+                        return StatusCode(200, response);
+                    }
+                    else
+                    {
+                        var round = _context.Round.SingleOrDefault(c => c.Id == roundID);
+                        _context.Round.Remove(round);
+                        _context.SaveChanges();
+                        var response = new
+                        {
+                            success = true,
+                            payload = new
+                            {
+                                message = "Round Record Deleted Successfully"
+                            }
+                        };
+                        return StatusCode(200, response);
+
+                    }
                 }
                 else
                 {
