@@ -56,3 +56,5 @@ Building Blocks/
 **/appsettings.*.json
 **/appsettings.json 
 *.g.targets
+
+*/**/appsettings.json
