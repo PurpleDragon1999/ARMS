@@ -56,3 +56,5 @@ Building Blocks/
 *.g.targets
 
 */**/appsettings.json
+*/**/Arms.Api.csproj.user
+*/**/Arms.Api.csproj
