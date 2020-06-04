@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Arms.Infrastructure.EntityTypeConfigurations
 {
-    internal class ApplicationEntityTypeConfiguration : IEntityTypeConfiguration<Applications>
+    internal class ApplicationEntityTypeConfiguration : IEntityTypeConfiguration<Application>
     {
-        public void Configure(EntityTypeBuilder<Applications> builder)
+        public void Configure(EntityTypeBuilder<Application> builder)
         {
-            builder.ToTable("Applications", "ARMS");
+            builder.ToTable("Application", "ARMS");
 
             builder.Property(e => e.Id).HasColumnName("id");
 

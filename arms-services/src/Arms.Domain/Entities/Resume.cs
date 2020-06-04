@@ -15,6 +15,6 @@ namespace Arms.Domain.Entities
         public DateTime ModifiedAt { get; set; }
         public string ModifiedBy { get; set; }
 
-        public Applications Application { get; set; }
+        public Application Application { get; set; }
     }
 }

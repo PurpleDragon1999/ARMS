@@ -1,9 +1,10 @@
 using Hrms.Core.Domains.Entities;
 using System;
+using System.Collections.Generic;
 
 namespace Arms.Domain.Entities
 {
-    public class ApplicationStatusType: Entity
+    public class ApplicationStatusType : Entity
     {
         public int Id { get; set; }
         public string Code { get; set; }
@@ -12,5 +13,6 @@ namespace Arms.Domain.Entities
         public string CreatedBy { get; set; }
         public DateTime ModifiedAt { get; set; }
         public string ModifiedBy { get; set; }
+        //public ICollection<Application> Application { get; set;}
     }
 }

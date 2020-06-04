@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Hrms.Core.Domains.Entities;
 using Microsoft.AspNetCore.Http;
 
@@ -14,5 +15,6 @@ namespace Arms.Domain.Entities
         public string JobTitle { get; set; }
         public int Vacancies { get; set; }
         public byte[] JdPdf { get; set; }
+        //public ICollection<Application> Application { get; set; }
     }
 }

@@ -23,7 +23,7 @@ namespace Arms.Domain.Entities
         public int ApplicationId { get; set; }
         public int InterviewPanelId { get; set; }
 
-        public Applications Application { get; set; }
+        public Application Application { get; set; }
         public InterviewPanel InterviewPanel { get; set; }
         public Round Round { get; set; }
         public ICollection<Criteria> Criteria { get; set; }

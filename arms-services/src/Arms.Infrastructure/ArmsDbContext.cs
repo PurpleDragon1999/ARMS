@@ -14,7 +14,7 @@ namespace Arms.Infrastructure
         public virtual DbSet<Candidate> Candidate { get; set; }
         public virtual DbSet<IdProofType> IdProofType { get; set; }
         public virtual DbSet<Assessment> Assessment { get; set; }
-        public virtual DbSet<Applications> Applications { get; set; }
+        public virtual DbSet<Application> Application { get; set; }
         public virtual DbSet<Resume> Resume { get; set; }
         public virtual DbSet<ApplicationStatusType> ApplicationStatusType { get; set; }
 

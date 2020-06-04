@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Arms.Domain.Entities
 {
-    public class Applications : Entity
+    public class Application : Entity
     {
         public int Id { get; set; }
         public string Code { get; set; }

@@ -44,8 +44,7 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
             builder.Property(e => e.IdentificationNo)
                 .IsRequired()
                 .HasColumnName("identificationNo")
-                .HasMaxLength(50)
-                .IsUnicode(false);
+                .HasMaxLength(50);
 
             builder.Property(e => e.ModifiedAt)
                 .HasColumnName("modifiedAt")
