@@ -37,7 +37,7 @@ x86/
 build/
 bld/
 [Bb]in/
-[Oo]bj/Debug
+[Oo]bj/
 *.nuget.*
 msbuild.log
 msbuild.err
@@ -55,3 +55,5 @@ Building Blocks/
 *.g.props
 *.g.targets
 */**/appsettings.json
+*/**/Arms.Api.csproj.user
+*/**/Arms.Api.csproj

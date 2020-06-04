@@ -71,7 +71,7 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .HasConstraintName("FK_ApplicationCandidate");
 
             builder.HasOne(d => d.Job)
-                .WithMany(p => p.Application)
+                .WithMany()
                 .HasForeignKey(d => d.JobId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_ApplicationJob");

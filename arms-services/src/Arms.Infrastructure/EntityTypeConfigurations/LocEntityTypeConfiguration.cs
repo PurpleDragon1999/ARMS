@@ -7,54 +7,50 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Arms.Infrastructure.EntityTypeConfigurations
 {
-    internal class LocationEntityTypeConfiguration: IEntityTypeConfiguration<Location>
+    internal class LocEntityTypeConfiguration : IEntityTypeConfiguration<Loc>
     {
-        public void Configure(EntityTypeBuilder<Location> builder)
+        public void Configure(EntityTypeBuilder<Loc> builder)
         {
             builder.ToTable("Location", "ARMS");
 
-            builder.Property(e => e.Id).HasColumnName("id");
+            builder.Property(e => e.id).HasColumnName("id");
 
-            builder.Property(e => e.Code)
+            //builder.Property(e => e.id).ValueGeneratedOnAdd();
+            builder.Property(e => e.code)
                 .IsRequired()
                 .HasColumnName("code")
                 .HasMaxLength(57)
                 .IsUnicode(false)
                 .HasComputedColumnSql("('CYGLCID'+CONVERT([varchar](50),[id]))");
 
-            builder.Property(e => e.CreatedAt)
+            builder.Property(e => e.createdAt)
                 .HasColumnName("createdAt")
                 .HasDefaultValueSql("(sysdatetime())");
 
-            builder.Property(e => e.CreatedBy)
+            builder.Property(e => e.createdBy)
                 .IsRequired()
                 .HasColumnName("createdBy")
                 .HasMaxLength(255)
                 .IsUnicode(false);
 
-            builder.Property(e => e.JobId).HasColumnName("jobId");
 
-            builder.Property(e => e.LocationName)
+
+            builder.Property(e => e.locationName)
                 .IsRequired()
                 .HasColumnName("locationName")
                 .HasMaxLength(255)
                 .IsUnicode(false);
 
-            builder.Property(e => e.ModifiedAt)
+            builder.Property(e => e.modifiedAt)
                 .HasColumnName("modifiedAt")
                 .HasDefaultValueSql("(sysdatetime())");
 
-            builder.Property(e => e.ModifiedBy)
+            builder.Property(e => e.modifiedBy)
                 .IsRequired()
                 .HasColumnName("modifiedBy")
                 .HasMaxLength(255)
                 .IsUnicode(false);
-
-            builder.HasOne(d => d.Job)
-                .WithMany(p => p.LocationNavigation)
-                .HasForeignKey(d => d.JobId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_LC_JobId");
         }
+           
     }
 }
