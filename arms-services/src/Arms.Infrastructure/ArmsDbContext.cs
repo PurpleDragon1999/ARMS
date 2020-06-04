@@ -16,7 +16,7 @@ namespace Arms.Infrastructure
         public virtual DbSet<EmploymentType> employmentType  { get; set; }
         public virtual DbSet<EligibilityCriteria>eligibilityCriteria { get; set; }
         public virtual DbSet<CriteriaType> CriteriaType { get; set; }
-
+        public virtual DbSet<Loc> Loc { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -30,6 +30,7 @@ namespace Arms.Infrastructure
             modelBuilder.ApplyConfiguration(new EligibilityCriteriaEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new CriteriaTypeEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new RoundTypeEntityTypeConfiguration());
+          
 
         }
     }

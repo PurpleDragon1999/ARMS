@@ -1,45 +1,40 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Arms.Application.Services.Users;
 using Arms.Domain.Entities;
 using Arms.Infrastructure;
-using System.Web.Http;
 using Microsoft.AspNetCore.Http;
-using System.IO;
-using System.Reflection.Metadata;
-using Microsoft.EntityFrameworkCore;
-
+using Microsoft.AspNetCore.Mvc;
 
 namespace Arms.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CriteriaTypeController :BaseController
+    public class LocationController : BaseController
     {
         private readonly IIdentityService _identityService;
         ArmsDbContext _context;
-        public CriteriaTypeController(IIdentityService identityService, ArmsDbContext armsContext)
+        public LocationController(IIdentityService identityService, ArmsDbContext armsContext)
         {
             _identityService = identityService;
             _context = armsContext;
         }
         //GET:api/CriteriaType
         [HttpGet]
-        public IActionResult GetCriteriaTypes()
+        public IActionResult GetLocations()
         {
             try
             {
-                List<CriteriaType> criteriaTypes = _context.CriteriaType.ToList();
+                List<Loc> location = _context.Loc.ToList();
                 var response = new
                 {
                     success = "true",
                     payload = new
                     {
-                        data = criteriaTypes,
-                        message = "Criteria Types Retrieved Successfully"
+                        data = location,
+                        message = "Locations Retrieved Successfully"
                     }
 
                 };
@@ -60,29 +55,27 @@ namespace Arms.Api.Controllers
             }
 
         }
-
-
-        //GET:api/criteriaType/id
+        //GET:api/location/id
         [HttpGet("{id}")]
 
-        public IActionResult GetCriteriaType(int id)
+        public IActionResult GetLocation(int id)
         {
 
             try
             {
-                CriteriaType criteria = _context.CriteriaType.Include(l => l.roundType).
+               Loc location = _context.Loc.
                     SingleOrDefault(c => c.Id == id);
 
 
 
-                if (criteria == null)
+                if (location == null)
                 {
                     var resNull = new
                     {
                         success = "false",
                         payload = new
                         {
-                            message = "This Criteria Type Does Not Exist"
+                            message = "This Location Does Not Exist"
                         }
                     };
                     return StatusCode(404, resNull);
@@ -95,8 +88,8 @@ namespace Arms.Api.Controllers
                         success = "true",
                         payload = new
                         {
-                            data = criteria,
-                            message = "Criteria Type Retrieved Successfully"
+                            data = location,
+                            message = "Location Retrieved Successfully"
                         }
 
                     };
@@ -119,13 +112,13 @@ namespace Arms.Api.Controllers
 
         }
 
-        //POST:api/CriteriaType
+        //POST:api/Location
         [HttpPost]
-        public IActionResult CreateCriteriaType(CriteriaType criteria)
+        public IActionResult CreateLocation(Loc location)
         {
             try
             {
-                CriteriaType checkinDb = _context.CriteriaType.SingleOrDefault(c => c.criteriaName == criteria.criteriaName);
+                Loc checkinDb = _context.Loc.SingleOrDefault(c => c.locationName == location.locationName);
                 if (checkinDb != null)
                 {
                     var resAlreadyExists = new
@@ -133,27 +126,25 @@ namespace Arms.Api.Controllers
                         success = "false",
                         payload = new
                         {
-                            message = "Criteria Type with this Criteria Name already exists"
+                            message = "Location with this Name already exists"
                         }
 
                     };
                     return StatusCode(400, resAlreadyExists);
                 }
-                CriteriaType criteriaObj = new CriteriaType
+               Loc locationObj = new Loc
                 {
-                    criteriaName = criteria.criteriaName,
-                      roundTypeId=criteria.roundTypeId
-
+                    locationName = location.locationName
                 };
-                _context.CriteriaType.Add(criteriaObj);
+                _context.Loc.Add(locationObj);
                 _context.SaveChanges();
                 var response = new
                 {
                     success = "true",
                     payload = new
                     {
-                        data = criteriaObj,
-                        message = " Criteria Type Created Successfully"
+                        data = locationObj,
+                        message = " Location Created Successfully"
                     }
 
                 };
@@ -175,14 +166,14 @@ namespace Arms.Api.Controllers
                 return StatusCode(500, response);
             }
         }
-        //PUT:api/ CriteriaType/id
+        //PUT:api/ location/id
         [HttpPut("{id}")]
-        public IActionResult UpdateCriteriaType(int id, CriteriaType criteria)
+        public IActionResult UpdateLocation(int id, Loc location)
         {
             try
             {
-                CriteriaType criteriaType = _context.CriteriaType.SingleOrDefault(c => c.Id == id);
-                if (criteriaType == null)
+               Loc loc = _context.Loc.SingleOrDefault(c => c.Id == id);
+                if (loc == null)
                 {
                     var resNull = new
                     {
@@ -190,25 +181,23 @@ namespace Arms.Api.Controllers
                         payload = new
                         {
 
-                            message = "This Criteria Type does not exist"
+                            message = "This Location does not exist"
                         }
 
                     };
                     return StatusCode(404, resNull);
                 }
 
-                criteriaType.criteriaName = criteria.criteriaName;
-                criteriaType.roundTypeId = criteria.roundTypeId;
-
-                
+               loc.locationName = location.locationName;
+               
                 _context.SaveChanges();
                 var response = new
                 {
                     success = "true",
                     payload = new
                     {
-                        data = criteriaType,
-                        message = " Criteria Type Updated Successfully"
+                        data = loc,
+                        message = " Location Updated Successfully"
                     }
 
                 };
@@ -228,14 +217,14 @@ namespace Arms.Api.Controllers
                 return StatusCode(500, response);
             }
         }
-        //DELETE:/api/ CriteriaType/id
+        //DELETE:/api/Location/id
         [HttpDelete("{id}")]
-        public IActionResult DeleteCriteriaType(int id)
+        public IActionResult DeleteLocation(int id)
         {
             try
             {
-                CriteriaType criteria = _context.CriteriaType.SingleOrDefault(c => c.Id == id);
-                if (criteria == null)
+                Loc loc = _context.Loc.SingleOrDefault(c => c.Id == id);
+                if (loc == null)
                 {
                     var resNull = new
                     {
@@ -249,14 +238,14 @@ namespace Arms.Api.Controllers
                     };
                     return StatusCode(404, resNull);
                 }
-                _context.CriteriaType.Remove(criteria);
+                _context.Loc.Remove(loc);
                 _context.SaveChanges();
                 var response = new
                 {
                     success = "true",
                     payload = new
                     {
-                        message = "Criteria Type Deleted Successfully"
+                        message = "Location Deleted Successfully"
                     }
 
                 };
@@ -278,3 +267,5 @@ namespace Arms.Api.Controllers
         }
     }
 }
+
+    
