@@ -22,7 +22,11 @@ obj/
 *.manifest
 *.cache
 *.g.props
-appsettings
+
+appsettings.json
+Arms.Api.csproj
+Arms.Api.csproj.user
+
 *.g.targets
 
 
