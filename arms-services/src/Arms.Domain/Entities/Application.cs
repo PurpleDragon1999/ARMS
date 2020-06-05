@@ -19,7 +19,7 @@ namespace Arms.Domain.Entities
         public string CreatedBy { get; set; }
         public DateTime ModifiedAt { get; set; }
         public string ModifiedBy { get; set; }
-        public ApplicationStatusType ApplicationStatus { get; set; }
+        public ApplicationStatusType ApplicationStatusType { get; set; }
         public Candidate Candidate { get; set; }
         public JobDescription Job { get; set; }
         public ICollection<Assessment> Assessment { get; set; }

@@ -1,11 +1,11 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Hrms.Core.Domains.Entities;
 using Microsoft.AspNetCore.Http;
 
 namespace Arms.Domain.Entities
 {
-    public class JobDescription: Entity
+    public class JobDescription : Entity
     {
         public string LocationId { get; set; }
         public DateTime OpeningDate { get; set; }
@@ -15,6 +15,6 @@ namespace Arms.Domain.Entities
         public string JobTitle { get; set; }
         public int Vacancies { get; set; }
         public byte[] JdPdf { get; set; }
-        
+
     }
 }

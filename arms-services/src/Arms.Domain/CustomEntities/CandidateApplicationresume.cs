@@ -11,12 +11,9 @@ namespace Arms.Domain.CustomEntities
         public string Phone { get; set; }
         public int IdProofTypeId { get; set; }
         public string IdentificationNo { get; set; }
-        public DateTime DateOfApplication { get; set; }
-        public DateTime StatusChangedAt { get; set; }
         public string Education { get; set; }
         public string Experience { get; set; }
         public int JobId { get; set; }
-        
         //public byte[] Cv { get; set; }
         public DateTime CreatedAt { get; set; }
         public string CreatedBy { get; set; }

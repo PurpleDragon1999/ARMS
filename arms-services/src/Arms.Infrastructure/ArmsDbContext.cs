@@ -17,6 +17,7 @@ namespace Arms.Infrastructure
         public virtual DbSet<Application> Application { get; set; }
         public virtual DbSet<Resume> Resume { get; set; }
         public virtual DbSet<ApplicationStatusType> ApplicationStatusType { get; set; }
+        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -28,6 +29,7 @@ namespace Arms.Infrastructure
             modelBuilder.ApplyConfiguration(new ApplicationEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new ResumeEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new ApplicationStatusTypeEntityTypeConfiguration());
+            
 
         }
     }

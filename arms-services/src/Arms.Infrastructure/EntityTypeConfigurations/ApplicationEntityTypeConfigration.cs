@@ -62,7 +62,7 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .HasColumnName("statusChangedAt")
                 .HasDefaultValueSql("(sysdatetime())");
 
-            builder.HasOne(d => d.ApplicationStatus)
+            builder.HasOne(d => d.ApplicationStatusType)
                 .WithMany()
                 .HasForeignKey(d => d.ApplicationStatusTypeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
