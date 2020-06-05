@@ -26,9 +26,19 @@ namespace Arms.Api.Controllers
         }
 
         [HttpGet]
-        public IActionResult Getcandidates(int jobId =0)
+        public IActionResult Getcandidates(int jobId = 0)
         {
-            List<Arms.Domain.Entities.Application> applications = _context.Application.Include(c => c.Candidate).Include(c=> c.Job).Include(c=> c.ApplicationStatus).Where(c => c.JobId == jobId).ToList(); 
+            List<Arms.Domain.Entities.Application> applications;
+            if (jobId != 0)
+            {
+                applications = _context.Application.Include(c => c.Candidate).Include(c => c.Job).Include(c => c.ApplicationStatus).Where(c => c.JobId == jobId).ToList();
+            }
+            else
+            {
+                applications = _context.Application.Include(c => c.Candidate).Include(c => c.Job).Include(c => c.ApplicationStatus).ToList();
+            }
+
+
             try
             {
                 var response = new
@@ -133,7 +143,7 @@ namespace Arms.Api.Controllers
                         success = true,
                         payload = new
                         {
-                            message = "Application not found"
+                            message = "Application Not found"
                         }
                     };
                     return Ok(response);
