@@ -58,7 +58,6 @@ namespace Arms.Api.Controllers
         }
 
         [HttpGet("{id}")]
-
         public IActionResult GetApplication(int applicationId)
         {
             try
@@ -77,7 +76,6 @@ namespace Arms.Api.Controllers
 
                     };
                     return Ok(response);
-
                 }
                 else
                 {
@@ -90,11 +88,8 @@ namespace Arms.Api.Controllers
                         }
 
                     };
-
-
                     return Ok(response);
                 }
-
             }
 
             catch (Exception e)
@@ -109,7 +104,6 @@ namespace Arms.Api.Controllers
                 };
                 return StatusCode(500, response);
             }
-            
         }
 
         [HttpDelete("{id}")]
@@ -157,9 +151,7 @@ namespace Arms.Api.Controllers
                 };
                 return StatusCode(500, response);
             }
-
         }
-
         public bool validateCandidate(CandidateApplicationResume candidateObj, int candidateId)
         {
             var lastAppliedOn = _context.Application
@@ -174,12 +166,10 @@ namespace Arms.Api.Controllers
 
             if (value.TotalDays > 183)
             {
-
                 return true;
             }
 
             var assessment = _context.Assessment.SingleOrDefault(c => c.ApplicationId == applicationId);
-
             if (assessment != null)
             {
                 return false;
@@ -193,21 +183,16 @@ namespace Arms.Api.Controllers
             
         }
 
-        
-
         [HttpPost]
         public IActionResult CreateCandidate([FromBody] CandidateApplicationResume customObj)
         {
             var candidate = _context.Candidate.SingleOrDefault(c => c.Email == customObj.Email || c.IdentificationNo == customObj.IdentificationNo);
             var applicationStatus = _context.ApplicationStatusType.SingleOrDefault(c => c.StatusName == "AppliedSuccessfully");
-
             try
             {
-                
                 int id;
                 if (candidate == null)
-                {
-                    
+                {       
                     var candidateObj = new Candidate
                     {
                         Name = customObj.Name,
@@ -218,16 +203,12 @@ namespace Arms.Api.Controllers
                         CreatedBy = customObj.CreatedBy,
                         ModifiedBy = customObj.ModifiedBy
                     };
-
                     _context.Candidate.Add(candidateObj);
                     _context.SaveChanges();
-
                     id = candidateObj.Id;
-
                 }
                 else
                 {
-
                     id = candidate.Id;
                     bool isAllowed = validateCandidate(customObj, id);
 
@@ -250,7 +231,6 @@ namespace Arms.Api.Controllers
                             candidate.ModifiedBy = customObj.ModifiedBy;
                         }
                         _context.SaveChanges();
-
                     }
                     else
                     {
@@ -264,7 +244,6 @@ namespace Arms.Api.Controllers
                         };
                         return StatusCode(200, responseFalse);
                     }
-
                 }
 
                 var applicationObj = new Domain.Entities.Application
@@ -282,18 +261,6 @@ namespace Arms.Api.Controllers
                 _context.SaveChanges();
 
                 int applicationId = applicationObj.Id;
-                //var resumeObj = new Resume
-                //{
-                //    Name = "CV|" + customObj.Name,
-                //    Cv = customObj.Cv,
-                //    ApplicationId = applicationId,
-                //    CreatedBy = customObj.CreatedBy,
-                //    ModifiedBy = customObj.ModifiedBy
-
-                //};
-
-                //_context.Resume.Add(resumeObj);
-                //_context.SaveChanges();
 
                 var response = new
                 {
@@ -304,13 +271,11 @@ namespace Arms.Api.Controllers
                     }
                 };
                 return StatusCode(200, response);
-
             }
             catch (Exception e)
             {
                 var response = new
                 {
-                   
                     success = false,
                     payload = new
                     {
@@ -318,9 +283,7 @@ namespace Arms.Api.Controllers
                     }
                 };
                 return StatusCode(500, response);
-
             }
-                      
         }
 
         [HttpPut("{id}")]
@@ -337,45 +300,35 @@ namespace Arms.Api.Controllers
                     var candidate = _context.Candidate.SingleOrDefault(c => c.Id == candidateId);
 
                     if (customObj.Name != null)
-                    {
-                      
+                    {         
                         candidate.Name = customObj.Name;
                         candidate.ModifiedBy = customObj.ModifiedBy;
                     }
+
                     if (customObj.Email != null)
-                    {
-                      
+                    { 
                         candidate.Email = customObj.Email;
                         candidate.ModifiedBy = customObj.ModifiedBy;
                     }
+
                     if (customObj.Phone != null)
-                    {
-                      
+                    { 
                         candidate.Phone = customObj.Phone;
                         candidate.ModifiedBy = customObj.ModifiedBy;
                     }
 
                     if (customObj.Education != null)
-                    {
-                      
+                    {  
                         application.Education = customObj.Education;
                         application.ModifiedBy = customObj.ModifiedBy;
                     }
 
                     if (customObj.Experience != null)
-                    {
-                      
+                    { 
                         application.Experience = customObj.Experience;
                         application.ModifiedBy = customObj.ModifiedBy;
                     }
-
-
-
-                    //if (customObj.ApplicationStatusTypeId != null)
-                    //{
-                    //    application.ApplicationStatusTypeId = customObj.ApplicationStatusTypeId;
-                    //}
-
+                    
                     //if (customObj.Cv != null)
                     //{
                     //    resume.Cv = customObj.Cv ;
@@ -421,10 +374,8 @@ namespace Arms.Api.Controllers
                     }
 
                 };
-                return StatusCode(500, response);
-               
+                return StatusCode(500, response);      
             }
         }
-
     }
 }
