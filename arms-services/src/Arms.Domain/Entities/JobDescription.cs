@@ -15,6 +15,6 @@ namespace Arms.Domain.Entities
         public string JobTitle { get; set; }
         public int Vacancies { get; set; }
         public byte[] JdPdf { get; set; }
-        //public ICollection<Application> Application { get; set; }
+        
     }
 }

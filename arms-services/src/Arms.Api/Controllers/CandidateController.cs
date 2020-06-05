@@ -28,8 +28,6 @@ namespace Arms.Api.Controllers
         [HttpGet]
         public IActionResult Getcandidates(int jobId =0)
         {
-            //List<Candidate> candidates = _context.Ca.Include(c => c.IdProofType).ToList();
-
             List<Arms.Domain.Entities.Application> applications = _context.Application.Include(c => c.Candidate).Include(c=> c.Job).Include(c=> c.ApplicationStatus).Where(c => c.JobId == jobId).ToList(); 
             try
             {
@@ -52,7 +50,7 @@ namespace Arms.Api.Controllers
                     success = false,
                     payload = new
                     {
-                        message = e.InnerException.Message
+                        message = e.Message
                     }
                 };
                 return StatusCode(500, response);
@@ -106,7 +104,7 @@ namespace Arms.Api.Controllers
                     success = false,
                     payload = new
                     {
-                        message = e
+                        message = e.Message
                     }
                 };
                 return StatusCode(500, response);
@@ -154,7 +152,7 @@ namespace Arms.Api.Controllers
                     success = false,
                     payload = new
                     {
-                        message = e
+                        message = e.Message
                     }
                 };
                 return StatusCode(500, response);
@@ -176,6 +174,7 @@ namespace Arms.Api.Controllers
 
             if (value.TotalDays > 183)
             {
+
                 return true;
             }
 
@@ -260,7 +259,7 @@ namespace Arms.Api.Controllers
                             success = true,
                             payload = new
                             {
-                                message = "Cannot register"
+                                message = "Cannot Register"
                             }
                         };
                         return StatusCode(200, responseFalse);
@@ -315,7 +314,7 @@ namespace Arms.Api.Controllers
                     success = false,
                     payload = new
                     {
-                        message = e
+                        message = e.Message
                     }
                 };
                 return StatusCode(500, response);
@@ -381,11 +380,10 @@ namespace Arms.Api.Controllers
                     //{
                     //    resume.Cv = customObj.Cv ;
                     //}
-                    var print = candidate;
-                    //_context.Candidate.Update(candidate);
+                    
+                    _context.Candidate.Update(candidate);
                     _context.SaveChanges();
 
-                    var print2 = application;
                     _context.Application.Update(application);
                     _context.SaveChanges();
 
@@ -419,7 +417,7 @@ namespace Arms.Api.Controllers
                     success = false,
                     payload = new
                     {
-                        message = e
+                        message = e.Message
                     }
 
                 };
