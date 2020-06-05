@@ -31,11 +31,11 @@ namespace Arms.Api.Controllers
             List<Arms.Domain.Entities.Application> applications;
             if (jobId != 0)
             {
-                applications = _context.Application.Include(c => c.Candidate).Include(c => c.Job).Include(c => c.ApplicationStatus).Where(c => c.JobId == jobId).ToList();
+                applications = _context.Application.Include(c => c.Candidate).Include(c => c.ApplicationStatusType).Where(c => c.JobId == jobId).ToList();
             }
             else
             {
-                applications = _context.Application.Include(c => c.Candidate).Include(c => c.Job).Include(c => c.ApplicationStatus).ToList();
+                applications = _context.Application.Include(c => c.Candidate).Include(c => c.ApplicationStatusType).ToList();
             }
 
 
@@ -68,11 +68,12 @@ namespace Arms.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetApplication(int applicationId)
+        public IActionResult GetApplication(int id )
         {
             try
             {
-                var application = _context.Application.Include(c=> c.Candidate).Include(c=> c.Job).Include(c=> c.ApplicationStatus).SingleOrDefault(c => c.Id == applicationId);
+                var check = id;
+                var application = _context.Application.Include(c=> c.Candidate).Include(c=> c.ApplicationStatusType).SingleOrDefault(c => c.Id == id);
                 if (application != null)
                 {
                     var response = new
@@ -296,7 +297,7 @@ namespace Arms.Api.Controllers
             }
         }
 
-        [HttpPut("{id}")]
+        [HttpPatch("{id}")]
         public IActionResult UpdateCandidateDetails(int id, [FromBody] CandidateApplicationResume customObj)
         {
             var resume = _context.Resume.SingleOrDefault(c => c.ApplicationId == id);
@@ -380,7 +381,7 @@ namespace Arms.Api.Controllers
                     success = false,
                     payload = new
                     {
-                        message = e.Message
+                        message = e
                     }
 
                 };
