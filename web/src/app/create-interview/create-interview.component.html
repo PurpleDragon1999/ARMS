@@ -1,5 +1,14 @@
+
 <div class="page-header">
-  <h4 class="page-title myclass" ><b>Create Interview</b></h4>
+  <h4 class="page-title myclass"*ngIf=" formType ==='update';else next " ><b>
+   Update Interview
+  </b></h4>
+  <ng-template #next>
+    <h4 class="page-title myclass"  ><b>
+      Create Interview
+     </b></h4>
+  </ng-template>
+  
 </div>
       <div class="card">
         <div class="card-body">
@@ -17,7 +26,7 @@
             <input
                 type="text"
                 name="jdId"
-                [ngModel]="interview.jdId"
+                [ngModel]="interview[0] && interview[0].jdObjectId.jdId"
                 class="form-control"
                 #jdId="ngModel"
                 id="jdId"
@@ -36,7 +45,7 @@
               <input
                 name="jd"
                 type="text"
-                [(ngModel)]="interview.jd"
+                [(ngModel)]="interview[0] && interview[0].jdObjectId.jdTitle"
                 class="form-control"
                 id="jd"
                 #jd="ngModel"
@@ -53,7 +62,7 @@
               <input
                 name="date"
                 type="date"
-                [(ngModel)]="interview.date"
+                [(ngModel)]="dateNew"
                 class="form-control"
                 id="date"
                 #date="ngModel"
@@ -71,7 +80,7 @@
               <input
                 name="time"
                 type="time"
-                [ngModel]="interview.time"
+                [ngModel]="interview && interview[0].time"
                 class="form-control"
                 id="time"
                 #time="ngModel"
@@ -89,7 +98,7 @@
               <select
                 name="noOfRounds"
                 type="number"
-                [ngModel]="interview.noOfRounds"
+                [ngModel]="interview[0] && interview[0].noOfRounds"
                 class="form-control"
                 id="noOfRounds"
                 #noOfRounds="ngModel"
@@ -114,7 +123,7 @@
               <input
                 name="venue"
                 type="text"
-                [ngModel]="interview.venue"
+                [ngModel]="interview[0] && interview[0].venue"
                 class="form-control"
                 id="venue"
                 #venue="ngModel"
@@ -152,5 +161,3 @@
           </form>
         </div>
       </div>
-   
-

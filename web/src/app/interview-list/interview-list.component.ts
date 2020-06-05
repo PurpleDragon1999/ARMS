@@ -29,16 +29,15 @@ export class InterviewListComponent implements OnInit {
   loadInterviews() {
     return this._service.getAllInterviews().subscribe((response: any) => {
       this.interviewsList = response.payload.data
-      console.log(this.interviewsList);
     });
   }
 
   interviewUpdateModal(id: string) {
     const modalRef: NgbModalRef = this.modalService.open(CreateInterviewComponent)
-    modalRef.componentInstance.jdUpdateId = id;
-    modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
-      modalRef.close();
-    });
+    modalRef.componentInstance.interviewId = id;
+    // modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+    //   modalRef.close();
+    // });
   }
 
   
