@@ -1,3 +1,4 @@
+import { ScheduleInterviewComponent } from './../schedule-interview/schedule-interview.component';
 import { EmailListModalComponent } from './../email-list-modal/email-list-modal.component';
 import { IResponse } from 'src/app/models/response.interface';
 import { JdModalComponent } from '../jd-modal/jd-modal.component';
@@ -7,7 +8,7 @@ import { NgbModal, NgbModalRef, ModalDismissReasons} from '@ng-bootstrap/ng-boot
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ModalComponent } from 'src/app/reusable-components/modal/modal.component';
 import { HttpErrorResponse } from '@angular/common/http';
-
+import{CreateInterviewComponent} from '../create-interview/create-interview.component'
 @Component({
   selector: 'app-interview-list',
   templateUrl: './interview-list.component.html',
@@ -32,22 +33,15 @@ export class InterviewListComponent implements OnInit {
     });
   }
 
-  jdUpdateModal(id: string) {
-    const modalRef: NgbModalRef = this.modalService.open(JdModalComponent)
+  interviewUpdateModal(id: string) {
+    const modalRef: NgbModalRef = this.modalService.open(CreateInterviewComponent)
     modalRef.componentInstance.jdUpdateId = id;
     modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
       modalRef.close();
     });
   }
 
-  sendBulkEmail(jobObjId: string) {
-    const modalRef: NgbModalRef = this.modalService.open(EmailListModalComponent);
-    modalRef.componentInstance.jdObjId = jobObjId;
-    modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
-      modalRef.close();
-    });
-  }
-
+  
   deleteInterview(interviewObjId: string) {
     const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
 
