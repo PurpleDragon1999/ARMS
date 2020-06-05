@@ -87,7 +87,7 @@ export class AppServicesService {
 
   jdList(): Observable<any>{
     return this.http.get<any>(`${USER_DOMAIN}/api/jobDescription`,  {headers: this.headers, observe: 'response'} );
-  }
+   }
 
   getCandidate(id: string): Observable<IResponse>{
     return this.http.get<IResponse>(`${USER_DOMAIN}/api/candidate/${id}`, this.options)
@@ -105,5 +105,11 @@ export class AppServicesService {
     const params: HttpParams = new HttpParams().set('character', character).set("pagination", "true").set("page", page.toString());
     return this.http.get<IResponse>(`${USER_DOMAIN}/api/jobDescriptionSearch`, {...this.options, params})
   }
+  getAllInterviews(): Observable<HttpResponse<any>>{
+    return this.http.get<any>(`${USER_DOMAIN}/api/interview`, this.options);
+}
+deleteInterview(interviewObjectId): Observable<IResponse>{
+  return this.http.delete<any>(`${USER_DOMAIN}/api/interview/${interviewObjectId}`, this.options);
+}
 
 }

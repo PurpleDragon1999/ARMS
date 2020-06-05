@@ -1,2 +1,91 @@
-<app-list title='interview' [data]="interviews" [columns]="columns" [pager]="pager" 
-          (emitDelete)="deleteInterview($event)" (emitPaginatedResult)="searchInterview($event)"></app-list>
+<!-- <app-list title='interview' [data]="interviews" [columns]="columns" [pager]="pager" 
+          (emitDelete)="deleteInterview($event)" (emitPaginatedResult)="searchInterview($event)"></app-list> -->
+          <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+          <div class="main-panel">
+            <div class="page-header">
+              <h4><b>Interview Listing</b></h4>
+              <button class="float-right btn btn-gradient-danger btn-fw" id="addbtn" routerLink="/admin/create-interview">Add <i class="mdi mdi-file-plus"></i> </button>
+            </div>
+            <div class="search-field d-md-block">
+              <form class="h-100" action="#">
+                <div class="input-group w-25">
+                  <div class="input-group-prepend bg-transparent card">
+                    <i class="input-group-text border-0 mdi mdi-magnify"></i>
+                  </div>
+                  <input #searchInput (input)="searchJd(searchInput.value)" type="text"
+                    class="form-control " placeholder="Search " />
+                </div>
+              </form>
+            </div>
+          
+            <div class="noMatch">
+              <p class="p-2" *ngIf="jobsList?.length==0"> No Match Found</p>
+            </div>
+          
+            <div class="row">
+              <div class="col-md-6 grid-margin stretch-card" *ngFor="let interview of interviewsList ">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="font-weight-normal mb-2"><b>
+                      Interview ID: </b> {{ interview._id }}
+                      <!--mobile view three dot icon-->
+                      <div class="w3-dropdown-hover d-lg-none float-right">
+                        <button class="w3-button">
+                          <span class="more-dot"></span>
+                          <span class="more-dot"></span>
+                          <span class="more-dot"></span>
+                        </button>
+                        <div class="w3-dropdown-content w3-bar-block">
+                          <a  class="w3-bar-item w3-button">
+                            <i class="mdi mdi-pencil float-right"
+                            (click)="jdUpdateModal(job.jdId)"
+                            ></i>
+                          </a>
+                         <a  class="w3-bar-item w3-button">
+                            <i class="mdi mdi-delete float-right"
+                            (click)="deleteInterview(interview?._id)"
+                            ></i>
+                          </a>
+                          
+                        </div>
+                      </div>
+                      <!--large screens-->
+                      <i
+                        class="mdi mdi-delete float-right d-none d-lg-block"
+                        (click)="deleteInterview(interview?._id)"
+                      ></i>
+                      <i class="mdi mdi-pencil float-right d-none d-lg-block"
+                      (click)="jdUpdateModal(job.jdId)"
+                      ></i>
+                    </h5>
+                     
+                      <h6 class="font-weight-normal">
+                        <b> Date : </b>{{ interview.date | date }}
+                     </h6>
+                   <h6 class="font-weight-normal">
+                      <b> Venue : </b>{{interview.venue}}
+                    </h6>
+                    <h6 class="font-weight-normal">
+                      <b> No Of Rounds : </b>{{interview.noOfRounds}}
+                    </h6>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+           <div class="paginationDiv">
+              <ul *ngIf="pager?.pages && pager?.pages?.length" class="pagination">
+                <li [ngClass]="{ disabled: pager.currentPage == 1 }" class="page-item previous-item">
+                  <a (click)="searchJd(searchInput.value, pager.currentPage - 1)" class="page-link"><i
+                      class="mdi mdi-chevron-left arrow"></i></a>
+                </li>
+                <li *ngFor="let page of pager.pages" [ngClass]="{ active: pager.currentPage === page }"
+                  class="page-item number-item">
+                  <a (click)="searchJd(searchInput.value, page)" class="page-link">{{ page }}</a>
+                </li>
+                <li [ngClass]="{ disabled: pager.currentPage == pager.totalPages }" class="page-item next-item">
+                  <a (click)="searchJd(searchInput.value, pager.currentPage + 1)" class="page-link"><i
+                      class="mdi mdi-chevron-right arrow"></i></a>
+                </li>
+              </ul>
+            </div>          

@@ -1,9 +1,11 @@
+import { EmailListModalComponent } from './../email-list-modal/email-list-modal.component';
 import { IResponse } from 'src/app/models/response.interface';
-import { Component, OnInit } from '@angular/core';
-import { IModelForPagination } from 'src/app/models/modelPagination.interface';
-import { InterviewService } from '../services/interview.service';
-import { NgbModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
-import { ModalComponent } from "src/app/reusable-components/modal/modal.component";
+import { JdModalComponent } from '../jd-modal/jd-modal.component';
+import { Component, OnInit, EventEmitter, Output, Input} from '@angular/core';
+import { AppServicesService } from 'src/app/services/app-services.service';
+import { NgbModal, NgbModalRef, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { ModalComponent } from 'src/app/reusable-components/modal/modal.component';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
@@ -12,25 +14,41 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./interview-list.component.scss']
 })
 export class InterviewListComponent implements OnInit {
-  columns: Array<String> = [];
+  interviewsList: any;
+  jdObject: any;
   pager: any;
-  interviews:any=[];
-  constructor(
-   private interviewService:InterviewService,
-   private modalService: NgbModal
-  ) { }
+
+  constructor(private _service: AppServicesService, private router: Router,
+              private modalService: NgbModal) {}
 
   ngOnInit() {
-    this.searchInterview({ page: 1, character: '' });
+    this.loadInterviews();
   }
-  searchInterview(event: IModelForPagination) {
-      this.interviewService.searchInterview(event.page, event.character).subscribe((res) => {
-      this.interviews = res.payload.data.dataList;
-      this.columns = ['jdObjectId', "date","noOfRounds"];
-      this.pager = res.payload.data.pager;
+
+  loadInterviews() {
+    return this._service.getAllInterviews().subscribe((response: any) => {
+      this.interviewsList = response.payload.data
+      console.log(this.interviewsList);
     });
   }
-  deleteInterview(interview:any) {
+
+  jdUpdateModal(id: string) {
+    const modalRef: NgbModalRef = this.modalService.open(JdModalComponent)
+    modalRef.componentInstance.jdUpdateId = id;
+    modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+      modalRef.close();
+    });
+  }
+
+  sendBulkEmail(jobObjId: string) {
+    const modalRef: NgbModalRef = this.modalService.open(EmailListModalComponent);
+    modalRef.componentInstance.jdObjId = jobObjId;
+    modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+      modalRef.close();
+    });
+  }
+
+  deleteInterview(interviewObjId: string) {
     const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
 
     modalRef.componentInstance.shouldConfirm = true;
@@ -39,15 +57,32 @@ export class InterviewListComponent implements OnInit {
       modalRef.close();
     });
     modalRef.componentInstance.emitPerformRequest.subscribe(() => {
-      this.interviewService.deleteEmployee(interview._id).subscribe((res: IResponse) => {
-        this.searchInterview({ page: this.pager.currentPage, character: '' });
+      this._service.deleteInterview(interviewObjId).subscribe((res: IResponse) => {
+       // this.loadInterviews();
         modalRef.componentInstance.success = res.success;
         modalRef.componentInstance.message = res.payload.message;
-      }, (error: HttpErrorResponse) => {
-        modalRef.componentInstance.success = error.error.success;
-        modalRef.componentInstance.message = error.error.payload.message;
-      });
+        }, (error: HttpErrorResponse) => {
+          modalRef.componentInstance.success = error.error.success;
+          modalRef.componentInstance.message = error.error.payload.message;
     });
+  });
   }
 
+  downloadPdf(jdId) {
+   this.router.navigate(["/jd-pdf", jdId]);
+  }
+
+  datecheck(closingDate) {
+    const currentDate = new Date().toISOString();
+    if (closingDate <= currentDate) {
+      return 1;
+    } else { return 0; }
+  }
+
+  // searchInterview(character?: string, page?: number){
+  //   this._service.search(character, page).subscribe(res=> {
+  //     this.jobsList = res.payload.data.dataList
+  //     this.pager = res.payload.data.pager
+  //   });
+  // }
 }
