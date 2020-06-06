@@ -24,12 +24,14 @@ export class JdListComponent implements OnInit {
               private modalService: NgbModal) {}
 
   ngOnInit() {
-    this.searchJd();
+    this.loadJds();
   }
 
   loadJds() {
     return this._service.getAllJobs().subscribe((response: any) => {
-      return (this.jobsList = response.payload.data);
+      this.jobsList = response.result.payload.data;
+      console.log(this.jobsList);
+
     });
   }
 
@@ -80,11 +82,11 @@ export class JdListComponent implements OnInit {
     } else { return 0; }
   }
 
-  searchJd(character?: string, page?: number){
-    this._service.search(character, page).subscribe(res=> {
-      this.jobsList = res.payload.data.dataList
-      this.pager = res.payload.data.pager
-    });
-  }
+  // searchJd(character?: string, page?: number){
+  //   this._service.search(character, page).subscribe(res=> {
+  //     this.jobsList = res.payload.data.dataList
+  //     this.pager = res.payload.data.pager
+  //   });
+  // }
 
 }

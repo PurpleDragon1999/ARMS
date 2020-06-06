@@ -25,7 +25,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="font-weight-normal mb-2"><b>
-            Job ID: </b> {{ job.jdId }} 
+            Job ID: </b> {{ job.code }} 
             <!--mobile view three dot icon-->
             <div class="w3-dropdown-hover d-lg-none float-right">
               <button class="w3-button">
@@ -76,12 +76,12 @@
             ></i>
           
           </h5>
-           <h4 class="mb-3">{{ job.jdTitle }}</h4>
+           <h4 class="mb-3">{{ job.jobTitle }}</h4>
            <h6 class="font-weight-normal">
            <b> Opening Date : </b>{{ job.openingDate | date }}
            </h6>
             <h6 class="font-weight-normal" [style.visibility]="job.closingDate ? 'visible' : 'hidden'">
-            <b> Date : </b>{{ job.closingDate | date }}
+            <b> Closing Date : </b>{{ job.closingDate | date }}
 
             <label *ngIf="datecheck(job.closingDate)==1"
             class="badge badge-gradient-danger float-right mb-0">CLOSED</label>
