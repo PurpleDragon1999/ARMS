@@ -10,340 +10,108 @@
           (ngSubmit)="createAssessment(form.value)"
           >
           <div class="form-group">
-            <label for="jdId">Jd Id <span class="asterick">*</span></label>
+            <label for="roundId">Round Id <span class="asterick">*</span></label>
             <div class="input-group col-xs-12">
-            <span class="input-group-append btn btn-gradient-danger span">
-              CYGJID
-            </span>
             <input
                 type="text"
-                name="jdId"
-                [ngModel]="assessment.jdId"
+                name="roundId"
+                [ngModel]="assessment.roundId"
                 class="form-control"
-                #jdId="ngModel"
-                id="jdId"
-                [ngClass]="{ 'is-invalid': jdId.dirty && jdId.invalid }"
-                placeholder="Jd ID"
+                #roundId="ngModel"
+                id="roundId"
+                [ngClass]="{ 'is-invalid': roundId.dirty && roundId.invalid }"
+                placeholder="Round ID"
                 maxlength="4"
                 required
               >
-            <div *ngIf="jdId.dirty && jdId.errors?.required"  class="invalid-feedback">
-              <div><i class="mdi mdi-alert-outline"></i>JD Id is required</div>
+            <div *ngIf="roundId.dirty && roundId.errors?.required"  class="invalid-feedback">
+              <div><i class="mdi mdi-alert-outline"></i>Round Id is required</div>
             </div>
           </div>
         </div>
+        <div class="form-group">
+          <label for="applicationId">Application Id <span class="asterick">*</span></label>
+          <div class="input-group col-xs-12">
+          <input
+              type="text"
+              name="applicationId"
+              [ngModel]="assessment.applicationId"
+              class="form-control"
+              #applicationId="ngModel"
+              id="applicationId"
+              [ngClass]="{ 'is-invalid': applicationId.dirty && applicationId.invalid }"
+              placeholder="Application ID"
+              maxlength="4"
+              required
+            >
+          <div *ngIf="applicationId.dirty && applicationId.errors?.required"  class="invalid-feedback">
+            <div><i class="mdi mdi-alert-outline"></i>Application Id is required</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="interviewpanelId">Round Id <span class="asterick">*</span></label>
+        <div class="input-group col-xs-12">
+        <input
+            type="text"
+            name="interviewpanelId"
+            [ngModel]="assessment.interviewpanelId"
+            class="form-control"
+            #interviewpanelId="ngModel"
+            id="interviewpanelId"
+            [ngClass]="{ 'is-invalid': interviewpanelId.dirty && interviewpanelId.invalid }"
+            placeholder="Interview Panel ID"
+            maxlength="4"
+            required
+          >
+        <div *ngIf="interviewpanelId.dirty && interviewpanelId.errors?.required"  class="invalid-feedback">
+          <div><i class="mdi mdi-alert-outline"></i>Interview Panel Id is required</div>
+        </div>
+      </div>
+    </div>
             <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-7">
                 <div class="form-group row">
-                  <label class="col-sm-3 col-form-label"> Full Name<span class="asterick">*</span></label>
-                  <div class="col-sm-9">
-                    <input
-                    type="text"
-                    name="name"
-                    [ngModel]="assessment.name"
-                    class="form-control"
-                    #name="ngModel"
-                    id="name"
-                    [ngClass]="{ 'is-invalid': name.dirty && name.invalid }"
-                    placeholder="Name"
-                    required
-                    />
-                    <div *ngIf="jdId.dirty && jdId.errors?.required"  class="invalid-feedback">
-                      <div><i class="mdi mdi-alert-outline"></i>Name is required</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Applied For<span class="asterick">*</span></label>
+                  <label class="col-sm-3 col-form-label">Round Result<span class="asterick">*</span></label>
                   <div class="col-sm-9">
                     <select 
                     class="form-control" 
-                    name="appliedFor"
-                    [ngModel]="assessment.appliedFor"
-                    #appliedFor="ngModel"
-                    id="appliedFor"
-                    [ngClass]="{ 'is-invalid': appliedFor.dirty && appliedFor.invalid }"
+                    name="roundResult"
+                    [ngModel]="assessment.roundResult"
+                    #roundResult="ngModel"
+                    id="roundResult"
+                    [ngClass]="{ 'is-invalid': roundResult.dirty && roundResult.invalid }"
                     required>
-                      <option>intern</option>
-                      <option>consultant1</option>
-                      <option>consultant2</option>
-                      <option>associate1</option>
-                      <option>associate2</option>
-                      <option>manager1</option>
-                      <option>manager2</option>
+                      <option>Accepted</option>
+                      <option>Rejected</option>
                     </select>
-                    <div *ngIf="appliedFor.dirty && appliedFor.errors?.required"  class="invalid-feedback">
+                    <div *ngIf="roundResult.dirty && roundResult.errors?.required"  class="invalid-feedback">
                       <div><i class="mdi mdi-alert-outline"></i>This field is required.</div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label"
-                    >Date of Interview<span class="asterick">*</span></label
-                  >
-                  <div class="col-sm-9">
-                    <input
-                    type="date"
-                    name="date"
-                    [ngModel]="assessment.date"
-                    class="form-control"
-                    #date="ngModel"
-                    id="date"
-                    [ngClass]="{ 'is-invalid': date.dirty && date.invalid }"
-                    required
-                    />
-                    <div *ngIf="date.dirty && date.errors?.required"  class="invalid-feedback">
-                      <div><i class="mdi mdi-alert-outline"></i>Date is required</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Email Address<span class="asterick">*</span></label>
-                  <div class="col-sm-9">
-                    <input
-                    type="email"
-                    name="email"
-                    [ngModel]="assessment.email"
-                    class="form-control"
-                    #email="ngModel"
-                    id="email"
-                    [ngClass]="{ 'is-invalid': email.dirty && email.invalid }"
-                    placeholder="Email"
-                    pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" 
-                    required
-                    />
-                    <div *ngIf="email.dirty && email.errors?.required"  class="invalid-feedback">
-                      <div><i class="mdi mdi-alert-outline"></i>Email is required</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Panel Name/s<span class="asterick">*</span></label>
-                  <div class="col-sm-9">
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                        <label class="form-check-label" for="defaultCheck1">
-                          Panel member 1
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                        <label class="form-check-label" for="defaultCheck1">
-                          Panel member 2
-                        </label>
-                      </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <hr class="mb-5" />
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group row">
-                  <label class="col-sm-4 col-form-label">Round Number<span class="asterick">*</span></label>
-                  <div class="col-sm-6">
-                    <select
-                    class="form-control" 
-                    name="noOfRounds"
-                    [ngModel]="assessment.noOfRounds"
-                    #noOfRounds="ngModel"
-                    id="noOfRounds"
-                    [ngClass]="{ 'is-invalid': noOfRounds.dirty && noOfRounds.invalid }"
-                    required
-                    >
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                      <option>5</option>
-                    </select>
-                    <div *ngIf="noOfRounds.dirty && noOfRounds.errors?.required"  class="invalid-feedback">
-                      <div><i class="mdi mdi-alert-outline"></i>This field is required.</div>
-                    </div>
-                    </div>
-                  </div>
-                </div>
-              <div class="col-md-6">
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Round Type<span class="asterick">*</span></label>
-                  <div class="col-sm-7">
-                    <select
-                    class="form-control" 
-                    name="roundType"
-                    [ngModel]="assessment.roundType"
-                    #roundType="ngModel"
-                    id="roundType"
-                    [ngClass]="{ 'is-invalid': roundType.dirty && roundType.invalid }"
-                    required
-                    >
-                      <option>written</option>
-                      <option>group-discussion</option>
-                      <option>technical</option>
-                      <option>hr</option>
-                      <option>behavioural</option>
-                    </select>
-                    <div *ngIf="roundType.dirty && roundType.errors?.required"  class="invalid-feedback">
-                      <div><i class="mdi mdi-alert-outline"></i>This field is required.</div>
-                    </div>
-                    </div>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12 eval-table-col">
-                <table class="table table-hover table-bordered">
-                  <thead>
-                    <tr>
-                      <th class="heading">Evaluation Criteria</th>
-                      <th class="heading">Remarks</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td><label for="aptitude">Aptitude<span class="asterick">*</span></label></td>
-                      <td>
-                        <textarea
-                        class="form-control" 
-                        type="text"
-                        name="aptitude"
-                        [ngModel]="assessment.aptitude"
-                        #aptitude="ngModel"
-                        id="aptitude"
-                        [ngClass]="{ 'is-invalid': aptitude.dirty && aptitude.invalid }"
-                        placeholder="Enter your remarks here"
-                        required
-                        rows="1"
-                        ></textarea>
-                        <div *ngIf="aptitude.dirty && aptitude.errors?.required"  class="invalid-feedback">
-                          <div><i class="mdi mdi-alert-outline"></i>This field is required.</div>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><label for="logical">Logical<span class="asterick">*</span></label></td>
-
-                      <td>
-                        <textarea
-                        class="form-control" 
-                        type="text"
-                        name="logical"
-                        [ngModel]="assessment.logical"
-                        #logical="ngModel"
-                        id="logical"
-                        [ngClass]="{ 'is-invalid': logical.dirty && logical.invalid }"
-                        placeholder="Enter your remarks here"
-                        required
-                        rows="1"
-                        ></textarea>
-                        <div *ngIf="logical.dirty && logical.errors?.required"  class="invalid-feedback">
-                          <div><i class="mdi mdi-alert-outline"></i>This field is required.</div>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><label for="communication">Communication<span class="asterick">*</span></label></td>
-                      <td>
-                        <textarea
-                        class="form-control" 
-                        type="text"
-                        name="communication"
-                        [ngModel]="assessment.communication"
-                        #communication="ngModel"
-                        id="communication"
-                        [ngClass]="{ 'is-invalid': communication.dirty && communication.invalid }"
-                        placeholder="Enter your remarks here"
-                        required
-                        rows="1"
-                        ></textarea>
-                        <div *ngIf="communication.dirty && communication.errors?.required"  class="invalid-feedback">
-                          <div><i class="mdi mdi-alert-outline"></i>This field is required.</div>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-            <hr class="my-5" />
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Selected<span class="asterick">*</span></label>
-                  <div class="col-sm-9">
-                    <select style="height: 3.2rem;"
-                    class="form-control" 
-                    name="selection"
-                    [ngModel]="assessment.selection"
-                    #selection="ngModel"
-                    id="selection"
-                    [ngClass]="{ 'is-invalid': selection.dirty && selection.invalid }"
-                    required>
-                      <option>Yes</option>
-                      <option>No</option>
-                    </select>
-                    <div *ngIf="selection.dirty && selection.errors?.required"  class="invalid-feedback">
-                      <div><i class="mdi mdi-alert-outline"></i>This field is required.</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label"
-                    >Recommend Interviewer</label
-                  >
-                  <div class="col-sm-9">
-                    <select style="height: 3.2rem;"
-                    class="form-control" 
-                    name="interviewer"
-                    [ngModel]="assessment.interviewer"
-                    #interviewer="ngModel"
-                    id="interviewer"
-                    [ngClass]="{ 'is-invalid': interviewer.dirty && interviewer.invalid }"
-                    required>
-                      <option>Vishal</option>
-                      <option>Mayank</option>
-                    </select>
-                    <div *ngIf="interviewer.dirty && interviewer.errors?.required"  class="invalid-feedback">
-                      <div><i class="mdi mdi-alert-outline"></i>This field is required.</div>
-                    </div>
-                </div>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12">
-                <div class="form-group row">
-                  <label class="col-sm-2 col-form-label">Feedback<span class="asterick">*</span></label>
-                  <div class="col-sm-9">
+                <div class="form-group">
+                  <label for="roundFeedback">Feedback<span class="asterick">*</span></label>
+                  <div class="input-group col-xs-12">
                     <textarea
                       class="form-control"
-                      name="feedback"
-                      id="feedback"
-                      rows="1"
+                      name="roundFeedback"
+                      id="roundFeedback"
+                      rows="2"
                       placeholder="Enter your feedback here...."
-                      [ngModel]="assessment.feedback"
-                      #feedback="ngModel"
-                      [ngClass]="{ 'is-invalid': feedback.dirty && feedback.invalid }"
+                      [ngModel]="assessment.roundFeedback"
+                      #roundFeedback="ngModel"
+                      [ngClass]="{ 'is-invalid': roundFeedback.dirty && roundFeedback.invalid }"
                       required>
                     ></textarea>
-                    <div *ngIf="feedback.dirty && feedback.errors?.required"  class="invalid-feedback">
+                    <div *ngIf="roundFeedback.dirty && roundFeedback.errors?.required"  class="invalid-feedback">
                       <div><i class="mdi mdi-alert-outline"></i>Feedback is required.</div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
+           
             <div class="d-flex flex-row-reverse">
               <button type="submit"
               class="btn btn-gradient-danger mr-2"
