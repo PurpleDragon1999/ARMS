@@ -41,7 +41,11 @@ namespace Arms.Api.Startup
                 .AddCustomSwagger(Configuration)
                 .AddArmsApplicationServices(Configuration);
 
+<<<<<<< HEAD
             services.AddCors();                      //mine
+=======
+                services.AddCors();
+>>>>>>> 2be29f0c4f54ca4f7629f009fdac4bbae995f4b2
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,8 +66,12 @@ namespace Arms.Api.Startup
                         c.OAuthAppName("ARMS Swagger UI");
                     });
             }
+<<<<<<< HEAD
 
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());  //mine
+=======
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+>>>>>>> 2be29f0c4f54ca4f7629f009fdac4bbae995f4b2
             app.UseMvcWithDefaultRoute();
         }
 
