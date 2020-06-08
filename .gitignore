@@ -12,6 +12,7 @@ yarn.lock
 jobDescriptions
 .idea
 
+
 *.swp
 *.*~
 project.lock.json
@@ -37,7 +38,7 @@ x86/
 build/
 bld/
 [Bb]in/
-[Oo]bj/Debug
+[Oo]bj/
 *.nuget.*
 msbuild.log
 msbuild.err
@@ -54,3 +55,5 @@ Building Blocks/
 *.cache
 *.g.props
 *.g.targets
+
+appsettings.json
