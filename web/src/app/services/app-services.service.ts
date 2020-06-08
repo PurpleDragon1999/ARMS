@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 import { ICreate} from '../models/create.interface';
 
 const USER_DOMAIN = 'http://localhost:3000';
-
+const DOTNET_DOMAIN='http://localhost:40802';
 @Injectable({
   providedIn: 'root'
 })
@@ -19,7 +19,7 @@ export class AppServicesService {
   headers: HttpHeaders = new HttpHeaders({
     'Content-Type': 'application/json',
        // Authorization: localStorage.getItem("Authorization")
-    'Authorization': 'Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjI2RTcyQjI1MTM1NUJGODFDOTA5QTVEQ0UzQTNENUIwNEI5OTMxMDEiLCJ0eXAiOiJhdCtqd3QiLCJ4NXQiOiJKdWNySlJOVnY0SEpDYVhjNDZQVnNFdVpNUUUifQ.eyJuYmYiOjE1OTE0MzE1MzYsImV4cCI6MTU5MTQ2MDMzNiwiaXNzIjoiaHR0cHM6Ly9ocm1zLWlkZW50aXR5LWRldi5henVyZXdlYnNpdGVzLm5ldCIsImF1ZCI6WyJhY2NvdW50IiwibG1zIl0sImNsaWVudF9pZCI6ImhybXNtb2JpbGUiLCJzdWIiOiJhMzhkZjNmYi0wOTZlLTQ1OGMtODljMS0xMmNkNjM4Y2Q5NjYiLCJhdXRoX3RpbWUiOjE1OTE0MzE1MzYsImlkcCI6ImxvY2FsIiwibmFtZSI6IlNvbmFsaSIsImxhc3RfbmFtZSI6IkNoYXdsYSIsImVtYWlsIjoic29uYWxpLmNoYXdsYUBjeWdycC5jb20iLCJzY29wZSI6WyJvcGVuaWQiLCJwcm9maWxlIiwiYWNjb3VudCIsImxtcyIsIm9mZmxpbmVfYWNjZXNzIl0sImFtciI6WyJwYXNzd29yZCJdfQ.eu5JPSWerzOJ0WZgLd98lC1SdndgMRo2Q8s7_ZOqG06EmgmuBNO6bRF9eGgP66hvNzFNVuDOM4XXAMd4NzhUEVCgvXRf3ZpKA7CuvdSDCdcOIIT6RVOhlIggYqLOQ9Biyn8lflHF1U0hHi4pCQcEEHiik7wfeOy10nlvCm5mLtPjLu_nWp7FF-wSDS6Vk7ZD2wl08zbl7pJQuaduSLdB-S06ce8BokvUYN1vYukqUfZjEMrK-5exzI68zhn1CNNBKl9r8SrbgrPJFfpeDwXiFMhFKmP6FT6mpF81c_a69k3p6b-T0RDyxVIYg4Vp-t6tMSDakryOflIggQnRzLUPi1hbgKFfkENMPWGUwd_0HbhzbpPJkEoR1ZkM2mUZVQEClnPH-sb5D3tCtoIMpdgFf9Q6ha2Y7paTFtcJ2KIvaokMnP1SiwMr_WpB0S6jlLDL5zftgrgKmhFdZt_mlT6TYT7dCxBCCQBGr7-da7ONGC2PHPt9PQsNkI6sgHTsE0Gu3UK28zGs89X_NTeXndVThGK9iqXlq4uHWNzFuPgL3xCjmddRZFoQqPu66J_gpKz9OaqtBLkIaFfX8Ors3TMMb0eLXEJseUxVjRf44L2fJTg9LIMYCEWhBY9JKnk-XtQ_t9BPy47rOhK6bDQNf12Z0Zw5l2JgKoDzuJB-1rnDwZY'
+    'Authorization': 'Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjI2RTcyQjI1MTM1NUJGODFDOTA5QTVEQ0UzQTNENUIwNEI5OTMxMDEiLCJ0eXAiOiJhdCtqd3QiLCJ4NXQiOiJKdWNySlJOVnY0SEpDYVhjNDZQVnNFdVpNUUUifQ.eyJuYmYiOjE1OTE2MDA2NzksImV4cCI6MTU5MTYyOTQ3OSwiaXNzIjoiaHR0cHM6Ly9ocm1zLWlkZW50aXR5LWRldi5henVyZXdlYnNpdGVzLm5ldCIsImF1ZCI6WyJhY2NvdW50IiwibG1zIl0sImNsaWVudF9pZCI6ImhybXNtb2JpbGUiLCJzdWIiOiJhMzhkZjNmYi0wOTZlLTQ1OGMtODljMS0xMmNkNjM4Y2Q5NjYiLCJhdXRoX3RpbWUiOjE1OTE2MDA2NzksImlkcCI6ImxvY2FsIiwibmFtZSI6IlNvbmFsaSIsImxhc3RfbmFtZSI6IkNoYXdsYSIsImVtYWlsIjoic29uYWxpLmNoYXdsYUBjeWdycC5jb20iLCJzY29wZSI6WyJvcGVuaWQiLCJwcm9maWxlIiwiYWNjb3VudCIsImxtcyIsIm9mZmxpbmVfYWNjZXNzIl0sImFtciI6WyJwYXNzd29yZCJdfQ.JvNTLEkdsV0dHtymoTQUvMflHul5yyT9-_nZLvFd6KaPiiRqCMBPua96M8xgHQKsud79pMgQ5t8-jPnZF040ztjg5g0RxykiPkE6EIogLRpZwStcJul1JqRfnIRVa9b82LyMpyseHmwnJCzf3bzO56HsIh667bHHtbCieJUg8gOkN2fYTukwvc9dKIYzy6ysnC8-sGSPoJkCFNNt8SeBHSllGFN2tUDWYwvRbniHSoVsA24EgeKBvnSIpvE6KbBWx-ff-_qP5HhDABDpA3V28AIq3XrG9rkZUpQ70rHmELy2L9a8xOBWJCHZG4dS6RUa8ydNDWSDwczJFxkU71PwqZY73Up7rj-RQdd490lKzXgsxiIrHUxHrFYe81s2doznoQ-lb8Mm_7Xz8O6XfDdRZjNWzJq69djOcRr1kCvzxrdDfYmw5vE0gilqO5MPKoMivhf4-kyu8xr10ZkD6aZyZ9eMEkjXpEcd_sZYDgHuEFlOnUq9HleJt2KtmzIju8DAspc-5UD6FOIMR772Lan0Px69PDilth4aVb4Ds4wSPZcWPXycatkvF5Rzb8LKFIvp4CbpVFZ3bWw6_qykmL9O0Ce3ctoTNnzg8WlUbgIFuaBEuQrccWg2L0bCgOxvkp_YOCp5EPKd6CjsQcc3f0smhFtCA-PcldkvCLdfw_mOJ5w'
   });
   
   createHeader: HttpHeaders= new HttpHeaders({
@@ -62,12 +62,18 @@ export class AppServicesService {
   createAssessment(user: IAssessment): Observable<HttpResponse<any>>{
     return this.http.post<any>(`${USER_DOMAIN}/api/assessment`, user, { ...this.httpOptions, observe: 'response' });
   }
-  // getAllJobs(): Observable<HttpResponse<any>>{
-  //     return this.http.get<any>(`${USER_DOMAIN}/api/jobDescription`, this.options);
-  // }
   getAllJobs(): Observable<any>{
-    return this.http.get<any>("http://localhost:40802/api/jobDescription", this.httpOptions);
-}
+    return this.http.get<any>(`${DOTNET_DOMAIN}/api/jobDescription`, this.httpOptions);
+ }
+ getAllEligibilityCriterias(): Observable<HttpResponse<any>>{
+  return this.http.get<any>(`${DOTNET_DOMAIN}/api/eligibilityCriteria`, this.httpOptions);
+ }
+ getAllEmploymentTypes(): Observable<HttpResponse<any>>{
+  return this.http.get<any>(`${DOTNET_DOMAIN}/api/employmentType`, this.httpOptions);
+ }  
+ getAllLocations():Observable<HttpResponse<any>>{
+  return this.http.get<any>(`${DOTNET_DOMAIN}/api/location`, this.httpOptions);
+ }
   getJobsById(Id): Observable<HttpResponse<any>>{
     return this.http.get<any>(`${USER_DOMAIN}/api/jobDescription/${Id}`, this.options);
   }
@@ -76,17 +82,18 @@ export class AppServicesService {
     return this.http.put<any>(`${USER_DOMAIN}/api/jobDescription/${jobId}`,jobFormObject, this.options);
   }
 
-
-  deleteJd(jobObjId): Observable<IResponse>{
-    return this.http.delete<any>(`${USER_DOMAIN}/api/jobDescription/${jobObjId}`, this.options);
+  deleteJd(id): Observable<IResponse>{
+    return this.http.delete<any>(`${DOTNET_DOMAIN}/api/jobDescription/${id}`, this.httpOptions);
   }
 
+  
   jdFormData(jdFormObject): Observable<any>{
-    return this.http.post<any>(`${USER_DOMAIN}/api/jobDescription`, jdFormObject, { ...this.options, observe: 'response' });
+    return this.http.post<any>(`${DOTNET_DOMAIN}/api/jobDescription`, jdFormObject, { ...this.httpOptions, observe: 'response' });
   }
 
-  getJdData(jdId):Observable<any>{
-    return this.http.get<any>(`${USER_DOMAIN}/api/jobDescription/${jdId}`)
+ 
+  getJdData(id):Observable<any>{
+    return this.http.get<any>(`${DOTNET_DOMAIN}/api/jobDescription/${id}`,this.httpOptions)
   }
 
   jdList(): Observable<any>{
