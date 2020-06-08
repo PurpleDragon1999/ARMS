@@ -22,21 +22,21 @@ namespace Arms.Api.Controllers
             _context = armsDbContext;
         }
 
-        public string saveInterviewer(List<InterviewerModel> interviewerModel)
+        public string saveInterviewer(InterviewerModels interviewerModels)
         {
             try
             {
-                for (int model = 0; model < interviewerModel.Count; model++)
+                for (int model = 0; model < interviewerModels.interviewerModels.Count; model++)
                 {
-                    for (int emp = 0; emp < interviewerModel[model].EmployeesId.Count; emp++)
+                    for (int emp = 0; emp < interviewerModels.interviewerModels[model].EmployeesId.Count; emp++)
                     {
-                        Interviewer interviewer = _context.Interviewer.SingleOrDefault(i => i.InterviewPanelId == interviewerModel[model].PanelId && i.EmployeeId == interviewerModel[model].EmployeesId[emp]);
+                        Interviewer interviewer = _context.Interviewer.SingleOrDefault(i => i.InterviewPanelId == interviewerModels.interviewerModels[model].PanelId && i.EmployeeId == interviewerModels.interviewerModels[model].EmployeesId[emp]);
                         if(interviewer == null)
                         {
                             Interviewer data = new Interviewer
                             {
-                                EmployeeId = interviewerModel[model].EmployeesId[emp],
-                                InterviewPanelId = interviewerModel[model].PanelId
+                                EmployeeId = interviewerModels.interviewerModels[model].EmployeesId[emp],
+                                InterviewPanelId = interviewerModels.interviewerModels[model].PanelId
                             };
                             _context.Interviewer.Add(data);
                         }
@@ -53,11 +53,8 @@ namespace Arms.Api.Controllers
             
         }
 
-        //There are two approaches, 
-        //One is to delete the interviewer first, then send a request to create new interviewer
-        //Other, is to remove the interviewer only from frontend, then when changed, it will be updated in the DB
         [HttpPut]
-        public IActionResult updateInterviewer([FromBody]List<InterviewerModel> interviewerModel)
+        public IActionResult updateInterviewer([FromBody]InterviewerModels interviewerModels)
         {
             Response response = new Response()
             {
@@ -65,7 +62,7 @@ namespace Arms.Api.Controllers
             };
             try
             {
-                string result = saveInterviewer(interviewerModel);
+                string result = saveInterviewer(interviewerModels);
                 if(result == "Success")
                 {
                     response.success = "true";

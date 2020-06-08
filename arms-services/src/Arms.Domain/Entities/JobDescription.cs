@@ -1,36 +1,36 @@
-using System;
-using System.Collections.Generic;
 using Hrms.Core.Domains.Entities;
 using Microsoft.AspNetCore.Http;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Text;
 
 namespace Arms.Domain.Entities
 {
-    public partial class JobDescription
+    public class JobDescription : Entity
     {
-        public JobDescription()
-        {
-            Application = new HashSet<Application>();
-            Interview = new HashSet<Interview>();
-            LocationNavigation = new HashSet<Location>();
-        }
-
         public int Id { get; set; }
-        public string Code { get; set; }
-        public string JobTitle { get; set; }
-        public DateTime OpeningDate { get; set; }
-        public DateTime ClosingDate { get; set; }
-        public string Description { get; set; }
-        public string Location { get; set; }
-        public long? Salary { get; set; }
-        public int? Vacancies { get; set; }
-        public byte[] PdfBlobData { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public DateTime ModifiedAt { get; set; }
-        public string CreatedBy { get; set; }
-        public string ModifiedBy { get; set; }
+        public string code { get; set; }
+        public int eligibilityCriteriaId { get; set; }
+        public EligibilityCriteria eligibilityCriteria { get; set; }
+        public int locationId { get; set; }
+        public Loc loc { get; set; }
+        public int employmentTypeId { get; set; }
+        public EmploymentType employmentType { get; set; }
 
-        public ICollection<Application> Application { get; set; }
-        public ICollection<Interview> Interview { get; set; }
-        public ICollection<Location> LocationNavigation { get; set; }
+        public DateTime openingDate { get; set; }
+        public DateTime closingDate { get; set; }
+        public string description { get; set; }
+        public long? salary { get; set; }
+        public string jobTitle { get; set; }
+        public int? vacancies { get; set; }
+        public DateTime createdAt { get; set; }
+        public DateTime modifiedAt { get; set; }
+        public Byte[] pdfBlobData { get; set; }
+        public string createdBy { get; set; }
+        public string modifiedBy { get; set; }
+
+
     }
 }

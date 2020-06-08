@@ -4,16 +4,19 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Arms.Infrastructure
 {
-    public class ArmsDbContext: DbContext
+    public  class ArmsDbContext: DbContext
     {
+      
+
         public ArmsDbContext(DbContextOptions<ArmsDbContext> options)
             : base(options)
         {
         }
-
+        public virtual DbSet<JobDescription> JobDescription { get; set; }
+        public virtual DbSet<EmploymentType> employmentType  { get; set; }
+        public virtual DbSet<EligibilityCriteria> eligibilityCriteria { get; set; }
         public virtual DbSet<Employee> Employee { get; set; }
         public virtual DbSet<EmployeeDetail> EmployeeDetail { get; set; }
-        public virtual DbSet<JobDescription> JobDescription { get; set; }
         public virtual DbSet<Application> Application { get; set; }
         public virtual DbSet<ApplicationStatusType> ApplicationStatusType { get; set; }
         public virtual DbSet<Assessment> Assessment { get; set; }
@@ -32,9 +35,13 @@ namespace Arms.Infrastructure
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            
             modelBuilder.ApplyConfiguration(new EmployeeEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new EmployeeDetailEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new JobDescriptionEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new LocEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new EmploymentTypeEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new EligibilityCriteriaEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new ApplicationEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new ApplicationStatusTypeEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new AssessmentEntityTypeConfiguration());
@@ -46,10 +53,10 @@ namespace Arms.Infrastructure
             modelBuilder.ApplyConfiguration(new InterviewEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new InterviewerEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new InterviewPanelEntityTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new LocationEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new ResumeEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new RoundEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new RoundTypeEntityTypeConfiguration());
+
         }
     }
 }

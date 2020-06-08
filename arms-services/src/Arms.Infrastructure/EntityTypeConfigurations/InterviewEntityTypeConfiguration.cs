@@ -55,7 +55,7 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .IsUnicode(false);
 
             builder.HasOne(d => d.Job)
-                .WithMany(p => p.Interview)
+                .WithMany()
                 .HasForeignKey(d => d.JobId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Jobdescription");

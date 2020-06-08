@@ -30,7 +30,7 @@ namespace Arms.Api.Controllers
             {
                 payload = new Payload()
             };
-            List<InterviewerModel> interviewerModel = new List<InterviewerModel>();
+            InterviewerModels interviewerModel = new InterviewerModels();
             try
             {
                 for (int r = 0; r < rounds.rounds.Count; r++)
@@ -51,7 +51,7 @@ namespace Arms.Api.Controllers
                             EmployeesId = rounds.rounds[r].Panel[p].employeesId,
                             PanelId = newPanelId
                         };
-                        interviewerModel.Add(temp);
+                        interviewerModel.interviewerModels.Add(temp);
                     }
                 }
                 var result = _interviewerController.saveInterviewer(interviewerModel);

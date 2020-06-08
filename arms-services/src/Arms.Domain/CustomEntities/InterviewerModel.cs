@@ -10,6 +10,11 @@ namespace Arms.Domain.CustomEntities
         public int PanelId { get; set; }
     }
 
+    public partial class InterviewerModels
+    {
+        public List<InterviewerModel> interviewerModels { get; set; }
+    }
+
     public partial class InterviewerModelData
     {
         public int EmployeeId { get; set; }

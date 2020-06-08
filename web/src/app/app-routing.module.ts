@@ -6,7 +6,7 @@ import { InterviewListComponent } from './interview-list/interview-list.componen
 import { ScheduleInterviewComponent } from './schedule-interview/schedule-interview.component';
 import { CandidateFormComponent } from './candidate-form/candidate-form.component';
 import { ProgressTrackerComponent } from './progress-tracker/progress-tracker.component';
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EmployeeComponent } from './employee/containers/employee/employee.component';
 import { HrComponent } from './hr/hr.component';
@@ -107,6 +107,11 @@ const routes: Routes = [
       { path: 'applied', component: CandidateFormComponent}
     ],
   },
+  {
+    path: 'panel', component: AppNavBarComponent, children: [
+      { path: "select", component: ScheduleInterviewComponent }
+    ]
+  }
 
 ];
 
