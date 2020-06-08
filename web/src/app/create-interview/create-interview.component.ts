@@ -23,8 +23,6 @@ export class CreateInterviewComponent implements OnInit {
   formType:string
   ngOnInit() {
     this.formType="create"
-    console.log(this.formType);
-    console.log(this.interviewId);
     this.loadInterview(this.interviewId);
     
   }
@@ -33,12 +31,11 @@ export class CreateInterviewComponent implements OnInit {
   loadInterview(interviewId){
     return this. AppServicesService.getInterviewById(interviewId).subscribe((response: any) => {
       this.interview = response.payload.data
-      console.log(this.interview);
+      
       if(this.interview.length!=0)
       this.formType="update"
-      console.log(this.formType);
       this.dateNew=this.interview[0].date.substring(0,10);
-      console.log("date format",this.dateNew);
+    
      });
   }
   createInterview(interview: ICreate) {
