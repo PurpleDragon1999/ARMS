@@ -88,7 +88,7 @@ namespace Arms.Api.Startup
             {
                 options.AddPolicy("CorsPolicy",
                     builder => builder
-                     //   .SetIsOriginAllowed((host) => true)
+                        .SetIsOriginAllowed((host) => true)
                         .AllowAnyMethod()
                         .AllowAnyHeader()
                         .AllowCredentials());
