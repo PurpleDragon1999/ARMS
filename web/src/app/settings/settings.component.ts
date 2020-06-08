@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup,FormsModule,ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-settings',
