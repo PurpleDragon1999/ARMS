@@ -54,7 +54,7 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .HasConstraintName("FK_CR_ArmsAssessment");
 
             builder.HasOne(d => d.CriteriaType)
-                .WithMany(p => p.Criteria)
+                .WithMany()
                 .HasForeignKey(d => d.CriteriaTypeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_CR_ArmsCriteriaType");

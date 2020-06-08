@@ -14,7 +14,6 @@ namespace Arms.Domain.Entities
         public string ModifiedBy { get; set; }
         public int CriteriaTypeId { get; set; }
         public int AssessmentId { get; set; }
-
         public Assessment Assessment { get; set; }
         public CriteriaType CriteriaType { get; set; }
     }

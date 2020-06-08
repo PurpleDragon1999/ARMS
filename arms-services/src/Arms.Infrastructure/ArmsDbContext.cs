@@ -1,7 +1,5 @@
-<<<<<<< HEAD
 
-=======
->>>>>>> 2be29f0c4f54ca4f7629f009fdac4bbae995f4b2
+
 using Arms.Domain.Entities;
 using Arms.Infrastructure.EntityTypeConfigurations;
 using Microsoft.EntityFrameworkCore;
@@ -16,7 +14,7 @@ namespace Arms.Infrastructure
             : base(options)
         {
         }
-<<<<<<< HEAD
+
         public virtual DbSet<Candidate> Candidate { get; set; }
         public virtual DbSet<IdProofType> IdProofType { get; set; }
         public virtual DbSet<Assessment> Assessment { get; set; }
@@ -24,48 +22,41 @@ namespace Arms.Infrastructure
         public virtual DbSet<Resume> Resume { get; set; }
         public virtual DbSet<ApplicationStatusType> ApplicationStatusType { get; set; }
         
-=======
+
         public virtual DbSet<JobDescription> JobDescription { get; set; }
         public virtual DbSet<EmploymentType> employmentType  { get; set; }
         public virtual DbSet<EligibilityCriteria>eligibilityCriteria { get; set; }
         public virtual DbSet<CriteriaType> CriteriaType { get; set; }
         public virtual DbSet<Loc> Loc { get; set; }
-
->>>>>>> 2be29f0c4f54ca4f7629f009fdac4bbae995f4b2
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             
             modelBuilder.ApplyConfiguration(new EmployeeEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new EmployeeDetailEntityTypeConfiguration());
-<<<<<<< HEAD
             modelBuilder.ApplyConfiguration(new CandidateEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new IdProofTypeEntityTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new AssessmentEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new ApplicationEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new ResumeEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new ApplicationStatusTypeEntityTypeConfiguration());
             
-=======
             modelBuilder.ApplyConfiguration(new JobDescriptionEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new LocEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new EmploymentTypeEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new EligibilityCriteriaEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new RoundTypeEntityTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new ApplicationEntityTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new ApplicationStatusTypeEntityTypeConfiguration());
+            
+            
             modelBuilder.ApplyConfiguration(new AssessmentEntityTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new CandidateEntityTypeConfiguration());
+            
             modelBuilder.ApplyConfiguration(new CriteriaEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new CriteriaTypeEntityTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new IdProofTypeEntityTypeConfiguration());
+           
             modelBuilder.ApplyConfiguration(new ImagesEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new InterviewEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new InterviewerEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new InterviewPanelEntityTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new ResumeEntityTypeConfiguration());
+            
             modelBuilder.ApplyConfiguration(new RoundEntityTypeConfiguration());
->>>>>>> 2be29f0c4f54ca4f7629f009fdac4bbae995f4b2
 
         }
     }

@@ -16,7 +16,6 @@ namespace Arms.Domain.Entities
         public DateTime ModifiedAt { get; set; }
         public string CreatedBy { get; set; }
         public string ModifiedBy { get; set; }
-
         public JobDescription Job { get; set; }
 
     }

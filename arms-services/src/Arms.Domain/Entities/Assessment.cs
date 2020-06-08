@@ -1,16 +1,12 @@
-﻿using System;
+﻿using Hrms.Core.Domains.Entities;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Arms.Domain.Entities
 {
-    public partial class Assessment
+    public partial class Assessment : Entity
     {
-        public Assessment()
-        {
-            Criteria = new HashSet<Criteria>();
-        }
-
         public int Id { get; set; }
         public string Code { get; set; }
         public string Feedback { get; set; }
@@ -29,8 +25,5 @@ namespace Arms.Domain.Entities
         public ICollection<Criteria> Criteria { get; set; }
 
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 2be29f0c4f54ca4f7629f009fdac4bbae995f4b2
+
