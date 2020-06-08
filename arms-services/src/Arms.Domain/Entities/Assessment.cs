@@ -29,4 +29,8 @@ namespace Arms.Domain.Entities
         public ICollection<Criteria> Criteria { get; set; }
 
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 2be29f0c4f54ca4f7629f009fdac4bbae995f4b2

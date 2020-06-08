@@ -23,7 +23,7 @@ export class EmployeeUploadComponent implements OnInit {
   public uploader: FileUploader = new FileUploader({
     url: URL,
     itemAlias: "csvUpload",
-    allowedMimeType: ["text/csv", "application/vnd.ms-excel"],
+    allowedMimeType: ["text/xlsx", "application/vnd.ms-excel"],
   });
 
   ngOnInit() {
