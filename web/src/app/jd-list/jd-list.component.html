@@ -36,7 +36,7 @@
               <div class="w3-dropdown-content w3-bar-block">
                 <a  class="w3-bar-item w3-button">
                   <i class="mdi mdi-pencil float-right"
-                  (click)="jdUpdateModal(job.jdId)"
+                  (click)="jdUpdateModal(job.id)"
                   ></i>
                 </a>
                 <a  class="w3-bar-item w3-button">
@@ -47,7 +47,7 @@
                 <a *ngIf="datecheck(job.closingDate)==0" 
                   class="w3-bar-item w3-button">
                   <i class="mdi mdi-send float-right"
-                  (click)="sendBulkEmail(job.jdId)"
+                  (click)="sendBulkEmail(job.id)"
                   ></i>
                 </a>
                 <a  class="w3-bar-item w3-button">
@@ -72,7 +72,7 @@
               (click)="downloadPdf(job.id)"
             ></i>
             <i class="mdi mdi-pencil float-right d-none d-lg-block"
-            (click)="jdUpdateModal(job.jdId)"
+            (click)="jdUpdateModal(job.id)"
             ></i>
           
           </h5>

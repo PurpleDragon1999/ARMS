@@ -78,10 +78,12 @@ export class AppServicesService {
     return this.http.get<any>(`${USER_DOMAIN}/api/jobDescription/${Id}`, this.options);
   }
   
+  // updateJobInfo(jobFormObject,jobId): Observable<HttpResponse<any>>{
+  //   return this.http.put<any>(`${USER_DOMAIN}/api/jobDescription/${jobId}`,jobFormObject, this.options);
+  // }
   updateJobInfo(jobFormObject,jobId): Observable<HttpResponse<any>>{
-    return this.http.put<any>(`${USER_DOMAIN}/api/jobDescription/${jobId}`,jobFormObject, this.options);
-  }
-
+       return this.http.put<any>(`${DOTNET_DOMAIN}/api/jobDescription/${jobId}`,jobFormObject, this.httpOptions);
+     }
   deleteJd(id): Observable<IResponse>{
     return this.http.delete<any>(`${DOTNET_DOMAIN}/api/jobDescription/${id}`, this.httpOptions);
   }

@@ -98,6 +98,11 @@ export class JdPdfComponent implements OnInit {
                        canvas_image_width*0.79, canvas_image_height*0.90);
         }
         pdf.save("jobdescription"+this.jdObject.id+'.pdf');
+        
+      //  this.appService.updateJobInfo({pdfblobData:blobPdf},Number(this.jdObject.id)).subscribe((res: any) => {
+      //          console.log(res.result.payload.data);
+
+      //     });
       });
    setTimeout(() => {
       this.navigation();
