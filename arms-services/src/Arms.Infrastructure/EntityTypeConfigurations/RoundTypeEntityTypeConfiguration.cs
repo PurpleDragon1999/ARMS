@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 namespace Arms.Infrastructure.EntityTypeConfigurations
 {
     internal class RoundTypeEntityTypeConfiguration : IEntityTypeConfiguration<RoundType>
+
     {
         public void Configure(EntityTypeBuilder<RoundType> builder)
         {
@@ -39,4 +40,6 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .IsUnicode(false);
         }
     }
+
 }
+

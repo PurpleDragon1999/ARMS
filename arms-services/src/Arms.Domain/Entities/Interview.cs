@@ -19,4 +19,5 @@ namespace Arms.Domain.Entities
         public string ModifiedBy { get; set; }
         public JobDescription JobDescription { get; set; }
    }
+
 }

@@ -39,9 +39,11 @@ AS
     WHERE id IN (SELECT DISTINCT id FROM Inserted)
 GO
 --insert command for jobDescription
+
 Insert into ARMS.JobDescription([jobTitle],[openingDate],[closingDate],[description],[locationId],[eligibilityCriteriaId],[employmentTypeId],pdfBlobData)
 SELECT 'Software Developer','2020-09-02','2020-09-09','require a logically strong person','1','1','1', BulkColumn
  FROM OPENROWSET(Bulk 'C:\Users\deepanshu.balani\Pictures\anal2.jpg', SINGLE_BLOB) AS BLOB
+
  
  
 

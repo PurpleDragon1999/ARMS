@@ -12,6 +12,7 @@ yarn.lock
 jobDescriptions
 .idea
 
+
 *.swp
 *.*~
 project.lock.json
@@ -55,4 +56,9 @@ Building Blocks/
 *.g.props
 *.g.targets
 
-*/**/Desktop.ini
+
+appsettings.json
+
+[Dd]esktop.ini
+debug.log
+
