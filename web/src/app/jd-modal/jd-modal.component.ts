@@ -51,8 +51,8 @@ export class JdModalComponent implements OnInit {
   jobTypeOptions: String;
   jobListingForm: FormGroup;
   submitted = false;
-  jdFormObject: jobDescription;
-  data: jobDescription;
+  jdFormObject: any;
+  data: any;
 
   ngOnInit() {
     this.loadJobData(Number(this.jdUpdateId));
