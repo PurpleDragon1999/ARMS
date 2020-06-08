@@ -8,22 +8,7 @@
        <div class="card-body">
          <br>
          <form class="forms-sample" [formGroup]="jobListingForm" (ngSubmit)="onSubmit()" novalidate>
-           <div class="form-group">
-             <label for="jobId"><b>Job ID</b></label>
-             <div class="input-group col-xs-12">
-               <span class="input-group-append btn btn-gradient-danger span">
-                 CYGJID
-               </span>
-               <input type="text" class="form-control" id="jobId" #jobId placeholder="Job ID" maxlength="4"
-                 (input)="jobId.value=$event.target.value.toUpperCase()" formControlName="jobId"
-                 [ngClass]="{ 'is-invalid': submitted && formControls.jobId.errors }" />
-               <div *ngIf="submitted && formControls.jobId.errors" class="invalid-feedback">
-                 <div *ngIf="formControls.jobId.errors.required"><i class="mdi mdi-alert-outline"></i> Job ID is
-                   required</div>
-               </div>
-             </div>
-           </div>
-           <div class="form-group">
+         <div class="form-group">
              <label for="jobTitle"><b>Job Title </b></label>
              <input type="text" class="form-control" placeholder="Job Title" #jobTitle maxlength="40"
                formControlName="jobTitle" [ngClass]="{ 'is-invalid': submitted && formControls.jobTitle.errors }" />
@@ -78,11 +63,10 @@
                (change)="selectChangeHandlerEligibilityCriteria($event)" formControlName="eligibilityCriteria"
                [ngClass]="{ 'is-invalid': submitted && formControls.eligibilityCriteria.errors }">
                <option class="select-css">{{eligibilityCriteriaOptions}}</option>
-               <option class="select-css"value="High School">High School</option>
-               <option class="select-css"value="Bachelor's">Bachelor's</option>
-               <option class="select-css"value="Master's">Master's</option>
-               <option class="select-css"value="Doctoral">Doctoral</option>
-             </select>
+               <option class="select-css"*ngFor="let el of eligibilityCriterias" [ngValue]="el.id">
+                {{ el.eligibilityCriteriaName }}
+              </option>
+            </select>
              <div *ngIf="submitted && formControls.eligibilityCriteria.errors" class="invalid-feedback">
                <div *ngIf="formControls.eligibilityCriteria.errors.required"><i class="mdi mdi-alert-outline"></i>
                  Eligibility criteria is required</div>
@@ -90,15 +74,15 @@
            </div>
 
            <div class="form-group">
-             <label for="jobType"><b>Job Type </b></label>
+             <label for="jobType"><b>Employment Type </b></label>
              <select class="form-control form-control-lg" placeholder="Criteria" #jobType
                (change)="selectChangeHandlerJobType($event)" formControlName="jobType"
                [ngClass]="{ 'is-invalid': submitted && formControls.jobType.errors }">
                <option class="select-css">{{jobTypeOptions}}</option>
-               <option class="select-css"value="full-time">Full-time</option>
-               <option class="select-css"value="part-time">Part-time</option>
-               <option class="select-css"value="intern">Intern</option>
-             </select>
+               <option class="select-css"*ngFor="let employmentType of employmentTypes" [ngValue]="employmentType.id">
+                {{ employmentType.employmentTypeName }}
+              </option>
+            </select>
              <div *ngIf="submitted && formControls.jobType.errors" class="invalid-feedback">
                <div *ngIf="formControls.jobType.errors.required"><i class="mdi mdi-alert-outline"></i> Job Type is
                  required</div>
@@ -107,13 +91,14 @@
 
            <div class="form-group">
              <label for="location"><b>Location </b></label>
-           
+              
              <select class="form-control form-control-lg" placeholder="Criteria" #location
                (change)="selectChangeHandlerLocation($event)" formControlName="location"
                [ngClass]="{ 'is-invalid': submitted && formControls.location.errors }">
                <option class="select-css">{{locationOptions}}</option>
-               <option class="select-css"> Dallas, TX - USA</option>
-               <option class="select-css"> Noida, UP - India</option>
+               <option class="select-css"*ngFor="let location of locations" [ngValue]="location.id">
+                {{ location.locationName }}
+              </option>
              </select>
             
              <div *ngIf="submitted && formControls.location.errors" class="invalid-feedback">

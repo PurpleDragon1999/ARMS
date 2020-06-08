@@ -41,7 +41,7 @@
                 </a>
                 <a  class="w3-bar-item w3-button">
                   <i class="mdi mdi-download float-right"
-                  (click)="downloadPdf(job.jdId)"
+                  (click)="downloadPdf(job.id)"
                   ></i>
                 </a>
                 <a *ngIf="datecheck(job.closingDate)==0" 
@@ -52,7 +52,7 @@
                 </a>
                 <a  class="w3-bar-item w3-button">
                   <i class="mdi mdi-delete float-right"
-                  (click)="deleteJd(job._id)"
+                  (click)="deleteJd(job.id)"
                   ></i>
                 </a>
                 
@@ -61,7 +61,7 @@
             <!--large screens-->
             <i
               class="mdi mdi-delete float-right d-none d-lg-block"
-              (click)="deleteJd(job._id)"
+              (click)="deleteJd(job.id)"
             ></i>
             <i *ngIf="datecheck(job.closingDate)==0"
             class="mdi mdi-send float-right d-none d-lg-block"
@@ -69,7 +69,7 @@
           ></i>
             <i
               class="mdi mdi-download float-right d-none d-lg-block"
-              (click)="downloadPdf(job.jdId)"
+              (click)="downloadPdf(job.id)"
             ></i>
             <i class="mdi mdi-pencil float-right d-none d-lg-block"
             (click)="jdUpdateModal(job.jdId)"

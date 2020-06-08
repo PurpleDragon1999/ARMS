@@ -13,7 +13,7 @@ import { stringify } from 'querystring';
   styleUrls: ['./jd-pdf.component.scss']
 })
 export class JdPdfComponent implements OnInit {
-  jdObject:jobDescription;
+  jdObject:any;
   obj:any;
  
   constructor(
@@ -33,13 +33,13 @@ export class JdPdfComponent implements OnInit {
     this.route.params
     .pipe(
       switchMap((params: Params) => {
-       
-     return this.appService.getJdData(params.jdId);
+       return this.appService.getJdData(params.jdId);
       })
       
     )
     .subscribe((res) => {
-      this.jdObject = res.payload.data;
+      this.jdObject = res.result.payload.data;
+    
     });
   }
 
@@ -97,7 +97,7 @@ export class JdPdfComponent implements OnInit {
           pdf.addImage(imgData, 'PNG',top_left_margin, -(PDF_Height * i) + (top_left_margin * 4)  ,
                        canvas_image_width*0.79, canvas_image_height*0.90);
         }
-         pdf.save("jobdescription"+this.jdObject.jdId+'.pdf');
+        pdf.save("jobdescription"+this.jdObject.id+'.pdf');
       });
    setTimeout(() => {
       this.navigation();
