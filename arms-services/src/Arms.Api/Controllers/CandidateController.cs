@@ -72,7 +72,6 @@ namespace Arms.Api.Controllers
         {
             try
             {
-                var check = id;
                 var application = _context.Application.Include(c=> c.Candidate).Include(c=> c.ApplicationStatusType).SingleOrDefault(c => c.Id == id);
                 if (application != null)
                 {
@@ -144,7 +143,7 @@ namespace Arms.Api.Controllers
                         success = true,
                         payload = new
                         {
-                            message = "Application Not found"
+                            message = "Application Not Found"
                         }
                     };
                     return Ok(response);
@@ -250,7 +249,7 @@ namespace Arms.Api.Controllers
                             success = true,
                             payload = new
                             {
-                                message = "Cannot Register"
+                                message = "You Cannot Register"
                             }
                         };
                         return StatusCode(200, responseFalse);
@@ -278,7 +277,7 @@ namespace Arms.Api.Controllers
                     success = true,
                     payload = new
                     {       
-                        message = "Registered successfully"
+                        message = "Registered Successfully"
                     }
                 };
                 return StatusCode(200, response);
