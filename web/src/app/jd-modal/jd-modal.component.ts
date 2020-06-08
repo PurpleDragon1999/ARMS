@@ -62,7 +62,7 @@ export class JdModalComponent implements OnInit {
     this._service.getJdData(Id).subscribe((res: any) => {
       if (res.success) {
         this.jobArray = res.result.payload.data;
-     
+        console.log(this.jobArray);
         this.setJobData();
       }
     });
