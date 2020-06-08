@@ -216,9 +216,7 @@
    
     <form class="card" [formGroup]="roundTypeForm" (ngSubmit)="onSubmit()">
       <div  formArrayName="roundTypes">
-        <div
-          *ngFor="let roundType of roundTypes().controls; let typeIndex = index"
-        >
+        <div *ngFor="let roundType of roundTypes().controls; let typeIndex = index">
         
           <div class="card-body" [formGroupName]="typeIndex">
             Round Type Name :
@@ -264,4 +262,5 @@
       </p>
     </form>
   </div>
+</div>
 </div>
