@@ -12,6 +12,7 @@ yarn.lock
 jobDescriptions
 .idea
 
+
 *.swp
 *.*~
 project.lock.json
@@ -37,7 +38,7 @@ x86/
 build/
 bld/
 [Bb]in/
-[Oo]bj/Debug
+[Oo]bj/
 *.nuget.*
 msbuild.log
 msbuild.err
@@ -60,3 +61,7 @@ obj/
 mono_*
 **/appsettings.*.json
 **/appsettings.json
+appsettings.json
+
+project.assets.json
+Arms.Api.csproj

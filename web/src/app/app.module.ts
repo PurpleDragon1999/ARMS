@@ -31,6 +31,8 @@ import { ProgressTrackerComponent } from './progress-tracker/progress-tracker.co
 import { InterviewListComponent } from './interview-list/interview-list.component';
 import { CandidateComponent } from './candidate/candidate.component';
 import { EmailListModalComponent } from './email-list-modal/email-list-modal.component';
+import { SettingsComponent } from './settings/settings.component';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -62,10 +64,12 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     ProgressTrackerComponent,
     CandidateComponent,
     EmailListModalComponent,
-    InterviewListComponent
+    InterviewListComponent,
+    SettingsComponent
   ],
   imports: [
     FileUploadModule,
+    MDBBootstrapModule.forRoot(),
     ReactiveFormsModule,
     FormsModule,
     BrowserModule,
