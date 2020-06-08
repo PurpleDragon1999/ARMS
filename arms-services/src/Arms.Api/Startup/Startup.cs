@@ -38,11 +38,11 @@ namespace Arms.Api.Startup
             // string connString = this.Configuration.GetConnectionString("Db");
             // services.AddDbContext<Arms.Infrastructure.ArmsDbContext>(o => o.UseSqlServer(connString));
             services
-                .AddCustomDatabaseService(Configuration)
                 .AddCustomMvc()
                 .AddCustomAuthentication(Configuration)
                 .AddCustomSwagger(Configuration)
-                .AddArmsApplicationServices(Configuration);
+                .AddArmsApplicationServices(Configuration)
+                .AddCustomDatabaseService(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

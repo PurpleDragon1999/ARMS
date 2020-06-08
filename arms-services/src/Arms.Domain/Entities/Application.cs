@@ -9,7 +9,6 @@ namespace Arms.Domain.Entities
         public Application()
         {
             Assessment = new HashSet<Assessment>();
-            Resume = new HashSet<Resume>();
         }
 
         public int Id { get; set; }

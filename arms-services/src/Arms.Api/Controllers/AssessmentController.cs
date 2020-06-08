@@ -26,7 +26,7 @@ namespace Arms.Api.Controllers
             
             try
             {
-                List<Assessment> data = _context.Assessment.ToList();
+                List<Assessment> data = _context.Assessments.ToList();
                 response = new Response<IEnumerable<Assessment>>(true, data, "Assessments retrieved successfully");
             }
             catch (Exception e)
@@ -47,7 +47,7 @@ namespace Arms.Api.Controllers
             
             try
             {
-                Assessment data = _context.Assessment.SingleOrDefault(assessment => assessment.Id == id);
+                Assessment data = _context.Assessments.SingleOrDefault(assessment => assessment.Id == id);
                 response = new Response<Assessment>(true, data, "Assessment retrieved successfully");
             }
             catch (Exception e)
@@ -81,7 +81,7 @@ namespace Arms.Api.Controllers
                     InterviewPanelId = assessment.InterviewPanelId,
                     RoundId = assessment.RoundId
                 };
-                _context.Assessment.Add(data);
+                _context.Assessments.Add(data);
                 _context.SaveChanges();
                 response = new Response<Assessment>(true, data, "Assessment Created successfully");
             }
@@ -102,12 +102,12 @@ namespace Arms.Api.Controllers
             Response<Assessment> response;
             try
             {
-                Assessment data = _context.Assessment.SingleOrDefault(assessment => assessment.Id == changedAssessment.Id);
+                Assessment data = _context.Assessments.SingleOrDefault(assessment => assessment.Id == changedAssessment.Id);
 
                 if (data != null)
                 {
                     data = changedAssessment;
-                    _context.Assessment.Update(changedAssessment);
+                    _context.Assessments.Update(changedAssessment);
                     _context.SaveChanges();
                 }
                 response = new Response<Assessment>(true, data, "Assessment Updated successfully");
@@ -129,11 +129,11 @@ namespace Arms.Api.Controllers
             Response<Assessment> response;
             try
             {
-                Assessment data = _context.Assessment.SingleOrDefault(ass => ass.Id == id);
+                Assessment data = _context.Assessments.SingleOrDefault(ass => ass.Id == id);
             
                 if (data != null)
                 {
-                    _context.Assessment.Remove(data);
+                    _context.Assessments.Remove(data);
                     _context.SaveChanges();
                 }
 

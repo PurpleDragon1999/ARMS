@@ -6,12 +6,12 @@ import { IModelForPagination } from 'src/app/models/modelPagination.interface';
   templateUrl: "./list.component.html",
   styleUrls: ["./list.component.scss"],
 })
-export class ListComponent  {
+export class ListComponent {
   @Input()
   title: string = '';
 
   @Input()
-  columns: Array<String> = [];
+  columns: Array<string> = [];
 
   @Input()
   data: Array<any> = [];
@@ -34,7 +34,7 @@ export class ListComponent  {
   @Output()
   emitDownloadPdf: EventEmitter<string> = new EventEmitter<string>();
 
-  openModal(formType: any["formType"], data: any["data"]) {
+  openModal(formType: any["formType"], data?: any["data"]) {
     this.emitOpenModal.emit({ formType, data });
   }
 
@@ -46,7 +46,7 @@ export class ListComponent  {
     this.emitDelete.emit(entry);
   }
 
-  setPageForPagination(character: string, page: number) {
+  setPageForPagination(character: string, page?: number) {
     this.emitPaginatedResult.emit({ page, character });
   }
 
