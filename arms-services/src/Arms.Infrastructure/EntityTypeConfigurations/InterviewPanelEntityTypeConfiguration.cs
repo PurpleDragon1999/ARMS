@@ -36,7 +36,7 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
             builder.Property(e => e.RoundId).HasColumnName("roundId");
 
             builder.HasOne(d => d.Round)
-                .WithMany(p => p.InterviewPanel)
+                .WithMany()
                 .HasForeignKey(d => d.RoundId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_round");

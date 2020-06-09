@@ -96,7 +96,6 @@ namespace Arms.Api.Controllers
                         {
                             message = "Application you are looking for does not exist"
                         }
-
                     };
                     return Ok(response);
                 }
@@ -212,6 +211,7 @@ namespace Arms.Api.Controllers
                         IdentificationNo = customObj.IdentificationNo,
                         CreatedBy = customObj.CreatedBy,
                         ModifiedBy = customObj.ModifiedBy
+                        //"nationality" : "indian"
                     };
                     _context.Candidate.Add(candidateObj);
                     _context.SaveChanges();
@@ -221,7 +221,7 @@ namespace Arms.Api.Controllers
                 {
                     id = candidate.Id;
                     bool isAllowed = validateCandidate(customObj, id);
-
+                
                     if (isAllowed)
                     {
                         id = candidate.Id;
@@ -269,7 +269,6 @@ namespace Arms.Api.Controllers
 
                 _context.Application.Add(applicationObj);
                 _context.SaveChanges();
-
                 int applicationId = applicationObj.Id;
 
                 var response = new
@@ -289,7 +288,7 @@ namespace Arms.Api.Controllers
                     success = false,
                     payload = new
                     {
-                        message = e.Message
+                        message = e
                     }
                 };
                 return StatusCode(500, response);
@@ -382,7 +381,6 @@ namespace Arms.Api.Controllers
                     {
                         message = e
                     }
-
                 };
                 return StatusCode(500, response);      
             }

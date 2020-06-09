@@ -6,11 +6,11 @@ namespace Arms.Domain.Entities
 {
     public partial class InterviewPanel
     {
-        public InterviewPanel()
-        {
-            Assessment = new HashSet<Assessment>();
-            Interviewer = new HashSet<Interviewer>();
-        }
+        //public InterviewPanel()
+        //{
+        //    Assessment = new HashSet<Assessment>();
+        //    Interviewer = new HashSet<Interviewer>();
+        //}
 
         public int Id { get; set; }
         public int RoundId { get; set; }
@@ -20,7 +20,7 @@ namespace Arms.Domain.Entities
         public string ModifiedBy { get; set; }
 
         public Round Round { get; set; }
-        public ICollection<Assessment> Assessment { get; set; }
-        public ICollection<Interviewer> Interviewer { get; set; }
+        //public ICollection<Assessment> Assessment { get; set; }
+        //public ICollection<Interviewer> Interviewer { get; set; }
     }
 }

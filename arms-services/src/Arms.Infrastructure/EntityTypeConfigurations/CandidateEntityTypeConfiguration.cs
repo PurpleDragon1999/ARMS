@@ -34,6 +34,11 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .HasColumnName("createdBy")
                 .HasMaxLength(50);
 
+            //builder.Property(e => e.nationality
+            //    .IsRequired()
+            //    .HasColumnName("nationality")
+            //    .HasMaxLength(100);
+
             builder.Property(e => e.Email)
                 .IsRequired()
                 .HasColumnName("email")

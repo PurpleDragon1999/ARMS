@@ -6,11 +6,7 @@ namespace Arms.Domain.Entities
 {
     public partial class Round
     {
-        public Round()
-        {
-            Assessment = new HashSet<Assessment>();
-            InterviewPanel = new HashSet<InterviewPanel>();
-        }
+        
 
         public int Id { get; set; }
         public int RoundTypeId { get; set; }
@@ -22,7 +18,6 @@ namespace Arms.Domain.Entities
 
         public Interview Interview { get; set; }
         public RoundType RoundType { get; set; }
-        public ICollection<Assessment> Assessment { get; set; }
-        public ICollection<InterviewPanel> InterviewPanel { get; set; }
+        
     }
 }
