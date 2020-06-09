@@ -45,8 +45,6 @@ namespace Arms.Api.Controllers
                     }
 
                 };
-                string emailHtmlBody = GenerateEmailBody();
-               // mailHelper.MailFunction(emailHtmlBody);
                 return StatusCode(200, response);
             }
             catch (Exception ex)
@@ -310,34 +308,7 @@ namespace Arms.Api.Controllers
                 return StatusCode(500, response);
             }
         }
-        public string GenerateEmailBody()
-        {
-            string output = @"<html>
-       <head>    
-	       <style type=""text/css"">
-           </style>
-       </head>
-
-         <body aria-readonly=""false"" style=""cursor: auto;"">
-              <p> Hello </p>
-             <p> Thank You for expressing your Interest for the position of ${ jdObject.jdTitle}
-              ,You can read more about us on our company career page </p>
-             <a href = 'www.cygrp.com/careers' > www.cygrp.com / careers </a>
-             <p  Please signup if you wish to accept and proceed with our process</p>
-             <a href = 'http://localhost:4200/candidateForm/${jdObject.jdId}' > Click here to apply.</a>
-             <p> Regards,</p>
-             <p> HR,</p>
-             <p> Cybergroup,B - 9, Block B, Sector 3, Noida, Uttar Pradesh 201301 </p>
-             <p> Thanks </p>
-            <img src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRCUuWWhu0HByWgdDAp2cA1TDf-a_
-                   FpjUA_DFbRt33DViY9tNDH & usqp = CAU'width='150'height='150'>
-             <br>
-            <em >This is automatically generated email,please do not reply</em>
-         </body>
-     </html>
-            ";
-            return output;
-        }
+      
 
 
 
