@@ -192,7 +192,7 @@ namespace Arms.Api.Controllers
                     success = false,
                     payload = new
                     {
-                        message = e.InnerException
+                        message = e.InnerException.Message
                     }
 
                 };

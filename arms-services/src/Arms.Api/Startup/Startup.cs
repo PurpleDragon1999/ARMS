@@ -42,9 +42,8 @@ namespace Arms.Api.Startup
                 .AddCustomMvc()
                 .AddCustomAuthentication(Configuration)
                 .AddCustomSwagger(Configuration)
-                .AddArmsApplicationServices(Configuration);
-
-                services.AddCors();
+                .AddArmsApplicationServices(Configuration)
+                .AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

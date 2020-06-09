@@ -1,3 +1,4 @@
+import { InterviewService } from './../services/interview.service';
 
 import { Component, OnInit } from "@angular/core";
 import { AppServicesService } from "../services/app-services.service";
@@ -16,37 +17,81 @@ import { HttpErrorResponse} from "@angular/common/http";
 export class CreateInterviewComponent implements OnInit {
   constructor(
     private AppServicesService: AppServicesService,
+    private service: InterviewService,
     private router: Router,
     private modalService : NgbModal,
   ) {}
 
-  ngOnInit() {}
-  interview: any = {}
+  ngOnInit() {
+    this.getLocation();
+    this.getRoundTypes();
+  }
 
-  createInterview(interview: ICreate) {
-    let interviewObj = interview;
-    interviewObj.jdId = "CYGJID" + interviewObj.jdId
-    this.AppServicesService.createInterview(interview).subscribe((res: any) => {
-        const modalRef = this.modalService.open(ModalComponent);
-        modalRef.componentInstance.shouldConfirm = false;
-        modalRef.componentInstance.success = res.body.success;
-        modalRef.componentInstance.message = res.body.payload.message;
-        modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
-          modalRef.close();
-        
+  interview: any = {}
+  interviewObj: any ={}
+ 
+
+  RoundType: any[]=[
+  ]
+
+  Location: any[]=[
+  ]
+
+  number: number;
+  location: string;
+
+  
+  onOptionsSelected(value){
+    this.number = value;
+  }
+
+  getLocation(){
+    this.service.getLocation().subscribe((res:any) => {
+      this.Location = res.result.payload.data;
+    })
+  }
+
+  getRoundTypes(){
+    this.service.getRoundTypes().subscribe((res:any) => {
+      this.RoundType = res.result.payload.data;
+    })
+  }
+
+  createInterview(interview: any) {
+    let round = [];
+    for (let index =0; index<this.number; index++){
+      round.push({
+        RoundNumber: interview[`roundNumber_${index}`],
+        RoundTypeId: interview[`roundType_${index}`],
+        RoundDate: interview[`roundDate_${index}`],
+        RoundTime: interview[`roundTime_${index}`]
+      })
+    }
+    this.interviewObj.JobId = interview.jobId;
+    this.interviewObj.Date = interview.date;
+    this.interviewObj.Time = interview.time;
+    this.interviewObj.Venue = interview.venue;
+    this.interviewObj.Round = round;
+
+    this.service.createInterview(this.interviewObj).subscribe((res:any) => {
+      const modalRef = this.modalService.open(ModalComponent);
+      modalRef.componentInstance.shouldConfirm = false;
+      modalRef.componentInstance.success = res.body.result.success;
+      modalRef.componentInstance.message = res.body.result.payload.message;
+      modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+        modalRef.close();        
         });
-    },
+      },
     
-      (error: HttpErrorResponse) => {
-        const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
-        modalRef.componentInstance.shouldConfirm = false;
-        modalRef.componentInstance.success = error.error.success;
-        modalRef.componentInstance.message = error.error.payload.message;
-        modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
-          modalRef.close();
-        });
-        
-      }
+    // (error: HttpErrorResponse) => {
+    //   const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
+    //   modalRef.componentInstance.shouldConfirm = false;
+    //   modalRef.componentInstance.success = error.error.success;
+    //   modalRef.componentInstance.message = error.error.payload.message;
+    //   modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+    //     modalRef.close();
+    //     });
+    //   }
     );
   }
 }
