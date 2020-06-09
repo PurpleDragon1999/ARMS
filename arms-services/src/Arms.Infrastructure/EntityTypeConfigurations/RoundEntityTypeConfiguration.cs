@@ -7,13 +7,16 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Arms.Infrastructure.EntityTypeConfigurations
 {
-    internal class RoundEntityTypeConfiguration: IEntityTypeConfiguration<Round>
+    internal class RoundEntityTypeConfiguration : IEntityTypeConfiguration<Round>
     {
         public void Configure(EntityTypeBuilder<Round> builder)
         {
             builder.ToTable("Round", "ARMS");
 
             builder.Property(e => e.Id).HasColumnName("id");
+            builder.Property(e => e.RoundNumber).HasColumnName("roundNumber");
+            builder.Property(e => e.RoundDate).HasColumnName("roundDate");
+            builder.Property(e => e.RoundTime).HasColumnName("roundTime");
 
             builder.Property(e => e.CreatedAt)
                 .HasColumnName("createdAt")
@@ -50,4 +53,5 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .HasConstraintName("FK_roundType");
         }
     }
+
 }

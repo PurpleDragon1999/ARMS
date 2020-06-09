@@ -66,7 +66,7 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .HasConstraintName("FK_Assessment_ArmsInterviewPanel");
 
             builder.HasOne(d => d.Round)
-                .WithMany(p => p.Assessment)
+                .WithMany()
                 .HasForeignKey(d => d.RoundId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Assessment_ArmsRound");
