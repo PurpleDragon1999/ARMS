@@ -1,12 +1,16 @@
 using Hrms.Core.Domains.Entities;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace Arms.Domain.Entities
 {
-    public class RoundType : Entity
+    public partial class RoundType
     {
+        public RoundType()
+        {
+            CriteriaType = new HashSet<CriteriaType>();
+            Round = new HashSet<Round>();
+        }
 
         public int Id { get; set; }
         public string Name { get; set; }
@@ -15,5 +19,7 @@ namespace Arms.Domain.Entities
         public DateTime ModifiedAt { get; set; }
         public string ModifiedBy { get; set; }
 
+        public ICollection<CriteriaType> CriteriaType { get; set; }
+        public ICollection<Round> Round { get; set; }
     }
 }

@@ -27,7 +27,7 @@
                 <div class="card">
                   <div class="card-body">
                     <h5 class="font-weight-normal mb-2"><b>
-                      Interview ID: </b> {{ interview._id }}
+                      Interview ID: </b> {{ interview.code }}
                       <!--mobile view three dot icon-->
                       <div class="w3-dropdown-hover d-lg-none float-right">
                         <button class="w3-button">
@@ -38,12 +38,12 @@
                         <div class="w3-dropdown-content w3-bar-block">
                           <a  class="w3-bar-item w3-button">
                             <i class="mdi mdi-pencil float-right"
-                            (click)="interviewUpdateModal(interview?._id)"
+                            (click)="interviewUpdateModal(interview?.id)"
                             ></i>
                           </a>
                          <a  class="w3-bar-item w3-button">
                             <i class="mdi mdi-delete float-right"
-                            (click)="deleteInterview(interview?._id)"
+                            (click)="deleteInterview(interview?.id)"
                             ></i>
                           </a>
                           
@@ -52,10 +52,10 @@
                       <!--large screens-->
                       <i
                         class="mdi mdi-delete float-right d-none d-lg-block"
-                        (click)="deleteInterview(interview?._id)"
+                        (click)="deleteInterview(interview?.id)"
                       ></i>
                       <i class="mdi mdi-pencil float-right d-none d-lg-block"
-                      (click)="interviewUpdateModal(interview?._id)"
+                      (click)="interviewUpdateModal(interview?.id)"
                       ></i>
                     </h5>
                      

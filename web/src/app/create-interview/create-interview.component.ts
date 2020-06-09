@@ -23,19 +23,19 @@ export class CreateInterviewComponent implements OnInit {
   formType:string
   ngOnInit() {
     this.formType="create"
-    this.loadInterview(this.interviewId);
+   this.loadInterview(this.interviewId);
     
   }
   dateNew:any;
   interview: any = {}
+  code:any;
   loadInterview(interviewId){
     return this. AppServicesService.getInterviewById(interviewId).subscribe((response: any) => {
-      this.interview = response.payload.data
+      this.interview = response.result.payload.data
       
       if(this.interview.length!=0)
       this.formType="update"
-      this.dateNew=this.interview[0].date.substring(0,10);
-    
+      this.dateNew=this.interview.date.substring(0,10);
      });
   }
   createInterview(interview: ICreate) {
@@ -44,11 +44,11 @@ export class CreateInterviewComponent implements OnInit {
     this.AppServicesService.createInterview(interview).subscribe((res: any) => {
         const modalRef = this.modalService.open(ModalComponent);
         modalRef.componentInstance.shouldConfirm = false;
-        modalRef.componentInstance.success = res.body.success;
-        modalRef.componentInstance.message = res.body.payload.message;
+        modalRef.componentInstance.success = res.body.result.success;
+        modalRef.componentInstance.message = res.body.result.payload.message;
         modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
           modalRef.close();
-        
+          
         });
     },
     

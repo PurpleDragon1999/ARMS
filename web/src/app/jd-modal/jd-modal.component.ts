@@ -76,7 +76,7 @@ export class JdModalComponent implements OnInit {
     this._service.getJdData(Id).subscribe((res: any) => {
       if (res.success) {
         this.jobArray = res.result.payload.data;
-        console.log(this.jobArray);
+      
         this.setJobData();
       }
     });
@@ -97,12 +97,12 @@ export class JdModalComponent implements OnInit {
 
   sendUpdateRequest(jdFormObject: any) {
     jdFormObject.jdId = `CYGJID${jdFormObject.jdId}`;
-    this._service.updateJobInfo(jdFormObject, this.jobArray._id).subscribe(
+    this._service.updateJobInfo(jdFormObject, this.jobArray.id).subscribe(
       (res: any) => {
         const modalRef = this.modalService.open(ModalComponent);
         modalRef.componentInstance.shouldConfirm = false;
-        modalRef.componentInstance.success = res.result.success;
-        modalRef.componentInstance.message = res.result.payload.message;
+        modalRef.componentInstance.success = res.body.result.success;
+        modalRef.componentInstance.message = res.body.result.payload.message;
         modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
           modalRef.close();
         });

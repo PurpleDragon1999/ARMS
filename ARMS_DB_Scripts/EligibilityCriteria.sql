@@ -1,3 +1,8 @@
+IF NOT EXISTS (SELECT * FROM sys.schemas WHERE name='ARMS')
+BEGIN
+EXEC('CREATE SCHEMA ARMS')
+END
+
 --table creation
 IF OBJECT_ID('ARMS.EligibilityCriteria') IS NULL
 BEGIN

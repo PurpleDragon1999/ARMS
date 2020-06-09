@@ -28,20 +28,20 @@ export class InterviewListComponent implements OnInit {
 
   loadInterviews() {
     return this._service.getAllInterviews().subscribe((response: any) => {
-      this.interviewsList = response.payload.data
+      this.interviewsList = response.result.payload.data
     });
   }
 
-  interviewUpdateModal(id: string) {
+  interviewUpdateModal(id) {
     const modalRef: NgbModalRef = this.modalService.open(CreateInterviewComponent)
     modalRef.componentInstance.interviewId = id;
-    // modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
-    //   modalRef.close();
-    // });
+    modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+      modalRef.close();
+    });
   }
 
   
-  deleteInterview(interviewObjId: string) {
+  deleteInterview(id) {
     const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
 
     modalRef.componentInstance.shouldConfirm = true;
@@ -50,27 +50,20 @@ export class InterviewListComponent implements OnInit {
       modalRef.close();
     });
     modalRef.componentInstance.emitPerformRequest.subscribe(() => {
-      this._service.deleteInterview(interviewObjId).subscribe((res: IResponse) => {
+      this._service.deleteInterview(id).subscribe((res: any) => {
        // this.loadInterviews();
-        modalRef.componentInstance.success = res.success;
-        modalRef.componentInstance.message = res.payload.message;
+        modalRef.componentInstance.success = res.body.result.success;
+      
+        modalRef.componentInstance.message = res.result.payload.message;
         }, (error: HttpErrorResponse) => {
-          modalRef.componentInstance.success = error.error.success;
+         modalRef.componentInstance.success = error.error.success;
           modalRef.componentInstance.message = error.error.payload.message;
     });
   });
   }
 
-  downloadPdf(jdId) {
-   this.router.navigate(["/jd-pdf", jdId]);
-  }
-
-  datecheck(closingDate) {
-    const currentDate = new Date().toISOString();
-    if (closingDate <= currentDate) {
-      return 1;
-    } else { return 0; }
-  }
+ 
+ 
 
   // searchInterview(character?: string, page?: number){
   //   this._service.search(character, page).subscribe(res=> {

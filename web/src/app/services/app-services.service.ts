@@ -20,7 +20,7 @@ export class AppServicesService {
     'Content-Type': 'application/json',
        // Authorization: localStorage.getItem("Authorization")
        //hard code token here
-    'Authorization': 'Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjI2RTcyQjI1MTM1NUJGODFDOTA5QTVEQ0UzQTNENUIwNEI5OTMxMDEiLCJ0eXAiOiJhdCtqd3QiLCJ4NXQiOiJKdWNySlJOVnY0SEpDYVhjNDZQVnNFdVpNUUUifQ.eyJuYmYiOjE1OTE2ODI2ODMsImV4cCI6MTU5MTcxMTQ4MywiaXNzIjoiaHR0cHM6Ly9ocm1zLWlkZW50aXR5LWRldi5henVyZXdlYnNpdGVzLm5ldCIsImF1ZCI6WyJhY2NvdW50IiwibG1zIl0sImNsaWVudF9pZCI6ImhybXNtb2JpbGUiLCJzdWIiOiJhMzhkZjNmYi0wOTZlLTQ1OGMtODljMS0xMmNkNjM4Y2Q5NjYiLCJhdXRoX3RpbWUiOjE1OTE2ODI2ODMsImlkcCI6ImxvY2FsIiwibmFtZSI6IlNvbmFsaSIsImxhc3RfbmFtZSI6IkNoYXdsYSIsImVtYWlsIjoic29uYWxpLmNoYXdsYUBjeWdycC5jb20iLCJzY29wZSI6WyJvcGVuaWQiLCJwcm9maWxlIiwiYWNjb3VudCIsImxtcyIsIm9mZmxpbmVfYWNjZXNzIl0sImFtciI6WyJwYXNzd29yZCJdfQ.BFJWCa8sQzIw0q6WF8C-XRWdD3guzsD-qq-R3_XfS3E1JfXzZG-Z1hHC_PvcYU6luA_9cNHi0uqRapLbOezFnIzsK7L9bR-GpiBkqdywLqBIMR5l8JNmgupDSB8HhORv3wHrz8qXs0DOtAyPqszfVTru50fPhGs_qMB6Ms_P-oAl4g181_IIwnGnGj6bfFX5Inr-Sj1vNk6BBiTPuYh7ghU0W42oI3NGk4TARlvQbFXJdzjewEVYt-vQOJGYvAaXsQP-SoW_t7nyIKTsjya_bYiF2w2C5nWwmJVLsgCkBSGTJNVV-pkvXX7QQy9JFQ-MTx92I_IQQ0T7_DBcN1LTYsC4iJddSE08wvMqdBUStM-1FhYm9a5uE0lvrth81BgrSHCumaQWIY5VQ3tPuQ3UPJmqgtP4JoyD93WfByuw4ezfNSn8E42VDxMEQzcseRohjKqCZt7bWbPRmTn8LzRci5jRPrMS9Dz8zg9Olbj78qlbOm7zYD3pprrqA2_Q1Llj2-UJHG7UtT67rlSsAEy2h3EdPo0hBBxHtM-HJvbGwJJU_sGNbrZ89Gsn47z9uvnbj5L-o6BWpl47A5ZWdMHB7p_E_THNAW5ibiPQzDrK8gfxfz3m-HnSzpdAnyiAyPa369ug4mycJCPmhqCJBfAYw8ePzoezbE2dy6sBHgYWbHU'
+    'Authorization': 'Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjI2RTcyQjI1MTM1NUJGODFDOTA5QTVEQ0UzQTNENUIwNEI5OTMxMDEiLCJ0eXAiOiJhdCtqd3QiLCJ4NXQiOiJKdWNySlJOVnY0SEpDYVhjNDZQVnNFdVpNUUUifQ.eyJuYmYiOjE1OTE3MTE0MDcsImV4cCI6MTU5MTc0MDIwNywiaXNzIjoiaHR0cHM6Ly9ocm1zLWlkZW50aXR5LWRldi5henVyZXdlYnNpdGVzLm5ldCIsImF1ZCI6WyJhY2NvdW50IiwibG1zIl0sImNsaWVudF9pZCI6ImhybXNtb2JpbGUiLCJzdWIiOiJhMzhkZjNmYi0wOTZlLTQ1OGMtODljMS0xMmNkNjM4Y2Q5NjYiLCJhdXRoX3RpbWUiOjE1OTE3MTE0MDcsImlkcCI6ImxvY2FsIiwibmFtZSI6IlNvbmFsaSIsImxhc3RfbmFtZSI6IkNoYXdsYSIsImVtYWlsIjoic29uYWxpLmNoYXdsYUBjeWdycC5jb20iLCJzY29wZSI6WyJvcGVuaWQiLCJwcm9maWxlIiwiYWNjb3VudCIsImxtcyIsIm9mZmxpbmVfYWNjZXNzIl0sImFtciI6WyJwYXNzd29yZCJdfQ.Out_AE0qBNEdwbn-1TeXXvE9m9ern92tlAgOy8MVApH4j9JcRlkaBjwB9c1gnhTfCHNIu-K4dCBMMyBHtU-icY5M-6dN-z7jzvzWsRPSS782BW-pwxC-HsoAGo7YdHyyGrF5bsqfTDv09KwnCA-Bz53IhiEl4Vjs9Jd70QGuIRiw5luwnwhsC5vuYVYPCvJkRHlgC18qYA8WpQo8-FdsHewPvqKonvPBWoXEdjLMMa8V-NmZPqYQis3IYUT_XNW52wPvO32B8njdGCluUl7zTsoVyaZkqfe3nXk1aanENJPkhWxMKhOTejY2tYc-gv6WQMU6x3MIZH4gSqx9mMwnR4x6xW2_t1bcX8TbG03tN1vY1GzYETknqC5JEW3obm5lEoUjCMKbRhkzhwl7P2LD0ZB7ao-BpKJAlEXV57tSZ_FsDKyv3iRDTYtgeOj2mM3oZJ8Q8msbURj2FwfOEpAEOhydvX3TehtCX6RIjs8veuHb9JlR25B0yBhHiCiyTVugjjSe4nWAzQcfAIM_wcIokfkBmHaP3QN4QmXRAwYbcXhDE8uaEUDaAvgowmothwtyF9mj1oHaT3QTjN8KBPxD0QsUMDj3N-UYwnhGzL915XS8U1-40yxb2TcD_gWRz0f8dZ9A3cQ00JUVmpy6uH7LE7vsMciCNQqbUuhq_-_uruU'
   });
   
   createHeader: HttpHeaders= new HttpHeaders({
@@ -85,8 +85,8 @@ export class AppServicesService {
   updateJobInfo(jobFormObject,jobId): Observable<HttpResponse<any>>{
        return this.http.put<any>(`${DOTNET_DOMAIN}/api/jobDescription/${jobId}`,jobFormObject, this.httpOptions);
      }
-  deleteJd(id): Observable<IResponse>{
-    return this.http.delete<any>(`${DOTNET_DOMAIN}/api/jobDescription/${id}`, this.httpOptions);
+  deleteJd(id): Observable<any>{
+    return this.http.delete<any>(`${DOTNET_DOMAIN}/api/jobDescription/${id}`, {...this.httpOptions,observe: 'response'});
   }
 
   
@@ -119,14 +119,16 @@ export class AppServicesService {
     const params: HttpParams = new HttpParams().set('character', character).set("pagination", "true").set("page", page.toString());
     return this.http.get<IResponse>(`${USER_DOMAIN}/api/jobDescriptionSearch`, {...this.options, params})
   }
-  getAllInterviews(): Observable<HttpResponse<any>>{
-    return this.http.get<any>(`${USER_DOMAIN}/api/interview`, this.options);
+
+getAllInterviews(): Observable<HttpResponse<any>>{
+  return this.http.get<any>(`${DOTNET_DOMAIN}/api/interview`, this.httpOptions);
 }
-deleteInterview(interviewObjectId): Observable<IResponse>{
-  return this.http.delete<any>(`${USER_DOMAIN}/api/interview/${interviewObjectId}`, this.options);
+
+deleteInterview(interviewId): Observable<IResponse>{
+  return this.http.delete<any>(`${DOTNET_DOMAIN}/api/interview/${interviewId}`, this.httpOptions);
 }
 getInterviewById(Id): Observable<HttpResponse<any>>{
-  return this.http.get<any>(`${USER_DOMAIN}/api/interview/${Id}`, this.options);
+  return this.http.get<any>(`${DOTNET_DOMAIN}/api/interview/${Id}`, this.httpOptions);
 }
 
 }

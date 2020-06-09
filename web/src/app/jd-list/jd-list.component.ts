@@ -61,9 +61,10 @@ export class JdListComponent implements OnInit {
     });
     modalRef.componentInstance.emitPerformRequest.subscribe(() => {
       this._service.deleteJd(id).subscribe((res: any) => {
-        this.loadJds();
-        modalRef.componentInstance.success = res.result.success;
-        modalRef.componentInstance.message = res.result.payload.message;
+       // this.loadJds();
+        console.log(res);
+        modalRef.componentInstance.success = res.body.result.success;
+        modalRef.componentInstance.message = res.body.result.payload.message;
         }, (error: HttpErrorResponse) => {
           modalRef.componentInstance.success = error.error.success;
           modalRef.componentInstance.message = error.error.payload.message;

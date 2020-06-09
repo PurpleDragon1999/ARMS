@@ -22,6 +22,7 @@ namespace Arms.Api.Controllers
         private readonly IIdentityService _identityService;
         ArmsDbContext _context;
         public MailHelperController mailHelper=new MailHelperController();
+       
         public JobDescriptionController(IIdentityService identityService, ArmsDbContext armsContext)
         {
             _identityService = identityService;
@@ -95,7 +96,7 @@ namespace Arms.Api.Controllers
 
                     var response = new
                     {
-                        success = "true",
+                        success = true,
                         payload = new
                         {
                             data = job,
@@ -110,7 +111,7 @@ namespace Arms.Api.Controllers
             {
                 var response = new
                 {
-                    success = "false",
+                    success = false,
                     payload = new
                     {
                         message = ex.InnerException.Message
@@ -133,7 +134,7 @@ namespace Arms.Api.Controllers
                 {
                     var resAlreadyExists = new
                     {
-                        success = "false",
+                        success = false,
                         payload = new
                         {
                             message = "Job with this Job Title already exists"
@@ -161,7 +162,7 @@ namespace Arms.Api.Controllers
                 _context.SaveChanges();
                 var response = new
                 {
-                    success = "true",
+                    success = true,
                     payload = new
                     {
                         data = newJob,
@@ -177,7 +178,7 @@ namespace Arms.Api.Controllers
 
                 var response = new
                 {
-                    success = "false",
+                    success = false,
                     payload = new
                     {
                         message = ex.InnerException.Message
@@ -198,7 +199,7 @@ namespace Arms.Api.Controllers
                 {
                     var resNull = new
                     {
-                        success = "false",
+                        success = false,
                         payload = new
                         {
 
@@ -236,7 +237,7 @@ namespace Arms.Api.Controllers
                 _context.SaveChanges();
                 var response = new
                 {
-                    success = "true",
+                    success = true,
                     payload = new
                     {
                         data = jobInDb,
@@ -250,7 +251,7 @@ namespace Arms.Api.Controllers
             {
                 var response = new
                 {
-                    success = "false",
+                    success = false,
                     payload = new
                     {
                         message = ex.InnerException.Message
@@ -271,7 +272,7 @@ namespace Arms.Api.Controllers
                 {
                     var resNull = new
                     {
-                        success = "false",
+                        success = false,
                         payload = new
                         {
 
@@ -285,7 +286,7 @@ namespace Arms.Api.Controllers
                 _context.SaveChanges();
                 var response = new
                 {
-                    success = "true",
+                    success = true,
                     payload = new
                     {
                         message = "Job Description Deleted Successfully"
@@ -298,7 +299,7 @@ namespace Arms.Api.Controllers
             {
                 var response = new
                 {
-                    success = "false",
+                    success = false,
                     payload = new
                     {
                         message = ex.InnerException.Message

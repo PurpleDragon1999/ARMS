@@ -130,11 +130,11 @@ export class JdFormComponent implements OnInit {
     }
    
     this._service.jdFormData(this.jdFormObject).subscribe((res: any) => {
-      this.data=res.result.payload.data;
+      this.data=res.body.result.payload.data;
       const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
       modalRef.componentInstance.shouldConfirm = false;
-      modalRef.componentInstance.success = res.result.success;
-      modalRef.componentInstance.message = res.result.payload.message;
+      modalRef.componentInstance.success = res.body.result.success;
+      modalRef.componentInstance.message = res.body.result.payload.message;
       modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
         modalRef.close();
       });
