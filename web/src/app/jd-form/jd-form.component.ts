@@ -32,7 +32,7 @@ export class JdFormComponent implements OnInit {
   @ViewChild("openingDate", { static: false }) openingDate: ElementRef;
   @ViewChild("closingDate", { static: false }) closingDate: ElementRef;
   @ViewChild("jobDescription", { static: false }) jobDescription: ElementRef;
-  //@ViewChild("skills", { static: false }) skills: ElementRef;
+  @ViewChild("skills", { static: false }) skills: ElementRef;
   @ViewChild("jobType", { static: false }) jobType: ElementRef;
   @ViewChild("eligibilityCriteria", { static: false })
   eligibilityCriteria: ElementRef;
@@ -111,7 +111,7 @@ export class JdFormComponent implements OnInit {
       openingDate: this.openingDate.nativeElement.value,
       closingDate: this.closingDate.nativeElement.value,
       description: this.jobDescription.nativeElement.value,
-     // skills: this.skills.nativeElement.value,
+      skills: this.skills.nativeElement.value,
       employmentTypeId: Number(this.jobType.nativeElement.value.substring(0,1)),
       eligibilityCriteriaId:  Number(this.eligibilityCriteria.nativeElement.value.substring(0,1)),
       locationId: Number(this.location.nativeElement.value.substring(0,1)),

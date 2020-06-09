@@ -53,9 +53,23 @@ export class JdModalComponent implements OnInit {
   submitted = false;
   jdFormObject: any;
   data: any;
-
+  eligibilityCriterias:any;
+  locations:any;
+  employmentTypes:any;
   ngOnInit() {
     this.loadJobData(Number(this.jdUpdateId));
+    this._service.getAllEligibilityCriterias().subscribe((res: any) => {
+       this.eligibilityCriterias=res.result.payload.data;
+     
+      });
+    this._service.getAllLocations().subscribe((res: any) => {
+      this.locations=res.result.payload.data;
+      
+      });
+    this._service.getAllEmploymentTypes().subscribe((res: any) => {
+      this.employmentTypes=res.result.payload.data;
+        
+      });
   }
 
   loadJobData(Id) {
@@ -73,7 +87,7 @@ export class JdModalComponent implements OnInit {
     this.openingDate = this.jobArray.openingDate.slice(0, 10);
     this.closingDate = this.jobArray.closingDate.slice(0, 10);
     this.jobProfileDescription = this.jobArray.description;
-    //this.skills = this.jobArray.skills;
+    this.skills = this.jobArray.skills;
     this.jobType = this.jobArray.employmentType.employmentTypeName;
     this.eligibilityCriteria = this.jobArray.eligibilityCriteria.eligibilityCriteriaName;
     this.location = this.jobArray.loc.locationName;

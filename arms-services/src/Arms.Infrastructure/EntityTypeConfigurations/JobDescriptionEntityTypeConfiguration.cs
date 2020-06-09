@@ -41,6 +41,9 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
             builder.Property(e => e.description)
                 .IsRequired()
                 .HasColumnName("description");
+            builder.Property(e => e.skills)
+                .IsRequired()
+                .HasColumnName("skills");
 
             builder.Property(e => e.jobTitle)
                 .IsRequired()
