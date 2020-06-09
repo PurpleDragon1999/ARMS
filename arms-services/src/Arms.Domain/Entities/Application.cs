@@ -1,10 +1,11 @@
+
 ﻿using Hrms.Core.Domains.Entities;
 using System;
 using System.Collections.Generic;
 
 namespace Arms.Domain.Entities
 {
-    public class Application : Entity
+    public partial class Application : Entity
     {
         public int Id { get; set; }
         public string Code { get; set; }

@@ -4,7 +4,7 @@ using Hrms.Core.Domains.Entities;
 
 namespace Arms.Domain.Entities
 {
-    public class IdProofType : Entity
+    public partial class IdProofType : Entity
     {
         public int Id { get; set; }
         public string Code { get; set; }
@@ -13,6 +13,9 @@ namespace Arms.Domain.Entities
         public string CreatedBy { get; set; }
         public DateTime ModifiedAt { get; set; }
         public string ModifiedBy { get; set; }
+
         
     }
 }
+
+        

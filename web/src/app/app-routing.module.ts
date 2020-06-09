@@ -1,12 +1,11 @@
-
+import { SettingsComponent } from './settings/settings.component';
 import { CreateInterviewComponent } from './create-interview/create-interview.component';
 import { HrInterviewAssessementComponent } from './hr-interview-assessement/hr-interview-assessement.component';
 import { InterviewListComponent } from './interview-list/interview-list.component';
-
 import { ScheduleInterviewComponent } from './schedule-interview/schedule-interview.component';
 import { CandidateFormComponent } from './candidate-form/candidate-form.component';
 import { ProgressTrackerComponent } from './progress-tracker/progress-tracker.component';
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EmployeeComponent } from './employee/containers/employee/employee.component';
 import { HrComponent } from './hr/hr.component';
@@ -20,10 +19,12 @@ import { ErrorPageComponent } from './error-page/error-page.component';
 import { JdModalComponent } from './jd-modal/jd-modal.component';
 import { CandidateComponent } from './candidate/candidate.component';
 
+
 const routes: Routes = [
   {path : "assessment", component : HrInterviewAssessementComponent},
   { path: "", redirectTo: 'login', pathMatch: 'full'},
   { path: "login", component: LoginComponent },
+  { path: "settings", component: SettingsComponent },
   { path: "404", component: ErrorPageComponent},
   {
     path: "edit", component: JdModalComponent
@@ -43,6 +44,9 @@ const routes: Routes = [
     path: "superuser", component: AppNavBarComponent, canActivate: [RoleGuardService], data: { role: "superuser" }, children: [
       {
         path: "", redirectTo: "home", pathMatch: "full"
+      },
+      {
+        path:"settings", component: SettingsComponent
       },
       {
         path: "home", component: HrComponent
@@ -107,7 +111,11 @@ const routes: Routes = [
       { path: 'applied', component: CandidateFormComponent}
     ],
   },
-
+{
+  path:'navbar',component:AppNavBarComponent, children:[
+    { path:'settings', component:SettingsComponent}
+  ]
+}
 ];
 
 @NgModule({

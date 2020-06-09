@@ -1,10 +1,9 @@
-using Hrms.Core.Domains.Entities;
-
 namespace Arms.Domain.Entities
+
 {
-    public class Location : Entity
+    public class Location
     {
         public int LocationId { get; set; }
-        public string Name { get; set; }
+        public string LocationName { get; set; }
     }
 }

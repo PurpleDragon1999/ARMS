@@ -1,9 +1,15 @@
 const Base = require("./base");
 const candidateModel = require("../models/candidate");
 var fs = require("fs");
+<<<<<<< HEAD
 var validator=require('aadhaar-validator');
 const jobDescriptionModel=require('../models/jobDescription');
 const nodeMail=require('../middlewares/mailHelper');
+=======
+var validator = require('aadhaar-validator');
+const jobDescriptionModel = require('../models/jobDescription');
+const nodeMail = require('../middlewares/mailHelper');
+>>>>>>> 2be29f0c4f54ca4f7629f009fdac4bbae995f4b2
 
 async function validateCandidate(candidate) {
   console.log(candidate)

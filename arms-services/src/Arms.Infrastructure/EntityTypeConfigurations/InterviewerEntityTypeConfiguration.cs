@@ -7,48 +7,42 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Arms.Infrastructure.EntityTypeConfigurations
 {
-    internal class ResumeEntityTypeConfiguration : IEntityTypeConfiguration<Resume>
+    internal class InterviewerEntityTypeConfiguration: IEntityTypeConfiguration<Interviewer>
     {
-        public void Configure(EntityTypeBuilder<Resume> builder)
+        public void Configure(EntityTypeBuilder<Interviewer> builder)
         {
-            builder.ToTable("Resume", "ARMS");
+            builder.ToTable("Interviewer", "ARMS");
 
             builder.Property(e => e.Id).HasColumnName("id");
-
-            builder.Property(e => e.ApplicationId).HasColumnName("applicationId");
 
             builder.Property(e => e.CreatedAt)
                 .HasColumnName("createdAt")
                 .HasDefaultValueSql("(sysdatetime())");
 
             builder.Property(e => e.CreatedBy)
-                .IsRequired()
                 .HasColumnName("createdBy")
-                .HasMaxLength(50);
+                .HasMaxLength(50)
+                .IsUnicode(false);
 
-            builder.Property(e => e.Cv)
-                .IsRequired()
-                .HasColumnName("cv");
+            builder.Property(e => e.EmployeeId).HasColumnName("employeeId");
+
+            builder.Property(e => e.InterviewPanelId).HasColumnName("interviewPanelId");
 
             builder.Property(e => e.ModifiedAt)
                 .HasColumnName("modifiedAt")
                 .HasDefaultValueSql("(sysdatetime())");
 
             builder.Property(e => e.ModifiedBy)
-                .IsRequired()
                 .HasColumnName("modifiedBy")
-                .HasMaxLength(50);
+                .HasMaxLength(50)
+                .IsUnicode(false);
 
-            builder.Property(e => e.Name)
-                .IsRequired()
-                .HasColumnName("name")
-                .HasMaxLength(50);
-
-            builder.HasOne(d => d.Application)
-                .WithMany(p => p.Resume)
-                .HasForeignKey(d => d.ApplicationId)
+            builder.HasOne(d => d.InterviewPanel)
+                .WithMany(p => p.Interviewer)
+                .HasForeignKey(d => d.InterviewPanelId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_ResumeApplication");
+                .HasConstraintName("FK_interviewPanel");
+
         }
     }
 }

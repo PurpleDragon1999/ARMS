@@ -12,7 +12,13 @@ id int identity(1,1) primary key,
 [openingDate] datetime2 NOT NULL,
 [closingDate] datetime2 NOT NULL,
 [description] nvarchar(MAX) NOT NULL,
-[location] varchar(50) NOT NULL,
+[locationId] int NOT NULL,
+constraint FK_location foreign key(locationId) references ARMS.Location(id),
+[eligibilityCriteriaId] int NOT NULL,
+constraint FK_eligibilityCriteria foreign key(eligibilityCriteriaId) references ARMS.EligibilityCriteria(id),
+[employmentTypeId] int NOT NULL,
+constraint FK_employmentType foreign key(employmentTypeId) references ARMS.EmploymentType(id),
+
 [salary] bigint NULL,
 [vacancies] int NULL,
 [pdfBlobData] varBinary(MAX),
@@ -33,9 +39,11 @@ AS
     WHERE id IN (SELECT DISTINCT id FROM Inserted)
 GO
 --insert command for jobDescription
-Insert into ARMS.JobDescription([jobTitle],[openingDate],[closingDate],[description],[location],pdfBlobData)
-SELECT 'Software Developer','2020-09-02','2020-09-09','require a logically strong person like himanshu','Delhi', BulkColumn
+
+Insert into ARMS.JobDescription([jobTitle],[openingDate],[closingDate],[description],[locationId],[eligibilityCriteriaId],[employmentTypeId],pdfBlobData)
+SELECT 'Software Developer','2020-09-02','2020-09-09','require a logically strong person','1','1','1', BulkColumn
  FROM OPENROWSET(Bulk 'C:\Users\deepanshu.balani\Pictures\anal2.jpg', SINGLE_BLOB) AS BLOB
+
  
  
 

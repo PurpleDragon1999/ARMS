@@ -4,7 +4,7 @@ using Hrms.Core.Domains.Entities;
 
 namespace Arms.Domain.Entities
 {
-    public class Candidate :Entity
+    public partial class Candidate :Entity
     {
         public int Id { get; set; }
         public string Code { get; set; }
@@ -19,7 +19,6 @@ namespace Arms.Domain.Entities
         public DateTime ModifiedAt { get; set; }
         public string ModifiedBy { get; set; }
         
-        
-        
+
     }
 }
