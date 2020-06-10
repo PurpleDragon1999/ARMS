@@ -8,6 +8,7 @@ BEGIN
 	[id] int identity(1,1) not null,
 	[code] as 'CYGLCID' + cast([id] as nvarchar(50)) persisted,
 	[locationName] varchar(255) not null,
+	
 	[createdAt] datetime2 default (sysdatetime()) not null,
 	[createdBy] nvarchar(255) not null,
 	[modifiedAt] datetime2 default (sysdatetime()) not null,
@@ -29,10 +30,8 @@ AS
 
 GO
 insert into ARMS.Location ([locationName],[createdBy],[modifiedBy])
-
 values ('Dallas', 'shivani','shivani'),
  ('Noida', 'shivani','shivani')
-
 
 select * from ARMS.Location;
 

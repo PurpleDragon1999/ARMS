@@ -32,7 +32,7 @@ AS
 
 GO
 insert into ARMS.Assessment ([feedback],[result],[roundId],[applicationId],[interviewPanelId], [createdBy],[modifiedBy])
-values ('good', 0,'2','1','1','shivani','shivani');
+values ('good', 0,'2','1','2','shivani','shivani');
 
 select * from ARMS.Assessment;
 

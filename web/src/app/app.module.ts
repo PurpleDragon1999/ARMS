@@ -37,6 +37,8 @@ import { SettingsComponent } from './settings/settings.component';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -68,7 +70,6 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     SettingsComponent
   ],
   imports: [
-    MDBBootstrapModule.forRoot(),
     ReactiveFormsModule,
     FormsModule,
     BrowserModule,
@@ -98,7 +99,6 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
         ],
         extraQueryParameters: {}
       }),
-    BrowserAnimationsModule,
   ],
   providers: [
     NgbActiveModal,

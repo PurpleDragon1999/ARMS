@@ -30,7 +30,7 @@ AS
 
 GO
 insert into ARMS.Criteria ([marks],[remarks],[criteriaTypeId],[assessmentId],[createdBy],[modifiedBy] )
-values (34, 'good','1','1','shivani','shivani');
+values (34, 'good','2','','shivani','shivani');
 
 select * from ARMS.Criteria;
 

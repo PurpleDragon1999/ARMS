@@ -25,7 +25,7 @@ GO
 --insert command
 
 Insert into ARMS.InterviewPanel([roundId])
-Values('1')
+Values('2')
 
 --Select command
 select * FROM ARMS.InterviewPanel
