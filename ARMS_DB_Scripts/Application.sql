@@ -40,7 +40,7 @@ AS
 
 insert into arms.Application(dateOfApplication, education, experience, statusChangedAt, candidateId, jobId,
 applicationStatusTypeId, createdBy, modifiedBy)
-values ('2020-05-19', 'Downtown University', '1','2020-05-19', 1, 1, 2, 'anna', 'anna')
+values ('2020-05-19', 'Downtown University', '1','2020-05-19', 1, 1, 1, 'anna', 'anna')
 
 update arms.Application
 set education = 'Northill University'

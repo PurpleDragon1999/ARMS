@@ -1,11 +1,11 @@
-if not exists (select * from sys.schemas where name = 'arms')
+if not exists (select * from sys.schemas where name = 'ARMS')
 begin
-	exec('create schema arms')
+	exec('create schema ARMS')
 end
 
-if OBJECT_ID('arms.Candidate') is null
+if OBJECT_ID('ARMS.Candidate') is null
 begin 
-	create table arms.Candidate
+	create table ARMS.Candidate
 	(
 		[id] int identity(1,1) ,
 		[code] as 'CYGCDID'+ cast(id as nvarchar(50)) persisted,
@@ -19,8 +19,7 @@ begin
 		[modifiedAt] datetime2 not null default (sysdatetime()),
 		[modifiedBy] nvarchar(50) not null,
 		constraint PK_Candidate primary key (id),
-		constraint FK_CandidateIdProofType foreign key (idProofTypeId) references arms.IdProofType(id)
-
+		constraint FK_CandidateIdProofType foreign key (idProofTypeId) references ARMS.IdProofType(id)
 	)
 end
 

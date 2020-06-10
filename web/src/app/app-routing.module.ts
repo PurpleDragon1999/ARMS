@@ -1,8 +1,6 @@
-
 import { CreateInterviewComponent } from './create-interview/create-interview.component';
 import { HrInterviewAssessementComponent } from './hr-interview-assessement/hr-interview-assessement.component';
 import { InterviewListComponent } from './interview-list/interview-list.component';
-
 import { ScheduleInterviewComponent } from './schedule-interview/schedule-interview.component';
 import { CandidateFormComponent } from './candidate-form/candidate-form.component';
 import { ProgressTrackerComponent } from './progress-tracker/progress-tracker.component';
@@ -47,11 +45,10 @@ const routes: Routes = [
       {
         path: "home", component: HrComponent
       },
-
       {
         path: "employee", component: EmployeeComponent
       },
-      {path:'interviews', component: InterviewListComponent}
+      {path: 'interviews', component: InterviewListComponent}
     ]
   },
   {
@@ -94,7 +91,9 @@ const routes: Routes = [
   },
   {
     path: 'jd-pdf', children: [
-      { path: ':jdId', component: JdPdfComponent }
+      {
+        path: ':jdId', component: JdPdfComponent
+      }
     ],
   },
   {

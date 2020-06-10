@@ -31,10 +31,9 @@ import { ProgressTrackerComponent } from './progress-tracker/progress-tracker.co
 import { InterviewListComponent } from './interview-list/interview-list.component';
 import { CandidateComponent } from './candidate/candidate.component';
 import { EmailListModalComponent } from './email-list-modal/email-list-modal.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
-
-
 
 @NgModule({
   declarations: [
@@ -63,9 +62,10 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     ProgressTrackerComponent,
     CandidateComponent,
     EmailListModalComponent,
-    InterviewListComponent
+    InterviewListComponent,
   ],
   imports: [
+    MDBBootstrapModule.forRoot(),
     ReactiveFormsModule,
     FormsModule,
     BrowserModule,
@@ -95,6 +95,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
         ],
         extraQueryParameters: {}
       }),
+    BrowserAnimationsModule,
   ],
   providers: [
     NgbActiveModal,

@@ -35,7 +35,7 @@ select * from arms.Resume
 
 insert into arms.Resume (name, cv, applicationId, createdBy, modifiedBy)
 select 'file', BulkColumn, 1, 'anna', 'anna'
-from openrowset (bulk 'C:\Users\chetna.mongmaw\Pictures\Saved Pictures\pexels-photo-3473492.jpeg', SINGLE_BLOB) AS BLOB
+from openrowset (bulk 'C:\Users\kritika.sachdeva\Downloads\_Untitled.pdf', SINGLE_BLOB) AS BLOB
 
 update arms.Resume 
 set name= 'resume'

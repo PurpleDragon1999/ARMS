@@ -26,7 +26,7 @@ AS
 GO
 INSERT into ARMS.Images(employeeId,createdBy,modifiedBy,imageBlobData)
 SELECT '1','deepsy','deepsy', BulkColumn
- FROM OPENROWSET(Bulk 'C:\Users\deepanshu.balani\Pictures\login.jpg', SINGLE_BLOB) AS BLOB
+ FROM OPENROWSET(Bulk 'C:\Users\kritika.sachdeva\Downloads\IMG-4740.jpg', SINGLE_BLOB) AS BLOB
  --select command
  SELECT * FROM ARMS.Images
 
