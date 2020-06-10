@@ -38,13 +38,13 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
             builder.Property(e => e.RoundTypeId).HasColumnName("roundTypeId");
 
             builder.HasOne(d => d.Interview)
-                .WithMany(p => p.Round)
+                .WithMany()
                 .HasForeignKey(d => d.InterviewId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Interview");
 
             builder.HasOne(d => d.RoundType)
-                .WithMany(p => p.Round)
+                .WithMany()
                 .HasForeignKey(d => d.RoundTypeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_roundType");

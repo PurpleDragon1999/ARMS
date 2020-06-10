@@ -33,6 +33,8 @@ import { CandidateComponent } from './candidate/candidate.component';
 import { EmailListModalComponent } from './email-list-modal/email-list-modal.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { SettingsComponent } from './settings/settings.component';
+
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
 @NgModule({
@@ -63,6 +65,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     CandidateComponent,
     EmailListModalComponent,
     InterviewListComponent,
+    SettingsComponent
   ],
   imports: [
     MDBBootstrapModule.forRoot(),

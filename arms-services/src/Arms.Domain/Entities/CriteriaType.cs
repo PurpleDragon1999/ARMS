@@ -1,26 +1,23 @@
 using Hrms.Core.Domains.Entities;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Arms.Domain.Entities
 {
-    public partial class CriteriaType
+    public class CriteriaType : Entity
     {
-        public CriteriaType()
-        {
-            Criteria = new HashSet<Criteria>();
-        }
+        [Key]
+        public int id { get; set; }
+        public int roundTypeId { get; set; }
+        public string code { get; set; }
+        public RoundType roundType { get; set; }
+        public string criteriaName { get; set; }
+        public DateTime createdAt { get; set; }
+        public DateTime modifiedAt { get; set; }
+        public string createdBy { get; set; }
+        public string modifiedBy { get; set; }
 
-        public int Id { get; set; }
-        public string Code { get; set; }
-        public string CriteriaName { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public string CreatedBy { get; set; }
-        public DateTime ModifiedAt { get; set; }
-        public string ModifiedBy { get; set; }
-        public int RoundTypeId { get; set; }
 
-        public RoundType RoundType { get; set; }
-        public ICollection<Criteria> Criteria { get; set; }
     }
 }
