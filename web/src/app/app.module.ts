@@ -70,6 +70,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     SettingsComponent
   ],
   imports: [
+    MDBBootstrapModule.forRoot(),
     ReactiveFormsModule,
     FormsModule,
     BrowserModule,
