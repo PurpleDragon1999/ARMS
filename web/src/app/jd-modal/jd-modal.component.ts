@@ -90,7 +90,6 @@ export class JdModalComponent implements OnInit {
     this.skills = this.jobArray.skills;
     this.jobType = this.jobArray.employmentType.employmentTypeName;
     this.eligibilityCriteria = this.jobArray.eligibilityCriteria.eligibilityCriteriaName;
-    console.log(this.eligibilityCriteria,"eliii");
     this.location = this.jobArray.loc.locationName;
     this.salary = this.jobArray.salary;
     this.vacancies = this.jobArray.vacancies;
