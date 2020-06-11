@@ -1,14 +1,11 @@
 using Arms.Domain.Entities;
 using Arms.Infrastructure.EntityTypeConfigurations;
 using Microsoft.EntityFrameworkCore;
-using Arms.Domain.Entities;
 
 namespace Arms.Infrastructure
 {
     public  class ArmsDbContext: DbContext
     {
-      
-
         public ArmsDbContext(DbContextOptions<ArmsDbContext> options)
             : base(options)
         {

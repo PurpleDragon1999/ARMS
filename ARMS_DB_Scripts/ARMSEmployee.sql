@@ -1,54 +1,26 @@
-if not exists (select * from sys.schemas where name = 'arms')
-begin
-	exec('create schema arms')
-end
+CREATE TABLE [ARMS].[EmployeeRoles](
+	[Id] [int] IDENTITY(1,1) PRIMARY KEY,
+	[Name] [nvarchar](255) NOT NULL,
+	[Active] [bit] NOT NULL,
+	[IsSystemRole] [bit] NOT NULL,
+	[SystemName] [nvarchar](255) NULL,
+	[DateCreated] [datetime] NOT NULL,
+	[DateModified] [datetime] NOT NULL,
+	[RoleOrder] [int] NULL,
+ )
+ Drop table ARMS.EmployeeRoles 
 
-IF OBJECT_ID('ARMS.HRMS_Employee') IS NULL
-BEGIN
-CREATE TABLE ARMS.HRMS_Employee
-(
- [id]          int IDENTITY(1,1) primary key ,
- [name]        varchar(50) NOT NULL ,
- [cygCode] as 'CYG' + cast(id as varchar(100)),
- [designation] varchar(300) check (Designation in ('Intern', 'Consultant 1', 'Consultant 2', 'Associate 1',
-'Associate 2')) default 'Consultant 1' not null,
-
- [role] varchar(255) check (Role in ('SuperUser', 'Admin', 'Employee')) default 'Employee',
- [email] varchar(400) not null unique ,
- [createdAt]   datetime2(7)  default (sysdatetime()) NOT NULL ,
- [createdBy]   varchar(50)  NULL ,
- [modifiedAt]  datetime2(7)  default (sysdatetime()) NOT NULL ,
- [modifiedBy]  varchar(50)  NULL ,
-)
-END
---creating the trigger for any update of interview
---new batch for trigger
 GO
-CREATE TRIGGER trg_UpdateARMSEmployee
-ON ARMS.HRMS_Employee
-AFTER UPDATE
-AS
-    UPDATE ARMS.HRMS_Employee
-    SET modifiedAt  = sysdatetime()
-    WHERE id IN (SELECT DISTINCT id FROM Inserted)
-
---insert command
+INSERT [ARMS].[EmployeeRoles] ([Name], [Active], [IsSystemRole], [SystemName], [DateCreated], [DateModified], [RoleOrder]) VALUES (N'SuperUser', 1, 1, N'SuperUser', CAST(N'2015-07-28T11:01:14.837' AS DateTime), CAST(N'2015-07-28T11:01:14.837' AS DateTime), 1)
 GO
-Insert into ARMS.HRMS_Employee([name],[designation],[role],[email])
-Values('sahil','Consultant 1','Admin','sahil2@gmail.com')
+INSERT [ARMS].[EmployeeRoles] ([Name], [Active], [IsSystemRole], [SystemName], [DateCreated], [DateModified], [RoleOrder]) VALUES (N'Admin', 1, 1, N'Admin', CAST(N'2015-07-28T11:01:14.837' AS DateTime), CAST(N'2015-09-28T11:01:14.837' AS DateTime), 2)
+GO
+INSERT [ARMS].[EmployeeRoles] ([Name], [Active], [IsSystemRole], [SystemName], [DateCreated], [DateModified], [RoleOrder]) VALUES (N'Employee', 1, 1, N'Employee', CAST(N'2015-07-28T11:01:14.837' AS DateTime), CAST(N'2015-10-28T11:01:14.837' AS DateTime), 3)
+Select * from ARMS.EmployeeRoles
 
-SELECT * FROM ARMS.HRMS_Employee
+update ARMS.EmployeeRoles set Name='SuperUser' 
 
+Select ARMS.EmployeeRoles.Name from ARMS.EmployeeRoles INNER JOIN ARMS.Employees On ARMS.EmployeeRoles.SystemName=ARMS.Employees.SystemName
 
-
-
-
-
-
-
-
-
-
-
-
+Select *from ARMS.EmployeeRoles INNER JOIN ARMS.Employees On ARMS.EmployeeRoles.SystemName=ARMS.Employees.SystemName
 
