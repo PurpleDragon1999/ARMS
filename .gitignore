@@ -12,6 +12,7 @@ yarn.lock
 jobDescriptions
 .idea
 
+
 *.swp
 *.*~
 project.lock.json
@@ -55,6 +56,4 @@ Building Blocks/
 *.g.props
 *.g.targets
 
-*/**/appsettings.json
-*/**/Arms.Api.csproj.user
-*/**/Arms.Api.csproj
+appsettings.json

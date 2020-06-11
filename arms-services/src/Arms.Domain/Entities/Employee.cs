@@ -1,10 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using Hrms.Core.Domains.Entities;
-using System.ComponentModel.DataAnnotations;
 
 namespace Arms.Domain.Entities
 {
+
     public partial class Employee
     {  
         public int? EmployeeDetailId { get; set; }
