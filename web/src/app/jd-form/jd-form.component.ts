@@ -52,8 +52,15 @@ export class JdFormComponent implements OnInit {
   eligibilityCriterias:any;
   employmentTypes:any;
   locations:any;
+  skillArray:any;
+  currencyText:string;
+  buttonName:string="Select Currency"
   selectChangeHandlerEligibilityCriteria(event: any) {
     this.eligibilityCriteriaOptions = event.target.value;
+  }
+  currencyChange(event:any){
+    this.currencyText=event.target.text;
+    this.buttonName=this.currencyText;
   }
 
   selectChangeHandlerLocation(event: any) {
@@ -77,18 +84,23 @@ export class JdFormComponent implements OnInit {
       salary: ["", Validators.required],
       vacancies: ["", Validators.required],
     });
-    this._service.getAllEligibilityCriterias().subscribe((res: any) => {
-      this.eligibilityCriterias=res.result.payload.data;
-     
-      });
-      this._service.getAllLocations().subscribe((res: any) => {
-        this.locations=res.result.payload.data;
+      this._service.getAllEligibilityCriterias().subscribe((res: any) => {
+        this.eligibilityCriterias=res.result.payload.data;
       
         });
-        this._service.getAllEmploymentTypes().subscribe((res: any) => {
-          this.employmentTypes=res.result.payload.data;
+        this._service.getAllLocations().subscribe((res: any) => {
+          this.locations=res.result.payload.data;
         
-          });
+        });
+          this._service.getAllEmploymentTypes().subscribe((res: any) => {
+            this.employmentTypes=res.result.payload.data;
+          
+        });
+        this._service.getSkills().subscribe((res: any) => {
+          this.skillArray=res.result.payload.data;
+        
+       });
+
   }
   get formControls() {
     return this.jobListingForm.controls;

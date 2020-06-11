@@ -51,6 +51,12 @@
              <label for="skills"><b>Skills </b></label>
              <input type="text" class="form-control" placeholder="Skills" #skills maxlength="30"
                formControlName="skills" [ngClass]="{ 'is-invalid': submitted && formControls.skills.errors }" />
+              
+                  
+               <!-- <option value="skill"*ngFor="let skill of skillArray">
+                {{ skill }}
+              </option> -->
+            <!-- </select> -->
              <div *ngIf="submitted && formControls.skills.errors" class="invalid-feedback">
                <div *ngIf="formControls.skills.errors.required"><i class="mdi mdi-alert-outline"></i> Skills is
                  required</div>
@@ -107,10 +113,21 @@
              </div>
            </div>
 
-           <div class="form-group">
-             <label for="salary"><b>Salary (per annum)</b></label>
-             <input type="number" class="form-control" placeholder="Salary" #salary />
-           </div>
+         
+            <div class="form-group">
+              <label for="salary"><b>Salary (per annum)</b></label>
+              
+                  <div class="input-group col-xs-12">
+                    <input type="number" class="form-control" placeholder="Salary" #salary />
+                    <button class="btn btn-gradient-danger btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      {{buttonName}}
+                    </button>
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item"value="USD" (click)="currencyChange($event)">USD</a>
+                      <a class="dropdown-item" value="INR"(click)="currencyChange($event)">INR</a>
+                    </div>
+                  </div>
+              </div>
 
            <div class="form-group">
              <label for="vacancies"><b>No .of Vacancies </b></label>
