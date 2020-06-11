@@ -23,6 +23,9 @@ namespace Arms.Infrastructure
         public virtual DbSet<RoundType> RoundType { get; set; }
         public virtual DbSet<CriteriaType> CriteriaType { get; set; }
         public virtual DbSet<Loc> Loc { get; set; }
+       public virtual DbSet<ApplicationStatusType> ApplicationStatusType { get; set; }
+       public virtual DbSet<Skill> Skill { get; set; }
+
 
 
         public virtual DbSet<ApplicationStatusType> ApplicationStatusType { get; set; }
@@ -36,7 +39,6 @@ namespace Arms.Infrastructure
             modelBuilder.ApplyConfiguration(new LocEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new EmploymentTypeEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new EligibilityCriteriaEntityTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new RoundTypeEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new ApplicationEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new ApplicationStatusTypeEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new AssessmentEntityTypeConfiguration());
@@ -50,7 +52,8 @@ namespace Arms.Infrastructure
             modelBuilder.ApplyConfiguration(new InterviewPanelEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new ResumeEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new RoundEntityTypeConfiguration());
-
+            modelBuilder.ApplyConfiguration(new RoundTypeEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new SkillEntityTypeConfiguration());
         }
     }
 }

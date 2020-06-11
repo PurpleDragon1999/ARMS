@@ -27,7 +27,7 @@ export class JdFormComponent implements OnInit {
   @Output()
   closeModal: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  @ViewChild("jobId", { static: false }) jobId: ElementRef;
+  //@ViewChild("jobId", { static: false }) jobId: ElementRef;
   @ViewChild("jobTitle", { static: false }) jobTitle: ElementRef;
   @ViewChild("openingDate", { static: false }) openingDate: ElementRef;
   @ViewChild("closingDate", { static: false }) closingDate: ElementRef;
@@ -46,11 +46,21 @@ export class JdFormComponent implements OnInit {
   jobTypeOptions: String;
   jobListingForm: FormGroup;
   submitted = false;
-  jdFormObject: jobDescription;
-  data: jobDescription;
+  jdFormObject: any;
+  data: any;
   jdForm: FormGroup;
+  eligibilityCriterias:any;
+  employmentTypes:any;
+  locations:any;
+  skillArray:any;
+  currencyText:string;
+  buttonName:string="Select Currency"
   selectChangeHandlerEligibilityCriteria(event: any) {
     this.eligibilityCriteriaOptions = event.target.value;
+  }
+  currencyChange(event:any){
+    this.currencyText=event.target.text;
+    this.buttonName=this.currencyText;
   }
 
   selectChangeHandlerLocation(event: any) {
@@ -74,6 +84,23 @@ export class JdFormComponent implements OnInit {
       salary: ["", Validators.required],
       vacancies: ["", Validators.required],
     });
+      this._service.getAllEligibilityCriterias().subscribe((res: any) => {
+        this.eligibilityCriterias=res.result.payload.data;
+      
+        });
+        this._service.getAllLocations().subscribe((res: any) => {
+          this.locations=res.result.payload.data;
+        
+        });
+          this._service.getAllEmploymentTypes().subscribe((res: any) => {
+            this.employmentTypes=res.result.payload.data;
+          
+        });
+        this._service.getSkills().subscribe((res: any) => {
+          this.skillArray=res.result.payload.data;
+        
+       });
+
   }
   get formControls() {
     return this.jobListingForm.controls;
@@ -91,15 +118,15 @@ export class JdFormComponent implements OnInit {
 
   jdFormData() {
     this.jdFormObject = {
-      jdId: `CYGJID${this.jobId.nativeElement.value}`,
-      jdTitle: this.jobTitle.nativeElement.value,
+     // jdId: `CYGJID${this.jobId.nativeElement.value}`,
+      jobTitle: this.jobTitle.nativeElement.value,
       openingDate: this.openingDate.nativeElement.value,
       closingDate: this.closingDate.nativeElement.value,
-      jobProfileDescription: this.jobDescription.nativeElement.value,
+      description: this.jobDescription.nativeElement.value,
       skills: this.skills.nativeElement.value,
-      jobType: this.jobType.nativeElement.value,
-      eligibilityCriteria: this.eligibilityCriteria.nativeElement.value,
-      location: this.location.nativeElement.value,
+      employmentTypeId: Number(this.jobType.nativeElement.value.substring(0,1)),
+      eligibilityCriteriaId:  Number(this.eligibilityCriteria.nativeElement.value.substring(0,1)),
+      locationId: Number(this.location.nativeElement.value.substring(0,1)),
       salary: this.salary.nativeElement.value,
       vacancies: this.vacancies.nativeElement.value,
     };
@@ -113,12 +140,13 @@ export class JdFormComponent implements OnInit {
       };
       return;
     }
+   
     this._service.jdFormData(this.jdFormObject).subscribe((res: any) => {
-      this.data=res.body.payload.data;
+      this.data=res.body.result.payload.data;
       const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
       modalRef.componentInstance.shouldConfirm = false;
-      modalRef.componentInstance.success = res.body.success;
-      modalRef.componentInstance.message = res.body.payload.message;
+      modalRef.componentInstance.success = res.body.result.success;
+      modalRef.componentInstance.message = res.body.result.payload.message;
       modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
         modalRef.close();
       });

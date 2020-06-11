@@ -3,13 +3,13 @@
    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
    crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+<button  class="pull-right btn btn-primary"style="float:right"(click)="convertToPDF()">Download</button>
 <div class="container"id="content"#content>
  
     <div class="image">
       <img src={{imageUrl}} class="image" alt="cyg">
    </div>
-   <button  class="pull-right btn btn-primary"style="float:right"(click)="convertToPDF()">Download</button>
+  
   <div class="card"style=" height:240px;">
    <div class="card-body">
       <div class="heading-holder">
@@ -17,7 +17,7 @@
         <h5 class="card-title">Job Description</h5>
       </div>
         <h6 class="card-subtitle mb-2 text-muted">Job Title:</h6>
-        <p class="card-text">{{jdObject?.jdTitle}}</p>
+        <p class="card-text">{{jdObject?.jobTitle}}</p>
     <div class="date-holder">
      <i class="fa fa-calendar"></i><h5 class="date-label">Opening Date</h5><p class="date">{{jdObject?.openingDate|date}}</p>
     </div>
@@ -33,7 +33,7 @@
       <h5 class="card-subtitle mb-2 text-muted">Responsibilities and Duties</h5>
      </div>
      <div>
-        <p>{{jdObject?.jobProfileDescription}}</p>
+        <p>{{jdObject?.description}}</p>
       </div>
       <div class="heading-holder">
         <h5 class="card-subtitle mb-2 text-muted">Skills and Qualifications</h5>
@@ -41,7 +41,7 @@
         <div class="list-body"style=" height:60px;">
           <div class="list-item">
             <p class="make-bold">Eligibility Criteria:&nbsp;</p>
-            <p>{{jdObject?.eligibilityCriteria}}</p>
+            <p>{{jdObject?.eligibilityCriteria.eligibilityCriteriaName}}</p>
           </div>
           <div class="list-item">
             <p class="make-bold">Skills Required:&nbsp;&nbsp;&nbsp;&nbsp;</p>
@@ -54,11 +54,11 @@
           <div class="list-body"style=" height:90px;">
             <div class="list-item">
               <p class="make-bold">Employment Type:&nbsp;</p>
-              <p>{{jdObject?.jobType}}</p>
+              <p>{{jdObject?.employmentType.employmentTypeName}}</p>
             </div>
             <div class="list-item">
               <p class="make-bold">Location:&nbsp;&nbsp;&nbsp;&nbsp;</p>
-              <p>{{jdObject?.location}}</p>
+              <p>{{jdObject?.loc.locationName}}</p>
             </div>
             <div class="list-item">
               <p class="make-bold">Cost To Company:&nbsp;&nbsp;&nbsp;&nbsp;</p>

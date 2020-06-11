@@ -58,7 +58,8 @@ const routes: Routes = [
       {
         path: "employee", component: EmployeeComponent
       },
-      {path:'interviews', component: InterviewListComponent}
+      {path:'interviews', component: InterviewListComponent},
+    
     ]
   },
   {
@@ -86,7 +87,7 @@ const routes: Routes = [
 
       {
         path: "interview/schedule", component: ScheduleInterviewComponent
-      }
+      },
     ]
   },
   {

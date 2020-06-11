@@ -54,3 +54,7 @@ SELECT * FROM ARMS.JobDescription
 
 --To get Object id of ARMS.JobDescription
 Select OBJECT_Id('ARMS.JobDescription')
+
+--Adding the column skills in table
+ALTER TABLE ARMS.JobDescription 
+ADD skills varchar(255)
