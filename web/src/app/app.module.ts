@@ -1,3 +1,5 @@
+import { LocationComponent } from './settings/components/location/location.component';
+import { RoundTypeComponent } from './settings/components/round-type/round-type.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule,  } from '@angular/forms';
@@ -35,7 +37,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { SettingsComponent } from './settings/settings.component';
 
-
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
 
@@ -68,7 +69,9 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     CandidateComponent,
     EmailListModalComponent,
     InterviewListComponent,
-    SettingsComponent
+    SettingsComponent,
+    RoundTypeComponent,
+    LocationComponent
   ],
   imports: [
     MDBBootstrapModule.forRoot(),

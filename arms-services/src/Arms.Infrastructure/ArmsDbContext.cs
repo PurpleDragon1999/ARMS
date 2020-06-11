@@ -23,8 +23,6 @@ namespace Arms.Infrastructure
         public virtual DbSet<RoundType> RoundType { get; set; }
         public virtual DbSet<CriteriaType> CriteriaType { get; set; }
         public virtual DbSet<Loc> Loc { get; set; }
-
-
         public virtual DbSet<ApplicationStatusType> ApplicationStatusType { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
