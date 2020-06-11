@@ -12,9 +12,14 @@ namespace Arms.Infrastructure
             : base(options)
         {
         }
+
+    
         public virtual DbSet<JobDescription> JobDescription { get; set; }
         public virtual DbSet<EmploymentType> employmentType  { get; set; }
         public virtual DbSet<EligibilityCriteria>eligibilityCriteria { get; set; }
+        public virtual DbSet<Interview> Interview { get; set; }
+        public virtual DbSet<Round> Round { get; set; }
+        public virtual DbSet<RoundType> RoundType { get; set; }
         public virtual DbSet<CriteriaType> CriteriaType { get; set; }
         public virtual DbSet<Loc> Loc { get; set; }
 

@@ -15,7 +15,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { EmployeeFormComponent } from "./employee/components/employee-form/employee-form.component";
 import { EmployeeUploadComponent } from "./employee/components/employee-upload/employee-upload.component";
 import { EmployeeComponent } from "./employee/containers/employee/employee.component";
-import { HrInterviewAssessementComponent } from './hr-interview-assessement/hr-interview-assessement.component';
+import { HrInterviewAssessementComponent } from './hr-interview-assessement/hr-interview-assessment.component'
 import { HrComponent } from './hr/hr.component';
 import { JdFormComponent } from './jd-form/jd-form.component';
 import { JdPdfComponent } from './jd-form/jd-pdf/jd-pdf.component';
@@ -33,6 +33,7 @@ import { CandidateComponent } from './candidate/candidate.component';
 import { EmailListModalComponent } from './email-list-modal/email-list-modal.component';
 import { SettingsComponent } from './settings/settings.component';
 import {MDBBootstrapModule} from 'angular-bootstrap-md';
+
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 

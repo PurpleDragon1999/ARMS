@@ -56,4 +56,9 @@ Building Blocks/
 *.g.props
 *.g.targets
 
+
 appsettings.json
+
+[Dd]esktop.ini
+debug.log
+
