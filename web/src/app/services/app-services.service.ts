@@ -41,7 +41,7 @@ export class AppServicesService {
 
   //Regarding tokens
   getToken(): string {
-    return localStorage.getItem('x-auth-token');
+    return localStorage.getItem('Authorized');
   }
 
   tokenDecoder(): any {
@@ -86,7 +86,7 @@ export class AppServicesService {
   //   return this.http.put<any>(`${USER_DOMAIN}/api/jobDescription/${jobId}`,jobFormObject, this.options);
   // }
   updateJobInfo(jobFormObject,jobId): Observable<HttpResponse<any>>{
-       return this.http.put<any>(`${DOTNET_DOMAIN}/api/jobDescription/${jobId}`,jobFormObject, this.httpOptions);
+       return this.http.put<any>(`${DOTNET_DOMAIN}/api/jobDescription/${jobId}`,jobFormObject, {...this.httpOptions,observe: 'response'});
      }
   deleteJd(id): Observable<any>{
     return this.http.delete<any>(`${DOTNET_DOMAIN}/api/jobDescription/${id}`, {...this.httpOptions,observe: 'response'});
