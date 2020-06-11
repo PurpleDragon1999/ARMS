@@ -82,7 +82,7 @@ export class LoginComponent implements OnInit {
           //   "x-auth-token",
           //   `${res.result.payload.data[""]}`
           // );
-          console.log(res.result);
+        
           window.localStorage.setItem(
             "Authorized",
             `${res.result.payload.authorized}`
@@ -95,7 +95,6 @@ export class LoginComponent implements OnInit {
       
           if (role == this._env.ADMIN) {
              this._router.navigate(['/admin']);
-             console.log(role);
           }
           else if (role == this._env.SUPERUSER) {
             this._router.navigate(['/superuser']);

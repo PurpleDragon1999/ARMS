@@ -13,7 +13,6 @@ export class RoleGuardService implements CanActivate {
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     if (localStorage.getItem('Authorized')) {
       const user = this._service.tokenDecoder().role;
-      console.log(user);
       if (user === next.data.role) {
         return true;
       }
