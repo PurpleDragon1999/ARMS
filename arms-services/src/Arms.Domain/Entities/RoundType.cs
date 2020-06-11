@@ -1,10 +1,11 @@
 using Hrms.Core.Domains.Entities;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Arms.Domain.Entities
 {
-    public partial class RoundType
+    public class RoundType : Entity
     {
 
         public int Id { get; set; }

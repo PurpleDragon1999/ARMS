@@ -38,13 +38,17 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
             builder.Property(e => e.RoundTypeId).HasColumnName("roundTypeId");
 
             builder.HasOne(d => d.Interview)
-                .WithMany(p => p.Round)
+                .WithMany()
                 .HasForeignKey(d => d.InterviewId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Interview");
 
             /*builder.HasOne(d => d.RoundType)
                 .WithMany(p => p.Round)
+=======
+            builder.HasOne(d => d.RoundType)
+                .WithMany()
+>>>>>>> 2be29f0c4f54ca4f7629f009fdac4bbae995f4b2
                 .HasForeignKey(d => d.RoundTypeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_roundType");*/

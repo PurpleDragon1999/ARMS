@@ -5,11 +5,6 @@ namespace Arms.Domain.Entities
 {
     public class Interview
     {
-        public Interview()
-        {
-            Round = new HashSet<Round>();
-        }
-
         public int Id { get; set; }
         public string Code { get; set; }
         public DateTime Date { get; set; }
@@ -23,6 +18,6 @@ namespace Arms.Domain.Entities
         public string ModifiedBy { get; set; }
 
         public JobDescription Job { get; set; }
-        public ICollection<Round> Round { get; set; }
+
     }
 }
