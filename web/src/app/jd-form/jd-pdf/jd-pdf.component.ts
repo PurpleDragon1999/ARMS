@@ -75,6 +75,7 @@ export class JdPdfComponent implements OnInit {
   //later achieved function which divides the content into pagers too but not able to set top margins
   convertToPDF() {
     var data = document.getElementById('content');
+    data.style.display="block";
     html2canvas(data, { allowTaint: true }).then(canvas => {
        let HTML_Width = canvas.width;
        let HTML_Height = canvas.height;
@@ -99,11 +100,12 @@ export class JdPdfComponent implements OnInit {
         }
         pdf.save("jobdescription"+this.jdObject.id+'.pdf');
         
-      //  this.appService.updateJobInfo({pdfblobData:blobPdf},Number(this.jdObject.id)).subscribe((res: any) => {
-      //          console.log(res.result.payload.data);
+       this.appService.updateJobInfo({pdfString:pdf.output()},Number(this.jdObject.id)).subscribe((res: any) => {
+               console.log(res.result.payload.data);
 
-      //     });
+          });
       });
+      data.style.display="none";
    setTimeout(() => {
       this.navigation();
      }, 5000);

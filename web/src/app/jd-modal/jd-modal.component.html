@@ -123,13 +123,14 @@
         <div class="form-group">
           <label for="eligibilityCriteria"><b>Eligibility criteria</b><span class="asterick">*</span></label>
           <select
+             id="eligibilityCriteria"
             name="eligibilityCriteria"
             [ngModel]="eligibilityCriteria"
             type="text"
             required
             class="form-control form-control-lg"
             placeholder="Eligibility Criteria"
-            ngModel
+            #eligibilityCriteria="ngModel"
           >
           <option class="select-css"*ngFor="let el of eligibilityCriterias" [ngValue]="el.id">
             {{ el.eligibilityCriteriaName }}

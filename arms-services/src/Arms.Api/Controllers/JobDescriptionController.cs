@@ -12,6 +12,7 @@ using System.IO;
 using System.Reflection.Metadata;
 using Microsoft.EntityFrameworkCore;
 using System.Net.Mail;
+using Arms.Domain.CustomEntities;
 
 namespace Arms.Api.Controllers
 {
@@ -190,7 +191,7 @@ namespace Arms.Api.Controllers
         }
         //PUT:api/jobdescription/id
         [HttpPut("{id}")]
-        public IActionResult UpdateJd(int id, [FromBody]JobDescription job)
+        public IActionResult UpdateJd(int id, [FromBody]CustomJd job)
         {
             try
             {
@@ -209,30 +210,30 @@ namespace Arms.Api.Controllers
                     };
                     return StatusCode(404, resNull);
                 }
-                if (job.openingDate != null)
-                    jobInDb.openingDate = job.openingDate;
+                //if (job.openingDate != null)
+                //    jobInDb.openingDate = job.openingDate;
 
-                if (job.closingDate != null)
-                    jobInDb.closingDate = job.closingDate;
+                //if (job.closingDate != null)
+                //    jobInDb.closingDate = job.closingDate;
 
-                if (job.locationId != 0)
-                    jobInDb.locationId = job.locationId;
+                //if (job.locationId != 0)
+                //    jobInDb.locationId = job.locationId;
 
-                if (job.description != null)
-                    jobInDb.description = job.description;
+                //if (job.description != null)
+                //    jobInDb.description = job.description;
 
-                if (job.jobTitle != null)
-                    jobInDb.jobTitle = job.jobTitle;
+                //if (job.jobTitle != null)
+                //    jobInDb.jobTitle = job.jobTitle;
 
-                if (job.skills != null)
-                    jobInDb.skills = job.skills;
+                //if (job.skills != null)
+                //    jobInDb.skills = job.skills;
 
-                if (job.vacancies != 0)
-                    jobInDb.vacancies = job.vacancies;
+                //if (job.vacancies != 0)
+                //    jobInDb.vacancies = job.vacancies;
 
-                if (job.salary != 0)
-                    jobInDb.salary = job.salary;
-
+                //if (job.salary != 0)
+                //    jobInDb.salary = job.salary;
+                Console.WriteLine(job.pdfString);
                 _context.JobDescription.Update(jobInDb);
                 _context.SaveChanges();
                 var response = new

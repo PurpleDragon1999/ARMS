@@ -23,7 +23,9 @@ namespace Arms.Infrastructure
         public virtual DbSet<RoundType> RoundType { get; set; }
         public virtual DbSet<CriteriaType> CriteriaType { get; set; }
         public virtual DbSet<Loc> Loc { get; set; }
-        public virtual DbSet<ApplicationStatusType> ApplicationStatusType { get; set; }
+       public virtual DbSet<ApplicationStatusType> ApplicationStatusType { get; set; }
+       public virtual DbSet<Skill> Skill { get; set; }
+
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -49,7 +51,7 @@ namespace Arms.Infrastructure
             modelBuilder.ApplyConfiguration(new ResumeEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new RoundEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new RoundTypeEntityTypeConfiguration());
-
+            modelBuilder.ApplyConfiguration(new SkillEntityTypeConfiguration());
         }
     }
 }

@@ -29,7 +29,7 @@ namespace Arms.Api.Controllers
         {
             var response = new
             {
-                success = "true",
+                success = true,
                 payload = new
                 {
                   message = "Email Sent Successfully"

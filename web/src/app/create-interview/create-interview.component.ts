@@ -28,7 +28,6 @@ export class CreateInterviewComponent implements OnInit {
   }
   dateNew:any;
   interview: any = {}
-  code:any;
   loadInterview(interviewId){
     return this. AppServicesService.getInterviewById(interviewId).subscribe((response: any) => {
       this.interview = response.result.payload.data

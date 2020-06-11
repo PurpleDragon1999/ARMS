@@ -18,9 +18,9 @@ export class AppServicesService {
   // }
   headers: HttpHeaders = new HttpHeaders({
     'Content-Type': 'application/json',
-       // Authorization: localStorage.getItem("Authorization")
+        Authorization: localStorage.getItem("Authorization")
        //hard code token here
-    'Authorization': 'Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjI2RTcyQjI1MTM1NUJGODFDOTA5QTVEQ0UzQTNENUIwNEI5OTMxMDEiLCJ0eXAiOiJhdCtqd3QiLCJ4NXQiOiJKdWNySlJOVnY0SEpDYVhjNDZQVnNFdVpNUUUifQ.eyJuYmYiOjE1OTE3MTE0MDcsImV4cCI6MTU5MTc0MDIwNywiaXNzIjoiaHR0cHM6Ly9ocm1zLWlkZW50aXR5LWRldi5henVyZXdlYnNpdGVzLm5ldCIsImF1ZCI6WyJhY2NvdW50IiwibG1zIl0sImNsaWVudF9pZCI6ImhybXNtb2JpbGUiLCJzdWIiOiJhMzhkZjNmYi0wOTZlLTQ1OGMtODljMS0xMmNkNjM4Y2Q5NjYiLCJhdXRoX3RpbWUiOjE1OTE3MTE0MDcsImlkcCI6ImxvY2FsIiwibmFtZSI6IlNvbmFsaSIsImxhc3RfbmFtZSI6IkNoYXdsYSIsImVtYWlsIjoic29uYWxpLmNoYXdsYUBjeWdycC5jb20iLCJzY29wZSI6WyJvcGVuaWQiLCJwcm9maWxlIiwiYWNjb3VudCIsImxtcyIsIm9mZmxpbmVfYWNjZXNzIl0sImFtciI6WyJwYXNzd29yZCJdfQ.Out_AE0qBNEdwbn-1TeXXvE9m9ern92tlAgOy8MVApH4j9JcRlkaBjwB9c1gnhTfCHNIu-K4dCBMMyBHtU-icY5M-6dN-z7jzvzWsRPSS782BW-pwxC-HsoAGo7YdHyyGrF5bsqfTDv09KwnCA-Bz53IhiEl4Vjs9Jd70QGuIRiw5luwnwhsC5vuYVYPCvJkRHlgC18qYA8WpQo8-FdsHewPvqKonvPBWoXEdjLMMa8V-NmZPqYQis3IYUT_XNW52wPvO32B8njdGCluUl7zTsoVyaZkqfe3nXk1aanENJPkhWxMKhOTejY2tYc-gv6WQMU6x3MIZH4gSqx9mMwnR4x6xW2_t1bcX8TbG03tN1vY1GzYETknqC5JEW3obm5lEoUjCMKbRhkzhwl7P2LD0ZB7ao-BpKJAlEXV57tSZ_FsDKyv3iRDTYtgeOj2mM3oZJ8Q8msbURj2FwfOEpAEOhydvX3TehtCX6RIjs8veuHb9JlR25B0yBhHiCiyTVugjjSe4nWAzQcfAIM_wcIokfkBmHaP3QN4QmXRAwYbcXhDE8uaEUDaAvgowmothwtyF9mj1oHaT3QTjN8KBPxD0QsUMDj3N-UYwnhGzL915XS8U1-40yxb2TcD_gWRz0f8dZ9A3cQ00JUVmpy6uH7LE7vsMciCNQqbUuhq_-_uruU'
+   
   });
   
   createHeader: HttpHeaders= new HttpHeaders({
@@ -74,6 +74,9 @@ export class AppServicesService {
  }  
  getAllLocations():Observable<HttpResponse<any>>{
   return this.http.get<any>(`${DOTNET_DOMAIN}/api/location`, this.httpOptions);
+ }
+ getSkills():Observable<HttpResponse<any>>{
+  return this.http.get<any>(`${DOTNET_DOMAIN}/api/skill`, this.httpOptions);
  }
   getJobsById(Id): Observable<HttpResponse<any>>{
     return this.http.get<any>(`${USER_DOMAIN}/api/jobDescription/${Id}`, this.options);
