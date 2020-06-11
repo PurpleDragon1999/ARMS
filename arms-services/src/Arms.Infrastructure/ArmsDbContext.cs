@@ -1,6 +1,7 @@
 using Arms.Domain.Entities;
 using Arms.Infrastructure.EntityTypeConfigurations;
 using Microsoft.EntityFrameworkCore;
+using Arms.Domain.Entities;
 
 namespace Arms.Infrastructure
 {
@@ -23,6 +24,8 @@ namespace Arms.Infrastructure
         public virtual DbSet<CriteriaType> CriteriaType { get; set; }
         public virtual DbSet<Loc> Loc { get; set; }
 
+
+        public virtual DbSet<ApplicationStatusType> ApplicationStatusType { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
