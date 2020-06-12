@@ -55,7 +55,6 @@ Building Blocks/
 *.cache
 *.g.props
 
-appsettings.json
 Arms.Api.csproj
 Arms.Api.csproj.user
 
