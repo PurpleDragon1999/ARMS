@@ -25,7 +25,7 @@ namespace Arms.Infrastructure
         public virtual DbSet<Loc> Loc { get; set; }
         public virtual DbSet<ApplicationStatusType> ApplicationStatusType { get; set; }
         public virtual DbSet<Skill> Skill { get; set; }
-        public virtual DbSet<HrmsEmployee>Employee  { get; set; }
+      
 
 
 
@@ -54,7 +54,7 @@ namespace Arms.Infrastructure
             modelBuilder.ApplyConfiguration(new RoundEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new RoundTypeEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new SkillEntityTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new HrmsEmployeeEntityTypeConfiguration());
+           
         }
     }
 }
