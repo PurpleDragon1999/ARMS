@@ -1,141 +1,26 @@
-<!--Accordion wrapper-->
-<div class="page-header">
-  <h2 class="page-title"><b>Settings </b></h2>
-</div>
-<div
-  class="accordion md-accordion accordion-blocks"
-  id="accordionEx78"
-  role="tablist"
-  aria-multiselectable="true"
->
-  <!-- Accordion card -->
-  <div class="card">
-    <!-- Card header -->
-    <div class="card-header" role="tab" id="headingUnfiled">
-      <!--Options-->
-      <div class="dropdown float-right">
-        <button
-          class="btn btn-gradient-danger mr-2 add-button"
-          type="button"
-          (click)="addRoundType()"
-        >
-          <i class="fas fa-plus-circle"></i>
-        </button>
-      </div>
-      <!-- Heading -->
-      <a
-        data-toggle="collapse"
-        data-parent="#accordionEx78"
-        href="#collapseUnfiled"
-        aria-expanded="true"
-        aria-controls="collapseUnfiled"
-      >
-        <h5 class="mt-1 mb-0">
-          <span
-            ><b>Round Type </b> <i class="fas fa-angle-down rotate-icon"></i
-          ></span>
-        </h5>
-      </a>
-      <div
-        id="collapseUnfiled"
-        class="collapse"
-        role="tabpanel"
-        aria-labelledby="headingUnfiled"
-        data-parent="#accordionEx78"
-      >
-        <div class="card">
-          <div class="card-body">
-            <p>round info</p>
-          </div>
-        </div>
-      </div>
-      <div
-        id="collapseUnfiled"
-        class="collapse"
-        role="tabpanel"
-        aria-labelledby="headingUnfiled"
-        data-parent="#accordionEx78"
-      >
-        <div class="card">
-          <div class="card-body">
-            <p>round info</p>
-          </div>
-        </div>
-      </div>
+<div class="main-panel">
+  <div class="page-header">
+    <h2 class="page-title"><b>Settings </b></h2>
+  </div>
 
-      <form class="card" [formGroup]="roundTypeForm" (ngSubmit)="onSubmit()">
-        <div formArrayName="roundTypes">
-          <div
-            *ngFor="
-              let roundType of roundTypes().controls;
-              let typeIndex = index
-            "
-          >
-            <div class="card-body" [formGroupName]="typeIndex">
-              Round Type Name :
-              <input
-                type="text"
-                class="input-box"
-                formControlName="firstName"
-              />
-              <button
-                class="btn btn-gradient-danger mr-2 add-button del-button"
-              >
-                <i
-                  class="fas fa-trash"
-                  (click)="removeRoundType(typeIndex)"
-                ></i>
-              </button>
-              <div class="add-criteria" formArrayName="criteria">
-                <div
-                  *ngFor="
-                    let criterion of roundCriteria(typeIndex).controls;
-                    let criteriaIndex = index
-                  "
-                >
-                  <div
-                    class="criteria form-control"
-                    [formGroupName]="criteriaIndex"
-                  >
-                    Criteria Name :
-                    <input
-                      type="text"
-                      class="input-box"
-                      formControlName="criterion"
-                    />
-                    <button
-                      class="btn btn-gradient-danger mr-2 add-button del-button"
-                    >
-                      <i
-                        class="fas fa-trash"
-                        (click)="removeRoundCriteria(typeIndex, criteriaIndex)"
-                      ></i>
-                    </button>
-                  </div>
-                </div>
-                <button
-                  class="btn btn-gradient-danger mr-2 add-button"
-                  type="button"
-                  (click)="addRoundCriteria(typeIndex)"
-                >
-                  <i class="fas fa-plus-circle"></i>
-                </button>
-                <a>Add New Criterion</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <p>
-          <button
-            *ngIf="addRound == true"
-            type="submit"
-            class="btn btn-gradient-danger mr-2 submit-button"
-          >
-            Submit
-          </button>
-        </p>
-      </form>
+  <div class="row">
+    <div
+      class="col-md-12 grid-margin accordion md-accordion accordion-blocks mb-0"
+      id="roundAccordionView"
+      role="tablist"
+      aria-multiselectable="true">
+     <app-round-type></app-round-type> 
     </div>
+
+    <div
+    class="col-md-12 grid-margin accordion md-accordion accordion-blocks"
+    id="locationAccordionView"
+    role="tablist"
+    aria-multiselectable="true">
+    
+    <app-location></app-location>
+
+  </div>
+
   </div>
 </div>
