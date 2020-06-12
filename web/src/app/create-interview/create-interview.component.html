@@ -1,5 +1,14 @@
+
 <div class="page-header">
-  <h4 class="page-title myclass" ><b>Create Interview</b></h4>
+  <h4 class="page-title myclass"*ngIf=" formType ==='update';else next " ><b>
+   Update Interview
+  </b></h4>
+  <ng-template #next>
+    <h4 class="page-title myclass"  ><b>
+      Create Interview
+     </b></h4>
+  </ng-template>
+  
 </div>
       <div class="card">
         <div class="card-body">
@@ -31,6 +40,7 @@
               </div>
             </div>
             </div>
+            
             <div class="form-group">
               <label for="jd">Job Title<span class="asterick">*</span></label>
               <input
@@ -244,5 +254,3 @@
           </form>
         </div>
       </div>
-   
-

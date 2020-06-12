@@ -1,5 +1,4 @@
 namespace Arms.Domain.Entities
-
 {
     public class Location
     {

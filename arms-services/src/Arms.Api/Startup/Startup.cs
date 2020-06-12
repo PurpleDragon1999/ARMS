@@ -28,22 +28,20 @@ namespace Arms.Api.Startup
 
         private readonly IHostingEnvironment _environment;
         private IConfiguration Configuration { get; }
-        
+
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-
             string connString = this.Configuration.GetConnectionString("db");
             services.AddDbContext<Arms.Infrastructure.ArmsDbContext>(o => o.UseSqlServer(connString));
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
             services
                 .AddCustomMvc()
                 .AddCustomAuthentication(Configuration)
                 .AddCustomSwagger(Configuration)
                 .AddArmsApplicationServices(Configuration)
                 .AddCors();
+               
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -64,16 +62,19 @@ namespace Arms.Api.Startup
                         c.OAuthAppName("ARMS Swagger UI");
                     });
             }
-            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+
+
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());  //mine
+
             app.UseMvcWithDefaultRoute();
         }
-        
+
         private void ConfigureAuth(IApplicationBuilder app)
         {
             app.UseAuthentication();
         }
     }
-    
+
     internal static class CustomExtensionsMethods
     {
         public static IServiceCollection AddCustomMvc(this IServiceCollection services)

@@ -28,6 +28,7 @@ namespace Arms.Api.Controllers
         [HttpGet]
         public IActionResult GetInterviews()
         {
+
             List<Interview> interviews = _context.Interview.Include(c => c.JobDescription).ToList();
             try
             {

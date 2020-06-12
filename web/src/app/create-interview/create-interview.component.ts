@@ -1,6 +1,6 @@
 import { InterviewService } from './../services/interview.service';
 
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit,Input } from "@angular/core";
 import { AppServicesService } from "../services/app-services.service";
 import { Router} from "@angular/router";
 import { ICreate } from "../models/create.interface";
