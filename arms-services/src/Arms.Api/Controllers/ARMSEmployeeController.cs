@@ -127,7 +127,7 @@ namespace Arms.Api.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateEmployee([FromBody] CustomEmployee customDTO)
+        public IActionResult CreateEmployee([FromBody] CustomARMSEmployee customDTO)
         {
             try
             {
@@ -135,14 +135,12 @@ namespace Arms.Api.Controllers
                 {
                     Id = customDTO.Id,
                     Name = customDTO.Name,
-                    Code = customDTO.Code,
-                    Designation = customDTO.Designation,
-                    Role = customDTO.Role,
-                    Email = customDTO.Email,
-                    CreatedBy = customDTO.CreatedBy,
-                    ModifiedBy = customDTO.ModifiedBy,
-                    CreatedAt = customDTO.ModifiedAt,
-                    ModifiedAt = customDTO.ModifiedAt,
+                    Active = customDTO.Active,
+                    IsSystemRole = customDTO.IsSystemRole,
+                    SystemName = customDTO.SystemName,
+                    DateCreated = customDTO.DateCreated,
+                    DateModified = customDTO.DateModified,
+                    RoleOrder = customDTO.RoleOrder,
                 };
                 _context.ARMSEmployee.Add(employeeObj);
                 _context.SaveChanges();
@@ -175,36 +173,28 @@ namespace Arms.Api.Controllers
 
 
         [HttpPatch("{id}")]
-        public IActionResult UpdateEmployee(int id, [FromBody] CustomEmployee employeeObj)
+        public IActionResult UpdateEmployee(int id, [FromBody] CustomARMSEmployee employeeObj)
         {
             var employee = _context.ARMSEmployee.SingleOrDefault(c => c.Id == id);
             try
             {
                 if (employee != null)
                 {
-                    if (employeeObj.Id != null)
-                    {
-                        employee.Id = employeeObj.Id;
-                    }
                     if (employeeObj.Name != null)
                     {
                         employee.Name = employeeObj.Name;
                     }
-                    if (employeeObj.Code != null)
+                    if (employeeObj.SystemName != null)
                     {
-                        employee.Code = employeeObj.Code;
+                        employee.SystemName = employeeObj.SystemName;
                     }
-                    if (employeeObj.Designation != null)
+                    if (employeeObj.DateCreated != null)
                     {
-                        employee.Designation = employeeObj.Designation;
+                        employee.DateCreated = employeeObj.DateCreated;
                     }
-                    if (employeeObj.Role != null)
+                    if (employeeObj.DateModified != null)
                     {
-                        employee.Role = employeeObj.Role;
-                    }
-                    if (employeeObj.Email != null)
-                    {
-                        employee.Email = employeeObj.Email;
+                        employee.DateModified = employeeObj.DateModified;
                     }
                     _context.ARMSEmployee.Update(employee);
                     _context.SaveChanges();
