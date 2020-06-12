@@ -13,7 +13,6 @@ namespace Arms.Infrastructure
             : base(options)
         {
         }
-
         public virtual DbSet <RoundType> RoundType { get;set ;}
         public virtual DbSet<JobDescription> JobDescription { get; set; }
         public virtual DbSet<EmploymentType> employmentType  { get; set; }
@@ -24,9 +23,6 @@ namespace Arms.Infrastructure
         public virtual DbSet<Loc> Loc { get; set; }
        public virtual DbSet<ApplicationStatusType> ApplicationStatusType { get; set; }
        public virtual DbSet<Skill> Skill { get; set; }
-
-
-
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
