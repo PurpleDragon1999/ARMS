@@ -1,11 +1,11 @@
 export interface jobDescription{
- jdId:string,
+// jdId:string,
 jdTitle:string,
 openingDate:Date,
 closingDate:Date,
 vacancies:number,
 salary:number,
-skills:string,
+//skills:string,
 eligibilityCriteria:string,
 jobType:string,
 location:string,

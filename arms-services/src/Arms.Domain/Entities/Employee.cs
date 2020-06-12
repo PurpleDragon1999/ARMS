@@ -4,7 +4,6 @@ using Hrms.Core.Domains.Entities;
 
 namespace Arms.Domain.Entities
 {
-
     public partial class Employee
     {   [Key]
         public int? EmployeeDetailId { get; set; }

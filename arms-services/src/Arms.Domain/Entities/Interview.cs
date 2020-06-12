@@ -6,6 +6,7 @@ namespace Arms.Domain.Entities
 {
     public class Interview
     {
+        
         public int Id { get; set; }
         public string Code { get; set; }
         public DateTime Date { get; set; }   
@@ -19,5 +20,8 @@ namespace Arms.Domain.Entities
         public string ModifiedBy { get; set; }
         public JobDescription JobDescription { get; set; }
    }
+
+
+      
 
 }

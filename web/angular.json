@@ -24,8 +24,12 @@
             "tsConfig": "tsconfig.app.json",
             "aot": false,
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.scss"],
-            "scripts": []
+            "styles": ["src/styles.scss"
+             
+              ],
+            "scripts": [
+             
+                     ]
           },
           "configurations": {
             "production": {
@@ -89,6 +93,7 @@
               
             ],
             "scripts": [
+              
             ]
           }
         },

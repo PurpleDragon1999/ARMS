@@ -1,4 +1,4 @@
-using Arms.Domain.Entities;
+﻿using Arms.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -9,7 +9,7 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
 {
     internal class CriteriaTypeEntityTypeConfiguration : IEntityTypeConfiguration<CriteriaType>
     {
-        
+
 
         public void Configure(EntityTypeBuilder<CriteriaType> builder)
         {
@@ -48,7 +48,7 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .HasColumnName("modifiedBy")
                 .HasMaxLength(255)
                 .IsUnicode(false);
-               
+
             builder.HasOne(d => d.roundType)
               .WithMany()
               .HasForeignKey(d => d.roundTypeId)
@@ -57,7 +57,7 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
 
         }
 
-        
+
 
     }
 }
