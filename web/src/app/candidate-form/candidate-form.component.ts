@@ -9,6 +9,7 @@ import { FileItem, FileUploader, ParsedResponseHeaders } from "ng2-file-upload";
 import { NgbModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
 import { ModalComponent } from "../reusable-components/modal/modal.component"
 import { Router } from "@angular/router";
+import { error } from 'util';
 
 
 const URL = 'http://localhost:40802/api/candidate'
@@ -21,7 +22,7 @@ const URL = 'http://localhost:40802/api/candidate'
 export class CandidateFormComponent implements OnInit {
   numbersInYears : Array<number>
   numbersInMonths : Array<number>
-  idProofTypes : Array<object>
+  idProofTypes : any
 
   constructor(private modalService: NgbModal,
     private router: Router,
@@ -55,7 +56,7 @@ export class CandidateFormComponent implements OnInit {
     getIdProofType(){
       this.CandidateService.getIdProofTypes().subscribe((res : INewResponse)=>{
         this.idProofTypes = res.result.payload.data;
-        console.log(this.idProofTypes, "types")
+        
       })
 
     this.uploader.onSuccessItem = (item: any, response: string, status: number) => {
@@ -75,7 +76,7 @@ export class CandidateFormComponent implements OnInit {
     }
 
     this.uploader.onErrorItem = (item: FileItem, response: string, status: number, headers: ParsedResponseHeaders) => {
-    console.log(response, "response")
+    
     let data = JSON.parse(response);
     const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
 
@@ -88,19 +89,94 @@ export class CandidateFormComponent implements OnInit {
     });
     }
 
-    //this.load()
+    this.load()
   }
 
   model: any = {};
   type: String;
   jdObjectId : String
+  formData:FormData = new FormData();
+
+validateApplication(applicationObj : ICandidate){
+  if (applicationObj.nationality == "Indian"){
+    
+    if (this.idProofTypes[0].id != applicationObj.idProofTypeId ){
+       return {
+        result : {
+          success: false,
+          payload: {    
+          message: "If you're Indian you have to give Aadhar No."
+      }},
+      }
+    }
+    else{
+      var idNo = applicationObj.identificationNo
+      var re = /^\d{4}\s\d{4}\s\d{4}$/; 
+      let result = re.test(idNo);
+      if (!result){
+        return {
+          result : {
+            success: false,
+            payload: {    
+            message: "Enter valid Aadhar No."
+        }},
+        }
+      }
+        
+      }
+  }
+  return {
+    result : {
+      success: true,
+      },
+  }
+}
+
+createApplication(applicationObj : ICandidate){
+  let isValid = this.validateApplication(applicationObj)
+
+  applicationObj.experience = applicationObj.experienceInYears + " years " + applicationObj.experienceInMonths + " months"
+  applicationObj.file = ""
+  applicationObj.createdBy = "shivani"
+  applicationObj.modifiedBy = "shivani"
+  applicationObj.jobId = parseInt((this.router.url.split("/")[2]).slice(6));
+  
+  if (isValid.result.success == true){
+    this.CandidateService.createCandidate(applicationObj).subscribe(res=>{
+      if (res.result != null){
+        this.openModal(res)
+      }
+      
+    },
+    error=>{
+      console.log(error)
+    })
+  }
+  else{
+    this.openModal(isValid);
+  }
+
+}
+
+  openModal(res){
+    const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
+  
+    modalRef.componentInstance.shouldConfirm = false;
+  
+    modalRef.componentInstance.success = res.result.success;
+    modalRef.componentInstance.message = res.result.payload.message;
+  
+    modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+    modalRef.close();
+    })
+  }
 
   createCandidate(candidateObj: ICandidate) {
     candidateObj.experience = candidateObj.experienceInYears + " years " + candidateObj.experienceInMonths + " months"
-    console.log(parseInt((this.router.url.split("/")[2]).slice(6)));
+    
     candidateObj.jobId = parseInt((this.router.url.split("/")[2]).slice(6));
     //candidateObj.jobId = parseInt( candidateObj.appliedForJdId.slice(6))
-    console.log(candidateObj, "obj");
+    
     if (
       candidateObj.name &&
       candidateObj.email &&
@@ -128,7 +204,7 @@ export class CandidateFormComponent implements OnInit {
           item.formData = candidateObj.education;
         };
         this.uploader.uploadAll();
-        console.log(this.uploader, "uploader")
+        
       }
     }
 

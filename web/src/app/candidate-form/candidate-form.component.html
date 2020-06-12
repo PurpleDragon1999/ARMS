@@ -113,7 +113,7 @@
             <label >Identification ID<span class="asterick">*</span></label>
             <div class="row">
               <div class="col-md-3">
-                <select type="text" name="IdProofTypeId"                         
+                <select type="text" name="idProofTypeId"                         
                 class="form-control" id="IdProofTypeId" [(ngModel)]="model.IdProofTypeId" #IdProofTypeId="ngModel" 
                 [ngClass]="{ 'is-invalid': IdProofTypeId.dirty && IdProofTypeId.invalid}" required>
                   <option class="select-css" value="none" selected disabled >Select an option</option>
@@ -127,8 +127,8 @@
               </div>
 
               <div class="col-md-3">
-                <input [readOnly]="type == 'progressTracker'"type="text" name="identificationNo" placeholder="0000 0000 0000" 
-                class="form-control" id="identificationNo" [(ngModel)]="model.identificationNo" #identificationNo="ngModel" pattern="^\d{4}\s\d{4}\s\d{4}$"
+                <input [readOnly]="type == 'progressTracker'"type="text" name="identificationNo"  
+                class="form-control" id="identificationNo" [(ngModel)]="model.identificationNo" #identificationNo="ngModel"
                 [ngClass]="{ 'is-invalid': identificationNo.dirty && identificationNo.invalid}" required>
 
                 <div *ngIf="identificationNo.dirty && identificationNo.errors?.required" class="invalid-feedback">
@@ -143,9 +143,9 @@
 
           <div class="form-group">
             <label>Resume<span class="asterick">*</span></label>
-            <div *ngIf="type !== 'progressTracker'" class="input-group col-xs-12">           
-              <input type="file" accept=".pdf, .doc, .docx" name="file" id="file" class="form-control file-upload-info inputfile"
-               ng2FileSelect [uploader]="uploader" ngModel #file="ngModel" 
+            <div *ngIf="type !== 'progressTracker'" class="input-group  col-xs-12">           
+              <input type="file" multiple accept=".pdf, .doc, .docx" name="file" id="file" class="form-control file-upload-info inputfile"
+              (change)="fileChange($event.target.files)" ngModel #file="ngModel" 
                [ngClass]="{ 'is-invalid': file.dirty && file.invalid}" required>
               <label for="file" class="file-upload-browse btn btn-gradient-danger mr-2">Upload Resume</label>
               <div *ngIf="file.dirty  && file.errors?.required" class="invalid-feedback">
@@ -161,7 +161,7 @@
 
           <div class="d-flex flex-row-reverse" *ngIf="type !== 'progressTracker'" >
             <button type="submit" [disabled]="f.invalid" class="btn btn-gradient-danger mr-2" 
-            (click)="f.form.valid; createCandidate(f.value); f.resetForm()"><b>Submit</b></button>
+            (click)="f.form.valid; createApplication(f); f.resetForm()"><b>Submit</b></button>
             <button class="btn btn-light" (click)="f.resetForm()"><b>Cancel</b></button>
           </div>
           

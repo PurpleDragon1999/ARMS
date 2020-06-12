@@ -195,7 +195,7 @@ namespace Arms.Api.Controllers
         [HttpPost]
         public IActionResult CreateCandidate([FromBody] CandidateApplicationResume customObj)
         {
-            var candidate = _context.Candidate.SingleOrDefault(c => c.Email == customObj.Email || c.IdentificationNo == customObj.IdentificationNo);
+            var candidate = _context.Candidate.SingleOrDefault(c => c.Email == customObj.Email || c.IdentificationNo == customObj.IdentificationNo || c.Phone == customObj.Phone);
             var applicationStatus = _context.ApplicationStatusType.SingleOrDefault(c => c.StatusName == "AppliedSuccessfully");
             try
             {
@@ -210,10 +210,9 @@ namespace Arms.Api.Controllers
                         IdProofTypeId = customObj.IdProofTypeId,
                         IdentificationNo = customObj.IdentificationNo,
                         nationality = customObj.nationality,
-                        //CreatedBy = customObj.CreatedBy,
-                        //ModifiedBy = customObj.ModifiedBy
-                        CreatedBy = "shivani",
-                        ModifiedBy = "shivani"
+                        CreatedBy = customObj.CreatedBy,
+                        ModifiedBy = customObj.ModifiedBy
+                        
                        
                     };
                     _context.Candidate.Add(candidateObj);
@@ -249,7 +248,7 @@ namespace Arms.Api.Controllers
                     {
                         var responseFalse = new
                         {
-                            success = true,
+                            success = false,
                             payload = new
                             {
                                 message = "You Cannot Register"

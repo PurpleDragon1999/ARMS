@@ -8,9 +8,11 @@ export interface ICandidate {
     idProofTypeId : number;
     jobId: number;
     education : string;
-    cv : string;
+    file : string;
     experienceInYears : string;
     experienceInMonths : string;
-    appliedForJdId : string
+    appliedForJdId : string,
+    createdBy : string,
+    modifiedBy : string
    
   }
