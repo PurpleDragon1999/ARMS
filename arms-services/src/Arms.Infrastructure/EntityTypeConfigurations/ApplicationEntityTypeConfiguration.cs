@@ -59,7 +59,7 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
             builder.Property(e => e.StatusChangedAt).HasColumnName("statusChangedAt");
 
             builder.HasOne(d => d.ApplicationStatusType)
-                .WithMany(p => p.Application)
+                .WithMany()
                 .HasForeignKey(d => d.ApplicationStatusTypeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_ApplicationStatusTypeId");

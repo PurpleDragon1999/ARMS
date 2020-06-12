@@ -41,6 +41,4 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .IsUnicode(false);
         }
     }
-
 }
-

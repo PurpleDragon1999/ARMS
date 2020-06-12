@@ -4,10 +4,10 @@ using Hrms.Core.Domains.Entities;
 
 namespace Arms.Domain.Entities
 {
-
     public partial class Employee
     {
         public int Id { get; set; }
+        public int? EmployeeDetailId { get; set; }
         public string FirstName { get; set; }
         public Guid UserGuid { get; set; }
         public string LastName { get; set; }
