@@ -36,6 +36,7 @@ import { EmailListModalComponent } from './email-list-modal/email-list-modal.com
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { SettingsComponent } from './settings/settings.component';
+import { IdProofTypeComponent } from './settings/components/id-proof-type/id-proof-type.component';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -71,7 +72,8 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     InterviewListComponent,
     SettingsComponent,
     RoundTypeComponent,
-    LocationComponent
+    LocationComponent,
+    IdProofTypeComponent
   ],
   imports: [
     MDBBootstrapModule.forRoot(),
