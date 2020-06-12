@@ -1,20 +1,17 @@
 using Arms.Domain.Entities;
 using Arms.Infrastructure.EntityTypeConfigurations;
 using Microsoft.EntityFrameworkCore;
-using Arms.Domain.Entities;
 
 namespace Arms.Infrastructure
 {
     public  class ArmsDbContext: DbContext
     {
-      
-
         public ArmsDbContext(DbContextOptions<ArmsDbContext> options)
             : base(options)
         {
         }
-
-    
+        public DbSet<ARMSEmployeeRoles> ARMSEmployeeRoles { get; set; }
+        public DbSet<Employee>Employee { get; set; }
         public virtual DbSet<JobDescription> JobDescription { get; set; }
         public virtual DbSet<EmploymentType> employmentType  { get; set; }
         public virtual DbSet<EligibilityCriteria>eligibilityCriteria { get; set; }
@@ -23,17 +20,13 @@ namespace Arms.Infrastructure
         public virtual DbSet<RoundType> RoundType { get; set; }
         public virtual DbSet<CriteriaType> CriteriaType { get; set; }
         public virtual DbSet<Loc> Loc { get; set; }
-       public virtual DbSet<ApplicationStatusType> ApplicationStatusType { get; set; }
-       public virtual DbSet<Skill> Skill { get; set; }
-
-
-
         public virtual DbSet<ApplicationStatusType> ApplicationStatusType { get; set; }
+        public virtual DbSet<Skill> Skill { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
             modelBuilder.ApplyConfiguration(new EmployeeEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new ARMSEmployeeRolesEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new EmployeeDetailEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new JobDescriptionEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new LocEntityTypeConfiguration());
@@ -54,6 +47,7 @@ namespace Arms.Infrastructure
             modelBuilder.ApplyConfiguration(new RoundEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new RoundTypeEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new SkillEntityTypeConfiguration());
+
         }
     }
 }
