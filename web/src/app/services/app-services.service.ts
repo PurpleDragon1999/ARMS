@@ -110,12 +110,19 @@ export class AppServicesService {
     return this.http.get<IResponse>(`${USER_DOMAIN}/api/candidate/${id}`, this.options)
   }
 
+  // sendMails(mailingList,jdId): Observable<any> {
+  //   let mailObj= {
+  //     jdId: jdId,
+  //     mailList: mailingList
+  //   }
+  //   return this.http.post<any>(`${USER_DOMAIN}/api/jdEmail`, mailObj, { ...this.options, observe: 'response' });
+  // }
   sendMails(mailingList,jdId): Observable<any> {
     let mailObj= {
-      jdId: jdId,
-      mailList: mailingList
+      jobDescriptionId: jdId,
+      emailList: mailingList
     }
-    return this.http.post<any>(`${USER_DOMAIN}/api/jdEmail`, mailObj, { ...this.options, observe: 'response' });
+    return this.http.post<any>(`${DOTNET_DOMAIN}/api/jdEmail`, mailObj, { ...this.httpOptions, observe: 'response' });
   }
 
   search(character: string = "", page: number = 1): Observable<IResponse> {

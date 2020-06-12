@@ -41,14 +41,15 @@ export class JdListComponent implements OnInit {
     const modalRef: NgbModalRef = this.modalService.open(JdModalComponent)
     modalRef.componentInstance.jdUpdateId = id;
     modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+      this.loadJds();
       modalRef.close();
     });
-    this.loadJds();
+   
   }
 
-  sendBulkEmail(jobObjId: string) {
+  sendBulkEmail(id) {
     const modalRef: NgbModalRef = this.modalService.open(EmailListModalComponent);
-    modalRef.componentInstance.jdObjId = jobObjId;
+    modalRef.componentInstance.jdObjId = id;
     modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
       modalRef.close();
     });
