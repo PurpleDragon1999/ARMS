@@ -7,9 +7,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Arms.Infrastructure.EntityTypeConfigurations
 {
-    internal class LocEntityTypeConfiguration : IEntityTypeConfiguration<Loc>
+    internal class LocEntityTypeConfiguration : IEntityTypeConfiguration<Location>
     {
-        public void Configure(EntityTypeBuilder<Loc> builder)
+        public void Configure(EntityTypeBuilder<Location> builder)
         {
             builder.ToTable("Loc", "ARMS");
 
