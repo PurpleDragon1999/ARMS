@@ -8,7 +8,7 @@
             <label for="appliedForJdId">Applied for JD<span class="asterick">*</span></label>
             <input [readOnly]="type == 'progressTracker' || 'candidate'" type="text" name="appliedForJdId" class="form-control" [(ngModel)]="model.appliedForJdId" 
              placeholder="JD referral" #appliedForJdId="ngModel" id="appliedForJdId"
-             [ngClass]="{ 'is-invalid': f.submitted && appliedForJdId.invalid }" required>
+             [ngClass]="{ 'is-invalid': f.submitted && appliedForJdId.invalid }">
             <div *ngIf="f.submitted && appliedForJdId.invalid" class="invalid-feedback">
               <div *ngIf="appliedForJdId.errors.required"><i class="mdi mdi-alert-outline"></i>Applied For JD ID field is required</div>
             </div>
@@ -18,7 +18,7 @@
             <label for="appliedForPosition">Applied for Position<span class="asterick">*</span></label>
             <input [readOnly]="type == 'progressTracker' || 'candidate'" type="text" name="appliedForPosition" class="form-control" [(ngModel)]="model.appliedForPosition" 
              placeholder="JD referral" #appliedForPosition="ngModel" id="appliedForPosition"
-             [ngClass]="{ 'is-invalid': f.submitted && appliedForPosition.invalid }" required>
+             [ngClass]="{ 'is-invalid': f.submitted && appliedForPosition.invalid }">
             <div *ngIf="f.submitted && appliedForPosition.invalid" class="invalid-feedback">
               <div *ngIf="appliedForPosition.errors.required"><i class="mdi mdi-alert-outline"></i>Applied For Position is required</div>
             </div>
@@ -35,18 +35,18 @@
           </div>
 
           <div class="form-group">
-            <label for="Experience">Experience</label>            
-            <input [readOnly]="type == 'progressTracker'" type="text" name="experience" placeholder="Experience" 
-             class="form-control" id="experience" [(ngModel)]="model.experience" #experience="ngModel" 
-             pattern="^(0?[0-9]|[12][0-9]|3[00])$" [ngClass]="{ 'is-invalid': experience.dirty && experience.invalid}">
-            <div *ngIf="experience.dirty && experience.errors?.pattern" class="invalid-feedback">
-              <div><i class="mdi mdi-alert-outline"></i>Experience cannot be more than 30</div>
+            <label for="education">Highest Qualification<span class="asterick">*</span></label>
+            <input [readOnly]="type == 'progressTracker'" type="text" name="education" class="form-control" 
+             [(ngModel)]="model.education"  placeholder="eg: BTech" #education="ngModel" id="education" 
+             [ngClass]="{ 'is-invalid': education.dirty && education.invalid}" required>
+            <div *ngIf="education.dirty && education.errors?.required" class="invalid-feedback">
+              <div *ngIf="education.errors.required"><i class="mdi mdi-alert-outline"></i>Highest Qualification is required</div>
             </div>
-          </div>          
+          </div>
 
           <div class="form-group">
             <label for="email">Email Address<span class="asterick">*</span></label>
-            <input [readOnly]="type == 'progressTracker'" type="email" name="email" placeholder="Email" 
+            <input [readOnly]="type == 'progressTracker'" type="email" name="email" placeholder="eg: example@gmail.com" 
              class="form-control" id="email" [(ngModel)]="model.email" #email="ngModel" 
              pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" 
              [ngClass]="{ 'is-invalid': email.dirty && email.invalid }" required>
@@ -59,16 +59,86 @@
           </div>
 
           <div class="form-group">
-            <label for="aadhar">Aadhar Card Number<span class="asterick">*</span></label>
-            <input [readOnly]="type == 'progressTracker'"type="text" name="aadhar" placeholder="0000 0000 0000" 
-             class="form-control" id="aadhar" [(ngModel)]="model.aadhar" #aadhar="ngModel" pattern="^\d{4}\s\d{4}\s\d{4}$"
-             [ngClass]="{ 'is-invalid': aadhar.dirty && aadhar.invalid}" required>
-            <div *ngIf="aadhar.dirty && aadhar.errors?.required" class="invalid-feedback">
-              <div><i class="mdi mdi-alert-outline"></i>Aadhar Card Number is required</div>
+            <label for="phone">Phone<span class="asterick">*</span></label>
+            <input [readOnly]="type == 'progressTracker'" type="text" name="phone" class="form-control" 
+             [(ngModel)]="model.phone"  placeholder="" #phone="ngModel" id="phone" 
+             [ngClass]="{ 'is-invalid': phone.dirty && phone.invalid}" required>
+            <div *ngIf="phone.dirty && phone.errors?.required" class="invalid-feedback">
+              <div *ngIf="phone.errors.required"><i class="mdi mdi-alert-outline"></i>Phone is required</div>
             </div>
-            <div *ngIf="aadhar.dirty && aadhar.errors?.pattern" class="invalid-feedback">
-              <div><i class="mdi mdi-alert-outline"></i>Enter valid Aadhar Card Number</div>
+          </div>
+
+          <div class="form-group">
+            <label >Experience</label>            
+            <div class="row">
+              <div class="col-md-3">
+                <select type="text" name="experienceInYears" placeholder="In years" 
+                class="form-control" id="experienceInYears" [(ngModel)]="model.experienceInYears" #experienceInYears="ngModel" 
+                [ngClass]="{ 'is-invalid': experienceInYears.dirty && experienceInYears.invalid}" required>
+                  <option class="select-css" value="YYYY" selected disabled  >YYYY</option>
+                  <option class="select-css" [disabled]="type == 'progressTracker'" *ngFor="let number of numbersInYears" value={{number}} >{{number}}</option>
+                  <option class="select-css" [disabled]="type == 'progressTracker'" value="30+">30+</option>
+                </select>
+
+                <div *ngIf="experienceInYears.dirty" class="invalid-feedback">
+                  <div><i class="mdi mdi-alert-outline"></i>Experience in years is required</div>
+                </div>
+              </div>
+
+              <div class="col-md-3">
+                <select type="text" name="experienceInMonths"                         placeholder="In months" 
+                class="form-control" id="experienceInMonths" [(ngModel)]="model.experienceInMonths" #experienceInMonths="ngModel" 
+                [ngClass]="{ 'is-invalid': experienceInMonths.dirty && experienceInMonths.invalid}">
+                  <option class="select-css" value="MM" selected disabled >MM</option>
+                  <option class="select-css" [disabled]="type == 'progressTracker'" *ngFor="let number of numbersInMonths" value={{number}} >{{number}}</option>
+                </select>
+                <div *ngIf="experienceInMonths.dirty" class="invalid-feedback">  
+                  <div><i class="mdi mdi-alert-outline"></i>Experience in months is required</div>
+                </div>
+              </div>
             </div>
+          </div>    
+
+          <div class="form-group">
+            <label for="nationality">Nationality<span class="asterick">*</span></label>
+            <input [readOnly]="type == 'progressTracker'" type="text" name="nationality" class="form-control" 
+             [(ngModel)]="model.nationality"  placeholder="eg: Indian" #nationality="ngModel" id="nationality" 
+             [ngClass]="{ 'is-invalid': nationality.dirty && nationality.invalid}" required>
+            <div *ngIf="nationality.dirty && nationality.errors?.required" class="invalid-feedback">
+              <div *ngIf="nationality.errors.required"><i class="mdi mdi-alert-outline"></i>Nationality is required</div>
+            </div>
+          </div>         
+
+          <div class="form-group">
+            <label >Identification ID<span class="asterick">*</span></label>
+            <div class="row">
+              <div class="col-md-3">
+                <select type="text" name="IdProofTypeId"                         
+                class="form-control" id="IdProofTypeId" [(ngModel)]="model.IdProofTypeId" #IdProofTypeId="ngModel" 
+                [ngClass]="{ 'is-invalid': IdProofTypeId.dirty && IdProofTypeId.invalid}" required>
+                  <option class="select-css" value="none" selected disabled >Select an option</option>
+                  <option class="select-css" [disabled]="type == 'progressTracker'" *ngFor="let idProof of idProofTypes" value={{idProof.id}} >{{idProof.name}}</option>
+                 
+                </select>
+
+                <div *ngIf="IdProofTypeId.dirty" class="invalid-feedback">  
+                  <div><i class="mdi mdi-alert-outline"></i>ID type is required</div>
+                </div>
+              </div>
+
+              <div class="col-md-3">
+                <input [readOnly]="type == 'progressTracker'"type="text" name="identificationNo" placeholder="0000 0000 0000" 
+                class="form-control" id="identificationNo" [(ngModel)]="model.identificationNo" #identificationNo="ngModel" pattern="^\d{4}\s\d{4}\s\d{4}$"
+                [ngClass]="{ 'is-invalid': identificationNo.dirty && identificationNo.invalid}" required>
+
+                <div *ngIf="identificationNo.dirty && identificationNo.errors?.required" class="invalid-feedback">
+                  <div><i class="mdi mdi-alert-outline"></i>Identification No is required</div>
+                </div>
+                <div *ngIf="identificationNo.dirty && identificationNo.errors?.pattern" class="invalid-feedback">
+                  <div><i class="mdi mdi-alert-outline"></i>Enter valid Identification Number</div>
+                </div>
+              </div>
+           </div>
           </div>
 
           <div class="form-group">
@@ -87,17 +157,7 @@
               <input [readOnly]="type == 'progressTracker'" type="text" name="file" class="form-control"
               placeholder="CV will be shown here"> 
             </div>
-          </div>  
-         
-          <div class="form-group">
-            <label for="Skills">Skills<span class="asterick">*</span></label>
-            <textarea [readOnly]="type == 'progressTracker'" name="skills" class="form-control" [(ngModel)]="model.skills"
-             id="skills" rows="4" placeholder="Skills"  #skills="ngModel" 
-             [ngClass]="{ 'is-invalid': skills.dirty && skills.invalid }" required></textarea>
-            <div *ngIf="skills.dirty && skills.errors?.required" class="invalid-feedback">
-              <div><i class="mdi mdi-alert-outline"></i>Skills is required</div>
-            </div>
-          </div>  
+          </div>   
 
           <div class="d-flex flex-row-reverse" *ngIf="type !== 'progressTracker'" >
             <button type="submit" [disabled]="f.invalid" class="btn btn-gradient-danger mr-2" 

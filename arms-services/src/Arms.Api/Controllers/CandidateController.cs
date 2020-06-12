@@ -47,7 +47,7 @@ namespace Arms.Api.Controllers
                     payload = new
                     {
                         data = applications,
-                        message = "Candidate Record Retrieved Successfully"
+                        message = "Applications Retrieved Successfully"
                     }
 
                 };
@@ -209,9 +209,12 @@ namespace Arms.Api.Controllers
                         Phone = customObj.Phone,
                         IdProofTypeId = customObj.IdProofTypeId,
                         IdentificationNo = customObj.IdentificationNo,
-                        CreatedBy = customObj.CreatedBy,
-                        ModifiedBy = customObj.ModifiedBy
-                        //"nationality" : "indian"
+                        nationality = customObj.nationality,
+                        //CreatedBy = customObj.CreatedBy,
+                        //ModifiedBy = customObj.ModifiedBy
+                        CreatedBy = "shivani",
+                        ModifiedBy = "shivani"
+                       
                     };
                     _context.Candidate.Add(candidateObj);
                     _context.SaveChanges();

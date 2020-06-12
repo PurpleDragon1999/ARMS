@@ -1,13 +1,16 @@
 export interface ICandidate {
     name: string;
-    experience: number;
     email: string;
-    aadhar: string;
-    file : string;
-    skills: string;
-    selection: string;
-    appliedFor: string;
-    status : string;
-    flag : number,
-    cv: string;
+    phone : string;
+    experience: string;
+    nationality : string;
+    identificationNo: string;
+    idProofTypeId : number;
+    jobId: number;
+    education : string;
+    cv : string;
+    experienceInYears : string;
+    experienceInMonths : string;
+    appliedForJdId : string
+   
   }

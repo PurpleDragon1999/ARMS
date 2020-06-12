@@ -15,6 +15,7 @@ namespace Arms.Domain.CustomEntities
         public string Experience { get; set; }
         public int JobId { get; set; }
         //public byte[] Cv { get; set; }
+        public string nationality { get; set; }
         public DateTime CreatedAt { get; set; }
         public string CreatedBy { get; set; }
         public DateTime ModifiedAt { get; set; }

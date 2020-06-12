@@ -20,12 +20,20 @@ export class CandidateComponent implements OnInit {
     constructor(private candidateService: CandidateService, private bufferToPdf: BufferToPdf) { }
 
     ngOnInit(): void {
+        this.getCandidates();
         this.searchCandidate({ page: 1, character: '' });
+    }
+
+    getCandidates(){
+        this.candidateService.getApplications().subscribe(res=>{
+            console.log(res, "response")
+        })
     }
 
     searchCandidate(event: IModelForPagination) {
         this.candidateService.searchCandidate(event.page, event.character).subscribe((res: IResponse) => {
             this.candidates = res.payload.data.dataList;
+            console.log(this.candidates, "data")
             this.candidates.forEach((candidate: any) => {
                 candidate.pdf = this.bufferToPdf.bufferToPdf(candidate.cv.data);
                 if (candidate.appliedFor)
@@ -33,6 +41,7 @@ export class CandidateComponent implements OnInit {
             });
             this.columns = ["name", "email", "appliedFor", "experience"];
             this.pager = res.payload.data.pager;
+            console.log(this.candidates, "data")
         }, (error: HttpErrorResponse) => {
 
         });

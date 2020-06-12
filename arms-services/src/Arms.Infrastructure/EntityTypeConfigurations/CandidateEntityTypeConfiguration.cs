@@ -25,6 +25,11 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .IsUnicode(false)
                 .HasComputedColumnSql("('CYGCDID'+CONVERT([nvarchar](57),[id]))");
 
+            builder.Property(e => e.nationality)
+                .IsRequired()
+                .HasColumnName("nationality")
+                .HasMaxLength(100);
+
             builder.Property(e => e.CreatedAt)
                 .HasColumnName("createdAt")
                 .HasDefaultValueSql("(sysdatetime())");
@@ -33,11 +38,6 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .IsRequired()
                 .HasColumnName("createdBy")
                 .HasMaxLength(50);
-
-            //builder.Property(e => e.nationality
-            //    .IsRequired()
-            //    .HasColumnName("nationality")
-            //    .HasMaxLength(100);
 
             builder.Property(e => e.Email)
                 .IsRequired()
