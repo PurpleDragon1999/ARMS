@@ -7,13 +7,16 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Arms.Infrastructure.EntityTypeConfigurations
 {
-    internal class RoundEntityTypeConfiguration: IEntityTypeConfiguration<Round>
+    internal class RoundEntityTypeConfiguration : IEntityTypeConfiguration<Round>
     {
         public void Configure(EntityTypeBuilder<Round> builder)
         {
             builder.ToTable("Round", "ARMS");
 
             builder.Property(e => e.Id).HasColumnName("id");
+            builder.Property(e => e.RoundNumber).HasColumnName("roundNumber");
+            builder.Property(e => e.RoundDate).HasColumnName("roundDate");
+            builder.Property(e => e.RoundTime).HasColumnName("roundTime");
 
             builder.Property(e => e.CreatedAt)
                 .HasColumnName("createdAt")
@@ -47,11 +50,16 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .WithMany(p => p.Round)
 =======
             builder.HasOne(d => d.RoundType)
+<<<<<<< HEAD
                 .WithMany()
 >>>>>>> 2be29f0c4f54ca4f7629f009fdac4bbae995f4b2
+=======
+                .WithMany(p => p.Round)
+>>>>>>> 92912613ef1c99728092eabe5aa53adebe2a73f4
                 .HasForeignKey(d => d.RoundTypeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_roundType");*/
         }
     }
+
 }

@@ -13,7 +13,7 @@ import { stringify } from 'querystring';
   styleUrls: ['./jd-pdf.component.scss']
 })
 export class JdPdfComponent implements OnInit {
-  jdObject:jobDescription;
+  jdObject:any;
   obj:any;
  
   constructor(
@@ -33,13 +33,13 @@ export class JdPdfComponent implements OnInit {
     this.route.params
     .pipe(
       switchMap((params: Params) => {
-       
-     return this.appService.getJdData(params.jdId);
+       return this.appService.getJdData(params.jdId);
       })
       
     )
     .subscribe((res) => {
-      this.jdObject = res.payload.data;
+      this.jdObject = res.result.payload.data;
+    
     });
   }
 
@@ -75,6 +75,7 @@ export class JdPdfComponent implements OnInit {
   //later achieved function which divides the content into pagers too but not able to set top margins
   convertToPDF() {
     var data = document.getElementById('content');
+    data.style.display="block";
     html2canvas(data, { allowTaint: true }).then(canvas => {
        let HTML_Width = canvas.width;
        let HTML_Height = canvas.height;
@@ -97,8 +98,14 @@ export class JdPdfComponent implements OnInit {
           pdf.addImage(imgData, 'PNG',top_left_margin, -(PDF_Height * i) + (top_left_margin * 4)  ,
                        canvas_image_width*0.79, canvas_image_height*0.90);
         }
-         pdf.save("jobdescription"+this.jdObject.jdId+'.pdf');
+        pdf.save("jobdescription"+this.jdObject.id+'.pdf');
+        
+       this.appService.updateJobInfo({pdfString:pdf.output()},Number(this.jdObject.id)).subscribe((res: any) => {
+               
+
+          });
       });
+      data.style.display="none";
    setTimeout(() => {
       this.navigation();
      }, 5000);

@@ -58,4 +58,9 @@ Building Blocks/
 **/appsettings.json 
 *.g.targets
 
+
 appsettings.json
+
+[Dd]esktop.ini
+debug.log
+

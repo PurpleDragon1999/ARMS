@@ -1,7 +1,8 @@
 import { SettingsComponent } from './settings/settings.component';
 import { CreateInterviewComponent } from './create-interview/create-interview.component';
-import { HrInterviewAssessementComponent } from './hr-interview-assessement/hr-interview-assessement.component';
+import { HrInterviewAssessementComponent } from './hr-interview-assessement/hr-interview-assessment.component';
 import { InterviewListComponent } from './interview-list/interview-list.component';
+
 import { ScheduleInterviewComponent } from './schedule-interview/schedule-interview.component';
 import { CandidateFormComponent } from './candidate-form/candidate-form.component';
 import { ProgressTrackerComponent } from './progress-tracker/progress-tracker.component';
@@ -51,11 +52,14 @@ const routes: Routes = [
       {
         path: "home", component: HrComponent
       },
-
+      {
+        path: "candidate", component: CandidateComponent
+      },
       {
         path: "employee", component: EmployeeComponent
       },
-      {path:'interviews', component: InterviewListComponent}
+      {path:'interviews', component: InterviewListComponent},
+    
     ]
   },
   {
@@ -83,7 +87,7 @@ const routes: Routes = [
 
       {
         path: "interview/schedule", component: ScheduleInterviewComponent
-      }
+      },
     ]
   },
   {
@@ -111,6 +115,9 @@ const routes: Routes = [
       { path: 'applied', component: CandidateFormComponent}
     ],
   },
+{
+  path: 'assessment', component: HrInterviewAssessementComponent
+},
 {
   path:'navbar',component:AppNavBarComponent, children:[
     { path:'settings', component:SettingsComponent}

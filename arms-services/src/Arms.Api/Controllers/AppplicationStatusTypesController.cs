@@ -5,38 +5,42 @@ using System.Threading.Tasks;
 using Arms.Application.Services.Users;
 using Arms.Domain.Entities;
 using Arms.Infrastructure;
+using System.Web.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.IO;
+using System.Reflection.Metadata;
+using Microsoft.EntityFrameworkCore;
 
 namespace Arms.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EmploymentTypeController : BaseController
+    public class ApplicationStatusTypesController : BaseController
     {
         private readonly IIdentityService _identityService;
         ArmsDbContext _context;
-        public EmploymentTypeController(IIdentityService identityService, ArmsDbContext armsContext)
+        public ApplicationStatusTypesController(IIdentityService identityService, ArmsDbContext armsContext)
         {
             _identityService = identityService;
             _context = armsContext;
         }
-        //GET:api/employementType
+
+
         [HttpGet]
-        public IActionResult GetEmploymentTypes()
+        public IActionResult GetAllStatusTypes()
         {
             try
             {
-                List<EmploymentType> employmentTypes = _context.employmentType.ToList();
+                List<ApplicationStatusType> statusTypes = _context.ApplicationStatusType.ToList();
                 var response = new
                 {
                     success = "true",
                     payload = new
                     {
-                        data = employmentTypes,
-                        message = "Employment Types Retrieved Successfully"
+                        data = statusTypes,
+                        message = "Application status types retrieved successfully"
                     }
-
                 };
                 return StatusCode(200, response);
             }
@@ -44,95 +48,101 @@ namespace Arms.Api.Controllers
             {
                 var response = new
                 {
-                    success = false,
+                    success = "false",
                     payload = new
                     {
-                        message = ex.InnerException.Message
+                        message = ex.Message
                     }
-
                 };
                 return StatusCode(500, response);
             }
         }
+
+
         [HttpGet("{id}")]
-        public IActionResult GetEmploymentTypeById(int id)
+        public IActionResult GetStatusTypeById(int id)
         {
             try
             {
-                EmploymentType employmentType = _context.employmentType.SingleOrDefault(c => c.Id == id);
-                if (employmentType == null)
+                ApplicationStatusType statusType = _context.ApplicationStatusType.
+                    SingleOrDefault(c => c.Id == id);
+                
+                if (statusType == null)
                 {
                     var resNull = new
                     {
-                        success = false,
+                        success = "false",
                         payload = new
                         {
-                            message = "This Employment Type does not exist"
+                            message = "Application status type does not exist"
                         }
                     };
                     return StatusCode(404, resNull);
                 }
-                var response = new
+                else
                 {
-                    success = true,
-                    payload = new
+                    var response = new
                     {
-                        data = employmentType,
-                        message = "Employment Type Retrieved Successfully"
-                    }
-
-                };
-                return StatusCode(200, response);
+                        success = "true",
+                        payload = new
+                        {
+                            data = statusType,
+                            message = "Application status type retrieved successfully"
+                        }
+                    };
+                    return StatusCode(200, response);
+                }
             }
             catch (Exception ex)
             {
                 var response = new
                 {
-                    success = false,
+                    success = "false",
                     payload = new
                     {
-                        message = ex.InnerException.Message
+                        message = ex.Message
                     }
-
                 };
                 return StatusCode(500, response);
             }
         }
+
+
         [HttpPost]
-        public IActionResult CreateEmploymentType(EmploymentType employmentType)
+        public IActionResult CreateStatusType(ApplicationStatusType statusType)
         {
             try
             {
-                EmploymentType empType = _context.employmentType.SingleOrDefault
-                    (c => c.employmentTypeName == employmentType.employmentTypeName);
-                if (empType != null)
+                ApplicationStatusType checkinDb = _context.ApplicationStatusType.SingleOrDefault(c => c.StatusName == statusType.StatusName);
+                if (checkinDb != null)
                 {
                     var resAlreadyExists = new
                     {
-                        success = false,
+                        success = "false",
                         payload = new
                         {
-                            message = "This Employment Type already exists"
+                            message = "Application status type already exists"
                         }
-
                     };
                     return StatusCode(400, resAlreadyExists);
                 }
-                EmploymentType newEmploymentType = new EmploymentType
+
+                ApplicationStatusType newStatusType = new ApplicationStatusType
                 {
-                    employmentTypeName = employmentType.employmentTypeName
+                    StatusName = statusType.StatusName,
+                    CreatedBy= statusType.CreatedBy,
+                    ModifiedBy= statusType.ModifiedBy
                 };
-                _context.employmentType.Add(newEmploymentType);
+                _context.ApplicationStatusType.Add(newStatusType);
                 _context.SaveChanges();
                 var response = new
                 {
-                    success = true,
+                    success = "true",
                     payload = new
                     {
-                        data = newEmploymentType,
-                        message = "Employment Type Created Successfully"
+                        data = newStatusType,
+                        message = "Application status type created successfully"
                     }
-
                 };
                 return StatusCode(201, response);
             }
@@ -140,49 +150,52 @@ namespace Arms.Api.Controllers
             {
                 var response = new
                 {
-                    success = false,
+                    success = "false",
                     payload = new
                     {
-                        message = ex.InnerException.Message
+                        message = ex.Message
                     }
-
                 };
                 return StatusCode(500, response);
             }
         }
 
-        //PUT:api/employmentType/id
+
         [HttpPut("{id}")]
-        public IActionResult UpdateEmploymentType(int id, [FromBody]EmploymentType employmentType)
+        public IActionResult UpdateStatusType(int id, ApplicationStatusType statusType)
         {
             try
             {
-                EmploymentType empTypeInDb = _context.employmentType.SingleOrDefault(c => c.Id == id);
-                if (empTypeInDb == null)
+                ApplicationStatusType statusTypeInDb = _context.ApplicationStatusType.SingleOrDefault(c => c.Id == id);
+                if (statusTypeInDb == null)
                 {
                     var resNull = new
                     {
-                        success = false,
+                        success = "false",
                         payload = new
                         {
-                            message = "This Employment Type does not exist"
+                            message = "Application status type does not exist"
                         }
                     };
                     return StatusCode(404, resNull);
-
                 }
-                empTypeInDb.employmentTypeName = employmentType.employmentTypeName;
-                _context.employmentType.Update(empTypeInDb);
+
+                if (statusType.StatusName != null)
+                    statusTypeInDb.StatusName = statusType.StatusName;
+
+                if (statusType.ModifiedBy != null)
+                    statusTypeInDb.ModifiedBy = statusType.ModifiedBy;
+
                 _context.SaveChanges();
+
                 var response = new
                 {
-                    success = true,
+                    success = "true",
                     payload = new
                     {
-                        data = empTypeInDb,
-                        message = "Employment Type Updated Successfully"
+                        data = statusTypeInDb,
+                        message = "Application status type updated successfully"
                     }
-
                 };
                 return StatusCode(200, response);
             }
@@ -190,45 +203,44 @@ namespace Arms.Api.Controllers
             {
                 var response = new
                 {
-                    success = false,
+                    success = "false",
                     payload = new
                     {
-                        message = ex.InnerException.Message
+                        message = ex.Message
                     }
-
                 };
                 return StatusCode(500, response);
             }
         }
+
+
         [HttpDelete("{id}")]
-        public IActionResult DeleteEmploymentType(int id)
+        public IActionResult DeleteStatusType(int id)
         {
             try
             {
-                EmploymentType empTypeInDb = _context.employmentType.SingleOrDefault(c => c.Id == id);
-                if (empTypeInDb == null)
+                ApplicationStatusType statusTypeInDb = _context.ApplicationStatusType.SingleOrDefault(c => c.Id == id);
+                if (statusTypeInDb == null)
                 {
                     var resNull = new
                     {
-                        success = false,
+                        success = "false",
                         payload = new
                         {
-                            message = "This Employment Type does not exist"
+                            message = "Application status type does not exist"
                         }
+
                     };
                     return StatusCode(404, resNull);
-
                 }
-
-                _context.employmentType.Remove(empTypeInDb);
+                _context.ApplicationStatusType.Remove(statusTypeInDb);
                 _context.SaveChanges();
                 var response = new
                 {
-                    success = true,
+                    success = "true",
                     payload = new
                     {
-
-                        message = "Employment Type Deleted Successfully"
+                        message = "Application status type deleted successfully"
                     }
 
                 };
@@ -238,18 +250,15 @@ namespace Arms.Api.Controllers
             {
                 var response = new
                 {
-                    success = false,
+                    success = "false",
                     payload = new
                     {
-                        message = ex.InnerException.Message
+                        message = ex.Message
                     }
-
                 };
                 return StatusCode(500, response);
             }
-
-
         }
-    }
 
+    }
 }
