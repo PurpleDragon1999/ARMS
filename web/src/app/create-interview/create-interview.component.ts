@@ -1,5 +1,5 @@
 
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit,Input } from "@angular/core";
 import { AppServicesService } from "../services/app-services.service";
 import { Router} from "@angular/router";
 import { ICreate } from "../models/create.interface";
@@ -19,21 +19,35 @@ export class CreateInterviewComponent implements OnInit {
     private router: Router,
     private modalService : NgbModal,
   ) {}
-
-  ngOnInit() {}
+  @Input() interviewId
+  formType:string
+  ngOnInit() {
+    this.formType="create"
+   this.loadInterview(this.interviewId);
+    
+  }
+  dateNew:any;
   interview: any = {}
-
+  loadInterview(interviewId){
+    return this. AppServicesService.getInterviewById(interviewId).subscribe((response: any) => {
+      this.interview = response.result.payload.data
+      
+      if(this.interview.length!=0)
+      this.formType="update"
+      this.dateNew=this.interview.date.substring(0,10);
+     });
+  }
   createInterview(interview: ICreate) {
     let interviewObj = interview;
     interviewObj.jdId = "CYGJID" + interviewObj.jdId
     this.AppServicesService.createInterview(interview).subscribe((res: any) => {
         const modalRef = this.modalService.open(ModalComponent);
         modalRef.componentInstance.shouldConfirm = false;
-        modalRef.componentInstance.success = res.body.success;
-        modalRef.componentInstance.message = res.body.payload.message;
+        modalRef.componentInstance.success = res.body.result.success;
+        modalRef.componentInstance.message = res.body.result.payload.message;
         modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
           modalRef.close();
-        
+          
         });
     },
     
