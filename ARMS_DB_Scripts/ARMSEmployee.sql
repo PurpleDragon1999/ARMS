@@ -3,9 +3,9 @@ CREATE TABLE [ARMS].[EmployeeRoles](
 	[Name] [nvarchar](255) NOT NULL,
 	[Active] [bit] NOT NULL,
 	[IsSystemRole] [bit] NOT NULL,
-	[SystemName] [nvarchar](255) NULL,
-	[DateCreated] [datetime] NOT NULL,
-	[DateModified] [datetime] NOT NULL,
+	[SystemName] [nvarchar](max) NOT NULL,
+	[DateCreated] [datetime] default (sysdatetime()) NOT NULL,
+	[DateModified] [datetime]default (sysdatetime()) NOT NULL,
 	[RoleOrder] [int] NULL,
  )
  Drop table ARMS.EmployeeRoles 

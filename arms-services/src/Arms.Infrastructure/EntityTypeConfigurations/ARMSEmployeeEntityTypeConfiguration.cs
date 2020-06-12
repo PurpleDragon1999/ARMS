@@ -13,51 +13,37 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
         {
             builder.ToTable("ARMSEmployee", "ARMS");
 
-            builder.Property(e => e.Id).HasColumnName("id");
+            builder.Property(e => e.Id).HasColumnName("Id");
 
             builder.Property(e => e.Name)
                 .IsRequired()
-                .HasColumnName("name")
+                .HasColumnName("Name")
                 .HasMaxLength(50);
 
-            builder.Property(e => e.Email)
+            builder.Property(e => e.Active)
                .IsRequired()
-               .HasColumnName("email")
-               .HasMaxLength(50);
+               .HasColumnName("Active");
 
-            builder.Property(e => e.Designation)
+            builder.Property(e => e.IsSystemRole)
                .IsRequired()
-               .HasColumnName("designation")
-               .HasMaxLength(50);
+               .HasColumnName("IsSystemRole");
 
-            builder.Property(e => e.Role)
+            builder.Property(e => e.SystemName)
                .IsRequired()
-               .HasColumnName("role")
-               .HasMaxLength(50);
+               .HasColumnName("SystemName");
 
-            builder.Property(e => e.Code)
-                .HasColumnName("code")
-                .HasMaxLength(106)
-                .IsUnicode(false)
-                .HasComputedColumnSql("('CYGIID'+CONVERT([varchar](100),[id]))");
-
-            builder.Property(e => e.CreatedAt)
-                .HasColumnName("createdAt")
+            builder.Property(e => e.DateCreated)
+                .HasColumnName("DateCreated")
                 .HasDefaultValueSql("(sysdatetime())");
 
-            builder.Property(e => e.CreatedBy)
-                .HasColumnName("createdBy")
-                .HasMaxLength(50)
-                .IsUnicode(false);
-
-            builder.Property(e => e.ModifiedAt)
-                .HasColumnName("modifiedAt")
+            builder.Property(e => e.DateModified)
+                .HasColumnName("DateModified")
                 .HasDefaultValueSql("(sysdatetime())");
 
-            builder.Property(e => e.ModifiedBy)
-                .HasColumnName("modifiedBy")
-                .HasMaxLength(50)
-                .IsUnicode(false);
+            builder.Property(e => e.RoleOrder)
+                .HasColumnName("RoleOrder");
+
+            
         }
     }
 }

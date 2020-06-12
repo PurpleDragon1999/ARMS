@@ -6,8 +6,8 @@ namespace Arms.Domain.Entities
 {
 
     public partial class Employee
-    {  [Key]
-        public int? EmployeeDetailId { get; set; }
+    {
+        public int Id { get; set; }
         public string FirstName { get; set; }
         public Guid UserGuid { get; set; }
         public string LastName { get; set; }
@@ -18,12 +18,12 @@ namespace Arms.Domain.Entities
         public string PasswordSalt { get; set; }
         public int LocationId { get; set; }
         public bool Active { get; set; }
+        public string SystemName { get; set; }
         public bool Deleted { get; set; }
         public int? DivisionId { get; set; }
         public DateTime? HireDate { get; set; }
         public DateTime? LastLoginDateUtc { get; set; }
         public Location Location { get; set; }
-        public EmployeeDetail EmployeeDetail { get; set; }
        
     }
 }
