@@ -1,3 +1,4 @@
+import { INewResponse } from 'src/app/models/newResponse.interface';
 import { Component, OnInit } from "@angular/core";
 import { CandidateService } from './services/candidate.service';
 import { IResponse } from '../models/response.interface';
@@ -21,12 +22,14 @@ export class CandidateComponent implements OnInit {
 
     ngOnInit(): void {
         this.getCandidates();
-        this.searchCandidate({ page: 1, character: '' });
+        //this.searchCandidate({ page: 1, character: '' });
     }
 
     getCandidates(){
-        this.candidateService.getApplications().subscribe(res=>{
-            
+        this.candidateService.getApplications().subscribe((res: INewResponse)=>{
+        this.candidates = res.result.payload.data
+        this.columns = ["name", "email", "experience", "Job Position"];
+        
         })
     }
 

@@ -31,11 +31,11 @@ namespace Arms.Api.Controllers
             List<Arms.Domain.Entities.Application> applications;
             if (jobId != 0)
             {
-                applications = _context.Application.Include(c => c.Candidate).Include(c => c.ApplicationStatusType).Where(c => c.JobId == jobId).ToList();
+                applications = _context.Application.Include(c => c.Candidate).Include(c => c.ApplicationStatusType).Include(c=> c.Job).Where(c => c.JobId == jobId).ToList();
             }
             else
             {
-                applications = _context.Application.Include(c => c.Candidate).Include(c => c.ApplicationStatusType).ToList();
+                applications = _context.Application.Include(c => c.Candidate).Include(c => c.ApplicationStatusType).Include(c => c.Job).ToList();
             }
 
 

@@ -51,6 +51,7 @@ export class CandidateFormComponent implements OnInit {
     };
     this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => { console.log('ImageUpload:uploaded:', item, status, response); alert('File uploaded successfully'); };
     this.getIdProofType()
+    this.load()
     }
 
     getIdProofType(){
@@ -96,6 +97,29 @@ export class CandidateFormComponent implements OnInit {
   type: String;
   jdObjectId : String
   formData:FormData = new FormData();
+
+  fileChange(files) {
+    
+    let fileList: FileList = files;
+    if(fileList.length > 0) {
+        let file: File = fileList[0];
+        let formData:FormData = new FormData();
+        formData.append(file.name, file);
+        
+        // let headers = new Headers();
+        // /** In Angular 5, including the header Content-Type can invalidate your request */
+        // headers.append('Content-Type', 'multipart/form-data');
+        // headers.append('Accept', 'application/json');
+        // let options = new RequestOptions({ headers: headers });
+        // this.http.post(`${this.apiEndPoint}`, formData, options)
+        //     .map(res => res.json())
+        //     .catch(error => Observable.throw(error))
+        //     .subscribe(
+        //         data => console.log('success'),
+        //         error => console.log(error)
+        //     )
+    }
+}
 
 validateApplication(applicationObj : ICandidate){
   if (applicationObj.nationality == "Indian"){
@@ -204,7 +228,7 @@ createApplication(applicationObj : ICandidate){
           item.formData = candidateObj.education;
         };
         this.uploader.uploadAll();
-        
+console
       }
     }
 
@@ -224,18 +248,18 @@ createApplication(applicationObj : ICandidate){
         (error: HttpErrorResponse) => {
         }
       )}
-    else if(this.router.url.split("/")[1]=="candidateForm"){     
-      this.model.appliedForJdId = this.router.url.split("/")[2];
-      this.service.getJdData(this.model.appliedForJdId).subscribe((res : IResponse)=>{
-        
-        if(res.success==false){
-        this.router.navigate(['/404'])
+    else if(this.router.url.split("/")[1]=="candidateForm"){  
+
+      this.model.appliedForJdId = (this.router.url.split("/")[2]);
+      let jdId = (this.model.appliedForJdId).slice(6)
+      this.service.getJdData(jdId).subscribe((res : INewResponse)=>{
+        if(res.result != null){
+          let jdObject = res.result.payload.data
+          this.model.appliedForPosition = jdObject.jobTitle;
+          this.jdObjectId = jdObject.code;
         }
-        else{
-        let jdObject = res.payload.data
-        this.model.appliedForPosition = jdObject.jdTitle;
-        this.jdObjectId = jdObject._id;
-       }
+      }, error=>{
+        this.router.navigate(['/404'])
       })
     }
   }
