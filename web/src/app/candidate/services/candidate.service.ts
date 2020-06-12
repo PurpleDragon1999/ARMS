@@ -48,6 +48,10 @@ export class CandidateService {
         )
     }
 
+    getApplication(id: string): Observable<INewResponse>{
+        return this.http.get<INewResponse>(`http://localhost:40802/api/candidate/${id}`, this.options)
+      }
+
     getIdProofTypes(){
         return this.http.get<INewResponse>(
             "http://localhost:40802/api/IdProofType", this.options

@@ -72,7 +72,7 @@ namespace Arms.Api.Controllers
         {
             try
             {
-                var application = _context.Application.Include(c=> c.Candidate).Include(c=> c.ApplicationStatusType).SingleOrDefault(c => c.Id == id);
+                var application = _context.Application.Include(c=> c.Candidate).Include(c=> c.ApplicationStatusType).Include(c=> c.Job).SingleOrDefault(c => c.Id == id);
                 if (application != null)
                 {
                     var response = new
@@ -195,7 +195,7 @@ namespace Arms.Api.Controllers
         [HttpPost]
         public IActionResult CreateCandidate([FromBody] CandidateApplicationResume customObj)
         {
-            var candidate = _context.Candidate.SingleOrDefault(c => c.Email == customObj.Email || c.IdentificationNo == customObj.IdentificationNo || c.Phone == customObj.Phone);
+            var candidate = _context.Candidate.FirstOrDefault(c => c.Email == customObj.Email || c.IdentificationNo == customObj.IdentificationNo || c.Phone == customObj.Phone);
             var applicationStatus = _context.ApplicationStatusType.SingleOrDefault(c => c.StatusName == "AppliedSuccessfully");
             try
             {

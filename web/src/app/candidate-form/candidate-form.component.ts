@@ -238,12 +238,13 @@ console
   load(){   
     this.type = this.router.url.split("/")[1];
     if (this.router.url.split("/")[1] == "progressTracker") {
-      let candidateId = this.router.url.split("/")[2];
-      this.service.getCandidate(candidateId).subscribe(
-        (res: IResponse) => {
-          this.model = res.payload.data;
-          this.model.appliedForPosition = this.model.appliedFor.jdTitle
-          this.model.appliedForJdId = this.model.appliedFor.jdId
+      let applicationId = (this.router.url.split("/")[2]).slice(7);
+      this.CandidateService.getApplication(applicationId).subscribe(
+        (res: INewResponse) => {
+          console.log(res, "progress")
+          this.model = res.result.payload.data;
+          this.model.appliedForPosition = this.model.job.jobTitle
+          this.model.appliedForJdId = this.model.job.code
         },
         (error: HttpErrorResponse) => {
         }
