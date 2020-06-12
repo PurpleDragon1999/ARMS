@@ -19,7 +19,7 @@ namespace Arms.Infrastructure
         public virtual DbSet<Round> Round { get; set; }
         public virtual DbSet<RoundType> RoundType { get; set; }
         public virtual DbSet<CriteriaType> CriteriaType { get; set; }
-        public virtual DbSet<Loc> Loc { get; set; }
+        public virtual DbSet<Location> Loc { get; set; }
         public virtual DbSet<ApplicationStatusType> ApplicationStatusType { get; set; }
         public virtual DbSet<Skill> Skill { get; set; }
 
@@ -29,7 +29,7 @@ namespace Arms.Infrastructure
             modelBuilder.ApplyConfiguration(new ARMSEmployeeRolesEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new EmployeeDetailEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new JobDescriptionEntityTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new LocEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new LocationEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new EmploymentTypeEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new EligibilityCriteriaEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new ApplicationEntityTypeConfiguration());
