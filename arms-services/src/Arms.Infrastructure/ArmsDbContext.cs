@@ -10,7 +10,7 @@ namespace Arms.Infrastructure
             : base(options)
         {
         }
-        public DbSet<ARMSEmployee> ARMSEmployee { get; set; }
+        public DbSet<ARMSEmployeeRoles> ARMSEmployeeRoles { get; set; }
         public DbSet<Employee>Employee { get; set; }
         public virtual DbSet<JobDescription> JobDescription { get; set; }
         public virtual DbSet<EmploymentType> employmentType  { get; set; }
@@ -20,13 +20,13 @@ namespace Arms.Infrastructure
         public virtual DbSet<RoundType> RoundType { get; set; }
         public virtual DbSet<CriteriaType> CriteriaType { get; set; }
         public virtual DbSet<Loc> Loc { get; set; }
-       public virtual DbSet<ApplicationStatusType> ApplicationStatusType { get; set; }
-       public virtual DbSet<Skill> Skill { get; set; }
+        public virtual DbSet<ApplicationStatusType> ApplicationStatusType { get; set; }
+        public virtual DbSet<Skill> Skill { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new EmployeeEntityTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new ARMSEmployeeEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new ARMSEmployeeRolesEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new EmployeeDetailEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new JobDescriptionEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new LocEntityTypeConfiguration());

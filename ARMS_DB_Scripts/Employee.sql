@@ -23,7 +23,7 @@ CREATE TABLE [ARMS].[Employees](
 	[IsAllowLogin] [bit] NOT NULL,
 	[EmployeeDetailId] [int] NULL,
 	[PasswordResetRequired] [bit] NOT NULL,
-	[Location] [int] NOT NULL,
+	[Location] [int] NULL,
 	[DateCreated] [datetime] NOT NULL,
 	[DateModified] [datetime] NOT NULL,
 	[Experience] [decimal](8, 2) NULL,

@@ -19,13 +19,11 @@ namespace Arms.Domain.CustomEntities
         public string Password { get; set; }
         public int PasswordFormatId { get; set; }
         public string PasswordSalt { get; set; }
-        public int LocationId { get; set; }
         public bool Active { get; set; }
         public string SystemName { get; set; }
         public bool Deleted { get; set; }
         public int? DivisionId { get; set; }
         public DateTime? HireDate { get; set; }
         public DateTime? LastLoginDateUtc { get; set; }
-        public Location Location { get; set; }
     }
 }

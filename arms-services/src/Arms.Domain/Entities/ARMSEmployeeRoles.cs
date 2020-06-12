@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Arms.Domain.Entities
 {
-    public partial class ARMSEmployee
+    public partial class ARMSEmployeeRoles
     {
         public int Id { get; set; }
         public string Name { get; set; }

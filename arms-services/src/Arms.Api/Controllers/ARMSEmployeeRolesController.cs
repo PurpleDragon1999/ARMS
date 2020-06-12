@@ -16,11 +16,11 @@ namespace Arms.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ARMSEmployeeController : BaseController
+    public class ARMSEmployeeRolesController : BaseController
     {
         private readonly IIdentityService _identityService;
         ArmsDbContext _context;
-        public ARMSEmployeeController(IIdentityService identityService, ArmsDbContext armsContext)
+        public ARMSEmployeeRolesController(IIdentityService identityService, ArmsDbContext armsContext)
         {
             _identityService = identityService;
             _context = armsContext;
@@ -29,7 +29,7 @@ namespace Arms.Api.Controllers
         [HttpGet]
         public IActionResult GetARMSEmployee()
         {
-            List<ARMSEmployee> employees = _context.ARMSEmployee.ToList();
+            List<ARMSEmployeeRoles> employees = _context.ARMSEmployeeRoles.ToList();
             try
             {
                 if (employees != null)
@@ -79,7 +79,7 @@ namespace Arms.Api.Controllers
         [HttpGet("{id}")]
         public IActionResult GetEmployee(int id)
         {
-            var employee = _context.ARMSEmployee.SingleOrDefault(c => c.Id == id);
+            var employee = _context.ARMSEmployeeRoles.SingleOrDefault(c => c.Id == id);
             try
             {
                 if (employee != null)
@@ -127,11 +127,11 @@ namespace Arms.Api.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateEmployee([FromBody] CustomARMSEmployee customDTO)
+        public IActionResult CreateEmployee([FromBody] ARMSEmployeeRoles customDTO)
         {
             try
             {
-                var employeeObj = new ARMSEmployee
+                var employeeObj = new ARMSEmployeeRoles
                 {
                     Id = customDTO.Id,
                     Name = customDTO.Name,
@@ -142,7 +142,7 @@ namespace Arms.Api.Controllers
                     DateModified = customDTO.DateModified,
                     RoleOrder = customDTO.RoleOrder,
                 };
-                _context.ARMSEmployee.Add(employeeObj);
+                _context.ARMSEmployeeRoles.Add(employeeObj);
                 _context.SaveChanges();
                 int id = employeeObj.Id;
                 var response = new
@@ -175,7 +175,7 @@ namespace Arms.Api.Controllers
         [HttpPatch("{id}")]
         public IActionResult UpdateEmployee(int id, [FromBody] CustomARMSEmployee employeeObj)
         {
-            var employee = _context.ARMSEmployee.SingleOrDefault(c => c.Id == id);
+            var employee = _context.ARMSEmployeeRoles.SingleOrDefault(c => c.Id == id);
             try
             {
                 if (employee != null)
@@ -196,7 +196,7 @@ namespace Arms.Api.Controllers
                     {
                         employee.DateModified = employeeObj.DateModified;
                     }
-                    _context.ARMSEmployee.Update(employee);
+                    _context.ARMSEmployeeRoles.Update(employee);
                     _context.SaveChanges();
                     var response = new
                     {
@@ -240,12 +240,12 @@ namespace Arms.Api.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteEmployee(int id)
         {
-            var employee = _context.ARMSEmployee.SingleOrDefault(c => c.Id == id);
+            var employee = _context.ARMSEmployeeRoles.SingleOrDefault(c => c.Id == id);
             try
             {
                 if (employee != null)
                 {
-                    _context.ARMSEmployee.Remove(employee);
+                    _context.ARMSEmployeeRoles.Remove(employee);
                     _context.SaveChanges();
                     var response = new
                     {
