@@ -1,16 +1,17 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { LocationComponent } from './location.component';
+
+import { ApplicationStatusComponent } from './application-status.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
-describe('LocationComponent', () => {
-  let component: LocationComponent;
-  let fixture: ComponentFixture<LocationComponent>;
+describe('ApplicationStatusComponent', () => {
+  let component: ApplicationStatusComponent;
+  let fixture: ComponentFixture<ApplicationStatusComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LocationComponent ],
+      declarations: [ ApplicationStatusComponent ],
       imports: [ReactiveFormsModule, HttpClientTestingModule, RouterTestingModule]
     
     })
@@ -18,7 +19,7 @@ describe('LocationComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LocationComponent);
+    fixture = TestBed.createComponent(ApplicationStatusComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

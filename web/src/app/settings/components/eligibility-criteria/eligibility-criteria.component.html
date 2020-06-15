@@ -1,0 +1,69 @@
+ <!-- Accordion card -->
+ <div class="card">
+    <!-- Card header -->
+    <div class="card-header" role="tab" id="eligibilityHeadingUnfiled">
+      <!--Options-->
+      <div class="dropdown float-right">
+        <button class="btn mr-2 add-button"
+                type="button"
+                (click)="addEligibilityCriterion()">
+                <i class="fas fa-plus"></i>
+        </button>
+      </div>
+      <!-- Heading -->
+      <a data-toggle="collapse"
+         data-parent="#eligibilityCriterionAccordionView"
+         href="#eligibilityCollapseUnfiled"
+         aria-expanded="true"
+         aria-controls="eligibilityCollapseUnfiled"
+         >
+         <h5 class="mt-1 mb-0">
+          <span (click)= "loadEligibilityCriteria()"><b>Eligibility Criteria </b> <i class="fas fa-angle-down rotate-icon"></i></span>
+         </h5>
+      </a>
+      <div id="eligibilityCollapseUnfiled"
+      class="collapse"
+      role="tabpanel"
+      aria-labelledby="eligibilityHeadingUnfiled"
+      data-parent="#eligibilityCriterionAccordionView">
+   <div class="card" *ngFor="let eligibilityCriterion of eligibilityCriterionList">
+     <div class="card-body">
+       <p>{{eligibilityCriterion.id}}</p>
+       <p>{{eligibilityCriterion.eligibilityCriteriaName}}</p>
+     </div>
+   </div>
+  </div>
+  
+      <form [formGroup]="eligibilityCriterionForm" (ngSubmit)="onSubmit()">
+        <div formArrayName="eligibilityCriteria">
+          <div
+            *ngFor="let eligibilityCriterion of eligibilityCriteria().controls;
+              let eligibilityIndex = index">
+  
+            <div class="card">
+              <div class="card-body" [formGroupName]="eligibilityIndex">
+                Eligibility Criteria:
+                <input type="text"
+                       class="input-box"
+                       formControlName="eligibilityName"/>
+                <button class="btn mr-2 add-button del-button">
+                  <i class="fas fa-trash"
+                    (click)="removeEligibilityCriterion(eligibilityIndex)">
+                  </i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <p>
+          <button
+            *ngIf="addEligibilityCriteria == true"
+            type="submit"
+            class="btn btn-gradient-danger mr-2 submit-button">
+            Submit
+          </button>
+        </p>
+      </form>
+    </div>
+  </div>

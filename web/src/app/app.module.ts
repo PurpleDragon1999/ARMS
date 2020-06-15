@@ -36,6 +36,9 @@ import { EmailListModalComponent } from './email-list-modal/email-list-modal.com
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { SettingsComponent } from './settings/settings.component';
+import { EmploymentTypeComponent } from './settings/components/employment-type/employment-type.component';
+import { EligibilityCriteriaComponent } from './settings/components/eligibility-criteria/eligibility-criteria.component';
+import { ApplicationStatusComponent } from './settings/components/application-status/application-status.component';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -71,7 +74,10 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     InterviewListComponent,
     SettingsComponent,
     RoundTypeComponent,
-    LocationComponent
+    LocationComponent,
+    EmploymentTypeComponent,
+    EligibilityCriteriaComponent,
+    ApplicationStatusComponent
   ],
   imports: [
     MDBBootstrapModule.forRoot(),
