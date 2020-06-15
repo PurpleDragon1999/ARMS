@@ -19,7 +19,6 @@ namespace Arms.Api.Controllers
     {
         private readonly IIdentityService _identityService;
         ArmsDbContext _context;
-        public Email email = new Email();
         public MailHelperController mailHelper = new MailHelperController();
         public CandidateController(IIdentityService identityService, ArmsDbContext armsContext)
         {
@@ -200,7 +199,7 @@ namespace Arms.Api.Controllers
             var candidate = _context.Candidate.FirstOrDefault(c => c.Email == customObj.Email || c.IdentificationNo == customObj.IdentificationNo || c.Phone == customObj.Phone);
             var applicationStatus = _context.ApplicationStatusType.SingleOrDefault(c => c.StatusName == "AppliedSuccessfully");
             try
-            {
+            { Candidate candObj = new Candidate();
                 int id;
                 if (candidate == null)
                 {       
@@ -220,6 +219,7 @@ namespace Arms.Api.Controllers
                     _context.Candidate.Add(candidateObj);
                     _context.SaveChanges();
                     id = candidateObj.Id;
+                    candObj = candidateObj;
                 }
                 else
                 {
@@ -283,12 +283,13 @@ namespace Arms.Api.Controllers
                         message = "Registered Successfully"
                     }
                 };
-                JobDescription jdObject = _context.JobDescription.SingleOrDefault(c => c.Id == applicationObj.JobId);
-                string emailHtmlBody = email.GenerateEmailBody( jdObject,candidate);
+                JobDescription jdObject = _context.JobDescription.Include(l => l.employmentType).
+                    Include(l => l.eligibilityCriteria).Include(l => l.loc).FirstOrDefault(c => c.Id == applicationObj.JobId);
+                string emailHtmlBody = GenerateEmailBody( jdObject, candObj.Code,candObj.Name);
                 //Adding Emails in string Array to send to candidates
                 string[] EmailToSend = new[]
                 {
-                    candidate.Email
+                    candObj.Email
                 };
 
                 mailHelper.MailFunction(emailHtmlBody, EmailToSend);
@@ -399,16 +400,7 @@ namespace Arms.Api.Controllers
             }
 
        }
-      
-    }
-    public  class Email
-    {
-        public Email()
-        {
-
-
-        }
-        public string GenerateEmailBody(JobDescription jdObject, Candidate candidate)
+        public string GenerateEmailBody(JobDescription jdObject, string Code,String Name)
         {
 
             string output = @"<html>
@@ -418,7 +410,7 @@ namespace Arms.Api.Controllers
        </head>
 
          <body aria-readonly=""false"" style=""cursor: auto;"">
-               <p>Dear Mr/Ms.</p><b>" + candidate.Name + @"</b>We are pleased to inform you that you have 
+               <p>Dear Mr/Ms.</p><b>" + Name + @"</b>We are pleased to inform you that you have 
     successfully registered for an interview process with CyberGroup.The details of interview will be communicated soon.
     </p>
     <table>
@@ -438,9 +430,9 @@ namespace Arms.Api.Controllers
        <td ><b>Address:</b></td>
        <td> B-9, Block B, Sector 3, Noida, Uttar Pradesh 201301</td>
      </tr>
-    </table>+" +
-     @"<a href = 'http://localhost:4200/progressTracker/" + candidate.Code + "'>" + @"Please click here to track your progress</a>
-      < br >
+    </table>" +
+     @"<a href = 'http://localhost:4200/progressTracker/" + Code + "'>" + @"Please click here to track your progress</a>
+      <br>
     <em>This is automatically generated email,please do not reply</em>
     <p>Thanks</p>
      <img src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRCUuWWhu0HByWgdDAp2cA1TDf-a_
@@ -454,7 +446,6 @@ namespace Arms.Api.Controllers
         }
 
 
-
-
     }
+ 
 }
