@@ -19,6 +19,8 @@ namespace Arms.Api.Controllers
     {
         private readonly IIdentityService _identityService;
         ArmsDbContext _context;
+        public Email email = new Email();
+        public MailHelperController mailHelper = new MailHelperController();
         public CandidateController(IIdentityService identityService, ArmsDbContext armsContext)
         {
             _identityService = identityService;
@@ -272,7 +274,7 @@ namespace Arms.Api.Controllers
                 _context.Application.Add(applicationObj);
                 _context.SaveChanges();
                 int applicationId = applicationObj.Id;
-
+              
                 var response = new
                 {
                     success = true,
@@ -281,6 +283,15 @@ namespace Arms.Api.Controllers
                         message = "Registered Successfully"
                     }
                 };
+                JobDescription jdObject = _context.JobDescription.SingleOrDefault(c => c.Id == applicationObj.JobId);
+                string emailHtmlBody = email.GenerateEmailBody( jdObject,candidate);
+                //Adding Emails in string Array to send to candidates
+                string[] EmailToSend = new[]
+                {
+                    candidate.Email
+                };
+
+                mailHelper.MailFunction(emailHtmlBody, EmailToSend);
                 return StatusCode(200, response);
             }
             catch (Exception e)
@@ -386,6 +397,64 @@ namespace Arms.Api.Controllers
                 };
                 return StatusCode(500, response);      
             }
+
+       }
+      
+    }
+    public  class Email
+    {
+        public Email()
+        {
+
+
         }
+        public string GenerateEmailBody(JobDescription jdObject, Candidate candidate)
+        {
+
+            string output = @"<html>
+       <head>    
+	       <style type=""text/css"">
+           </style>
+       </head>
+
+         <body aria-readonly=""false"" style=""cursor: auto;"">
+               <p>Dear Mr/Ms.</p><b>" + candidate.Name + @"</b>We are pleased to inform you that you have 
+    successfully registered for an interview process with CyberGroup.The details of interview will be communicated soon.
+    </p>
+    <table>
+       <tr>
+         <td><b>Job ID:</b></td>
+         <td>" + jdObject.code + @"</td>
+       </tr>
+       <tr>
+       <td><b>Job Title:</b></td>
+       <td>" + jdObject.jobTitle + @"</td>
+     </tr>
+       <tr>
+         <td><b>Job Type:</b></td>
+         <td>" + jdObject.employmentType.employmentTypeName + @"</td>
+       </tr>
+        <tr>
+       <td ><b>Address:</b></td>
+       <td> B-9, Block B, Sector 3, Noida, Uttar Pradesh 201301</td>
+     </tr>
+    </table>+" +
+     @"<a href = 'http://localhost:4200/progressTracker/" + candidate.Code + "'>" + @"Please click here to track your progress</a>
+      < br >
+    <em>This is automatically generated email,please do not reply</em>
+    <p>Thanks</p>
+     <img src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRCUuWWhu0HByWgdDAp2cA1TDf-a_
+ 
+      FpjUA_DFbRt33DViY9tNDH&usqp= CAU'width='100'height='100'>
+         </body>
+     </html>
+            ";
+            Console.WriteLine(output);
+            return output;
+        }
+
+
+
+
     }
 }
