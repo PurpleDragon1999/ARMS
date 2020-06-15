@@ -219,6 +219,14 @@ namespace Arms.Api.Controllers
                 if (job.locationId != 0)
                     jobInDb.locationId = job.locationId;
 
+                if (job.eligibilityCriteriaId != 0)
+                    jobInDb.eligibilityCriteriaId = job.eligibilityCriteriaId;
+
+                if (job.employmentTypeId != 0)
+                    jobInDb.employmentTypeId = job.employmentTypeId;
+
+               
+
                 if (job.description != null)
                     jobInDb.description = job.description;
 

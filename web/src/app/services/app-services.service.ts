@@ -41,7 +41,7 @@ export class AppServicesService {
 
   //Regarding tokens
   getToken(): string {
-    return localStorage.getItem('x-auth-token');
+    return localStorage.getItem('Authorized');
   }
 
   tokenDecoder(): any {
@@ -86,7 +86,7 @@ export class AppServicesService {
   //   return this.http.put<any>(`${USER_DOMAIN}/api/jobDescription/${jobId}`,jobFormObject, this.options);
   // }
   updateJobInfo(jobFormObject,jobId): Observable<HttpResponse<any>>{
-       return this.http.put<any>(`${DOTNET_DOMAIN}/api/jobDescription/${jobId}`,jobFormObject, this.httpOptions);
+       return this.http.put<any>(`${DOTNET_DOMAIN}/api/jobDescription/${jobId}`,jobFormObject, {...this.httpOptions,observe: 'response'});
      }
   deleteJd(id): Observable<any>{
     return this.http.delete<any>(`${DOTNET_DOMAIN}/api/jobDescription/${id}`, {...this.httpOptions,observe: 'response'});
@@ -110,12 +110,19 @@ export class AppServicesService {
     return this.http.get<IResponse>(`${USER_DOMAIN}/api/candidate/${id}`, this.options)
   }
 
+  // sendMails(mailingList,jdId): Observable<any> {
+  //   let mailObj= {
+  //     jdId: jdId,
+  //     mailList: mailingList
+  //   }
+  //   return this.http.post<any>(`${USER_DOMAIN}/api/jdEmail`, mailObj, { ...this.options, observe: 'response' });
+  // }
   sendMails(mailingList,jdId): Observable<any> {
     let mailObj= {
-      jdId: jdId,
-      mailList: mailingList
+      jobDescriptionId: jdId,
+      emailList: mailingList
     }
-    return this.http.post<any>(`${USER_DOMAIN}/api/jdEmail`, mailObj, { ...this.options, observe: 'response' });
+    return this.http.post<any>(`${DOTNET_DOMAIN}/api/jdEmail`, mailObj, { ...this.httpOptions, observe: 'response' });
   }
 
   search(character: string = "", page: number = 1): Observable<IResponse> {

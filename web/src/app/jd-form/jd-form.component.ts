@@ -151,7 +151,7 @@ export class JdFormComponent implements OnInit {
         modalRef.close();
       });
       this.modalClose(true);
-      // this.router.navigate(["/jd-pdf", this.data.jdId]);
+      this.router.navigate(["admin/job-desc"]);
     },
     (error: HttpErrorResponse) => {
       const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
