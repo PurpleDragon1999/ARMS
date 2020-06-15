@@ -1,16 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using Hrms.Core.Domains.Entities;
 
 namespace Arms.Domain.Entities
 {
-    public partial class IdProofType
+    public partial class IdProofType : Entity
     {
-        public IdProofType()
-        {
-            Candidate = new HashSet<Candidate>();
-        }
-
         public int Id { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }
@@ -19,7 +14,8 @@ namespace Arms.Domain.Entities
         public DateTime ModifiedAt { get; set; }
         public string ModifiedBy { get; set; }
 
-        public ICollection<Candidate> Candidate { get; set; }
-
+        
     }
 }
+
+        

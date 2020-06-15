@@ -17,4 +17,5 @@ namespace Arms.Domain.Entities
 
         public Application Application { get; set; }
     }
+
 }

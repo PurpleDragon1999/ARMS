@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { BroadcastService, MsalService } from '@azure/msal-angular';
 import { Logger, CryptoUtils } from 'msal';
-
 const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
 
 import { HttpClient } from '@angular/common/http';
@@ -110,7 +109,5 @@ export class LoginComponent implements OnInit {
         this.message = err.error.message
       }
     )
-
-  }
-  
+  }  
 }
