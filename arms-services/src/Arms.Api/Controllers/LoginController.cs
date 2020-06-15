@@ -92,11 +92,11 @@ namespace Arms.Api.Controllers
 
                new Claim(JwtRegisteredClaimNames.Email, emp.Email),
                 
-                 new Claim("role", emp.Role),
-                  new Claim("designation", emp.Designation),
+                   new Claim("role", emp.Role),
+                   new Claim("designation", emp.Designation),
                    new Claim("code",emp.CygCode),
                    new Claim("name", emp.Name),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+                   new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
                 var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);

@@ -127,7 +127,7 @@ export class JdFormComponent implements OnInit {
       employmentTypeId: Number(this.jobType.nativeElement.value.substring(0,1)),
       eligibilityCriteriaId:  Number(this.eligibilityCriteria.nativeElement.value.substring(0,1)),
       locationId: Number(this.location.nativeElement.value.substring(0,1)),
-      salary: this.salary.nativeElement.value,
+      salary: this.salary.nativeElement.value+this.currencyText,
       vacancies: this.vacancies.nativeElement.value,
     };
     if (
