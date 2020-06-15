@@ -60,12 +60,7 @@ Arms.Api.csproj.user
 
 *.g.targets
 
-
-<<<<<<< HEAD
 appsettings.json
 
 [Dd]esktop.ini
 debug.log
-
-=======
->>>>>>> 4b6326ce5eec301206b1cca9d0884c1350bfabd3
