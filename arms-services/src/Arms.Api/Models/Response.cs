@@ -4,8 +4,8 @@ namespace Arms.Api.Models
 {
     public class Payload<T>
     {
-        private T Data { get; set; }
-        private string Message { get; set; }
+        public T Data { get; set; }
+        public string Message { get; set; }
 
         public Payload(T data, string message)
         {
@@ -16,8 +16,8 @@ namespace Arms.Api.Models
     
     public class Response<T>
     {
-        private bool Success;
-        private Payload<T> Payload;
+        public bool Success;
+        public Payload<T> Payload;
         
         public Response(bool success, T data, string message)
         {

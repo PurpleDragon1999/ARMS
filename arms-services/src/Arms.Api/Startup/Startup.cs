@@ -36,9 +36,9 @@ namespace Arms.Api.Startup
         public void ConfigureServices(IServiceCollection services)
         {
 
-            string connString = this.Configuration.GetConnectionString("db");
-            services.AddDbContext<Arms.Infrastructure.ArmsDbContext>(o => o.UseSqlServer(connString));
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            // string connString = this.Configuration.GetConnectionString("db");
+            // services.AddDbContext<Arms.Infrastructure.ArmsDbContext>(o => o.UseSqlServer(connString));
+            // services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services
                 .AddCustomMvc()
@@ -46,7 +46,6 @@ namespace Arms.Api.Startup
                 .AddCustomSwagger(Configuration)
                 .AddArmsApplicationServices(Configuration)
                 .AddCustomDatabaseService(Configuration);
-                .AddArmsApplicationServices(Configuration);
 
                 services.AddCors();
         }
@@ -145,7 +144,7 @@ namespace Arms.Api.Startup
         public static IServiceCollection AddCustomDatabaseService(this IServiceCollection services, IConfiguration configuration)
         {
             Console.WriteLine(configuration.GetConnectionString("Db"));
-            services.AddDbContextPool<ArmsDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("Db")));
+            services.AddDbContext<ArmsDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("Db")));
             
             return services;
         }

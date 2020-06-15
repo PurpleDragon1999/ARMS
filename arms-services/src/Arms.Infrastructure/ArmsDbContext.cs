@@ -1,13 +1,12 @@
+using System;
 using Arms.Domain.Entities;
 using Arms.Infrastructure.EntityTypeConfigurations;
 using Microsoft.EntityFrameworkCore;
 
 namespace Arms.Infrastructure
 {
-    public  class ArmsDbContext: DbContext
+    public class ArmsDbContext: DbContext
     {
-      
-
         public ArmsDbContext(DbContextOptions<ArmsDbContext> options)
             : base(options)
         {
@@ -19,10 +18,10 @@ namespace Arms.Infrastructure
         public virtual DbSet<Loc> Loc { get; set; }
 
 
-        public DbSet<Assessment> Assessments { get; set; }
-        // public DbSet<Criteria> Criterias { get; set; }
+        public DbSet<Assessment> Assessment { get; set; }
+        public DbSet<Criteria> Criterias { get; set; }
 
-        protected ov erride void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             
             modelBuilder.ApplyConfiguration(new EmployeeEntityTypeConfiguration());
@@ -45,7 +44,7 @@ namespace Arms.Infrastructure
             modelBuilder.ApplyConfiguration(new InterviewPanelEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new ResumeEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new RoundEntityTypeConfiguration());
-
+        
         }
     }
 }
