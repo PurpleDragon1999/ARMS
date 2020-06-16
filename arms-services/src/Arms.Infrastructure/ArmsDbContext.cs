@@ -39,7 +39,8 @@ namespace Arms.Infrastructure
         public virtual DbSet<Skill> Skill { get; set; }
         public virtual DbSet<HrmsEmployee> Employee { get; set; }
 
-
+        public virtual DbSet<ArmsEmployees> ArmsEmployees { get; set; }
+        public virtual DbSet<ArmsEmployeeRoles> ArmsEmployeeRoles { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
@@ -75,6 +76,8 @@ namespace Arms.Infrastructure
             modelBuilder.ApplyConfiguration(new RoundTypeEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new SkillEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new HrmsEmployeeEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new ArmsEmployeeEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new ArmsEmployeeRolesEntityTypeConfiguration());
         }
     }
 }
