@@ -7,12 +7,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Arms.Infrastructure.EntityTypeConfigurations
 {
-    internal class LocEntityTypeConfiguration : IEntityTypeConfiguration<Location>
+    internal class LocationEntityTypeConfiguration : IEntityTypeConfiguration<Location>
     {
         public void Configure(EntityTypeBuilder<Location> builder)
         {
-            builder.ToTable("Loc", "ARMS");
-
+            builder.ToTable("Location", "ARMS");
             builder.Property(e => e.id).HasColumnName("id");
 
             //builder.Property(e => e.id).ValueGeneratedOnAdd();
@@ -49,6 +48,5 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .HasMaxLength(255)
                 .IsUnicode(false);
         }
-           
     }
 }

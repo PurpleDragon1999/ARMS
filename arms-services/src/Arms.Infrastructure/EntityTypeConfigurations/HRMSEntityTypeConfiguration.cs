@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Arms.Infrastructure.EntityTypeConfigurations
 {
-    internal class HrmsEmployeeEntityTypeConfiguration: IEntityTypeConfiguration<HrmsEmployee>
+    internal class HrmsEmployeeEntityTypeConfiguration : IEntityTypeConfiguration<HrmsEmployee>
     {
         public void Configure(EntityTypeBuilder<HrmsEmployee> builder)
         {

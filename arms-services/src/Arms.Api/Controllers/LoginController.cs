@@ -118,9 +118,8 @@ namespace Arms.Api.Controllers
             var handler = new JwtSecurityTokenHandler();
 
             var jsonToken = handler.ReadToken(login.idToken) as JwtSecurityToken;
-            var emailPayload = jsonToken.Payload.Values.ToList();
             var email = jsonToken.Payload["email"].ToString();
-
+            
            ArmsEmployees employee = _context.ArmsEmployees.FirstOrDefault(c => c.Email == email);
            
            ArmsEmployeeRoles armsEmployeeRole = _context.ArmsEmployeeRoles.FirstOrDefault(c=>c.SystemName==employee.SystemName);
