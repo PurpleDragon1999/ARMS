@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
     private http: HttpClient,
     private loginService: LoginService,
     private _router: Router,
-    private _env: EnvVarService,
+    private _env: EnvVarService
   ) {}
 
   ngOnInit() {
@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
       new Logger((logLevel, message, piiEnabled) => {}, {
         correlationId: CryptoUtils.createNewGuid(),
         piiLoggingEnabled: false,
-      }),
+      })
     );
   }
 
@@ -59,15 +59,17 @@ export class LoginComponent implements OnInit {
   }
 
   getProfile() {
-    this.http.get(GRAPH_ENDPOINT).toPromise()
+    this.http
+      .get(GRAPH_ENDPOINT)
+      .toPromise()
       .then((profile) => {
         this.profile = profile;
       });
   }
 
   async loginFunction() {
-    this.loginService.login().subscribe((res) => console.log(res));
-    /*const isIE =
+    // this.loginService.login().subscribe((res) => console.log(res));
+    const isIE =
       window.navigator.userAgent.indexOf("MSIE ") > -1 ||
       window.navigator.userAgent.indexOf("Trident/") > -1;
     if (isIE) {
@@ -75,11 +77,11 @@ export class LoginComponent implements OnInit {
     } else {
       let object = await this.authService.loginPopup();
     }
-    
+
     const idToken = window.localStorage.getItem("msal.idtoken");
-    
+
     this.loginService.checkPermissions(idToken).subscribe(
-      res => {
+      (res) => {
         if (res != null) {
           window.localStorage.setItem(
             "x-auth-token",
@@ -87,21 +89,18 @@ export class LoginComponent implements OnInit {
           );
           let role = this.loginService.tokenDecoder().role;
           if (role == this._env.ADMIN) {
-            this._router.navigate(['/admin']);
-          }
-          else if (role == this._env.SUPERUSER) {
-            this._router.navigate(['/superuser']);
-          }
-          else if (role == this._env.EMPLOYEE) {
-            this._router.navigate(['/employee']);
+            this._router.navigate(["/admin"]);
+          } else if (role == this._env.SUPERUSER) {
+            this._router.navigate(["/superuser"]);
+          } else if (role == this._env.EMPLOYEE) {
+            this._router.navigate(["/employee"]);
           }
         }
-        this.message = res.payload.message
-
-
-      }, err => {
-        this.message = err.error.message
+        this.message = res.payload.message;
+      },
+      (err) => {
+        this.message = err.error.message;
       }
-    )*/
+    );
   }
 }

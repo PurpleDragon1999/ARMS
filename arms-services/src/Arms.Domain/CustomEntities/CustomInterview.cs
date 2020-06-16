@@ -1,14 +1,17 @@
+﻿using Arms.Domain.Entities;
 using System;
-using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
+using System.Text;
 
-namespace Arms.Domain.Entities
+namespace Arms.Domain.CustomEntities
 {
-    public class Interview
+    
+    public class CustomInterview
     {
+        
         public int Id { get; set; }
         public string Code { get; set; }
-        public DateTime Date { get; set; }   
+        public DateTime Date { get; set; }
         public TimeSpan Time { get; set; }
         public string Venue { get; set; }
         public int JobId { get; set; }
@@ -17,7 +20,6 @@ namespace Arms.Domain.Entities
         public string CreatedBy { get; set; }
         public DateTime ModifiedAt { get; set; }
         public string ModifiedBy { get; set; }
-        public JobDescription JobDescription { get; set; }
-   }
-
+        public List<Round> Round { get; set; }
+    }
 }

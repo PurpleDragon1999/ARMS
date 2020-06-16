@@ -6,7 +6,11 @@ namespace Arms.Domain.Entities
 {
 
     public partial class Employee
+<<<<<<< HEAD
     {  
+=======
+    {   [Key]
+>>>>>>> f4e88a3f47e6a279d49cc1abaf7520b0bfc0208a
         public int? EmployeeDetailId { get; set; }
         public string FirstName { get; set; }
         [Key]

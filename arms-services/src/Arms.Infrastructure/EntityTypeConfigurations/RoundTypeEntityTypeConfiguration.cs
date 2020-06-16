@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Arms.Infrastructure.EntityTypeConfigurations
 {
-
     internal class RoundTypeEntityTypeConfiguration : IEntityTypeConfiguration<RoundType>
 
     {

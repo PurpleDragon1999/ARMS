@@ -55,7 +55,6 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
               .OnDelete(DeleteBehavior.ClientSetNull)
               .HasConstraintName("FK_CT_ArmsRoundType");
 
-
         }
 
         

@@ -3,22 +3,31 @@
 </div>
 <div class="card">
   <div class="card-body">
-    <div *ngFor="let round of rounds">
+    <div *ngFor="let round of rounds; let i = index">
       <div class="panel-select mt-3">
-        <h3>{{ round }}</h3>
+        <h3>{{ round.name }}</h3>
         <ul class="nav nav-tabs nav-fill mb-3">
           <li class="nav-item">
-            <a class="nav-link" [ngClass]="active1" (click)="changeActive(1)"
+            <a
+              class="nav-link"
+              [ngClass]="main[i][0]"
+              (click)="changeActive(i, 0)"
               >Panel 1</a
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link" [ngClass]="active2" (click)="changeActive(2)"
+            <a
+              class="nav-link"
+              [ngClass]="main[i][1]"
+              (click)="changeActive(i, 1)"
               >Panel 2</a
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link" [ngClass]="active3" (click)="changeActive(3)"
+            <a
+              class="nav-link"
+              [ngClass]="main[i][2]"
+              (click)="changeActive(i, 2)"
               >Panel 3</a
             >
           </li>
@@ -40,7 +49,10 @@
             </div>
           </form>
           <ul *ngIf="list">
-            <li *ngFor="let data of searchData" (click)="select(data)">
+            <li
+              *ngFor="let data of searchData"
+              (click)="select(data, round.roundId, index)"
+            >
               {{ data.name }} - {{ data.designation | uppercase }}
             </li>
           </ul>
@@ -65,29 +77,6 @@
           </table>
         </div>
 
-        <div class="d-lg-none">
-          <div class="emp-card mt-2" *ngFor="let data of tableData">
-            <p>{{ data.name }} {{ data.employeeId }}</p>
-            <p>{{ data.designation | uppercase }}</p>
-            <div class="d-flex justify-content-end mt-3">
-              <button class="btn btn-gradient-danger btn-sm">
-                Check availability
-              </button>
-            </div>
-          </div>
-
-          <div class="mt-3 d-flex justify-content-end">
-            <button type="reset" class="btn btn-light">Cancel</button>
-            <button
-              type="submit"
-              class="btn btn-gradient-danger mr-2"
-              (click)="schedule()"
-            >
-              Schedule
-            </button>
-          </div>
-        </div>
-
         <div class="d-flex justify-content-end mt-3">
           <button class="btn btn-gradient-danger btn-sm">
             Check availability
@@ -95,6 +84,7 @@
         </div>
       </div>
     </div>
+
     <div class="mt-3 d-flex justify-content-end">
       <button type="reset" class="btn btn-sm btn-light">Cancel</button>
       <button

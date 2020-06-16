@@ -1,6 +1,7 @@
 using Arms.Domain.Entities;
 using Arms.Infrastructure.EntityTypeConfigurations;
 using Microsoft.EntityFrameworkCore;
+using Arms.Domain.Entities;
 
 namespace Arms.Infrastructure
 {
@@ -12,8 +13,11 @@ namespace Arms.Infrastructure
             : base(options)
         {
         }
+
+    
         public virtual DbSet<JobDescription> JobDescription { get; set; }
         public virtual DbSet<EmploymentType> employmentType  { get; set; }
+
         public virtual DbSet<EligibilityCriteria> eligibilityCriteria { get; set; }
         public virtual DbSet<Employee> Employee { get; set; }
         public virtual DbSet<EmployeeDetail> EmployeeDetail { get; set; }
@@ -22,18 +26,19 @@ namespace Arms.Infrastructure
         public virtual DbSet<Assessment> Assessment { get; set; }
         public virtual DbSet<Candidate> Candidate { get; set; }
         public virtual DbSet<Criteria> Criteria { get; set; }
+
+        public virtual DbSet<Interview> Interview { get; set; }
+        public virtual DbSet<Round> Round { get; set; }
+        public virtual DbSet<RoundType> RoundType { get; set; }
+
         public virtual DbSet<CriteriaType> CriteriaType { get; set; }
         public virtual DbSet<IdProofType> IdProofType { get; set; }
         public virtual DbSet<Images> Images { get; set; }
-        public virtual DbSet<Interview> Interview { get; set; }
         public virtual DbSet<Interviewer> Interviewer { get; set; }
         public virtual DbSet<InterviewPanel> InterviewPanel { get; set; }
         public virtual DbSet<Location> Location { get; set; }
         public virtual DbSet<Resume> Resume { get; set; }
-        public virtual DbSet<Round> Round { get; set; }
-        public virtual DbSet<RoundType> RoundType { get; set; }
         public virtual DbSet<Loc> Loc { get; set; }
-
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
