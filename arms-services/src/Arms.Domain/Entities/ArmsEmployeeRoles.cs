@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Arms.Domain.Entities
 {
-   public  class ArmsEmployeeRoles:Entity
+    public class ArmsEmployeeRoles : Entity
     {
         public int Id { get; set; }
         public string Name { get; set; }
