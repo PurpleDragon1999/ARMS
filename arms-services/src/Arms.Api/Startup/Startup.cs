@@ -43,6 +43,7 @@ namespace Arms.Api.Startup
                 .AddArmsApplicationServices(Configuration);
 
 
+
             services.AddCors();                      //mine
 
                 
@@ -67,9 +68,8 @@ namespace Arms.Api.Startup
                         c.OAuthAppName("ARMS Swagger UI");
                     });
             }
-
-
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());  //mine
+
 
             app.UseMvcWithDefaultRoute();
         }
