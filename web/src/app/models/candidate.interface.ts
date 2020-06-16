@@ -1,13 +1,20 @@
+import { IJobDescription } from './jobDescription.interface';
+
 export interface ICandidate {
-    name: string;
-    experience: number;
-    email: string;
-    aadhar: string;
-    file : string;
-    skills: string;
-    selection: string;
-    appliedFor: string;
-    status : string;
-    flag : number,
-    cv: string;
-  }
+  name: string;
+  email: string;
+  phone: string;
+  identificationNo?: string;
+}
+
+export interface IApplication {
+  education?: string;
+  candidate: ICandidate;
+  jobDescription: IJobDescription;
+  experience: string;
+}
+
+export interface IAssessment {
+  feedback: string;
+  round: 
+}
