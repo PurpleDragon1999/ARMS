@@ -47,7 +47,7 @@ namespace Arms.Api.Controllers
             
             try
             {
-                Assessment data = _context.Assessment.SingleOrDefault(assessment => assessment.Id == id);
+                Assessment data = _context.Assessment.FirstOrDefault(assessment => assessment.Id == id);
                 response = new Response<Assessment>(true, data, "Assessment retrieved successfully");
             }
             catch (Exception e)
@@ -71,7 +71,6 @@ namespace Arms.Api.Controllers
                 Assessment data = new Assessment()
                 {
                     Application = assessment.Application,
-                    Code = assessment.Code,
                     Criteria = assessment.Criteria,
                     Feedback = assessment.Feedback,
                     Result = assessment.Result,
@@ -96,21 +95,32 @@ namespace Arms.Api.Controllers
             return Ok(response);
         }
         
-        [HttpPut("")]
-        public IActionResult Modify([FromBody] Assessment changedAssessment)
+        [HttpPut("{id}")]
+        public IActionResult Modify(int id, [FromBody] Assessment changedAssessment)
         {
             Response<Assessment> response;
             try
             {
-                Assessment data = _context.Assessment.SingleOrDefault(assessment => assessment.Id == changedAssessment.Id);
+                Assessment data = _context.Assessment.FirstOrDefault(assessment => id == assessment.Id);
 
                 if (data != null)
                 {
-                    data = changedAssessment;
-                    _context.Assessment.Update(changedAssessment);
+                    data.Application = changedAssessment.Application;
+                    data.Criteria = changedAssessment.Criteria;
+                    data.Feedback = changedAssessment.Feedback;
+                    data.Result = changedAssessment.Result;
+                    data.RoundId = changedAssessment.RoundId;
+                    data.ApplicationId = changedAssessment.ApplicationId;
+
+                    _context.Assessment.Update(data);
                     _context.SaveChanges();
+                    
+                    response = new Response<Assessment>(true, data, "Assessment Updated successfully");
                 }
-                response = new Response<Assessment>(true, data, "Assessment Updated successfully");
+                else
+                {
+                    response = new Response<Assessment>(false, null, "Assessment doesn't exist with given id");
+                }
             }
             catch (Exception e)
             {
@@ -129,7 +139,7 @@ namespace Arms.Api.Controllers
             Response<Assessment> response;
             try
             {
-                Assessment data = _context.Assessment.SingleOrDefault(ass => ass.Id == id);
+                Assessment data = _context.Assessment.FirstOrDefault(ass => ass.Id == id);
             
                 if (data != null)
                 {

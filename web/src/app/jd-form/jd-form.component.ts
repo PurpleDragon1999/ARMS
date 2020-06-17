@@ -6,7 +6,7 @@ import { IResponse } from "src/app/models/response.interface";
 import { Router } from "@angular/router";
 import { ModalComponent } from "./../reusable-components/modal/modal.component";
 import * as jsPDF from "jspdf";
-import { jobDescription } from "../models/jobDescription.interface";
+import { IJobDescription } from "../models/jobDescription.interface";
 import html2canvas from "html2canvas";
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { NgbModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
@@ -21,8 +21,8 @@ export class JdFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private _service: AppServicesService,
     private router: Router,
-    private modalService:NgbModal
-  ) {}
+    private modalService: NgbModal
+  ) { }
 
   @Output()
   closeModal: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -46,8 +46,8 @@ export class JdFormComponent implements OnInit {
   jobTypeOptions: String;
   jobListingForm: FormGroup;
   submitted = false;
-  jdFormObject: jobDescription;
-  data: jobDescription;
+  jdFormObject: IJobDescription;
+  data: IJobDescription;
   jdForm: FormGroup;
   selectChangeHandlerEligibilityCriteria(event: any) {
     this.eligibilityCriteriaOptions = event.target.value;
@@ -86,7 +86,7 @@ export class JdFormComponent implements OnInit {
     if (this.jobListingForm.invalid) {
       return;
     }
-  
+
   }
 
   jdFormData() {
@@ -114,7 +114,7 @@ export class JdFormComponent implements OnInit {
       return;
     }
     this._service.jdFormData(this.jdFormObject).subscribe((res: any) => {
-      this.data=res.body.payload.data;
+      this.data = res.body.payload.data;
       const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
       modalRef.componentInstance.shouldConfirm = false;
       modalRef.componentInstance.success = res.body.success;
@@ -125,25 +125,25 @@ export class JdFormComponent implements OnInit {
       this.modalClose(true);
       // this.router.navigate(["/jd-pdf", this.data.jdId]);
     },
-    (error: HttpErrorResponse) => {
-      const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
-      modalRef.componentInstance.shouldConfirm = false;
-      modalRef.componentInstance.success = error.error.success;
-      modalRef.componentInstance.message = error.error.payload.message;
-      modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
-        modalRef.close();
-      });
-      
-      this.data = error.error.payload.data;
-      
-    }
-    ); 
+      (error: HttpErrorResponse) => {
+        const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
+        modalRef.componentInstance.shouldConfirm = false;
+        modalRef.componentInstance.success = error.error.success;
+        modalRef.componentInstance.message = error.error.payload.message;
+        modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+          modalRef.close();
+        });
+
+        this.data = error.error.payload.data;
+
+      }
+    );
   }
-    modalClose(rerender: boolean): void {
-      this.closeModal.emit(rerender);
-  
-    }
+  modalClose(rerender: boolean): void {
+    this.closeModal.emit(rerender);
+
   }
+}
 
 
 

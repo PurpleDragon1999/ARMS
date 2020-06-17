@@ -6,6 +6,8 @@ import { ModalComponent } from "../reusable-components/modal/modal.component";
 import { AppServicesService } from "../services/app-services.service";
 import { IAssessment } from './../models/assessment.interface';
 import { CandidateService } from '../candidate/services/candidate.service';
+import { ICandidate } from '../models/candidate.interface';
+import { IResponse } from '../models/response.interface';
 
 @Component({
   selector: "app-hr-interview-assessement",
@@ -18,38 +20,40 @@ export class HrInterviewAssessementComponent implements OnInit {
     private modalService: NgbModal,
     private candidateService: CandidateService) { }
 
-  candidates:
+  candidates: ICandidate[];
 
-    ngOnInit() {
-      this.candidateService.getCandidate().subscribe();
-    }
-
-assessment: any = {}
-
-createAssessment(assessment: IAssessment) {
-  let assessmentObj = assessment;
-  this.AppServicesService.createAssessment(assessment).subscribe((res: any) => {
-    const modalRef = this.modalService.open(ModalComponent);
-    modalRef.componentInstance.shouldConfirm = false;
-    modalRef.componentInstance.success = res.body.success;
-    modalRef.componentInstance.message = res.body.payload.message;
-    modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
-      modalRef.close();
+  ngOnInit() {
+    this.candidateService.getCandidate().subscribe((res: IResponse) => {
+      console.log(res, 'response');
     });
-  },
+  }
 
-    (error: HttpErrorResponse) => {
-      const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
+  assessment: any = {}
+
+  createAssessment(assessment: IAssessment) {
+    let assessmentObj = assessment;
+    this.AppServicesService.createAssessment(assessment).subscribe((res: any) => {
+      const modalRef = this.modalService.open(ModalComponent);
       modalRef.componentInstance.shouldConfirm = false;
-      modalRef.componentInstance.success = error.error.success;
-      modalRef.componentInstance.message = error.error.payload.message;
+      modalRef.componentInstance.success = res.body.success;
+      modalRef.componentInstance.message = res.body.payload.message;
       modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
         modalRef.close();
       });
+    },
 
-    }
-  );
-}
+      (error: HttpErrorResponse) => {
+        const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
+        modalRef.componentInstance.shouldConfirm = false;
+        modalRef.componentInstance.success = error.error.success;
+        modalRef.componentInstance.message = error.error.payload.message;
+        modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+          modalRef.close();
+        });
+
+      }
+    );
+  }
 
 }
 

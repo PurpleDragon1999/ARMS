@@ -7,7 +7,7 @@ import { ViewChild, ElementRef, AfterViewInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { ModalComponent } from "../reusable-components/modal/modal.component";
 import * as jsPDF from "jspdf";
-import { jobDescription } from "../models/jobDescription.interface";
+import { IJobDescription } from "../models/jobDescription.interface";
 import html2canvas from "html2canvas";
 import { HttpErrorResponse, HttpResponse } from "@angular/common/http";
 import { NgbModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
@@ -27,7 +27,7 @@ export class JdModalComponent implements OnInit {
     private router: Router,
     private modalService: NgbModal,
     private _router: Router
-  ) {}
+  ) { }
 
   @Output()
   closeModal: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -36,9 +36,9 @@ export class JdModalComponent implements OnInit {
   jdId: string;
   jdTitle: string;
   openingDate: string;
-  closingDate: string; 
-  jobProfileDescription: string; 
-  skills: string; 
+  closingDate: string;
+  jobProfileDescription: string;
+  skills: string;
   jobType: string;
   eligibilityCriteria: string;
   location: string;
@@ -51,8 +51,8 @@ export class JdModalComponent implements OnInit {
   jobTypeOptions: String;
   jobListingForm: FormGroup;
   submitted = false;
-  jdFormObject: jobDescription;
-  data: jobDescription;
+  jdFormObject: IJobDescription;
+  data: IJobDescription;
 
   ngOnInit() {
     this.loadJobData(this.jdUpdateId);
@@ -91,7 +91,7 @@ export class JdModalComponent implements OnInit {
         modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
           modalRef.close();
         });
-       this.modalClose();
+        this.modalClose();
       },
       (error: HttpErrorResponse) => {
         const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
