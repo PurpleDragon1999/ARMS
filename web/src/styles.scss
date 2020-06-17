@@ -17921,18 +17921,24 @@ dl li {
   content: "\f140";
 }
 .sidebar .nav .nav-item.active {
-  background: #ffffff;
+  background: rgba(240, 79, 35, 0.2);
 }
+
 .sidebar .nav .nav-item.active > .nav-link .menu-title {
-  color: #fc4c02;
+  color: #000000;
   font-family: "ubuntu-medium", sans-serif;
 }
 .sidebar .nav .nav-item.active > .nav-link i {
-  color: #fc4c02;
+  color: #000000;
 }
 .sidebar .nav .nav-item:hover {
-  background: rgba(240, 79, 35, 0.2);
+  background: #f3f2f2;
 }
+
+.sidebar .nav .nav-item.active:hover {
+  background-color: rgba(240, 79, 35, 0.2);
+}
+
 .sidebar .nav .nav-item.nav-profile .nav-link {
   height: auto;
   line-height: 1;
@@ -18082,6 +18088,7 @@ dl li {
     display: none;
   }
   .sidebar-icon-only .sidebar .nav .nav-item .nav-link .menu-title {
+    margin-left: 0 !important;
     border-radius: 0 5px 5px 0px;
   }
   .rtl.sidebar-icon-only .sidebar .nav .nav-item .nav-link .menu-title {
