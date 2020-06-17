@@ -54,12 +54,9 @@ Building Blocks/
 *.manifest
 *.cache
 *.g.props
-<<<<<<< HEAD
 **/appsettings.*.json
 **/appsettings.json 
 *.g.targets
-=======
->>>>>>> a6cf1bbbd4a487a27f8a126f20be0ae8a3423ab9
 
 Arms.Api.csproj
 Arms.Api.csproj.user
