@@ -40,13 +40,11 @@ namespace Arms.Api.Startup
                 .AddCustomMvc()
                 .AddCustomAuthentication(Configuration)
                 .AddCustomSwagger(Configuration)
+
                 .AddArmsApplicationServices(Configuration);
-
-
 
             services.AddCors();                      //mine
 
-                
 
         }
 
