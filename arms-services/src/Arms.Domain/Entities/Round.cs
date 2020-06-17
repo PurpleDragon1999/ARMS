@@ -7,7 +7,6 @@ namespace Arms.Domain.Entities
 {
     public partial class Round
     {
-
         public int Id { get; set; }
         public int RoundTypeId { get; set; }
         public int InterviewId { get; set; }
