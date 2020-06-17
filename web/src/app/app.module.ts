@@ -34,11 +34,6 @@ import { EmailListModalComponent } from './email-list-modal/email-list-modal.com
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { SettingsComponent } from './settings/settings.component';
-<<<<<<< HEAD
-import { MDBBootstrapModule } from 'angular-bootstrap-md';
-=======
-
->>>>>>> 3cf9cb49801a41b097d786510f638d824d5f88fb
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -72,7 +67,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     EmailListModalComponent,
     InterviewListComponent,
     SettingsComponent,
-   
+
   ],
   imports: [
     FileUploadModule,
