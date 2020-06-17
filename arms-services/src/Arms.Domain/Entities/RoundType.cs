@@ -18,7 +18,6 @@ namespace Arms.Domain.Entities
         public string CreatedBy { get; set; }
         public DateTime ModifiedAt { get; set; }
         public string ModifiedBy { get; set; }
-
         public ICollection<CriteriaType> CriteriaType { get; set; }
         public ICollection<Round> Round { get; set; }
     }

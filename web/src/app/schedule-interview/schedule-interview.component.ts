@@ -1,118 +1,116 @@
-import { AppServicesService } from 'src/app/services/app-services.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { AppServicesService } from "src/app/services/app-services.service";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
+interface round {
+  roundID: number;
+  panel: panel[];
+}
+
+interface panel {
+  panelName: string;
+  panel: number[];
+}
 
 @Component({
-  selector: 'app-schedule-interview',
-  templateUrl: './schedule-interview.component.html',
-  styleUrls: ['./schedule-interview.component.scss']
+  selector: "app-schedule-interview",
+  templateUrl: "./schedule-interview.component.html",
+  styleUrls: ["./schedule-interview.component.scss"],
 })
 export class ScheduleInterviewComponent implements OnInit {
+  rounds = [
+    {
+      roundId: 1,
+      name: "Aptitude",
+    },
+    {
+      roundId: 2,
+      name: "Technincal",
+    },
+    {
+      roundId: 3,
+      name: "Managerial",
+    },
+  ];
 
-  @ViewChild("interviewDate", {static: false}) interviewDate: ElementRef;
-  @ViewChild("interviewTime", {static: false}) interviewTime: ElementRef;
+  //To handle navigation for panel
+  active: string[] = ["active", "", ""];
+  main = [];
 
-  active1: string = "active";
-  active2: string = "";
-  active3: string = "";
-
-  currentDate: String;
-  date: Date = new Date();
-  scheduleForm: FormGroup;
-  submitted: boolean = false;
-
+  //To handle search results
   searchData: any = [];
   list: boolean = false;
 
-  panel1: any = [];
-  panel2: any = [];
-  panel3: any = [];
+  //To handle selected data
 
-  tableData: any = this.panel1;
+  tableData: any = [];
+  roundsData: round[];
+  roundData = [
+    {
+      roundId: 1,
+      panel1: {
+        panelName: "",
+        employeesId: [],
+      },
+      panel2: {
+        panelName: "",
+        employeesId: [],
+      },
+      panel3: {
+        panelName: "",
+        employeesId: [],
+      },
+    },
+  ];
 
   error: any = { isError: false, errorMessage: "" };
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private _appService: AppServicesService) { }
+  constructor(private _appService: AppServicesService) {}
 
   ngOnInit() {
-    this.currentDate = this.date.toISOString().substr(0, 10);
-
-    this.scheduleForm = this.formBuilder.group({
-      interviewDate: ["", Validators.required],
-      interviewTime: ["", Validators.required]
-    });
+    for (let i = 0; i < this.rounds.length; i++) {
+      this.main.push(this.active);
+    }
+    console.log(this.main);
   }
 
-  get formControls() {
-    return this.scheduleForm.controls;
+  changeActive(index: number, panel: number) {
+    this.main[index] = ["", "", ""];
+    this.main[index][panel] = "active";
   }
 
-  schedule(){
-    this.submitted = true;
-    if (this.scheduleForm.invalid) {
-      return;
-    }
-    else if((this.scheduleForm.controls["interviewDate"].value) < this.currentDate){
-      console.log("condition true");
-      this.error = {
-        isError: true,
-        errorMessage: "Invalid Date"
-      };
-      return;  
-    }
-    else{
-      console.log("Inside Else");
-    }
-  }
-
-  changeActive(panelNo: number){
-    this.tableData = [];
-    if(panelNo == 1){
-      this.active1 = "active";
-      this.active2 = this.active3 = "";
-      this.tableData = this.panel1;
-    }
-    else if(panelNo == 2){
-      this.active2 = "active";
-      this.active1 = this.active3 = "";
-      this.tableData = this.panel2;
-    }
-    else{
-      this.active3 = "active";
-      this.active1 = this.active2 = "";
-      this.tableData = this.panel3;
-    }
-  }
-
-  search(input: string){
-    if(input != ""){
-      this._appService.searchCandidates(input, "false").subscribe(res => {
+  search(input: string) {
+    if (input != "") {
+      this._appService.searchCandidates(input, "false").subscribe((res) => {
         this.searchData = res.payload.data;
       });
-    }
-    else if(input === ""){
+    } else if (input === "") {
       this.searchData = [];
       this.list = false;
     }
-    (this.searchData.length == 0) ? this.list = false : this.list = true;
+    this.searchData.length == 0 ? (this.list = false) : (this.list = true);
     console.log(this.searchData, this.list);
   }
 
-  select(data: any){
-    if(this.active1 == "active"){
-      if(this.panel1.length < 2)
-        this.panel1.push(data);
-    }
-    else if(this.active2 == "active"){
-      if(this.panel2.length < 2){
-        this.panel2.push(data);
-      }
-    }
-    else if(this.active3 == "active"){
-      if(this.panel3.length < 2){
-        this.panel3.push(data);
+  select(data: any, roundId: number, index: number) {
+    if (index == 0) {
+      if (this.main[index][0] === "active") {
+        this.roundData[0].roundId = roundId;
+        this.roundData[0].panel1.panelName = "Java";
+        if (this.roundData[0].panel1.employeesId.length < 2) {
+          this.roundData[0].panel1.employeesId.push(data.id);
+        }
+      } else if (this.main[index][1] === "active") {
+        this.roundData[1].roundId = roundId;
+        this.roundData[1].panel2.panelName = "Java";
+        if (this.roundData[1].panel2.employeesId.length < 2) {
+          this.roundData[1].panel2.employeesId.push(data.id);
+        }
+      } else if (this.main[index][2] === "active") {
+        this.roundData[2].roundId = roundId;
+        this.roundData[2].panel3.panelName = "Java";
+        if (this.roundData[2].panel3.employeesId.length < 2) {
+          this.roundData[2].panel3.employeesId.push(data.id);
+        }
       }
     }
   }
