@@ -4,6 +4,7 @@
       <div class="card">
         <div class="card-body">
           <h4 class="card-title"><b>Interview Assessement form</b></h4>
+<<<<<<< HEAD
           <form class="forms-sample" #form="ngForm" (ngSubmit)="createAssessment(form.value)">
             <div class="form-group">
               <label for="jdId">Jd Id <span class="asterick">*</span></label>
@@ -33,9 +34,79 @@
                 </div>
               </div>
               <div class="col-md-6">
+=======
+          <form
+          class="forms-sample"
+          #form="ngForm"
+          (ngSubmit)="createAssessment(form.value)"
+          >
+          <div class="form-group">
+            <label for="roundId">Round Id <span class="asterick">*</span></label>
+            <div class="input-group col-xs-12">
+            <input
+                type="text"
+                name="roundId"
+                [ngModel]="assessment.roundId"
+                class="form-control"
+                #roundId="ngModel"
+                id="roundId"
+                [ngClass]="{ 'is-invalid': roundId.dirty && roundId.invalid }"
+                placeholder="Round ID"
+                maxlength="4"
+                required
+              >
+            <div *ngIf="roundId.dirty && roundId.errors?.required"  class="invalid-feedback">
+              <div><i class="mdi mdi-alert-outline"></i>Round Id is required</div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="applicationId">Application Id <span class="asterick">*</span></label>
+          <div class="input-group col-xs-12">
+          <input
+              type="text"
+              name="applicationId"
+              [ngModel]="assessment.applicationId"
+              class="form-control"
+              #applicationId="ngModel"
+              id="applicationId"
+              [ngClass]="{ 'is-invalid': applicationId.dirty && applicationId.invalid }"
+              placeholder="Application ID"
+              maxlength="4"
+              required
+            >
+          <div *ngIf="applicationId.dirty && applicationId.errors?.required"  class="invalid-feedback">
+            <div><i class="mdi mdi-alert-outline"></i>Application Id is required</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="interviewpanelId">Interview Panel Id <span class="asterick">*</span></label>
+        <div class="input-group col-xs-12">
+        <input
+            type="text"
+            name="interviewpanelId"
+            [ngModel]="assessment.interviewpanelId"
+            class="form-control"
+            #interviewpanelId="ngModel"
+            id="interviewpanelId"
+            [ngClass]="{ 'is-invalid': interviewpanelId.dirty && interviewpanelId.invalid }"
+            placeholder="Interview Panel ID"
+            maxlength="4"
+            required
+          >
+        <div *ngIf="interviewpanelId.dirty && interviewpanelId.errors?.required"  class="invalid-feedback">
+          <div><i class="mdi mdi-alert-outline"></i>Interview Panel Id is required</div>
+        </div>
+      </div>
+    </div>
+            <div class="row">
+              <div class="col-md-7">
+>>>>>>> 3cf9cb49801a41b097d786510f638d824d5f88fb
                 <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Applied For<span class="asterick">*</span></label>
+                  <label class="col-sm-3 col-form-label">Round Result<span class="asterick">*</span></label>
                   <div class="col-sm-9">
+<<<<<<< HEAD
                     <select class="form-control" name="appliedFor" [ngModel]="assessment.appliedFor"
                       #appliedFor="ngModel" id="appliedFor"
                       [ngClass]="{ 'is-invalid': appliedFor.dirty && appliedFor.invalid }" required>
@@ -203,11 +274,26 @@
                       <option>No</option>
                     </select>
                     <div *ngIf="selection.dirty && selection.errors?.required" class="invalid-feedback">
+=======
+                    <select 
+                    class="form-control" 
+                    name="roundResult"
+                    [ngModel]="assessment.roundResult"
+                    #roundResult="ngModel"
+                    id="roundResult"
+                    [ngClass]="{ 'is-invalid': roundResult.dirty && roundResult.invalid }"
+                    required>
+                      <option>Accepted</option>
+                      <option>Rejected</option>
+                    </select>
+                    <div *ngIf="roundResult.dirty && roundResult.errors?.required"  class="invalid-feedback">
+>>>>>>> 3cf9cb49801a41b097d786510f638d824d5f88fb
                       <div><i class="mdi mdi-alert-outline"></i>This field is required.</div>
                     </div>
                   </div>
                 </div>
               </div>
+<<<<<<< HEAD
               <div class="col-md-6">
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Recommend Interviewer</label>
@@ -235,12 +321,29 @@
                       [ngClass]="{ 'is-invalid': feedback.dirty && feedback.invalid }" required>
                     ></textarea>
                     <div *ngIf="feedback.dirty && feedback.errors?.required" class="invalid-feedback">
+=======
+            </div>
+                <div class="form-group">
+                  <label for="roundFeedback">Feedback<span class="asterick">*</span></label>
+                  <div class="input-group col-xs-12">
+                    <textarea
+                      class="form-control"
+                      name="roundFeedback"
+                      id="roundFeedback"
+                      rows="2"
+                      placeholder="Enter your feedback here...."
+                      [ngModel]="assessment.roundFeedback"
+                      #roundFeedback="ngModel"
+                      [ngClass]="{ 'is-invalid': roundFeedback.dirty && roundFeedback.invalid }"
+                      required>
+                    ></textarea>
+                    <div *ngIf="roundFeedback.dirty && roundFeedback.errors?.required"  class="invalid-feedback">
+>>>>>>> 3cf9cb49801a41b097d786510f638d824d5f88fb
                       <div><i class="mdi mdi-alert-outline"></i>Feedback is required.</div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
+           
             <div class="d-flex flex-row-reverse">
               <button type="submit" class="btn btn-gradient-danger mr-2" [disabled]="!form.valid">
                 Submit

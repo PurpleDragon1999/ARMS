@@ -1,16 +1,16 @@
 using Hrms.Core.Domains.Entities;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Arms.Domain.Entities
 {
-    public partial class ApplicationStatusType
-    {
-        public ApplicationStatusType()
-        {
-            Application = new HashSet<Application>();
-        }
 
+    public partial class ApplicationStatusType
+    {   [Key]
+
+ 
+        
         public int Id { get; set; }
         public string Code { get; set; }
         public string StatusName { get; set; }
@@ -19,6 +19,5 @@ namespace Arms.Domain.Entities
         public DateTime ModifiedAt { get; set; }
         public string ModifiedBy { get; set; }
 
-        public ICollection<Application> Application { get; set; }
     }
 }

@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Arms.Infrastructure.EntityTypeConfigurations
 {
-    internal class ApplicationStatusTypeEntityTypeConfiguration: IEntityTypeConfiguration<ApplicationStatusType>
+    internal class ApplicationStatusTypeEntityTypeConfiguration : IEntityTypeConfiguration<ApplicationStatusType>
     {
         public void Configure(EntityTypeBuilder<ApplicationStatusType> builder)
         {
@@ -17,7 +17,7 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .HasName("UQ__Applicat__6A50C2120E452C50")
                 .IsUnique();
 
-            builder.Property(e => e.Id).HasColumnName("id");
+            builder.Property(e => e.Id).ValueGeneratedOnAdd();
 
             builder.Property(e => e.Code)
                 .HasColumnName("code")
@@ -31,8 +31,7 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
             builder.Property(e => e.CreatedBy)
                 .IsRequired()
                 .HasColumnName("createdBy")
-                .HasMaxLength(255)
-                .IsUnicode(false);
+                .HasMaxLength(255);
 
             builder.Property(e => e.ModifiedAt)
                 .HasColumnName("modifiedAt")
@@ -41,8 +40,7 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
             builder.Property(e => e.ModifiedBy)
                 .IsRequired()
                 .HasColumnName("modifiedBy")
-                .HasMaxLength(255)
-                .IsUnicode(false);
+                .HasMaxLength(255);
 
             builder.Property(e => e.StatusName)
                 .IsRequired()

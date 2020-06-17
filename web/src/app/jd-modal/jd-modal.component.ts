@@ -11,7 +11,7 @@ import { IJobDescription } from "../models/jobDescription.interface";
 import html2canvas from "html2canvas";
 import { HttpErrorResponse, HttpResponse } from "@angular/common/http";
 import { NgbModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
-
+import { JobService } from '../services/job.service'
 @Component({
   selector: "app-jd-modal",
   templateUrl: "./jd-modal.component.html",
@@ -26,68 +26,85 @@ export class JdModalComponent implements OnInit {
     private _service: AppServicesService,
     private router: Router,
     private modalService: NgbModal,
-    private _router: Router
+    private _router: Router,
+    private jobService: JobService
   ) { }
 
   @Output()
   closeModal: EventEmitter<boolean> = new EventEmitter<boolean>();
-
-
   jdId: string;
-  jdTitle: string;
+  jobTitle: string;
   openingDate: string;
   closingDate: string;
-  jobProfileDescription: string;
+  description: string;
   skills: string;
   jobType: string;
-  eligibilityCriteria: string;
-  location: string;
-  salary: string;
-  vacancies: string;
-
+  eligibilityCriteriaId: number;
+  locationId: number;
+  salary: number;
+  vacancies: number;
   jobArray: any;
   eligibilityCriteriaOptions: String;
   locationOptions: String;
   jobTypeOptions: String;
   jobListingForm: FormGroup;
   submitted = false;
-  jdFormObject: IJobDescription;
-  data: IJobDescription;
-
+  jdFormObject: any;
+  data: any;
+  eligibilityCriterias: any;
+  locations: any;
+  employmentTypes: any;
+  employmentTypeId: number;
+  location: string;
+  eligibilityCriteria: string;
   ngOnInit() {
-    this.loadJobData(this.jdUpdateId);
+    this.loadJobData(Number(this.jdUpdateId));
+    this._service.getAllEligibilityCriterias().subscribe((res: any) => {
+      this.eligibilityCriterias = res.result.payload.data;
+
+    });
+    this._service.getAllLocations().subscribe((res: any) => {
+      this.locations = res.result.payload.data;
+
+    });
+    this._service.getAllEmploymentTypes().subscribe((res: any) => {
+      this.employmentTypes = res.result.payload.data;
+
+    });
   }
 
-  loadJobData(Id: string) {
-    this._service.getJobsById(Id).subscribe((res: any) => {
+  loadJobData(Id) {
+    this.jobService.getJdData(Id).subscribe((res: any) => {
       if (res.success) {
-        this.jobArray = res.payload.data;
+        this.jobArray = res.result.payload.data;
+
         this.setJobData();
       }
     });
   }
   setJobData() {
-    this.jdId = this.jobArray.jdId.slice(6, 11);
-    this.jdTitle = this.jobArray.jdTitle;
+    this.jdId = this.jobArray.code.slice(6, 11);
+    this.jobTitle = this.jobArray.jobTitle;
     this.openingDate = this.jobArray.openingDate.slice(0, 10);
     this.closingDate = this.jobArray.closingDate.slice(0, 10);
-    this.jobProfileDescription = this.jobArray.jobProfileDescription;
+    this.description = this.jobArray.description;
     this.skills = this.jobArray.skills;
-    this.jobType = this.jobArray.jobType;
-    this.eligibilityCriteria = this.jobArray.eligibilityCriteria;
-    this.location = this.jobArray.location;
+    this.jobType = this.jobArray.employmentType.employmentTypeName;
+    this.eligibilityCriteria = this.jobArray.eligibilityCriteria.eligibilityCriteriaName;
+    this.location = this.jobArray.loc.locationName;
     this.salary = this.jobArray.salary;
     this.vacancies = this.jobArray.vacancies;
   }
 
   sendUpdateRequest(jdFormObject: any) {
-    jdFormObject.jdId = `CYGJID${jdFormObject.jdId}`;
-    this._service.updateJobInfo(jdFormObject, this.jobArray._id).subscribe(
+    jdFormObject.eligibilityCriteria
+    jdFormObject.jdId = `CYGJID${jdFormObject.jdId}`
+    this.jobService.updateJobInfo(jdFormObject, this.jobArray.id).subscribe(
       (res: any) => {
         const modalRef = this.modalService.open(ModalComponent);
         modalRef.componentInstance.shouldConfirm = false;
-        modalRef.componentInstance.success = res.success;
-        modalRef.componentInstance.message = res.payload.message;
+        modalRef.componentInstance.success = res.body.result.success;
+        modalRef.componentInstance.message = res.body.result.payload.message;
         modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
           modalRef.close();
         });

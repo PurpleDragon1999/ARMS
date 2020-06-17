@@ -54,6 +54,13 @@ Building Blocks/
 *.manifest
 *.cache
 *.g.props
+**/appsettings.*.json
+**/appsettings.json 
+*.g.targets
+
+Arms.Api.csproj
+Arms.Api.csproj.user
+
 *.g.targets
 
 bin/
@@ -65,3 +72,6 @@ appsettings.json
 
 project.assets.json
 Arms.Api.csproj
+
+[Dd]esktop.ini
+debug.log

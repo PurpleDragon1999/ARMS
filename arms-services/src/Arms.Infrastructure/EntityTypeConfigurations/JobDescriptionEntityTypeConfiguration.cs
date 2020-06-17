@@ -8,12 +8,13 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Arms.Infrastructure.EntityTypeConfigurations
 {
-    internal class JobDescriptionEntityTypeConfiguration : IEntityTypeConfiguration<JobDescription>
+    internal class JobDescriptionEntityTypeConfiguration: IEntityTypeConfiguration<JobDescription>
+    
     {
         public void Configure(EntityTypeBuilder<JobDescription> builder)
         {
             builder.ToTable("JobDescription", "ARMS");
-
+            
             builder.HasIndex(e => e.jobTitle)
                 .HasName("UQ__JobDescr__151D087A2951D1F8")
                 .IsUnique();
@@ -29,6 +30,7 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .IsUnicode(false)
                 .HasComputedColumnSql("('CYGJID'+CONVERT([varchar](100),[id]))");
 
+
             builder.Property(e => e.createdAt)
                 .HasColumnName("createdAt")
                 .HasDefaultValueSql("(sysdatetime())");
@@ -42,13 +44,18 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .IsRequired()
                 .HasColumnName("description");
 
-            builder.Property(e => e.jobTitle)
+            builder.Property(e => e.skills)
                 .IsRequired()
-                .HasColumnName("jobTitle")
-                .HasMaxLength(60)
-                .IsUnicode(false);
+                .HasColumnName("skills");
 
-           builder.Property(e => e.modifiedAt)
+
+            builder.Property(e => e.salary)
+              .IsRequired()
+              .HasColumnName("salary")
+              .HasMaxLength(60)
+              .IsUnicode(false);
+
+            builder.Property(e => e.modifiedAt)
                 .HasColumnName("modifiedAt")
                 .HasDefaultValueSql("(sysdatetime())");
 
@@ -64,7 +71,7 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
 
             builder.Property(e => e.pdfBlobData).HasColumnName("pdfBlobData");
 
-            builder.Property(e => e.salary).HasColumnName("salary");
+          
 
             builder.Property(e => e.vacancies).HasColumnName("vacancies");
 
@@ -85,7 +92,6 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
              .HasForeignKey(d => d.eligibilityCriteriaId)
              .OnDelete(DeleteBehavior.ClientSetNull)
              .HasConstraintName("FK_eligibilityCriteria");
-
            
         }
     }

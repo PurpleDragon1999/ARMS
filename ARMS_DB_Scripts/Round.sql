@@ -36,8 +36,18 @@ GO
 
 --Insert into ARMS.Round(roundTypeId,interviewId)
 --Values('2','1')
+Insert into ARMS.Round(roundTypeId,interviewId)
+Values('2','2')
 
 --Select command
 select * FROM ARMS.Round
 --Select command with joins
 select *FROM ARMS.Round INNER JOIN ARMS.Interview  on ARMS.Round.interviewId=ARMS.interview.id INNER JOIN ARMS.RoundType on ARMS.Round.roundTypeId =ARMS.RoundType.id
+
+ALTER TABLE arms.Round
+ADD roundNumber int,
+	roundDate datetime2,
+	roundTime time;
+
+	
+

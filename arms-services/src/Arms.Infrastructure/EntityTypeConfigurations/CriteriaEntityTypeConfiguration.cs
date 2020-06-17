@@ -48,7 +48,7 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .HasColumnName("remarks");
 
             builder.HasOne(d => d.Assessment)
-                .WithMany(p => p.Criteria)
+                .WithMany()
                 .HasForeignKey(d => d.AssessmentId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_CR_ArmsAssessment");
@@ -58,6 +58,14 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
             //     .HasForeignKey(d => d.CriteriaTypeId)
             //     .OnDelete(DeleteBehavior.ClientSetNull)
             //     .HasConstraintName("FK_CR_ArmsCriteriaType");
+           /* builder.HasOne(d => d.CriteriaType)
+                .WithMany(p => p.Criteria)
+=======
+            builder.HasOne(d => d.CriteriaType)
+                .WithMany()
+                .HasForeignKey(d => d.CriteriaTypeId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_CR_ArmsCriteriaType");*/
         }
     }
 }
