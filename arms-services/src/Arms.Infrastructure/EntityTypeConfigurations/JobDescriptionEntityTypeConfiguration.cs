@@ -48,11 +48,12 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .IsRequired()
                 .HasColumnName("skills");
 
-            builder.Property(e => e.jobTitle)
-                .IsRequired()
-                .HasColumnName("jobTitle")
-                .HasMaxLength(60)
-                .IsUnicode(false);
+
+            builder.Property(e => e.salary)
+              .IsRequired()
+              .HasColumnName("salary")
+              .HasMaxLength(60)
+              .IsUnicode(false);
 
             builder.Property(e => e.modifiedAt)
                 .HasColumnName("modifiedAt")
@@ -70,7 +71,7 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
 
             builder.Property(e => e.pdfBlobData).HasColumnName("pdfBlobData");
 
-            builder.Property(e => e.salary).HasColumnName("salary");
+          
 
             builder.Property(e => e.vacancies).HasColumnName("vacancies");
 

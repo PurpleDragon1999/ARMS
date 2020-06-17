@@ -5,8 +5,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Arms.Domain.Entities
 {
+
     public partial class ApplicationStatusType
     {   [Key]
+        
         public int Id { get; set; }
         public string Code { get; set; }
         public string StatusName { get; set; }
@@ -14,5 +16,6 @@ namespace Arms.Domain.Entities
         public string CreatedBy { get; set; }
         public DateTime ModifiedAt { get; set; }
         public string ModifiedBy { get; set; }
+
     }
 }

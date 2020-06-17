@@ -10,7 +10,7 @@ import { jobDescription } from "../models/jobDescription.interface";
 import html2canvas from "html2canvas";
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { NgbModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
-
+import{JobService}from '../services/job.service'
 @Component({
   selector: "app-jd-form",
   templateUrl: "./jd-form.component.html",
@@ -21,7 +21,8 @@ export class JdFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private _service: AppServicesService,
     private router: Router,
-    private modalService:NgbModal
+    private modalService:NgbModal,
+    private jobService :JobService
   ) {}
 
   @Output()
@@ -127,7 +128,7 @@ export class JdFormComponent implements OnInit {
       employmentTypeId: Number(this.jobType.nativeElement.value.substring(0,1)),
       eligibilityCriteriaId:  Number(this.eligibilityCriteria.nativeElement.value.substring(0,1)),
       locationId: Number(this.location.nativeElement.value.substring(0,1)),
-      salary: this.salary.nativeElement.value,
+      salary: this.salary.nativeElement.value+this.currencyText,
       vacancies: this.vacancies.nativeElement.value,
     };
     if (
@@ -141,7 +142,7 @@ export class JdFormComponent implements OnInit {
       return;
     }
    
-    this._service.jdFormData(this.jdFormObject).subscribe((res: any) => {
+    this.jobService.jdFormData(this.jdFormObject).subscribe((res: any) => {
       this.data=res.body.result.payload.data;
       const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
       modalRef.componentInstance.shouldConfirm = false;
@@ -169,7 +170,6 @@ export class JdFormComponent implements OnInit {
   }
     modalClose(rerender: boolean): void {
       this.closeModal.emit(rerender);
-  
     }
   }
 

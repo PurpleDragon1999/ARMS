@@ -60,7 +60,11 @@ const routes: Routes = [
       },
       {
         path: 'settings', component: SettingsComponent
-      }
+      },
+      {
+        path:'interviews', component: InterviewListComponent
+      },
+    
     ]
   },
   {

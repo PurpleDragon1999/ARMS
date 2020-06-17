@@ -1,3 +1,4 @@
+import { INewResponse } from 'src/app/models/newResponse.interface';
 import { Component, OnInit } from "@angular/core";
 import { CandidateService } from './services/candidate.service';
 import { IResponse } from '../models/response.interface';
@@ -20,12 +21,22 @@ export class CandidateComponent implements OnInit {
     constructor(private candidateService: CandidateService, private bufferToPdf: BufferToPdf) { }
 
     ngOnInit(): void {
-        this.searchCandidate({ page: 1, character: '' });
+        this.getCandidates();
+        //this.searchCandidate({ page: 1, character: '' });
+    }
+
+    getCandidates(){
+        this.candidateService.getApplications().subscribe((res: INewResponse)=>{
+        this.candidates = res.result.payload.data
+        this.columns = ["name", "email", "experience", "Job Position"];
+        
+        })
     }
 
     searchCandidate(event: IModelForPagination) {
         this.candidateService.searchCandidate(event.page, event.character).subscribe((res: IResponse) => {
             this.candidates = res.payload.data.dataList;
+            
             this.candidates.forEach((candidate: any) => {
                 candidate.pdf = this.bufferToPdf.bufferToPdf(candidate.cv.data);
                 if (candidate.appliedFor)
@@ -33,6 +44,7 @@ export class CandidateComponent implements OnInit {
             });
             this.columns = ["name", "email", "appliedFor", "experience"];
             this.pager = res.payload.data.pager;
+            
         }, (error: HttpErrorResponse) => {
 
         });

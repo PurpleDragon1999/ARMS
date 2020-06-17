@@ -11,7 +11,7 @@ import { jobDescription } from "../models/jobDescription.interface";
 import html2canvas from "html2canvas";
 import { HttpErrorResponse, HttpResponse } from "@angular/common/http";
 import { NgbModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
-
+import{JobService} from '../services/job.service'
 @Component({
   selector: "app-jd-modal",
   templateUrl: "./jd-modal.component.html",
@@ -26,7 +26,8 @@ export class JdModalComponent implements OnInit {
     private _service: AppServicesService,
     private router: Router,
     private modalService: NgbModal,
-    private _router: Router
+    private _router: Router,
+    private jobService:JobService
   ) {}
 
   @Output()
@@ -73,7 +74,7 @@ export class JdModalComponent implements OnInit {
   }
 
   loadJobData(Id) {
-    this._service.getJdData(Id).subscribe((res: any) => {
+    this.jobService.getJdData(Id).subscribe((res: any) => {
       if (res.success) {
         this.jobArray = res.result.payload.data;
       
@@ -98,7 +99,7 @@ export class JdModalComponent implements OnInit {
   sendUpdateRequest(jdFormObject: any) {
     jdFormObject.eligibilityCriteria
     jdFormObject.jdId = `CYGJID${jdFormObject.jdId}`
-    this._service.updateJobInfo(jdFormObject, this.jobArray.id).subscribe(
+    this.jobService.updateJobInfo(jdFormObject, this.jobArray.id).subscribe(
       (res: any) => {
         const modalRef = this.modalService.open(ModalComponent);
         modalRef.componentInstance.shouldConfirm = false;

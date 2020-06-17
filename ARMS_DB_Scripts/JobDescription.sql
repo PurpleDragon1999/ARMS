@@ -58,3 +58,17 @@ Select OBJECT_Id('ARMS.JobDescription')
 --Adding the column skills in table
 ALTER TABLE ARMS.JobDescription 
 ADD skills varchar(255)
+
+--dropping the column salary of type int
+ALTER TABLE ARMS.JobDescription
+DROP COLUMN salary
+
+--adding the column salary ofd type varchar
+ALTER TABLE ARMS.JobDescription
+ADD salary varchar(50)
+
+
+--setting salary
+Update ARMS.JobDescription
+set salary='10000' where id>1
+

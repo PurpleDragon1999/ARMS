@@ -13,11 +13,13 @@ using System.Reflection.Metadata;
 using Microsoft.EntityFrameworkCore;
 using System.Net.Mail;
 using Arms.Domain.CustomEntities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Arms.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+  
     public class JobDescriptionController : BaseController
     {
         private readonly IIdentityService _identityService;
@@ -39,7 +41,7 @@ namespace Arms.Api.Controllers
                     Include(l => l.eligibilityCriteria).Include(l => l.loc).ToList();
                 var response = new
                 {
-                    success = "true",
+                    success = true,
                     payload = new
                     {
                         data = jobDescriptions,
@@ -53,10 +55,10 @@ namespace Arms.Api.Controllers
             {
                 var response = new
                 {
-                    success = "false",
+                    success = false,
                     payload = new
                     {
-                        message = ex.InnerException.Message
+                        message = ex
                     }
 
                 };
@@ -84,7 +86,7 @@ namespace Arms.Api.Controllers
                 {
                     var resNull = new
                     {
-                        success = "false",
+                        success = false,
                         payload = new
                         {
                             message = "This Jobdescription does not exist"
@@ -239,7 +241,7 @@ namespace Arms.Api.Controllers
                 if (job.vacancies != 0)
                     jobInDb.vacancies = job.vacancies;
 
-                if (job.salary != 0)
+                if (job.salary != null)
                     jobInDb.salary = job.salary;
 
                 _context.JobDescription.Update(jobInDb);

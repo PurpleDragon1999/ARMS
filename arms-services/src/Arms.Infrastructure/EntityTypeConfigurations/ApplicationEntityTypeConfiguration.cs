@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Arms.Infrastructure.EntityTypeConfigurations
 {
-    internal class ApplicationEntityTypeConfiguration: IEntityTypeConfiguration<Application>
+    internal class ApplicationEntityTypeConfiguration : IEntityTypeConfiguration<Application>
     {
         public void Configure(EntityTypeBuilder<Application> builder)
         {
@@ -33,7 +33,9 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .HasColumnName("createdBy")
                 .HasMaxLength(50);
 
-            builder.Property(e => e.DateOfApplication).HasColumnName("dateOfApplication");
+            builder.Property(e => e.DateOfApplication)
+                .HasColumnName("dateOfApplication")
+                .HasDefaultValueSql("(sysdatetime())");
 
             builder.Property(e => e.Education)
                 .IsRequired()
@@ -56,7 +58,9 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .HasColumnName("modifiedBy")
                 .HasMaxLength(50);
 
-            builder.Property(e => e.StatusChangedAt).HasColumnName("statusChangedAt");
+            builder.Property(e => e.StatusChangedAt)
+                .HasColumnName("statusChangedAt")
+                .HasDefaultValueSql("(sysdatetime())");
 
             builder.HasOne(d => d.ApplicationStatusType)
                 .WithMany()
@@ -65,7 +69,7 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .HasConstraintName("FK_ApplicationStatusTypeId");
 
             builder.HasOne(d => d.Candidate)
-                .WithMany(p => p.Application)
+                .WithMany()
                 .HasForeignKey(d => d.CandidateId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_ApplicationCandidate");

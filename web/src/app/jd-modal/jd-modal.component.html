@@ -43,15 +43,15 @@
         <div class="form-group">
           <label for="jobTitle"><b>Job Title </b><span class="asterick">*</span></label>
           <input
-            name="jdTitle"
-            [ngModel]="jobArray && jobArray.jobTitle"
+            name="jobTitle"
+            [ngModel]="jobArray.jobTitle"
             type="text"
             class="form-control"
             id="jdTitle"
             placeholder="Job Title"
             #jobTitle="ngModel"
             [ngClass]="{ 'is-invalid': jobTitle.dirty && jobTitle.invalid }"
-            ngModel
+           
             required
           />
           <div *ngIf="jobTitle.dirty && jobTitle.errors.required" class="invalid-feedback">
@@ -61,17 +61,17 @@
         </div>
 
         <div class="form-group">
-          <label for="jobDescription"><b>Job Description</b><span class="asterick">*</span></label>
+          <label for="description"><b>Job Description</b><span class="asterick">*</span></label>
           <textarea
-            name="jobProfileDescription"
+            name="description"
             [ngModel]="description"
             type="text"
             class="form-control"
-            id="jobProfileDescription"
+            id="description"
             placeholder="Job Description"
-            #jobDescription="ngModel"
-            [ngClass]="{ 'is-invalid': jobDescription.dirty && jobDescription.invalid }"
             ngModel
+            [ngClass]="{ 'is-invalid': jobDescription.dirty && jobDescription.invalid }"
+            #jobDescription="ngModel"
             required
           ></textarea>
           <div *ngIf="jobDescription.dirty && jobDescription.errors.required" class="invalid-feedback">
