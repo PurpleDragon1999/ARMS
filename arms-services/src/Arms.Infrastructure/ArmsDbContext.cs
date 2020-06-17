@@ -21,8 +21,10 @@ namespace Arms.Infrastructure
         public virtual DbSet<Application> Application { get; set; }
         public virtual DbSet<Resume> Resume { get; set; }
         public virtual DbSet<ApplicationStatusType> ApplicationStatusType { get; set; }
-        
 
+        //public virtual DbSet<ARMSEmployeeRoles> ARMSEmployeeRoles { get; set; } //here
+        //public virtual DbSet<ARMSEmployee> ARMSEmployee { get; set; } //here
+        //public virtual DbSet<Location> Location { get; set; } //here
         public virtual DbSet<JobDescription> JobDescription { get; set; }
         public virtual DbSet<EmploymentType> employmentType  { get; set; }
         public virtual DbSet<EligibilityCriteria>eligibilityCriteria { get; set; }
@@ -57,6 +59,10 @@ namespace Arms.Infrastructure
             modelBuilder.ApplyConfiguration(new InterviewPanelEntityTypeConfiguration());
             
             modelBuilder.ApplyConfiguration(new RoundEntityTypeConfiguration());
+            //modelBuilder.ApplyConfiguration(new ARMSEmployeeRolesEntityTypeConfiguration()); //here
+            //modelBuilder.ApplyConfiguration(new ARMSEmployeeEntityTypeConfiguration()); //here
+            //modelBuilder.ApplyConfiguration(new LocationEntityTypeConfiguration()); //here
+
 
         }
     }

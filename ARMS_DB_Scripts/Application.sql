@@ -37,6 +37,16 @@ AS
     SET modifiedAt  = sysdatetime()
     WHERE id IN (SELECT DISTINCT id FROM Inserted)
 
+GO
+ALTER TABLE arms.application
+ADD CONSTRAINT df_statusChangedAt
+DEFAULT (sysdatetime()) FOR statusChangedAt;
+
+GO
+ALTER TABLE arms.application
+ADD CONSTRAINT df_dateOfApplication
+DEFAULT (sysdatetime()) FOR dateOfApplication;
+
 
 insert into arms.Application(dateOfApplication, education, experience, statusChangedAt, candidateId, jobId,
 applicationStatusTypeId, createdBy, modifiedBy)

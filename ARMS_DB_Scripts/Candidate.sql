@@ -34,6 +34,9 @@ AS
     SET modifiedAt  = sysdatetime()
     WHERE id IN (SELECT DISTINCT id FROM Inserted)
 
+GO
+ALTER TABLE arms.candidate
+ADD nationality varchar(100) not null;
 
 insert into arms.Candidate(name, email, phone, idProofTypeId, identificationNo, createdBy, modifiedBy)
 values ('chetna', 'nangchetnamaw@gmail.com','9207868601',1,'8907 4567 3637', 'anna', 'anna')

@@ -12,6 +12,7 @@ export interface ICandidate {
     experienceInYears : string;
     experienceInMonths : string;
     appliedForJdId : string,
+    appliedForPosition : string,
     createdBy : string,
     modifiedBy : string
    
