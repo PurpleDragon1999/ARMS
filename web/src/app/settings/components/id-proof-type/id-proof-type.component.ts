@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-id-proof-type',
@@ -7,45 +8,45 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IdProofTypeComponent implements OnInit {
 
-  constructor() { }
+  
 
   
   ngOnInit() {
   }
 
-  locationForm:FormGroup;
-  addLocations:Boolean=false;
+  idProofForm:FormGroup;
+  addIdProofs:Boolean=false;
 
   constructor(private fb: FormBuilder) {
-    this.locationForm = this.fb.group({
-      locations: this.fb.array([]) ,
+    this.idProofForm = this.fb.group({
+      idProofs: this.fb.array([]) ,
     });
   }
 
-  locations(): FormArray {
-    return this.locationForm.get("locations") as FormArray
+  idProofs(): FormArray {
+    return this.idProofForm.get("idProofs") as FormArray
   }
 
-  newLocation(): FormGroup {
+  newidProof(): FormGroup {
     return this.fb.group({
-      locName: ''
+      idProofName: ''
     });
   }
 
-  addLocation() {
-    this.addLocations = true;
-    this.locations().push(this.newLocation());
+  addIdProof() {
+    this.addIdProofs = true;
+    this.idProofs().push(this.newidProof());
   }
 
-  removeLocation(locIndex: number) {
-    this.locations().removeAt(locIndex);
-    if (locIndex==0) {
-      this.addLocations = false;
+  removeidProof(idProofIndex: number) {
+    this.idProofs().removeAt(idProofIndex);
+    if (idProofIndex==0) {
+      this.addIdProofs = false;
     }
   }
 
   onSubmit() {
-    console.log(this.locationForm.value);
+    console.log(this.idProofForm.value);
   }
 
 

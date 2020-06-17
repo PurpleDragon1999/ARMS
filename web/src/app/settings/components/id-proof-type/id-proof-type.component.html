@@ -1,63 +1,63 @@
  <!-- Accordion card -->
  <div class="card">
     <!-- Card header -->
-    <div class="card-header" role="tab" id="locHeadingUnfiled">
+    <div class="card-header" role="tab" id="idProofHeadingUnfiled">
       <!--Options-->
       <div class="dropdown float-right">
         <button class="btn mr-2 add-button"
                 type="button"
-                (click)="addLocation()">
-                <i class="fas fa-plus"></i>
+                (click)="addIdProof()">
+                 <i class="fas fa-plus"></i>
         </button>
       </div>
       <!-- Heading -->
       <a data-toggle="collapse"
-         data-parent="#locationAccordionView"
-         href="#locCollapseUnfiled"
+         data-parent="#idProofAccordionView"
+         href="#idProofCollapseUnfiled"
          aria-expanded="true"
-         aria-controls="locCollapseUnfiled">
+         aria-controls="idProofCollapseUnfiled">
          <h5 class="mt-1 mb-0">
-          <span><b>Locations </b> <i class="fas fa-angle-down rotate-icon"></i></span>
+          <span><b>Id Proof Type  </b> <i class="fas fa-angle-down rotate-icon"></i></span>
          </h5>
       </a>
-      <div id="locCollapseUnfiled"
+      <div id="idProofCollapseUnfiled"
            class="collapse"
            role="tabpanel"
-           aria-labelledby="locHeadingUnfiled"
-           data-parent="#locationAccordionView">
+           aria-labelledby="idProofHeadingUnfiled"
+           data-parent="#idProofAccordionView">
         <div class="card">
           <div class="card-body">
-            <p>Dallas,Texas</p>
+            <p>Passport</p>
           </div>
         </div>
       </div>
-      <div id="locCollapseUnfiled"
+      <div id="idProofCollapseUnfiled"
           class="collapse"
           role="tabpanel"
-          aria-labelledby="locHeadingUnfiled"
-          data-parent="#locationAccordionView">
+          aria-labelledby="idProofHeadingUnfiled"
+          data-parent="#idProofAccordionView">
         <div class="card">
           <div class="card-body">
-            <p>Noida,UP</p>
+            <p>Aadhar card</p>
           </div>
         </div>
       </div>
 
-      <form [formGroup]="locationForm" (ngSubmit)="onSubmit()">
-        <div formArrayName="locations">
+      <form [formGroup]="idProofForm" (ngSubmit)="onSubmit()">
+        <div formArrayName="idProofs">
           <div
-            *ngFor="let location of locations().controls;
-              let locIndex = index">
+            *ngFor="let idProof of idProofs().controls;
+              let idProofIndex = index">
 
             <div class="card">
-              <div class="card-body" [formGroupName]="locIndex">
-                Location:
+              <div class="card-body" [formGroupName]="idProofIndex">
+                ID Proof:
                 <input type="text"
                        class="input-box"
-                       formControlName="locName"/>
+                       formControlName="idProofName"/>
                 <button class="btn mr-2 add-button del-button">
                   <i class="fas fa-trash"
-                    (click)="removeLocation(locIndex)">
+                    (click)="removeidProof(idProofIndex)">
                   </i>
                 </button>
               </div>
@@ -67,7 +67,7 @@
 
         <p>
           <button
-            *ngIf="addLocations == true"
+            *ngIf="addIdProofs == true"
             type="submit"
             class="btn btn-gradient-danger mr-2 submit-button">
             Submit

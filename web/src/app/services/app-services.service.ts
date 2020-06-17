@@ -75,6 +75,15 @@ export class AppServicesService {
  getAllLocations():Observable<HttpResponse<any>>{
   return this.http.get<any>(`${DOTNET_DOMAIN}/api/location`, this.httpOptions);
  }
+ deleteLocation(id): Observable<any>{
+  return this.http.delete<any>(`${DOTNET_DOMAIN}/api/location/${id}`, {...this.httpOptions,observe: 'response'});
+}
+ getAllIdProofTypes():Observable<HttpResponse<any>>{
+  return this.http.get<any>(`${DOTNET_DOMAIN}/api/IdProofTypes`, this.httpOptions);
+ }
+ getAllRounds():Observable<HttpResponse<any>>{
+  return this.http.get<any>(`${DOTNET_DOMAIN}/api/RoundType`, this.httpOptions);
+ }
  getSkills():Observable<HttpResponse<any>>{
   return this.http.get<any>(`${DOTNET_DOMAIN}/api/skill`, this.httpOptions);
  }

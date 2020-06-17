@@ -14,11 +14,11 @@ namespace Arms.Api.Controllers
     [ApiController]
     public class LocationController : BaseController
     {
-        private readonly IIdentityService _identityService;
+       
         ArmsDbContext _context;
-        public LocationController(IIdentityService identityService, ArmsDbContext armsContext)
+        public LocationController(ArmsDbContext armsContext)
         {
-            _identityService = identityService;
+       
             _context = armsContext;
         }
         //GET:api/CriteriaType
