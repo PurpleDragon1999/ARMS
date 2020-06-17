@@ -5,45 +5,31 @@ using Arms.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
+
 namespace Arms.Infrastructure.EntityTypeConfigurations
 {
-    internal class ARMSEmployeeRolesEntityTypeConfiguration : IEntityTypeConfiguration<ARMSEmployeeRoles>
-    {
-        public void Configure(EntityTypeBuilder<ARMSEmployeeRoles> builder)
-        {
-            builder.ToTable("ARMSEmployee", "ARMS");
+    internal class ArmsEmployeeRolesEntityTypeConfiguration : IEntityTypeConfiguration<ArmsEmployeeRoles>
 
-            builder.Property(e => e.Id).HasColumnName("Id");
+    {
+        public void Configure(EntityTypeBuilder<ArmsEmployeeRoles> builder)
+        {
+            builder.ToTable("ArmsEmployeeRoles", "HRMS");
+
+            builder.Property(e => e.DateCreated).HasColumnType("datetime");
+
+            builder.Property(e => e.DateModified).HasColumnType("datetime");
 
             builder.Property(e => e.Name)
                 .IsRequired()
-                .HasColumnName("Name")
-                .HasMaxLength(50);
+                .HasMaxLength(255);
 
-            builder.Property(e => e.Active)
-               .IsRequired()
-               .HasColumnName("Active");
+            builder.Property(e => e.SystemName).HasMaxLength(255);
 
-            builder.Property(e => e.IsSystemRole)
-               .IsRequired()
-               .HasColumnName("IsSystemRole");
 
-            builder.Property(e => e.SystemName)
-               .IsRequired()
-               .HasColumnName("SystemName");
 
-            builder.Property(e => e.DateCreated)
-                .HasColumnName("DateCreated")
-                .HasDefaultValueSql("(sysdatetime())");
 
-            builder.Property(e => e.DateModified)
-                .HasColumnName("DateModified")
-                .HasDefaultValueSql("(sysdatetime())");
 
-            builder.Property(e => e.RoleOrder)
-                .HasColumnName("RoleOrder");
 
-            
         }
     }
 }
