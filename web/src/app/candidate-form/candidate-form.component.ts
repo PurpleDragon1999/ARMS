@@ -10,7 +10,7 @@ import { NgbModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
 import { ModalComponent } from "../reusable-components/modal/modal.component"
 import { Router } from "@angular/router";
 import { error } from 'util';
-
+import{JobService} from '../services/job.service'
 
 const URL = 'http://localhost:40802/api/candidate'
 
@@ -27,7 +27,8 @@ export class CandidateFormComponent implements OnInit {
   constructor(private modalService: NgbModal,
     private router: Router,
     private service: AppServicesService,
-    private CandidateService : CandidateService
+    private CandidateService : CandidateService,
+    private jobService:JobService
   ) { 
     this.numbersInYears = Array(30).fill(0).map((x,i)=>i);
     this.numbersInMonths = Array(12).fill(0).map((x,i)=>i);
@@ -230,7 +231,7 @@ console
 
       this.model.appliedForJdId = (this.router.url.split("/")[2]);
       let jdId = (this.model.appliedForJdId).slice(6)
-      this.service.getJdData(jdId).subscribe((res : INewResponse)=>{
+      this.jobService.getJdData(jdId).subscribe((res : INewResponse)=>{
         if(res.result != null){
           let jdObject = res.result.payload.data
           this.model.appliedForPosition = jdObject.jobTitle;

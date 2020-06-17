@@ -36,11 +36,11 @@ namespace Arms.Api.Controllers
         {
             try
             {
-                var employee = AuthenticateUser(login);
+               CustomEmployee empObj  = AuthenticateUser(login);
 
-                if (employee != null)
+                if (empObj != null)
                 {
-                    var tokenString = GenerateJSONWebToken(employee);
+                    var tokenString = GenerateJSONWebToken(empObj);
                     var response = new
                     {
                         success = "true",
@@ -86,16 +86,17 @@ namespace Arms.Api.Controllers
             }
         }
         //This function generates Jwt token by adding claims
-            private string GenerateJSONWebToken(HrmsEmployee emp)
+            private string GenerateJSONWebToken(CustomEmployee empObj)
             {
               var claims = new[] {
 
-               new Claim(JwtRegisteredClaimNames.Email, emp.Email),
+               new Claim(JwtRegisteredClaimNames.Email, empObj.armsEmployee.Email),
                 
-                   new Claim("role", emp.Role),
-                   new Claim("designation", emp.Designation),
-                   new Claim("code",emp.CygCode),
-                   new Claim("name", emp.Name),
+                   new Claim("role", empObj.armsEmployeeRole.Name),
+                   new Claim("experience", empObj.armsEmployee.Experience.ToString()),
+                   new Claim("firstName", empObj.armsEmployee.FirstName),
+                   new Claim("lastName", empObj.armsEmployee.LastName),
+                      new Claim("userName", empObj.armsEmployee.LastName),
                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
@@ -110,18 +111,24 @@ namespace Arms.Api.Controllers
                 return new JwtSecurityTokenHandler().WriteToken(token);
             }
         //This function authenticates the credentials that are valid as per our db or not
-            private HrmsEmployee AuthenticateUser(LoginReq login)
+            private CustomEmployee AuthenticateUser(LoginReq login)
             {
               Console.WriteLine(login.idToken);
                 
             var handler = new JwtSecurityTokenHandler();
 
             var jsonToken = handler.ReadToken(login.idToken) as JwtSecurityToken;
-            var emailPayload = jsonToken.Payload.Values.ToList();
             var email = jsonToken.Payload["email"].ToString();
-
-           HrmsEmployee employee = _context.Employee.FirstOrDefault(c => c.Email == email);
-            return employee;
+            
+           ArmsEmployees employee = _context.ArmsEmployees.FirstOrDefault(c => c.Email == email);
+           
+           ArmsEmployeeRoles armsEmployeeRole = _context.ArmsEmployeeRoles.FirstOrDefault(c=>c.SystemName==employee.SystemName);
+            CustomEmployee employeeObj = new CustomEmployee
+            {
+                armsEmployee=employee,
+                armsEmployeeRole=armsEmployeeRole
+            };
+            return employeeObj;
             
 
         }

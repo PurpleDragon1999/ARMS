@@ -1,12 +1,11 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using Hrms.Core.Domains.Entities;
-using System.ComponentModel.DataAnnotations;
 namespace Arms.Domain.Entities
 {
     public partial class Employee
-
-    {  
+    {
+        public int Id { get; set; }
         public int? EmployeeDetailId { get; set; }
         public string FirstName { get; set; }
         [Key]
@@ -19,15 +18,12 @@ namespace Arms.Domain.Entities
         public string PasswordSalt { get; set; }
         public int LocationId { get; set; }
         public bool Active { get; set; }
+        public string SystemName { get; set; }
         public bool Deleted { get; set; }
         public int? DivisionId { get; set; }
         public DateTime? HireDate { get; set; }
         public DateTime? LastLoginDateUtc { get; set; }
-        public Location Location { get; set; }
-        public EmployeeDetail EmployeeDetail { get; set; }
-        public string CreatedBy { get; set; }
-        public string ModifiedBy { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public DateTime ModifiedAt { get; set; }
+        public Location Location{ get; set; }
+       
     }
 }
