@@ -9,6 +9,7 @@ namespace Arms.Domain.Entities
         public int Id { get; set; }
         public int? EmployeeDetailId { get; set; }
         public string FirstName { get; set; }
+        [Key]
         public Guid UserGuid { get; set; }
         public string LastName { get; set; }
         public string Username { get; set; }
