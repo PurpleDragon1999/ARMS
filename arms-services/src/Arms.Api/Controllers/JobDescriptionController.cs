@@ -18,7 +18,7 @@ namespace Arms.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class JobDescriptionController : BaseController
+    public class JobDescriptionController : ControllerBase
     {
         private readonly IIdentityService _identityService;
         ArmsDbContext _context;

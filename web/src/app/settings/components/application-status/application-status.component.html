@@ -1,69 +1,90 @@
- <!-- Accordion card -->
- <div class="card">
-    <!-- Card header -->
-    <div class="card-header" role="tab" id="appStatusHeadingUnfiled">
-      <!--Options-->
-      <div class="dropdown float-right">
-        <button class="btn mr-2 add-button"
-                type="button"
-                (click)="addApplicationStatus()">
-                <i class="fas fa-plus"></i>
-        </button>
-      </div>
-      <!-- Heading -->
-      <a data-toggle="collapse"
-         data-parent="#applicationStatusAccordionView"
-         href="#appStatusCollapseUnfiled"
-         aria-expanded="true"
-         aria-controls="appStatusCollapseUnfiled"
-         >
-         <h5 class="mt-1 mb-0">
-          <span (click)= "loadApplicationStatusTypes()"><b>Application Status Types </b> <i class="fas fa-angle-down rotate-icon"></i></span>
-         </h5>
-      </a>
-      <div id="appStatusCollapseUnfiled"
+<!-- Accordion card -->
+<div class="card">
+  <!-- Card header -->
+  <div class="card-header" role="tab" id="appStatusHeadingUnfiled">
+    <!--Options-->
+    <div class="dropdown float-right">
+      <button
+        class="btn mr-2 add-button"
+        type="button"
+        (click)="addApplicationStatus()"
+      >
+        <i class="fas fa-plus"></i>
+      </button>
+    </div>
+    <!-- Heading -->
+    <a
+      data-toggle="collapse"
+      data-parent="#applicationStatusAccordionView"
+      href="#appStatusCollapseUnfiled"
+      aria-expanded="true"
+      aria-controls="appStatusCollapseUnfiled"
+    >
+      <h5 class="mt-1 mb-0">
+        <span (click)="loadApplicationStatusTypes()"
+          ><b>Application Status Types </b>
+          <i class="fas fa-angle-down rotate-icon"></i
+        ></span>
+      </h5>
+    </a>
+    <div
+      id="appStatusCollapseUnfiled"
       class="collapse"
       role="tabpanel"
       aria-labelledby="appStatusHeadingUnfiled"
-      data-parent="#applicationStatusAccordionView">
-   <div class="card" *ngFor="let applicationStatus of applicationStatusList">
-     <div class="card-body">
-       <p>{{applicationStatus.code}}</p>
-       <p>{{applicationStatus.statusName}}</p>
-     </div>
-   </div>
-  </div>
-  
-      <form [formGroup]="applicationStatusForm" (ngSubmit)="onSubmit()">
-        <div formArrayName="applicationStatusTypes">
-          <div
-            *ngFor="let applicationStatus of applicationStatusTypes().controls;
-              let appStatusIndex = index">
-  
-            <div class="card">
-              <div class="card-body" [formGroupName]="appStatusIndex">
-                Application Status Type:
-                <input type="text"
-                       class="input-box"
-                       formControlName="appStatusName"/>
-                <button class="btn mr-2 add-button del-button">
-                  <i class="fas fa-trash"
-                    (click)="removeApplicationStatus(appStatusIndex)">
-                  </i>
-                </button>
-              </div>
+      data-parent="#applicationStatusAccordionView"
+    >
+      <div class="card" *ngFor="let applicationStatus of applicationStatusList">
+        <div class="card-body">
+          <span class="mr">{{ applicationStatus.code }}</span>
+          <span class="mr">{{ applicationStatus.statusName }}</span>
+          <span
+            ><i
+              class="fas fa-trash"
+              (click)="removeApplicationStatus(applicationStatus.id)"
+            ></i
+          ></span>
+        </div>
+      </div>
+    </div>
+
+    <form [formGroup]="applicationStatusForm" (ngSubmit)="onSubmit()">
+      <div formArrayName="applicationStatusTypes">
+        <div
+          *ngFor="
+            let applicationStatus of applicationStatusTypes().controls;
+            let appStatusIndex = index
+          "
+        >
+          <div class="card">
+            <div class="card-body" [formGroupName]="appStatusIndex">
+              Application Status Type:
+              <input
+                type="text"
+                class="input-box"
+                formControlName="StatusName"
+              />
+              <button class="btn mr-2 add-button del-button">
+                <i
+                  class="fas fa-trash"
+                  (click)="removeApplicationStatus(appStatusIndex)"
+                >
+                </i>
+              </button>
             </div>
           </div>
         </div>
-  
-        <p>
-          <button
-            *ngIf="addApplicationStatusTypes == true"
-            type="submit"
-            class="btn btn-gradient-danger mr-2 submit-button">
-            Submit
-          </button>
-        </p>
-      </form>
-    </div>
+      </div>
+
+      <p>
+        <button
+          *ngIf="addApplicationStatusTypes == true"
+          type="submit"
+          class="btn btn-gradient-danger mr-2 submit-button"
+        >
+          Submit
+        </button>
+      </p>
+    </form>
   </div>
+</div>

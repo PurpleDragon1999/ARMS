@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,38 +7,38 @@ using Arms.Domain.Entities;
 using Arms.Infrastructure;
 using System.Web.Http;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System.IO;
 using System.Reflection.Metadata;
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace Arms.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CriteriaTypeController :ControllerBase
+    public class RoundTypeController : ControllerBase
     {
-        private readonly IIdentityService _identityService;
+       
         ArmsDbContext _context;
-        public CriteriaTypeController(IIdentityService identityService, ArmsDbContext armsContext)
+        public RoundTypeController(ArmsDbContext armsContext)
         {
-            _identityService = identityService;
             _context = armsContext;
         }
-        //GET:api/CriteriaType
+        //GET:api/roundType
         [HttpGet]
-        public IActionResult GetCriteriaTypes()
+        public IActionResult GetRoundTypes()
         {
             try
             {
-                List<CriteriaType> criteriaTypes = _context.CriteriaType.ToList();
+                List<RoundType> roundTypes = _context.RoundType.ToList();
                 var response = new
                 {
-                    success = true,
+                    success = "true",
                     payload = new
                     {
-                        data = criteriaTypes,
-                        message = "Criteria Types Retrieved Successfully"
+                        data = roundTypes,
+                        message = "Round Types Retrieved Successfully"
                     }
 
                 };
@@ -62,27 +61,22 @@ namespace Arms.Api.Controllers
         }
 
 
-        //GET:api/criteriaType/id
+        //GET:api/roundType/id
         [HttpGet("{id}")]
 
-        public IActionResult GetCriteriaType(int id)
+        public IActionResult GetRoundType(int id)
         {
-
+            RoundType round = _context.RoundType.SingleOrDefault(c => c.Id == id);
             try
             {
-                CriteriaType criteria = _context.CriteriaType.Include(l => l.roundType).
-                    SingleOrDefault(c => c.Id == id);
-
-
-
-                if (criteria == null)
+                if (round == null)
                 {
                     var resNull = new
                     {
-                        success = false,
+                        success = "false",
                         payload = new
                         {
-                            message = "This Criteria Type Does Not Exist"
+                            message = "No such round type exists"
                         }
                     };
                     return StatusCode(404, resNull);
@@ -92,11 +86,11 @@ namespace Arms.Api.Controllers
 
                     var response = new
                     {
-                        success = true,
+                        success = "true",
                         payload = new
                         {
-                            data = criteria,
-                            message = "Criteria Type Retrieved Successfully"
+                            data = round,
+                            message = "Round Type Retrieved Successfully"
                         }
 
                     };
@@ -107,7 +101,7 @@ namespace Arms.Api.Controllers
             {
                 var response = new
                 {
-                    success = false,
+                    success = "false",
                     payload = new
                     {
                         message = ex.Message
@@ -119,41 +113,26 @@ namespace Arms.Api.Controllers
 
         }
 
-        //POST:api/CriteriaType
+        //POST:api/roundType
         [HttpPost]
-        public IActionResult CreateCriteriaType(CriteriaType criteria)
+        public IActionResult CreateRoundType(RoundType round)
         {
             try
             {
-                CriteriaType checkinDb = _context.CriteriaType.SingleOrDefault(c => c.criteriaName == criteria.criteriaName);
-                if (checkinDb != null)
+                RoundType newround = new RoundType
                 {
-                    var resAlreadyExists = new
-                    {
-                        success = false,
-                        payload = new
-                        {
-                            message = "Criteria Type with this Criteria Name already exists"
-                        }
-
-                    };
-                    return StatusCode(400, resAlreadyExists);
-                }
-                CriteriaType criteriaObj = new CriteriaType
-                {
-                    criteriaName = criteria.criteriaName,
-                      roundTypeId=criteria.roundTypeId
-
+                    Name = round.Name,
+                    CreatedBy=round.CreatedBy,
                 };
-                _context.CriteriaType.Add(criteriaObj);
+                _context.RoundType.Add(newround);
                 _context.SaveChanges();
                 var response = new
                 {
-                    success = true,
+                    success = "true",
                     payload = new
                     {
-                        data = criteriaObj,
-                        message = " Criteria Type Created Successfully"
+                        data = newround,
+                        message = "Round Type Created Successfully"
                     }
 
                 };
@@ -175,40 +154,39 @@ namespace Arms.Api.Controllers
                 return StatusCode(500, response);
             }
         }
-        //PUT:api/ CriteriaType/id
+        //PUT:api/roundType/id
         [HttpPut("{id}")]
-        public IActionResult UpdateCriteriaType(int id, CriteriaType criteria)
+        public IActionResult UpdateRoundType(int id, RoundType round)
         {
             try
             {
-                CriteriaType criteriaType = _context.CriteriaType.SingleOrDefault(c => c.Id == id);
-                if (criteriaType == null)
+                RoundType roundInDb = _context.RoundType.SingleOrDefault(c => c.Id == id);
+                if (roundInDb == null)
                 {
                     var resNull = new
                     {
-                        success = false,
+                        success = "false",
                         payload = new
                         {
 
-                            message = "This Criteria Type does not exist"
+                            message = "Round type does not exist"
                         }
 
                     };
                     return StatusCode(404, resNull);
                 }
 
-                criteriaType.criteriaName = criteria.criteriaName;
-                criteriaType.roundTypeId = criteria.roundTypeId;
-
-                
+                roundInDb.Name = round.Name;
+                roundInDb.ModifiedBy = round.ModifiedBy;
+                _context.RoundType.Update(roundInDb);
                 _context.SaveChanges();
                 var response = new
                 {
-                    success = true,
+                    success = "false",
                     payload = new
                     {
-                        data = criteriaType,
-                        message = " Criteria Type Updated Successfully"
+                        data = roundInDb,
+                        message = "Round Type Updated Successfully"
                     }
 
                 };
@@ -218,7 +196,7 @@ namespace Arms.Api.Controllers
             {
                 var response = new
                 {
-                    success = false,
+                    success = "false",
                     payload = new
                     {
                         message = ex.Message
@@ -228,35 +206,35 @@ namespace Arms.Api.Controllers
                 return StatusCode(500, response);
             }
         }
-        //DELETE:/api/ CriteriaType/id
+        //DELETE:/api/roundType/id
         [HttpDelete("{id}")]
-        public IActionResult DeleteCriteriaType(int id)
+        public IActionResult DeleteRoundType(int id)
         {
             try
             {
-                CriteriaType criteria = _context.CriteriaType.SingleOrDefault(c => c.Id == id);
-                if (criteria == null)
+                RoundType roundInDb = _context.RoundType.SingleOrDefault(c => c.Id == id);
+                if (roundInDb == null)
                 {
                     var resNull = new
                     {
-                        success = false,
+                        success = "false",
                         payload = new
                         {
 
-                            message = "This  Criteria Type does not exist"
+                            message = "Such round type does not exist"
                         }
 
                     };
                     return StatusCode(404, resNull);
                 }
-                _context.CriteriaType.Remove(criteria);
+                _context.RoundType.Remove(roundInDb);
                 _context.SaveChanges();
                 var response = new
                 {
-                    success = true,
+                    success = "true",
                     payload = new
                     {
-                        message = "Criteria Type Deleted Successfully"
+                        message = "Round type Deleted Successfully"
                     }
 
                 };
@@ -266,7 +244,7 @@ namespace Arms.Api.Controllers
             {
                 var response = new
                 {
-                    success = false,
+                    success = "false",
                     payload = new
                     {
                         message = ex.Message
@@ -276,5 +254,6 @@ namespace Arms.Api.Controllers
                 return StatusCode(500, response);
             }
         }
+
     }
 }

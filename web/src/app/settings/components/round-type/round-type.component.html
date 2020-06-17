@@ -1,103 +1,113 @@
 <!-- Accordion card -->
 <div class="card">
-    <!-- Card header -->
-    <div class="card-header" role="tab" id="roundHeadingUnfiled">
-      <!--Options-->
-      <div class="dropdown float-right">
-        <button class="btn mr-2 add-button"
-                type="button"
-                (click)="addRoundType()">
-                <i class="fas fa-plus"></i>
-        </button>
-      </div>
-      <!-- Heading -->
-      <a data-toggle="collapse"
-         data-parent="#roundAccordionView"
-         href="#roundCollapseUnfiled"
-         aria-expanded="true"
-         aria-controls="roundCollapseUnfiled">
-          
-        <h5 class="mt-1 mb-0">
-          <span><b>Round Type </b> <i class="fas fa-angle-down rotate-icon"></i></span>
-        </h5>
-      </a>
-      <div id="roundCollapseUnfiled"
-          class="collapse"
-          role="tabpanel"
-          aria-labelledby="roundHeadingUnfiled"
-          data-parent="#roundAccordionView">
-
-        <div class="card">
-          <div class="card-body">
-            <p>Technical</p>
-          </div>
+  <!-- Card header -->
+  <div class="card-header" role="tab" id="roundHeadingUnfiled">
+    <!--Options-->
+    <div class="dropdown float-right">
+      <button
+        class="btn mr-2 add-button"
+        type="button"
+        (click)="addRoundType()"
+      >
+        <i class="fas fa-plus"></i>
+      </button>
+    </div>
+    <!-- Heading -->
+    <a
+      data-toggle="collapse"
+      data-parent="#roundAccordionView"
+      href="#roundCollapseUnfiled"
+      aria-expanded="true"
+      aria-controls="roundCollapseUnfiled"
+    >
+      <h5 class="mt-1 mb-0">
+        <span (click)="loadRoundTypes()"
+          ><b>Round Type </b> <i class="fas fa-angle-down rotate-icon"></i
+        ></span>
+      </h5>
+    </a>
+    <div
+      id="roundCollapseUnfiled"
+      class="collapse"
+      role="tabpanel"
+      aria-labelledby="roundHeadingUnfiled"
+      data-parent="#roundAccordionView"
+    >
+      <div class="card" *ngFor="let roundType of roundTypeList">
+        <div class="card-body">
+          <span class="mr">{{ roundType.id }}</span>
+          <span class="mr">{{ roundType.name }}</span>
+          <span
+            ><i class="fas fa-trash" (click)="removeRoundType(roundType.id)"></i
+          ></span>
         </div>
       </div>
+    </div>
 
-      <div id="roundCollapseUnfiled"
-          class="collapse"
-          role="tabpanel"
-          aria-labelledby="roundHeadingUnfiled"
-          data-parent="#roundAccordionView">
-
-        <div class="card">
-          <div class="card-body">
-            <p>Logical</p>
-          </div>
-        </div>
-      </div>
-
-      <form [formGroup]="roundTypeForm" (ngSubmit)="onSubmit()">
-        <div formArrayName="roundTypes">
-          <div
-            *ngFor="let roundType of roundTypes().controls;
-              let typeIndex = index">
-
-            <div class="card">
-              <div class="card-body" [formGroupName]="typeIndex">
-                Round Type Name :
-                <input type="text"
+    <form [formGroup]="roundTypeForm" (ngSubmit)="onSubmit()">
+      <div formArrayName="roundTypes">
+        <div
+          *ngFor="let roundType of roundTypes().controls; let typeIndex = index"
+        >
+          <div class="card">
+            <div class="card-body" [formGroupName]="typeIndex">
+              Round Type Name :
+              <input
+                type="text"
+                class="input-box"
+                formControlName="roundName"
+              />
+              <button class="btn mr-2 add-button del-button">
+                <i
+                  class="fas fa-trash"
+                  (click)="removeRoundType(typeIndex)"
+                ></i>
+              </button>
+              <div class="addCriteria" formArrayName="criteria">
+                <div
+                  *ngFor="
+                    let criterion of roundCriteria(typeIndex).controls;
+                    let criteriaIndex = index
+                  "
+                >
+                  <div class="criteria" [formGroupName]="criteriaIndex">
+                    Criteria Name :
+                    <input
+                      type="text"
                       class="input-box"
-                      formControlName="roundName"/>
-                <button class="btn mr-2 add-button del-button">
-                  <i class="fas fa-trash"
-                    (click)="removeRoundType(typeIndex)"></i>
-                </button>
-                <div class="addCriteria" formArrayName="criteria">
-                  <div
-                    *ngFor="let criterion of roundCriteria(typeIndex).controls;
-                      let criteriaIndex = index">
-                    <div class="criteria" [formGroupName]="criteriaIndex">
-                      Criteria Name :
-                      <input type="text"
-                            class="input-box"
-                            formControlName="criterion"/>
-                      <button class="btn mr-2 add-button del-button">
-                        <i class="fas fa-trash"
-                          (click)="removeRoundCriteria(typeIndex, criteriaIndex)"></i>
-                      </button>
-                    </div>
+                      formControlName="criterion"
+                    />
+                    <button class="btn mr-2 add-button del-button">
+                      <i
+                        class="fas fa-trash"
+                        (click)="removeRoundCriteria(typeIndex, criteriaIndex)"
+                      ></i>
+                    </button>
                   </div>
-                  <button class="btn mr-2 add-button"
-                          type="button"
-                          (click)="addRoundCriteria(typeIndex)">
-                    <i class="fas fa-plus"></i>
-                  </button>
-                  <a>Add New Criterion</a>
                 </div>
+                <button
+                  class="btn mr-2 add-button"
+                  type="button"
+                  (click)="addRoundCriteria(typeIndex)"
+                >
+                  <i class="fas fa-plus"></i>
+                </button>
+                <a>Add New Criterion</a>
               </div>
             </div>
           </div>
         </div>
+      </div>
 
-        <p>
-          <button
-            *ngIf="addRound == true"
-            type="submit"
-            class="btn btn-gradient-danger mr-2 submit-button">
-            Submit
-          </button>
-        </p>
-      </form>
-    </div>
+      <p>
+        <button
+          *ngIf="addRound == true"
+          type="submit"
+          class="btn btn-gradient-danger mr-2 submit-button"
+        >
+          Submit
+        </button>
+      </p>
+    </form>
   </div>
+</div>

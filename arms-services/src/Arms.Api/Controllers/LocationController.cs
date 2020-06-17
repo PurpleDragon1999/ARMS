@@ -12,7 +12,7 @@ namespace Arms.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LocationController : BaseController
+    public class LocationController : ControllerBase
     {
        
         ArmsDbContext _context;

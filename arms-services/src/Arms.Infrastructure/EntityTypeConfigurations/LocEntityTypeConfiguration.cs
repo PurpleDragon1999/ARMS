@@ -11,7 +11,7 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
     {
         public void Configure(EntityTypeBuilder<Location> builder)
         {
-            builder.ToTable("Loc", "ARMS");
+            builder.ToTable("Location", "ARMS");
 
             builder.Property(e => e.id).HasColumnName("id");
 

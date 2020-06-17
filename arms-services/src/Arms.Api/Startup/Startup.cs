@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Arms.Application;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -13,6 +14,7 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace Arms.Api.Startup
@@ -33,18 +35,28 @@ namespace Arms.Api.Startup
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            string connString = this.Configuration.GetConnectionString("db");
+            string connString = this.Configuration.GetConnectionString("Db");
             services.AddDbContext<Arms.Infrastructure.ArmsDbContext>(o => o.UseSqlServer(connString));
             services
                 .AddCustomMvc()
-              
+                .AddCustomAuthentication(Configuration)
                 .AddCustomSwagger(Configuration)
                 .AddArmsApplicationServices(Configuration);
 
 
             services.AddCors();                      //mine
+                                                     //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                                                     //    .AddJwtBearer(options => {
+                                                     //        options.TokenValidationParameters = new TokenValidationParameters
+                                                     //        {
+                                                     //            //what to validate
+                                                     //            ValidateIssuer = true,
+                                                     //            ValidateIssuerSigningKey = true,
+                                                     //            ValidIssuer= Configuration["Jwt:Issuer"],
+                                                     //            IssuerSigningKey= new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
+                                                     //         };
+                                                     //    });
 
-                
 
         }
 
@@ -66,14 +78,10 @@ namespace Arms.Api.Startup
                         c.OAuthAppName("ARMS Swagger UI");
                     });
             }
-<<<<<<< HEAD
-            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());  
-=======
 
 
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());  //mine
 
->>>>>>> 33391e4beebc6a85b30782021b9892d3aba84f2e
             app.UseMvcWithDefaultRoute();
         }
 

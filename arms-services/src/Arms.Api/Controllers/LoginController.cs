@@ -19,7 +19,7 @@ namespace Arms.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LoginController : BaseController
+    public class LoginController : ControllerBase
     {
 
         private IConfiguration _config;

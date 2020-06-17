@@ -14,7 +14,7 @@ namespace Arms.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class InterviewController : BaseController
+    public class InterviewController : ControllerBase
     {
         private readonly IIdentityService _identityService;
         ArmsDbContext _context;

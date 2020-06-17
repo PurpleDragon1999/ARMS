@@ -13,7 +13,7 @@ namespace Arms.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class JdEmailController : BaseController
+    public class JdEmailController : ControllerBase
     {
         private readonly IIdentityService _identityService;
         ArmsDbContext _context;

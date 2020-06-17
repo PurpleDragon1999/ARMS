@@ -1,55 +1,56 @@
- <!-- Accordion card -->
- <div class="card">
+<!-- Accordion card -->
+<div class="card">
   <!-- Card header -->
   <div class="card-header" role="tab" id="locHeadingUnfiled">
     <!--Options-->
     <div class="dropdown float-right">
-      <button class="btn mr-2 add-button"
-              type="button"
-              (click)="addLocation()">
-              <i class="fas fa-plus"></i>
+      <button class="btn mr-2 add-button" type="button" (click)="addLocation()">
+        <i class="fas fa-plus"></i>
       </button>
     </div>
     <!-- Heading -->
-    <a data-toggle="collapse"
-       data-parent="#locationAccordionView"
-       href="#locCollapseUnfiled"
-       aria-expanded="true"
-       aria-controls="locCollapseUnfiled"
-       >
-       <h5 class="mt-1 mb-0">
-        <span (click)= "loadLocations()"><b>Locations </b> <i class="fas fa-angle-down rotate-icon"></i></span>
-       </h5>
+    <a
+      data-toggle="collapse"
+      data-parent="#locationAccordionView"
+      href="#locCollapseUnfiled"
+      aria-expanded="true"
+      aria-controls="locCollapseUnfiled"
+    >
+      <h5 class="mt-1 mb-0">
+        <span (click)="loadLocations()"
+          ><b>Locations </b> <i class="fas fa-angle-down rotate-icon"></i
+        ></span>
+      </h5>
     </a>
-    <div id="locCollapseUnfiled"
-    class="collapse"
-    role="tabpanel"
-    aria-labelledby="locHeadingUnfiled"
-    data-parent="#locationAccordionView">
- <div class="card" *ngFor="let location of locationList">
-   <div class="card-body">
-     <p>{{location.code}}</p>
-     <p>{{location.locationName}}</p>
-   </div>
- </div>
-</div>
+    <div
+      id="locCollapseUnfiled"
+      class="collapse"
+      role="tabpanel"
+      aria-labelledby="locHeadingUnfiled"
+      data-parent="#locationAccordionView"
+    >
+      <div class="card" *ngFor="let location of locationList">
+        <div class="card-body">
+          <span class="mr">{{ location.code }}</span>
+          <span class="mr">{{ location.locationName }}</span>
+          <span
+            ><i class="fas fa-trash" (click)="removeLocation(location.id)"></i
+          ></span>
+        </div>
+      </div>
+    </div>
 
     <form [formGroup]="locationForm" (ngSubmit)="onSubmit()">
       <div formArrayName="locations">
         <div
-          *ngFor="let location of locations().controls;
-            let locIndex = index">
-
+          *ngFor="let location of locations().controls; let locIndex = index"
+        >
           <div class="card">
             <div class="card-body" [formGroupName]="locIndex">
               Location:
-              <input type="text"
-                     class="input-box"
-                     formControlName="locName"/>
+              <input type="text" class="input-box" formControlName="locName" />
               <button class="btn mr-2 add-button del-button">
-                <i class="fas fa-trash"
-                  (click)="removeLocation(locIndex)">
-                </i>
+                <i class="fas fa-trash" (click)="removeLocation(locIndex)"> </i>
               </button>
             </div>
           </div>
@@ -60,7 +61,8 @@
         <button
           *ngIf="addLocations == true"
           type="submit"
-          class="btn btn-gradient-danger mr-2 submit-button">
+          class="btn btn-gradient-danger mr-2 submit-button"
+        >
           Submit
         </button>
       </p>

@@ -17,7 +17,7 @@
          aria-expanded="true"
          aria-controls="idProofCollapseUnfiled">
          <h5 class="mt-1 mb-0">
-          <span><b>Id Proof Type  </b> <i class="fas fa-angle-down rotate-icon"></i></span>
+          <span (click)= "loadIdProofTypes()"><b>Id Proof Type  </b> <i class="fas fa-angle-down rotate-icon"></i></span>
          </h5>
       </a>
       <div id="idProofCollapseUnfiled"
@@ -25,23 +25,15 @@
            role="tabpanel"
            aria-labelledby="idProofHeadingUnfiled"
            data-parent="#idProofAccordionView">
-        <div class="card">
+        <div class="card" *ngFor="let idproof of idProofList">
           <div class="card-body">
-            <p>Passport</p>
+            <span class="mr">{{idproof.code}}</span>
+            <span class="mr">{{idproof.name}}</span>
+            <span><i class="fas fa-trash" (click)="removeidProof(idproof.id)"></i></span>
           </div>
         </div>
       </div>
-      <div id="idProofCollapseUnfiled"
-          class="collapse"
-          role="tabpanel"
-          aria-labelledby="idProofHeadingUnfiled"
-          data-parent="#idProofAccordionView">
-        <div class="card">
-          <div class="card-body">
-            <p>Aadhar card</p>
-          </div>
-        </div>
-      </div>
+     
 
       <form [formGroup]="idProofForm" (ngSubmit)="onSubmit()">
         <div formArrayName="idProofs">

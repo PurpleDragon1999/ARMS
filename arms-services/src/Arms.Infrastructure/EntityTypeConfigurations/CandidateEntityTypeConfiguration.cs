@@ -64,11 +64,7 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .HasColumnName("phone")
                 .HasMaxLength(22);
 
-            builder.HasOne(d => d.IdProofType)
-                .WithMany(p => p.Candidate)
-                .HasForeignKey(d => d.IdProofTypeId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_CandidateIdProofType");
+     
         }
     }
 }

@@ -6,10 +6,10 @@ namespace Arms.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
-    public class BaseController: Controller
+
+    public class ControllerBase: Controller
     {
-        public BaseController()
+        public ControllerBase()
         {
         }
     }
