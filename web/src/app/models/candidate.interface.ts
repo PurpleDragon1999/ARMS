@@ -7,7 +7,7 @@ export interface ICandidate {
   email: string;
   phone: string;
   identificationNo?: string;
-  experience: number;
+  experience: string;
   aadhar: string;
   file: string;
   skills: string;
