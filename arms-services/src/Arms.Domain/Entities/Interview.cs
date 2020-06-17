@@ -18,10 +18,10 @@ namespace Arms.Domain.Entities
         public string CreatedBy { get; set; }
         public DateTime ModifiedAt { get; set; }
         public string ModifiedBy { get; set; }
+
         public JobDescription JobDescription { get; set; }
    }
 
-
-      
+    
 
 }

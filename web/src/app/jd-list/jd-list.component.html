@@ -65,7 +65,7 @@
             ></i>
             <i *ngIf="datecheck(job.closingDate)==0"
             class="mdi mdi-send float-right d-none d-lg-block"
-            (click)="sendBulkEmail(job.jdId)"
+            (click)="sendBulkEmail(job.id)"
           ></i>
             <i
               class="mdi mdi-download float-right d-none d-lg-block"
@@ -111,20 +111,85 @@
             class="mdi mdi-chevron-right arrow"></i></a>
       </li>
     </ul>
+ 
+
+
+  <!--JobDescription Pdf-->
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div class="container"id="content"#content>
+ 
+    <div class="image">
+      <img src={{imageUrl}} class="image" alt="cyg">
+   </div>
+  
+  <div class="card card-like"style=" height:240px;">
+   <div class="card-body">
+      <div class="heading-holder">
+        <i class="fa fa-suitcase"></i>
+        <h5 class="card-title">Job Description</h5>
+      </div>
+        <h6 class="card-subtitle mb-2 text-muted">Job Title:</h6>
+        <p class="card-text">{{jdObject?.jobTitle}}</p>
+    <div class="date-holder">
+     <i class="fa fa-calendar"></i><h5 class="date-label">Opening Date</h5><p class="date">{{jdObject?.openingDate|date}}</p>
+    </div>
+     <div class="date-holder">
+      <i class="fa fa-calendar"></i><h5 class="date-label">Closing Date</h5><p class="date">{{jdObject?.closingDate|date}}</p>
+     </div>
+  </div>
+ </div>
+
+<div class="card card-like" >
+  <div class="card-body">
+     <div class="heading-holder">
+      <h5 class="card-subtitle mb-2 text-muted">Responsibilities and Duties</h5>
+     </div>
+     <div>
+        <p>{{jdObject?.description}}</p>
+      </div>
+      <div class="heading-holder">
+        <h5 class="card-subtitle mb-2 text-muted">Skills and Qualifications</h5>
+      </div>
+        <div class="list-body"style=" height:60px;">
+          <div class="list-item">
+            <p class="make-bold">Eligibility Criteria:&nbsp;</p>
+            <p>{{jdObject?.eligibilityCriteria.eligibilityCriteriaName}}</p>
+          </div>
+          <div class="list-item">
+            <p class="make-bold">Skills Required:&nbsp;&nbsp;&nbsp;&nbsp;</p>
+            <p>{{jdObject?.skills}}</p>
+          </div>
+        </div>
+        <div class="heading-holder">
+          <h5 class="card-subtitle mb-2 text-muted">Other Details about job</h5>
+        </div>
+          <div class="list-body"style=" height:90px;">
+            <div class="list-item">
+              <p class="make-bold">Employment Type:&nbsp;</p>
+              <p>{{jdObject?.employmentType.employmentTypeName}}</p>
+            </div>
+            <div class="list-item">
+              <p class="make-bold">Location:&nbsp;&nbsp;&nbsp;&nbsp;</p>
+              <p>{{jdObject?.loc.locationName}}</p>
+            </div>
+            <div class="list-item">
+              <p class="make-bold">Cost To Company:&nbsp;&nbsp;&nbsp;&nbsp;</p>
+              <p>{{jdObject?.salary}}</p>
+            </div>
+         </div>
+    </div>
   </div>
 
+  <footer class="page-footer font-small">
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  <!-- Copyright -->
+  <div class="footer-copyright  py-3 bottom">Copyright © 2020
+    <a href="www.cygrp.com"target="blank">CyberGroup</a> All rights reserved
+  </div>
+  <!-- Copyright -->
+  </footer>
+<!-- Footer -->
+</div> 
+</div>

@@ -112,3 +112,79 @@ body {
   line-height: normal !important;
   -webkit-font-smoothing: antialiased;
 }
+.image{
+  margin-left:100px;
+  height:160px;
+  width:240px;
+  margin-top:0;
+}
+#content{
+ display:none;
+}
+.date-label{
+  background-color:rgb(255, 145, 0);
+  color:white;
+  border-radius:10%;
+  margin-left:10px;
+  margin-right:10px;
+  padding:1px;
+  font-size:15px;
+  height:20px;
+}
+.date-holder{
+  display:flex;
+}
+.heading-holder{
+  display:flex;
+  margin-bottom:8px;
+
+}
+.card-title{
+  font-size:30px;
+  top:3px;
+  margin-left:10px;
+ 
+}
+.fa-calendar{
+  color:black;
+  font-size:23px;
+}
+.fa-suitcase{
+  color:black;
+  font-size:45px;
+}
+.card-like{
+  width:60%;
+  padding:0;
+ 
+  position: relative;
+   display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: .25rem;
+  
+}
+.date{
+  color:black;
+}
+.bottom{
+  margin-left:10px;
+}
+
+.make-bold{
+  font-weight:bolder;
+ 
+}
+.list-item{
+  display:flex;
+}
+.text-muted{
+  font-weight:bolder;
+  color:#343a40;
+}

@@ -33,8 +33,6 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .HasMaxLength(255)
                 .IsUnicode(false);
 
-
-
             builder.Property(e => e.locationName)
                 .IsRequired()
                 .HasColumnName("locationName")

@@ -7,22 +7,28 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Arms.Infrastructure.EntityTypeConfigurations
 {
-    internal class CandidateEntityTypeConfiguration: IEntityTypeConfiguration<Candidate>
+    internal class CandidateEntityTypeConfiguration : IEntityTypeConfiguration<Candidate>
     {
         public void Configure(EntityTypeBuilder<Candidate> builder)
         {
             builder.ToTable("Candidate", "ARMS");
 
             builder.HasIndex(e => e.IdentificationNo)
-                .HasName("UQ__Candidat__8E2B5F48F002B100")
+                .HasName("UK_Candidate")
                 .IsUnique();
 
-            builder.Property(e => e.Id).HasColumnName("id");
+            builder.Property(e => e.Id).ValueGeneratedOnAdd();
 
             builder.Property(e => e.Code)
                 .HasColumnName("code")
                 .HasMaxLength(57)
-                .HasComputedColumnSql("('CYGCDID'+CONVERT([nvarchar](50),[id]))");
+                .IsUnicode(false)
+                .HasComputedColumnSql("('CYGCDID'+CONVERT([nvarchar](57),[id]))");
+
+            builder.Property(e => e.nationality)
+                .IsRequired()
+                .HasColumnName("nationality")
+                .HasMaxLength(100);
 
             builder.Property(e => e.CreatedAt)
                 .HasColumnName("createdAt")
@@ -65,10 +71,15 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .HasMaxLength(22);
 
             builder.HasOne(d => d.IdProofType)
-                .WithMany(p => p.Candidate)
+                .WithMany()
                 .HasForeignKey(d => d.IdProofTypeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_CandidateIdProofType");
+
+            builder.Property(e => e.IdProofTypeId).HasColumnName("idProofTypeId");
+
+
+
         }
     }
 }

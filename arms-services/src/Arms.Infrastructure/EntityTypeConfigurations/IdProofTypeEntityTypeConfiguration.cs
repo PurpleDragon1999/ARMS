@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Arms.Infrastructure.EntityTypeConfigurations
 {
-    internal class IdProofTypeEntityTypeConfiguration: IEntityTypeConfiguration<IdProofType>
+    internal class IdProofTypeEntityTypeConfiguration : IEntityTypeConfiguration<IdProofType>
     {
         public void Configure(EntityTypeBuilder<IdProofType> builder)
         {

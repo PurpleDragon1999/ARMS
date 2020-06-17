@@ -64,7 +64,7 @@ namespace Arms.Api.Controllers
             try
             {
                Loc location = _context.Loc.
-                    SingleOrDefault(c => c.Id == id);
+                    SingleOrDefault(c => c.id == id);
 
 
 
@@ -114,7 +114,7 @@ namespace Arms.Api.Controllers
 
         //POST:api/Location
         [HttpPost]
-        public IActionResult CreateLocation(Loc location)
+        public IActionResult CreateLocation(Location location)
         {
             try
             {
@@ -168,11 +168,11 @@ namespace Arms.Api.Controllers
         }
         //PUT:api/ location/id
         [HttpPut("{id}")]
-        public IActionResult UpdateLocation(int id, Loc location)
+        public IActionResult UpdateLocation(int id, Location location)
         {
             try
             {
-               Loc loc = _context.Loc.SingleOrDefault(c => c.Id == id);
+               Loc loc = _context.Loc.SingleOrDefault(c => c.id == id);
                 if (loc == null)
                 {
                     var resNull = new
@@ -223,7 +223,7 @@ namespace Arms.Api.Controllers
         {
             try
             {
-                Loc loc = _context.Loc.SingleOrDefault(c => c.Id == id);
+                Loc loc = _context.Loc.SingleOrDefault(c => c.id == id);
                 if (loc == null)
                 {
                     var resNull = new
