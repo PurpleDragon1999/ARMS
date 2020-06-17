@@ -26,13 +26,13 @@ export class ProgressTrackerComponent implements OnInit {
   loadcandidateStatus(){
     let candidateId = this._route.url.split("/")[2]
     this._service.getCandidate(candidateId).subscribe((res:IResponse)=>{  
-      if(res.success == false){
-        this._route.navigate(['/404'])
-      }
-      else{
+      // if(res.success == false){
+      //   this._route.navigate(['/404'])
+      // }
+      // else{
         let candidateData = res.payload.data
         this.flag = candidateData.flag 
-      }    
+      // }    
     })
   }
 

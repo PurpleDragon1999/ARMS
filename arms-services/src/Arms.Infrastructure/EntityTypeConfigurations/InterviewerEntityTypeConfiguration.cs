@@ -38,7 +38,7 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .IsUnicode(false);
 
             builder.HasOne(d => d.InterviewPanel)
-                .WithMany(p => p.Interviewer)
+                .WithMany()
                 .HasForeignKey(d => d.InterviewPanelId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_interviewPanel");

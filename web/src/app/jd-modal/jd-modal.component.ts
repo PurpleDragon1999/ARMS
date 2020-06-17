@@ -11,7 +11,7 @@ import { jobDescription } from "../models/jobDescription.interface";
 import html2canvas from "html2canvas";
 import { HttpErrorResponse, HttpResponse } from "@angular/common/http";
 import { NgbModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
-
+import{JobService} from '../services/job.service'
 @Component({
   selector: "app-jd-modal",
   templateUrl: "./jd-modal.component.html",
@@ -26,25 +26,23 @@ export class JdModalComponent implements OnInit {
     private _service: AppServicesService,
     private router: Router,
     private modalService: NgbModal,
-    private _router: Router
+    private _router: Router,
+    private jobService:JobService
   ) {}
 
   @Output()
   closeModal: EventEmitter<boolean> = new EventEmitter<boolean>();
-
-
-  jdId: string;
-  jdTitle: string;
+   jdId:string;     
+  jobTitle: string;
   openingDate: string;
   closingDate: string; 
-  jobProfileDescription: string; 
+  description: string; 
   skills: string; 
   jobType: string;
-  eligibilityCriteria: string;
-  location: string;
-  salary: string;
-  vacancies: string;
-
+  eligibilityCriteriaId: number;
+  locationId: number;
+  salary: number;
+  vacancies: number;
   jobArray: any;
   eligibilityCriteriaOptions: String;
   locationOptions: String;
@@ -56,6 +54,9 @@ export class JdModalComponent implements OnInit {
   eligibilityCriterias:any;
   locations:any;
   employmentTypes:any;
+  employmentTypeId: number;
+  location:string;
+  eligibilityCriteria:string;
   ngOnInit() {
     this.loadJobData(Number(this.jdUpdateId));
     this._service.getAllEligibilityCriterias().subscribe((res: any) => {
@@ -73,7 +74,7 @@ export class JdModalComponent implements OnInit {
   }
 
   loadJobData(Id) {
-    this._service.getJdData(Id).subscribe((res: any) => {
+    this.jobService.getJdData(Id).subscribe((res: any) => {
       if (res.success) {
         this.jobArray = res.result.payload.data;
       
@@ -83,10 +84,10 @@ export class JdModalComponent implements OnInit {
   }
   setJobData() {
     this.jdId = this.jobArray.code.slice(6, 11);
-    this.jdTitle = this.jobArray.jobTitle;
+    this.jobTitle = this.jobArray.jobTitle;
     this.openingDate = this.jobArray.openingDate.slice(0, 10);
     this.closingDate = this.jobArray.closingDate.slice(0, 10);
-    this.jobProfileDescription = this.jobArray.description;
+    this.description = this.jobArray.description;
     this.skills = this.jobArray.skills;
     this.jobType = this.jobArray.employmentType.employmentTypeName;
     this.eligibilityCriteria = this.jobArray.eligibilityCriteria.eligibilityCriteriaName;
@@ -96,8 +97,9 @@ export class JdModalComponent implements OnInit {
   }
 
   sendUpdateRequest(jdFormObject: any) {
-    jdFormObject.jdId = `CYGJID${jdFormObject.jdId}`;
-    this._service.updateJobInfo(jdFormObject, this.jobArray.id).subscribe(
+    jdFormObject.eligibilityCriteria
+    jdFormObject.jdId = `CYGJID${jdFormObject.jdId}`
+    this.jobService.updateJobInfo(jdFormObject, this.jobArray.id).subscribe(
       (res: any) => {
         const modalRef = this.modalService.open(ModalComponent);
         modalRef.componentInstance.shouldConfirm = false;

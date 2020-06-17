@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Arms.Infrastructure.EntityTypeConfigurations
 {
-    internal class ApplicationStatusTypeEntityTypeConfiguration: IEntityTypeConfiguration<ApplicationStatusType>
+    internal class ApplicationStatusTypeEntityTypeConfiguration : IEntityTypeConfiguration<ApplicationStatusType>
     {
         public void Configure(EntityTypeBuilder<ApplicationStatusType> builder)
         {
