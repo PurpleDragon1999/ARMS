@@ -16,6 +16,15 @@ export interface ICandidate {
   status: string;
   flag: number,
   cv: string;
+  nationality: string;
+  idProofTypeId: number;
+  jobId: number;
+  education: string;
+  experienceInYears: string;
+  experienceInMonths: string;
+  appliedForJdId: string,
+  createdBy: string,
+  modifiedBy: string
 }
 
 export interface IApplication {

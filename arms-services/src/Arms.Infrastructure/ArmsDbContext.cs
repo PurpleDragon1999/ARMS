@@ -27,8 +27,6 @@ namespace Arms.Infrastructure
         public virtual DbSet<EmployeeDetail> EmployeeDetail { get; set; }
         public virtual DbSet<Criteria> Criteria { get; set; }
 
-        public virtual DbSet<Assessment> Assessment { get; set; }
-        public virtual DbSet<Criteria> Criterias { get; set; }
 
         public virtual DbSet<Interview> Interview { get; set; }
         public virtual DbSet<Round> Round { get; set; }
@@ -40,7 +38,7 @@ namespace Arms.Infrastructure
         public virtual DbSet<Interviewer> Interviewer { get; set; }
         public virtual DbSet<InterviewPanel> InterviewPanel { get; set; }      
         public virtual DbSet<ArmsEmployees> ArmsEmployees { get; set; }
-        public virtual DbSet<ArmsEmployeeRoles> ArmsEmployeeRoles { get; set; }
+        // public virtual DbSet<ArmsEmployeeRoles> ArmsEmployeeRoles { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
@@ -70,7 +68,7 @@ namespace Arms.Infrastructure
             modelBuilder.ApplyConfiguration(new RoundTypeEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new SkillEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new ArmsEmployeeEntityTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new ArmsEmployeeRolesEntityTypeConfiguration());
+            // modelBuilder.ApplyConfiguration(new ArmsEmployeeRolesEntityTypeConfiguration());
 
         }
     }
