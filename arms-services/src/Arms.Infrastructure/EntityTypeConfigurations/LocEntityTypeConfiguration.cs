@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Arms.Infrastructure.EntityTypeConfigurations
 {
-    internal class LocEntityTypeConfiguration : IEntityTypeConfiguration<Location>
+    internal class LocEntityTypeConfiguration : IEntityTypeConfiguration<Loc>
     {
-        public void Configure(EntityTypeBuilder<Location> builder)
+        public void Configure(EntityTypeBuilder<Loc> builder)
         {
-            builder.ToTable("Loc", "ARMS");
+            builder.ToTable("Location", "ARMS");
 
             builder.Property(e => e.id).HasColumnName("id");
 

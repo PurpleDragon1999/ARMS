@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Arms.Infrastructure.EntityTypeConfigurations
 {
-    internal class AssessmentEntityTypeConfiguration: IEntityTypeConfiguration<Assessment>
+    internal class AssessmentEntityTypeConfiguration : IEntityTypeConfiguration<Assessment>
     {
         public void Configure(EntityTypeBuilder<Assessment> builder)
         {
@@ -60,7 +60,7 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .HasConstraintName("FK_Assessment_ArmsApplication");
 
             builder.HasOne(d => d.InterviewPanel)
-                .WithMany(p => p.Assessment)
+                .WithMany()
                 .HasForeignKey(d => d.InterviewPanelId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Assessment_ArmsInterviewPanel");

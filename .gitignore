@@ -54,11 +54,13 @@ Building Blocks/
 *.manifest
 *.cache
 *.g.props
-*.g.targets
 
+Arms.Api.csproj
+Arms.Api.csproj.user
+
+*.g.targets
 
 appsettings.json
 
 [Dd]esktop.ini
 debug.log
-

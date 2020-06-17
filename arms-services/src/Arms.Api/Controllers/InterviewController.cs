@@ -15,7 +15,10 @@ namespace Arms.Api.Controllers
     [ApiController]
     [Route("api/[controller]")]
     public class InterviewController : BaseController
-    {
+    {   //mailController object 
+        public MailHelperController mailHelper = new MailHelperController();
+        //Email class Object
+        public Email email = new Email();
         private readonly IIdentityService _identityService;
         ArmsDbContext _context;
         public InterviewController(IIdentityService identityService, ArmsDbContext armsContext)
@@ -95,6 +98,28 @@ namespace Arms.Api.Controllers
                             }
 
                         };
+                        //
+                        var applications = _context.Application.Include(c => c.Candidate).
+                                            Where(c => c.JobId == interview.JobId);
+                        //getting the job description object for sending in email
+                        JobDescription jdObject = _context.JobDescription.Include(l => l.employmentType).
+                         Include(l => l.eligibilityCriteria).Include(l => l.loc).FirstOrDefault(c => c.Id == interview.JobId);
+                      
+                        //Adding Emails in string Array to send to candidates
+                       
+                         foreach(Arms.Domain.Entities.Application app in applications)
+                        {
+                            string[] EmailToSend=new[]
+                            {
+                                app.Candidate.Email
+
+                            };
+                            string emailHtmlBody = email.GenerateEmailBody(jdObject, interview,app);
+
+                             mailHelper.MailFunction(emailHtmlBody, EmailToSend);
+                        }
+
+                      
                         return StatusCode(200, response);
                     }
                     else
@@ -183,6 +208,29 @@ namespace Arms.Api.Controllers
                     }
 
                 };
+
+                //getting all the applications whose job Id in interview matches with id and whose status is Scheduled Interview
+                var applications = _context.Application.Include(c => c.Candidate).
+                                           Where(c => c.JobId == interviewObj.JobId && c.ApplicationStatusTypeId==2);
+                //getting the job description object for sending in email
+                JobDescription jdObject = _context.JobDescription.Include(l => l.employmentType).
+                                                               Include(l => l.eligibilityCriteria).
+                                                               Include(l => l.loc).
+                                                              FirstOrDefault(c => c.Id == interviewObj.JobId);
+
+                //Adding Emails in string Array to send to candidates
+
+                foreach (Arms.Domain.Entities.Application app in applications)
+                {
+                    string[] EmailToSend = new[]
+                    {
+                                app.Candidate.Email
+
+                    };
+                    string emailHtmlBody = email.GenerateEmailBody(jdObject, interviewObj, app);
+
+                    mailHelper.MailFunction(emailHtmlBody, EmailToSend);
+                }
                 return StatusCode(200, response);
             }
             catch(Exception e)
@@ -369,6 +417,83 @@ namespace Arms.Api.Controllers
                 return StatusCode(500, response);
             }
         }
+
+        //Email Class is made seperate to pass 3 different objects
+        public class Email
+        {
+            public Email()
+            {
+
+
+            }
+            public string GenerateEmailBody(JobDescription jdObject, Interview interview, Arms.Domain.Entities.Application app)
+            {
+
+                string output = @"<html>
+           <head>    
+	          <style type=""text/css"">
+               </style>
+          </head>
+
+          <body aria-readonly=""false"" style=""cursor: auto;"">
+               <p>Dear Mr/Ms.</p><b>" + app.Candidate.Name + @"</b>We are pleased to inform you that you have 
+          successfully registered for an interview process with CyberGroup.The details of interview are.
+               </p>
+           <table>
+             <tr>
+                <td><b>Date Of Interview:</b></td>
+                <td>" + interview.Date.ToShortDateString() + @"</td>
+            </tr>
+             <tr>
+                <td><b>Time Of Interview:</b></td>
+                <td>" + interview.Time + @"</td>
+            </tr>
+              <tr>
+                <td><b>Venue:</b></td>
+                <td>" + interview.Venue + @"</td>
+            </tr>
+            <tr>
+                <td><b>No Of Rounds:</b></td>
+                <td>" + interview.NoOfRounds + @"</td>
+            </tr>
+            <tr>
+                <td><b>Job ID:</b></td>
+                <td>" + jdObject.code + @"</td>
+           </tr>
+           <tr>
+             <td><b>Job Title:</b></td>
+             <td>" + jdObject.jobTitle + @"</td>
+          </tr>
+          <tr>
+            <td><b>Job Type:</b></td>
+            <td>" + jdObject.employmentType.employmentTypeName + @"</td>
+          </tr>
+          <tr>
+          <td ><b>Address:</b></td>
+          <td> B-9, Block B, Sector 3, Noida, Uttar Pradesh 201301</td>
+         </tr>
+        </table>" +
+         @"<a href = 'http://localhost:4200/progressTracker/" + app.Candidate.Code + "'>" + @"Please click here to track your progress</a>
+        <br>
+         <em>This is automatically generated email,please do not reply</em>
+        <p>Thanks</p>
+         <img src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRCUuWWhu0HByWgdDAp2cA1TDf-a_
+ 
+           FpjUA_DFbRt33DViY9tNDH&usqp= CAU'width='100'height='100'>
+         </body>
+     </html>
+            ";
+                Console.WriteLine(output);
+                return output;
+            }
+
+
+        
+
+
+
+    }
+
 
 
     }
