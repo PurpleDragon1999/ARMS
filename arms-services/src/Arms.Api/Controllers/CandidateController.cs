@@ -9,20 +9,22 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Arms.Domain.CustomEntities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Arms.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class CandidateController : BaseController
 
     {
-        private readonly IIdentityService _identityService;
+        
         ArmsDbContext _context;
         public MailHelperController mailHelper = new MailHelperController();
-        public CandidateController(IIdentityService identityService, ArmsDbContext armsContext)
+        public CandidateController( ArmsDbContext armsContext)
         {
-            _identityService = identityService;
+            
             _context = armsContext;
         }
 

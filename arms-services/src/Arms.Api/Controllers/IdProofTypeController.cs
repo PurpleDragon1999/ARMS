@@ -1,6 +1,7 @@
 ﻿using Arms.Application.Services.Users;
 using Arms.Domain.Entities;
 using Arms.Infrastructure;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -14,13 +15,13 @@ namespace Arms.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class IdProofTypeController:BaseController
     {
-        private readonly IIdentityService _identityService;
+       
         ArmsDbContext _context;
-        public IdProofTypeController(IIdentityService identityService, ArmsDbContext armsContext)
+        public IdProofTypeController(ArmsDbContext armsContext)
         {
-            _identityService = identityService;
             _context = armsContext;
         }
 

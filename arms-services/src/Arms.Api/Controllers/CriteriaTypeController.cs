@@ -11,19 +11,20 @@ using Microsoft.AspNetCore.Http;
 using System.IO;
 using System.Reflection.Metadata;
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace Arms.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CriteriaTypeController :BaseController
     {
-        private readonly IIdentityService _identityService;
+        
         ArmsDbContext _context;
-        public CriteriaTypeController(IIdentityService identityService, ArmsDbContext armsContext)
+        public CriteriaTypeController( ArmsDbContext armsContext)
         {
-            _identityService = identityService;
+          
             _context = armsContext;
         }
         //GET:api/CriteriaType

@@ -9,11 +9,13 @@ using Arms.Infrastructure;
 using Arms.Domain.Entities;
 using System.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Arms.Api.Controllers
 {
     [Route("api/interviewer")]
     [ApiController]
+    [Authorize]
     public class InterviewerController : ControllerBase
     {
         ArmsDbContext _context;
