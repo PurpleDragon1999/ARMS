@@ -157,7 +157,7 @@ namespace Arms.Api.Controllers
                     jobTitle = job.jobTitle,
                     vacancies = job.vacancies,
                     salary = job.salary,
-                    skills=job.skills,
+                    skills = job.skills,
                     pdfBlobData = job.pdfBlobData,
 
                 };

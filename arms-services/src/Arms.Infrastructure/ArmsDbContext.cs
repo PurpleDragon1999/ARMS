@@ -13,19 +13,12 @@ namespace Arms.Infrastructure
             : base(options)
         {
         }
-
-
-
         public virtual DbSet<Candidate> Candidate { get; set; }
         public virtual DbSet<IdProofType> IdProofType { get; set; }
         public virtual DbSet<Assessment> Assessment { get; set; }
         public virtual DbSet<Application> Application { get; set; }
         public virtual DbSet<Resume> Resume { get; set; }
         public virtual DbSet<ApplicationStatusType> ApplicationStatusType { get; set; }
-        
-
-
-
         public virtual DbSet<JobDescription> JobDescription { get; set; }
         public virtual DbSet<EmploymentType> employmentType  { get; set; }
 
@@ -37,15 +30,12 @@ namespace Arms.Infrastructure
         public virtual DbSet<Interview> Interview { get; set; }
         public virtual DbSet<Round> Round { get; set; }
         public virtual DbSet<RoundType> RoundType { get; set; }
-
         public virtual DbSet<CriteriaType> CriteriaType { get; set; }
+        public virtual DbSet<Loc> Loc { get; set; }
+        public virtual DbSet<Skill> Skill { get; set; }
         public virtual DbSet<Images> Images { get; set; }
         public virtual DbSet<Interviewer> Interviewer { get; set; }
-        public virtual DbSet<InterviewPanel> InterviewPanel { get; set; }
-        public virtual DbSet<Skill> Skill { get; set; }
-        public virtual DbSet<Loc> Loc { get; set; }       
-      
-       
+        public virtual DbSet<InterviewPanel> InterviewPanel { get; set; }      
         public virtual DbSet<ArmsEmployees> ArmsEmployees { get; set; }
         public virtual DbSet<ArmsEmployeeRoles> ArmsEmployeeRoles { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)

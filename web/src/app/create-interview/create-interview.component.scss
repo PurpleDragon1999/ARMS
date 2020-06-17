@@ -15,7 +15,24 @@ label, button{
     color: rgb(201, 5, 5);
 }
 
+.content{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
 
+select::-ms-expand {
+    padding-right: 5rem;
+    display: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    // text-indent: 1px;
+    // text-overflow: '';
+}
+
+.form-control::-ms-expand {
+    background-color: transparent;
+    border: 0; }
 
 
 

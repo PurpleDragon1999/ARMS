@@ -35,17 +35,16 @@ namespace Arms.Api.Startup
         {
             string connString = this.Configuration.GetConnectionString("db");
             services.AddDbContext<Arms.Infrastructure.ArmsDbContext>(o => o.UseSqlServer(connString));
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services
                 .AddCustomMvc()
                 .AddCustomAuthentication(Configuration)
                 .AddCustomSwagger(Configuration)
+
                 .AddArmsApplicationServices(Configuration);
-
-
 
             services.AddCors();                      //mine
 
-                
 
         }
 

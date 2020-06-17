@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using Hrms.Core.Domains.Entities;
-
 namespace Arms.Domain.Entities
 {
     public partial class Employee
