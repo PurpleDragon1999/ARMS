@@ -4,23 +4,14 @@
   </div>
 
   <div class="row">
-    <div
-      class="col-md-12 grid-margin accordion md-accordion accordion-blocks mb-0"
-      id="roundAccordionView"
+    <div class="col-md-12 grid-margin accordion md-accordion accordion-blocks mb-0"
+      id="applicationStatusAccordionView"
       role="tablist"
       aria-multiselectable="true">
-     <app-round-type></app-round-type> 
+      <app-application-status></app-application-status>
     </div>
 
-    <div
-    class="col-md-12  accordion md-accordion accordion-blocks"
-    id="locationAccordionView"
-    role="tablist"
-    aria-multiselectable="true">
-    
-    <app-location></app-location>
 
-  </div>
   <div
   class="col-md-12  accordion md-accordion accordion-blocks"
   id="idProofAccordionView"
@@ -30,6 +21,32 @@
   <app-id-proof-type></app-id-proof-type>
 
 </div>
+    <div class="col-md-12 grid-margin accordion md-accordion accordion-blocks mb-0"
+      id="eligibilityCriterionAccordionView"
+      role="tablist"
+      aria-multiselectable="true">
+      <app-eligibility-criteria></app-eligibility-criteria>
+    </div>
 
+    <div class="col-md-12 grid-margin accordion md-accordion accordion-blocks mb-0"
+      id="employmentTypeAccordionView"
+      role="tablist"
+      aria-multiselectable="true">
+      <app-employment-type></app-employment-type>
+    </div>
+
+    <div class="col-md-12 grid-margin accordion md-accordion accordion-blocks mb-0"
+        id="locationAccordionView"
+        role="tablist"
+        aria-multiselectable="true">
+        <app-location></app-location>
+    </div>
+
+    <div class="col-md-12 grid-margin accordion md-accordion accordion-blocks mb-0"
+      id="roundAccordionView"
+      role="tablist"
+      aria-multiselectable="true">
+      <app-round-type></app-round-type> 
+    </div>
   </div>
 </div>

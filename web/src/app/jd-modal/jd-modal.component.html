@@ -43,8 +43,8 @@
         <div class="form-group">
           <label for="jobTitle"><b>Job Title </b><span class="asterick">*</span></label>
           <input
-            name="jobTitle"
-            [ngModel]="jobArray.jobTitle"
+            name="jdTitle"
+            [ngModel]="jobArray && jobArray.jobTitle"
             type="text"
             class="form-control"
             id="jdTitle"
@@ -63,7 +63,7 @@
         <div class="form-group">
           <label for="description"><b>Job Description</b><span class="asterick">*</span></label>
           <textarea
-            name="description"
+            name="jobProfileDescription"
             [ngModel]="description"
             type="text"
             class="form-control"

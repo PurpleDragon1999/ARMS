@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 using System;
 
+=======
+>>>>>>> 33391e4beebc6a85b30782021b9892d3aba84f2e
 namespace Arms.Domain.Entities
 {
     public class Location

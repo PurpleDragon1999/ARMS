@@ -129,11 +129,11 @@ export class JdListComponent implements OnInit {
     } else { return 0; }
   }
 
-   searchJd(character?: string, page?: number){
-     this._service.search(character, page).subscribe(res=> {
+  // searchJd(character?: string, page?: number){
+  //   this._service.search(character, page).subscribe(res=> {
   //     this.jobsList = res.payload.data.dataList
   //     this.pager = res.payload.data.pager
-   });
-   }
+  //   });
+  // }
 
 }

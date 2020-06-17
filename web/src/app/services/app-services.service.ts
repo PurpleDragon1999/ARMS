@@ -63,30 +63,29 @@ export class AppServicesService {
   createAssessment(user: IAssessment): Observable<HttpResponse<any>>{
     return this.http.post<any>(`${USER_DOMAIN}/api/assessment`, user, { ...this.httpOptions, observe: 'response' });
   }
-  getAllJobs(): Observable<any>{
-    return this.http.get<any>(`${DOTNET_DOMAIN}/api/jobDescription`, this.httpOptions);
- }
- getAllEligibilityCriterias(): Observable<HttpResponse<any>>{
-  return this.http.get<any>(`${DOTNET_DOMAIN}/api/eligibilityCriteria`, this.httpOptions);
- }
- getAllEmploymentTypes(): Observable<HttpResponse<any>>{
-  return this.http.get<any>(`${DOTNET_DOMAIN}/api/employmentType`, this.httpOptions);
- }  
- getAllLocations():Observable<HttpResponse<any>>{
-  return this.http.get<any>(`${DOTNET_DOMAIN}/api/location`, this.httpOptions);
- }
- deleteLocation(id): Observable<any>{
-  return this.http.delete<any>(`${DOTNET_DOMAIN}/api/location/${id}`, {...this.httpOptions,observe: 'response'});
-}
+
  getAllIdProofTypes():Observable<HttpResponse<any>>{
   return this.http.get<any>(`${DOTNET_DOMAIN}/api/IdProofTypes`, this.httpOptions);
  }
  getAllRounds():Observable<HttpResponse<any>>{
   return this.http.get<any>(`${DOTNET_DOMAIN}/api/RoundType`, this.httpOptions);
  }
- getSkills():Observable<HttpResponse<any>>{
-  return this.http.get<any>(`${DOTNET_DOMAIN}/api/skill`, this.httpOptions);
- }
+  getAllJobs(): Observable<any>{
+    return this.http.get<any>(`${DOTNET_DOMAIN}/api/jobDescription`, this.httpOptions);
+  }
+
+  getAllEligibilityCriterias(): Observable<HttpResponse<any>>{
+    return this.http.get<any>(`${DOTNET_DOMAIN}/api/eligibilityCriteria`, this.httpOptions);
+  }
+
+  getAllEmploymentTypes(): Observable<HttpResponse<any>>{
+    return this.http.get<any>(`${DOTNET_DOMAIN}/api/employmentType`, this.httpOptions);
+  }  
+
+  getSkills():Observable<HttpResponse<any>>{
+    return this.http.get<any>(`${DOTNET_DOMAIN}/api/skill`, this.httpOptions);
+  }
+
   getJobsById(Id): Observable<HttpResponse<any>>{
     return this.http.get<any>(`${USER_DOMAIN}/api/jobDescription/${Id}`, this.options);
   }
@@ -126,7 +125,8 @@ export class AppServicesService {
   //   }
   //   return this.http.post<any>(`${USER_DOMAIN}/api/jdEmail`, mailObj, { ...this.options, observe: 'response' });
   // }
-  sendMails(mailingList,jdId): Observable<any> {
+
+  sendMails(mailingList,jdId): Observable<any>{
     let mailObj= {
       jobDescriptionId: jdId,
       emailList: mailingList
@@ -134,20 +134,44 @@ export class AppServicesService {
     return this.http.post<any>(`${DOTNET_DOMAIN}/api/jdEmail`, mailObj, { ...this.httpOptions, observe: 'response' });
   }
 
-  search(character: string = "", page: number = 1): Observable<IResponse> {
+  search(character: string = "", page: number = 1): Observable<IResponse>{
     const params: HttpParams = new HttpParams().set('character', character).set("pagination", "true").set("page", page.toString());
     return this.http.get<IResponse>(`${USER_DOMAIN}/api/jobDescriptionSearch`, {...this.options, params})
   }
 
-getAllInterviews(): Observable<HttpResponse<any>>{
-  return this.http.get<any>(`${DOTNET_DOMAIN}/api/interview`, this.httpOptions);
-}
+  getAllInterviews(): Observable<HttpResponse<any>>{
+    return this.http.get<any>(`${DOTNET_DOMAIN}/api/interview`, this.httpOptions);
+  }
 
-deleteInterview(interviewId): Observable<IResponse>{
-  return this.http.delete<any>(`${DOTNET_DOMAIN}/api/interview/${interviewId}`, this.httpOptions);
-}
-getInterviewById(Id): Observable<HttpResponse<any>>{
-  return this.http.get<any>(`${DOTNET_DOMAIN}/api/interview/${Id}`, this.httpOptions);
-}
+  deleteInterview(interviewId): Observable<IResponse>{
+    return this.http.delete<any>(`${DOTNET_DOMAIN}/api/interview/${interviewId}`, this.httpOptions);
+  }
 
+  getInterviewById(Id): Observable<HttpResponse<any>>{
+    return this.http.get<any>(`${DOTNET_DOMAIN}/api/interview/${Id}`, this.httpOptions);
+  }
+
+  getAllLocations():Observable<HttpResponse<any>>{
+    return this.http.get<any>(`${DOTNET_DOMAIN}/api/location`, this.httpOptions);
+  }
+
+  deleteLocation(id): Observable<any>{
+    return this.http.delete<any>(`${DOTNET_DOMAIN}/api/location/${id}`, {...this.httpOptions,observe: 'response'});
+  }
+
+  deleteEmploymentType(id): Observable<any>{
+    return this.http.delete<any>(`${DOTNET_DOMAIN}/api/employmentType/${id}`, {...this.httpOptions,observe: 'response'});
+  }
+
+  deleteApplicationStatusType(id): Observable<any>{
+    return this.http.delete<any>(`${DOTNET_DOMAIN}/api/applicationStatusTypes/${id}`, {...this.httpOptions,observe: 'response'});
+  }
+
+  getAllApplicationStatusTypes():Observable<HttpResponse<any>>{
+    return this.http.get<any>(`${DOTNET_DOMAIN}/api/applicationStatusTypes`, this.httpOptions);
+  }
+
+  deleteEligibilityCriterion(id): Observable<any>{
+    return this.http.delete<any>(`${DOTNET_DOMAIN}/api/eligibilityCriteria/${id}`, {...this.httpOptions,observe: 'response'});
+  }
 }

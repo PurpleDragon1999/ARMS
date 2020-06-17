@@ -1,24 +1,24 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { LocationComponent } from './location.component';
+
+import { EmploymentTypeComponent } from './employment-type.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
-describe('LocationComponent', () => {
-  let component: LocationComponent;
-  let fixture: ComponentFixture<LocationComponent>;
+describe('EmploymentTypeComponent', () => {
+  let component: EmploymentTypeComponent;
+  let fixture: ComponentFixture<EmploymentTypeComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LocationComponent ],
+      declarations: [ EmploymentTypeComponent ],
       imports: [ReactiveFormsModule, HttpClientTestingModule, RouterTestingModule]
-    
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LocationComponent);
+    fixture = TestBed.createComponent(EmploymentTypeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -66,7 +66,7 @@ export class LocationComponent implements OnInit {
 
       this.loadLocations();
       modalRef.componentInstance.success = response.body.result.success;
-      modalRef.componentInstance.message = "Deleted Successfully";
+      modalRef.componentInstance.message = response.body.result.payload.message;
       }, (error: HttpErrorResponse) => {
         modalRef.componentInstance.success = error.error.success;
         modalRef.componentInstance.message = error.error.payload.message;
