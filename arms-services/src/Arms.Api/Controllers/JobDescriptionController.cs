@@ -80,7 +80,7 @@ namespace Arms.Api.Controllers
                 {
                     var resNull = new
                     {
-                        success = "false",
+                        success = false,
                         payload = new
                         {
                             message = "This Jobdescription does not exist"
@@ -93,7 +93,7 @@ namespace Arms.Api.Controllers
 
                     var response = new
                     {
-                        success = "true",
+                        success = true,
                         payload = new
                         {
                             data = job,
@@ -108,7 +108,7 @@ namespace Arms.Api.Controllers
             {
                 var response = new
                   {
-                    success = "false",
+                    success = false,
                     payload = new
                     {
                         message = ex.InnerException.Message
