@@ -68,7 +68,8 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     CandidateComponent,
     EmailListModalComponent,
     InterviewListComponent,
-    SettingsComponent
+    SettingsComponent,
+   
   ],
   imports: [
     MDBBootstrapModule.forRoot(),

@@ -51,43 +51,58 @@ export class JdModalComponent implements OnInit {
   jobTypeOptions: String;
   jobListingForm: FormGroup;
   submitted = false;
-  jdFormObject: jobDescription;
-  data: jobDescription;
-
+  jdFormObject: any;
+  data: any;
+  eligibilityCriterias:any;
+  locations:any;
+  employmentTypes:any;
   ngOnInit() {
-    this.loadJobData(this.jdUpdateId);
+    this.loadJobData(Number(this.jdUpdateId));
+    this._service.getAllEligibilityCriterias().subscribe((res: any) => {
+       this.eligibilityCriterias=res.result.payload.data;
+     
+      });
+    this._service.getAllLocations().subscribe((res: any) => {
+      this.locations=res.result.payload.data;
+      
+      });
+    this._service.getAllEmploymentTypes().subscribe((res: any) => {
+      this.employmentTypes=res.result.payload.data;
+        
+      });
   }
 
-  loadJobData(Id: string) {
-    this._service.getJobsById(Id).subscribe((res: any) => {
+  loadJobData(Id) {
+    this._service.getJdData(Id).subscribe((res: any) => {
       if (res.success) {
-        this.jobArray = res.payload.data;
+        this.jobArray = res.result.payload.data;
+      
         this.setJobData();
       }
     });
   }
   setJobData() {
-    this.jdId = this.jobArray.jdId.slice(6, 11);
-    this.jdTitle = this.jobArray.jdTitle;
+    this.jdId = this.jobArray.code.slice(6, 11);
+    this.jdTitle = this.jobArray.jobTitle;
     this.openingDate = this.jobArray.openingDate.slice(0, 10);
     this.closingDate = this.jobArray.closingDate.slice(0, 10);
-    this.jobProfileDescription = this.jobArray.jobProfileDescription;
+    this.jobProfileDescription = this.jobArray.description;
     this.skills = this.jobArray.skills;
-    this.jobType = this.jobArray.jobType;
-    this.eligibilityCriteria = this.jobArray.eligibilityCriteria;
-    this.location = this.jobArray.location;
+    this.jobType = this.jobArray.employmentType.employmentTypeName;
+    this.eligibilityCriteria = this.jobArray.eligibilityCriteria.eligibilityCriteriaName;
+    this.location = this.jobArray.loc.locationName;
     this.salary = this.jobArray.salary;
     this.vacancies = this.jobArray.vacancies;
   }
 
   sendUpdateRequest(jdFormObject: any) {
     jdFormObject.jdId = `CYGJID${jdFormObject.jdId}`;
-    this._service.updateJobInfo(jdFormObject, this.jobArray._id).subscribe(
+    this._service.updateJobInfo(jdFormObject, this.jobArray.id).subscribe(
       (res: any) => {
         const modalRef = this.modalService.open(ModalComponent);
         modalRef.componentInstance.shouldConfirm = false;
-        modalRef.componentInstance.success = res.success;
-        modalRef.componentInstance.message = res.payload.message;
+        modalRef.componentInstance.success = res.body.result.success;
+        modalRef.componentInstance.message = res.body.result.payload.message;
         modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
           modalRef.close();
         });

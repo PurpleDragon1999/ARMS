@@ -8,22 +8,7 @@
        <div class="card-body">
          <br>
          <form class="forms-sample" [formGroup]="jobListingForm" (ngSubmit)="onSubmit()" novalidate>
-           <div class="form-group">
-             <label for="jobId"><b>Job ID</b></label>
-             <div class="input-group col-xs-12">
-               <span class="input-group-append btn btn-gradient-danger span">
-                 CYGJID
-               </span>
-               <input type="text" class="form-control" id="jobId" #jobId placeholder="Job ID" maxlength="4"
-                 (input)="jobId.value=$event.target.value.toUpperCase()" formControlName="jobId"
-                 [ngClass]="{ 'is-invalid': submitted && formControls.jobId.errors }" />
-               <div *ngIf="submitted && formControls.jobId.errors" class="invalid-feedback">
-                 <div *ngIf="formControls.jobId.errors.required"><i class="mdi mdi-alert-outline"></i> Job ID is
-                   required</div>
-               </div>
-             </div>
-           </div>
-           <div class="form-group">
+         <div class="form-group">
              <label for="jobTitle"><b>Job Title </b></label>
              <input type="text" class="form-control" placeholder="Job Title" #jobTitle maxlength="40"
                formControlName="jobTitle" [ngClass]="{ 'is-invalid': submitted && formControls.jobTitle.errors }" />
@@ -66,6 +51,12 @@
              <label for="skills"><b>Skills </b></label>
              <input type="text" class="form-control" placeholder="Skills" #skills maxlength="30"
                formControlName="skills" [ngClass]="{ 'is-invalid': submitted && formControls.skills.errors }" />
+              
+                  
+               <!-- <option value="skill"*ngFor="let skill of skillArray">
+                {{ skill }}
+              </option> -->
+            <!-- </select> -->
              <div *ngIf="submitted && formControls.skills.errors" class="invalid-feedback">
                <div *ngIf="formControls.skills.errors.required"><i class="mdi mdi-alert-outline"></i> Skills is
                  required</div>
@@ -78,11 +69,10 @@
                (change)="selectChangeHandlerEligibilityCriteria($event)" formControlName="eligibilityCriteria"
                [ngClass]="{ 'is-invalid': submitted && formControls.eligibilityCriteria.errors }">
                <option class="select-css">{{eligibilityCriteriaOptions}}</option>
-               <option class="select-css"value="High School">High School</option>
-               <option class="select-css"value="Bachelor's">Bachelor's</option>
-               <option class="select-css"value="Master's">Master's</option>
-               <option class="select-css"value="Doctoral">Doctoral</option>
-             </select>
+               <option class="select-css"*ngFor="let el of eligibilityCriterias" [ngValue]="el.id">
+                {{ el.eligibilityCriteriaName }}
+              </option>
+            </select>
              <div *ngIf="submitted && formControls.eligibilityCriteria.errors" class="invalid-feedback">
                <div *ngIf="formControls.eligibilityCriteria.errors.required"><i class="mdi mdi-alert-outline"></i>
                  Eligibility criteria is required</div>
@@ -90,15 +80,15 @@
            </div>
 
            <div class="form-group">
-             <label for="jobType"><b>Job Type </b></label>
+             <label for="jobType"><b>Employment Type </b></label>
              <select class="form-control form-control-lg" placeholder="Criteria" #jobType
                (change)="selectChangeHandlerJobType($event)" formControlName="jobType"
                [ngClass]="{ 'is-invalid': submitted && formControls.jobType.errors }">
                <option class="select-css">{{jobTypeOptions}}</option>
-               <option class="select-css"value="full-time">Full-time</option>
-               <option class="select-css"value="part-time">Part-time</option>
-               <option class="select-css"value="intern">Intern</option>
-             </select>
+               <option class="select-css"*ngFor="let employmentType of employmentTypes" [ngValue]="employmentType.id">
+                {{ employmentType.employmentTypeName }}
+              </option>
+            </select>
              <div *ngIf="submitted && formControls.jobType.errors" class="invalid-feedback">
                <div *ngIf="formControls.jobType.errors.required"><i class="mdi mdi-alert-outline"></i> Job Type is
                  required</div>
@@ -107,13 +97,14 @@
 
            <div class="form-group">
              <label for="location"><b>Location </b></label>
-           
+              
              <select class="form-control form-control-lg" placeholder="Criteria" #location
                (change)="selectChangeHandlerLocation($event)" formControlName="location"
                [ngClass]="{ 'is-invalid': submitted && formControls.location.errors }">
                <option class="select-css">{{locationOptions}}</option>
-               <option class="select-css"> Dallas, TX - USA</option>
-               <option class="select-css"> Noida, UP - India</option>
+               <option class="select-css"*ngFor="let location of locations" [ngValue]="location.id">
+                {{ location.locationName }}
+              </option>
              </select>
             
              <div *ngIf="submitted && formControls.location.errors" class="invalid-feedback">
@@ -122,10 +113,21 @@
              </div>
            </div>
 
-           <div class="form-group">
-             <label for="salary"><b>Salary (per annum)</b></label>
-             <input type="number" class="form-control" placeholder="Salary" #salary />
-           </div>
+         
+            <div class="form-group">
+              <label for="salary"><b>Salary (per annum)</b></label>
+              
+                  <div class="input-group col-xs-12">
+                    <input type="number" class="form-control" placeholder="Salary" #salary />
+                    <button class="btn btn-gradient-danger btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      {{buttonName}}
+                    </button>
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item"value="USD" (click)="currencyChange($event)">USD</a>
+                      <a class="dropdown-item" value="INR"(click)="currencyChange($event)">INR</a>
+                    </div>
+                  </div>
+              </div>
 
            <div class="form-group">
              <label for="vacancies"><b>No .of Vacancies </b></label>

@@ -1,20 +1,17 @@
 using Arms.Domain.Entities;
 using Arms.Infrastructure.EntityTypeConfigurations;
 using Microsoft.EntityFrameworkCore;
-using Arms.Domain.Entities;
 
 namespace Arms.Infrastructure
 {
     public  class ArmsDbContext: DbContext
     {
-      
-
         public ArmsDbContext(DbContextOptions<ArmsDbContext> options)
             : base(options)
         {
         }
-
-    
+        public DbSet<ARMSEmployeeRoles> ARMSEmployeeRoles { get; set; }
+        public DbSet<Employee>Employee { get; set; }
         public virtual DbSet<JobDescription> JobDescription { get; set; }
         public virtual DbSet<EmploymentType> employmentType  { get; set; }
 
@@ -38,18 +35,18 @@ namespace Arms.Infrastructure
         public virtual DbSet<InterviewPanel> InterviewPanel { get; set; }
         public virtual DbSet<Location> Location { get; set; }
         public virtual DbSet<Resume> Resume { get; set; }
-        public virtual DbSet<Loc> Loc { get; set; }
+        public virtual DbSet<Location> Loc { get; set; }
+        public virtual DbSet<Skill> Skill { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
             modelBuilder.ApplyConfiguration(new EmployeeEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new ARMSEmployeeRolesEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new EmployeeDetailEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new JobDescriptionEntityTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new LocEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new LocationEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new EmploymentTypeEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new EligibilityCriteriaEntityTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new RoundTypeEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new ApplicationEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new ApplicationStatusTypeEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new AssessmentEntityTypeConfiguration());
@@ -63,6 +60,8 @@ namespace Arms.Infrastructure
             modelBuilder.ApplyConfiguration(new InterviewPanelEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new ResumeEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new RoundEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new RoundTypeEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new SkillEntityTypeConfiguration());
 
         }
     }

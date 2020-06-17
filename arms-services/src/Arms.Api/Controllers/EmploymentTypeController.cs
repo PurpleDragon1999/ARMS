@@ -44,7 +44,7 @@ namespace Arms.Api.Controllers
             {
                 var response = new
                 {
-                    success = "false",
+                    success = false,
                     payload = new
                     {
                         message = ex.InnerException.Message
@@ -64,7 +64,7 @@ namespace Arms.Api.Controllers
                 {
                     var resNull = new
                     {
-                        success = "false",
+                        success = false,
                         payload = new
                         {
                             message = "This Employment Type does not exist"
@@ -74,7 +74,7 @@ namespace Arms.Api.Controllers
                 }
                 var response = new
                 {
-                    success = "true",
+                    success = true,
                     payload = new
                     {
                         data = employmentType,
@@ -88,7 +88,7 @@ namespace Arms.Api.Controllers
             {
                 var response = new
                 {
-                    success = "false",
+                    success = false,
                     payload = new
                     {
                         message = ex.InnerException.Message
@@ -109,7 +109,7 @@ namespace Arms.Api.Controllers
                 {
                     var resAlreadyExists = new
                     {
-                        success = "false",
+                        success = false,
                         payload = new
                         {
                             message = "This Employment Type already exists"
@@ -126,7 +126,7 @@ namespace Arms.Api.Controllers
                 _context.SaveChanges();
                 var response = new
                 {
-                    success = "true",
+                    success = true,
                     payload = new
                     {
                         data = newEmploymentType,
@@ -140,7 +140,7 @@ namespace Arms.Api.Controllers
             {
                 var response = new
                 {
-                    success = "false",
+                    success = false,
                     payload = new
                     {
                         message = ex.InnerException.Message
@@ -162,7 +162,7 @@ namespace Arms.Api.Controllers
                 {
                     var resNull = new
                     {
-                        success = "false",
+                        success = false,
                         payload = new
                         {
                             message = "This Employment Type does not exist"
@@ -176,7 +176,7 @@ namespace Arms.Api.Controllers
                 _context.SaveChanges();
                 var response = new
                 {
-                    success = "true",
+                    success = true,
                     payload = new
                     {
                         data = empTypeInDb,
@@ -190,7 +190,7 @@ namespace Arms.Api.Controllers
             {
                 var response = new
                 {
-                    success = "false",
+                    success = false,
                     payload = new
                     {
                         message = ex.InnerException.Message
@@ -210,7 +210,7 @@ namespace Arms.Api.Controllers
                 {
                     var resNull = new
                     {
-                        success = "false",
+                        success = false,
                         payload = new
                         {
                             message = "This Employment Type does not exist"
@@ -224,7 +224,7 @@ namespace Arms.Api.Controllers
                 _context.SaveChanges();
                 var response = new
                 {
-                    success = "true",
+                    success = true,
                     payload = new
                     {
 
@@ -238,7 +238,7 @@ namespace Arms.Api.Controllers
             {
                 var response = new
                 {
-                    success = "false",
+                    success = false,
                     payload = new
                     {
                         message = ex.InnerException.Message

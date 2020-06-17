@@ -30,7 +30,7 @@ namespace Arms.Api.Controllers
                 List<EligibilityCriteria> eligibilityCriterias = _context.eligibilityCriteria.ToList();
                 var response = new
                 {
-                    success = "true",
+                    success = true,
                     payload = new
                     {
                         data = eligibilityCriterias,
@@ -44,7 +44,7 @@ namespace Arms.Api.Controllers
             {
                 var response = new
                 {
-                    success = "false",
+                    success = false,
                     payload = new
                     {
                         message = ex.InnerException.Message
@@ -65,7 +65,7 @@ namespace Arms.Api.Controllers
                 {
                     var resNull = new
                     {
-                        success = "false",
+                        success = false,
                         payload = new
                         {
                             message = "This Eligibility Criteria does not exist"
@@ -75,7 +75,7 @@ namespace Arms.Api.Controllers
                 }
                 var response = new
                 {
-                    success = "true",
+                    success = true,
                     payload = new
                     {
                         data = eligibilityCriteria,
@@ -89,7 +89,7 @@ namespace Arms.Api.Controllers
             {
                 var response = new
                 {
-                    success = "false",
+                    success = false,
                     payload = new
                     {
                         message = ex.InnerException.Message
@@ -111,7 +111,7 @@ namespace Arms.Api.Controllers
                 {
                     var resAlreadyExists = new
                     {
-                        success = "false",
+                        success = false,
                         payload = new
                         {
                             message = "This Eligibility Criteria already exists"
@@ -128,7 +128,7 @@ namespace Arms.Api.Controllers
                 _context.SaveChanges();
                 var response = new
                 {
-                    success = "true",
+                    success = true,
                     payload = new
                     {
                         data = newEligibilityCriteria,
@@ -142,7 +142,7 @@ namespace Arms.Api.Controllers
             {
                 var response = new
                 {
-                    success = "false",
+                    success = false,
                     payload = new
                     {
                         message = ex.InnerException.Message
@@ -164,7 +164,7 @@ namespace Arms.Api.Controllers
                 {
                     var resNull = new
                     {
-                        success = "false",
+                        success = false,
                         payload = new
                         {
                             message = "This Eligibility Criteiria does not exist"
@@ -192,7 +192,7 @@ namespace Arms.Api.Controllers
             {
                 var response = new
                 {
-                    success = "false",
+                    success = false,
                     payload = new
                     {
                         message = ex.InnerException.Message
@@ -212,7 +212,7 @@ namespace Arms.Api.Controllers
                 {
                     var resNull = new
                     {
-                        success = "false",
+                        success = false,
                         payload = new
                         {
                             message = "This Eligibility Criteria does not exist"
@@ -240,7 +240,7 @@ namespace Arms.Api.Controllers
             {
                 var response = new
                 {
-                    success = "false",
+                    success = false,
                     payload = new
                     {
                         message = ex.InnerException.Message
