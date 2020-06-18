@@ -2,7 +2,7 @@ import { LocationComponent } from './settings/components/location/location.compo
 import { RoundTypeComponent } from './settings/components/round-type/round-type.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule,  } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { MsalInterceptor, MsalModule } from '@azure/msal-angular';
 import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -36,6 +36,7 @@ import { EmailListModalComponent } from './email-list-modal/email-list-modal.com
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { SettingsComponent } from './settings/settings.component';
+import { IdProofTypeComponent } from './settings/components/id-proof-type/id-proof-type.component';
 import { EmploymentTypeComponent } from './settings/components/employment-type/employment-type.component';
 import { EligibilityCriteriaComponent } from './settings/components/eligibility-criteria/eligibility-criteria.component';
 import { ApplicationStatusComponent } from './settings/components/application-status/application-status.component';
@@ -75,6 +76,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     SettingsComponent,
     RoundTypeComponent,
     LocationComponent,
+    IdProofTypeComponent,
     EmploymentTypeComponent,
     EligibilityCriteriaComponent,
     ApplicationStatusComponent

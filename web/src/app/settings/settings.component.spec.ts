@@ -1,3 +1,4 @@
+import { IdProofTypeComponent } from './components/id-proof-type/id-proof-type.component';
 import { ApplicationStatusComponent } from './components/application-status/application-status.component';
 import { EligibilityCriteriaComponent } from './components/eligibility-criteria/eligibility-criteria.component';
 import { EmploymentTypeComponent } from './components/employment-type/employment-type.component';
@@ -15,7 +16,7 @@ describe('SettingsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SettingsComponent, ApplicationStatusComponent, EligibilityCriteriaComponent, EmploymentTypeComponent, LocationComponent, RoundTypeComponent],
+      declarations: [ SettingsComponent, ApplicationStatusComponent, EligibilityCriteriaComponent, EmploymentTypeComponent, LocationComponent, RoundTypeComponent, IdProofTypeComponent],
       imports: [ReactiveFormsModule, HttpClientTestingModule, RouterTestingModule]
     
     })

@@ -16,7 +16,7 @@ namespace Arms.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ApplicationStatusTypesController : BaseController
+    public class ApplicationStatusTypesController : ControllerBase
     {
         private readonly IIdentityService _identityService;
         ArmsDbContext _context;
@@ -109,42 +109,46 @@ namespace Arms.Api.Controllers
 
 
         [HttpPost]
-        public IActionResult CreateStatusType(ApplicationStatusType statusType)
+        public IActionResult CreateStatusType(ApplicationStatusType[] statusType)
         {
             try
             {
-                ApplicationStatusType checkinDb = _context.ApplicationStatusType.SingleOrDefault(c => c.StatusName == statusType.StatusName);
-                if (checkinDb != null)
+                for (int i = 0; i < statusType.Length; i++)
                 {
-                    var resAlreadyExists = new
+                    ApplicationStatusType checkinDb = _context.ApplicationStatusType.SingleOrDefault(c => c.StatusName == statusType[i].StatusName);
+                    if (checkinDb != null)
                     {
-                        success = "false",
+                        var resAlreadyExists = new
+                        {
+                            success = "false",
+                            payload = new
+                            {
+                                message = "Application status type already exists"
+                            }
+                        };
+                        return StatusCode(400, resAlreadyExists);
+                    }
+
+                    ApplicationStatusType newStatusType = new ApplicationStatusType
+                    {
+                        StatusName = statusType[i].StatusName,
+                        CreatedBy = statusType[i].CreatedBy,
+                        ModifiedBy = statusType[i].ModifiedBy
+                    };
+                    _context.ApplicationStatusType.Add(newStatusType);
+                    _context.SaveChanges();
+                    var response = new
+                    {
+                        success = "true",
                         payload = new
                         {
-                            message = "Application status type already exists"
+                            data = newStatusType,
+                            message = "Application status type created successfully"
                         }
                     };
-                    return StatusCode(400, resAlreadyExists);
                 }
+                return StatusCode(201);
 
-                ApplicationStatusType newStatusType = new ApplicationStatusType
-                {
-                    StatusName = statusType.StatusName,
-                    CreatedBy= statusType.CreatedBy,
-                    ModifiedBy= statusType.ModifiedBy
-                };
-                _context.ApplicationStatusType.Add(newStatusType);
-                _context.SaveChanges();
-                var response = new
-                {
-                    success = "true",
-                    payload = new
-                    {
-                        data = newStatusType,
-                        message = "Application status type created successfully"
-                    }
-                };
-                return StatusCode(201, response);
             }
             catch (Exception ex)
             {

@@ -13,12 +13,15 @@ namespace Arms.Infrastructure
         {
         }
 
+<<<<<<< HEAD
         public virtual DbSet<Candidate> Candidate { get; set; }
         public virtual DbSet<IdProofType> IdProofType { get; set; }
         public virtual DbSet<Assessment> Assessment { get; set; }
         public virtual DbSet<Application> Application { get; set; }
         public virtual DbSet<Resume> Resume { get; set; }
         public virtual DbSet<ApplicationStatusType> ApplicationStatusType { get; set; }
+=======
+>>>>>>> d68f2da69690c134ac34b5244771043ec00833f4
         public virtual DbSet<JobDescription> JobDescription { get; set; }
         public virtual DbSet<EmploymentType> employmentType  { get; set; }
 
@@ -31,6 +34,7 @@ namespace Arms.Infrastructure
         public virtual DbSet<Round> Round { get; set; }
         public virtual DbSet<RoundType> RoundType { get; set; }
         public virtual DbSet<CriteriaType> CriteriaType { get; set; }
+<<<<<<< HEAD
         public virtual DbSet<Loc> Loc { get; set; }
         public virtual DbSet<Skill> Skill { get; set; }
         public virtual DbSet<Images> Images { get; set; }
@@ -45,6 +49,25 @@ namespace Arms.Infrastructure
             modelBuilder.ApplyConfiguration(new ApplicationEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new ResumeEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new ApplicationStatusTypeEntityTypeConfiguration());
+=======
+
+        public virtual DbSet<Location> Loc { get; set; }
+        public virtual DbSet<ApplicationStatusType> ApplicationStatusType { get; set; }
+        public virtual DbSet<Skill> Skill { get; set; }
+        public virtual DbSet<HrmsEmployee> Employee { get; set; }
+        public virtual DbSet<IdProofType> IdProofType { get; set; }
+
+
+
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+
+            modelBuilder.ApplyConfiguration(new EmployeeEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new ARMSEmployeeRolesEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new EmployeeDetailEntityTypeConfiguration());
+>>>>>>> d68f2da69690c134ac34b5244771043ec00833f4
             modelBuilder.ApplyConfiguration(new JobDescriptionEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new LocEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new EmploymentTypeEntityTypeConfiguration());
@@ -62,8 +85,13 @@ namespace Arms.Infrastructure
             modelBuilder.ApplyConfiguration(new RoundEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new RoundTypeEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new SkillEntityTypeConfiguration());
+<<<<<<< HEAD
             modelBuilder.ApplyConfiguration(new ArmsEmployeeEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new ArmsEmployeeRolesEntityTypeConfiguration());
+=======
+            modelBuilder.ApplyConfiguration(new HrmsEmployeeEntityTypeConfiguration());
+
+>>>>>>> d68f2da69690c134ac34b5244771043ec00833f4
         }
     }
 }

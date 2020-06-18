@@ -77,9 +77,7 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .HasConstraintName("FK_CandidateIdProofType");
 
             builder.Property(e => e.IdProofTypeId).HasColumnName("idProofTypeId");
-
-
-
+            
         }
     }
 }

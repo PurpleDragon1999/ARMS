@@ -1,5 +1,4 @@
 import { InterviewService } from './../services/interview.service';
-
 import { Component, OnInit,Input } from "@angular/core";
 import { AppServicesService } from "../services/app-services.service";
 import { Router} from "@angular/router";

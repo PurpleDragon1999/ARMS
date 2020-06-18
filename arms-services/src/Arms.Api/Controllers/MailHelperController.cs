@@ -10,7 +10,7 @@ namespace Arms.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MailHelperController : BaseController
+    public class MailHelperController : ControllerBase
     {
         public MailMessage mail;
         public SmtpClient client;

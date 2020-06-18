@@ -1,54 +1,73 @@
- <!-- Accordion card -->
- <div class="card">
+<!-- Accordion card -->
+<div class="card">
   <!-- Card header -->
   <div class="card-header" role="tab" id="empTypeHeadingUnfiled">
     <!--Options-->
     <div class="dropdown float-right">
-      <button class="btn mr-2 add-button"
-              type="button"
-              (click)="addEmploymentType()">
-              <i class="fas fa-plus"></i>
+      <button
+        class="btn mr-2 add-button"
+        type="button"
+        (click)="addEmploymentType()"
+      >
+        <i class="fas fa-plus"></i>
       </button>
     </div>
     <!-- Heading -->
-    <a data-toggle="collapse"
-       data-parent="#employmentTypeAccordionView"
-       href="#empTypeCollapseUnfiled"
-       aria-expanded="true"
-       aria-controls="empTypeCollapseUnfiled"
-       >
-       <h5 class="mt-1 mb-0">
-        <span (click)= "loadEmploymentTypes()"><b>Employment Types </b> <i class="fas fa-angle-down rotate-icon"></i></span>
-       </h5>
+    <a
+      data-toggle="collapse"
+      data-parent="#employmentTypeAccordionView"
+      href="#empTypeCollapseUnfiled"
+      aria-expanded="true"
+      aria-controls="empTypeCollapseUnfiled"
+    >
+      <h5 class="mt-1 mb-0">
+        <span (click)="loadEmploymentTypes()"
+          ><b>Employment Types </b> <i class="fas fa-angle-down rotate-icon"></i
+        ></span>
+      </h5>
     </a>
-    <div id="empTypeCollapseUnfiled"
-    class="collapse"
-    role="tabpanel"
-    aria-labelledby="empTypeHeadingUnfiled"
-    data-parent="#employmentTypeAccordionView">
- <div class="card" *ngFor="let employmentType of employmentTypeList">
-   <div class="card-body">
-     <p>{{employmentType.id}}</p>
-     <p>{{employmentType.employmentTypeName}}</p>
-   </div>
- </div>
-</div>
+    <div
+      id="empTypeCollapseUnfiled"
+      class="collapse"
+      role="tabpanel"
+      aria-labelledby="empTypeHeadingUnfiled"
+      data-parent="#employmentTypeAccordionView"
+    >
+      <div class="card" *ngFor="let employmentType of employmentTypeList">
+        <div class="card-body">
+          <span class="mr">{{ employmentType.id }}</span>
+          <span class="mr">{{ employmentType.employmentTypeName }}</span>
+          <span
+            ><i
+              class="fas fa-trash"
+              (click)="removeEmploymentType(employmentType.id)"
+            ></i
+          ></span>
+        </div>
+      </div>
+    </div>
 
     <form [formGroup]="employmentTypeForm" (ngSubmit)="onSubmit()">
       <div formArrayName="employmentTypes">
         <div
-          *ngFor="let employmentType of employmentTypes().controls;
-            let empTypeIndex = index">
-
+          *ngFor="
+            let employmentType of employmentTypes().controls;
+            let empTypeIndex = index
+          "
+        >
           <div class="card">
             <div class="card-body" [formGroupName]="empTypeIndex">
               Employment Type:
-              <input type="text"
-                     class="input-box"
-                     formControlName="empTypeName"/>
+              <input
+                type="text"
+                class="input-box"
+                formControlName="empTypeName"
+              />
               <button class="btn mr-2 add-button del-button">
-                <i class="fas fa-trash"
-                  (click)="removeEmploymentType(empTypeIndex)">
+                <i
+                  class="fas fa-trash"
+                  (click)="removeEmploymentType(empTypeIndex)"
+                >
                 </i>
               </button>
             </div>
@@ -60,7 +79,8 @@
         <button
           *ngIf="addEmploymentTypes == true"
           type="submit"
-          class="btn btn-gradient-danger mr-2 submit-button">
+          class="btn btn-gradient-danger mr-2 submit-button"
+        >
           Submit
         </button>
       </p>
