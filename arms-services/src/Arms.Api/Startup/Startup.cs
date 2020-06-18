@@ -52,6 +52,7 @@ namespace Arms.Api.Startup
                       };
                   });
 
+
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("RequireRoles",

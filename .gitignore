@@ -11,6 +11,7 @@ yarn.lock
 
 jobDescriptions
 .idea
+Building Blocks/
 
 
 *.swp
@@ -47,7 +48,7 @@ msbuild.wrn
 # Visual Studio 2015
 .vs/
 
-Building Blocks/
+Buiding Blocks/
 
 *.exe
 *.pdb

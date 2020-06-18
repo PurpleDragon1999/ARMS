@@ -17,7 +17,7 @@ namespace Arms.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-  
+
     public class ApplicationStatusTypesController : ControllerBase
     {
         ArmsDbContext _context;
@@ -111,7 +111,9 @@ namespace Arms.Api.Controllers
 
 
         [HttpPost]
+
         [Authorize(Roles = "superuser")]
+
         public IActionResult CreateStatusType(ApplicationStatusType[] statusType)
         {
             try
