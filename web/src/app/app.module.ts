@@ -1,5 +1,7 @@
 import { LocationComponent } from './settings/components/location/location.component';
 import { RoundTypeComponent } from './settings/components/round-type/round-type.component';
+import { HrInterviewAssessementComponent } from './hr-interview-assessement/hr-interview-assessement.component';
+import { CandidateAssessmentComponent } from './candidate-assessment/containers/candidate-assessment.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
@@ -17,7 +19,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { EmployeeFormComponent } from "./employee/components/employee-form/employee-form.component";
 import { EmployeeUploadComponent } from "./employee/components/employee-upload/employee-upload.component";
 import { EmployeeComponent } from "./employee/containers/employee/employee.component";
-import { HrInterviewAssessementComponent } from './hr-interview-assessement/hr-interview-assessment.component'
 import { HrComponent } from './hr/hr.component';
 import { JdFormComponent } from './jd-form/jd-form.component';
 import { JdPdfComponent } from './jd-form/jd-pdf/jd-pdf.component';
@@ -72,6 +73,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     CandidateComponent,
     EmailListModalComponent,
     InterviewListComponent,
+    HrInterviewAssessementComponent,
     SettingsComponent,
     RoundTypeComponent,
     LocationComponent,
@@ -79,6 +81,8 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     EmploymentTypeComponent,
     EligibilityCriteriaComponent,
     ApplicationStatusComponent
+    CandidateAssessmentComponent,
+    HrInterviewAssessementComponent
   ],
   imports: [
     FileUploadModule,
