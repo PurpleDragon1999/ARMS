@@ -209,6 +209,11 @@ export class AppServicesService {
     });
   }
 
+  
+  getSkills():Observable<HttpResponse<any>>{
+    return this.http.get<any>(`${DOTNET_DOMAIN}/api/skill`, this.httpOptions);
+  }
+  
   deleteLocation(id): Observable<any> {
     return this.http.delete<any>(`${DOTNET_DOMAIN}/api/location/${id}`, {
       ...this.httpOptions,
