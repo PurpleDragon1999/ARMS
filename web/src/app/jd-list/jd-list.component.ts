@@ -32,7 +32,7 @@ export class JdListComponent implements OnInit {
 
   loadJds() {
     return this.jobService.getAllJobs().subscribe((response: any) => {
-      this.jobsList = response.result.payload.data;
+      this.jobsList = response.payload.data;
   
 
     });
@@ -67,8 +67,8 @@ export class JdListComponent implements OnInit {
     modalRef.componentInstance.emitPerformRequest.subscribe(() => {
       this.jobService.deleteJd(id).subscribe((res: any) => {
         this.loadJds();
-        modalRef.componentInstance.success = res.body.result.success;
-        modalRef.componentInstance.message = res.body.result.payload.message;
+        modalRef.componentInstance.success = res.body.success;
+        modalRef.componentInstance.message = res.body.payload.message;
         }, (error: HttpErrorResponse) => {
           modalRef.componentInstance.success = error.error.success;
           modalRef.componentInstance.message = error.error.payload.message;
