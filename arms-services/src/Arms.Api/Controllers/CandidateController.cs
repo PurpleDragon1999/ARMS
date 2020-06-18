@@ -9,20 +9,22 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Arms.Domain.CustomEntities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Arms.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class CandidateController : BaseController
 
     {
-        private readonly IIdentityService _identityService;
+        
         ArmsDbContext _context;
         public MailHelperController mailHelper = new MailHelperController();
-        public CandidateController(IIdentityService identityService, ArmsDbContext armsContext)
+        public CandidateController( ArmsDbContext armsContext)
         {
-            _identityService = identityService;
+            
             _context = armsContext;
         }
 
@@ -284,7 +286,8 @@ namespace Arms.Api.Controllers
                     }
                 };
                 JobDescription jdObject = _context.JobDescription.Include(l => l.employmentType).
-                    Include(l => l.eligibilityCriteria).Include(l => l.loc).FirstOrDefault(c => c.Id == applicationObj.JobId);
+                    Include(l => l.eligibilityCriteria).Include(l => l.loc).
+                    FirstOrDefault(c => c.Id == applicationObj.JobId);
                 string emailHtmlBody = GenerateEmailBody( jdObject, candObj.Code,candObj.Name);
                 //Adding Emails in string Array to send to candidates
                 string[] EmailToSend = new[]

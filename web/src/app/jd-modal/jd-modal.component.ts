@@ -60,15 +60,15 @@ export class JdModalComponent implements OnInit {
   ngOnInit() {
     this.loadJobData(Number(this.jdUpdateId));
     this._service.getAllEligibilityCriterias().subscribe((res: any) => {
-       this.eligibilityCriterias=res.result.payload.data;
+       this.eligibilityCriterias=res.payload.data;
      
       });
     this._service.getAllLocations().subscribe((res: any) => {
-      this.locations=res.result.payload.data;
+      this.locations=res.payload.data;
       
       });
     this._service.getAllEmploymentTypes().subscribe((res: any) => {
-      this.employmentTypes=res.result.payload.data;
+      this.employmentTypes=res.payload.data;
         
       });
   }
@@ -76,8 +76,8 @@ export class JdModalComponent implements OnInit {
   loadJobData(Id) {
     this.jobService.getJdData(Id).subscribe((res: any) => {
       if (res.success) {
-        this.jobArray = res.result.payload.data;
-      
+        this.jobArray = res.payload.data;
+        console.log(this.jobArray);
         this.setJobData();
       }
     });
@@ -103,8 +103,8 @@ export class JdModalComponent implements OnInit {
       (res: any) => {
         const modalRef = this.modalService.open(ModalComponent);
         modalRef.componentInstance.shouldConfirm = false;
-        modalRef.componentInstance.success = res.body.result.success;
-        modalRef.componentInstance.message = res.body.result.payload.message;
+        modalRef.componentInstance.success = res.body.success;
+        modalRef.componentInstance.message = res.body.payload.message;
         modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
           modalRef.close();
         });

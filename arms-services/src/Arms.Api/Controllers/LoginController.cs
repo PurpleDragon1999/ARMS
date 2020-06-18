@@ -104,7 +104,7 @@ namespace Arms.Api.Controllers
                 var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
                 var token = new JwtSecurityToken(_config["Jwt:Issuer"],
-                  _config["Jwt:Issuer"],
+                  _config["Jwt:Aud"],
                   claims,
                   expires: DateTime.Now.AddSeconds(86400),
                   signingCredentials: credentials);

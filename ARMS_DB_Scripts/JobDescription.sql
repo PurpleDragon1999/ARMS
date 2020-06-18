@@ -70,5 +70,6 @@ ADD salary varchar(50)
 
 --setting salary
 Update ARMS.JobDescription
-set salary='10000' where id>1
+set skills='java skills'
 
+select* from ARMS.JobDescription

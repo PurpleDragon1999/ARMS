@@ -16,7 +16,7 @@ export class AppServicesService {
  
   headers: HttpHeaders = new HttpHeaders({
     'Content-Type': 'application/json',
-        Authorization: localStorage.getItem("Authorization")
+        Authorization: localStorage.getItem("Authorized")
        //hard code token here
    
   });
