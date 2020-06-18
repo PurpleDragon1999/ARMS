@@ -78,8 +78,8 @@ export class JdListComponent implements OnInit {
 
   downloadPdf(id) {
     this.jobService.getJdData(id).subscribe((res: any) => {
-      if (res.result.success) {
-        this.jdObject = res.result.payload.data;
+      if (res.success) {
+        this.jdObject = res.payload.data;
       }
     });
    setTimeout(()=>{

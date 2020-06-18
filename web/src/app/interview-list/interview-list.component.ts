@@ -28,7 +28,7 @@ export class InterviewListComponent implements OnInit {
 
   loadInterviews() {
     return this._service.getAllInterviews().subscribe((response: any) => {
-      this.interviewsList = response.result.payload.data
+      this.interviewsList = response.payload.data
     });
   }
 
@@ -52,9 +52,9 @@ export class InterviewListComponent implements OnInit {
     modalRef.componentInstance.emitPerformRequest.subscribe(() => {
       this._service.deleteInterview(id).subscribe((res: any) => {
         this.loadInterviews();
-        modalRef.componentInstance.success = res.body.result.success;
+        modalRef.componentInstance.success = res.body.success;
       
-        modalRef.componentInstance.message = res.result.payload.message;
+        modalRef.componentInstance.message = res.payload.message;
         }, (error: HttpErrorResponse) => {
          modalRef.componentInstance.success = error.error.success;
           modalRef.componentInstance.message = error.error.payload.message;

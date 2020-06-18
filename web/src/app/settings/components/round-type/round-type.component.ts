@@ -46,7 +46,7 @@ export class RoundTypeComponent implements OnInit {
   }
   loadRoundTypes() {
     return this._service.getAllRoundTypes().subscribe((response: any) => {
-      this.roundTypeList = response.result.payload.data;
+      this.roundTypeList = response.payload.data;
     });
   }
 

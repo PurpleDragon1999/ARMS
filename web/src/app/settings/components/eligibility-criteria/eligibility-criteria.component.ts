@@ -30,7 +30,7 @@ export class EligibilityCriteriaComponent implements OnInit {
     return this._service
       .getAllEligibilityCriterias()
       .subscribe((response: any) => {
-        this.eligibilityCriterionList = response.result.payload.data;
+        this.eligibilityCriterionList = response.payload.data;
       });
   }
   eligibilityCriteria(): FormArray {

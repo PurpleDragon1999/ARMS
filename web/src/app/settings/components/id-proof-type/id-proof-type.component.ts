@@ -48,7 +48,7 @@ export class IdProofTypeComponent implements OnInit {
   
   loadIdProofTypes() {
     return this._service.getAllIdProofTypes().subscribe((response: any) => {
-      this.idProofList = response.result.payload.data;
+      this.idProofList = response.payload.data;
     });
   }
 

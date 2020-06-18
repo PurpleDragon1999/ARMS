@@ -29,7 +29,7 @@ export class EmploymentTypeComponent implements OnInit {
 
   loadEmploymentTypes() {
     return this._service.getAllEmploymentTypes().subscribe((response: any) => {
-      this.employmentTypeList = response.result.payload.data;
+      this.employmentTypeList = response.payload.data;
     });
   }
   employmentTypes(): FormArray {

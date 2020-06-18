@@ -31,7 +31,7 @@ export class ApplicationStatusComponent implements OnInit {
     return this._service
       .getAllApplicationStatusTypes()
       .subscribe((response: any) => {
-        this.applicationStatusList = response.result.payload.data;
+        this.applicationStatusList = response.payload.data;
       });
   }
   applicationStatusTypes(): FormArray {
@@ -101,7 +101,7 @@ export class ApplicationStatusComponent implements OnInit {
     return this._service
       .createApplicationStatusType(this.applicationStatusForm.value)
       .subscribe((response: any) => {
-        this.applicationStatusList = response.result.payload.data;
+        this.applicationStatusList = response.payload.data;
       });
   }
 }

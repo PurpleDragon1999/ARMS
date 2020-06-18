@@ -39,7 +39,7 @@ export class JdPdfComponent implements OnInit {
       
     )
     .subscribe((res) => {
-      this.jdObject = res.result.payload.data;
+      this.jdObject = res.payload.data;
     
     });
   }

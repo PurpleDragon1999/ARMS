@@ -11,18 +11,18 @@ using Microsoft.AspNetCore.Mvc;
 using System.IO;
 using System.Reflection.Metadata;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Arms.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ApplicationStatusTypesController : ControllerBase
     {
-        private readonly IIdentityService _identityService;
         ArmsDbContext _context;
-        public ApplicationStatusTypesController(IIdentityService identityService, ArmsDbContext armsContext)
+        public ApplicationStatusTypesController(ArmsDbContext armsContext)
         {
-            _identityService = identityService;
             _context = armsContext;
         }
 

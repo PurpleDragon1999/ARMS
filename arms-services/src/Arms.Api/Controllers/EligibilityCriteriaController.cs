@@ -16,7 +16,6 @@ namespace Arms.Api.Controllers
     [Authorize]
     public class EligibilityCriteriaController : BaseController
     {
-        private readonly IIdentityService _identityService;
         ArmsDbContext _context;
         public EligibilityCriteriaController( ArmsDbContext armsContext)
         {

@@ -33,7 +33,7 @@ export class LocationComponent implements OnInit {
 
   loadLocations() {
     return this._service.getAllLocations().subscribe((response: any) => {
-      this.locationList = response.result.payload.data;
+      this.locationList = response.payload.data;
     });
   }
   locations(): FormArray {

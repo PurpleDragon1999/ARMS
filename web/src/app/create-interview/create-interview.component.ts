@@ -46,13 +46,13 @@ export class CreateInterviewComponent implements OnInit {
 
   getLocation(){
     this.service.getLocation().subscribe((res:any) => {
-      this.Location = res.result.payload.data;
+      this.Location = res.payload.data;
     })
   }
 
   getRoundTypes(){
     this.service.getRoundTypes().subscribe((res:any) => {
-      this.RoundType = res.result.payload.data;
+      this.RoundType = res.payload.data;
     })
   }
 
