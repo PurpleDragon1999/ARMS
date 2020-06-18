@@ -42,4 +42,11 @@ update arms.Candidate set phone = '8575249081' where [name] = 'chetna'
 
 select * from arms.Candidate
 
+ALTER TABLE arms.candidate
+
+ADD nationality varchar(100) not null;
+ 
+
+GO
+
 

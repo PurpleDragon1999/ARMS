@@ -80,7 +80,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     IdProofTypeComponent,
     EmploymentTypeComponent,
     EligibilityCriteriaComponent,
-    ApplicationStatusComponent
+    ApplicationStatusComponent,
     CandidateAssessmentComponent,
     HrInterviewAssessementComponent
   ],
