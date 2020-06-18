@@ -1,3 +1,4 @@
+using System;
 
 
 using Arms.Domain.Entities;
@@ -6,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Arms.Infrastructure
 {
-    public class ArmsDbContext : DbContext
+    public class ArmsDbContext: DbContext
     {
         public ArmsDbContext(DbContextOptions<ArmsDbContext> options)
             : base(options)
@@ -26,6 +27,7 @@ namespace Arms.Infrastructure
         public virtual DbSet<Employee> Employee { get; set; }
         public virtual DbSet<EmployeeDetail> EmployeeDetail { get; set; }
         public virtual DbSet<Criteria> Criteria { get; set; }
+
 
         public virtual DbSet<Interview> Interview { get; set; }
         public virtual DbSet<Round> Round { get; set; }
@@ -62,6 +64,7 @@ namespace Arms.Infrastructure
             modelBuilder.ApplyConfiguration(new InterviewerEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new InterviewPanelEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new RoundEntityTypeConfiguration());
+        
             modelBuilder.ApplyConfiguration(new RoundTypeEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new SkillEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new ArmsEmployeeEntityTypeConfiguration());

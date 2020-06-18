@@ -10,7 +10,7 @@ namespace Arms.Domain.Entities
         public int Id { get; set; }
         public string Code { get; set; }
         public string Feedback { get; set; }
-        public string Result { get; set; }
+        public bool Result { get; set; }
         public DateTime CreatedAt { get; set; }
         public string CreatedBy { get; set; }
         public DateTime ModifiedAt { get; set; }

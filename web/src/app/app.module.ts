@@ -8,7 +8,7 @@ import { MsalInterceptor, MsalModule } from '@azure/msal-angular';
 import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProgressHttpModule } from 'angular-progress-http';
 import { ChartsModule } from 'ng2-charts';
-import { FileSelectDirective } from 'ng2-file-upload';
+import { FileUploadModule } from 'ng2-file-upload';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CandidateFormComponent } from './candidate-form/candidate-form.component';
@@ -50,7 +50,6 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     AppComponent,
     LoginComponent,
     CandidateFormComponent,
-    FileSelectDirective,
     EmployeeFormComponent,
     CreateInterviewComponent,
     JdFormComponent,
@@ -82,6 +81,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     ApplicationStatusComponent
   ],
   imports: [
+    FileUploadModule,
     MDBBootstrapModule.forRoot(),
     ReactiveFormsModule,
     FormsModule,
@@ -119,7 +119,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
       provide: HTTP_INTERCEPTORS,
       useClass: MsalInterceptor,
       multi: true,
-    },
+    }
   ],
   exports: [ListComponent],
   entryComponents: [EmployeeFormComponent, ModalComponent, EmployeeUploadComponent, EmailListModalComponent],
