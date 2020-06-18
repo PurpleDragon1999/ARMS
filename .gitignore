@@ -55,9 +55,9 @@ Buiding Blocks/
 *.manifest
 *.cache
 *.g.props
-**/appsettings.*.json
-**/appsettings.json 
-*.g.targets
+**/appsettings.*.json	
+**/appsettings.json 	
+*.g.targets	
 
 Arms.Api.csproj
 Arms.Api.csproj.user

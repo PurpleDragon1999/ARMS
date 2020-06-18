@@ -17,9 +17,10 @@ namespace Arms.Api.Controllers
     [Route("api/[controller]")]
 
 
+
     [Authorize(Roles = "admin,superuser")]
 
-
+    
     public class CandidateController : BaseController
 
     {
