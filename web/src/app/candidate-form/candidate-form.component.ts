@@ -57,7 +57,7 @@ export class CandidateFormComponent implements OnInit {
 
     getIdProofType(){
       this.CandidateService.getIdProofTypes().subscribe((res : INewResponse)=>{
-        this.idProofTypes = res.result.payload.data;
+        this.idProofTypes = res.payload.data;
         
       })
 
@@ -145,7 +145,7 @@ createApplication(applicationObj : ICandidate){
   
   if (isValid.result.success == true){
     this.CandidateService.createCandidate(applicationObj).subscribe(res=>{
-      if (res.result != null){
+      if (res != null){
         this.openModal(res)
       }
       
@@ -220,7 +220,7 @@ console
       this.CandidateService.getApplication(applicationId).subscribe(
         (res: INewResponse) => {
           console.log(res, "progress")
-          this.model = res.result.payload.data;
+          this.model = res.payload.data;
           this.model.appliedForPosition = this.model.job.jobTitle
           this.model.appliedForJdId = this.model.job.code
         },
@@ -232,8 +232,8 @@ console
       this.model.appliedForJdId = (this.router.url.split("/")[2]);
       let jdId = (this.model.appliedForJdId).slice(6)
       this.jobService.getJdData(jdId).subscribe((res : INewResponse)=>{
-        if(res.result != null){
-          let jdObject = res.result.payload.data
+        if(res != null){
+          let jdObject = res.payload.data
           this.model.appliedForPosition = jdObject.jobTitle;
           this.jdObjectId = jdObject.code;
         }

@@ -27,7 +27,7 @@ export class CandidateComponent implements OnInit {
 
     getCandidates(){
         this.candidateService.getApplications().subscribe((res: INewResponse)=>{
-        this.candidates = res.result.payload.data
+        this.candidates = res.payload.data
         this.columns = ["name", "email", "experience", "Job Position"];
         
         })
