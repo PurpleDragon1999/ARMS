@@ -15,12 +15,12 @@ const CANDIDATE_SEARCH = `${HOST}/api/candidateSearch`;
 
 export class CandidateService {
 
-   
-
-    private headers: HttpHeaders = new HttpHeaders({
+    headers: HttpHeaders = new HttpHeaders({
         'Content-Type': 'application/json',
-        Authorization: localStorage.getItem("Authorized")
-     });
+            Authorization: localStorage.getItem("Authorized")
+           //hard code token here
+       
+      });
 
     private options = {
         headers: this.headers

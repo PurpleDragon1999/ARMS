@@ -22,6 +22,7 @@ export class JdListComponent implements OnInit {
   jdObject: any;
   pager: any;
   obj:any;
+  searchJd:any;
   constructor(private _service: AppServicesService, private router: Router,
               private modalService: NgbModal,private jobService:JobService) {}
   imageUrl=
@@ -78,8 +79,8 @@ export class JdListComponent implements OnInit {
 
   downloadPdf(id) {
     this.jobService.getJdData(id).subscribe((res: any) => {
-      if (res.result.success) {
-        this.jdObject = res.result.payload.data;
+      if (res.success) {
+        this.jdObject = res.payload.data;
       }
     });
    setTimeout(()=>{

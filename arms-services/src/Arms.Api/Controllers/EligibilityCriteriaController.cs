@@ -16,7 +16,7 @@ namespace Arms.Api.Controllers
     
     public class EligibilityCriteriaController : BaseController
     {
-       
+
         ArmsDbContext _context;
         public EligibilityCriteriaController( ArmsDbContext armsContext)
         {

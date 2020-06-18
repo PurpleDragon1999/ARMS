@@ -24,7 +24,7 @@ export class EmployeeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.searchEmployee({ page: 1, character: '' });
+    //this.searchEmployee({ page: 1, character: '' });
   }
 
   openModal(dataModal: any) {

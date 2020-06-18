@@ -43,7 +43,7 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
             builder.Property(e => e.RoleOrder)
                 .HasColumnName("RoleOrder");
 
-            
+
         }
     }
 }

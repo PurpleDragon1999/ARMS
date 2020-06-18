@@ -47,3 +47,18 @@ set education = 'Northill University'
 where id= 1
 
 select * from arms.Application
+
+ALTER TABLE arms.application
+
+ADD CONSTRAINT df_statusChangedAt
+
+DEFAULT (sysdatetime()) FOR statusChangedAt;
+ 
+
+GO
+
+ALTER TABLE arms.application
+
+ADD CONSTRAINT df_dateOfApplication
+
+DEFAULT (sysdatetime()) FOR dateOfApplication;

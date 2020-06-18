@@ -1,0 +1,29 @@
+.card {
+  margin: 1rem;
+}
+.card-body {
+  padding: 1rem !important;
+  display: flex;
+  justify-content: space-between;
+}
+.add-button {
+  width: 2rem;
+  padding: 0.5rem;
+}
+.del-button {
+  margin-left: 0.5rem;
+}
+a {
+  color: black !important;
+}
+.input-box {
+  height: 2rem;
+  background: rgba(0, 0, 0, 0.03);
+  border: groove rgb(209, 205, 205) 1px;
+}
+.submit-button {
+  margin-left: 20rem;
+}
+.mr {
+  margin-right: 2rem;
+}

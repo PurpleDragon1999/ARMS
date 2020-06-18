@@ -1,11 +1,7 @@
 export interface INewResponse {
-    
-     success: boolean;
+    success: boolean;
     payload: {
         data?: any;
         message: string;
     }
-  
-   
-    
 }

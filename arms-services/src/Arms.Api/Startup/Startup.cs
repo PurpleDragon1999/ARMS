@@ -44,18 +44,20 @@ namespace Arms.Api.Startup
                       {
                           //what to validate
                           ValidateIssuer = true,
-                          ValidateAudience=true,
+                          ValidateAudience = true,
                           ValidateIssuerSigningKey = true,
                           ValidIssuer = Configuration["Jwt:Issuer"],
                           ValidAudience = Configuration["Jwt:Aud"],
                           IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
                       };
                   });
+
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("RequireRoles",
                      policy => policy.RequireRole("admin","superuser","employee"));
             });
+
             services.AddCors();
         }
 

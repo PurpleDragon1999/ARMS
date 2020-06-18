@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
+using Arms.Domain.Entities;
 using System.Collections.Generic;
 using System.Text;
-using Arms.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Arms.Infrastructure.EntityTypeConfigurations
 {
@@ -18,31 +18,33 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
             builder.Property(e => e.Code)
                 .HasColumnName("code")
                 .HasMaxLength(57)
+                .IsUnicode(false)
                 .HasComputedColumnSql("('CYGPFID'+CONVERT([nvarchar](50),[id]))");
+
+            builder.Property(e => e.Name)
+                .HasColumnName("name")
+                .HasMaxLength(50)
+                .IsUnicode(false);
 
             builder.Property(e => e.CreatedAt)
                 .HasColumnName("createdAt")
                 .HasDefaultValueSql("(sysdatetime())");
 
             builder.Property(e => e.CreatedBy)
-                .IsRequired()
                 .HasColumnName("createdBy")
-                .HasMaxLength(50);
+                .HasMaxLength(50)
+                .IsUnicode(false);
 
             builder.Property(e => e.ModifiedAt)
                 .HasColumnName("modifiedAt")
                 .HasDefaultValueSql("(sysdatetime())");
 
             builder.Property(e => e.ModifiedBy)
-                .IsRequired()
                 .HasColumnName("modifiedBy")
-                .HasMaxLength(50);
-
-            builder.Property(e => e.Name)
-                .IsRequired()
-                .HasColumnName("name")
                 .HasMaxLength(50)
                 .IsUnicode(false);
+
         }
+
     }
 }

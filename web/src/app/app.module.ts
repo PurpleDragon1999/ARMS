@@ -1,12 +1,16 @@
+import { LocationComponent } from './settings/components/location/location.component';
+import { RoundTypeComponent } from './settings/components/round-type/round-type.component';
+import { HrInterviewAssessementComponent } from './hr-interview-assessement/hr-interview-assessement.component';
+import { CandidateAssessmentComponent } from './candidate-assessment/containers/candidate-assessment.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule,  } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { MsalInterceptor, MsalModule } from '@azure/msal-angular';
 import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProgressHttpModule } from 'angular-progress-http';
 import { ChartsModule } from 'ng2-charts';
-import { FileSelectDirective } from 'ng2-file-upload';
+import { FileUploadModule } from 'ng2-file-upload';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CandidateFormComponent } from './candidate-form/candidate-form.component';
@@ -15,7 +19,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { EmployeeFormComponent } from "./employee/components/employee-form/employee-form.component";
 import { EmployeeUploadComponent } from "./employee/components/employee-upload/employee-upload.component";
 import { EmployeeComponent } from "./employee/containers/employee/employee.component";
-import { HrInterviewAssessementComponent } from './hr-interview-assessement/hr-interview-assessment.component'
 import { HrComponent } from './hr/hr.component';
 import { JdFormComponent } from './jd-form/jd-form.component';
 import { JdPdfComponent } from './jd-form/jd-pdf/jd-pdf.component';
@@ -34,7 +37,10 @@ import { EmailListModalComponent } from './email-list-modal/email-list-modal.com
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { SettingsComponent } from './settings/settings.component';
-
+import { IdProofTypeComponent } from './settings/components/id-proof-type/id-proof-type.component';
+import { EmploymentTypeComponent } from './settings/components/employment-type/employment-type.component';
+import { EligibilityCriteriaComponent } from './settings/components/eligibility-criteria/eligibility-criteria.component';
+import { ApplicationStatusComponent } from './settings/components/application-status/application-status.component';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -45,7 +51,6 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     AppComponent,
     LoginComponent,
     CandidateFormComponent,
-    FileSelectDirective,
     EmployeeFormComponent,
     CreateInterviewComponent,
     JdFormComponent,
@@ -68,10 +73,19 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     CandidateComponent,
     EmailListModalComponent,
     InterviewListComponent,
+    HrInterviewAssessementComponent,
     SettingsComponent,
-   
+    RoundTypeComponent,
+    LocationComponent,
+    IdProofTypeComponent,
+    EmploymentTypeComponent,
+    EligibilityCriteriaComponent,
+    ApplicationStatusComponent,
+    CandidateAssessmentComponent,
+    HrInterviewAssessementComponent
   ],
   imports: [
+    FileUploadModule,
     MDBBootstrapModule.forRoot(),
     ReactiveFormsModule,
     FormsModule,
@@ -109,7 +123,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
       provide: HTTP_INTERCEPTORS,
       useClass: MsalInterceptor,
       multi: true,
-    },
+    }
   ],
   exports: [ListComponent],
   entryComponents: [EmployeeFormComponent, ModalComponent, EmployeeUploadComponent, EmailListModalComponent],
