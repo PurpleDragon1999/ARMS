@@ -1,3 +1,8 @@
+if not exists (select * from sys.schemas where name = 'ARMS')
+begin
+	exec('create schema ARMS')
+end
+
 IF OBJECT_ID('ARMS.Interviewer') IS NULL
 BEGIN
 CREATE TABLE ARMS.Interviewer(
@@ -22,9 +27,6 @@ AS
     SET modifiedAt  = sysdatetime()
     WHERE id IN (SELECT DISTINCT id FROM Inserted)
 --new batch
-	GO
-Insert into ARMS.Interviewer(interviewPanelId,employeeId)
-Values('1','1')
 
 SELECT * from ARMS.Interviewer
 

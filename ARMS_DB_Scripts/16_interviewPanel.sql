@@ -1,3 +1,8 @@
+if not exists (select * from sys.schemas where name = 'ARMS')
+begin
+	exec('create schema ARMS')
+end
+
  IF OBJECT_ID('ARMS.InterviewPanel') IS NULL
 BEGIN
 CREATE TABLE ARMS.InterviewPanel(
@@ -21,11 +26,6 @@ AS
     SET modifiedAt  = sysdatetime()
     WHERE id IN (SELECT DISTINCT id FROM Inserted)
 
-GO 
---insert command
-
-Insert into ARMS.InterviewPanel([roundId])
-Values('2')
 
 --Select command
 select * FROM ARMS.InterviewPanel

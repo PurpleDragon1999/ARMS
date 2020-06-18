@@ -1,11 +1,11 @@
-if not exists (select * from sys.schemas where name = 'arms')
+if not exists (select * from sys.schemas where name = 'ARMS')
 begin
-	exec('create schema arms')
+	exec('create schema ARMS')
 end
 
-if OBJECT_ID('arms.Application') is null
+if OBJECT_ID('ARMS.Application') is null
 begin 
-	create table arms.Application
+	create table ARMS.Application
 	(
 		[id] int identity(1,1),
 		[code] as 'CYGAPID'+ cast(id as nvarchar(50)) persisted, 
@@ -29,36 +29,31 @@ end
 
 GO
 
-CREATE TRIGGER arms.trg_UpdateApplication
-ON arms.Application
+CREATE TRIGGER ARMS.trg_UpdateApplication
+ON ARMS.Application
 AFTER UPDATE
 AS
-    UPDATE arms.Application
+    UPDATE ARMS.Application
     SET modifiedAt  = sysdatetime()
     WHERE id IN (SELECT DISTINCT id FROM Inserted)
 
-
-insert into arms.Application(dateOfApplication, education, experience, statusChangedAt, candidateId, jobId,
+insert into ARMS.Application(dateOfApplication, education, experience, statusChangedAt, candidateId, jobId,
 applicationStatusTypeId, createdBy, modifiedBy)
 values ('2020-05-19', 'Downtown University', '1','2020-05-19', 1, 1, 2, 'anna', 'anna')
 
-update arms.Application
+update ARMS.Application
 set education = 'Northill University'
 where id= 1
 
-select * from arms.Application
-
-ALTER TABLE arms.application
-
-ADD CONSTRAINT df_statusChangedAt
-
-DEFAULT (sysdatetime()) FOR statusChangedAt;
- 
+select * from ARMS.Application
 
 GO
+ALTER TABLE ARMS.application
+ADD CONSTRAINT df_statusChangedAt
+DEFAULT (sysdatetime()) FOR statusChangedAt;
 
-ALTER TABLE arms.application
-
+GO
+ALTER TABLE ARMS.application
 ADD CONSTRAINT df_dateOfApplication
-
 DEFAULT (sysdatetime()) FOR dateOfApplication;
+
