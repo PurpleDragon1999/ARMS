@@ -15,7 +15,7 @@ namespace Arms.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
+    [Authorize(Roles = "admin,superuser")]
     public class CandidateController : BaseController
 
     {
@@ -29,6 +29,7 @@ namespace Arms.Api.Controllers
         }
 
         [HttpGet]
+       
         public IActionResult Getcandidates(int jobId = 0)
         {
             List<Arms.Domain.Entities.Application> applications;
@@ -71,6 +72,7 @@ namespace Arms.Api.Controllers
         }
 
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public IActionResult GetApplication(int id )
         {
             try
@@ -119,7 +121,8 @@ namespace Arms.Api.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteInterview(int id)
+       
+        public IActionResult DeleteApplication(int id)
         {
             try
             {
@@ -196,6 +199,7 @@ namespace Arms.Api.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public IActionResult CreateCandidate([FromBody] CandidateApplicationResume customObj)
         {
             var candidate = _context.Candidate.FirstOrDefault(c => c.Email == customObj.Email || c.IdentificationNo == customObj.IdentificationNo || c.Phone == customObj.Phone);
@@ -313,6 +317,7 @@ namespace Arms.Api.Controllers
         }
 
         [HttpPatch("{id}")]
+        
         public IActionResult UpdateCandidateDetails(int id, [FromBody] CandidateApplicationResume customObj)
         {
             var resume = _context.Resume.SingleOrDefault(c => c.ApplicationId == id);

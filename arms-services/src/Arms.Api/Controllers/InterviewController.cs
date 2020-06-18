@@ -15,7 +15,7 @@ namespace Arms.Api.Controllers
 {
 	[ApiController]
 	[Route("api/[controller]")]
-    [Authorize]
+    [Authorize(Roles ="admin")]
 	public class InterviewController : BaseController
 	{   //mailController object 
 		public MailHelperController mailHelper = new MailHelperController();

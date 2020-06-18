@@ -51,7 +51,12 @@ namespace Arms.Api.Startup
                           IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
                       };
                   });
-
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("RequireRoles",
+                     policy => policy.RequireRole("admin","superuser","employee"));
+            });
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
