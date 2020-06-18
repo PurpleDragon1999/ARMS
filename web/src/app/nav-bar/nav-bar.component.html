@@ -128,6 +128,18 @@
           </a>
         </li>
 
+        <li
+          class="nav-item d-flex flex-row pl-0"
+          *ngIf="superuserBool"
+          routerLinkActive="active"
+        >
+          <span class="highlight">h</span>
+          <a class="nav-link w-100" [routerLink]="['settings']">
+            <span class="menu-title">Settings</span>
+            <i class="fas fa-cogs menu-icon"></i>
+          </a>
+        </li>
+
         <li class="nav-item d-flex flex-row pl-0 d-lg-none">
           <span class="highlight">h</span>
           <a class="nav-link w-100" href="#">

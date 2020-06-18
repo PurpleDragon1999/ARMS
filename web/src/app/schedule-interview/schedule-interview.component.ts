@@ -94,22 +94,22 @@ export class ScheduleInterviewComponent implements OnInit {
   select(data: any, roundId: number, index: number) {
     if (index == 0) {
       if (this.main[index][0] === "active") {
-        this.roundData[0].roundId = roundId;
-        this.roundData[0].panel1.panelName = "Java";
-        if (this.roundData[0].panel1.employeesId.length < 2) {
-          this.roundData[0].panel1.employeesId.push(data.id);
+        this.roundData[index].roundId = roundId;
+        this.roundData[index].panel1.panelName = "Java";
+        if (this.roundData[index].panel1.employeesId.length < 2) {
+          this.roundData[index].panel1.employeesId.push(data.id);
         }
       } else if (this.main[index][1] === "active") {
-        this.roundData[1].roundId = roundId;
-        this.roundData[1].panel2.panelName = "Java";
-        if (this.roundData[1].panel2.employeesId.length < 2) {
-          this.roundData[1].panel2.employeesId.push(data.id);
+        this.roundData[index].roundId = roundId;
+        this.roundData[index].panel2.panelName = "Java";
+        if (this.roundData[index].panel2.employeesId.length < 2) {
+          this.roundData[index].panel2.employeesId.push(data.id);
         }
       } else if (this.main[index][2] === "active") {
-        this.roundData[2].roundId = roundId;
-        this.roundData[2].panel3.panelName = "Java";
-        if (this.roundData[2].panel3.employeesId.length < 2) {
-          this.roundData[2].panel3.employeesId.push(data.id);
+        this.roundData[index].roundId = roundId;
+        this.roundData[index].panel3.panelName = "Java";
+        if (this.roundData[index].panel3.employeesId.length < 2) {
+          this.roundData[index].panel3.employeesId.push(data.id);
         }
       }
     }
