@@ -32,7 +32,6 @@ namespace Arms.Api.Controllers
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
                 response = new Response<IEnumerable<Assessment>>(false, null, "Something went wrong");
 
                 return StatusCode(500, response);
@@ -52,7 +51,6 @@ namespace Arms.Api.Controllers
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
                 response = new Response<Assessment>(false, null, "Something went wrong");
 
                 return StatusCode(500, response);
@@ -86,7 +84,6 @@ namespace Arms.Api.Controllers
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
                 response = new Response<Assessment>(false, null, "Something went wrong");
 
                 return StatusCode(500, response);
@@ -124,7 +121,6 @@ namespace Arms.Api.Controllers
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
                 response = new Response<Assessment>(false, null, "Something went wrong");
 
                 return StatusCode(500, response);
@@ -151,7 +147,6 @@ namespace Arms.Api.Controllers
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
                 response = new Response<Assessment>(false, null, "Something went wrong");
 
                 return StatusCode(500, response);

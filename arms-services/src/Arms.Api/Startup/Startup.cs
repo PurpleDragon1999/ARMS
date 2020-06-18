@@ -143,7 +143,6 @@ namespace Arms.Api.Startup
 
         public static IServiceCollection AddCustomDatabaseService(this IServiceCollection services, IConfiguration configuration)
         {
-            Console.WriteLine(configuration.GetConnectionString("db"));
             services.AddDbContext<ArmsDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("db")));
             
             return services;

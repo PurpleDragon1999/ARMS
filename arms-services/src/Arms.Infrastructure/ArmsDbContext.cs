@@ -38,12 +38,12 @@ namespace Arms.Infrastructure
         public virtual DbSet<Interviewer> Interviewer { get; set; }
         public virtual DbSet<InterviewPanel> InterviewPanel { get; set; }      
         public virtual DbSet<ArmsEmployees> ArmsEmployees { get; set; }
-        // public virtual DbSet<ArmsEmployeeRoles> ArmsEmployeeRoles { get; set; }
+        public virtual DbSet<ArmsEmployeeRoles> ArmsEmployeeRoles { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-            // modelBuilder.ApplyConfiguration(new EmployeeEntityTypeConfiguration());
-            //modelBuilder.ApplyConfiguration(new EmployeeDetailEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new EmployeeEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new EmployeeDetailEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new CandidateEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new IdProofTypeEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new ApplicationEntityTypeConfiguration());
@@ -68,7 +68,7 @@ namespace Arms.Infrastructure
             modelBuilder.ApplyConfiguration(new RoundTypeEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new SkillEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new ArmsEmployeeEntityTypeConfiguration());
-            // modelBuilder.ApplyConfiguration(new ArmsEmployeeRolesEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new ArmsEmployeeRolesEntityTypeConfiguration());
 
         }
     }
