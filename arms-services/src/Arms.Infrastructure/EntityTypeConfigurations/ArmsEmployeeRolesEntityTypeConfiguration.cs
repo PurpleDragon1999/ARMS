@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Arms.Infrastructure.EntityTypeConfigurations
 {
-    internal class ARMSEmployeeRolesEntityTypeConfiguration : IEntityTypeConfiguration<ArmsEmployeeRoles>
+    internal class ArmsEmployeeRolesEntityTypeConfiguration : IEntityTypeConfiguration<ArmsEmployeeRoles>
     {
         public void Configure(EntityTypeBuilder<ArmsEmployeeRoles> builder)
         {
-            builder.ToTable("ARMSEmployee", "ARMS");
+            builder.ToTable("ARMSEmployeeRoles", "HRMS");
 
             builder.Property(e => e.Id).HasColumnName("Id");
 

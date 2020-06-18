@@ -13,7 +13,7 @@ export class JobService {
 
   headers: HttpHeaders = new HttpHeaders({
     'Content-Type': 'application/json',
-        Authorization: localStorage.getItem("Authorization")
+        Authorization: localStorage.getItem("Authorized")
        //hard code token here
    
   });
@@ -23,7 +23,7 @@ export class JobService {
   constructor(private http: HttpClient) { }
 
     getAllJobs(): Observable<any>{
-      return this.http.get<any>(`${DOTNET_DOMAIN}/api/jobDescription`, this.httpOptions);
+      return this.http.get<any>(`${DOTNET_DOMAIN}/api/jobDescription`,this.httpOptions);
     }
   jdFormData(jdFormObject): Observable<any>{
     return this.http.post<any>(`${DOTNET_DOMAIN}/api/jobDescription`, jdFormObject, { ...this.httpOptions, observe: 'response' });

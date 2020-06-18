@@ -14,22 +14,24 @@ using Microsoft.EntityFrameworkCore;
 using System.Net.Mail;
 using Arms.Domain.CustomEntities;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Configuration;
 
 namespace Arms.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-   // [Authorize]
+    [Authorize]
     public class JobDescriptionController : BaseController
     {
-        private readonly IIdentityService _identityService;
+      
         ArmsDbContext _context;
         public MailHelperController mailHelper=new MailHelperController();
-       
-        public JobDescriptionController(IIdentityService identityService, ArmsDbContext armsContext)
-        {
-            _identityService = identityService;
-            _context = armsContext;
+     
+        public JobDescriptionController(ArmsDbContext armsContext)
+        {   
+        
+             _context = armsContext;
+          
         }
         //GET:api/jobDescriptions
         [HttpGet]
