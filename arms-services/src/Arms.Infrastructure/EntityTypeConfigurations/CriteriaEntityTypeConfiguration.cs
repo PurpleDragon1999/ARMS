@@ -60,7 +60,7 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
             //     .HasConstraintName("FK_CR_ArmsCriteriaType");
            /* builder.HasOne(d => d.CriteriaType)
                 .WithMany(p => p.Criteria)
-=======
+
             builder.HasOne(d => d.CriteriaType)
                 .WithMany()
                 .HasForeignKey(d => d.CriteriaTypeId)
