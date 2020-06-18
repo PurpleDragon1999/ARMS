@@ -27,7 +27,7 @@ namespace Arms.Api.Controllers
 
         //GET:api/idProofType
         [HttpGet]
-        [Authorize(Roles = "superuser,admin")]
+        [Authorize(Roles = "SuperAdministrator,Admin")]
         public IActionResult GetIds()
         {
             List<IdProofType> idProofType = _context.IdProofType.ToList();
@@ -64,7 +64,7 @@ namespace Arms.Api.Controllers
 
 
         [HttpGet("{id}")]
-        [Authorize(Roles = "superuser")]
+        [Authorize(Roles = "SuperAdministrator")]
         public IActionResult GetId(int id)
         {
             var idDetails = _context.IdProofType.SingleOrDefault(c => c.Id == id);
@@ -115,7 +115,7 @@ namespace Arms.Api.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "superuser")]
+        [Authorize(Roles = "SuperAdministrator")]
         public IActionResult writeId(IdProofType id)
         {
             try
@@ -175,7 +175,7 @@ namespace Arms.Api.Controllers
 
 
         [HttpPatch("{id}")]
-        [Authorize(Roles = "superuser")]
+        [Authorize(Roles = "SuperAdministrator")]
         public IActionResult UpdateId(int id, IdProofType idObj)
         {
             try
@@ -240,7 +240,7 @@ namespace Arms.Api.Controllers
 
 
         [HttpDelete("{id}")]
-        [Authorize(Roles = "superuser")]
+        [Authorize(Roles = "SuperAdministrator")]
         public IActionResult DeleteInterview(int id)
         {
             var idToDel = _context.IdProofType.SingleOrDefault(c => c.Id == id);

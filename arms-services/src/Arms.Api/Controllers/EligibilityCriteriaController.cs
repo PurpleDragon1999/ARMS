@@ -24,7 +24,7 @@ namespace Arms.Api.Controllers
         }
         //GET:api/eligibilityCriteria
         [HttpGet]
-        [Authorize(Roles ="superuser,admin")]
+        [Authorize(Roles ="SuperAdministrator,Admin")]
         public IActionResult GetEligibilityCriterias()
         {
             try
@@ -58,7 +58,7 @@ namespace Arms.Api.Controllers
         }
         //GET:api/eligibilityCriteira/id
         [HttpGet("{id}")]
-        [Authorize(Roles = "superuser")]
+        [Authorize(Roles = "SuperAdministrator")]
         public IActionResult GetEligibilityCriteriaById(int id)
         {
             try
@@ -104,7 +104,7 @@ namespace Arms.Api.Controllers
         }
         //POST:api/eligibilityCriteria
         [HttpPost]
-        [Authorize(Roles = "superuser")]
+        [Authorize(Roles = "SuperAdministrator")]
         public IActionResult CreateEligibilityCriteria(EligibilityCriteria eligibility)
         {
             try
@@ -159,7 +159,7 @@ namespace Arms.Api.Controllers
 
         //PUT:api/employmentType/id
         [HttpPut("{id}")]
-        [Authorize(Roles = "superuser")]
+        [Authorize(Roles = "SuperAdministrator")]
         public IActionResult UpdateEligibilityCriteria(int id, [FromBody]EligibilityCriteria eligibility)
         {
             try
@@ -208,7 +208,7 @@ namespace Arms.Api.Controllers
             }
         }
         [HttpDelete("{id}")]
-        [Authorize(Roles = "superuser")]
+        [Authorize(Roles = "SuperAdministrator")]
         public IActionResult DeleteEligibilityCriteria(int id)
         {
             try

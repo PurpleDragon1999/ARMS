@@ -23,7 +23,7 @@ namespace Arms.Api.Controllers
             _context = armsContext;
         }
         //GET:api/CriteriaType
-        [Authorize(Roles = "superuser,admin")]
+        [Authorize(Roles = "SuperAdministrator,Admin")]
         [HttpGet]
         public IActionResult GetLocations()
         {
@@ -57,7 +57,7 @@ namespace Arms.Api.Controllers
             }
 
         }
-        [Authorize(Roles = "superuser")]
+        [Authorize(Roles = "SuperAdministrator")]
         //GET:api/location/id
         [HttpGet("{id}")]
 
@@ -116,7 +116,7 @@ namespace Arms.Api.Controllers
         }
 
         //POST:api/Location
-        [Authorize(Roles = "superuser")]
+        [Authorize(Roles = "SuperAdministrator")]
         [HttpPost]
         public IActionResult CreateLocation(Location location)
         {
@@ -171,7 +171,7 @@ namespace Arms.Api.Controllers
             }
         }
         //PUT:api/ location/id
-        [Authorize(Roles = "superuser")]
+        [Authorize(Roles = "SuperAdministrator")]
         [HttpPut("{id}")]
         public IActionResult UpdateLocation(int id, Location location)
         {
@@ -223,7 +223,7 @@ namespace Arms.Api.Controllers
             }
         }
         //DELETE:/api/Location/id
-        [Authorize(Roles = "superuser")]
+        [Authorize(Roles = "SuperAdministrator")]
         [HttpDelete("{id}")]
         public IActionResult DeleteLocation(int id)
         {
