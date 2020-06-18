@@ -55,14 +55,17 @@ SELECT * FROM ARMS.JobDescription
 --To get Object id of ARMS.JobDescription
 Select OBJECT_Id('ARMS.JobDescription')
 
+GO
 --Adding the column skills in table
 ALTER TABLE ARMS.JobDescription 
 ADD skills varchar(255)
 
+GO
 --dropping the column salary of type int
 ALTER TABLE ARMS.JobDescription
 DROP COLUMN salary
 
+GO
 --adding the column salary ofd type varchar
 ALTER TABLE ARMS.JobDescription
 ADD salary varchar(50)

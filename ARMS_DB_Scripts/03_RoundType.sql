@@ -1,3 +1,8 @@
+if not exists (select * from sys.schemas where name = 'ARMS')
+begin
+	exec('create schema ARMS')
+end
+
 --RoundType Table creation
 IF OBJECT_ID('ARMS.RoundType') IS NULL
 BEGIN

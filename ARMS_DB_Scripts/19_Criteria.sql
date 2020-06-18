@@ -1,3 +1,8 @@
+if not exists (select * from sys.schemas where name = 'ARMS')
+begin
+	exec('create schema ARMS')
+end
+
 IF OBJECT_ID('ARMS.Criteria') IS NULL
 BEGIN
 	CREATE TABLE ARMS.Criteria(
@@ -30,7 +35,7 @@ AS
 
 GO
 insert into ARMS.Criteria ([marks],[remarks],[criteriaTypeId],[assessmentId],[createdBy],[modifiedBy] )
-values (34, 'good','2','','shivani','shivani');
+values (34, 'good','2','','employee','employee');
 
 select * from ARMS.Criteria;
 

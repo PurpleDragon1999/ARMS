@@ -1,11 +1,11 @@
-if not exists (select * from sys.schemas where name = 'arms')
+if not exists (select * from sys.schemas where name = 'ARMS')
 begin
-	exec('create schema arms')
+	exec('create schema ARMS')
 end
 
-if OBJECT_ID('arms.Resume') is null
+if OBJECT_ID('ARMS.Resume') is null
 begin 
-	create table arms.Resume
+	create table ARMS.Resume
 	(
 		[id] int identity(1,1),
 		[name] nvarchar(50) not null,
@@ -23,20 +23,17 @@ end
 
 GO
 
-CREATE TRIGGER arms.trg_UpdateResume
-ON arms.Resume
+CREATE TRIGGER ARMS.trg_UpdateResume
+ON ARMS.Resume
 AFTER UPDATE
 AS
-    UPDATE arms.Resume
+    UPDATE ARMS.Resume
     SET modifiedAt  = sysdatetime()
     WHERE id IN (SELECT DISTINCT id FROM Inserted)
 
-select * from arms.Resume
+select * from ARMS.Resume
 
-insert into arms.Resume (name, cv, applicationId, createdBy, modifiedBy)
-select 'file', BulkColumn, 1, 'anna', 'anna'
-from openrowset (bulk 'C:\Users\chetna.mongmaw\Pictures\Saved Pictures\pexels-photo-3473492.jpeg', SINGLE_BLOB) AS BLOB
-
-update arms.Resume 
+update ARMS.Resume 
 set name= 'resume'
 where id= 2
+

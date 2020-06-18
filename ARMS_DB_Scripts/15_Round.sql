@@ -1,3 +1,8 @@
+if not exists (select * from sys.schemas where name = 'ARMS')
+begin
+	exec('create schema ARMS')
+end
+
  IF OBJECT_ID('ARMS.Round') IS NULL
 BEGIN
 CREATE TABLE ARMS.Round(
@@ -25,17 +30,12 @@ AS
     SET modifiedAt  = sysdatetime()
     WHERE id IN (SELECT DISTINCT id FROM Inserted)
 
-GO 
---insert command
-
-Insert into ARMS.Round(roundTypeId,interviewId)
-Values('2','2')
-
 --Select command
 select * FROM ARMS.Round
 --Select command with joins
 select *FROM ARMS.Round INNER JOIN ARMS.Interview  on ARMS.Round.interviewId=ARMS.interview.id INNER JOIN ARMS.RoundType on ARMS.Round.roundTypeId =ARMS.RoundType.id
 
+GO
 ALTER TABLE arms.Round
 ADD roundNumber int,
 	roundDate datetime2,
