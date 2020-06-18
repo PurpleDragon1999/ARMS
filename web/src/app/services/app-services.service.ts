@@ -2,12 +2,7 @@ import { IAssessment } from "./../models/assessment.interface";
 import { IResponse } from "src/app/models/response.interface";
 import { Injectable } from "@angular/core";
 import { JwtHelperService } from "@auth0/angular-jwt";
-import {
-  HttpClient,
-  HttpResponse,
-  HttpHeaders,
-  HttpParams,
-} from "@angular/common/http";
+import { HttpClient, HttpResponse, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { ICreate } from "../models/create.interface";
 
