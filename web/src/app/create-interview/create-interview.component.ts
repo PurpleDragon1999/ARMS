@@ -28,7 +28,7 @@ export class CreateInterviewComponent implements OnInit {
 
   interview: any = {}
   interviewObj: any ={}
- 
+  formType:any;
 
   RoundType: any[]=[
   ]
@@ -70,13 +70,14 @@ export class CreateInterviewComponent implements OnInit {
     this.interviewObj.Date = interview.date;
     this.interviewObj.Time = interview.time;
     this.interviewObj.Venue = interview.venue;
+    this.interviewObj.NoOfRounds = interview.noOfRounds;
     this.interviewObj.Round = round;
 
     this.service.createInterview(this.interviewObj).subscribe((res:any) => {
       const modalRef = this.modalService.open(ModalComponent);
       modalRef.componentInstance.shouldConfirm = false;
-      modalRef.componentInstance.success = res.body.result.success;
-      modalRef.componentInstance.message = res.body.result.payload.message;
+      modalRef.componentInstance.success = res.body.success;
+      modalRef.componentInstance.message = res.body.payload.message;
       modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
         modalRef.close();        
         });

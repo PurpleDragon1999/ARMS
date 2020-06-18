@@ -18,7 +18,8 @@ export class InterviewListComponent implements OnInit {
   interviewsList: any;
   jdObject: any;
   pager: any;
-
+  searchJd: any;
+  jobsList: any;
   constructor(private _service: AppServicesService, private router: Router,
               private modalService: NgbModal) {}
 

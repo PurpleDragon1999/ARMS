@@ -97,10 +97,10 @@ export class JdFormComponent implements OnInit {
       this.employmentTypes = res.payload.data;
 
     });
-    this._service.getSkills().subscribe((res: any) => {
-      this.skillArray = res.payload.data;
+    // this._service.getSkills().subscribe((res: any) => {
+    //   this.skillArray = res.payload.data;
 
-    });
+    // });
 
   }
   get formControls() {

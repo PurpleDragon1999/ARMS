@@ -22,6 +22,7 @@ export class JdListComponent implements OnInit {
   jdObject: any;
   pager: any;
   obj:any;
+  searchJd:any;
   constructor(private _service: AppServicesService, private router: Router,
               private modalService: NgbModal,private jobService:JobService) {}
   imageUrl=
