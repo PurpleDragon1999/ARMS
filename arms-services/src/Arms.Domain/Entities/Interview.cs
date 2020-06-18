@@ -22,6 +22,4 @@ namespace Arms.Domain.Entities
         public JobDescription JobDescription { get; set; }
    }
 
-    
-
 }

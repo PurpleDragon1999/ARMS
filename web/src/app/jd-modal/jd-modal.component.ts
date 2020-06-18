@@ -45,6 +45,7 @@ export class JdModalComponent implements OnInit {
   vacancies: number;
   jobArray: any;
   eligibilityCriteriaOptions: String;
+  jobId:any;
   locationOptions: String;
   jobTypeOptions: String;
   jobListingForm: FormGroup;

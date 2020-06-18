@@ -97,10 +97,10 @@ export class JdFormComponent implements OnInit {
       this.employmentTypes = res.payload.data;
 
     });
-    this._service.getSkills().subscribe((res: any) => {
-      this.skillArray = res.payload.data;
+    // this._service.getSkills().subscribe((res: any) => {
+    //   this.skillArray = res.payload.data;
 
-    });
+    // });
 
   }
   get formControls() {
@@ -168,12 +168,7 @@ export class JdFormComponent implements OnInit {
       }
     );
   }
-  modalClose(rerender: boolean): void {
-    this.closeModal.emit(rerender);
-
+    modalClose(rerender: boolean): void {
+      this.closeModal.emit(rerender);
+    }
   }
-}
-
-
-
-

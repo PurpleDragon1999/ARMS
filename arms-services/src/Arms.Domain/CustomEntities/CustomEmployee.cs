@@ -11,7 +11,7 @@ namespace Arms.Domain.CustomEntities
     public class CustomEmployee : Entity
     {
         public ArmsEmployees armsEmployee { get; set; }
-        // public ArmsEmployeeRoles armsEmployeeRole { get; set; }
+        public ArmsEmployeeRoles armsEmployeeRole { get; set; }
     }
 
   

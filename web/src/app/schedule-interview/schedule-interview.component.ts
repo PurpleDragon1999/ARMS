@@ -63,7 +63,8 @@ export class ScheduleInterviewComponent implements OnInit {
   ];
 
   error: any = { isError: false, errorMessage: "" };
-
+  index: any;
+  schedule: any;
   constructor(private _appService: AppServicesService) {}
 
   ngOnInit() {

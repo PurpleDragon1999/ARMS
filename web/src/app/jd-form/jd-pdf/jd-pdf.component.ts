@@ -32,16 +32,16 @@ export class JdPdfComponent implements OnInit {
 
   public loadJd() {
     this.route.params
-      .pipe(
-        switchMap((params: Params) => {
-          return this.jobService.getJdData(params.jdId);
-        })
-
-      )
-      .subscribe((res) => {
-        this.jdObject = res.result.payload.data;
-
-      });
+    .pipe(
+      switchMap((params: Params) => {
+       return this.jobService.getJdData(params.jdId);
+      })
+      
+    )
+    .subscribe((res) => {
+      this.jdObject = res.payload.data;
+    
+    });
   }
 
   //Earlier  function achieved which sets all the content into one page and increases page height

@@ -13,6 +13,7 @@ namespace Arms.Infrastructure
             : base(options)
         {
         }
+
         public virtual DbSet<Candidate> Candidate { get; set; }
         public virtual DbSet<IdProofType> IdProofType { get; set; }
         public virtual DbSet<Assessment> Assessment { get; set; }
@@ -41,14 +42,13 @@ namespace Arms.Infrastructure
         public virtual DbSet<ArmsEmployeeRoles> ArmsEmployeeRoles { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
-            modelBuilder.ApplyConfiguration(new EmployeeEntityTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new EmployeeDetailEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new CandidateEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new IdProofTypeEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new ApplicationEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new ResumeEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new ApplicationStatusTypeEntityTypeConfiguration());
+            //modelBuilder.ApplyConfiguration(new EmployeeEntityTypeConfiguration());
+            //modelBuilder.ApplyConfiguration(new EmployeeDetailEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new JobDescriptionEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new LocEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new EmploymentTypeEntityTypeConfiguration());
@@ -69,7 +69,6 @@ namespace Arms.Infrastructure
             modelBuilder.ApplyConfiguration(new SkillEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new ArmsEmployeeEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new ArmsEmployeeRolesEntityTypeConfiguration());
-
         }
     }
 }
