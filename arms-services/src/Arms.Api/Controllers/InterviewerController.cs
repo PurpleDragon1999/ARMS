@@ -15,7 +15,7 @@ namespace Arms.Api.Controllers
 {
     [Route("api/interviewer")]
     [ApiController]
-    [Authorize]
+    
     public class InterviewerController : ControllerBase
     {
         ArmsDbContext _context;
@@ -56,6 +56,7 @@ namespace Arms.Api.Controllers
         }
 
         [HttpPut]
+        [Authorize(Roles ="admin")]
         public IActionResult updateInterviewer([FromBody]InterviewerModels interviewerModels)
         {
             Response response = new Response()
@@ -115,6 +116,7 @@ namespace Arms.Api.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "admin")]
         public IActionResult delete(int id)
         {
             Response response = new Response()

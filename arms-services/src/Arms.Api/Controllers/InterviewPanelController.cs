@@ -14,7 +14,7 @@ namespace Arms.Api.Controllers
 {
     [Route("api/panel")]
     [ApiController]
-    [Authorize]
+    [Authorize(Roles ="admin")]
     public class InterviewPanelController : ControllerBase
     {
         private readonly ArmsDbContext _context;

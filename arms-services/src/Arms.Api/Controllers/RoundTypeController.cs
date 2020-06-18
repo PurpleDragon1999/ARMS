@@ -17,7 +17,7 @@ namespace Arms.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+  
     public class RoundTypeController : BaseController
     {
        
@@ -28,6 +28,7 @@ namespace Arms.Api.Controllers
         }
         //GET:api/roundType
         [HttpGet]
+        [Authorize(Roles = "superuser,admin")]
         public IActionResult GetRoundTypes()
         {
             try
@@ -64,7 +65,7 @@ namespace Arms.Api.Controllers
 
         //GET:api/roundType/id
         [HttpGet("{id}")]
-
+        [Authorize(Roles = "superuser")]
         public IActionResult GetRoundType(int id)
         {
             RoundType round = _context.RoundType.SingleOrDefault(c => c.Id == id);
@@ -116,6 +117,7 @@ namespace Arms.Api.Controllers
 
         //POST:api/roundType
         [HttpPost]
+        [Authorize(Roles = "superuser")]
         public IActionResult CreateRoundType(RoundType round)
         {
             try
@@ -157,6 +159,7 @@ namespace Arms.Api.Controllers
         }
         //PUT:api/roundType/id
         [HttpPut("{id}")]
+        [Authorize(Roles = "superuser")]
         public IActionResult UpdateRoundType(int id, RoundType round)
         {
             try
@@ -209,6 +212,7 @@ namespace Arms.Api.Controllers
         }
         //DELETE:/api/roundType/id
         [HttpDelete("{id}")]
+        [Authorize(Roles = "superuser")]
         public IActionResult DeleteRoundType(int id)
         {
             try

@@ -20,7 +20,7 @@ namespace Arms.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    [Authorize(Roles ="admin")]
     public class JobDescriptionController : BaseController
     {
       

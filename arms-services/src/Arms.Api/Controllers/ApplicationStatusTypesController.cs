@@ -17,7 +17,9 @@ namespace Arms.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+
+
+   
     public class ApplicationStatusTypesController : ControllerBase
     {
         ArmsDbContext _context;
@@ -28,6 +30,7 @@ namespace Arms.Api.Controllers
 
 
         [HttpGet]
+        [Authorize(Roles ="admin,superuser")]
         public IActionResult GetAllStatusTypes()
         {
             try
@@ -60,6 +63,7 @@ namespace Arms.Api.Controllers
 
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "superuser")]
         public IActionResult GetStatusTypeById(int id)
         {
             try
@@ -109,6 +113,10 @@ namespace Arms.Api.Controllers
 
 
         [HttpPost]
+
+        [Authorize(Roles = "superuser")]
+
+
         public IActionResult CreateStatusType(ApplicationStatusType[] statusType)
         {
             try
@@ -166,6 +174,7 @@ namespace Arms.Api.Controllers
 
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "superuser")]
         public IActionResult UpdateStatusType(int id, ApplicationStatusType statusType)
         {
             try
@@ -219,6 +228,7 @@ namespace Arms.Api.Controllers
 
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "superuser")]
         public IActionResult DeleteStatusType(int id)
         {
             try

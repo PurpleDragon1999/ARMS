@@ -13,7 +13,7 @@ namespace Arms.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+   
     public class LocationController : BaseController
     {
        
@@ -23,6 +23,7 @@ namespace Arms.Api.Controllers
             _context = armsContext;
         }
         //GET:api/CriteriaType
+        [Authorize(Roles = "superuser,admin")]
         [HttpGet]
         public IActionResult GetLocations()
         {
@@ -56,6 +57,7 @@ namespace Arms.Api.Controllers
             }
 
         }
+        [Authorize(Roles = "superuser")]
         //GET:api/location/id
         [HttpGet("{id}")]
 
@@ -114,6 +116,7 @@ namespace Arms.Api.Controllers
         }
 
         //POST:api/Location
+        [Authorize(Roles = "superuser")]
         [HttpPost]
         public IActionResult CreateLocation(Location location)
         {
@@ -168,6 +171,7 @@ namespace Arms.Api.Controllers
             }
         }
         //PUT:api/ location/id
+        [Authorize(Roles = "superuser")]
         [HttpPut("{id}")]
         public IActionResult UpdateLocation(int id, Location location)
         {
@@ -219,6 +223,7 @@ namespace Arms.Api.Controllers
             }
         }
         //DELETE:/api/Location/id
+        [Authorize(Roles = "superuser")]
         [HttpDelete("{id}")]
         public IActionResult DeleteLocation(int id)
         {

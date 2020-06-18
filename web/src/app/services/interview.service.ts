@@ -5,6 +5,8 @@ import { Observable } from "rxjs";
 import { HOST } from "../config/apiHost.config";
 const INTERVIEW_SEARCH = `${HOST}/api/interviewSearch`;
 const INTERVIEW_API=`${HOST}/api/interview`
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -39,23 +41,23 @@ export class InterviewService {
   //new
   getInterview():Observable<any>{
     return this.http.get<any>(
-      `http://localhost:40802/api/interview/66?append=1`, this.options
+      `${HOST}/api/interview/66?append=1`, this.options
     )
   }
  
   createInterview(interviewObj: any):Observable<HttpResponse<any>>{
-    return this.http.post<any>(`http://localhost:40802/api/interview`, interviewObj, { ...this.options, observe: 'response' } )
+    return this.http.post<any>(`${HOST}/api/interview`, interviewObj, { ...this.options, observe: 'response' } )
   }
 
   getLocation():Observable<any>{
     return this.http.get<any>(
-      `http://localhost:40802/api/location`, this.options
+      `${HOST}/api/location`, this.options
     )
   }
 
   getRoundTypes():Observable<any>{
     return this.http.get<any>(
-      `http://localhost:40802/api/roundType`, this.options
+      `${HOST}/api/roundType`, this.options
     )
   }
 }
