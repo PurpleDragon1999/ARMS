@@ -1,3 +1,8 @@
+if not exists (select * from sys.schemas where name = 'ARMS')
+begin
+	exec('create schema ARMS')
+end
+
 IF OBJECT_ID('ARMS.ApplicationStatusType') IS NULL
 BEGIN
 	CREATE TABLE ARMS.ApplicationStatusType(

@@ -1,3 +1,7 @@
+if not exists (select * from sys.schemas where name = 'ARMS')
+begin
+	exec('create schema ARMS')
+end
 
 IF OBJECT_ID('ARMS.Assessment') IS NULL
 BEGIN
@@ -32,7 +36,7 @@ AS
 
 GO
 insert into ARMS.Assessment ([feedback],[result],[roundId],[applicationId],[interviewPanelId], [createdBy],[modifiedBy])
-values ('good', 0,'2','1','2','shivani','shivani');
+values ('good', 0,'2','1','2','employee','employee');
 
 select * from ARMS.Assessment;
 

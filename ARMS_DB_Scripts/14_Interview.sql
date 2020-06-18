@@ -1,3 +1,8 @@
+if not exists (select * from sys.schemas where name = 'ARMS')
+begin
+	exec('create schema ARMS')
+end
+
 IF OBJECT_ID('ARMS.Interview') IS NULL
 BEGIN
 CREATE TABLE ARMS.Interview (
@@ -24,11 +29,6 @@ AS
     UPDATE ARMS.Interview
     SET modifiedAt  = sysdatetime()
     WHERE id IN (SELECT DISTINCT id FROM Inserted)
-
-GO
---Insert command for interview
-Insert into ARMS.Interview([date],[time],[venue],[noOfRounds],[jobId])
-Values('2020-02-09','12:00','delhi','5','1')
 
 --display command for interview
 
