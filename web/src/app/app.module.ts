@@ -4,7 +4,7 @@ import { HrInterviewAssessementComponent } from './hr-interview-assessement/hr-i
 import { CandidateAssessmentComponent } from './candidate-assessment/containers/candidate-assessment.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { MsalInterceptor, MsalModule } from '@azure/msal-angular';
 import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -75,14 +75,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     InterviewListComponent,
     HrInterviewAssessementComponent,
     SettingsComponent,
-    RoundTypeComponent,
-    LocationComponent,
-    IdProofTypeComponent,
-    EmploymentTypeComponent,
-    EligibilityCriteriaComponent,
-    ApplicationStatusComponent,
-    CandidateAssessmentComponent,
-    HrInterviewAssessementComponent
+    CandidateAssessmentComponent
   ],
   imports: [
     FileUploadModule,

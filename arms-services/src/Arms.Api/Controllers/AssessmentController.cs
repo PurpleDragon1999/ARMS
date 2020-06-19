@@ -1,12 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using Arms.Api.Models;
-using Arms.Application.Services.Users;
 using Arms.Domain.Entities;
 using Arms.Infrastructure;
-using Hrms.Core;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Arms.Api.Controllers
