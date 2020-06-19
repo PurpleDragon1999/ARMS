@@ -11,7 +11,7 @@ const INTERVIEW_API=`${HOST}/api/interview`
 export class InterviewService {
   headers: HttpHeaders = new HttpHeaders({
     "Content-Type": "application/json",
-    "Authorization": "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjI2RTcyQjI1MTM1NUJGODFDOTA5QTVEQ0UzQTNENUIwNEI5OTMxMDEiLCJ0eXAiOiJhdCtqd3QiLCJ4NXQiOiJKdWNySlJOVnY0SEpDYVhjNDZQVnNFdVpNUUUifQ.eyJuYmYiOjE1OTIzNzkzNTgsImV4cCI6MTU5MjQwODE1OCwiaXNzIjoiaHR0cHM6Ly9ocm1zLWlkZW50aXR5LWRldi5henVyZXdlYnNpdGVzLm5ldCIsImF1ZCI6WyJhY2NvdW50IiwibG1zIl0sImNsaWVudF9pZCI6ImhybXNtb2JpbGUiLCJzdWIiOiJhMzhkZjNmYi0wOTZlLTQ1OGMtODljMS0xMmNkNjM4Y2Q5NjYiLCJhdXRoX3RpbWUiOjE1OTIzNzkzNTgsImlkcCI6ImxvY2FsIiwibmFtZSI6IlNvbmFsaSIsImxhc3RfbmFtZSI6IkNoYXdsYSIsImVtYWlsIjoic29uYWxpLmNoYXdsYUBjeWdycC5jb20iLCJzY29wZSI6WyJvcGVuaWQiLCJwcm9maWxlIiwiYWNjb3VudCIsImxtcyIsIm9mZmxpbmVfYWNjZXNzIl0sImFtciI6WyJwYXNzd29yZCJdfQ.iM68ghJAXaqqbfWeTwBBCWAYAg-1Hh6FA629XoWC4QPgQQ0v8dsyP6bnYiu_byPsbMRUkAJXCFHeovMTTiMo7CeJJ7B4h4yNbFvptvbvlhVJ-c_cP8jeqTmEQA5ayBHyacKgQ7dTX-dXQNJMPZdpL2yAC78NaSbofGLWwvFAKLuaGE-_nDZ6Pq3Gh6DZStDwci4XLcUcdmvnC1LU2d9SeRHBcVMNRSnWTYVh_F7uwV82_8YLW6RUF9xqrLr1XKSVorPjbON1nof-3jWVlrApCTJBq_e_WDQfb984DFVhiajy8QWAmdoQybLBGJI8Q4fMsOHzMSk-u1lH8V6SAk0q-oPx8k9qOSLqI9iBKU3vKm6TTBWuELOVQGWcJ5gj6KZUnnwGrKrvKXewtaEqmbJbUSvVcQ-XYnxgMriEB5dgJ8B_lva-5w8H0l9CFT8b_S2ix5HhHgOKHvuH24nf-rcpbND_nRufBkRdm8_f5sRPTscFQBeAj4nArdyqE5iO-sqYa1VABKl4OgEfUFC6B6bkJnmj5s5Actpsf1pgBWK8GeBiMWmtHCJrVnHMNQSd4l4cLaeykHb8AIBV0ILogkJeBrTmanIVSioCE237oeqd_J5n9jbibas5UwCY1Wjy79StaKYgzARJg5Bmt_m4h3ycIbhhR9BsayEH1xvP5INODh0"
+    "Authorization": "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjI2RTcyQjI1MTM1NUJGODFDOTA5QTVEQ0UzQTNENUIwNEI5OTMxMDEiLCJ0eXAiOiJhdCtqd3QiLCJ4NXQiOiJKdWNySlJOVnY0SEpDYVhjNDZQVnNFdVpNUUUifQ.eyJuYmYiOjE1OTI0MDg3MjIsImV4cCI6MTU5MjQzNzUyMiwiaXNzIjoiaHR0cHM6Ly9ocm1zLWlkZW50aXR5LWRldi5henVyZXdlYnNpdGVzLm5ldCIsImF1ZCI6WyJhY2NvdW50IiwibG1zIl0sImNsaWVudF9pZCI6ImhybXNtb2JpbGUiLCJzdWIiOiJhMzhkZjNmYi0wOTZlLTQ1OGMtODljMS0xMmNkNjM4Y2Q5NjYiLCJhdXRoX3RpbWUiOjE1OTI0MDg3MjIsImlkcCI6ImxvY2FsIiwibmFtZSI6IlNvbmFsaSIsImxhc3RfbmFtZSI6IkNoYXdsYSIsImVtYWlsIjoic29uYWxpLmNoYXdsYUBjeWdycC5jb20iLCJzY29wZSI6WyJvcGVuaWQiLCJwcm9maWxlIiwiYWNjb3VudCIsImxtcyIsIm9mZmxpbmVfYWNjZXNzIl0sImFtciI6WyJwYXNzd29yZCJdfQ.hbtRd2lPH3xFE-Qs2DK7XumAJfEPEAH5MjdNRl6C6Be8XMz8RPTR8rTozmH5Y_Ie1Tqb5GlzpPkjrVBLyX-x-xlUkR3jO9bj97It8iLP4HeMqNHa63n59vwOzxFhkGaLuogQ13xL3TlS1ofps7TrG2SoxSnKa3zuS-A_UiN-gtdrrQ8g-hkeU9mS4pzk_5_XmpchPUSE6mvu0s7OvGKH2rLqonxpyvlm1KQVz-M5uJiKSTjVOpvwoga5F3BtUep3Tcbib4HfkO1ymrz7yeYEBZ2Ke5geTLXtbdQx1MemOmVukmTLm7osrFg47IS2hQXqFoaG9WCUiPkw4bm_hT__21z1b80jRUfD9qt4qnU_2ExPwEXcrr_MDfY2N-uv4unO1eFBx5dIQ0NoP15MaQBX9CjT9AwTm9EWrEMQ7KlX8oItW0xhz2Ic1Q-9C63PtLROfRM1VFHnUQVS9altGW8RqN8m0j6gwbdZZTr35E-uHhYpMMKErZD_2YRSzgkIK1zlvV84xu4rdqFHda1tw8nJF5JGOb6mjBn8Al7exq2vrvwMRA5p2qvPKep-SQx66DhOqoY95fAX0nn_yaI9a3tNwx4aE9PvxliUKtzDqMMqzec1x5EQfA2OUl3W2MgMdX2IkK6ChNdoI-6YsYjN0I38K69FrraA6uWXCyNVOM1fu5w"
   });
 
   options = {
@@ -35,12 +35,7 @@ export class InterviewService {
   }
 
   //new
-  getInterview():Observable<any>{
-    return this.http.get<any>(
-      `http://localhost:40802/api/interview/66?append=1`, this.options
-    )
-  }
- 
+  
   createInterview(interviewObj: any):Observable<HttpResponse<any>>{
     return this.http.post<any>(`http://localhost:40802/api/interview`, interviewObj, { ...this.options, observe: 'response' } )
   }
@@ -54,6 +49,30 @@ export class InterviewService {
   getRoundTypes():Observable<any>{
     return this.http.get<any>(
       `http://localhost:40802/api/roundType`, this.options
+    )
+  }
+
+  getInterview(id: number):Observable<any>{
+    return this.http.get<any>(
+      `http://localhost:40802/api/interview/${id}`, this.options
+    )
+  }
+
+  getRounds(id: number, append: number):Observable<any>{
+    return this.http.get<any>(
+      `http://localhost:40802/api/interview/${id}?append=${append}`, this.options
+    )
+  }
+
+  updateInterview (id:number, updateObj):Observable<any>{
+    return this.http.patch<any>(
+      `http://localhost:40802/api/interview/${id}`, updateObj, this.options
+    )
+  }
+  
+  updateRound( id:number, roundID: number, updateObj):Observable<any>{
+    return this.http.patch<any>(
+      `http://localhost:40802/api/interview/${id}?roundID=${roundID}`, updateObj, this.options
     )
   }
 }

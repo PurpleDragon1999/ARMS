@@ -98,29 +98,7 @@ namespace Arms.Api.Controllers
 								message = "Interview Record Retrieved Successfully"
 							}
 
-						};
-						//
-						var applications = _context.Application.Include(c => c.Candidate).
-											Where(c => c.JobId == interview.JobId);
-						//getting the job description object for sending in email
-						JobDescription jdObject = _context.JobDescription.Include(l => l.employmentType).
-						 Include(l => l.eligibilityCriteria).Include(l => l.loc).FirstOrDefault(c => c.Id == interview.JobId);
-					  
-						//Adding Emails in string Array to send to candidates
-					   
-						 foreach(Arms.Domain.Entities.Application app in applications)
-						{
-							string[] EmailToSend=new[]
-							{
-								app.Candidate.Email
-
-							};
-							string emailHtmlBody = email.GenerateEmailBody(jdObject, interview,app);
-
-							 mailHelper.MailFunction(emailHtmlBody, EmailToSend);
-						}
-
-					  
+						};											
 						return StatusCode(200, response);
 					}
 					else

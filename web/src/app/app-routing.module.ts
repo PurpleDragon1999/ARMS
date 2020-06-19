@@ -1,8 +1,8 @@
+import { UpdateInterviewComponent } from './update-interview/update-interview.component';
 import { SettingsComponent } from "./settings/settings.component";
 import { CreateInterviewComponent } from "./create-interview/create-interview.component";
 import { HrInterviewAssessementComponent } from "./hr-interview-assessement/hr-interview-assessment.component";
 import { InterviewListComponent } from "./interview-list/interview-list.component";
-
 import { ScheduleInterviewComponent } from "./schedule-interview/schedule-interview.component";
 import { CandidateFormComponent } from "./candidate-form/candidate-form.component";
 import { ProgressTrackerComponent } from "./progress-tracker/progress-tracker.component";
@@ -19,6 +19,7 @@ import { RoleGuardService } from "./utilities/role-guard.service";
 import { ErrorPageComponent } from "./error-page/error-page.component";
 import { JdModalComponent } from "./jd-modal/jd-modal.component";
 import { CandidateComponent } from "./candidate/candidate.component";
+import { RoundComponent } from './round/round.component';
 
 const routes: Routes = [
   { path: "assessment", component: HrInterviewAssessementComponent },
@@ -90,10 +91,16 @@ const routes: Routes = [
         component: CandidateComponent,
       },
       {
+        path: "round",
+        component: RoundComponent,
+      },
+      {
         path: "create-interview",
         component: CreateInterviewComponent,
+      },{
+        path: "update-interview",
+        component: UpdateInterviewComponent,
       },
-
       {
         path: "home",
         component: HrComponent,

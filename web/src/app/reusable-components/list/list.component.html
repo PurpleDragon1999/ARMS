@@ -48,6 +48,7 @@
                 <div *ngSwitchCase="columnName=='Job Position'">{{entry['job']?.jobTitle}}</div>  
                 <div *ngSwitchCase="columnName=='date'">{{entry[columnName]|date}}</div>
                 <div *ngSwitchCase="columnName=='jdObjectId'">{{entry[columnName]?.jdTitle}}</div>
+                <div *ngSwitchCase="columnName=='roundType'">{{entry['roundType']?.name}}</div>
                 <div *ngSwitchDefault>{{entry[columnName]}}</div>
               </ng-container>
             </td>
@@ -153,6 +154,7 @@
                 <ng-container [ngSwitch]="true">
                   <div *ngSwitchCase="columnName=='date'">{{entry[columnName]|date}}</div>
                   <div *ngSwitchCase="columnName=='jdObjectId'">{{entry[columnName]?.jdTitle}}</div>
+                  <div *ngSwitchCase="columnName=='roundType'">{{entry['roundType']?.name}}</div>
                   <div *ngSwitchDefault>{{entry[columnName]}}</div>
                 </ng-container>
               </div>
