@@ -11,6 +11,7 @@ yarn.lock
 
 jobDescriptions
 .idea
+Building Blocks/
 
 
 *.swp
@@ -47,13 +48,16 @@ msbuild.wrn
 # Visual Studio 2015
 .vs/
 
-Building Blocks/
+Buiding Blocks/
 
 *.exe
 *.pdb
 *.manifest
 *.cache
 *.g.props
+**/appsettings.*.json	
+**/appsettings.json 	
+*.g.targets	
 
 Arms.Api.csproj
 Arms.Api.csproj.user

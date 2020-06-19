@@ -24,7 +24,7 @@ namespace Arms.Application
             // Register database services
             services.AddTransient<IDbContextProvider<ArmsDbContext>, ArmsDbContextProvider>();
             services.AddTransient(typeof(IRepository<>), typeof(ArmsEfCoreRepository<>));
-
+            
             services.AddTransient<IIdentityService, IdentityService>();
 
             return services;

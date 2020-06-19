@@ -8,8 +8,6 @@ namespace Arms.Domain.Entities
 
     public partial class ApplicationStatusType
     {   [Key]
-
- 
         
         public int Id { get; set; }
         public string Code { get; set; }

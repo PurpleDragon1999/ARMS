@@ -64,7 +64,11 @@
       id="sidebar"
     >
       <ul class="nav">
-        <li class="nav-item d-flex flex-row pl-0" routerLinkActive="active">
+        <li
+          class="nav-item d-flex flex-row pl-0"
+          *ngIf="adminBool"
+          routerLinkActive="active"
+        >
           <span class="highlight">h</span>
           <a class="nav-link w-100" [routerLink]="['home']">
             <span class="menu-title">Home</span>
@@ -84,7 +88,11 @@
           </a>
         </li>
 
-        <li class="nav-item d-flex flex-row pl-0" routerLinkActive="active">
+        <li
+          class="nav-item d-flex flex-row pl-0"
+          *ngIf="adminBool"
+          routerLinkActive="active"
+        >
           <span class="highlight">h</span>
           <a class="nav-link w-100" [routerLink]="['candidate']">
             <span class="menu-title">Applied Candidates</span>
@@ -137,6 +145,18 @@
           <a class="nav-link w-100" [routerLink]="['settings']">
             <span class="menu-title">Settings</span>
             <i class="fas fa-cogs menu-icon"></i>
+          </a>
+        </li>
+
+        <li
+          class="nav-item d-flex flex-row pl-0"
+          *ngIf="employeeBool"
+          routerLinkActive="active"
+        >
+          <span class="highlight">h</span>
+          <a class="nav-link w-100" [routerLink]="['home']">
+            <span class="menu-title">Home</span>
+            <i class="fas fa-home menu-icon"></i>
           </a>
         </li>
 

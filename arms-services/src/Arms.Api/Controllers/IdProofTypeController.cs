@@ -1,6 +1,7 @@
 ﻿using Arms.Application.Services.Users;
 using Arms.Domain.Entities;
 using Arms.Infrastructure;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -14,18 +15,19 @@ namespace Arms.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+   
     public class IdProofTypeController:BaseController
     {
-        private readonly IIdentityService _identityService;
+       
         ArmsDbContext _context;
-        public IdProofTypeController(IIdentityService identityService, ArmsDbContext armsContext)
+        public IdProofTypeController(ArmsDbContext armsContext)
         {
-            _identityService = identityService;
             _context = armsContext;
         }
 
         //GET:api/idProofType
         [HttpGet]
+        [Authorize(Roles = "SuperAdministrator,Admin")]
         public IActionResult GetIds()
         {
             List<IdProofType> idProofType = _context.IdProofType.ToList();
@@ -62,6 +64,7 @@ namespace Arms.Api.Controllers
 
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "SuperAdministrator")]
         public IActionResult GetId(int id)
         {
             var idDetails = _context.IdProofType.SingleOrDefault(c => c.Id == id);
@@ -112,6 +115,7 @@ namespace Arms.Api.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "SuperAdministrator")]
         public IActionResult writeId(IdProofType id)
         {
             try
@@ -171,6 +175,7 @@ namespace Arms.Api.Controllers
 
 
         [HttpPatch("{id}")]
+        [Authorize(Roles = "SuperAdministrator")]
         public IActionResult UpdateId(int id, IdProofType idObj)
         {
             try
@@ -235,6 +240,7 @@ namespace Arms.Api.Controllers
 
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "SuperAdministrator")]
         public IActionResult DeleteInterview(int id)
         {
             var idToDel = _context.IdProofType.SingleOrDefault(c => c.Id == id);

@@ -18,6 +18,7 @@ export class AppNavBarComponent implements OnInit {
 
   adminBool: boolean = false;
   superuserBool: boolean = false;
+  employeeBool: boolean = false;
 
   constructor(
     private renderer: Renderer2,
@@ -33,8 +34,11 @@ export class AppNavBarComponent implements OnInit {
     this.role = data.role;
     if (this.role == this._env.SUPERUSER) {
       this.superuserBool = true;
+      this.adminBool = true;
     } else if (this.role == this._env.ADMIN) {
       this.adminBool = true;
+    } else if (this.role == this._env.EMPLOYEE) {
+      this.employeeBool = true;
     }
   }
 

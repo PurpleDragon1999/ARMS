@@ -65,7 +65,8 @@ export class ScheduleInterviewComponent implements OnInit {
   // panelName = [];
 
   error: any = { isError: false, errorMessage: "" };
-
+  index: any;
+  schedule: any;
   constructor(private _appService: AppServicesService) {}
 
   ngOnInit() {
@@ -83,9 +84,7 @@ export class ScheduleInterviewComponent implements OnInit {
 
   search(input: string) {
     if (input != "") {
-      this._appService.searchCandidates(input, "false").subscribe((res) => {
-        this.searchData = res.payload.data;
-      });
+    
     } else if (input === "") {
       this.searchData = [];
       this.list = false;
