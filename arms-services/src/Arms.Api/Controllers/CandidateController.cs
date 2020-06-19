@@ -13,17 +13,13 @@ using System.IO;
 
 namespace Arms.Api.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
     public class CandidateController : BaseController
 
     {
-        private readonly IIdentityService _identityService;
-        ArmsDbContext _context;
+        public ArmsDbContext _context;
         public MailHelperController mailHelper = new MailHelperController();
-        public CandidateController(IIdentityService identityService, ArmsDbContext armsContext)
+        public CandidateController(ArmsDbContext armsContext)
         {
-            _identityService = identityService;
             _context = armsContext;
         }
 
@@ -37,7 +33,7 @@ namespace Arms.Api.Controllers
             }
             else
             {
-                applications = _context.Application.Include(c => c.Candidate).Include(c=> c.Resume).Include(c => c.ApplicationStatusType).Include(c => c.Job).ToList();
+                applications = _context.Application.Include(c => c.Candidate).Include(c => c.ApplicationStatusType).Include(c => c.Job).ToList();
             }
 
             try
@@ -221,7 +217,7 @@ namespace Arms.Api.Controllers
             {
                 var res = new
                 {
-                    isValid = true,
+                    isValid = false,
                     message = "You cannot register before 6 months"
                 };
                 return res;
@@ -231,7 +227,7 @@ namespace Arms.Api.Controllers
             {
                 var res = new
                 {
-                    isValid = true,
+                    isValid = false,
                     message = "You've already registered for this Job Position"
                 };
                 return res;
@@ -273,10 +269,10 @@ namespace Arms.Api.Controllers
                     return StatusCode(200, responseFalse);
                 }
 
-                Candidate candidateObj = new Candidate();
+                //Candidate candidateObj = new Candidate();
                 if (candidate == null)
                 {           
-                    candidateObj = new Candidate
+                    var candidateObj = new Candidate
                     {
                         Name = customObj.Name,
                         Email = customObj.Email,
@@ -301,6 +297,21 @@ namespace Arms.Api.Controllers
                     _context.SaveChanges();
                 }
 
+                var applicationObj = new Domain.Entities.Application
+                {
+                    Education = customObj.Education,
+                    Experience = customObj.Experience,
+                    CandidateId = id,
+                    ApplicationStatusTypeId = applicationStatus.Id,
+                    JobId = customObj.JobId,
+                    CreatedBy = customObj.CreatedBy,
+                    ModifiedBy = customObj.ModifiedBy
+                };
+
+                _context.Application.Add(applicationObj);
+                _context.SaveChanges();
+                int applicationId = applicationObj.Id;
+
                 //Getting FileName
                 var fileName = Path.GetFileName(customObj.Cv.FileName);
                 //Getting file Extension
@@ -311,6 +322,7 @@ namespace Arms.Api.Controllers
                 var resumeObj = new Resume
                 {
                     Name = newFileName,
+                    ApplicationId = applicationId,
                     CreatedBy = customObj.CreatedBy,
                     ModifiedBy = customObj.ModifiedBy
                 };
@@ -322,22 +334,6 @@ namespace Arms.Api.Controllers
                 }
 
                 _context.Resume.Add(resumeObj);
-                _context.SaveChanges();
-                int resumeId = resumeObj.Id;
-
-                var applicationObj = new Domain.Entities.Application
-                {
-                    Education = customObj.Education,
-                    Experience = customObj.Experience,
-                    CandidateId = id,
-                    ResumeId = resumeId,
-                    ApplicationStatusTypeId = applicationStatus.Id,
-                    JobId = customObj.JobId,
-                    CreatedBy = customObj.CreatedBy,
-                    ModifiedBy = customObj.ModifiedBy
-                };
-
-                _context.Application.Add(applicationObj);
                 _context.SaveChanges();
                 
                 var response = new

@@ -6,6 +6,7 @@ using Arms.Application.Services.Users;
 using Arms.Domain.CustomEntities;
 using Arms.Domain.Entities;
 using Arms.Infrastructure;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,13 +14,14 @@ namespace Arms.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles="Admin")]
     public class JdEmailController : BaseController
     {
-        private readonly IIdentityService _identityService;
+      
         ArmsDbContext _context;
-        public JdEmailController(IIdentityService identityService, ArmsDbContext armsContext)
+        public JdEmailController(ArmsDbContext armsContext)
         {
-            _identityService = identityService;
+            
             _context = armsContext;
 
         }

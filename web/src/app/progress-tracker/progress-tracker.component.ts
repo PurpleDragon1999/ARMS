@@ -1,7 +1,6 @@
 import { InterviewService } from './../services/interview.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { error } from 'util';
-import { INewResponse } from 'src/app/models/newResponse.interface';
 import { CandidateService } from './../candidate/services/candidate.service';
 import { ICandidate } from './../models/candidate.interface';
 import { IResponse } from 'src/app/models/response.interface';
@@ -32,13 +31,13 @@ export class ProgressTrackerComponent implements OnInit {
     console.log("ind\side func")
     this.type = this._route.url.split("/")[1]
     let applicationId = parseInt(this._route.url.split("/")[2].slice(7))
-    this.CandidateService.getApplication(applicationId).subscribe((res:INewResponse)=>{  
+    this.CandidateService.getApplication(applicationId).subscribe((res:IResponse)=>{  
       console.log("ind\side func", res)
-      if(res.result.success == false){
+      if(res.success == false){
         this._route.navigate(['/404'])
       }
       else{
-        this.applicationdata = res.result.payload.data
+        this.applicationdata = res.payload.data
         this.applicationStatusName = this.applicationdata.applicationStatusType.statusName
         this.loadInterviews(this.applicationdata.job.id)
         //this.getResume(this.applicationdata.resumeId)
@@ -51,8 +50,8 @@ export class ProgressTrackerComponent implements OnInit {
 
   loadInterviews(jobId : number){
     console.log(this.applicationdata, "applicationData")
-    this.InterviewService.getInterviews(this.applicationdata.job.id).subscribe((res : INewResponse)=>{
-      this.noOfRounds = res.result.payload.data[0].noOfRounds;
+    this.InterviewService.getInterviews(this.applicationdata.job.id).subscribe((res : IResponse)=>{
+      this.noOfRounds = res.payload.data[0].noOfRounds;
     })
   }
 

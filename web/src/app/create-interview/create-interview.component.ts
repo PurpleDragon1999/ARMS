@@ -1,5 +1,4 @@
 import { InterviewService } from './../services/interview.service';
-
 import { Component, OnInit,Input } from "@angular/core";
 import { AppServicesService } from "../services/app-services.service";
 import { Router} from "@angular/router";
@@ -29,7 +28,7 @@ export class CreateInterviewComponent implements OnInit {
 
   interview: any = {}
   interviewObj: any ={}
- 
+  formType:any;
 
   RoundType: any[]=[
   ]
@@ -47,13 +46,13 @@ export class CreateInterviewComponent implements OnInit {
 
   getLocation(){
     this.service.getLocation().subscribe((res:any) => {
-      this.Location = res.result.payload.data;
+      this.Location = res.payload.data;
     })
   }
 
   getRoundTypes(){
     this.service.getRoundTypes().subscribe((res:any) => {
-      this.RoundType = res.result.payload.data;
+      this.RoundType = res.payload.data;
     })
   }
 
@@ -71,13 +70,14 @@ export class CreateInterviewComponent implements OnInit {
     this.interviewObj.Date = interview.date;
     this.interviewObj.Time = interview.time;
     this.interviewObj.Venue = interview.venue;
+    this.interviewObj.NoOfRounds = interview.noOfRounds;
     this.interviewObj.Round = round;
 
     this.service.createInterview(this.interviewObj).subscribe((res:any) => {
       const modalRef = this.modalService.open(ModalComponent);
       modalRef.componentInstance.shouldConfirm = false;
-      modalRef.componentInstance.success = res.body.result.success;
-      modalRef.componentInstance.message = res.body.result.payload.message;
+      modalRef.componentInstance.success = res.body.success;
+      modalRef.componentInstance.message = res.body.payload.message;
       modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
         modalRef.close();        
         });

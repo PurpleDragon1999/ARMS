@@ -1,8 +1,7 @@
+import { HrInterviewAssessementComponent } from './hr-interview-assessement/hr-interview-assessement.component';
 import { SettingsComponent } from "./settings/settings.component";
 import { CreateInterviewComponent } from "./create-interview/create-interview.component";
-import { HrInterviewAssessementComponent } from "./hr-interview-assessement/hr-interview-assessment.component";
 import { InterviewListComponent } from "./interview-list/interview-list.component";
-
 import { ScheduleInterviewComponent } from "./schedule-interview/schedule-interview.component";
 import { CandidateFormComponent } from "./candidate-form/candidate-form.component";
 import { ProgressTrackerComponent } from "./progress-tracker/progress-tracker.component";
@@ -48,7 +47,7 @@ const routes: Routes = [
     path: "superuser",
     component: AppNavBarComponent,
     canActivate: [RoleGuardService],
-    data: { role: "superuser" },
+    data: { role: "SuperAdministrator" },
     children: [
       {
         path: "",
@@ -71,14 +70,19 @@ const routes: Routes = [
         path: "employee",
         component: EmployeeComponent,
       },
-      { path: "interviews", component: InterviewListComponent },
+      { 
+        path: "interviews", component: InterviewListComponent 
+      },
+      {
+        path: 'settings', component: SettingsComponent
+      },
     ],
   },
   {
     path: "admin",
     component: AppNavBarComponent,
     canActivate: [RoleGuardService],
-    data: { role: "admin" },
+    data: { role: "Admin" },
     children: [
       {
         path: "",
@@ -118,7 +122,7 @@ const routes: Routes = [
     path: "employee",
     component: AppNavBarComponent,
     canActivate: [RoleGuardService],
-    data: { role: "employee" },
+    data: { role: "Employee" },
     children: [
       {
         path: "",

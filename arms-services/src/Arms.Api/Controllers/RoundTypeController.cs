@@ -11,22 +11,24 @@ using Microsoft.AspNetCore.Mvc;
 using System.IO;
 using System.Reflection.Metadata;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Arms.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+  
     public class RoundTypeController : BaseController
     {
-        private readonly IIdentityService _identityService;
+       
         ArmsDbContext _context;
-        public RoundTypeController(IIdentityService identityService, ArmsDbContext armsContext)
+        public RoundTypeController(ArmsDbContext armsContext)
         {
-            _identityService = identityService;
             _context = armsContext;
         }
         //GET:api/roundType
         [HttpGet]
+        [Authorize(Roles = "SuperAdministrator,Admin")]
         public IActionResult GetRoundTypes()
         {
             try
@@ -63,7 +65,7 @@ namespace Arms.Api.Controllers
 
         //GET:api/roundType/id
         [HttpGet("{id}")]
-
+        [Authorize(Roles = "SuperAdministrator")]
         public IActionResult GetRoundType(int id)
         {
             RoundType round = _context.RoundType.SingleOrDefault(c => c.Id == id);
@@ -115,6 +117,7 @@ namespace Arms.Api.Controllers
 
         //POST:api/roundType
         [HttpPost]
+        [Authorize(Roles = "SuperAdministrator")]
         public IActionResult CreateRoundType(RoundType round)
         {
             try
@@ -156,6 +159,7 @@ namespace Arms.Api.Controllers
         }
         //PUT:api/roundType/id
         [HttpPut("{id}")]
+        [Authorize(Roles = "SuperAdministrator")]
         public IActionResult UpdateRoundType(int id, RoundType round)
         {
             try
@@ -208,6 +212,7 @@ namespace Arms.Api.Controllers
         }
         //DELETE:/api/roundType/id
         [HttpDelete("{id}")]
+        [Authorize(Roles = "SuperAdministrator")]
         public IActionResult DeleteRoundType(int id)
         {
             try

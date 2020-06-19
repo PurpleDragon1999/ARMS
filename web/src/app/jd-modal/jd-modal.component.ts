@@ -7,11 +7,11 @@ import { ViewChild, ElementRef, AfterViewInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { ModalComponent } from "../reusable-components/modal/modal.component";
 import * as jsPDF from "jspdf";
-import { jobDescription } from "../models/jobDescription.interface";
+import { IJobDescription } from "../models/jobDescription.interface";
 import html2canvas from "html2canvas";
 import { HttpErrorResponse, HttpResponse } from "@angular/common/http";
 import { NgbModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
-import{JobService} from '../services/job.service'
+import { JobService } from '../services/job.service'
 @Component({
   selector: "app-jd-modal",
   templateUrl: "./jd-modal.component.html",
@@ -27,17 +27,17 @@ export class JdModalComponent implements OnInit {
     private router: Router,
     private modalService: NgbModal,
     private _router: Router,
-    private jobService:JobService
-  ) {}
+    private jobService: JobService
+  ) { }
 
   @Output()
   closeModal: EventEmitter<boolean> = new EventEmitter<boolean>();
-   jdId:string;     
+  jdId: string;
   jobTitle: string;
   openingDate: string;
-  closingDate: string; 
-  description: string; 
-  skills: string; 
+  closingDate: string;
+  description: string;
+  skills: string;
   jobType: string;
   eligibilityCriteriaId: number;
   locationId: number;
@@ -45,39 +45,40 @@ export class JdModalComponent implements OnInit {
   vacancies: number;
   jobArray: any;
   eligibilityCriteriaOptions: String;
+  jobId:any;
   locationOptions: String;
   jobTypeOptions: String;
   jobListingForm: FormGroup;
   submitted = false;
   jdFormObject: any;
   data: any;
-  eligibilityCriterias:any;
-  locations:any;
-  employmentTypes:any;
+  eligibilityCriterias: any;
+  locations: any;
+  employmentTypes: any;
   employmentTypeId: number;
-  location:string;
-  eligibilityCriteria:string;
+  location: string;
+  eligibilityCriteria: string;
   ngOnInit() {
     this.loadJobData(Number(this.jdUpdateId));
     this._service.getAllEligibilityCriterias().subscribe((res: any) => {
-       this.eligibilityCriterias=res.result.payload.data;
-     
-      });
+      this.eligibilityCriterias = res.payload.data;
+
+    });
     this._service.getAllLocations().subscribe((res: any) => {
-      this.locations=res.result.payload.data;
-      
-      });
+      this.locations = res.payload.data;
+
+    });
     this._service.getAllEmploymentTypes().subscribe((res: any) => {
-      this.employmentTypes=res.result.payload.data;
-        
-      });
+      this.employmentTypes = res.payload.data;
+
+    });
   }
 
   loadJobData(Id) {
     this.jobService.getJdData(Id).subscribe((res: any) => {
       if (res.success) {
-        this.jobArray = res.result.payload.data;
-      
+        this.jobArray = res.payload.data;
+        console.log(this.jobArray);
         this.setJobData();
       }
     });
@@ -103,12 +104,12 @@ export class JdModalComponent implements OnInit {
       (res: any) => {
         const modalRef = this.modalService.open(ModalComponent);
         modalRef.componentInstance.shouldConfirm = false;
-        modalRef.componentInstance.success = res.body.result.success;
-        modalRef.componentInstance.message = res.body.result.payload.message;
+        modalRef.componentInstance.success = res.body.success;
+        modalRef.componentInstance.message = res.body.payload.message;
         modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
           modalRef.close();
         });
-       this.modalClose();
+        this.modalClose();
       },
       (error: HttpErrorResponse) => {
         const modalRef: NgbModalRef = this.modalService.open(ModalComponent);

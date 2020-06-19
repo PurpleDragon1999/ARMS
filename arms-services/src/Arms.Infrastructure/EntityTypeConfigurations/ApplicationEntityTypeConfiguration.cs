@@ -19,8 +19,6 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
 
             builder.Property(e => e.CandidateId).HasColumnName("candidateId");
 
-            builder.Property(e => e.ResumeId).HasColumnName("resumeId");
-
             builder.Property(e => e.Code)
                 .HasColumnName("code")
                 .HasMaxLength(57)
@@ -75,12 +73,6 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .HasForeignKey(d => d.CandidateId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_ApplicationCandidate");
-
-            builder.HasOne(d => d.Resume)
-                .WithMany()
-                .HasForeignKey(d => d.CandidateId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Resume");
 
             builder.HasOne(d => d.Job)
                 .WithMany()

@@ -1,7 +1,6 @@
 <div class="col-lg-12 stretch-card desktopView">
   <div class="card">
     <div class="card-body">
-      {{data| json}}
       <div class="itemsDiv">
         <div class="search-field  d-md-block ">
           <form class="d-flex align-items-center h-100" action="#">
@@ -33,7 +32,7 @@
               <div *ngIf="columnName=='jdObjectId';else otherCol">
                 JOB TITLE
               </div>
-              
+
               <ng-template #otherCol>{{columnName | uppercase}}</ng-template>
             </th>
           </tr>
@@ -42,17 +41,18 @@
           
           <tr *ngFor="let entry of data ; let i = index">
             <td *ngFor="let columnName of columns;">
+              <!-- <ng-container [ngSwitch]="columnName">
+                <div *ngSwitchCase="'date'">{{entry[columnName]|date}}</div>
+                <div *ngSwitchCase="'jdObjectId'">{{entry[columnName]?.jdTitle}}</div> -->
               <ng-container [ngSwitch]="true">
-                <div *ngSwitchCase="columnName=='name'">{{entry['candidate']?.name}}</div> 
+                <div *ngSwitchCase="columnName=='name'">{{entry['candidate']?.name}}</div>
                 <div *ngSwitchCase="columnName=='email'">{{entry['candidate']?.email}}</div>
-                <div *ngSwitchCase="columnName=='Job Position'">{{entry['job']?.jobTitle}}</div>  
-                <div *ngSwitchCase="columnName=='date'">{{entry[columnName]|date}}</div>
-                <div *ngSwitchCase="columnName=='jdObjectId'">{{entry[columnName]?.jdTitle}}</div>
+                <div *ngSwitchCase="columnName=='Job Position'">{{entry['job']?.jobTitle}}</div>
                 <div *ngSwitchDefault>{{entry[columnName]}}</div>
               </ng-container>
             </td>
-            <td *ngIf="title === 'candidate'"><button type="button" class="btn btn-gradient-danger" (click)="showPdf(entry['pdf'])"><i
-                  class="fa fa-file-pdf-o"></i>  Show CV</button>
+            <td *ngIf="title === 'candidate'"><button type="button" class="btn btn-gradient-danger"
+                (click)="showPdf(entry['pdf'])"><i class="fa fa-file-pdf-o"></i> Show CV</button>
             </td>
             <td><a (click)="openModal('update', entry)"><i class="mdi mdi-pencil"></i></a></td>
             <td><a (click)="deleteEntry(entry)"><i class="mdi mdi-delete"></i></a> </td>
@@ -93,7 +93,7 @@
         {{ title | titlecase }}(s)
       </button>
       <div ngbDropdownMenu>
-        <button ngbDropdownItem class="btn btn-gradient-danger" (click)="openModal('create')"><i
+        <button *ngIf="title == 'employee'" ngbDropdownItem class="btn btn-gradient-danger" (click)="openModal('create')"><i
             class="mdi mdi-account-plus"></i>Add {{ title | titlecase }} </button>
         <button ngbDropdownItem class="btn btn-gradient-danger" (click)="openFileUploadModal()"><i
             class="mdi mdi-account-plus"></i> Add through file upload</button>
@@ -123,12 +123,14 @@
                   <div class="pt-2">
                     <img class="nav-profile-img" src="../../assets/images/customers-icon-3.png" alt="image">
                   </div>
-                  <ng-container [ngSwitch]="true">                    
+                  <ng-container [ngSwitch]="true">
                     <h5 *ngSwitchCase="columnName=='jdObjectId'" class="m-0 p-3">{{entry[columnName].jdTitle}}
                     </h5>
+                    <h5 *ngSwitchCase="columnName=='name'">{{entry['candidate']?.name}}</h5>
                     <h5 *ngSwitchDefault  class="m-0 p-3">{{ entry[columns[0]] }}</h5>
+                    
                   </ng-container>
-                
+
                 </div>
                 <div class="d-flex">
                   <div class="p-3">
@@ -150,9 +152,11 @@
                 </b>
               </div>
               <div>
-                <ng-container [ngSwitch]="true">
-                  <div *ngSwitchCase="columnName=='date'">{{entry[columnName]|date}}</div>
-                  <div *ngSwitchCase="columnName=='jdObjectId'">{{entry[columnName]?.jdTitle}}</div>
+                <ng-container [ngSwitch]="columnName">
+                  
+                  <div *ngSwitchCase="columnName=='name'">{{entry['candidate']?.name}}</div>
+                  <div *ngSwitchCase="columnName=='email'">{{entry['candidate']?.email}}</div>
+                  <div *ngSwitchCase="columnName=='Job Position'">{{entry['job']?.jobTitle}}</div>
                   <div *ngSwitchDefault>{{entry[columnName]}}</div>
                 </ng-container>
               </div>

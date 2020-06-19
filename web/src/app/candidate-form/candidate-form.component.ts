@@ -1,6 +1,4 @@
 import { JobService } from './../services/job.service';
-import { IdProofTypeService } from './../services/idProofType';
-import { INewResponse } from 'src/app/models/newResponse.interface';
 import { CandidateService } from './../candidate/services/candidate.service';
 import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { IResponse } from 'src/app/models/response.interface';
@@ -34,7 +32,6 @@ export class CandidateFormComponent implements OnInit {
     private router: Router,
     private service: AppServicesService,
     private CandidateService : CandidateService,
-    private IdProofTypeService : IdProofTypeService,
     private jobService: JobService
   ) { 
     this.numbersInYears = Array(30).fill(0).map((x,i)=>i);
@@ -50,28 +47,29 @@ export class CandidateFormComponent implements OnInit {
       this.type = this.router.url.split("/")[1];
       var jobId = parseInt(this.router.url.split("/")[2].slice(6))
       if (this.type == "candidateForm"){
-        this.service.getJdData(jobId).subscribe((res : INewResponse)=>{
+        
+        this.service.getJdData(jobId).subscribe((res : IResponse)=>{
           console.log(res, "res")
-          if (res.result.success == true){
-            this.model.appliedForJdId = res.result.payload.data.code;
-            this.model.appliedForPosition = res.result.payload.data.jobTitle;
+          if (res.success == true){
+            this.model.appliedForJdId = res.payload.data.code;
+            this.model.appliedForPosition = res.payload.data.jobTitle;
           }
           else{
             this.router.navigate(['/404']);
           }
         },
         (error : HttpErrorResponse)=>{
-          console.log(error, "error")
+          console.log(error, "error!!!!!!!")
           this.router.navigate(['/404']);
         })
       }
       else if (this.type == "progressTracker"){
         var applicationId = parseInt(this.router.url.split("/")[2].slice(7))
-        this.CandidateService.getApplication(applicationId).subscribe((res:INewResponse)=>{
+        this.CandidateService.getApplication(applicationId).subscribe((res:IResponse)=>{
           console.log(res, "candidatw from")
-          if (res.result.success == true){
+          if (res.success == true){
             
-          let application = res.result.payload.data
+          let application = res.payload.data
           this.model.appliedForJdId = application.job.code;
           this.model.appliedForPosition = application.job.jobTitle;
           this.model.name = application.candidate.name;
@@ -97,8 +95,8 @@ export class CandidateFormComponent implements OnInit {
     }
 
     getIdProofType(){
-      this.IdProofTypeService.getIdProofTypes().subscribe((res : INewResponse)=>{
-        this.idProofTypes = res.result.payload.data;
+      this.service.getAllIdProofTypes().subscribe((res : IResponse)=>{
+        this.idProofTypes = res.payload.data;
         
       })
     }
@@ -115,34 +113,28 @@ validateApplication(applicationObj : ICandidate){
     
     if (this.idProofTypes[0].id != applicationObj.idProofTypeId ){
        return {
-        result : {
-          success: false,
-          payload: {    
+        success: false,
+        payload: {    
           message: "If you're Indian you have to give Aadhar No."
-      }},
-      }
+      }}
     }
     else{
       var idNo = applicationObj.identificationNo
       var re = /^\d{4}\s\d{4}\s\d{4}$/; 
-      let result = re.test(idNo);
-      if (!result){
+      let ans = re.test(idNo);
+      if (!ans){
         return {
-          result : {
-            success: false,
-            payload: {    
+          success: false,
+          payload: {    
             message: "Enter valid Aadhar No."
-        }},
-        }
+        }}
       }
         
       }
   }
   return {
-    result : {
       success: true,
-      },
-  }
+     }
 }
 
 createApplication(application ){
@@ -152,6 +144,7 @@ createApplication(application ){
   let experience = this.model.experienceInYears + " years " + this.model.experienceInMonths + " months"
   let jobId = (this.model.appliedForJdId).slice(6);
 
+  console.log(this.model, "model")
   var formData = new FormData();
   formData.append("name", this.model.name)
   formData.append("education", this.model.education)
@@ -166,12 +159,13 @@ createApplication(application ){
   formData.append("createdBy", "employee")
   formData.append("modifiedBy", "employee")
  
-  if (isValid.result.success == true){
+  if (isValid.success == true){
+    console.log("inside if")
     this.CandidateService.createCandidate(formData).subscribe(res=>{
       
-      if (res.result != null){
+      if (res != null){
         this.openModal(res)
-        if (res.result.success == true){
+        if (res.success == true){
           application.resetForm()
         }
       }
@@ -187,13 +181,13 @@ createApplication(application ){
 
 }
 
-  openModal(res){
+  openModal(res ){
     const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
   
     modalRef.componentInstance.shouldConfirm = false;
   
-    modalRef.componentInstance.success = res.result.success;
-    modalRef.componentInstance.message = res.result.payload.message;
+    modalRef.componentInstance.success = res.success;
+    modalRef.componentInstance.message = res.payload.message;
   
     modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
     modalRef.close();

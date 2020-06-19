@@ -11,9 +11,11 @@ namespace Arms.Api.Startup
             CreateWebHostBuilder(args).Build().Run();
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
-                .UseSerilog(); // Use Serilog as our loggin system;
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args)
+        {
+            return WebHost.CreateDefaultBuilder(args)
+.UseStartup<Startup>()
+.UseSerilog(); // Use Serilog as our loggin system;
+        }
     }
 }

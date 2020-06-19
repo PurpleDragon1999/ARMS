@@ -1,11 +1,12 @@
-import { INewResponse } from 'src/app/models/newResponse.interface';
+import { IResponse } from 'src/app/models/response.interface';
 import { Component, OnInit } from "@angular/core";
 import { CandidateService } from './services/candidate.service';
-import { IResponse } from '../models/response.interface';
 import { IModelForPagination } from '../models/modelPagination.interface';
 import { ICandidate } from '../models/candidate.interface';
 import { HttpErrorResponse } from '@angular/common/http';
 import { BufferToPdf } from '../utils/bufferToPdf';
+import { NgbModal, NgbModalRef, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { ModalComponent } from 'src/app/reusable-components/modal/modal.component';
 
 @Component({
     selector: 'app-candidate',
@@ -18,16 +19,39 @@ export class CandidateComponent implements OnInit {
     columns: Array<string>;
     pager: any;
 
-    constructor(private candidateService: CandidateService, private bufferToPdf: BufferToPdf) { }
+    constructor(private modalService: NgbModal,private candidateService: CandidateService, private bufferToPdf: BufferToPdf) { }
 
     ngOnInit(): void {
         this.getCandidates();
         //this.searchCandidate({ page: 1, character: '' });
     }
 
+    deleteApplication(data ) {
+        console.log(data, "data")
+        let id = data.id
+        const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
+    
+        modalRef.componentInstance.shouldConfirm = true;
+    
+        modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+          modalRef.close();
+        });
+        modalRef.componentInstance.emitPerformRequest.subscribe(() => {
+          this.candidateService.deleteApplication(id).subscribe((res : IResponse)=>{
+            this.getCandidates()
+            modalRef.componentInstance.success = res.success;
+            modalRef.componentInstance.message = res.payload.message;
+            }, (error ) => {
+              modalRef.componentInstance.success = error.error.success;
+              modalRef.componentInstance.message = error.error.payload.message;
+          })
+
+      });
+      }
+
     getCandidates(){
-        this.candidateService.getApplications().subscribe((res: INewResponse)=>{
-        this.candidates = res.result.payload.data
+        this.candidateService.getApplications().subscribe((res: IResponse)=>{
+        this.candidates = res.payload.data
         this.columns = ["name", "email", "experience", "Job Position"];
         console.log(this.candidates)
         

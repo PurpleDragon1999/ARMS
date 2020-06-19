@@ -22,15 +22,14 @@ namespace Arms.Api.Controllers
     // [Authorize]
     public class JobDescriptionController : BaseController
     {
-        private readonly IIdentityService _identityService;
-        ArmsDbContext _context;
+        public ArmsDbContext _context;
         public MailHelperController mailHelper = new MailHelperController();
 
-        public JobDescriptionController(IIdentityService identityService, ArmsDbContext armsContext)
+        public JobDescriptionController(ArmsDbContext armsContext)
         {
-            _identityService = identityService;
             _context = armsContext;
         }
+
         //GET:api/jobDescriptions
         [HttpGet]
         public IActionResult GetJds()

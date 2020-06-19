@@ -12,12 +12,10 @@ namespace Arms.Api.Controllers
     [Route("api/[controller]")]
     public class ResumeController : BaseController
     {
-        private readonly IIdentityService _identityService;
-        ArmsDbContext _context;
+        public ArmsDbContext _context;
         public MailHelperController mailHelper = new MailHelperController();
         public ResumeController(IIdentityService identityService, ArmsDbContext armsContext)
         {
-            _identityService = identityService;
             _context = armsContext;
         }
 

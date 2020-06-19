@@ -16,7 +16,6 @@ namespace Arms.Domain.Entities
         public int CandidateId { get; set; }
         public int JobId { get; set; }
         public int ApplicationStatusTypeId { get; set; }
-        public int ResumeId { get; set; }
         public DateTime CreatedAt { get; set; }
         public string CreatedBy { get; set; }
         public DateTime ModifiedAt { get; set; }
@@ -24,7 +23,6 @@ namespace Arms.Domain.Entities
         public ApplicationStatusType ApplicationStatusType { get; set; }
         public Candidate Candidate { get; set; }
         public JobDescription Job { get; set; }
-        public Resume Resume { get; set; }
         public ICollection<Assessment> Assessment { get; set; }
 
 
