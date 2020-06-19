@@ -48,19 +48,21 @@ export class ScheduleInterviewComponent implements OnInit {
     {
       roundId: 1,
       panel1: {
-        panelName: "",
+        // panelName: "",
         employeesId: [],
       },
       panel2: {
-        panelName: "",
+        // panelName: "",
         employeesId: [],
       },
       panel3: {
-        panelName: "",
+        // panelName: "",
         employeesId: [],
       },
     },
   ];
+  // name: string[] = ["", "", ""];
+  // panelName = [];
 
   error: any = { isError: false, errorMessage: "" };
 
@@ -69,6 +71,7 @@ export class ScheduleInterviewComponent implements OnInit {
   ngOnInit() {
     for (let i = 0; i < this.rounds.length; i++) {
       this.main.push(this.active);
+      // this.panelName.push(name);
     }
     console.log(this.main);
   }
@@ -95,19 +98,19 @@ export class ScheduleInterviewComponent implements OnInit {
     if (index == 0) {
       if (this.main[index][0] === "active") {
         this.roundData[index].roundId = roundId;
-        this.roundData[index].panel1.panelName = "Java";
+        // this.roundData[index].panel1.panelName = "Java";
         if (this.roundData[index].panel1.employeesId.length < 2) {
           this.roundData[index].panel1.employeesId.push(data.id);
         }
       } else if (this.main[index][1] === "active") {
         this.roundData[index].roundId = roundId;
-        this.roundData[index].panel2.panelName = "Java";
+        // this.roundData[index].panel2.panelName = "Java";
         if (this.roundData[index].panel2.employeesId.length < 2) {
           this.roundData[index].panel2.employeesId.push(data.id);
         }
       } else if (this.main[index][2] === "active") {
         this.roundData[index].roundId = roundId;
-        this.roundData[index].panel3.panelName = "Java";
+        // this.roundData[index].panel3.panelName = "Java";
         if (this.roundData[index].panel3.employeesId.length < 2) {
           this.roundData[index].panel3.employeesId.push(data.id);
         }
