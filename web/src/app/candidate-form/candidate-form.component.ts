@@ -1,3 +1,4 @@
+import { JobService } from './../services/job.service';
 import { IdProofTypeService } from './../services/idProofType';
 import { INewResponse } from 'src/app/models/newResponse.interface';
 import { CandidateService } from './../candidate/services/candidate.service';
@@ -33,7 +34,8 @@ export class CandidateFormComponent implements OnInit {
     private router: Router,
     private service: AppServicesService,
     private CandidateService : CandidateService,
-    private IdProofTypeService : IdProofTypeService
+    private IdProofTypeService : IdProofTypeService,
+    private jobService: JobService
   ) { 
     this.numbersInYears = Array(30).fill(0).map((x,i)=>i);
     this.numbersInMonths = Array(12).fill(0).map((x,i)=>i);
@@ -49,7 +51,7 @@ export class CandidateFormComponent implements OnInit {
       var jobId = parseInt(this.router.url.split("/")[2].slice(6))
       if (this.type == "candidateForm"){
         this.service.getJdData(jobId).subscribe((res : INewResponse)=>{
-         
+          console.log(res, "res")
           if (res.result.success == true){
             this.model.appliedForJdId = res.result.payload.data.code;
             this.model.appliedForPosition = res.result.payload.data.jobTitle;
@@ -59,12 +61,14 @@ export class CandidateFormComponent implements OnInit {
           }
         },
         (error : HttpErrorResponse)=>{
+          console.log(error, "error")
           this.router.navigate(['/404']);
         })
       }
       else if (this.type == "progressTracker"){
         var applicationId = parseInt(this.router.url.split("/")[2].slice(7))
         this.CandidateService.getApplication(applicationId).subscribe((res:INewResponse)=>{
+          console.log(res, "candidatw from")
           if (res.result.success == true){
             
           let application = res.result.payload.data
@@ -195,34 +199,4 @@ createApplication(application ){
     modalRef.close();
     })
   }
-
-  // load(){   
-  //   this.type = this.router.url.split("/")[1];
-  //   if (this.router.url.split("/")[1] == "progressTracker") {
-  //     let applicationId = (this.router.url.split("/")[2]).slice(7);
-  //     this.CandidateService.getApplication(applicationId).subscribe(
-  //       (res: INewResponse) => {
-  //         console.log(res, "progress")
-  //         this.model = res.result.payload.data;
-  //         this.model.appliedForPosition = this.model.job.jobTitle
-  //         this.model.appliedForJdId = this.model.job.code
-  //       },
-  //       (error: HttpErrorResponse) => {
-  //       }
-  //     )}
-  //   else if(this.router.url.split("/")[1]=="candidateForm"){  
-
-  //     this.model.appliedForJdId = (this.router.url.split("/")[2]);
-  //     let jdId = (this.model.appliedForJdId).slice(6)
-  //     this.service.getJdData(jdId).subscribe((res : INewResponse)=>{
-  //       if(res.result != null){
-  //         let jdObject = res.result.payload.data
-  //         this.model.appliedForPosition = jdObject.jobTitle;
-  //         this.jdObjectId = jdObject.code;
-  //       }
-  //     }, error=>{
-  //       this.router.navigate(['/404'])
-  //     })
-  //   }
-  // }
 }

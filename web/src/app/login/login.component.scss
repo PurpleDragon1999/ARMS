@@ -1,5 +1,5 @@
 .login-block {
-  background: #F2EDF3;
+  background: #f2edf3;
   float: left;
   width: 100vw;
   height: 100vh;
@@ -38,19 +38,19 @@
   margin-bottom: 30px;
   font-weight: 700;
   font-size: 30px;
-  color: #B66DFF;
+  color: #b66dff;
 }
 
 .login-sec h2:after {
   content: " ";
   width: 100px;
   height: 5px;
-  background: #FEB58A;
+  background: #feb58a;
   display: block;
   margin-top: 20px;
   border-radius: 3px;
   margin-left: auto;
-  margin-right: auto
+  margin-right: auto;
 }
 
 .banner-text {
@@ -69,7 +69,7 @@
   content: " ";
   width: 100px;
   height: 5px;
-  background: #FFF;
+  background: #fff;
   display: block;
   margin-top: 20px;
   border-radius: 3px;
@@ -79,16 +79,16 @@
   color: #fff;
 }
 
-.logo-design{
-    width: 200px;   
+.logo-design {
+  width: 200px;
 }
 
-.logo-design:hover{
+.logo-design:hover {
   cursor: pointer;
 }
 
 @media only screen and (max-width: 600px) {
-    .login-block {
-      padding: 0;
-    }
+  .login-block {
+    padding: 0;
   }
+}

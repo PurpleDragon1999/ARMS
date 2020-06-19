@@ -15,8 +15,6 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
 
             builder.Property(e => e.Id).HasColumnName("id");
 
-            builder.Property(e => e.ApplicationId).HasColumnName("applicationId");
-
             builder.Property(e => e.CreatedAt)
                 .HasColumnName("createdAt")
                 .HasDefaultValueSql("(sysdatetime())");
@@ -43,12 +41,6 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .IsRequired()
                 .HasColumnName("name")
                 .HasMaxLength(50);
-
-            builder.HasOne(d => d.Application)
-                .WithMany(p => p.Resume)
-                .HasForeignKey(d => d.ApplicationId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_ResumeApplication");
         }
     }
 }

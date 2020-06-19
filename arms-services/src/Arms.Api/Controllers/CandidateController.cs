@@ -20,6 +20,7 @@ namespace Arms.Api.Controllers
     {
         private readonly IIdentityService _identityService;
         ArmsDbContext _context;
+        public MailHelperController mailHelper = new MailHelperController();
         public CandidateController(IIdentityService identityService, ArmsDbContext armsContext)
         {
             _identityService = identityService;
@@ -36,9 +37,8 @@ namespace Arms.Api.Controllers
             }
             else
             {
-                applications = _context.Application.Include(c => c.Candidate).Include(c => c.ApplicationStatusType).Include(c => c.Job).ToList();
+                applications = _context.Application.Include(c => c.Candidate).Include(c=> c.Resume).Include(c => c.ApplicationStatusType).Include(c => c.Job).ToList();
             }
-
 
             try
             {
@@ -92,7 +92,7 @@ namespace Arms.Api.Controllers
                 {
                     var response = new
                     {
-                        success = true,
+                        success = false,
                         payload = new
                         {
                             message = "Application you are looking for does not exist"
@@ -251,6 +251,7 @@ namespace Arms.Api.Controllers
             var applicationStatus = _context.ApplicationStatusType.SingleOrDefault(c => c.StatusName == "AppliedSuccessfully");
 
             try
+
             {
                 int id = 0;
                 if (candidate != null)
@@ -272,9 +273,10 @@ namespace Arms.Api.Controllers
                     return StatusCode(200, responseFalse);
                 }
 
+                Candidate candidateObj = new Candidate();
                 if (candidate == null)
                 {           
-                    var candidateObj = new Candidate
+                    candidateObj = new Candidate
                     {
                         Name = customObj.Name,
                         Email = customObj.Email,
@@ -298,21 +300,6 @@ namespace Arms.Api.Controllers
 
                     _context.SaveChanges();
                 }
-                
-                var applicationObj = new Domain.Entities.Application
-                {
-                    Education = customObj.Education,
-                    Experience = customObj.Experience,
-                    CandidateId = id,
-                    ApplicationStatusTypeId = applicationStatus.Id,
-                    JobId = customObj.JobId,
-                    CreatedBy = customObj.CreatedBy,
-                    ModifiedBy = customObj.ModifiedBy
-                };
-
-                _context.Application.Add(applicationObj);
-                _context.SaveChanges();
-                int applicationId = applicationObj.Id;
 
                 //Getting FileName
                 var fileName = Path.GetFileName(customObj.Cv.FileName);
@@ -322,9 +309,8 @@ namespace Arms.Api.Controllers
                 var newFileName = String.Concat(Convert.ToString(Guid.NewGuid()), fileExtension);
 
                 var resumeObj = new Resume
-                {   
+                {
                     Name = newFileName,
-                    ApplicationId = applicationId,
                     CreatedBy = customObj.CreatedBy,
                     ModifiedBy = customObj.ModifiedBy
                 };
@@ -337,7 +323,23 @@ namespace Arms.Api.Controllers
 
                 _context.Resume.Add(resumeObj);
                 _context.SaveChanges();
+                int resumeId = resumeObj.Id;
 
+                var applicationObj = new Domain.Entities.Application
+                {
+                    Education = customObj.Education,
+                    Experience = customObj.Experience,
+                    CandidateId = id,
+                    ResumeId = resumeId,
+                    ApplicationStatusTypeId = applicationStatus.Id,
+                    JobId = customObj.JobId,
+                    CreatedBy = customObj.CreatedBy,
+                    ModifiedBy = customObj.ModifiedBy
+                };
+
+                _context.Application.Add(applicationObj);
+                _context.SaveChanges();
+                
                 var response = new
                 {
                     success = true,
@@ -347,6 +349,16 @@ namespace Arms.Api.Controllers
                     }
                 };
 
+                //JobDescription jdObject = _context.JobDescription.Include(l => l.employmentType).
+                //    Include(l => l.eligibilityCriteria).Include(l => l.loc).FirstOrDefault(c => c.Id == applicationObj.JobId);
+                //string emailHtmlBody = GenerateEmailBody( jdObject, candidateObj.Code, candidateObj.Name);
+                ////Adding Emails in string Array to send to candidates
+                //string[] EmailToSend = new[]
+                //{
+                //    candidateObj.Email
+                //};
+
+                //mailHelper.MailFunction(emailHtmlBody, EmailToSend);
                 return StatusCode(200, response);
             }
             catch (Exception e)
@@ -366,7 +378,6 @@ namespace Arms.Api.Controllers
         [HttpPatch("{id}")]
         public IActionResult UpdateCandidateDetails(int id, [FromForm] CandidateApplicationResume customObj)
         {
-            var resume = _context.Resume.SingleOrDefault(c => c.ApplicationId == id);
             var application = _context.Application.SingleOrDefault(c => c.Id == id);
 
             try
@@ -449,6 +460,54 @@ namespace Arms.Api.Controllers
                 };
                 return StatusCode(500, response);      
             }
+
+       }
+        public string GenerateEmailBody(JobDescription jdObject, string Code,String Name)
+        {
+
+            string output = @"<html>
+       <head>    
+	       <style type=""text/css"">
+           </style>
+       </head>
+
+         <body aria-readonly=""false"" style=""cursor: auto;"">
+               <p>Dear Mr/Ms.</p><b>" + Name + @"</b>We are pleased to inform you that you have 
+    successfully registered for an interview process with CyberGroup.The details of interview will be communicated soon.
+    </p>
+    <table>
+       <tr>
+         <td><b>Job ID:</b></td>
+         <td>" + jdObject.code + @"</td>
+       </tr>
+       <tr>
+       <td><b>Job Title:</b></td>
+       <td>" + jdObject.jobTitle + @"</td>
+     </tr>
+       <tr>
+         <td><b>Job Type:</b></td>
+         <td>" + jdObject.employmentType.employmentTypeName + @"</td>
+       </tr>
+        <tr>
+       <td ><b>Address:</b></td>
+       <td> B-9, Block B, Sector 3, Noida, Uttar Pradesh 201301</td>
+     </tr>
+    </table>" +
+     @"<a href = 'http://localhost:4200/progressTracker/" + Code + "'>" + @"Please click here to track your progress</a>
+      <br>
+    <em>This is automatically generated email,please do not reply</em>
+    <p>Thanks</p>
+     <img src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRCUuWWhu0HByWgdDAp2cA1TDf-a_
+ 
+      FpjUA_DFbRt33DViY9tNDH&usqp= CAU'width='100'height='100'>
+         </body>
+     </html>
+            ";
+            Console.WriteLine(output);
+            return output;
         }
+
+
     }
+ 
 }

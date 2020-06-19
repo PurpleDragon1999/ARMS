@@ -24,8 +24,9 @@ namespace Arms.Domain.Entities
         public DateTime openingDate { get; set; }
         public DateTime closingDate { get; set; }
         public string description { get; set; }
-        public long? salary { get; set; }
+        public string salary { get; set; }
         public string jobTitle { get; set; }
+        public string skills { get; set; }
         public int? vacancies { get; set; }
         public DateTime createdAt { get; set; }
         public DateTime modifiedAt { get; set; }

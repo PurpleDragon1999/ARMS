@@ -1,45 +1,45 @@
-﻿//using System;
-//using Arms.Domain.Entities;
+﻿using System;
+using Arms.Domain.Entities;
 
-//namespace Arms.Domain.Extensions
-//{
-//    public static class EmployeeExtensions
-//    {
-//        public static bool IsDallasEmployee(this Employee employee)
-//        {
-//            return employee.Location.LocationName.ToUpper() == "US";
-//        }
+namespace Arms.Domain.Extensions
+{
+    public static class EmployeeExtensions
+    {
+        public static bool IsDallasEmployee(this Employee employee)
+        {
+            return employee.Location.locationName.ToUpper() == "US";
+        }
 
-//        public static bool IsIndiaEmployee(this Employee employee)
-//        {
-//            return employee.Location.LocationName.ToUpper() == "INDIA";
-//        }
+        public static bool IsIndiaEmployee(this Employee employee)
+        {
+            return employee.Location.locationName.ToUpper() == "INDIA";
+        }
 
-//        public static string GetFullName(this Employee employee)
-//        {
-//            if (employee == null)
-//            {
-//                throw new ArgumentNullException(nameof(employee));
-//            }
+        public static string GetFullName(this Employee employee)
+        {
+            if (employee == null)
+            {
+                throw new ArgumentNullException(nameof(employee));
+            }
 
-//            var firstName = employee.FirstName;
-//            var lastName = employee.LastName;
+            var firstName = employee.FirstName;
+            var lastName = employee.LastName;
 
-//            string fullName = "";
-//            if (!String.IsNullOrWhiteSpace(firstName) && !String.IsNullOrWhiteSpace(lastName))
-//            {
-//                fullName = string.Format("{0} {1}", firstName, lastName);
-//            }
-//            else
-//            {
-//                if (!String.IsNullOrWhiteSpace(firstName))
-//                    fullName = firstName;
+            string fullName = "";
+            if (!String.IsNullOrWhiteSpace(firstName) && !String.IsNullOrWhiteSpace(lastName))
+            {
+                fullName = string.Format("{0} {1}", firstName, lastName);
+            }
+            else
+            {
+                if (!String.IsNullOrWhiteSpace(firstName))
+                    fullName = firstName;
 
-//                if (!String.IsNullOrWhiteSpace(lastName))
-//                    fullName = lastName;
-//            }
+                if (!String.IsNullOrWhiteSpace(lastName))
+                    fullName = lastName;
+            }
 
-//            return fullName;
-//        }
-//    }
-//}
+            return fullName;
+        }
+    }
+}

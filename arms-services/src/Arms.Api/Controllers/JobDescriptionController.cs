@@ -11,15 +11,21 @@ using Microsoft.AspNetCore.Mvc;
 using System.IO;
 using System.Reflection.Metadata;
 using Microsoft.EntityFrameworkCore;
+using System.Net.Mail;
+using Arms.Domain.CustomEntities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Arms.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    // [Authorize]
     public class JobDescriptionController : BaseController
     {
         private readonly IIdentityService _identityService;
         ArmsDbContext _context;
+        public MailHelperController mailHelper = new MailHelperController();
+
         public JobDescriptionController(IIdentityService identityService, ArmsDbContext armsContext)
         {
             _identityService = identityService;
@@ -31,11 +37,11 @@ namespace Arms.Api.Controllers
         {
             try
             {
-                List<JobDescription> jobDescriptions = _context.JobDescription.Include(l=>l.employmentType).
+                List<JobDescription> jobDescriptions = _context.JobDescription.Include(l => l.employmentType).
                     Include(l => l.eligibilityCriteria).Include(l => l.loc).ToList();
                 var response = new
                 {
-                    success = "true",
+                    success = true,
                     payload = new
                     {
                         data = jobDescriptions,
@@ -47,9 +53,9 @@ namespace Arms.Api.Controllers
             }
             catch (Exception ex)
             {
-              var response = new
+                var response = new
                 {
-                    success = "false",
+                    success = false,
                     payload = new
                     {
                         message = ex
@@ -58,16 +64,16 @@ namespace Arms.Api.Controllers
                 };
                 return StatusCode(500, response);
             }
-           
+
         }
 
-     
+
         //GET:api/jobDescription/id
         [HttpGet("{id}")]
-        
+
         public IActionResult GetJd(int id)
         {
-         
+
             try
             {
                 JobDescription job = _context.JobDescription.Include(l => l.employmentType).
@@ -99,22 +105,22 @@ namespace Arms.Api.Controllers
                             data = job,
                             message = "Job Description Retrieved Successfully"
                         }
-                       
+
                     };
-                    return StatusCode(200,response);
+                    return StatusCode(200, response);
                 }
             }
             catch (Exception ex)
             {
                 var response = new
-                  {
+                {
                     success = false,
                     payload = new
                     {
                         message = ex.InnerException.Message
                     }
 
-                  };
+                };
                 return StatusCode(500, response);
             }
 
@@ -127,14 +133,14 @@ namespace Arms.Api.Controllers
             try
             {
                 JobDescription checkinDb = _context.JobDescription.SingleOrDefault(c => c.jobTitle == job.jobTitle);
-                if (checkinDb!=null)
+                if (checkinDb != null)
                 {
                     var resAlreadyExists = new
                     {
-                        success = "false",
+                        success = false,
                         payload = new
                         {
-                          message = "Job with this Job Title already exists"
+                            message = "Job with this Job Title already exists"
                         }
 
                     };
@@ -151,14 +157,15 @@ namespace Arms.Api.Controllers
                     jobTitle = job.jobTitle,
                     vacancies = job.vacancies,
                     salary = job.salary,
+                    skills = job.skills,
                     pdfBlobData = job.pdfBlobData,
 
                 };
                 _context.JobDescription.Add(newJob);
                 _context.SaveChanges();
                 var response = new
-                {   
-                    success = "true",
+                {
+                    success = true,
                     payload = new
                     {
                         data = newJob,
@@ -166,17 +173,18 @@ namespace Arms.Api.Controllers
                     }
 
                 };
-                return StatusCode(201,response);
+
+                return StatusCode(201, response);
             }
             catch (Exception ex)
             {
-             
+
                 var response = new
                 {
-                    success = "false",
+                    success = false,
                     payload = new
                     {
-                       message = ex.InnerException.Message
+                        message = ex.InnerException.Message
                     }
 
                 };
@@ -185,7 +193,7 @@ namespace Arms.Api.Controllers
         }
         //PUT:api/jobdescription/id
         [HttpPut("{id}")]
-        public IActionResult UpdateJd(int id,[FromBody]JobDescription job)
+        public IActionResult UpdateJd(int id, [FromBody]JobDescription job)
         {
             try
             {
@@ -194,7 +202,7 @@ namespace Arms.Api.Controllers
                 {
                     var resNull = new
                     {
-                        success = "false",
+                        success = false,
                         payload = new
                         {
 
@@ -213,23 +221,34 @@ namespace Arms.Api.Controllers
                 if (job.locationId != 0)
                     jobInDb.locationId = job.locationId;
 
-                if (job.description!=null)
-                  jobInDb.description = job.description;
+                if (job.eligibilityCriteriaId != 0)
+                    jobInDb.eligibilityCriteriaId = job.eligibilityCriteriaId;
+
+                if (job.employmentTypeId != 0)
+                    jobInDb.employmentTypeId = job.employmentTypeId;
+
+
+
+                if (job.description != null)
+                    jobInDb.description = job.description;
 
                 if (job.jobTitle != null)
                     jobInDb.jobTitle = job.jobTitle;
 
+                if (job.skills != null)
+                    jobInDb.skills = job.skills;
+
                 if (job.vacancies != 0)
                     jobInDb.vacancies = job.vacancies;
 
-                if (job.salary != 0)
+                if (job.salary != null)
                     jobInDb.salary = job.salary;
 
                 _context.JobDescription.Update(jobInDb);
                 _context.SaveChanges();
                 var response = new
                 {
-                    success = "true",
+                    success = true,
                     payload = new
                     {
                         data = jobInDb,
@@ -241,9 +260,9 @@ namespace Arms.Api.Controllers
             }
             catch (Exception ex)
             {
-              var response = new
+                var response = new
                 {
-                    success = "false",
+                    success = false,
                     payload = new
                     {
                         message = ex.InnerException.Message
@@ -264,7 +283,7 @@ namespace Arms.Api.Controllers
                 {
                     var resNull = new
                     {
-                        success = "false",
+                        success = false,
                         payload = new
                         {
 
@@ -278,7 +297,7 @@ namespace Arms.Api.Controllers
                 _context.SaveChanges();
                 var response = new
                 {
-                    success = "true",
+                    success = true,
                     payload = new
                     {
                         message = "Job Description Deleted Successfully"
@@ -291,7 +310,7 @@ namespace Arms.Api.Controllers
             {
                 var response = new
                 {
-                    success = "false",
+                    success = false,
                     payload = new
                     {
                         message = ex.InnerException.Message
@@ -301,6 +320,9 @@ namespace Arms.Api.Controllers
                 return StatusCode(500, response);
             }
         }
-       
+
+
+
+
     }
 }

@@ -1,3 +1,4 @@
+import { InterviewService } from './../services/interview.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { error } from 'util';
 import { INewResponse } from 'src/app/models/newResponse.interface';
@@ -16,31 +17,52 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class ProgressTrackerComponent implements OnInit {
-
-  flag : number = 0
-  applicationdata : ICandidate
+  applicationdata : any
   type : string
   applicationStatusName : string
+  noOfRounds : number
 
-  constructor(private _route : Router, private CandidateService : CandidateService) { }
+  constructor(private _route : Router, private CandidateService : CandidateService, private InterviewService : InterviewService) { }
 
   ngOnInit() {
     this.loadcandidateStatus()
   }
 
   loadcandidateStatus(){
+    console.log("ind\side func")
     this.type = this._route.url.split("/")[1]
     let applicationId = parseInt(this._route.url.split("/")[2].slice(7))
     this.CandidateService.getApplication(applicationId).subscribe((res:INewResponse)=>{  
-      console.log(res, "resp")
+      console.log("ind\side func", res)
       if(res.result.success == false){
         this._route.navigate(['/404'])
       }
       else{
-        this.applicationStatusName = res.result.payload.data.applicationStatusType.statusName
+        this.applicationdata = res.result.payload.data
+        this.applicationStatusName = this.applicationdata.applicationStatusType.statusName
+        this.loadInterviews(this.applicationdata.job.id)
+        //this.getResume(this.applicationdata.resumeId)
       }    
     }, (error : HttpErrorResponse)=>{
       console.log(error)
+      this._route.navigate(['/404'])
+    })
+  }
+
+  loadInterviews(jobId : number){
+    console.log(this.applicationdata, "applicationData")
+    this.InterviewService.getInterviews(this.applicationdata.job.id).subscribe((res : INewResponse)=>{
+      this.noOfRounds = res.result.payload.data[0].noOfRounds;
+    })
+  }
+
+  getResume(id : number){
+    this.CandidateService.getResume(id).subscribe((res : any)=>{
+      console.log(res, "resume")
+      let resume = res.result.data.cv
+      let file = new Blob([resume], { type: 'application/pdf' });            
+      var fileURL = URL.createObjectURL(file);
+      window.open(fileURL);
     })
   }
 

@@ -48,16 +48,20 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .HasColumnName("remarks");
 
             builder.HasOne(d => d.Assessment)
-                .WithMany(p => p.Criteria)
+                .WithMany()
                 .HasForeignKey(d => d.AssessmentId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_CR_ArmsAssessment");
 
+           /* builder.HasOne(d => d.CriteriaType)
+                .WithMany(p => p.Criteria)
+=======
             builder.HasOne(d => d.CriteriaType)
                 .WithMany()
+>>>>>>> 92912613ef1c99728092eabe5aa53adebe2a73f4
                 .HasForeignKey(d => d.CriteriaTypeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_CR_ArmsCriteriaType");
+                .HasConstraintName("FK_CR_ArmsCriteriaType");*/
         }
     }
 }

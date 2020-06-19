@@ -35,7 +35,7 @@ namespace Arms.Api.Controllers
                 List<CriteriaType> criteriaTypes = _context.CriteriaType.ToList();
                 var response = new
                 {
-                    success = "true",
+                    success = true,
                     payload = new
                     {
                         data = criteriaTypes,
@@ -79,7 +79,7 @@ namespace Arms.Api.Controllers
                 {
                     var resNull = new
                     {
-                        success = "false",
+                        success = false,
                         payload = new
                         {
                             message = "This Criteria Type Does Not Exist"
@@ -92,7 +92,7 @@ namespace Arms.Api.Controllers
 
                     var response = new
                     {
-                        success = "true",
+                        success = true,
                         payload = new
                         {
                             data = criteria,
@@ -107,7 +107,7 @@ namespace Arms.Api.Controllers
             {
                 var response = new
                 {
-                    success = "false",
+                    success = false,
                     payload = new
                     {
                         message = ex.Message
@@ -130,7 +130,7 @@ namespace Arms.Api.Controllers
                 {
                     var resAlreadyExists = new
                     {
-                        success = "false",
+                        success = false,
                         payload = new
                         {
                             message = "Criteria Type with this Criteria Name already exists"
@@ -149,7 +149,7 @@ namespace Arms.Api.Controllers
                 _context.SaveChanges();
                 var response = new
                 {
-                    success = "true",
+                    success = true,
                     payload = new
                     {
                         data = criteriaObj,
@@ -186,7 +186,7 @@ namespace Arms.Api.Controllers
                 {
                     var resNull = new
                     {
-                        success = "false",
+                        success = false,
                         payload = new
                         {
 
@@ -204,7 +204,7 @@ namespace Arms.Api.Controllers
                 _context.SaveChanges();
                 var response = new
                 {
-                    success = "true",
+                    success = true,
                     payload = new
                     {
                         data = criteriaType,
@@ -218,7 +218,7 @@ namespace Arms.Api.Controllers
             {
                 var response = new
                 {
-                    success = "false",
+                    success = false,
                     payload = new
                     {
                         message = ex.Message
@@ -239,7 +239,7 @@ namespace Arms.Api.Controllers
                 {
                     var resNull = new
                     {
-                        success = "false",
+                        success = false,
                         payload = new
                         {
 
@@ -253,7 +253,7 @@ namespace Arms.Api.Controllers
                 _context.SaveChanges();
                 var response = new
                 {
-                    success = "true",
+                    success = true,
                     payload = new
                     {
                         message = "Criteria Type Deleted Successfully"
@@ -266,7 +266,7 @@ namespace Arms.Api.Controllers
             {
                 var response = new
                 {
-                    success = "false",
+                    success = false,
                     payload = new
                     {
                         message = ex.Message
