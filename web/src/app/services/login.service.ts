@@ -2,8 +2,8 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { JwtHelperService } from "@auth0/angular-jwt";
+import { HOST } from 'src/app/config/apiHost.config';
 
-const DOTNET_LOGIN_API = "http://localhost:40802/api/login";
 @Injectable({
   providedIn: "root",
 })
@@ -27,7 +27,7 @@ export class LoginService {
 
   checkPermissions(idToken): Observable<any> {
     return this.http.post<any>(
-      DOTNET_LOGIN_API,
+     `${HOST}/api/login`,
       { idToken },
       { ...this.httpOptions }
     );
