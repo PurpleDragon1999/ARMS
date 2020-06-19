@@ -28,7 +28,7 @@ export class InterviewListComponent implements OnInit {
   }
 
   loadInterviews() {
-    return this._service.getAllInterviews().subscribe((response: any) => {
+    return this._service.getAllInterviews().subscribe((response: IResponse) => {
       this.interviewsList = response.payload.data
     });
   }

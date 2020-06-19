@@ -10,6 +10,7 @@ import { HOST } from 'src/app/config/apiHost.config';
 @Injectable({
   providedIn: 'root'
 })
+
 export class JobService {
 
   headers: HttpHeaders = new HttpHeaders({
@@ -23,27 +24,27 @@ export class JobService {
   };
   constructor(private http: HttpClient) { }
 
-    getAllJobs(): Observable<any>{
-      return this.http.get<any>(`${HOST}/api/jobDescription`,this.httpOptions);
+    getAllJobs(): Observable<IResponse>{
+      return this.http.get<IResponse>(`${HOST}/api/jobDescription`,this.httpOptions);
     }
-  jdFormData(jdFormObject): Observable<any>{
-    return this.http.post<any>(`${HOST}/api/jobDescription`, jdFormObject, { ...this.httpOptions, observe: 'response' });
+  jdFormData(jdFormObject): Observable<IResponse>{
+    return this.http.post<IResponse>(`${HOST}/api/jobDescription`, jdFormObject, { ...this.httpOptions});
     }
-    getJdData(id):Observable<any>{
-    return this.http.get<any>(`${HOST}/api/jobDescription/${id}`,this.httpOptions)
+    getJdData(id):Observable<IResponse>{
+    return this.http.get<IResponse>(`${HOST}/api/jobDescription/${id}`,this.httpOptions)
     }
-    updateJobInfo(jobFormObject,jobId): Observable<HttpResponse<any>>{
-      return this.http.put<any>(`${HOST}/api/jobDescription/${jobId}`,jobFormObject, {...this.httpOptions,observe: 'response'});
+    updateJobInfo(jobFormObject,jobId): Observable<IResponse>{
+      return this.http.put<IResponse>(`${HOST}/api/jobDescription/${jobId}`,jobFormObject, {...this.httpOptions});
     }
-    deleteJd(id): Observable<any>{
-      return this.http.delete<any>(`${HOST}/api/jobDescription/${id}`, {...this.httpOptions,observe: 'response'});
+    deleteJd(id): Observable<IResponse>{
+      return this.http.delete<IResponse>(`${HOST}/api/jobDescription/${id}`, {...this.httpOptions});
     }
-    sendMails(mailingList,jdId): Observable<any> {
+    sendMails(mailingList,jdId): Observable<IResponse> {
       let mailObj= {
         jobDescriptionId: jdId,
         emailList: mailingList
        }
-      return this.http.post<any>(`${HOST}/api/jdEmail`, mailObj, { ...this.httpOptions, observe: 'response' });
+      return this.http.post<IResponse>(`${HOST}/api/jdEmail`, mailObj, { ...this.httpOptions });
     }
     
 

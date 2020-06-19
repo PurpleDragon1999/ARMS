@@ -85,15 +85,15 @@ export class JdFormComponent implements OnInit {
       salary: ["", Validators.required],
       vacancies: ["", Validators.required],
     });
-    this._service.getAllEligibilityCriterias().subscribe((res: any) => {
+    this._service.getAllEligibilityCriterias().subscribe((res: IResponse) => {
       this.eligibilityCriterias = res.payload.data;
 
     });
-    this._service.getAllLocations().subscribe((res: any) => {
+    this._service.getAllLocations().subscribe((res: IResponse) => {
       this.locations = res.payload.data;
 
     });
-    this._service.getAllEmploymentTypes().subscribe((res: any) => {
+    this._service.getAllEmploymentTypes().subscribe((res: IResponse) => {
       this.employmentTypes = res.payload.data;
 
     });
@@ -143,11 +143,11 @@ export class JdFormComponent implements OnInit {
     }
 
     this.jobService.jdFormData(this.jdFormObject).subscribe((res: any) => {
-      this.data = res.body.payload.data;
+      this.data = res.payload.data;
       const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
       modalRef.componentInstance.shouldConfirm = false;
-      modalRef.componentInstance.success = res.body.success;
-      modalRef.componentInstance.message = res.body.payload.message;
+      modalRef.componentInstance.success = res.success;
+      modalRef.componentInstance.message = res.payload.message;
       modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
         modalRef.close();
       });
