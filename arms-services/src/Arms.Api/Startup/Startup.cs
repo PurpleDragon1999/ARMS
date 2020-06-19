@@ -57,7 +57,7 @@ namespace Arms.Api.Startup
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("RequireRoles",
-                     policy => policy.RequireRole("admin","superuser","employee"));
+                     policy => policy.RequireRole("Admin","SuperAdministrator","Employee"));
             });
 
 

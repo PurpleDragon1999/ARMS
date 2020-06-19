@@ -13,7 +13,7 @@ namespace Arms.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles ="admin,superuser")]
+    [Authorize(Roles ="Admin,SuperAdministrator")]
     public class SkillController : BaseController
     {
         ArmsDbContext _context;

@@ -24,7 +24,7 @@ namespace Arms.Api.Controllers
         }
         //GET:api/employementType
         [HttpGet]
-        [Authorize(Roles ="superuser,admin")]
+        [Authorize(Roles ="SuperAdministrator,Admin")]
         public IActionResult GetEmploymentTypes()
         {
             try
@@ -57,7 +57,7 @@ namespace Arms.Api.Controllers
             }
         }
         [HttpGet("{id}")]
-        [Authorize(Roles = "superuser")]
+        [Authorize(Roles = "SuperAdministrator")]
         public IActionResult GetEmploymentTypeById(int id)
         {
             try
@@ -102,7 +102,7 @@ namespace Arms.Api.Controllers
             }
         }
         [HttpPost]
-        [Authorize(Roles = "superuser")]
+        [Authorize(Roles = "SuperAdministrator")]
         public IActionResult CreateEmploymentType(EmploymentType employmentType)
         {
             try
@@ -157,7 +157,7 @@ namespace Arms.Api.Controllers
 
         //PUT:api/employmentType/id
         [HttpPut("{id}")]
-        [Authorize(Roles = "superuser")]
+        [Authorize(Roles = "SuperAdministrator")]
         public IActionResult UpdateEmploymentType(int id, [FromBody]EmploymentType employmentType)
         {
             try
@@ -206,7 +206,7 @@ namespace Arms.Api.Controllers
             }
         }
         [HttpDelete("{id}")]
-        [Authorize(Roles = "superuser")]
+        [Authorize(Roles = "SuperAdministrator")]
         public IActionResult DeleteEmploymentType(int id)
         {
             try

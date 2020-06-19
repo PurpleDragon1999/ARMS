@@ -47,7 +47,7 @@ const routes: Routes = [
     path: "superuser",
     component: AppNavBarComponent,
     canActivate: [RoleGuardService],
-    data: { role: "superuser" },
+    data: { role: "SuperAdministrator" },
     children: [
       {
         path: "",
@@ -82,7 +82,7 @@ const routes: Routes = [
     path: "admin",
     component: AppNavBarComponent,
     canActivate: [RoleGuardService],
-    data: { role: "admin" },
+    data: { role: "Admin" },
     children: [
       {
         path: "",
@@ -122,7 +122,7 @@ const routes: Routes = [
     path: "employee",
     component: AppNavBarComponent,
     canActivate: [RoleGuardService],
-    data: { role: "employee" },
+    data: { role: "Employee" },
     children: [
       {
         path: "",

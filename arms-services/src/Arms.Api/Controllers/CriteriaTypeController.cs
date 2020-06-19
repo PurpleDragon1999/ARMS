@@ -29,7 +29,7 @@ namespace Arms.Api.Controllers
         }
         //GET:api/CriteriaType
         [HttpGet]
-        [Authorize(Roles ="superuser,admin")]
+        [Authorize(Roles ="SuperAdministrator,Admin")]
         public IActionResult GetCriteriaTypes()
         {
             try
@@ -66,7 +66,7 @@ namespace Arms.Api.Controllers
 
         //GET:api/criteriaType/id
         [HttpGet("{id}")]
-        [Authorize(Roles = "superuser")]
+        [Authorize(Roles = "SuperAdministrator")]
         public IActionResult GetCriteriaType(int id)
         {
 
@@ -123,7 +123,7 @@ namespace Arms.Api.Controllers
 
         //POST:api/CriteriaType
         [HttpPost]
-        [Authorize(Roles = "superuser")]
+        [Authorize(Roles = "SuperAdministrator")]
         public IActionResult CreateCriteriaType(CriteriaType criteria)
         {
             try
@@ -180,7 +180,7 @@ namespace Arms.Api.Controllers
         }
         //PUT:api/ CriteriaType/id
         [HttpPut("{id}")]
-        [Authorize(Roles = "superuser")]
+        [Authorize(Roles = "SuperAdministrator")]
         public IActionResult UpdateCriteriaType(int id, CriteriaType criteria)
         {
             try
@@ -234,7 +234,7 @@ namespace Arms.Api.Controllers
         }
         //DELETE:/api/ CriteriaType/id
         [HttpDelete("{id}")]
-        [Authorize(Roles = "superuser")]
+        [Authorize(Roles = "SuperAdministrator")]
         public IActionResult DeleteCriteriaType(int id)
         {
             try

@@ -14,7 +14,7 @@ namespace Arms.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles="admin")]
+    [Authorize(Roles="Admin")]
     public class JdEmailController : BaseController
     {
       

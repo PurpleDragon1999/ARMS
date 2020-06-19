@@ -11,7 +11,7 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
     {
         public void Configure(EntityTypeBuilder<ArmsEmployeeRoles> builder)
         {
-            builder.ToTable("ARMSEmployeeRoles", "HRMS");
+            builder.ToTable("ARMSEmployeeRoles", "dbo");
 
             builder.Property(e => e.Id).HasColumnName("Id");
 
