@@ -19,6 +19,8 @@ import { ErrorPageComponent } from "./error-page/error-page.component";
 import { JdModalComponent } from "./jd-modal/jd-modal.component";
 import { CandidateComponent } from "./candidate/candidate.component";
 import { CandidateAssessmentComponent } from './candidate-assessment/containers/candidate-assessment.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import {AnalyticsComponent} from './dashboard/analytics/analytics.component';
 
 const routes: Routes = [
   { path: "assessment", component: HrInterviewAssessementComponent },
@@ -71,8 +73,8 @@ const routes: Routes = [
         path: "employee",
         component: EmployeeComponent,
       },
-      { 
-        path: "interviews", component: InterviewListComponent 
+      {
+        path: "interviews", component: InterviewListComponent
       },
       {
         path: 'settings', component: SettingsComponent
@@ -167,6 +169,14 @@ const routes: Routes = [
   {
     path: 'candidate-assessment',
     component: CandidateAssessmentComponent
+  },
+  {
+    path: 'dashboard',
+    component: AppNavBarComponent,
+    children: [{
+      path: '',
+      component: AnalyticsComponent
+    }]
   }
 ];
 

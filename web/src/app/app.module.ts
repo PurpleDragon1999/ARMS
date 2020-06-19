@@ -41,6 +41,8 @@ import { IdProofTypeComponent } from './settings/components/id-proof-type/id-pro
 import { EmploymentTypeComponent } from './settings/components/employment-type/employment-type.component';
 import { EligibilityCriteriaComponent } from './settings/components/eligibility-criteria/eligibility-criteria.component';
 import { ApplicationStatusComponent } from './settings/components/application-status/application-status.component';
+import {AnalyticsComponent} from './dashboard/analytics/analytics.component';
+import {StatsComponent} from './dashboard/stats/stats.component';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -75,7 +77,10 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     InterviewListComponent,
     HrInterviewAssessementComponent,
     SettingsComponent,
-    CandidateAssessmentComponent
+    CandidateAssessmentComponent,
+    DashboardComponent,
+    StatsComponent,
+    AnalyticsComponent
   ],
   imports: [
     FileUploadModule,
