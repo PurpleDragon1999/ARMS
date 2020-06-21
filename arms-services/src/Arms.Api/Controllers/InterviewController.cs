@@ -9,21 +9,22 @@ using Arms.Infrastructure;
 using Arms.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Arms.Domain.CustomEntities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Arms.Api.Controllers
 {
 	[ApiController]
 	[Route("api/[controller]")]
+	[Authorize(Roles ="Admin")]
 	public class InterviewController : BaseController
 	{   //mailController object 
 		public MailHelperController mailHelper = new MailHelperController();
 		//Email class Object
 		public Email email = new Email();
-		private readonly IIdentityService _identityService;
+		
 		ArmsDbContext _context;
-		public InterviewController(IIdentityService identityService, ArmsDbContext armsContext)
+		public InterviewController( ArmsDbContext armsContext)
 		{
-			_identityService = identityService;
 			_context = armsContext;
 		}
 
@@ -98,7 +99,9 @@ namespace Arms.Api.Controllers
 								message = "Interview Record Retrieved Successfully"
 							}
 
+											
 						};											
+					  
 						return StatusCode(200, response);
 					}
 					else

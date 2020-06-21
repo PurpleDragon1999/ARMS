@@ -130,61 +130,61 @@ class Candidate extends Base {
     }
   }
 
-  async get(req, res) {
-    try {
-      let candidateId = req.params.id
-      let candidateObj = await candidateModel.get({ _id: candidateId })
-      console.log(candidateId, candidateObj)
+  // async get(req, res) {
+  //   try {
+  //     let candidateId = req.params.id
+  //     let candidateObj = await candidateModel.get({ _id: candidateId })
+  //     console.log(candidateId, candidateObj)
 
-      let data = { ...(await candidateObj).toObject(), cv: fs.readFileSync(candidateObj.cv) }
+  //     let data = { ...(await candidateObj).toObject(), cv: fs.readFileSync(candidateObj.cv) }
 
-      res.status(200).send({
-        success: true,
-        payload: {
-          data,
-          message: "Candidate Details returned Successfully!!"
-        }
-      })
-    }
-    catch (err) {
-      console.log(err)
-      res.send({
-        success: false,
-        payload: {
-          message: err.message
-        }
-      })
-    }
-  }
+  //     res.status(200).send({
+  //       success: true,
+  //       payload: {
+  //         data,
+  //         message: "Candidate Details returned Successfully!!"
+  //       }
+  //     })
+  //   }
+  //   catch (err) {
+  //     console.log(err)
+  //     res.send({
+  //       success: false,
+  //       payload: {
+  //         message: err.message
+  //       }
+  //     })
+  //   }
+  // }
 
-  async searchRecord(req, res) {
-    try {
-      let queryObject = {
-        $regex: ".*^" + req.query.character + ".*",
-        $options: "i",
-      };
+  // async searchRecord(req, res) {
+  //   try {
+  //     let queryObject = {
+  //       $regex: ".*^" + req.query.character + ".*",
+  //       $options: "i",
+  //     };
 
-      let candidateList = await candidateModel.getAll({ $or: [{ name: queryObject }] });
+  //     let candidateList = await candidateModel.getAll({ $or: [{ name: queryObject }] });
 
-      candidateList = await Promise.all(candidateList.map(async (candidate) => {
-        if (fs.existsSync(candidate.cv)) {
-          return { ...candidate.toObject(), cv: fs.readFileSync(candidate.cv) };
-        }
-        return { ...candidate.toObject() };
-      }));
+  //     candidateList = await Promise.all(candidateList.map(async (candidate) => {
+  //       if (fs.existsSync(candidate.cv)) {
+  //         return { ...candidate.toObject(), cv: fs.readFileSync(candidate.cv) };
+  //       }
+  //       return { ...candidate.toObject() };
+  //     }));
 
-      req.body.records = candidateList;
-      super.getPaginatedResult(req, res)
-    }
-    catch (err) {
-      res.send({
-        success: false,
-        payload: {
-          message: err.message
-        }
-      })
-    }
-  }
+  //     req.body.records = candidateList;
+  //     super.getPaginatedResult(req, res)
+  //   }
+  //   catch (err) {
+  //     res.send({
+  //       success: false,
+  //       payload: {
+  //         message: err.message
+  //       }
+  //     })
+  //   }
+  //}
 
 }
 

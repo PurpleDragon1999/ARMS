@@ -53,11 +53,19 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_CR_ArmsAssessment");
 
+            // builder.HasOne(d => d.CriteriaType)
+            //     .WithMany(p => p.Criteria)
+            //     .HasForeignKey(d => d.CriteriaTypeId)
+            //     .OnDelete(DeleteBehavior.ClientSetNull)
+            //     .HasConstraintName("FK_CR_ArmsCriteriaType");
+           /* builder.HasOne(d => d.CriteriaType)
+                .WithMany(p => p.Criteria)
+
             builder.HasOne(d => d.CriteriaType)
                 .WithMany()
                 .HasForeignKey(d => d.CriteriaTypeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_CR_ArmsCriteriaType");
+                .HasConstraintName("FK_CR_ArmsCriteriaType");*/
         }
     }
 }

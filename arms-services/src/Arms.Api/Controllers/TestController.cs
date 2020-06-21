@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Arms.Api.Controllers
 {
-    public class TestController : BaseController
+    public class TestController : ControllerBase
     {
         private readonly IIdentityService _identityService;
 

@@ -9,24 +9,32 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Arms.Domain.CustomEntities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Arms.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+
+
+
+    [Authorize(Roles = "Admin,SuperAdministrator")]
+
+    
     public class CandidateController : BaseController
 
     {
-        private readonly IIdentityService _identityService;
+        
         ArmsDbContext _context;
         public MailHelperController mailHelper = new MailHelperController();
-        public CandidateController(IIdentityService identityService, ArmsDbContext armsContext)
+        public CandidateController( ArmsDbContext armsContext)
         {
-            _identityService = identityService;
+            
             _context = armsContext;
         }
 
         [HttpGet]
+       
         public IActionResult Getcandidates(int jobId = 0)
         {
             List<Arms.Domain.Entities.Application> applications;
@@ -69,6 +77,7 @@ namespace Arms.Api.Controllers
         }
 
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public IActionResult GetApplication(int id )
         {
             try
@@ -117,7 +126,8 @@ namespace Arms.Api.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteInterview(int id)
+       
+        public IActionResult DeleteApplication(int id)
         {
             try
             {
@@ -194,6 +204,7 @@ namespace Arms.Api.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public IActionResult CreateCandidate([FromBody] CandidateApplicationResume customObj)
         {
             var candidate = _context.Candidate.FirstOrDefault(c => c.Email == customObj.Email || c.IdentificationNo == customObj.IdentificationNo || c.Phone == customObj.Phone);
@@ -284,7 +295,8 @@ namespace Arms.Api.Controllers
                     }
                 };
                 JobDescription jdObject = _context.JobDescription.Include(l => l.employmentType).
-                    Include(l => l.eligibilityCriteria).Include(l => l.loc).FirstOrDefault(c => c.Id == applicationObj.JobId);
+                    Include(l => l.eligibilityCriteria).Include(l => l.loc).
+                    FirstOrDefault(c => c.Id == applicationObj.JobId);
                 string emailHtmlBody = GenerateEmailBody( jdObject, candObj.Code,candObj.Name);
                 //Adding Emails in string Array to send to candidates
                 string[] EmailToSend = new[]
@@ -310,6 +322,7 @@ namespace Arms.Api.Controllers
         }
 
         [HttpPatch("{id}")]
+        
         public IActionResult UpdateCandidateDetails(int id, [FromBody] CandidateApplicationResume customObj)
         {
             var resume = _context.Resume.SingleOrDefault(c => c.ApplicationId == id);

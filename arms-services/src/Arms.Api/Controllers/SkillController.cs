@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Arms.Application.Services.Users;
 using Arms.Domain.Entities;
 using Arms.Infrastructure;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,13 +13,12 @@ namespace Arms.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles ="Admin,SuperAdministrator")]
     public class SkillController : BaseController
     {
-        private readonly IIdentityService _identityService;
         ArmsDbContext _context;
-        public SkillController(IIdentityService identityService, ArmsDbContext armsContext)
+        public SkillController(ArmsDbContext armsContext)
         {
-            _identityService = identityService;
             _context = armsContext;
         }
         //GET:api/eligibilityCriteria

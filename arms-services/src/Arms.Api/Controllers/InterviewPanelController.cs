@@ -8,11 +8,13 @@ using Arms.Domain.CustomEntities;
 using Arms.Infrastructure;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Arms.Api.Controllers
 {
     [Route("api/panel")]
     [ApiController]
+    [Authorize(Roles ="Admin")]
     public class InterviewPanelController : ControllerBase
     {
         private readonly ArmsDbContext _context;

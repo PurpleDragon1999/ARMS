@@ -19,7 +19,7 @@ namespace Arms.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LoginController : BaseController
+    public class LoginController : ControllerBase
     {
 
         private IConfiguration _config;
@@ -41,6 +41,7 @@ namespace Arms.Api.Controllers
                 if (empObj != null)
                 {
                     var tokenString = GenerateJSONWebToken(empObj);
+
                     var response = new
                     {
                         success = "true",
@@ -103,7 +104,7 @@ namespace Arms.Api.Controllers
                 var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
                 var token = new JwtSecurityToken(_config["Jwt:Issuer"],
-                  _config["Jwt:Issuer"],
+                  _config["Jwt:Aud"],
                   claims,
                   expires: DateTime.Now.AddSeconds(86400),
                   signingCredentials: credentials);
@@ -118,6 +119,7 @@ namespace Arms.Api.Controllers
             var handler = new JwtSecurityTokenHandler();
 
             var jsonToken = handler.ReadToken(login.idToken) as JwtSecurityToken;
+
             var email = jsonToken.Payload["email"].ToString();
             
            ArmsEmployees employee = _context.ArmsEmployees.FirstOrDefault(c => c.Email == email);
@@ -128,11 +130,10 @@ namespace Arms.Api.Controllers
                 armsEmployee=employee,
                 armsEmployeeRole=armsEmployeeRole
             };
-            return employeeObj;
-            
+            return employeeObj;            
 
-        }
+           }
 
-        }
     }
+}
 

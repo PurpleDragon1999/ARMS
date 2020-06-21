@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { InterviewService } from './../services/interview.service';
 import { AppServicesService } from "../services/app-services.service";
 import { Router} from "@angular/router";
@@ -23,8 +23,8 @@ export class UpdateInterviewComponent implements OnInit {
   ngOnInit() {
     this.getLocation();
     this.getRoundTypes();
-    this.onDisplayInterview(84);
-    this.onDisplayRounds(84,1);  
+    this.onDisplayInterview(this.id);
+    this.onDisplayRounds(this.id,this.append);  
   }
 
   interview:any={
@@ -42,13 +42,26 @@ export class UpdateInterviewComponent implements OnInit {
   Location: any[]=[
   ]
 
+  @Input()
+  isInterview: boolean;
+
+  @Input()
+  isRounds: boolean;
+
+  @Input()
+  id: number;
+
+  @Input()
+  append: number =1;
+
+  @Input()
+  roundID: number;
+
+  @Output()
+  closeModal: EventEmitter<boolean> = new EventEmitter<boolean>();
+
   number: number = this.interview.roundNumber;
 
-  isInterview: boolean = false;
-
-  isRounds: boolean = true;
-
-  roundID: number = 92 ;
 
   onOptionsSelected(value){
     this.number = value;
@@ -56,19 +69,19 @@ export class UpdateInterviewComponent implements OnInit {
 
   getLocation(){
     this.service.getLocation().subscribe((res:any) => {
-      this.Location = res.result.payload.data;
+      this.Location = res.payload.data;
     })
   }
 
   getRoundTypes(){
     this.service.getRoundTypes().subscribe((res:any) => {
-      this.RoundType = res.result.payload.data;
+      this.RoundType = res.payload.data;
     })
   }
 
   onDisplayInterview(id){
     this.service.getInterview(id).subscribe((res:any)=>{
-      this.interview=res.result.payload.data;
+      this.interview=res.payload.data;
       this.interview.jobTitle=this.interview.jobDescription.jobTitle;
       this.interview.date=this.interview.date.slice(0,10);
       this.number= this.interview.noOfRounds;
@@ -76,8 +89,10 @@ export class UpdateInterviewComponent implements OnInit {
   }
 
   onDisplayRounds(id, append){
+    console.log("what do we get here", id, append)
     this.service.getRounds(id, append).subscribe((res:any)=>{
-      let round = res.result.payload.data;
+      let round = res.payload.data;
+      console.log(round)
       for (let index=0; index<this.number; index++){
         this.interview.round = round;
         this.interview.round[index].roundNumber = round[index].roundNumber;
@@ -102,11 +117,11 @@ export class UpdateInterviewComponent implements OnInit {
       this.updateObj.NoOfRounds = formValue.noOfRounds;
       console.log(this.updateObj);
       
-      this.service.updateInterview(84, this.updateObj).subscribe((res:any) => {
+      this.service.updateInterview(this.id, this.updateObj).subscribe((res:any) => {
         const modalRef = this.modalService.open(ModalComponent);
         modalRef.componentInstance.shouldConfirm = false;
-        modalRef.componentInstance.success = res.result.success;
-        modalRef.componentInstance.message = res.result.payload.message;
+        modalRef.componentInstance.success = res.success;
+        modalRef.componentInstance.message = res.payload.message;
         modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
           modalRef.close();        
           });
@@ -125,7 +140,6 @@ export class UpdateInterviewComponent implements OnInit {
     }
     if(this.isRounds){
       let updateRound=[];
-      let index=1
       for (let index =0; index<this.number; index++){
         updateRound.push({
           RoundNumber: formValue[`roundNumber_${index}`],
@@ -156,6 +170,10 @@ export class UpdateInterviewComponent implements OnInit {
       //   }
       );
    }
+  }
+
+  modalClose(rerender: boolean): void {
+    this.closeModal.emit(rerender);
   }
   
 

@@ -10,7 +10,7 @@ namespace Arms.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MailHelperController : BaseController
+    public class MailHelperController : ControllerBase
     {
         public MailMessage mail;
         public SmtpClient client;
@@ -42,7 +42,6 @@ namespace Arms.Api.Controllers
         public void MailFunction( string emailHtmlBody,string[] emailList)
         {
             var credentials = new System.Net.NetworkCredential("mongmawchetna@gmail.com", "mongmaw.chetna@21ok");
-
             // Mail message
             mail = new MailMessage()
             {
