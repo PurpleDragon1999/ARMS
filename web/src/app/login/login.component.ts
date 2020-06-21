@@ -89,7 +89,6 @@ export class LoginComponent implements OnInit {
             `Bearer ${res.payload.authorized}`
           );
            let role = this.loginService.tokenDecoder().role;
-        
           if (role == this._env.ADMIN) {
             this._router.navigate(["/admin"]);
           } else if (role == this._env.SUPERUSER) {

@@ -10,11 +10,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Arms.Domain.CustomEntities;
 using System.IO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Arms.Api.Controllers
 {
     public class CandidateController : BaseController
-
     {
         public ArmsDbContext _context;
         public MailHelperController mailHelper = new MailHelperController();
@@ -65,6 +65,7 @@ namespace Arms.Api.Controllers
         }
 
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public IActionResult GetApplication(int id )
         {
             try
@@ -113,15 +114,19 @@ namespace Arms.Api.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteInterview(int id)
+        public IActionResult DeleteApplication(int id)
         {
             try
             {
-                var application = _context.Application.SingleOrDefault(c => c.Id == id);
+                var application = _context.Application.FirstOrDefault(c => c.Id == id);
+                var resume = _context.Resume.FirstOrDefault(c => c.ApplicationId == id);
                 if (application != null)
                 {
+                    _context.Resume.Remove(resume);
+                    _context.SaveChanges();
                     _context.Application.Remove(application);
                     _context.SaveChanges();
+
                     var response = new
                     {
                         success = true,
@@ -167,8 +172,7 @@ namespace Arms.Api.Controllers
                 var res = new
                 {
                     isValid = false,
-                    message = "This Email is already registered."
-                    
+                    message = "This Email is already registered."  
                 };
                 return res;
             }
@@ -180,7 +184,6 @@ namespace Arms.Api.Controllers
                 {
                     isValid = false,
                     message = "This Phone Number is already registered."
-                    
                 };
                 return res;
             }
@@ -241,6 +244,7 @@ namespace Arms.Api.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public IActionResult CreateCandidate([FromForm] CandidateApplicationResume customObj)
         {
             var candidate = _context.Candidate.FirstOrDefault(c=> c.IdentificationNo == customObj.IdentificationNo);
@@ -346,15 +350,15 @@ namespace Arms.Api.Controllers
                 };
 
                 //JobDescription jdObject = _context.JobDescription.Include(l => l.employmentType).
-                //    Include(l => l.eligibilityCriteria).Include(l => l.loc).FirstOrDefault(c => c.Id == applicationObj.JobId);
-                //string emailHtmlBody = GenerateEmailBody( jdObject, candidateObj.Code, candidateObj.Name);
+                //    Include(l => l.eligibilityCriteria).Include(l => l.loc).
+                //    FirstOrDefault(c => c.Id == applicationObj.JobId);
+                //string emailHtmlBody = GenerateEmailBody( jdObject, candObj.Code,candObj.Name);
                 ////Adding Emails in string Array to send to candidates
                 //string[] EmailToSend = new[]
                 //{
-                //    candidateObj.Email
+                //    candObj.Email
                 //};
 
-                //mailHelper.MailFunction(emailHtmlBody, EmailToSend);
                 return StatusCode(200, response);
             }
             catch (Exception e)
@@ -371,8 +375,10 @@ namespace Arms.Api.Controllers
             }
         }
 
+        [AllowAnonymous]
         [HttpPatch("{id}")]
         public IActionResult UpdateCandidateDetails(int id, [FromForm] CandidateApplicationResume customObj)
+
         {
             var application = _context.Application.SingleOrDefault(c => c.Id == id);
 

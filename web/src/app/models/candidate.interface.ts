@@ -1,6 +1,6 @@
 import { IJobDescription } from './jobDescription.interface';
 import { IRound } from './round.interface';
-//import { IInterviewPanel } from './interview.interface';
+import { IInterviewPanel } from './interview.interface';
 
 export interface ICandidate {
     name: string;
@@ -29,10 +29,10 @@ export interface ICandidate {
     experience: string;
   }
   
-  // export interface IAssessment {
-  //   feedback: string;
-  //   round: IRound;
-  //   application: IApplication;
-  //   result: boolean;
-  //   interviewPanelId: IInterviewPanel;
-  // }
+  export interface IAssessment {
+    feedback: string;
+    round: IRound;
+    application: IApplication;
+    result: boolean;
+    interviewPanelId: IInterviewPanel;
+  }

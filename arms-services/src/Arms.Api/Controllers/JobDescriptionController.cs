@@ -14,20 +14,23 @@ using Microsoft.EntityFrameworkCore;
 using System.Net.Mail;
 using Arms.Domain.CustomEntities;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Configuration;
 
 namespace Arms.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    // [Authorize]
+
+    [Authorize(Roles ="Admin")]
     public class JobDescriptionController : BaseController
     {
-        public ArmsDbContext _context;
-        public MailHelperController mailHelper = new MailHelperController();
-
+      
+        ArmsDbContext _context;
+        public MailHelperController mailHelper=new MailHelperController();
+     
         public JobDescriptionController(ArmsDbContext armsContext)
-        {
-            _context = armsContext;
+        {   
+             _context = armsContext;
         }
 
         //GET:api/jobDescriptions
@@ -57,7 +60,7 @@ namespace Arms.Api.Controllers
                     success = false,
                     payload = new
                     {
-                        message = ex
+                        message = ex.InnerException
                     }
 
                 };

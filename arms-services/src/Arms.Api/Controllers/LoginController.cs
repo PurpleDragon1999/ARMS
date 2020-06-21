@@ -103,11 +103,11 @@ namespace Arms.Api.Controllers
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
-            var token = new JwtSecurityToken(_config["Jwt:Issuer"],
-              _config["Jwt:Aud"],
-              claims,
-              expires: DateTime.Now.AddSeconds(86400),
-              signingCredentials: credentials);
+                var token = new JwtSecurityToken(_config["Jwt:Issuer"],
+                  _config["Jwt:Aud"],
+                  claims,
+                  expires: DateTime.Now.AddSeconds(86400),
+                  signingCredentials: credentials);
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
@@ -130,9 +130,10 @@ namespace Arms.Api.Controllers
                 armsEmployee = employee,
                 armsEmployeeRole = armsEmployeeRole
             };
-            return employeeObj;
 
-        }
+            return employeeObj;            
+
+           }
 
     }
 }

@@ -8,7 +8,6 @@ import { ICreate } from "../models/create.interface";
 import { HOST } from 'src/app/config/apiHost.config';
 
 const USER_DOMAIN = "http://localhost:3000";
-const DOTNET_DOMAIN = "http://localhost:40802";
 @Injectable({
   providedIn: "root",
 })
@@ -39,14 +38,14 @@ export class AppServicesService {
   }
 
   getJdData(id):Observable<any>{
-    return this.http.get<any>(`${DOTNET_DOMAIN}/api/jobDescription/${id}`,this.httpOptions)
+    return this.http.get<any>(`${HOST}/api/jobDescription/${id}`,this.httpOptions)
     }
 
   // For making HTTP calls
 
   //For searching with pagination
-  getAllIdProofTypes(): Observable<IResponse> {
-    return this.http.get<IResponse>(`${HOST}/api/IdProofType`, {
+  getAllIdProofTypes(): Observable<HttpResponse<any>> {
+    return this.http.get<any>(`${HOST}/api/IdProofType`, {
       ...this.httpOptions,
     });
   }

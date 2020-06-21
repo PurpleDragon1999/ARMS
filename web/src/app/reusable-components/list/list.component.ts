@@ -11,9 +11,6 @@ import { ModalComponent } from 'src/app/reusable-components/modal/modal.componen
   styleUrls: ["./list.component.scss"],
 })
 export class ListComponent {
-
-  constructor(private modalService: NgbModal, private CandidateService: CandidateService){}
-
   @Input()
   title: string = '';
 
@@ -40,26 +37,6 @@ export class ListComponent {
 
   @Output()
   emitDownloadPdf: EventEmitter<string> = new EventEmitter<string>();
-
-  // deleteEntry(id: number) {
-  //   const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
-
-  //   modalRef.componentInstance.shouldConfirm = true;
-
-  //   modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
-  //     modalRef.close();
-  //   });
-  //   modalRef.componentInstance.emitPerformRequest.subscribe(() => {
-  //     this.CandidateService.deleteApplication(id).subscribe((res: IResponse) => {
-        
-  //       modalRef.componentInstance.success = res.success;
-  //       modalRef.componentInstance.message = res.payload.message;
-  //       }, (error : HttpErrorResponse) => {
-  //         modalRef.componentInstance.success = error.error.success;
-  //         modalRef.componentInstance.message = error.error.payload.message;
-  //   });
-  // });
-  // }
 
   openModal(formType: any["formType"], data?: any["data"]) {
     this.emitOpenModal.emit({ formType, data });

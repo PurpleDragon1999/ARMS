@@ -1,7 +1,7 @@
-import { AppServicesService } from 'src/app/services/app-services.service';
 import { ModalComponent } from './../../../reusable-components/modal/modal.component';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { HttpErrorResponse } from '@angular/common/http';
+import { AppServicesService } from 'src/app/services/app-services.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 
@@ -13,6 +13,9 @@ import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 })
 export class IdProofTypeComponent implements OnInit {
 
+  
+
+  
   ngOnInit() {
   }
 

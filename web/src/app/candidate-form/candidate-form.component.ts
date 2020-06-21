@@ -1,7 +1,7 @@
+import { IResponse } from './../models/response.interface';
 import { JobService } from './../services/job.service';
 import { CandidateService } from './../candidate/services/candidate.service';
 import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { IResponse } from 'src/app/models/response.interface';
 import { ICandidate } from './../models/candidate.interface';
 import { AppServicesService } from "../services/app-services.service";
 import { Component, OnInit, Input } from "@angular/core";
@@ -102,9 +102,8 @@ export class CandidateFormComponent implements OnInit {
     } 
 
     getIdProofType(){
-      this.service.getAllIdProofTypes().subscribe((res : IResponse)=>{
-        this.idProofTypes = res.payload.data;
-        
+      this.service.getAllIdProofTypes().subscribe((res : any)=>{
+        this.idProofTypes = res.payload.data
       })
     }
 
@@ -168,7 +167,7 @@ createApplication(application ){
  
   if (isValid.success == true){
    
-    this.CandidateService.createCandidate(formData).subscribe(res=>{
+    this.CandidateService.createCandidate(formData).subscribe((res : IResponse)=>{
       
       if (res != null){
         this.openModal(res)
