@@ -43,6 +43,8 @@ import { EligibilityCriteriaComponent } from './settings/components/eligibility-
 import { ApplicationStatusComponent } from './settings/components/application-status/application-status.component';
 import {AnalyticsComponent} from './dashboard/analytics/analytics.component';
 import {StatsComponent} from './dashboard/stats/stats.component';
+import {CandidateAssessmentFormComponent} from './candidate-assessment/components/candidate-assessment-form/candidate-assessment-form.component';
+import {CandidateDescriptionComponent} from './candidate-assessment/components/candidate-description/candidate-description.component';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -78,6 +80,8 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     HrInterviewAssessementComponent,
     SettingsComponent,
     CandidateAssessmentComponent,
+    CandidateAssessmentFormComponent,
+    CandidateDescriptionComponent,
     DashboardComponent,
     StatsComponent,
     AnalyticsComponent

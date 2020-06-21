@@ -68,3 +68,5 @@ appsettings.json
 
 [Dd]esktop.ini
 debug.log
+
+ARMS_DB_Scripts/

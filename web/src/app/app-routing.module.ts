@@ -168,7 +168,11 @@ const routes: Routes = [
   },
   {
     path: 'candidate-assessment',
-    component: CandidateAssessmentComponent
+    component: AppNavBarComponent,
+    children: [{
+      path: '',
+      component: CandidateAssessmentComponent
+    }]
   },
   {
     path: 'dashboard',
