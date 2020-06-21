@@ -30,6 +30,7 @@ namespace Arms.Api.Controllers
 
 
 		[HttpGet]
+        [AllowAnonymous]
 		public IActionResult GetInterviews()
 		{
 

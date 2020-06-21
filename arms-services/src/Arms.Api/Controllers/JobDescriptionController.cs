@@ -72,7 +72,7 @@ namespace Arms.Api.Controllers
 
         //GET:api/jobDescription/id
         [HttpGet("{id}")]
-
+        [AllowAnonymous]
         public IActionResult GetJd(int id)
         {
 
@@ -135,6 +135,11 @@ namespace Arms.Api.Controllers
             try
             {
                 JobDescription checkinDb = _context.JobDescription.SingleOrDefault(c => c.jobTitle == job.jobTitle);
+                if (job.jobTitle == null || job.eligibilityCriteriaId == 0 || job.employmentTypeId == 0 || job.locationId == 0)
+                {
+                    throw new System.ArgumentException("These are required fields");
+                }
+
                 if (checkinDb != null)
                 {
                     var resAlreadyExists = new
