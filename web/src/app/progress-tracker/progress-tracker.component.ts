@@ -25,7 +25,6 @@ export class ProgressTrackerComponent implements OnInit {
   constructor( private route: ActivatedRoute,private _route : Router, private CandidateService : CandidateService, private InterviewService : InterviewService) { }
 
   ngOnInit() {
-    console.log(this.route)
     this.loadcandidateStatus()
   }
   
@@ -48,7 +47,6 @@ export class ProgressTrackerComponent implements OnInit {
         //this.getResume(this.applicationdata.resumeId)
       }    
     }, (error )=>{
-      console.log("inside error")
       this._route.navigate(['/404'])
     })
   }
