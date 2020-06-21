@@ -149,32 +149,32 @@ export class UpdateInterviewComponent implements OnInit {
         })
       }
       this.updateObj.Round = updateRound;
-      console.log("we are sending this", this.updateObj)
-      this.service.updateRound(84, 91, this.updateObj).subscribe((res:any) => {
+      console.log("we are sending this", this.updateObj, this.id, this,this.roundID)
+      this.service.updateRound(this.id, this.roundID, this.updateObj).subscribe((res:any) => {
       const modalRef = this.modalService.open(ModalComponent);
         modalRef.componentInstance.shouldConfirm = false;
-        modalRef.componentInstance.success = res.result.success;
-        modalRef.componentInstance.message = res.result.payload.message;
+        modalRef.componentInstance.success = res.success;
+        modalRef.componentInstance.message = res.payload.message;
         modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
           modalRef.close();        
           });
       },
-      // (error: HttpErrorResponse) => {
-      //   const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
-      //   modalRef.componentInstance.shouldConfirm = false;
-      //   modalRef.componentInstance.success = error.error.success;
-      //   modalRef.componentInstance.message = error.error.payload.message;
-      //   modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
-      //     modalRef.close();
-      //     });
-      //   }
+      (error: HttpErrorResponse) => {
+        const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
+        modalRef.componentInstance.shouldConfirm = false;
+        modalRef.componentInstance.success = error.error.success;
+        modalRef.componentInstance.message = error.error.payload.message;
+        modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+          modalRef.close();
+          });
+        }
       );
    }
   }
 
-  modalClose(rerender: boolean): void {
-    this.closeModal.emit(rerender);
-  }
+  // modalClose(rerender: boolean): void {
+  //   this.closeModal.emit(rerender);
+  // }
   
 
 }

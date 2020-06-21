@@ -130,7 +130,7 @@
                 
                 <div class="rounds" *ngIf="isRounds">
                     <div *ngFor="let index of [].constructor(number); index as i">
-                    <div class="content" *ngIf="interview.round[i].id == roundID" >
+                    <div class="content" *ngIf="interview.round[i]?.id == roundID" >
                     <div class="outer" >
                         <div class="form-group">
                             <label for="roundNumber">Round Number<span class="asterick">*</span></label>
