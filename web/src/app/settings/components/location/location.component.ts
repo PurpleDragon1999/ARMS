@@ -42,7 +42,9 @@ export class LocationComponent implements OnInit {
 
   newLocation(): FormGroup {
     return this.fb.group({
-      locName: "",
+      locationName: "",
+      createdBy: this._service.tokenDecoder().userName,
+      modifiedBy: this._service.tokenDecoder().userName
     });
   }
 
@@ -66,9 +68,9 @@ export class LocationComponent implements OnInit {
     return this._service.deleteLocation(locIndex).subscribe(
       (response: any) => {
         this.loadLocations();
-        modalRef.componentInstance.success = response.body.result.success;
+        modalRef.componentInstance.success = response.body.success;
         modalRef.componentInstance.message =
-          response.body.result.payload.message;
+          response.body.payload.message;
       },
       (error: HttpErrorResponse) => {
         modalRef.componentInstance.success = error.error.success;
@@ -78,6 +80,14 @@ export class LocationComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.locationForm.value);
+    this._service.createLocation(this.locationForm.get('locations').value).subscribe((res:any) => {
+      const modalRef = this.modalService.open(ModalComponent);
+      modalRef.componentInstance.shouldConfirm = false;
+      modalRef.componentInstance.success = res.body.success;
+      modalRef.componentInstance.message = res.body.payload.message;
+      modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+      modalRef.close();        
+      });
+    })
   }
 }

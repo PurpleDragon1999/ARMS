@@ -13,9 +13,6 @@ import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 })
 export class IdProofTypeComponent implements OnInit {
 
-  
-
-  
   ngOnInit() {
   }
 
@@ -37,7 +34,9 @@ export class IdProofTypeComponent implements OnInit {
 
   newidProof(): FormGroup {
     return this.fb.group({
-      idProofName: ''
+      Name: '',
+      createdBy: this._service.tokenDecoder().userName,
+      modifiedBy: this._service.tokenDecoder().userName
     });
   }
 
@@ -68,22 +67,27 @@ export class IdProofTypeComponent implements OnInit {
     return this._service.deleteIdProofType(idProofIndex).subscribe((response: any) => {
 
       this.loadIdProofTypes();
-      modalRef.componentInstance.success = response.body.result.success;
-      modalRef.componentInstance.message = response.body.result.payload.message;
+      modalRef.componentInstance.success = response.body.success;
+      modalRef.componentInstance.message = response.body.payload.message;
       }, (error: HttpErrorResponse) => {
         modalRef.componentInstance.success = error.error.success;
         modalRef.componentInstance.message = error.error.payload.message;
       }
-
     );
    
     
   }
 
   onSubmit() {
-    console.log(this.idProofForm.value);
+    this._service.createIdProof(this.idProofForm.get('idProofs').value).subscribe((res:any) => {
+      const modalRef = this.modalService.open(ModalComponent);
+      modalRef.componentInstance.shouldConfirm = false;
+      modalRef.componentInstance.success = res.success;
+      modalRef.componentInstance.message = res.payload.message;
+      modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+      modalRef.close();        
+      });
+    })
   }
-
-
 
 }

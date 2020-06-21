@@ -160,4 +160,36 @@ export class AppServicesService {
       { ...this.httpOptions }
     );
   }
+
+  createLocation(formObject): Observable<any> {
+    return this.http.post<any>(
+      `${HOST}/api/Location`,
+      formObject,
+      { ...this.httpOptions }
+    );
+  }
+
+  createIdProof(formObject): Observable<any> {
+    return this.http.post<any>(
+      `${HOST}/api/IdProofType`,
+      formObject,
+      { ...this.httpOptions }
+    );
+  }
+
+  createEmploymentType(formObject): Observable<any> {
+    return this.http.post<any>(
+      `${HOST}/api/employmentType`,
+      formObject,
+      { ...this.httpOptions }
+    );
+  }
+
+  createEligibilityCriteria(formObject): Observable<any> {
+    return this.http.post<any>(
+      `${HOST}/api/eligibilityCriteria`,
+      formObject,
+      { ...this.httpOptions }
+    );
+  }
 }

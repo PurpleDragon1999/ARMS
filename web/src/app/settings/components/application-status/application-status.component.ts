@@ -16,6 +16,8 @@ export class ApplicationStatusComponent implements OnInit {
   applicationStatusForm: FormGroup;
   addApplicationStatusTypes: Boolean = false;
   applicationStatusList: any;
+  createdBy: string;
+  modifiedBy: string;
 
   constructor(
     private fb: FormBuilder,
@@ -23,7 +25,7 @@ export class ApplicationStatusComponent implements OnInit {
     private modalService: NgbModal
   ) {
     this.applicationStatusForm = this.fb.group({
-      applicationStatusTypes: this.fb.array([]),
+      applicationStatusTypes: this.fb.array([])
     });
   }
 
@@ -34,6 +36,7 @@ export class ApplicationStatusComponent implements OnInit {
         this.applicationStatusList = response.payload.data;
       });
   }
+  
   applicationStatusTypes(): FormArray {
     return this.applicationStatusForm.get(
       "applicationStatusTypes"
@@ -43,6 +46,8 @@ export class ApplicationStatusComponent implements OnInit {
   newApplicationStatus(): FormGroup {
     return this.fb.group({
       StatusName: "",
+      CreatedBy: this._service.tokenDecoder().userName,
+      ModifiedBy: this._service.tokenDecoder().userName
     });
   }
 
@@ -50,6 +55,7 @@ export class ApplicationStatusComponent implements OnInit {
     this.addApplicationStatusTypes = true;
     this.applicationStatusTypes().push(this.newApplicationStatus());
   }
+
   deleteRecord(id) {
     const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
 
@@ -61,9 +67,9 @@ export class ApplicationStatusComponent implements OnInit {
     return this._service.deleteApplicationStatusType(id).subscribe(
       (response: any) => {
         this.loadApplicationStatusTypes();
-        modalRef.componentInstance.success = response.body.result.success;
+        modalRef.componentInstance.success = response.success;
         modalRef.componentInstance.message =
-          response.body.result.payload.message;
+          response.payload.message;
       },
       (error: HttpErrorResponse) => {
         modalRef.componentInstance.success = error.error.success;
@@ -71,6 +77,7 @@ export class ApplicationStatusComponent implements OnInit {
       }
     );
   }
+  
   removeApplicationStatus(appStatusIndex: number) {
     const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
 
@@ -86,9 +93,9 @@ export class ApplicationStatusComponent implements OnInit {
     return this._service.deleteApplicationStatusType(appStatusIndex).subscribe(
       (response: any) => {
         this.loadApplicationStatusTypes();
-        modalRef.componentInstance.success = response.body.result.success;
+        modalRef.componentInstance.success = response.body.success;
         modalRef.componentInstance.message =
-          response.body.result.payload.message;
+          response.payload.message;
       },
       (error: HttpErrorResponse) => {
         modalRef.componentInstance.success = error.error.success;
@@ -98,10 +105,14 @@ export class ApplicationStatusComponent implements OnInit {
   }
 
   onSubmit() {
-    return this._service
-      .createApplicationStatusType(this.applicationStatusForm.value)
-      .subscribe((response: any) => {
-        this.applicationStatusList = response.payload.data;
-      });
-  }
+  this._service.createApplicationStatusType(this.applicationStatusForm.get('applicationStatusTypes').value).subscribe((res:any) => {
+    const modalRef = this.modalService.open(ModalComponent);
+    modalRef.componentInstance.shouldConfirm = false;
+    modalRef.componentInstance.success = res.success;
+    modalRef.componentInstance.message = res.payload.message;
+    modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+    modalRef.close();        
+    });
+  })
+}
 }

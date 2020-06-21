@@ -37,6 +37,8 @@ export class RoundTypeComponent implements OnInit {
     return this.fb.group({
       roundName: "",
       criteria: this.fb.array([]),
+      createdBy: this._service.tokenDecoder().userName,
+      modifiedBy: this._service.tokenDecoder().userName
     });
   }
 
@@ -66,9 +68,8 @@ export class RoundTypeComponent implements OnInit {
     return this._service.deleteRoundType(typeIndex).subscribe(
       (response: any) => {
         this.loadRoundTypes();
-        modalRef.componentInstance.success = response.body.result.success;
-        modalRef.componentInstance.message =
-          response.body.result.payload.message;
+        modalRef.componentInstance.success = response.body.success;
+        modalRef.componentInstance.message = response.body.payload.message;
       },
       (error: HttpErrorResponse) => {
         modalRef.componentInstance.success = error.error.success;
@@ -84,6 +85,8 @@ export class RoundTypeComponent implements OnInit {
   newCriterion(): FormGroup {
     return this.fb.group({
       criterion: "",
+      createdBy: this._service.tokenDecoder().userName,
+      modifiedBy: this._service.tokenDecoder().userName
     });
   }
 

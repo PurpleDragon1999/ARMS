@@ -13,7 +13,7 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
     {
         public void Configure(EntityTypeBuilder<ArmsEmployees> builder)
         {
-            builder.ToTable("ArmsEmployees", "dbo");
+            builder.ToTable("ArmsEmployees", "HRMS");
 
 
             builder.Property(e => e.DateCreated).HasColumnType("datetime");

@@ -38,7 +38,9 @@ export class EmploymentTypeComponent implements OnInit {
 
   newEmploymentType(): FormGroup {
     return this.fb.group({
-      empTypeName: "",
+      employmentTypeName: "",
+      createdBy: this._service.tokenDecoder().userName,
+      modifiedBy: this._service.tokenDecoder().userName
     });
   }
 
@@ -62,9 +64,9 @@ export class EmploymentTypeComponent implements OnInit {
     return this._service.deleteEmploymentType(empTypeIndex).subscribe(
       (response: any) => {
         this.loadEmploymentTypes();
-        modalRef.componentInstance.success = response.body.result.success;
+        modalRef.componentInstance.success = response.body.success;
         modalRef.componentInstance.message =
-          response.body.result.payload.message;
+          response.body.payload.message;
       },
       (error: HttpErrorResponse) => {
         modalRef.componentInstance.success = error.error.success;
@@ -74,6 +76,14 @@ export class EmploymentTypeComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.employmentTypeForm.value);
+    this._service.createEmploymentType(this.employmentTypeForm.get('employmentTypes').value).subscribe((res:any) => {
+      const modalRef = this.modalService.open(ModalComponent);
+      modalRef.componentInstance.shouldConfirm = false;
+      modalRef.componentInstance.success = res.success;
+      modalRef.componentInstance.message = res.payload.message;
+      modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+      modalRef.close();        
+      });
+    })
   }
 }

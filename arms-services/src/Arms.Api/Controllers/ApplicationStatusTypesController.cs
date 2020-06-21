@@ -117,11 +117,11 @@ namespace Arms.Api.Controllers
         [Authorize(Roles = "SuperAdministrator")]
 
 
-        public IActionResult CreateStatusType(ApplicationStatusType[] statusType)
+        public IActionResult CreateStatusType(List<ApplicationStatusType> statusType)
         {
             try
             {
-                for (int i = 0; i < statusType.Length; i++)
+                for (int i = 0; i < statusType.Count; i++)
                 {
                     ApplicationStatusType checkinDb = _context.ApplicationStatusType.SingleOrDefault(c => c.StatusName == statusType[i].StatusName);
                     if (checkinDb != null)
@@ -145,18 +145,19 @@ namespace Arms.Api.Controllers
                     };
                     _context.ApplicationStatusType.Add(newStatusType);
                     _context.SaveChanges();
+                }
                     var response = new
                     {
                         success = "true",
                         payload = new
                         {
-                            data = newStatusType,
+                            data = statusType,
                             message = "Application status type created successfully"
                         }
                     };
-                }
-                return StatusCode(201);
 
+                    return StatusCode(201, response);
+                
             }
             catch (Exception ex)
             {
@@ -165,7 +166,7 @@ namespace Arms.Api.Controllers
                     success = "false",
                     payload = new
                     {
-                        message = ex.Message
+                        message = ex.InnerException
                     }
                 };
                 return StatusCode(500, response);

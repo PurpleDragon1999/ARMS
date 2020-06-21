@@ -116,40 +116,44 @@ namespace Arms.Api.Controllers
 
         [HttpPost]
         [Authorize(Roles = "SuperAdministrator")]
-        public IActionResult writeId(IdProofType id)
+        public IActionResult writeId(List<IdProofType> id)
         {
             try
             {
-                IdProofType checkinDb = _context.IdProofType.SingleOrDefault(c => c.Name == id.Name);
-                if (checkinDb != null)
+                for (int i = 0; i < id.Count; i++)
                 {
-                    var resAlreadyExists = new
+                    IdProofType checkinDb = _context.IdProofType.SingleOrDefault(c => c.Name == id[i].Name);
+                    if (checkinDb != null)
                     {
-                        success = "false",
-                        payload = new
+                        var resAlreadyExists = new
                         {
-                            message = "Id type with this name already exists"
-                        }
+                            success = "false",
+                            payload = new
+                            {
+                                message = "Id type with this name already exists"
+                            }
+
+                        };
+                        return StatusCode(400, resAlreadyExists);
+                    }
+                    IdProofType newIdentity = new IdProofType
+                    {
+
+                        Name = id[i].Name,
+                        CreatedBy = id[i].CreatedBy,
+                        ModifiedBy = id[i].ModifiedBy,
 
                     };
-                    return StatusCode(400, resAlreadyExists);
+                    _context.IdProofType.Add(newIdentity);
+                    _context.SaveChanges();
                 }
-                IdProofType newIdentity = new IdProofType
-                {
 
-                    Name = id.Name,
-                    CreatedBy = id.CreatedBy,
-                    ModifiedBy = id.ModifiedBy,
-
-                };
-                _context.IdProofType.Add(newIdentity);
-                _context.SaveChanges();
                 var response = new
                 {
                     success = "true",
                     payload = new
                     {
-                        data = newIdentity,
+                        data = id,
                         message = "Id Proof detail  created Successfully"
                     }
 
@@ -165,7 +169,7 @@ namespace Arms.Api.Controllers
                     success = "false",
                     payload = new
                     {
-                        message = ex.Message
+                        message = ex.InnerException
                     }
 
                 };

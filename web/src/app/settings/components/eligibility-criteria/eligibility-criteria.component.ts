@@ -41,7 +41,9 @@ export class EligibilityCriteriaComponent implements OnInit {
 
   newEligibilityCriterion(): FormGroup {
     return this.fb.group({
-      eligibilityName: "",
+      eligibilityCriteriaName: "",
+      createdBy: this._service.tokenDecoder().userName,
+      modifiedBy: this._service.tokenDecoder().userName
     });
   }
 
@@ -65,9 +67,9 @@ export class EligibilityCriteriaComponent implements OnInit {
     return this._service.deleteEligibilityCriterion(eligibilityIndex).subscribe(
       (response: any) => {
         this.loadEligibilityCriteria();
-        modalRef.componentInstance.success = response.body.result.success;
+        modalRef.componentInstance.success = response.body.success;
         modalRef.componentInstance.message =
-          response.body.result.payload.message;
+          response.body.payload.message;
       },
       (error: HttpErrorResponse) => {
         modalRef.componentInstance.success = error.error.success;
@@ -77,6 +79,14 @@ export class EligibilityCriteriaComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.eligibilityCriterionForm.value);
+    this._service.createEligibilityCriteria(this.eligibilityCriterionForm.get('eligibilityCriteria').value).subscribe((res:any) => {
+      const modalRef = this.modalService.open(ModalComponent);
+      modalRef.componentInstance.shouldConfirm = false;
+      modalRef.componentInstance.success = res.success;
+      modalRef.componentInstance.message = res.payload.message;
+      modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+      modalRef.close();        
+      });
+    })
   }
 }

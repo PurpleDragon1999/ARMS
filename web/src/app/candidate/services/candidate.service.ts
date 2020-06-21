@@ -17,9 +17,7 @@ export class CandidateService {
 
     headers: HttpHeaders = new HttpHeaders({
         'Content-Type': 'application/json',
-            Authorization: localStorage.getItem("Authorized")
-           //hard code token here
-       
+            Authorization: localStorage.getItem("Authorized")       
       });
 
     private options = {
