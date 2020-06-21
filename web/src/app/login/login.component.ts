@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit {
   }
 
   async loginFunction() {
-    console.log("inside login")
+   
     // this.loginService.login().subscribe((res) => console.log(res));
     const isIE =
       window.navigator.userAgent.indexOf("MSIE ") > -1 ||
@@ -82,24 +82,20 @@ export class LoginComponent implements OnInit {
     this.loginService.checkPermissions(idToken).subscribe(
       (res) => {
         if (res != null) {
-          console.log(res, "response")
+         
           window.localStorage.setItem(
 
             "Authorized",
             `Bearer ${res.payload.authorized}`
           );
            let role = this.loginService.tokenDecoder().role;
-            console.log(role, this._env.ADMIN, "here")
+        
           if (role == this._env.ADMIN) {
-            console.log("inside env")
             this._router.navigate(["/admin"]);
           } else if (role == this._env.SUPERUSER) {
             this._router.navigate(["/superuser"]);
           } else if (role == this._env.EMPLOYEE) {
             this._router.navigate(["/employee"]);
-          }
-          else{
-            console.log("insideelse")
           }
         }
         this.message = res.payload.message;

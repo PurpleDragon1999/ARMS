@@ -8,7 +8,7 @@ import { Component, OnInit, Input } from "@angular/core";
 import { FileItem, FileUploader, ParsedResponseHeaders } from "ng2-file-upload";
 import { NgbModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
 import { ModalComponent } from "../reusable-components/modal/modal.component"
-import { Router } from "@angular/router";
+import { Router, Params, ActivatedRoute } from "@angular/router";
 import { error } from 'util';
 
 @Component({
@@ -32,7 +32,8 @@ export class CandidateFormComponent implements OnInit {
     private router: Router,
     private service: AppServicesService,
     private CandidateService : CandidateService,
-    private jobService: JobService
+    private jobService: JobService,
+    private route : ActivatedRoute
   ) { 
     this.numbersInYears = Array(30).fill(0).map((x,i)=>i);
     this.numbersInMonths = Array(12).fill(0).map((x,i)=>i);
@@ -45,11 +46,15 @@ export class CandidateFormComponent implements OnInit {
 
     loadJdData(){
       this.type = this.router.url.split("/")[1];
-      var jobId = parseInt(this.router.url.split("/")[2].slice(6))
       if (this.type == "candidateForm"){
-        
+        var jobId 
+        this.route.params.subscribe(params=>{
+          if (params.jobId){
+            jobId = params.jobId.slice(6)
+          }
+        })
         this.service.getJdData(jobId).subscribe((res : IResponse)=>{
-          console.log(res, "res")
+          
           if (res.success == true){
             this.model.appliedForJdId = res.payload.data.code;
             this.model.appliedForPosition = res.payload.data.jobTitle;
@@ -59,16 +64,19 @@ export class CandidateFormComponent implements OnInit {
           }
         },
         (error : HttpErrorResponse)=>{
-          console.log(error, "error!!!!!!!")
           this.router.navigate(['/404']);
         })
+        
       }
       else if (this.type == "progressTracker"){
-        var applicationId = parseInt(this.router.url.split("/")[2].slice(7))
+        var applicationId 
+        this.route.params.subscribe(params=>{
+          if (params.candidateId){
+            applicationId = params.candidateId.slice(7)
+          }
+        })
         this.CandidateService.getApplication(applicationId).subscribe((res:IResponse)=>{
-          console.log(res, "candidatw from")
           if (res.success == true){
-            
           let application = res.payload.data
           this.model.appliedForJdId = application.job.code;
           this.model.appliedForPosition = application.job.jobTitle;
@@ -90,9 +98,8 @@ export class CandidateFormComponent implements OnInit {
           console.log(error)
           this.router.navigate(['/404']);
         })
-
       }
-    }
+    } 
 
     getIdProofType(){
       this.service.getAllIdProofTypes().subscribe((res : IResponse)=>{
@@ -142,9 +149,9 @@ createApplication(application ){
   let isValid = this.validateApplication(applicationObj)
 
   let experience = this.model.experienceInYears + " years " + this.model.experienceInMonths + " months"
-  let jobId = (this.model.appliedForJdId).slice(6);
+  let jobId = (this.model.appliedForJdId)[6];
 
-  console.log(this.model, "model")
+ 
   var formData = new FormData();
   formData.append("name", this.model.name)
   formData.append("education", this.model.education)
@@ -160,7 +167,7 @@ createApplication(application ){
   formData.append("modifiedBy", "employee")
  
   if (isValid.success == true){
-    console.log("inside if")
+   
     this.CandidateService.createCandidate(formData).subscribe(res=>{
       
       if (res != null){

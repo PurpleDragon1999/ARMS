@@ -3,9 +3,7 @@
       <div class="card-body">
         <h4 class= "top"><b>Job Application</b></h4>
         <form name="form" #f="ngForm" (ngSubmit)="createApplication(f)" >
-          
-          {{model | json}}
-          {{data}}
+  
           <div class="form-group">
             <label for="appliedForJdId">Applied for JD<span class="asterick">*</span></label>
             <input [readOnly]="type == 'progressTracker' || 'candidate'" type="text" name="appliedForJdId" class="form-control" [(ngModel)]="model.appliedForJdId" 
@@ -77,7 +75,7 @@
                 <select type="text" name="experienceInYears" placeholder="In years" 
                 class="form-control" id="experienceInYears" [(ngModel)]="model.experienceInYears" #experienceInYears="ngModel" 
                 [ngClass]="{ 'is-invalid': experienceInYears.dirty && experienceInYears.invalid}" required>
-                  <option class="select-css" [selected]="isSelected" value="0" selected disabled  >YYYY</option>
+                  <option class="select-css" value="0" selected disabled  >YYYY</option>
                   <option class="select-css" [disabled]="type == 'progressTracker'" *ngFor="let number of numbersInYears" value={{number}} >{{number}}</option>
                   <option class="select-css" [disabled]="type == 'progressTracker'" value="30+">30+</option>
                 </select>
@@ -91,7 +89,7 @@
                 <select type="text" name="experienceInMonths"                         placeholder="In months" 
                 class="form-control" id="experienceInMonths" [(ngModel)]="model.experienceInMonths" #experienceInMonths="ngModel" 
                 [ngClass]="{ 'is-invalid': experienceInMonths.dirty && experienceInMonths.invalid}" required>
-                  <option class="select-css" [selected]="isSelected" value="0" selected disabled >MM</option>
+                  <option class="select-css" value="0" selected disabled >MM</option>
                   <option class="select-css" [disabled]="type == 'progressTracker'" *ngFor="let number of numbersInMonths" value={{number}} >{{number}}</option>
                 </select>
                 <div *ngIf="experienceInMonths.dirty" class="invalid-feedback">  

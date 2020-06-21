@@ -26,7 +26,6 @@ export class LoginService {
   }
 
   checkPermissions(idToken): Observable<any> {
-    console.log("inside dotnet")
     return this.http.post<any>(
       DOTNET_LOGIN_API,
       { idToken },

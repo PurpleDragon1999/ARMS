@@ -27,7 +27,6 @@ export class CandidateComponent implements OnInit {
     }
 
     deleteApplication(data ) {
-        console.log(data, "data")
         let id = data.id
         const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
     
@@ -53,7 +52,7 @@ export class CandidateComponent implements OnInit {
         this.candidateService.getApplications().subscribe((res: IResponse)=>{
         this.candidates = res.payload.data
         this.columns = ["name", "email", "experience", "Job Position"];
-        console.log(this.candidates)
+        
         
         })
     }

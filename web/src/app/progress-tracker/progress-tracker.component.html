@@ -22,7 +22,7 @@
                     <div class="progress-marker" data-text=""></div>
                     <div class="progress-text">
                       Applied Successfully
-                      <i *ngIf="flag>='1'" class="mdi mdi-checkbox-marked-circle-outline"></i>
+                      <i class="mdi mdi-checkbox-marked-circle-outline"></i>
                     </div>
                   </a>
                 </li>
@@ -32,13 +32,13 @@
                     <div class="progress-marker" data-text=""></div>
                     <div class="progress-text">
                       Process Started
-                      <i *ngIf="flag>='2'" class="mdi mdi-checkbox-marked-circle-outline"></i>
+                      <i class="mdi mdi-checkbox-marked-circle-outline"></i>
                     </div>
                   </a>
                 </li>
   
                 <li class="progress-step anim--path" 
-                *ngFor="let index of [].constructor(noOfRounds); index as i" [ngClass]="{'is-active': flag==2}" [ngClass]="{'is-active': flag==2, 'is-complete': flag >= 3}" aria-current="step">
+                *ngFor="let index of [].constructor(noOfRounds); index as i" aria-current="step">
                   <a>
                     <div class="progress-marker" data-text=''></div>
                     <div class="progress-text">
@@ -47,7 +47,7 @@
                   </a>
                 </li>
   
-                <li class="progress-step anim--path" [ngClass]="{'is-active': flag==4}" [ngClass]="{'is-active': flag==4, 'is-complete': flag >= 5}">
+                <li class="progress-step anim--path" >
                   <a>
                     <div class="progress-marker" data-text=""></div>
                     <div class="progress-text">
@@ -56,7 +56,7 @@
                   </a>
                 </li>
               </ul>
-              <router-outlet ></router-outlet>
+              <router-outlet  > </router-outlet>
         </div>
       </div>
     </div>

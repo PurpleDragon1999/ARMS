@@ -4,11 +4,11 @@ import { error } from 'util';
 import { CandidateService } from './../candidate/services/candidate.service';
 import { ICandidate } from './../models/candidate.interface';
 import { IResponse } from 'src/app/models/response.interface';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params } from "@angular/router";
 import { AppServicesService } from 'src/app/services/app-services.service';
 import { element } from 'protractor';
 import { Component, OnInit } from '@angular/core';
-
+import { switchMap } from "rxjs/operators";
 @Component({
   selector: 'app-progress-tracker',
   templateUrl: './progress-tracker.component.html',
@@ -20,19 +20,24 @@ export class ProgressTrackerComponent implements OnInit {
   type : string
   applicationStatusName : string
   noOfRounds : number
+  applicationCode : string
 
-  constructor(private _route : Router, private CandidateService : CandidateService, private InterviewService : InterviewService) { }
+  constructor( private route: ActivatedRoute,private _route : Router, private CandidateService : CandidateService, private InterviewService : InterviewService) { }
 
   ngOnInit() {
+    console.log(this.route)
     this.loadcandidateStatus()
   }
-
+  
   loadcandidateStatus(){
-    console.log("ind\side func")
-    this.type = this._route.url.split("/")[1]
-    let applicationId = parseInt(this._route.url.split("/")[2].slice(7))
+    var applicationId
+    this.route.params.subscribe(params=>{
+      if (params.candidateId){
+        applicationId = params.candidateId.slice(7)
+      }
+    })
+
     this.CandidateService.getApplication(applicationId).subscribe((res:IResponse)=>{  
-      console.log("ind\side func", res)
       if(res.success == false){
         this._route.navigate(['/404'])
       }
@@ -42,28 +47,26 @@ export class ProgressTrackerComponent implements OnInit {
         this.loadInterviews(this.applicationdata.job.id)
         //this.getResume(this.applicationdata.resumeId)
       }    
-    }, (error : HttpErrorResponse)=>{
-      console.log(error)
+    }, (error )=>{
+      console.log("inside error")
       this._route.navigate(['/404'])
     })
   }
 
   loadInterviews(jobId : number){
-    console.log(this.applicationdata, "applicationData")
+   
     this.InterviewService.getInterviews(this.applicationdata.job.id).subscribe((res : IResponse)=>{
       this.noOfRounds = res.payload.data[0].noOfRounds;
     })
   }
 
   getResume(id : number){
-    this.CandidateService.getResume(id).subscribe((res : any)=>{
-      console.log(res, "resume")
+    this.CandidateService.getResume(id).subscribe((res : any)=>{ 
       let resume = res.result.data.cv
       let file = new Blob([resume], { type: 'application/pdf' });            
       var fileURL = URL.createObjectURL(file);
       window.open(fileURL);
     })
   }
-
 }
 

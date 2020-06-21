@@ -55,7 +55,7 @@ export class CandidateService {
         )
     }
 
-    getApplication(id: number): Observable<IResponse>{
+    getApplication(id): Observable<IResponse>{
         return this.http.get<IResponse>(
             `${CANDIDATE_API}/${id}`, this.options)
       }

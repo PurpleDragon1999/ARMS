@@ -29,10 +29,6 @@
         <thead>
           <tr>
             <th *ngFor="let columnName of columns; let i = index">
-              <div *ngIf="columnName=='jdObjectId';else otherCol">
-                JOB TITLE
-              </div>
-
               <ng-template #otherCol>{{columnName | uppercase}}</ng-template>
             </th>
           </tr>
@@ -41,9 +37,6 @@
           
           <tr *ngFor="let entry of data ; let i = index">
             <td *ngFor="let columnName of columns;">
-              <!-- <ng-container [ngSwitch]="columnName">
-                <div *ngSwitchCase="'date'">{{entry[columnName]|date}}</div>
-                <div *ngSwitchCase="'jdObjectId'">{{entry[columnName]?.jdTitle}}</div> -->
               <ng-container [ngSwitch]="true">
                 <div *ngSwitchCase="columnName=='name'">{{entry['candidate']?.name}}</div>
                 <div *ngSwitchCase="columnName=='email'">{{entry['candidate']?.email}}</div>
@@ -124,9 +117,9 @@
                     <img class="nav-profile-img" src="../../assets/images/customers-icon-3.png" alt="image">
                   </div>
                   <ng-container [ngSwitch]="true">
-                    <h5 *ngSwitchCase="columnName=='jdObjectId'" class="m-0 p-3">{{entry[columnName].jdTitle}}
+                    <!-- <h5 *ngSwitchCase="columnName=='jdObjectId'" class="m-0 p-3">{{entry[columnName].jdTitle}}
                     </h5>
-                    <h5 *ngSwitchCase="columnName=='name'">{{entry['candidate']?.name}}</h5>
+                    <h5 *ngSwitchCase="columnName=='name'">{{entry['candidate']?.name}}</h5> -->
                     <h5 *ngSwitchDefault  class="m-0 p-3">{{ entry[columns[0]] }}</h5>
                     
                   </ng-container>
@@ -145,7 +138,7 @@
             </div>
           </ng-template>
           <ng-template ngbPanelContent>
-            <div *ngFor="let columnName of columns | slice: 1" class="py-2">
+            <div *ngFor="let columnName of columns " class="py-2">
               <div>
                 <b>
                   {{ columnName | uppercase }}

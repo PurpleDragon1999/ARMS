@@ -19,11 +19,9 @@ namespace Arms.Api.Controllers
 		public MailHelperController mailHelper = new MailHelperController();
 		//Email class Object
 		public Email email = new Email();
-		private readonly IIdentityService _identityService;
 		ArmsDbContext _context;
-		public InterviewController(IIdentityService identityService, ArmsDbContext armsContext)
+		public InterviewController( ArmsDbContext armsContext)
 		{
-			_identityService = identityService;
 			_context = armsContext;
 		}
 
@@ -32,7 +30,7 @@ namespace Arms.Api.Controllers
 		public IActionResult GetInterviews(int jobId=0)
 		{
             List<Interview> interviews;
-            if (jobId != null)
+            if (jobId != 0)
             {
                 interviews = _context.Interview.Include(c => c.JobDescription).Where(c=> c.JobId == jobId).ToList();
             }

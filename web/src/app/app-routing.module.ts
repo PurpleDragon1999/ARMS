@@ -18,6 +18,7 @@ import { RoleGuardService } from "./utilities/role-guard.service";
 import { ErrorPageComponent } from "./error-page/error-page.component";
 import { JdModalComponent } from "./jd-modal/jd-modal.component";
 import { CandidateComponent } from "./candidate/candidate.component";
+import { Z_FULL_FLUSH } from 'zlib';
 
 const routes: Routes = [
   { path: "assessment", component: HrInterviewAssessementComponent },
@@ -38,10 +39,6 @@ const routes: Routes = [
         component: CandidateComponent,
       },
     ],
-  },
-  {
-    path: "candidate/form",
-    component: CandidateFormComponent,
   },
   {
     path: "superuser",
@@ -141,13 +138,26 @@ const routes: Routes = [
   },
   {
     path: "candidateForm",
-    children: [{ path: ":jdId", component: CandidateFormComponent }],
+    children: [{ path: ":jobId", component: CandidateFormComponent }],
   },
   {
-    path: "progressTracker/:candidateId",
-    component: ProgressTrackerComponent,
-    children: [{ path: "applied", component: CandidateFormComponent }],
+    path: "progressTracker",
+    children: [
+    {
+      path: ':candidateId',
+      pathMatch: 'full',
+      component: ProgressTrackerComponent
+    },
+    { 
+      path: ":candidateId/applied", component: ProgressTrackerComponent, children: [{
+        path: '', component: CandidateFormComponent
+      }] 
+    }],
   },
+  // {
+  //   path: "progressTracker/:candidateId/applied",
+  //   component: CandidateFormComponent,
+  // },
   {
     path: "panel",
     component: AppNavBarComponent,
