@@ -6,11 +6,8 @@ namespace Arms.Api.Controllers
 {
     public class TestController : ControllerBase
     {
-        private readonly IIdentityService _identityService;
-
-        public TestController(IIdentityService identityService)
+        public TestController()
         {
-            _identityService = identityService;
         }
 
         [HttpGet]
@@ -18,7 +15,7 @@ namespace Arms.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public string Index()
         {
-            return "Shubham Sharma";
+            return "This is a test route.";
         }
     }
 }

@@ -55,7 +55,7 @@
             let empTypeIndex = index
           "
         >
-          <div class="card">
+          <div class="card" *ngIf="addEmploymentTypes == true">
             <div class="card-body" [formGroupName]="empTypeIndex">
               Employment Type:
               <input
@@ -66,7 +66,7 @@
               <button class="btn mr-2 add-button del-button">
                 <i
                   class="fas fa-trash"
-                  (click)="removeEmploymentType(empTypeIndex)"
+                  (click)="deleteNewEntry(empTypeIndex)"
                 >
                 </i>
               </button>

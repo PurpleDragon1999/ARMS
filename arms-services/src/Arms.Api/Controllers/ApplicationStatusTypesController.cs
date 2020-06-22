@@ -19,16 +19,15 @@ namespace Arms.Api.Controllers
     [ApiController]
 
 
-   
     public class ApplicationStatusTypesController : ControllerBase
     {
         ArmsDbContext _context;
+       
         public ApplicationStatusTypesController(ArmsDbContext armsContext)
         {
             _context = armsContext;
         }
-
-
+    
         [HttpGet]
         [Authorize(Roles ="Admin,SuperAdministrator")]
         public IActionResult GetAllStatusTypes()
@@ -38,7 +37,7 @@ namespace Arms.Api.Controllers
                 List<ApplicationStatusType> statusTypes = _context.ApplicationStatusType.ToList();
                 var response = new
                 {
-                    success = "true",
+                    success = true,
                     payload = new
                     {
                         data = statusTypes,
@@ -51,7 +50,7 @@ namespace Arms.Api.Controllers
             {
                 var response = new
                 {
-                    success = "false",
+                    success = false,
                     payload = new
                     {
                         message = ex.Message
@@ -75,7 +74,7 @@ namespace Arms.Api.Controllers
                 {
                     var resNull = new
                     {
-                        success = "false",
+                        success = false,
                         payload = new
                         {
                             message = "Application status type does not exist"
@@ -87,7 +86,7 @@ namespace Arms.Api.Controllers
                 {
                     var response = new
                     {
-                        success = "true",
+                        success = true,
                         payload = new
                         {
                             data = statusType,
@@ -101,7 +100,7 @@ namespace Arms.Api.Controllers
             {
                 var response = new
                 {
-                    success = "false",
+                    success = false,
                     payload = new
                     {
                         message = ex.Message
@@ -128,7 +127,7 @@ namespace Arms.Api.Controllers
                     {
                         var resAlreadyExists = new
                         {
-                            success = "false",
+                            success = false,
                             payload = new
                             {
                                 message = "Application status type already exists"
@@ -148,7 +147,7 @@ namespace Arms.Api.Controllers
                 }
                     var response = new
                     {
-                        success = "true",
+                        success = true,
                         payload = new
                         {
                             data = statusType,
@@ -163,10 +162,10 @@ namespace Arms.Api.Controllers
             {
                 var response = new
                 {
-                    success = "false",
+                    success = false,
                     payload = new
                     {
-                        message = ex.InnerException
+                        message = ex.Message
                     }
                 };
                 return StatusCode(500, response);
@@ -185,7 +184,7 @@ namespace Arms.Api.Controllers
                 {
                     var resNull = new
                     {
-                        success = "false",
+                        success = false,
                         payload = new
                         {
                             message = "Application status type does not exist"
@@ -204,7 +203,7 @@ namespace Arms.Api.Controllers
 
                 var response = new
                 {
-                    success = "true",
+                    success = true,
                     payload = new
                     {
                         data = statusTypeInDb,
@@ -217,7 +216,7 @@ namespace Arms.Api.Controllers
             {
                 var response = new
                 {
-                    success = "false",
+                    success = false,
                     payload = new
                     {
                         message = ex.Message
@@ -239,7 +238,7 @@ namespace Arms.Api.Controllers
                 {
                     var resNull = new
                     {
-                        success = "false",
+                        success = false,
                         payload = new
                         {
                             message = "Application status type does not exist"
@@ -252,7 +251,7 @@ namespace Arms.Api.Controllers
                 _context.SaveChanges();
                 var response = new
                 {
-                    success = "true",
+                    success = true,
                     payload = new
                     {
                         message = "Application status type deleted successfully"
@@ -265,7 +264,7 @@ namespace Arms.Api.Controllers
             {
                 var response = new
                 {
-                    success = "false",
+                    success = false,
                     payload = new
                     {
                         message = ex.Message

@@ -67,7 +67,7 @@ namespace Arms.Api.Controllers
             try
             {
                Loc location = _context.Loc.
-                    SingleOrDefault(c => c.id == id);
+                    SingleOrDefault(c => c.Id == id);
 
 
 
@@ -162,14 +162,12 @@ namespace Arms.Api.Controllers
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.GetType().FullName);
-                Console.WriteLine(ex.Message);
                 var response = new
                 {
                     success = false,
                     payload = new
                     {
-                        message = ex.InnerException
+                        message = ex.Message
                     }
 
                 };
@@ -183,7 +181,7 @@ namespace Arms.Api.Controllers
         {
             try
             {
-               Loc loc = _context.Loc.SingleOrDefault(c => c.id == id);
+               Loc loc = _context.Loc.SingleOrDefault(c => c.Id == id);
                 if (loc == null)
                 {
                     var resNull = new
@@ -235,7 +233,7 @@ namespace Arms.Api.Controllers
         {
             try
             {
-                Loc loc = _context.Loc.SingleOrDefault(c => c.id == id);
+                Loc loc = _context.Loc.SingleOrDefault(c => c.Id == id);
                 if (loc == null)
                 {
                     var resNull = new

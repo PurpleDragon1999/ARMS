@@ -52,18 +52,23 @@ export class EligibilityCriteriaComponent implements OnInit {
     this.eligibilityCriteria().push(this.newEligibilityCriterion());
   }
 
+  deleteNewEntry(eligibilityIndex){
+    this.eligibilityCriteria().removeAt(eligibilityIndex);
+    if ((this.eligibilityCriterionForm.get('eligibilityCriteria').value.length)==0) {
+      this.addEligibilityCriteria = false;
+    }
+  }
+  
   removeEligibilityCriterion(eligibilityIndex: number) {
     const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
-
     modalRef.componentInstance.shouldConfirm = true;
-
     modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
       modalRef.close();
     });
-    this.eligibilityCriteria().removeAt(eligibilityIndex);
-    if (eligibilityIndex == 0) {
-      this.addEligibilityCriteria = false;
-    }
+
+    modalRef.componentInstance.emitPerformRequest.subscribe(() => {
+    this.deleteNewEntry(eligibilityIndex);
+
     return this._service.deleteEligibilityCriterion(eligibilityIndex).subscribe(
       (response: any) => {
         this.loadEligibilityCriteria();
@@ -75,8 +80,10 @@ export class EligibilityCriteriaComponent implements OnInit {
         modalRef.componentInstance.success = error.error.success;
         modalRef.componentInstance.message = error.error.payload.message;
       }
-    );
-  }
+      );
+    });
+    }
+  
 
   onSubmit() {
     this._service.createEligibilityCriteria(this.eligibilityCriterionForm.get('eligibilityCriteria').value).subscribe((res:any) => {
@@ -85,7 +92,11 @@ export class EligibilityCriteriaComponent implements OnInit {
       modalRef.componentInstance.success = res.success;
       modalRef.componentInstance.message = res.payload.message;
       modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
-      modalRef.close();        
+        modalRef.close();    
+        
+        this.eligibilityCriterionForm.reset();
+        this.addEligibilityCriteria = false;
+        this.loadEligibilityCriteria();   
       });
     })
   }

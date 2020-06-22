@@ -218,7 +218,6 @@ console
       let applicationId = (this.router.url.split("/")[2]).slice(7);
       this.CandidateService.getApplication(applicationId).subscribe(
         (res: INewResponse) => {
-          console.log(res, "progress")
           this.model = res.payload.data;
           this.model.appliedForPosition = this.model.job.jobTitle
           this.model.appliedForJdId = this.model.job.code

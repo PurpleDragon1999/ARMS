@@ -49,30 +49,37 @@ export class EmploymentTypeComponent implements OnInit {
     this.employmentTypes().push(this.newEmploymentType());
   }
 
+  deleteNewEntry(empTypeIndex){
+    this.employmentTypes().removeAt(empTypeIndex);
+    if ((this.employmentTypeForm.get('employmentTypes').value.length)==0) {
+      this.addEmploymentTypes = false;
+    }
+  }
+
   removeEmploymentType(empTypeIndex: number) {
     const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
-
     modalRef.componentInstance.shouldConfirm = true;
-
     modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
       modalRef.close();
     });
-    this.employmentTypes().removeAt(empTypeIndex);
-    if (empTypeIndex == 0) {
-      this.addEmploymentTypes = false;
-    }
-    return this._service.deleteEmploymentType(empTypeIndex).subscribe(
-      (response: any) => {
+
+    modalRef.componentInstance.emitPerformRequest.subscribe(() => {
+      this.deleteNewEntry(empTypeIndex);
+
+      return this._service.deleteEmploymentType(empTypeIndex).subscribe(
+        (response: any) => {
+
         this.loadEmploymentTypes();
-        modalRef.componentInstance.success = response.body.success;
-        modalRef.componentInstance.message =
+          modalRef.componentInstance.success = response.body.success;
+          modalRef.componentInstance.message =
           response.body.payload.message;
-      },
-      (error: HttpErrorResponse) => {
-        modalRef.componentInstance.success = error.error.success;
-        modalRef.componentInstance.message = error.error.payload.message;
-      }
-    );
+        },
+        (error: HttpErrorResponse) => {
+          modalRef.componentInstance.success = error.error.success;
+          modalRef.componentInstance.message = error.error.payload.message;
+        }
+        );
+    });
   }
 
   onSubmit() {
@@ -82,7 +89,11 @@ export class EmploymentTypeComponent implements OnInit {
       modalRef.componentInstance.success = res.success;
       modalRef.componentInstance.message = res.payload.message;
       modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
-      modalRef.close();        
+        modalRef.close();
+        
+      this.employmentTypeForm.reset();
+      this.addEmploymentTypes = false;
+      this.loadEmploymentTypes();
       });
     })
   }

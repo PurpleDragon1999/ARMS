@@ -71,7 +71,6 @@ export class ScheduleInterviewComponent implements OnInit {
     for (let i = 0; i < this.rounds.length; i++) {
       this.main.push(this.active);
     }
-    console.log(this.main);
   }
 
   changeActive(index: number, panel: number) {
@@ -87,7 +86,6 @@ export class ScheduleInterviewComponent implements OnInit {
       this.list = false;
     }
     this.searchData.length == 0 ? (this.list = false) : (this.list = true);
-    console.log(this.searchData, this.list);
   }
 
   select(data: any, roundId: number, index: number) {
