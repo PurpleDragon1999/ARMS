@@ -6,7 +6,7 @@ import { HttpClient, HttpResponse, HttpHeaders, HttpParams } from "@angular/comm
 import { Observable } from "rxjs";
 import { ICreate } from "../models/create.interface";
 import { HOST } from 'src/app/config/apiHost.config';
-
+const CALENDER_API ="https://graph.microsoft.com/v1.0/me/events"
 const USER_DOMAIN = "http://localhost:3000";
 @Injectable({
   providedIn: "root",
@@ -166,4 +166,9 @@ export class AppServicesService {
       { ...this.httpOptions }
     );
   }
+  blockCalender(obj):Observable<any>{
+    
+     return this.http.post<any>(CALENDER_API,obj);
+   
+   }
 }

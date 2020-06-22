@@ -29,7 +29,7 @@ export class CreateInterviewComponent implements OnInit {
   interview: any = {}
   interviewObj: any ={}
   formType:any;
-
+  roundsList:any=[];
   RoundType: any[]=[
   ]
 
@@ -55,7 +55,7 @@ export class CreateInterviewComponent implements OnInit {
       this.RoundType = res.payload.data;
     })
   }
-
+  i:any;
   createInterview(interview: any) {
     let round = [];
     for (let index =0; index<this.number; index++){
@@ -74,6 +74,10 @@ export class CreateInterviewComponent implements OnInit {
     this.interviewObj.Round = round;
 
     this.service.createInterview(this.interviewObj).subscribe((res:any) => {
+   
+       this.roundsList=res.body.payload.data;
+       this.blockCalender(this.roundsList);
+      
       const modalRef = this.modalService.open(ModalComponent);
       modalRef.componentInstance.shouldConfirm = false;
       modalRef.componentInstance.success = res.body.success;
@@ -81,6 +85,7 @@ export class CreateInterviewComponent implements OnInit {
       modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
         modalRef.close();        
         });
+       
       },
     
     // (error: HttpErrorResponse) => {
@@ -93,5 +98,36 @@ export class CreateInterviewComponent implements OnInit {
     //     });
     //   }
     );
+  }
+  blockCalender(roundsList){
+  for (var round of roundsList) {
+        let obj={
+        "Subject": round.roundType.name+" Interview with Himanshu sharma",
+        "Body": {
+          "ContentType": "HTML",
+          "Content": "I think it will meet our requirements!"
+        },
+        "Start": {
+            "DateTime":round.roundDate,
+            "TimeZone": "India Standard Time"
+        },
+        "End": {      
+            "DateTime":"2020-07-03T19:00:00",
+            "TimeZone": "India Standard Time"
+        },
+        "Attendees": [
+          {
+            "EmailAddress": {
+              "Address": "deepanshu.balani@cygrp.com",
+              "Name": "Deepanshu balani"
+            },
+            "Type": "Required"
+          }
+        ]
+      }
+      this.AppServicesService.blockCalender(obj).subscribe(res=>{
+        console.log(res);
+     });
+    }
   }
 }

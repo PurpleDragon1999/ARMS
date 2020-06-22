@@ -209,19 +209,24 @@ namespace Arms.Api.Controllers
 				_context.Interview.Add(interviewObj);
 				_context.SaveChanges();
 				int id = interviewObj.Id;
-
+                List<Round> roundsList = new List<Round>();
 				foreach (Round round in customDTO.Round)
 				{
 					var roundObj = round;
 					roundObj.InterviewId = id;
 					_context.Round.Add(roundObj);
-					_context.SaveChanges();
-				}
-				var response = new
+                    _context.SaveChanges();
+                  
+                   
+                }
+                var roundToAdd = _context.Round.Include(c => c.RoundType).
+                    Where(c => c.InterviewId == interviewObj.Id);
+                var response = new
 				{
 					success = true,
 					payload = new
 					{
+                        data=roundToAdd,
 						message = "Interview Record Created Successfully"
 					}
 
