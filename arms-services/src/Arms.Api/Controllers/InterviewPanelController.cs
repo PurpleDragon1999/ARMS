@@ -133,6 +133,29 @@ namespace Arms.Api.Controllers
             
         }
 
+        [HttpGet("round/{interviewId}")]
+        public IActionResult getRounds(int interviewId)
+        {
+            Response response = new Response()
+            {
+                payload = new Payload()
+            };
+            try
+            {
+                var data = _context.Round.Where(r => r.InterviewId == interviewId).Select(r => new { r.Id, r.RoundDate, r.RoundTime }).ToList();
+                response.success = "true";
+                response.payload.data = data;
+                return StatusCode(200, response);
+            }
+            catch(Exception e)
+            {
+                response.success = "false";
+                response.payload.msg = "Some Error Occured. Details: " + e.Message;
+                return StatusCode(500, response);
+            }
+            
+        }
+
         [HttpGet("{id}")]
         public IActionResult getPanel(int id)
         {

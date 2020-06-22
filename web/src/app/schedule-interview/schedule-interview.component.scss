@@ -1,92 +1,96 @@
-.panel-nav{
-    background-color: #F2EDF3;
+.panel-nav {
+  background-color: #f2edf3;
 }
 
-ul{
-    list-style-type: none;
-    padding: 0;
+ul {
+  list-style-type: none;
+  padding: 0;
 }
 
-.active{
-    color: #FC4C02 !important;
-    font-weight: bolder;
+.nav-item {
+  background-color: rgba(240, 79, 35, 0.2);
 }
 
-.panel-link:hover{
-    color: #FC4C02 !important;
-    cursor: pointer;
+.active {
+  color: #fc4c02 !important;
+  font-weight: bolder;
 }
 
-input[type="date"]::-webkit-inner-spin-button{
-    display: none;
-    -webkit-appearance: none;
+.panel-link:hover {
+  color: #fc4c02 !important;
+  cursor: pointer;
 }
 
-.search-field{
-    width: 50%;
+input[type="date"]::-webkit-inner-spin-button {
+  display: none;
+  -webkit-appearance: none;
 }
 
-.panel-select{
-    border: gray;
-    border-style: solid;
-    border-width: 1px;
-    padding: 1rem;
-    margin-left: 20px;
+.search-field {
+  width: 80%;
+}
+
+.panel-select {
+  border: gray;
+  border-style: solid;
+  border-width: 1px;
+  padding: 1rem;
+  margin-left: 20px;
 }
 
 .panel-select ul {
-    background-color: #F2EDF3;
+  background-color: #f2edf3;
 }
 
 .panel-select li:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
-.search-field li{
-    height: 46px;
-    padding: 15px 22px;
+.search-field li {
+  height: 46px;
+  padding: 15px 22px;
 }
 
-.search-field li:hover{
-    background-color: #f2edf3;
-    cursor: pointer;
+.search-field li:hover {
+  background-color: rgba(240, 79, 35, 0.2);
+  cursor: pointer;
 }
 
-.search-field ul{
-    background-color: #ffffff;
-    border: #80bdff;
-    border-top: white;
-    height: fit-content;
-    border-style: solid;
-    border-width: 0.5px;
-    max-height: 10rem;
-    margin-left: 39px;
-    overflow-y: auto;
+.search-field ul {
+  background-color: #ffffff;
+  border: #80bdff;
+  border-top: white;
+  height: fit-content;
+  border-style: solid;
+  border-width: 0.5px;
+  max-height: 10rem;
+  margin-left: 39px;
+  overflow-y: auto;
 }
 
 @media only screen and (max-width: 600px) {
-    .card .card-body{
-        padding: 1rem;
-    }
-
-    .search-field{
-        width: 100%;
-    }
-
-    .search-field li{
-        font-size: 10px !important;
-    }
-
-    .panel-select{
-        margin-left: 0;
-    }
+  .card .card-body {
+    padding: 1rem;
   }
 
-.emp-card{
-    padding: 0.5rem !important;
-    background-color: #f2edf3;
+  .search-field {
+    width: 100%;
+  }
+
+  .search-field li {
+    font-size: 10px !important;
+  }
+
+  .panel-select {
+    margin-left: 0;
+  }
 }
 
-p{
-    margin: 0;
+.emp-card {
+  padding: 0.5rem !important;
+  background-color: #f2edf3;
+}
+
+p {
+  margin: 0;
 }

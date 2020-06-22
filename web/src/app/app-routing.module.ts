@@ -1,3 +1,4 @@
+import { InterviewTrackerComponent } from "./interview-tracker/interview-tracker.component";
 import { HrInterviewAssessementComponent } from "./hr-interview-assessement/hr-interview-assessement.component";
 import { SettingsComponent } from "./settings/settings.component";
 import { CreateInterviewComponent } from "./create-interview/create-interview.component";
@@ -92,8 +93,23 @@ const routes: Routes = [
         component: CandidateComponent,
       },
       {
-        path: "create-interview",
-        component: CreateInterviewComponent,
+        path: "interview",
+        component: InterviewTrackerComponent,
+        children: [
+          {
+            path: "",
+            redirectTo: "create",
+            pathMatch: "full",
+          },
+          {
+            path: "create",
+            component: CreateInterviewComponent,
+          },
+          {
+            path: "select-panel/:interviewId",
+            component: ScheduleInterviewComponent,
+          },
+        ],
       },
 
       {
