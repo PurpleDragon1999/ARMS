@@ -41,25 +41,33 @@ export class CandidateService {
         );
     }
 
-    getApplications(){
+    getApplications(jobId:string){
+        if(jobId!=null){
         return this.http.get<INewResponse>(
-            "http://localhost:40802/api/candidate", this.options
+           
+           `${HOST}/api/candidate?jobId=${jobId}`, this.options
         )
+        }
+        else{
+            return this.http.get<INewResponse>(
+             CANDIDATE_API, this.options
+             )
+        }
     }
 
     getApplication(id: string): Observable<INewResponse>{
-        return this.http.get<INewResponse>(`http://localhost:40802/api/candidate/${id}`, this.options)
+        return this.http.get<INewResponse>(`${CANDIDATE_API}/${id}`, this.options)
       }
 
     getIdProofTypes(){
         return this.http.get<INewResponse>(
-            "http://localhost:40802/api/IdProofType", this.options
+           `${HOST}/api/IdProofType`, this.options
         )
     }
 
     createCandidate(candidateObj){
         return this.http.post<INewResponse>(
-            "http://localhost:40802/api/candidate", candidateObj, this.options
+                       CANDIDATE_API,candidateObj, this.options
         )
     }
 }

@@ -32,6 +32,9 @@ export class InterviewListComponent implements OnInit {
       this.interviewsList = response.payload.data
     });
   }
+  appliedCandidates(jobId:number){
+     this.router.navigate(['admin/candidate',jobId]);
+  }
 
   interviewUpdateModal(id) {
     const modalRef: NgbModalRef = this.modalService.open(CreateInterviewComponent)

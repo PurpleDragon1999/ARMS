@@ -6,7 +6,8 @@ import { IModelForPagination } from '../models/modelPagination.interface';
 import { ICandidate } from '../models/candidate.interface';
 import { HttpErrorResponse } from '@angular/common/http';
 import { BufferToPdf } from '../utils/bufferToPdf';
-
+import { Router, ActivatedRoute, Params } from "@angular/router";
+import { switchMap } from "rxjs/operators";
 @Component({
     selector: 'app-candidate',
     templateUrl: 'candidate.component.html',
@@ -18,15 +19,34 @@ export class CandidateComponent implements OnInit {
     columns: Array<string>;
     pager: any;
 
-    constructor(private candidateService: CandidateService, private bufferToPdf: BufferToPdf) { }
+    constructor(private candidateService: CandidateService, 
+                private bufferToPdf: BufferToPdf,
+                private route:ActivatedRoute) { }
 
-    ngOnInit(): void {
-        this.getCandidates();
-        //this.searchCandidate({ page: 1, character: '' });
+    ngOnInit():any{
+        this.callFunction();
+      
     }
+    callFunction():any{
+        
+    this.route.params
+    .pipe(
+        switchMap((params: Params) => {
+        return this.candidateService.getApplications(params.jobId);
+        })
+     )
+       .subscribe((res) => {
+       
+            this.candidates = res.payload.data
+            this.columns = ["name", "email", "experience", "Job Position"];
+    
+        });
+      }
+   
 
-    getCandidates(){
-        this.candidateService.getApplications().subscribe((res: INewResponse)=>{
+
+    getCandidates(jobId){
+        this.candidateService.getApplications(jobId).subscribe((res: INewResponse)=>{
         this.candidates = res.payload.data
         this.columns = ["name", "email", "experience", "Job Position"];
 

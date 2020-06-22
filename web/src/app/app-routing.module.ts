@@ -116,6 +116,10 @@ const routes: Routes = [
         path: "interview/schedule",
         component: ScheduleInterviewComponent,
       },
+      {
+        path: "candidate/:jobId",
+        component: CandidateComponent,
+      },
     ],
   },
   {
@@ -134,6 +138,10 @@ const routes: Routes = [
         component: HrComponent,
       },
       { path: "interviews", component: InterviewListComponent },
+      {
+        path: "candidate",
+        component: CandidateComponent,
+      },
     ],
   },
   {

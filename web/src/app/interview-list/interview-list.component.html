@@ -46,7 +46,8 @@
                             (click)="deleteInterview(interview?.id)"
                             ></i>
                           </a>
-                          
+                           
+                         
                         </div>
                       </div>
                       <!--large screens-->
@@ -56,6 +57,9 @@
                       ></i>
                       <i class="mdi mdi-pencil float-right d-none d-lg-block"
                       (click)="interviewUpdateModal(interview?.id)"
+                      ></i>
+                      <i class="mdi mdi-account-multiple float-right d-none d-lg-block"
+                        (click)="appliedCandidates(interview?.jobId)"
                       ></i>
                     </h5>
                      
