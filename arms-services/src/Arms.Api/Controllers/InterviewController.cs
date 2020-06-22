@@ -10,6 +10,7 @@ using Arms.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Arms.Domain.CustomEntities;
 using Microsoft.AspNetCore.Authorization;
+using System.Net.Http;
 
 namespace Arms.Api.Controllers
 {
@@ -29,56 +30,88 @@ namespace Arms.Api.Controllers
 		}
 
 
-		[HttpGet]
+        [HttpGet]
         [AllowAnonymous]
-		public IActionResult GetInterviews()
-		{
+        public IActionResult GetInterviews(string employeeId)
+        {
+            if (employeeId != null)
+            {
+                var eee= Int16.Parse(employeeId);
+               
+                var interviewer = _context.Interviewer.Where(c => c.EmployeeId == eee);
+                Interview[] interviewsTo= new Interview[] { };
+                List<Interview> listing = interviewsTo.ToList();
+                int[] jobIds = new int[] { };
+                foreach( var inte in interviewer)
+                {
+                   jobIds.Append(inte.JobId);
+                    Interview interviewTo = _context.Interview.FirstOrDefault(c => c.JobId == inte.JobId);
+                     listing.Add(interviewTo);
+                    Console.WriteLine(interviewsTo);
+                }
+               
 
-			List<Interview> interviews = _context.Interview.Include(c => c.JobDescription).ToList();
-			try
-			{
-				if (interviews != null)
-				{
-					var response = new
-						{
-							success = true,
-							payload = new
-							{
-								data = interviews,
-								message = "Interview Records Retrieved Successfully"
-							}
+                var response = new
+                {
+                    success = true,
+                    payload = new
+                    {
+                        data = listing,
+                        message = "Interview Records Retrieved Successfully"
+                    }
 
-						};
-						return StatusCode(200, response);
-				}
-				else
-				{
-					var response = new
-					{
-						success = false,
-						payload = new
-						{
-							message = "The Interview Records you are looking for do not exist"
-						}
+                };
+                return StatusCode(200, response);
 
-					};
-					return StatusCode(404, response);
-				}
-			}
-			catch(Exception e)
-			{
-				var response = new
-				{
-					success = false,
-					payload = new
-					{
-						message = e.InnerException.Message
-					}
+            }
 
-				};
-				return StatusCode(500, response);
-			}
-		}
+            List<Interview> interviews = _context.Interview.Include(c => c.JobDescription).ToList();
+                try
+                {
+                    if (interviews != null)
+                    {
+                        var response = new
+                        {
+                            success = true,
+                            payload = new
+                            {
+                                data = interviews,
+                                message = "Interview Records Retrieved Successfully"
+                            }
+
+                        };
+                        return StatusCode(200, response);
+                    }
+                    else
+                    {
+                        var response = new
+                        {
+                            success = false,
+                            payload = new
+                            {
+                                message = "The Interview Records you are looking for do not exist"
+                            }
+
+                        };
+                        return StatusCode(404, response);
+                    }
+                }
+
+                catch (Exception e)
+                {
+                    var response = new
+                    {
+                        success = false,
+                        payload = new
+                        {
+                            message = e.InnerException.Message
+                        }
+
+                    };
+                    return StatusCode(500, response);
+                }
+            
+        }
 
 
 		[HttpGet("{id}")]
@@ -401,20 +434,23 @@ namespace Arms.Api.Controllers
 				};
 				return StatusCode(500, response);
 			}
-		}
+             
+        }
+      
 
-		//Email Class is made seperate to pass 3 different objects
-		public class Email
-		{
-			public Email()
-			{
+    }
+    //Email Class is made seperate to pass 3 different objects
+    public class Email
+    {
+        public Email()
+        {
 
 
-			}
-			public string GenerateEmailBody(JobDescription jdObject, Interview interview, Arms.Domain.Entities.Application app)
-			{
+        }
+        public string GenerateEmailBody(JobDescription jdObject, Interview interview, Arms.Domain.Entities.Application app)
+        {
 
-				string output = @"<html>
+            string output = @"<html>
 		   <head>    
 			  <style type=""text/css"">
 			   </style>
@@ -458,7 +494,7 @@ namespace Arms.Api.Controllers
 		  <td> B-9, Block B, Sector 3, Noida, Uttar Pradesh 201301</td>
 		 </tr>
 		</table>" +
-		 @"<a href = 'http://localhost:4200/progressTracker/" + app.Candidate.Code + "'>" + @"Please click here to track your progress</a>
+     @"<a href = 'http://localhost:4200/progressTracker/" + app.Candidate.Code + "'>" + @"Please click here to track your progress</a>
 		<br>
 		 <em>This is automatically generated email,please do not reply</em>
 		<p>Thanks</p>
@@ -468,18 +504,14 @@ namespace Arms.Api.Controllers
 		 </body>
 	 </html>
 			";
-				Console.WriteLine(output);
-				return output;
-			}
-
-
-		
+            Console.WriteLine(output);
+            return output;
+        }
 
 
 
-	}
 
 
 
-	}
+    }
 }

@@ -71,7 +71,7 @@ export class JdListComponent implements OnInit {
         modalRef.componentInstance.success = res.success;
         modalRef.componentInstance.message = res.payload.message;
         }, (error: HttpErrorResponse) => {
-          modalRef.componentInstance.success = error.error.success;
+          modalRef.componentInstance.success = error.ok;
           modalRef.componentInstance.message = error.error.payload.message;
     });
   });

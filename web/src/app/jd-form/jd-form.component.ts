@@ -85,15 +85,15 @@ export class JdFormComponent implements OnInit {
       salary: ["", Validators.required],
       vacancies: ["", Validators.required],
     });
-    this._service.getAllEligibilityCriterias().subscribe((res: IResponse) => {
+    this._service.getAllEligibilityCriterias().subscribe((res: any) => {
       this.eligibilityCriterias = res.payload.data;
 
     });
-    this._service.getAllLocations().subscribe((res: IResponse) => {
+    this._service.getAllLocations().subscribe((res: any) => {
       this.locations = res.payload.data;
 
     });
-    this._service.getAllEmploymentTypes().subscribe((res: IResponse) => {
+    this._service.getAllEmploymentTypes().subscribe((res: any) => {
       this.employmentTypes = res.payload.data;
 
     });
@@ -126,7 +126,7 @@ export class JdFormComponent implements OnInit {
       description: this.jobDescription.nativeElement.value,
       skills: this.skills.nativeElement.value,
       employmentTypeId: Number(this.jobType.nativeElement.value.substring(0, 1)),
-      eligibilityCriteriaId: Number(this.eligibilityCriteria.nativeElement.value.substring(0, 1)),
+      eligibilityCriteria: Number(this.eligibilityCriteria.nativeElement.value.substring(0, 1)),
       locationId: Number(this.location.nativeElement.value.substring(0, 1)),
       salary: this.salary.nativeElement.value + this.currencyText,
       vacancies: this.vacancies.nativeElement.value,
@@ -141,13 +141,13 @@ export class JdFormComponent implements OnInit {
       };
       return;
     }
-
+   
     this.jobService.jdFormData(this.jdFormObject).subscribe((res: any) => {
-      this.data = res.payload.data;
+      this.data = res.body.payload.data;
       const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
       modalRef.componentInstance.shouldConfirm = false;
-      modalRef.componentInstance.success = res.success;
-      modalRef.componentInstance.message = res.payload.message;
+      modalRef.componentInstance.success = res.body.success;
+      modalRef.componentInstance.message = res.body.payload.message;
       modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
         modalRef.close();
       });
@@ -155,6 +155,7 @@ export class JdFormComponent implements OnInit {
       this.router.navigate(["admin/job-desc"]);
     },
       (error: HttpErrorResponse) => {
+        console.log(error);
         const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
         modalRef.componentInstance.shouldConfirm = false;
         modalRef.componentInstance.success = error.error.success;

@@ -70,10 +70,17 @@ export class AppServicesService {
     });
   }
   getAllInterviews(): Observable<IResponse> {
+  if(this.tokenDecoder().role=='Employee'){
     return this.http.get<IResponse>(
-      `${HOST}/api/interview`,
-      this.httpOptions
-    );
+      `${HOST}/api/interview?employeeId=${this.tokenDecoder().Id}`,
+       this.httpOptions
+     );
+  }else{
+     return this.http.get<IResponse>(
+       `${HOST}/api/interview`,
+        this.httpOptions
+      );
+     }
   }
 
   deleteInterview(interviewId): Observable<IResponse> {

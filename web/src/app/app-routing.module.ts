@@ -133,6 +133,7 @@ const routes: Routes = [
         path: "home",
         component: HrComponent,
       },
+      { path: "interviews", component: InterviewListComponent },
     ],
   },
   {
