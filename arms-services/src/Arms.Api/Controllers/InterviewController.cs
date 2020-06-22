@@ -32,13 +32,31 @@ namespace Arms.Api.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult GetInterviews(string employeeId)
-        {
+        public IActionResult GetInterviews(string employeeId,string jobId)
+        {    if(employeeId!=null && jobId != null)
+            {
+
+
+                Round round =GetRound(employeeId, jobId);
+                var response = new
+                {
+                    success = true,
+                    payload = new
+                    {
+                        data = round,
+                        message = "Round Retrieved Successfully"
+                    }
+
+                };
+                return StatusCode(200, response);
+
+
+            }
             if (employeeId != null)
             {
-                var eee= Int16.Parse(employeeId);
+                var empId= Int16.Parse(employeeId);
                
-                var interviewer = _context.Interviewer.Where(c => c.EmployeeId == eee);
+                var interviewer = _context.Interviewer.Where(c => c.EmployeeId == empId);
                 Interview[] interviewsTo= new Interview[] { };
                 List<Interview> listing = interviewsTo.ToList();
                 int[] jobIds = new int[] { };
@@ -116,7 +134,7 @@ namespace Arms.Api.Controllers
 
 		[HttpGet("{id}")]
 		public IActionResult GetInterview(int id, int append=0)
-		{
+        {
 			var interview = _context.Interview.Include(c => c.JobDescription).SingleOrDefault(c => c.Id == id);
 			try
 			{
@@ -441,6 +459,22 @@ namespace Arms.Api.Controllers
 			}
              
         }
+       
+        public Round GetRound(string employeeId,string jobId)
+        {
+            
+                var empId = Int16.Parse(employeeId);
+                var jId = Int16.Parse(jobId);
+                var interviewer = _context.Interviewer.FirstOrDefault(c => c.EmployeeId == empId && c.JobId==jId);
+                var panel = _context.InterviewPanel.FirstOrDefault(c=>c.Id==interviewer.InterviewPanelId);
+                Round round = _context.Round.FirstOrDefault(c => c.Id == panel.RoundId);
+            return round;
+
+      }
+
+
+
+        
       
 
     }
