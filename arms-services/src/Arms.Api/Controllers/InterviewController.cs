@@ -32,8 +32,8 @@ namespace Arms.Api.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult GetInterviews(string employeeId,string jobId)
-        {    if(employeeId!=null && jobId != null)
+        public IActionResult GetInterviews(int employeeId=0,int jobId=0)
+        {    if(employeeId!=0 && jobId != 0)
             {
 
 
@@ -52,11 +52,11 @@ namespace Arms.Api.Controllers
 
 
             }
-            if (employeeId != null)
+            if (employeeId != 0)
             {
-                var empId= Int16.Parse(employeeId);
+                
                
-                var interviewer = _context.Interviewer.Where(c => c.EmployeeId == empId);
+                var interviewer = _context.Interviewer.Where(c => c.EmployeeId == employeeId);
                 Interview[] interviewsTo= new Interview[] { };
                 List<Interview> listing = interviewsTo.ToList();
                 int[] jobIds = new int[] { };
@@ -460,12 +460,9 @@ namespace Arms.Api.Controllers
              
         }
        
-        public Round GetRound(string employeeId,string jobId)
+        public Round GetRound(int employeeId,int jobId)
         {
-            
-                var empId = Int16.Parse(employeeId);
-                var jId = Int16.Parse(jobId);
-                var interviewer = _context.Interviewer.FirstOrDefault(c => c.EmployeeId == empId && c.JobId==jId);
+                var interviewer = _context.Interviewer.FirstOrDefault(c => c.EmployeeId == employeeId && c.JobId==jobId);
                 var panel = _context.InterviewPanel.FirstOrDefault(c=>c.Id==interviewer.InterviewPanelId);
                 Round round = _context.Round.FirstOrDefault(c => c.Id == panel.RoundId);
             return round;

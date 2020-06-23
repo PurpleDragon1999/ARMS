@@ -35,14 +35,14 @@ namespace Arms.Api.Controllers
 
         [HttpGet]
        
-        public IActionResult Getcandidates(string jobId)
+        public IActionResult Getcandidates(int jobId=0)
         {
             List<Arms.Domain.Entities.Application> applications;
-            if (jobId != null)
+            if (jobId != 0)
             {
-                var applicationJobId = Int16.Parse(jobId);
+               
 
-                applications = _context.Application.Include(c => c.Candidate).Include(c => c.ApplicationStatusType).Include(c=> c.Job).Where(c => c.JobId == applicationJobId).ToList();
+                applications = _context.Application.Include(c => c.Candidate).Include(c => c.ApplicationStatusType).Include(c=> c.Job).Where(c => c.JobId == jobId).ToList();
             }
             else
             {
