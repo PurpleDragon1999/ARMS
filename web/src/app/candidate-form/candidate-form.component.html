@@ -158,15 +158,16 @@
                ngModel #file="ngModel" 
                (change) = "uploadResume($event)"
                [ngClass]="{ 'is-invalid': file.dirty && file.invalid}" required>
-              <!-- <label for="file" class="file-upload-browse btn btn-gradient-danger mr-2">Upload Resume</label> -->
               <div *ngIf="file.dirty  && file.errors?.required" class="invalid-feedback">
                 <div><i class="mdi mdi-alert-outline"></i>Resume is required</div>
               </div>
             </div>
 
             <div *ngIf="type == 'progressTracker'" class="input-group col-xs-12"> 
-              <input [readOnly]="type == 'progressTracker'" type="text" name="file" class="form-control"
-              placeholder="CV will be shown here"> 
+              <!-- <input [readOnly]="type == 'progressTracker'" type="text" [(ngModel)]="model.name" name="file" class="form-control"  (click)="openResume()"
+              placeholder="CV will be shown here">  -->
+              
+              <a (click)="openResume()" ><i class="far fa-file-pdf"></i>  {{model.name}}|CV</a>
             </div>
           </div>   
 

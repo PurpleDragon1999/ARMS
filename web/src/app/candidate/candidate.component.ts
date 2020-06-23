@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { UrltoFile } from './../utils/urlToFile';
 import { IResponse } from 'src/app/models/response.interface';
 import { Component, OnInit } from "@angular/core";
 import { CandidateService } from './services/candidate.service';
@@ -12,14 +14,16 @@ import { ModalComponent } from 'src/app/reusable-components/modal/modal.componen
     selector: 'app-candidate',
     templateUrl: 'candidate.component.html',
     styleUrls: ['candidate.component.scss'],
-    providers: [BufferToPdf]
+    providers: [UrltoFile, BufferToPdf],
 })
 export class CandidateComponent implements OnInit {
     candidates: ICandidate[];
     columns: Array<string>;
     pager: any;
+    file : any;
+    resumeDetails : any
 
-    constructor(private modalService: NgbModal,private candidateService: CandidateService, private bufferToPdf: BufferToPdf) { }
+    constructor(private router : Router,private urltoFile: UrltoFile,private modalService: NgbModal,private candidateService: CandidateService, private bufferToPdf: BufferToPdf) { }
 
     ngOnInit(): void {
         this.getCandidates();
@@ -52,8 +56,6 @@ export class CandidateComponent implements OnInit {
         this.candidateService.getApplications().subscribe((res: IResponse)=>{
         this.candidates = res.payload.data
         this.columns = ["name", "email", "experience", "Job Position"];
-        
-        
         })
     }
 
@@ -74,11 +76,44 @@ export class CandidateComponent implements OnInit {
         });
     }
 
-    downloadPdf(cv: string): void {
-        let newPdfWindow = window.open("", "Print");
+    getResume(id : number){
+       
+        this.candidateService.getResume(id).subscribe((res : IResponse)=>{
+          if (res.success==true){
+           
+            this.resumeDetails = res.payload.data[0]
+            let cv = this.resumeDetails.cv ? 
+            "data:application/" +
+            'pdf' +
+            ";base64," +
+            this.resumeDetails.cv
+                        : null;
+            this.urltoFile.urltoFile(
+            cv,
+            this.resumeDetails.name,
+            "application/octet-stream"
+                      ).then(file=> {
+            this.file = file;
+            this.openResume()
+                      });
+          }
+          else{
+              this.router.navigate(['/404'])
+          }
+        })
+        
+      }
 
-        let iframe = `<\iframe width='100%' height='100%' src="${cv}"><\/iframe>`;
-
-        newPdfWindow.document.write(iframe);
+    openResume(){
+        let fileType = this.resumeDetails.name.split(".")[1];
+        const blob = new Blob([this.file], { type:"application/" + fileType });
+        // var a = document.createElement("a");
+        // a.href = URL.createObjectURL(blob);
+        // //a.download = this.result.name;
+        // window.open(a.href)
+        // a.click();
+        const url = window.URL.createObjectURL(blob);
+        window.open(url);
     }
+
 }

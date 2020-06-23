@@ -54,7 +54,7 @@ export class ListComponent {
     this.emitPaginatedResult.emit({ page, character });
   }
 
-  showPdf(pdf: string): void {
-    this.emitDownloadPdf.emit(pdf);
+  showPdf(id: string): void {
+    this.emitDownloadPdf.emit(id);
   }
 }

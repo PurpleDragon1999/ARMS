@@ -1,3 +1,4 @@
+import { BufferToPdf } from './../utils/bufferToPdf';
 import { InterviewService } from './../services/interview.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { error } from 'util';
@@ -21,7 +22,7 @@ export class ProgressTrackerComponent implements OnInit {
   applicationStatusName : string
   noOfRounds : number
   applicationCode : string
-
+  
   constructor( private route: ActivatedRoute,private _route : Router, private CandidateService : CandidateService, private InterviewService : InterviewService) { }
 
   ngOnInit() {
@@ -42,9 +43,8 @@ export class ProgressTrackerComponent implements OnInit {
       }
       else{
         this.applicationdata = res.payload.data
-        this.applicationStatusName = this.applicationdata.applicationStatusType.statusName
         this.loadInterviews(this.applicationdata.job.id)
-        //this.getResume(this.applicationdata.resumeId)
+        this.applicationStatusName = this.applicationdata.applicationStatusType.statusName
       }    
     }, (error )=>{
       this._route.navigate(['/404'])
@@ -52,18 +52,8 @@ export class ProgressTrackerComponent implements OnInit {
   }
 
   loadInterviews(jobId : number){
-   
     this.InterviewService.getInterviews(this.applicationdata.job.id).subscribe((res : IResponse)=>{
       this.noOfRounds = res.payload.data[0].noOfRounds;
-    })
-  }
-
-  getResume(id : number){
-    this.CandidateService.getResume(id).subscribe((res : any)=>{ 
-      let resume = res.result.data.cv
-      let file = new Blob([resume], { type: 'application/pdf' });            
-      var fileURL = URL.createObjectURL(file);
-      window.open(fileURL);
     })
   }
 }

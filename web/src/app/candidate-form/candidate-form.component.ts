@@ -1,3 +1,4 @@
+import {UrltoFile} from './../utils/urlToFile'
 import { IResponse } from './../models/response.interface';
 import { JobService } from './../services/job.service';
 import { CandidateService } from './../candidate/services/candidate.service';
@@ -10,11 +11,14 @@ import { NgbModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
 import { ModalComponent } from "../reusable-components/modal/modal.component"
 import { Router, Params, ActivatedRoute } from "@angular/router";
 import { error } from 'util';
+import { from } from 'rxjs';
+import { Url } from 'url';
 
 @Component({
   selector: "app-candidate-form",
   templateUrl: "./candidate-form.component.html",
   styleUrls: ["./candidate-form.component.scss"],
+  providers : [UrltoFile]
 })
 export class CandidateFormComponent implements OnInit {
   numbersInYears : Array<number>
@@ -23,17 +27,17 @@ export class CandidateFormComponent implements OnInit {
   model: any = {};
   type: String;
   file : any
-  jdObjectId : String
-  
-  @Input()
-  data: ICandidate;
+  resumeDetails : any
 
+  
   constructor(private modalService: NgbModal,
     private router: Router,
     private service: AppServicesService,
     private CandidateService : CandidateService,
     private jobService: JobService,
-    private route : ActivatedRoute
+    private route : ActivatedRoute,
+    private urltoFile : UrltoFile
+
   ) { 
     this.numbersInYears = Array(30).fill(0).map((x,i)=>i);
     this.numbersInMonths = Array(12).fill(0).map((x,i)=>i);
@@ -78,6 +82,7 @@ export class CandidateFormComponent implements OnInit {
         this.CandidateService.getApplication(applicationId).subscribe((res:IResponse)=>{
           if (res.success == true){
           let application = res.payload.data
+          this.model.id = applicationId
           this.model.appliedForJdId = application.job.code;
           this.model.appliedForPosition = application.job.jobTitle;
           this.model.name = application.candidate.name;
@@ -89,6 +94,7 @@ export class CandidateFormComponent implements OnInit {
           this.model.education = application.education
           this.model.experienceInYears = (application.experience).split(" ")[0]
           this.model.experienceInMonths = (application.experience).split(" ")[2]
+          this.getResume(applicationId)
           }
           else{
             this.router.navigate(['/404']);
@@ -98,8 +104,40 @@ export class CandidateFormComponent implements OnInit {
           console.log(error)
           this.router.navigate(['/404']);
         })
+        
       }
     } 
+
+    openResume(){
+        let fileType = this.resumeDetails.name.split(".")[1];
+        const blob = new Blob([this.file], { type:"application/" + fileType });
+        // var a = document.createElement("a");
+        // a.href = URL.createObjectURL(blob);
+        // //a.download = this.result.name;
+        // window.open(a.href)
+        // a.click();
+        const url = window.URL.createObjectURL(blob);
+        window.open(url);
+    }
+
+    getResume(id : number){
+      this.CandidateService.getResume(id).subscribe((res : IResponse)=>{
+        this.resumeDetails = res.payload.data[0]
+        this.model.cv = this.resumeDetails.cv ? 
+        "data:application/" +
+        'pdf' +
+        ";base64," +
+        this.resumeDetails.cv
+                    : null;
+        this.urltoFile.urltoFile(
+        this.model.cv,
+        this.resumeDetails.name,
+        "application/octet-stream"
+                  ).then(file=> {
+        this.file = file;
+                  });
+      })
+    }
 
     getIdProofType(){
       this.service.getAllIdProofTypes().subscribe((res : any)=>{
@@ -107,14 +145,13 @@ export class CandidateFormComponent implements OnInit {
       })
     }
 
-    uploadResume(event){
+  uploadResume(event){
       if (event.target.files.length > 0) {
         this.file = event.target.files[0];
       }
     }
 
-validateApplication(applicationObj : ICandidate){
-  
+  validateApplication(applicationObj : ICandidate){
   if (applicationObj.nationality == "Indian"){
     
     if (this.idProofTypes[0].id != applicationObj.idProofTypeId ){
@@ -143,49 +180,47 @@ validateApplication(applicationObj : ICandidate){
      }
 }
 
-createApplication(application ){
-  let applicationObj = application.value;
-  let isValid = this.validateApplication(applicationObj)
+  createApplication(application ){
+    let applicationObj = application.value;
+    let isValid = this.validateApplication(applicationObj)
 
-  let experience = this.model.experienceInYears + " years " + this.model.experienceInMonths + " months"
-  let jobId = (this.model.appliedForJdId)[6];
-
- 
-  var formData = new FormData();
-  formData.append("name", this.model.name)
-  formData.append("education", this.model.education)
-  formData.append("email", this.model.email)
-  formData.append("phone", this.model.phone)
-  formData.append("experience", experience)
-  formData.append("nationality", this.model.nationality)
-  formData.append("idProofTypeId", this.model.idProofTypeId)
-  formData.append("identificationNo", this.model.identificationNo)
-  formData.append("jobId", jobId)  
-  formData.append("cv", this.file) 
-  formData.append("createdBy", "employee")
-  formData.append("modifiedBy", "employee")
- 
-  if (isValid.success == true){
-   
-    this.CandidateService.createCandidate(formData).subscribe((res : IResponse)=>{
-      
-      if (res != null){
-        this.openModal(res)
-        if (res.success == true){
-          application.resetForm()
+    let experience = this.model.experienceInYears + " years " + this.model.experienceInMonths + " months"
+    let jobId = (this.model.appliedForJdId)[6];
+    var formData = new FormData();
+    formData.append("name", this.model.name)
+    formData.append("education", this.model.education)
+    formData.append("email", this.model.email)
+    formData.append("phone", this.model.phone)
+    formData.append("experience", experience)
+    formData.append("nationality", this.model.nationality)
+    formData.append("idProofTypeId", this.model.idProofTypeId)
+    formData.append("identificationNo", this.model.identificationNo)
+    formData.append("jobId", jobId)  
+    formData.append("cv", this.file) 
+    formData.append("createdBy", "employee")
+    formData.append("modifiedBy", "employee")
+  
+    if (isValid.success == true){
+    
+      this.CandidateService.createCandidate(formData).subscribe((res : IResponse)=>{
+        
+        if (res != null){
+          this.openModal(res)
+          if (res.success == true){
+            application.resetForm()
+          }
         }
-      }
-      
-    },
-    error=>{
-      console.log(error)
-    })
-  }
-  else{
-    this.openModal(isValid);
-  }
+        
+      },
+      error=>{
+        console.log(error)
+      })
+    }
+    else{
+      this.openModal(isValid);
+    }
 
-}
+  }
 
   openModal(res ){
     const modalRef: NgbModalRef = this.modalService.open(ModalComponent);

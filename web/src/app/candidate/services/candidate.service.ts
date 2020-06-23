@@ -25,13 +25,6 @@ export class CandidateService {
         
     }
 
-    private httpOptions = {
-        headers: this.headers,
-        'responseType'  : 'arraybuffer' as 'json'
-    }
-
-    
-
     constructor(private http: HttpClient) { };
 
     getCandidate(): Observable<IResponse> {
@@ -64,8 +57,8 @@ export class CandidateService {
         )
     }
 
-    getResume(id : number) : Observable<IResponse>{
-        return this.http.get<IResponse>(`${RESUME_API}/${id}`, this.httpOptions)
+    getResume(id : number = 0) : Observable<IResponse>{
+        return this.http.get<IResponse>(`${RESUME_API}?applicationId=${id}`, this.options)
     }
 
     deleteApplication(id ): Observable<IResponse>{

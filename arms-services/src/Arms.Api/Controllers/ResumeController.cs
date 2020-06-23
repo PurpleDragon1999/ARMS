@@ -14,15 +14,23 @@ namespace Arms.Api.Controllers
     {
         public ArmsDbContext _context;
         public MailHelperController mailHelper = new MailHelperController();
-        public ResumeController(IIdentityService identityService, ArmsDbContext armsContext)
+        public ResumeController( ArmsDbContext armsContext)
         {
             _context = armsContext;
         }
 
         [HttpGet]
-        public IActionResult GetResume()
+        public IActionResult GetResumes(int applicationId = 0)
         {
-            List<Arms.Domain.Entities.Resume> resumes = _context.Resume.ToList();
+            List<Arms.Domain.Entities.Resume> resumes;
+            if (applicationId == 0)
+            {
+                resumes = _context.Resume.ToList();
+            }
+            else
+            {
+                resumes = _context.Resume.Where(c => c.ApplicationId == applicationId).ToList();
+            }
             
             try
             {
@@ -65,12 +73,12 @@ namespace Arms.Api.Controllers
                         success = true,
                         payload = new
                         {
-                            data = resume.Cv,
+                            data = resume ,
                             message = "Resume Retrieved Successfully"
                         }
 
                     };
-                    return Ok(response);
+                    return Ok(resume.Cv);
                 }
                 else
                 {
