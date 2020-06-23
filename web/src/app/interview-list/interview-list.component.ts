@@ -56,7 +56,7 @@ export class InterviewListComponent implements OnInit {
     modalRef.componentInstance.emitPerformRequest.subscribe(() => {
       this._service.deleteInterview(id).subscribe((res: any) => {
         this.loadInterviews();
-        modalRef.componentInstance.success = res.body.success;
+        modalRef.componentInstance.success = res.success;
       
         modalRef.componentInstance.message = res.payload.message;
         }, (error: HttpErrorResponse) => {

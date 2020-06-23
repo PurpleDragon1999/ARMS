@@ -54,27 +54,14 @@ namespace Arms.Api.Controllers
             }
             if (employeeId != 0)
             {
-                
-               
-                var interviewer = _context.Interviewer.Where(c => c.EmployeeId == employeeId);
-                Interview[] interviewsTo= new Interview[] { };
-                List<Interview> listing = interviewsTo.ToList();
-                int[] jobIds = new int[] { };
-                foreach( var inte in interviewer)
-                {
-                   jobIds.Append(inte.JobId);
-                    Interview interviewTo = _context.Interview.FirstOrDefault(c => c.JobId == inte.JobId);
-                     listing.Add(interviewTo);
-                    Console.WriteLine(interviewsTo);
-                }
-               
+                List<Interview> interviewsListing = filterInterviews(employeeId);
 
                 var response = new
                 {
                     success = true,
                     payload = new
                     {
-                        data = listing,
+                        data = interviewsListing,
                         message = "Interview Records Retrieved Successfully"
                     }
 
@@ -403,7 +390,14 @@ namespace Arms.Api.Controllers
 				{
 					if (roundID == 0)
 					{
-						_context.Interview.Remove(interview);
+                        var rounds = _context.Round.Where(c=>c.InterviewId==id);
+                        foreach (var round in rounds)
+                        {
+                           _context.Round.Remove(round);
+                        }
+
+                       _context.Interview.Remove(interview);
+                       
 						_context.SaveChanges();
 						var response = new
 						{
@@ -459,7 +453,7 @@ namespace Arms.Api.Controllers
 			}
              
         }
-       
+       //function which returns round 
         public Round GetRound(int employeeId,int jobId)
         {
                 var interviewer = _context.Interviewer.FirstOrDefault(c => c.EmployeeId == employeeId && c.JobId==jobId);
@@ -468,7 +462,22 @@ namespace Arms.Api.Controllers
             return round;
 
       }
+        //function which returns list of filtered interviews
 
+        public List<Interview>filterInterviews(int employeeId)
+        {
+            var interviewer = _context.Interviewer.Where(c => c.EmployeeId == employeeId);
+
+            List<Interview> interviewsListing = new List<Interview>();
+
+            foreach (var inte in interviewer)
+            {
+                Interview interviewTo = _context.Interview.FirstOrDefault(c => c.JobId == inte.JobId);
+                interviewsListing.Add(interviewTo);
+            }
+
+            return interviewsListing;
+        }
 
 
         
