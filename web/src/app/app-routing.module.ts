@@ -167,7 +167,7 @@ const routes: Routes = [
     component: HrInterviewAssessementComponent,
   },
   {
-    path: 'candidate-assessment',
+    path: 'candidate-assessment/jd/:jdId/candidate/:candidateId',
     component: AppNavBarComponent,
     children: [{
       path: '',
