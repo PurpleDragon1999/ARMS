@@ -458,7 +458,7 @@ namespace Arms.Api.Controllers
         {
                 var interviewer = _context.Interviewer.FirstOrDefault(c => c.EmployeeId == employeeId && c.JobId==jobId);
                 var panel = _context.InterviewPanel.FirstOrDefault(c=>c.Id==interviewer.InterviewPanelId);
-                Round round = _context.Round.FirstOrDefault(c => c.Id == panel.RoundId);
+                Round round = _context.Round.Include(c=>c.RoundType).FirstOrDefault(c => c.Id == panel.RoundId);
             return round;
 
       }

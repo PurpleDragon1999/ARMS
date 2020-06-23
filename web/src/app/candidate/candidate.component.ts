@@ -1,3 +1,4 @@
+import { AppServicesService } from 'src/app/services/app-services.service';
 import { INewResponse } from 'src/app/models/newResponse.interface';
 import { Component, OnInit } from "@angular/core";
 import { CandidateService } from './services/candidate.service';
@@ -18,21 +19,25 @@ export class CandidateComponent implements OnInit {
     candidates: ICandidate[];
     columns: Array<string>;
     pager: any;
-
+    employeeId:any;
+    jobId:any;
     constructor(private candidateService: CandidateService, 
                 private bufferToPdf: BufferToPdf,
-                private route:ActivatedRoute) { }
+                private route:ActivatedRoute,
+                private _service:AppServicesService) { }
 
     ngOnInit():any{
-        this.callFunction();
-      
+         this.employeeId=this._service.tokenDecoder().Id;
+         this.callFunction();
+         this.getRoundData();
     }
     callFunction():any{
         
     this.route.params
     .pipe(
         switchMap((params: Params) => {
-        return this.candidateService.getApplications(params.jobId);
+            this.jobId=params.jobId;
+            return this.candidateService.getApplications(params.jobId);
         })
      )
        .subscribe((res) => {
@@ -41,6 +46,14 @@ export class CandidateComponent implements OnInit {
             this.columns = ["name", "email", "experience", "Job Position"];
     
         });
+        
+      }
+      getRoundData(){
+         this._service.getRound(this.jobId,this.employeeId).subscribe((res)=>{
+             console.log(res);
+         }
+         )
+
       }
    
 

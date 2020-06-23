@@ -117,7 +117,7 @@ const routes: Routes = [
         component: ScheduleInterviewComponent,
       },
       {
-        path: "candidate/:jobId",
+        path: "candidate:/jobId",
         component: CandidateComponent,
       },
     ],
@@ -140,7 +140,7 @@ const routes: Routes = [
       { path: "interviews", component: InterviewListComponent },
       {
         path: "candidate",
-        component: CandidateComponent,
+        children: [{ path: ":jobId", component: CandidateComponent }],
       },
     ],
   },

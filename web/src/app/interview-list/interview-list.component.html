@@ -46,7 +46,12 @@
                             (click)="deleteInterview(interview?.id)"
                             ></i>
                           </a>
-                           
+                           <a class="w3-bar-item w3-button">
+                            <i class="mdi mdi-account-multiple float-right"
+                            (click)="appliedCandidates(interview?.jobId)"
+                            ></i>
+                           </a>
+
                          
                         </div>
                       </div>
@@ -59,7 +64,7 @@
                       (click)="interviewUpdateModal(interview?.id)"
                       ></i>
                       <i class="mdi mdi-account-multiple float-right d-none d-lg-block"
-                        (click)="appliedCandidates(interview?.jobId)"
+                          (click)="appliedCandidates(interview?.jobId)"
                       ></i>
                     </h5>
                      

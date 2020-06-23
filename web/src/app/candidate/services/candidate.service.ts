@@ -41,11 +41,11 @@ export class CandidateService {
         );
     }
 
-    getApplications(jobId:string){
-        if(jobId!=null){
+    getApplications(jobId:number=0){
+        if(jobId!=0){
         return this.http.get<INewResponse>(
            
-           `${HOST}/api/candidate?jobId=${jobId}`, this.options
+           `${CANDIDATE_API}?jobId=${jobId}`, this.options
         )
         }
         else{

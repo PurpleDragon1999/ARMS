@@ -18,7 +18,7 @@ namespace Arms.Api.Controllers
 
 
 
-    [Authorize(Roles = "Admin,SuperAdministrator")]
+    [Authorize(Roles = "Admin,SuperAdministrator,Employee")]
 
     
     public class CandidateController : BaseController
