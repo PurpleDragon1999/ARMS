@@ -7,6 +7,7 @@ import { Observable } from "rxjs";
 import { ICreate } from "../models/create.interface";
 import { HOST } from 'src/app/config/apiHost.config';
 const CALENDER_API ="https://graph.microsoft.com/v1.0/me/events"
+const CALENDER_VIEW_API= "https://outlook.office.com/api/v2.0/vishal.ranjan@cygrp.com/calendarview?startdatetime=2015-01-01T00:00:00Z&enddatetime=2015-04-10T00:00:00Z"
 const USER_DOMAIN = "http://localhost:3000";
 @Injectable({
   providedIn: "root",
@@ -20,6 +21,16 @@ export class AppServicesService {
    
   });
    httpOptions = {
+    headers: this.headers
+  };
+  out_headers: HttpHeaders = new HttpHeaders({
+    'Content-Type': 'application/json',
+    Authorization: "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6IlNzWnNCTmhaY0YzUTlTNHRycFFCVEJ5TlJSSSJ9.eyJhdWQiOiI0ZDMxZTM0OC1iYzg5LTQwZDItODIxYy1mNjU5NDIwODRhZTMiLCJpc3MiOiJodHRwczovL2xvZ2luLm1pY3Jvc29mdG9ubGluZS5jb20vOTRhNzZiYjEtNjExYi00ZWI1LWFlZTUtZTMxMjM4MWMzMmNiL3YyLjAiLCJpYXQiOjE1OTI4OTcyNDMsIm5iZiI6MTU5Mjg5NzI0MywiZXhwIjoxNTkyOTAxMTQzLCJhaW8iOiJBVFFBeS84UEFBQUF2dzVsclA0NU5aOStubDgyUmd6blNwSWpJQ2hZRDFXVDdkQldJOWIwVVNHT050V1hIczRJa0c4SDRjS2NzZ2FYIiwiZW1haWwiOiJkZWVwYW5zaHUuYmFsYW5pQGN5Z3JwLmNvbSIsImZhbWlseV9uYW1lIjoiQmFsYW5pIiwibmFtZSI6IkRlZXBhbnNodSBCYWxhbmkiLCJub25jZSI6Ijk4NDhkMTRkLTVjOTgtNGFjNS1hM2NjLWViYmM5Yzk3YWZjYSIsIm9pZCI6Ijc0NTgyNjQ3LTEzNWMtNDk3OS1iMjFkLWJiZDY1NGRiNzBhNiIsInByZWZlcnJlZF91c2VybmFtZSI6ImRlZXBhbnNodS5iYWxhbmlAY3lncnAuY29tIiwic3ViIjoibEw3elFVX1RQdEhBaWdkWV80eFd1VXoyM1BSZ3dvRFlqR3VsSUdjbGltUSIsInRpZCI6Ijk0YTc2YmIxLTYxMWItNGViNS1hZWU1LWUzMTIzODFjMzJjYiIsInV0aSI6IlExVW9aTUF4WUVPNFRZdzV4OW5EQVEiLCJ2ZXIiOiIyLjAifQ.a2JR1YaWgvax0fdEZfezHYQpTi34c7rtKBWLAMB2g2qE5oLTiZuKprpzSQcHrCjsV6z5b6ohG-6KRhPo3oCd6ozjpRsHlyyLm3tDXHPL2FICY0ynPqjR3w2Kfc5bWfLWnpAKp7vB4CfTijH5Wx0CIxjE-KH6AobT2zElFzgoyYBpWmJBPnhCBmCdL3ENC3yXRv-d83i369K1hLd_0R8VQDe-9uFm_1aClIpnFMlCjIlrm45COplXVSpLgr6dHK_mjsgF33dJCSsh2Yp3WV-U_h-iRyoUIhJf0e_InKJxJ6TRInphwo5m6jSo6bAv0c995tqXIUnwsLBaDPkeVI1xJg"
+
+     
+   
+  });
+   out_httpOptions = {
     headers: this.headers
   };
 
@@ -70,17 +81,21 @@ export class AppServicesService {
     });
   }
   getAllInterviews(): Observable<IResponse> {
-  if(this.tokenDecoder().role=='Employee'){
-    return this.http.get<IResponse>(
-      `${HOST}/api/interview?employeeId=${this.tokenDecoder().Id}`,
-       this.httpOptions
-     );
-  }else{
-     return this.http.get<IResponse>(
-       `${HOST}/api/interview`,
+    let data=this.tokenDecoder();
+     if(data!=null){
+       var role=data.role;
+      }
+     if(role=='Employee'){
+      return this.http.get<IResponse>(
+        `${HOST}/api/interview?employeeId=${data.Id}`,
         this.httpOptions
       );
-     }
+    }else{
+      return this.http.get<IResponse>(
+        `${HOST}/api/interview`,
+          this.httpOptions
+        );
+      }
   }
 
   deleteInterview(interviewId): Observable<IResponse> {
@@ -168,7 +183,16 @@ export class AppServicesService {
   }
   blockCalender(obj):Observable<any>{
     
-     return this.http.post<any>(CALENDER_API,obj);
-   
+     //return this.http.post<any>(CALENDER_API,obj);
+     return this.http.get<any>(CALENDER_VIEW_API,this.out_httpOptions);
+    
    }
+   getRound(jobId,employeeId){
+    return this.http.get<IResponse>(
+      `${HOST}/api/interview?jobId=${jobId}&employeeId=${employeeId}`,
+        { ...this.httpOptions }
+    );
+
+   }
+ 
 }
