@@ -9,7 +9,7 @@ export class HrComponent implements OnInit {
 
   constructor() { }
 
-  //bar chart data
+  // bar chart data
   public barChartOptions = {
     scaleShowVerticalLines: false,
     responsive: true
@@ -22,7 +22,7 @@ export class HrComponent implements OnInit {
     {data: [28, 20, 40, 19, 27], label: 'Hired applicants'}
   ];
 
-  //doughnut chart data
+  // doughnut chart data
   public doughnutChartLabels = ['Java Developer', 'Full-stack developer', 'UI developer', 'Data analyst', 'DB administrator'];
   public doughnutChartData = [28, 20, 40, 19, 27];
   public doughnutChartType = 'doughnut';

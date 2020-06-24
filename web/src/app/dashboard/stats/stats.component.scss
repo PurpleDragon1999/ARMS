@@ -1,0 +1,34 @@
+.app-stats{
+  background-color: #fff;
+  border-radius: 0.3125rem;
+  margin-bottom: 2rem;
+}
+
+.app-stats__heading{
+  padding-left: 1.2rem;
+  color: #76838f;
+  margin-bottom: .75rem;
+  text-transform: capitalize;
+  font-size: 1.365rem;
+}
+
+.app-stats-data{
+  display: flex;
+  text-align: center;
+
+  &__parent{
+    padding: 0.64rem 1.4rem;
+
+    &--subdata{
+      font-size: 1.465rem;
+      font-weight: 600;
+      padding-bottom: 0.2rem;
+    }
+
+    &--subdataheading{
+      color: #76838f;
+      font-size: 1.165rem;
+      text-align: center;
+    }
+  }
+}

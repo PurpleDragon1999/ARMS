@@ -186,7 +186,8 @@ namespace Arms.Api.Controllers
 					success = true,
 					payload = new
 					{
-						message = "Interview Record Created Successfully"
+						message = "Interview Record Created Successfully",
+                        data = id
 					}
 
 				};
@@ -222,7 +223,7 @@ namespace Arms.Api.Controllers
 					success = false,
 					payload = new
 					{
-						message = e.InnerException.Message
+						message = e.Message
 					}
 
 				};

@@ -36,20 +36,37 @@ namespace Arms.Api.Controllers
         {
             try
             {
-               CustomEmployee empObj  = AuthenticateUser(login);
+                CustomEmployee empObj = AuthenticateUser(login);
+                string role = RoleMapper(empObj);
+                if (role == "UnAuthorized")
+                {
+                    var response = new
+                    {
+                        success = false,
+                        payload = new
+                        {
+                            message = "You are UnAuthorized on this Page"
+                        }
 
+                    };
+                    return StatusCode(401, response);
+
+                }
                 if (empObj != null)
                 {
-                    var tokenString = GenerateJSONWebToken(empObj);
+                    var tokenString = GenerateJSONWebToken(empObj, role);
 
                     var response = new
                     {
-                        success = "true",
+                        success = true,
                         payload = new
                         {
-                            Authorized = tokenString,
-                            message = "This Employee Exists in our Db"
-                        }
+                            data = new
+                            {
+                                Authorized = tokenString,
+                                message = "This Employee Exists in our Db"
+                            }
+                         }
 
                     };
                     return StatusCode(200, response);
@@ -87,53 +104,68 @@ namespace Arms.Api.Controllers
             }
         }
         //This function generates Jwt token by adding claims
-            private string GenerateJSONWebToken(CustomEmployee empObj)
-            {
-              var claims = new[] {
+        private string GenerateJSONWebToken(CustomEmployee empObj, string role)
+        {
+
+            var claims = new[] {
 
                new Claim(JwtRegisteredClaimNames.Email, empObj.armsEmployee.Email),
-                
-                   new Claim("role", empObj.armsEmployeeRole.Name),
+                   new Claim("Id",empObj.armsEmployee.Id.ToString()),
+                   new Claim("role", role),
                    new Claim("experience", empObj.armsEmployee.Experience.ToString()),
                    new Claim("firstName", empObj.armsEmployee.FirstName),
                    new Claim("lastName", empObj.armsEmployee.LastName),
-                      new Claim("userName", empObj.armsEmployee.LastName),
+                   new Claim("userName", empObj.armsEmployee.LastName),
                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
-                var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
-                var token = new JwtSecurityToken(_config["Jwt:Issuer"],
-                  _config["Jwt:Aud"],
-                  claims,
-                  expires: DateTime.Now.AddSeconds(86400),
-                  signingCredentials: credentials);
+            var token = new JwtSecurityToken(_config["Jwt:Issuer"],
+              _config["Jwt:Aud"],
+              claims,
+              expires: DateTime.Now.AddSeconds(86400),
+              signingCredentials: credentials);
 
-                return new JwtSecurityTokenHandler().WriteToken(token);
-            }
+            return new JwtSecurityTokenHandler().WriteToken(token);
+        }
         //This function authenticates the credentials that are valid as per our db or not
-            private CustomEmployee AuthenticateUser(LoginReq login)
-            {
-              Console.WriteLine(login.idToken);
-                
+        private CustomEmployee AuthenticateUser(LoginReq login)
+        {
+            Console.WriteLine(login.idToken);
+
             var handler = new JwtSecurityTokenHandler();
 
             var jsonToken = handler.ReadToken(login.idToken) as JwtSecurityToken;
 
             var email = jsonToken.Payload["email"].ToString();
-            
-           ArmsEmployees employee = _context.ArmsEmployees.FirstOrDefault(c => c.Email == email);
-           
-           ArmsEmployeeRoles armsEmployeeRole = _context.ArmsEmployeeRoles.FirstOrDefault(c=>c.SystemName==employee.SystemName);
+
+            ArmsEmployees employee = _context.ArmsEmployees.FirstOrDefault(c => c.Email == email);
+
+            ArmsEmployeeRoles armsEmployeeRole = _context.ArmsEmployeeRoles.FirstOrDefault(c => c.SystemName == employee.SystemName);
             CustomEmployee employeeObj = new CustomEmployee
             {
-                armsEmployee=employee,
-                armsEmployeeRole=armsEmployeeRole
+                armsEmployee = employee,
+                armsEmployeeRole = armsEmployeeRole
             };
-            return employeeObj;            
+            return employeeObj;
 
-           }
+        }
+        public string RoleMapper(CustomEmployee empObj)
+        {
+            if (empObj.armsEmployeeRole.Name == "ResourceManager" || empObj.armsEmployeeRole.Name == "HumanResource")
+                return "Admin";
+            else if (empObj.armsEmployeeRole.Name == "Executive" || empObj.armsEmployeeRole.Name == "Employee")
+                return "Employee";
+
+            else if (empObj.armsEmployeeRole.Name == "SuperAdministrator")
+                return "SuperAdministrator";
+
+            else if (empObj.armsEmployeeRole.Name == "Finance")
+                return "UnAuthorized";
+
+            return "UnAuthorized";
+        }
 
     }
 }
-

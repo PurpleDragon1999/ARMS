@@ -11,9 +11,9 @@ import { ModalComponent } from 'src/app/reusable-components/modal/modal.componen
 import { HttpErrorResponse } from '@angular/common/http';
 import {CreateInterviewComponent} from '../create-interview/create-interview.component'
 @Component({
-  selector: 'app-interview-list',
-  templateUrl: './interview-list.component.html',
-  styleUrls: ['./interview-list.component.scss']
+  selector: "app-interview-list",
+  templateUrl: "./interview-list.component.html",
+  styleUrls: ["./interview-list.component.scss"],
 })
 export class InterviewListComponent implements OnInit {
   interviewsList: any;
@@ -21,8 +21,11 @@ export class InterviewListComponent implements OnInit {
   pager: any;
   searchJd: any;
   jobsList: any;
-  constructor(private _service: AppServicesService, private router: Router,
-              private modalService: NgbModal) {}
+  constructor(
+    private _service: AppServicesService,
+    private router: Router,
+    private modalService: NgbModal
+  ) {}
 
   ngOnInit() {
     this.loadInterviews();
@@ -30,7 +33,7 @@ export class InterviewListComponent implements OnInit {
 
   loadInterviews() {
     return this._service.getAllInterviews().subscribe((response: any) => {
-      this.interviewsList = response.payload.data
+      this.interviewsList = response.payload.data;
     });
   }
 
@@ -44,7 +47,6 @@ export class InterviewListComponent implements OnInit {
     });
   }
 
-  
   deleteInterview(id) {
     const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
     modalRef.componentInstance.shouldConfirm = true;
@@ -59,8 +61,9 @@ export class InterviewListComponent implements OnInit {
         }, (error: HttpErrorResponse) => {
          modalRef.componentInstance.success = error.error.success;
           modalRef.componentInstance.message = error.error.payload.message;
+        }
+      );
     });
-  });
   }
 
   // searchInterview(character?: string, page?: number){

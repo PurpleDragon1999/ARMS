@@ -1,38 +1,84 @@
-@media(max-width:350px){
-    .eval-table-col{
-        padding-left: 0;
-        
-    }
-}
-label, button{
-    font-weight: bold;
+@import "node_modules/progress-tracker/src/styles/progress-tracker.scss";
+
+.progress-marker::after {
+  z-index: 10;
 }
 
-.top{
-    padding-top: 2rem;
-}
-.asterick{
-    color: rgb(201, 5, 5);
+.progress-step.is-complete .progress-marker::before {
+  background-color: rgb(248, 164, 8);
+  text-decoration: none;
 }
 
-.content{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+.progress-step.is-complete .progress-marker::after {
+  background: rgb(248, 164, 8);
+}
+
+.progress-step.is-active .progress-marker::before {
+  border: 2px solid rgb(248, 164, 8);
+  background-color: white;
+  color: black;
+}
+
+li:focus {
+  outline: none;
+}
+
+.progress-step:hover .progress-marker::before {
+  background-color: rgb(248, 164, 8);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.mdi {
+  font-size: 1.1rem;
+}
+
+.progress-text {
+  font-weight: bold;
+  font-size: larger;
+}
+
+a {
+  cursor: pointer;
+}
+
+//Create Interview component
+@media (max-width: 350px) {
+  .eval-table-col {
+    padding-left: 0;
+  }
+}
+label,
+button {
+  font-weight: bold;
+}
+
+.top {
+  padding-top: 2rem;
+}
+.asterick {
+  color: rgb(201, 5, 5);
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 }
 
 select::-ms-expand {
-    padding-right: 5rem;
-    display: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    // text-indent: 1px;
-    // text-overflow: '';
+  padding-right: 5rem;
+  display: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  // text-indent: 1px;
+  // text-overflow: '';
 }
 
 .form-control::-ms-expand {
-    background-color: transparent;
-    border: 0; }
-
-
-
+  background-color: transparent;
+  border: 0;
+}
