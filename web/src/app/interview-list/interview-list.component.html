@@ -46,10 +46,18 @@
                             (click)="deleteInterview(interview?.id)"
                             ></i>
                           </a>
+                          <a class="w3-bar-item w3-button">
+                            <i class="mdi mdi-view-array float-right"
+                            [routerLink]="['round', interview?.id, 1]"
+                            ></i>
+                          </a>
                           
                         </div>
                       </div>
                       <!--large screens-->
+                      <i class="mdi mdi-view-array float-right d-none d-lg-block"
+                          [routerLink]="['round', interview?.id, 1]"
+                          ></i>
                       <i
                         class="mdi mdi-delete float-right d-none d-lg-block"
                         (click)="deleteInterview(interview?.id)"
@@ -57,8 +65,8 @@
                       <i class="mdi mdi-pencil float-right d-none d-lg-block"
                       (click)="interviewUpdateModal(interview?.id)"
                       ></i>
-                    </h5>
-                     
+                  
+                    </h5>                   
                       <h6 class="font-weight-normal">
                         <b> Date : </b>{{ interview.date | date }}
                      </h6>
