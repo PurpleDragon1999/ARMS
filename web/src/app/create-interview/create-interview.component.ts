@@ -72,7 +72,6 @@ export class CreateInterviewComponent implements OnInit {
 
     this.service.createInterview(this.interviewObj).subscribe(
       (res: any) => {
-        console.log(res);
         const modalRef = this.modalService.open(ModalComponent);
         modalRef.componentInstance.shouldConfirm = false;
         modalRef.componentInstance.success = res.body.success;

@@ -123,7 +123,6 @@ export class ScheduleInterviewComponent implements OnInit {
         this.employeeIds.push(data.id);
       }
     }
-    console.log(this.tableData);
   }
 
   blockCalendar(index: number) {

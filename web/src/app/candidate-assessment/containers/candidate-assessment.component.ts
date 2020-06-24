@@ -14,11 +14,8 @@ export class CandidateAssessmentComponent implements OnInit {
     applicationData: any;
 
     ngOnInit() {
-      console.log('Inside NgOnInit');
       this.route.params.subscribe(params => {
-        console.log(params, 'params');
         this.candidateAssessmentService.getApplication(params.jdId, params.candidateId).subscribe((res: IResponse) => {
-          console.log(res);
           this.applicationData = res.payload.data;
         });
       });
