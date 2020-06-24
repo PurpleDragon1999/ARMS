@@ -80,7 +80,7 @@ export class LoginComponent implements OnInit {
 
     this.loginService.checkPermissions(idToken).subscribe(
       (res) => {
-        console.log(res);
+       
         if (res != null) {
           window.localStorage.setItem(
             "Authorized",

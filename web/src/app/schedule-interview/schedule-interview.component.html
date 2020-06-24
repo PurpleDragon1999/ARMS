@@ -161,6 +161,8 @@
                 <td>{{ data.id }}</td>
                 <td>{{ data.firstName | uppercase }} {{ data.lastName }}</td>
                 <td>{{ data.email }}</td>
+                <td><i [ngClass]="data.status"></i></td>
+                <td><i class="fas fa-trash"></i></td>
               </tr>
             </tbody>
             <tbody *ngIf="main[i][2]">
@@ -168,6 +170,8 @@
                 <td>{{ data.id }}</td>
                 <td>{{ data.firstName | uppercase }} {{ data.lastName }}</td>
                 <td>{{ data.email }}</td>
+                <td><i [ngClass]="data.status"></i></td>
+                <td><i class="fas fa-trash"></i></td>
               </tr>
             </tbody>
           </table>
