@@ -15,6 +15,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CandidateFormComponent } from './candidate-form/candidate-form.component';
 import { CreateInterviewComponent } from './create-interview/create-interview.component';
+import { UpdateInterviewComponent } from './update-interview/update-interview.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EmployeeFormComponent } from "./employee/components/employee-form/employee-form.component";
 import { EmployeeUploadComponent } from "./employee/components/employee-upload/employee-upload.component";
@@ -37,6 +38,7 @@ import { EmailListModalComponent } from './email-list-modal/email-list-modal.com
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { SettingsComponent } from './settings/settings.component';
+import { RoundComponent } from './round/round.component';
 import { IdProofTypeComponent } from './settings/components/id-proof-type/id-proof-type.component';
 import { EmploymentTypeComponent } from './settings/components/employment-type/employment-type.component';
 import { EligibilityCriteriaComponent } from './settings/components/eligibility-criteria/eligibility-criteria.component';
@@ -54,6 +56,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     CandidateFormComponent,
     EmployeeFormComponent,
     CreateInterviewComponent,
+    UpdateInterviewComponent,
     JdFormComponent,
     HrInterviewAssessementComponent,
     AppNavBarComponent,
@@ -76,6 +79,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     InterviewListComponent,
     HrInterviewAssessementComponent,
     SettingsComponent,
+    RoundComponent,   
     RoundTypeComponent,
     LocationComponent,
     IdProofTypeComponent,

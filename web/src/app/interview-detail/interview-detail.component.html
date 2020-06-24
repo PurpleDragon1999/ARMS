@@ -1,33 +1,37 @@
 <div class="col-md-12 grid-margin stretch-card" >
     <div class="card">
         <div class="card-header" >
-            <h5 class="card-title text-center"><b>Round Type:  </b>Technical</h5>
+            <h5 *ngIf="title=='round'" class=" title card-title text-center"><b>JOB POSITION : </b>{{data.interview.jobDescription.jobTitle}}</h5>
+            <h5 *ngIf="title=='candidate'" class="card-title text-center"><b>Round Type:  </b>Technical</h5>
             </div>
         <div class="card-body">
         <div class="row">
         <div class="col pb-1" >
-            <h6 ><b>
-                INTERVIEW ID: </b> CYGJDID1
-            </h6>
-            <h6 class="font-weight-normal">
-                <b> DATE : </b> May 16, 2020
-            </h6>
+            <div>
+                <h6 *ngIf="title=='round'"><b>INTERVIEW ID : </b> {{data.interview?.code}}</h6>
+                <h6 *ngIf="title=='candidate'"><b>INTERVIEW ID: </b> CYGJDID1</h6>
+            </div>
+            
+            <div>
+                <h6 *ngIf="title=='round'"><b>TIME : </b> {{data.interview?.time}}</h6>
+                <h6 *ngIf="title=='candidate'"><b>INTERVIEW ID: </b> CYGJDID1</h6>
+            </div>
         </div>
         <div class="col">
-            <h6 class="font-weight-normal">
-                <b> JOB POSITION : </b> Software Developer
-              </h6>
-            <h6 class="font-weight-normal">
-                <b> TIME : </b> 10:00 AM
-            </h6>
+            <div>
+                <h6 *ngIf="title=='round'"><b>NUMBER OF ROUNDS : </b> {{data?.interview?.noOfRounds}}</h6>
+                <h6 *ngIf="title=='candidate'"><b>INTERVIEW ID: </b> CYGJDID1</h6>
+            </div>
+            <div>
+                <h6 *ngIf="title=='round'"><b>VENUE : </b> {{data.interview?.venue}}</h6>
+                <h6 *ngIf="title=='candidate'"><b>INTERVIEW ID: </b> CYGJDID1</h6>
+            </div>
         </div>
         <div class="col">
-            <h6 class="font-weight-normal">
-                <b> NUMBER OF ROUNDS : </b> 5
-            </h6>
-            <h6 class="font-weight-normal">
-                <b> VENUE : </b> Noida
-            </h6>
+            <div>
+                <h6 *ngIf="title=='round'"><b>DATE :</b> {{data.interview?.date | date}}</h6>
+                <h6 *ngIf="title=='candidate'"><b>INTERVIEW ID: </b> CYGJDID1</h6>
+            </div>
         </div>
         </div>
     </div>

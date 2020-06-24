@@ -1,3 +1,4 @@
+import { UpdateInterviewComponent } from './update-interview/update-interview.component';
 import { HrInterviewAssessementComponent } from './hr-interview-assessement/hr-interview-assessement.component';
 import { SettingsComponent } from "./settings/settings.component";
 import { CreateInterviewComponent } from "./create-interview/create-interview.component";
@@ -19,6 +20,7 @@ import { ErrorPageComponent } from "./error-page/error-page.component";
 import { JdModalComponent } from "./jd-modal/jd-modal.component";
 import { CandidateComponent } from "./candidate/candidate.component";
 import { Z_FULL_FLUSH } from 'zlib';
+import { RoundComponent } from './round/round.component';
 
 const routes: Routes = [
   { path: "assessment", component: HrInterviewAssessementComponent },
@@ -91,10 +93,16 @@ const routes: Routes = [
         component: CandidateComponent,
       },
       {
+        path: "interviews/round/:id/:append",
+        component: RoundComponent,
+      },
+      {
         path: "create-interview",
         component: CreateInterviewComponent,
+      },{
+        path: "update-interview",
+        component: UpdateInterviewComponent,
       },
-
       {
         path: "home",
         component: HrComponent,
@@ -154,10 +162,6 @@ const routes: Routes = [
       }] 
     }],
   },
-  // {
-  //   path: "progressTracker/:candidateId/applied",
-  //   component: CandidateFormComponent,
-  // },
   {
     path: "panel",
     component: AppNavBarComponent,

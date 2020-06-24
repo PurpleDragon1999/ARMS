@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input} from '@angular/core';
 
 @Component({
   selector: 'app-interview-detail',
   templateUrl: './interview-detail.component.html',
   styleUrls: ['./interview-detail.component.scss']
 })
-export class InterviewDetailComponent implements OnInit {
+export class InterviewDetailComponent  {
 
-  constructor() { }
+  @Input()
+  title: string = '';
 
-  ngOnInit() {
-  }
-
+  @Input()
+  data: any;
 }

@@ -46,6 +46,11 @@
                             (click)="deleteInterview(interview?.id)"
                             ></i>
                           </a>
+                          <a class="w3-bar-item w3-button">
+                            <i class="mdi mdi-view-array float-right"
+                            [routerLink]="['round', interview?.id, 1]"
+                            ></i>
+                          </a>
                           
                         </div>
                       </div>
