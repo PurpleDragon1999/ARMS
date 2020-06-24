@@ -22,9 +22,10 @@ export class CreateInterviewComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+   
     this.getLocation();
     this.getRoundTypes();
-  }
+   }
 
   interview: any = {}
   interviewObj: any ={}
@@ -101,6 +102,8 @@ export class CreateInterviewComponent implements OnInit {
   }
   blockCalender(roundsList){
   for (var round of roundsList) {
+    var endDate= new Date(round.roundDate);
+    endDate.setHours(endDate.getHours()+2);
         let obj={
         "Subject": round.roundType.name+" Interview with Himanshu sharma",
         "Body": {
@@ -112,21 +115,25 @@ export class CreateInterviewComponent implements OnInit {
             "TimeZone": "India Standard Time"
         },
         "End": {      
-            "DateTime":"2020-07-03T19:00:00",
+            "DateTime":endDate,
             "TimeZone": "India Standard Time"
         },
+        "reminderMinutesBeforeStart": 99,
+        "isOnlineMeeting": true,
+        "onlineMeetingProvider": "teamsForBusiness",
+        "isReminderOn": true,
         "Attendees": [
           {
             "EmailAddress": {
-              "Address": "deepanshu.balani@cygrp.com",
-              "Name": "Deepanshu balani"
+              "Address": "shubham.sharma@cygrp.com",
+              "Name": "Shubham Sharma"
             },
             "Type": "Required"
           }
         ]
       }
       this.AppServicesService.blockCalender(obj).subscribe(res=>{
-        console.log(res);
+         
      });
     }
   }
