@@ -1,0 +1,237 @@
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-body">
+            <div class="modal-body">
+                <form
+                    class="forms-sample"
+                    #form="ngForm"
+                    (ngSubmit)="performUpdate(form.value)"
+                >
+                <div class="interview" *ngIf="isInterview">
+                    <div class="form-group top">
+                        <label for="jobId">Job Id<span class="asterick">*</span></label>
+                        <div class="input-group col-xs-12">
+                        <input
+                            type="text"
+                            name="jobId"
+                            [(ngModel)]= "interview.jobId"
+                            class="form-control"
+                            #jobId="ngModel"
+                            id="jobId"
+                            [ngClass]="{ 'is-invalid': jobId.dirty && jobId.invalid }"
+                            placeholder="Job ID"
+                            maxlength="4"
+                            required
+                        >
+                        <div *ngIf="jobId.dirty && jobId.errors?.required"  class="invalid-feedback">
+                        <div><i class="mdi mdi-alert-outline"></i>Job Description Id is required</div>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="jobTitle">Job Title<span class="asterick">*</span></label>
+                        <input
+                        name="jobTitle"
+                        type="text"
+                        [(ngModel)]= "interview.jobDescription.jobTitle"
+                        class="form-control"
+                        id="jobTitle"
+                        #jobTitle="ngModel"
+                        [ngClass]="{ 'is-invalid': jobTitle.dirty && jobTitle.invalid }"
+                        placeholder="Job Title"
+                        required
+                        >
+                        <div *ngIf="jobTitle.dirty && jobTitle.errors?.required" class="invalid-feedback">
+                        <div><i class="mdi mdi-alert-outline"></i>Job Title is required</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Date<span class="asterick">*</span></label>
+                        <input
+                        name="date"
+                        type="date"
+                        [(ngModel)]= "interview.date"
+                        class="form-control"
+                        id="date"
+                        #date="ngModel"
+                        [ngClass]="{ 'is-invalid': date.dirty && date.invalid }"
+                        placeholder="Date"
+                        required
+                        >
+                        <div *ngIf="date.dirty && date.errors?.required" class="invalid-feedback">
+                        <div><i class="mdi mdi-alert-outline"></i>Date is required</div>
+                        </div>
+                    </div>
+        
+                    <div class="form-group">
+                        <label for="time">Time<span class="asterick">*</span></label>
+                        <input
+                        name="time"
+                        type="time"
+                        [(ngModel)]= "interview.time"
+                        class="form-control"
+                        id="time"
+                        #time="ngModel"
+                        [ngClass]="{ 'is-invalid': time.dirty && time.invalid }"
+                        placeholder="Time"
+                        required
+                        >
+                        <div *ngIf="time.dirty && time.errors?.required" class="invalid-feedback">
+                        <div><i class="mdi mdi-alert-outline"></i>Time is required</div>
+                        </div>
+                    </div>
+        
+                    <div class="form-group">
+                        <label for="venue">Venue<span class="asterick">*</span></label>
+                        <select
+                        name="venue"
+                        type="text"
+                        [(ngModel)]= "interview.venue"
+                        class="form-control"
+                        id="venue"
+                        #venue="ngModel"
+                        [ngClass]="{ 'is-invalid': venue.dirty && venue.invalid }" 
+                        required
+                        >
+        
+                        <option class="select-css" *ngFor ="let location of Location" [ngValue]="location.locationName">
+                            {{location.locationName}}
+                        </option>
+                        </select>
+                        <div *ngIf="venue.dirty && venue.errors?.required" class="invalid-feedback">
+                        <div><i class="mdi mdi-alert-outline"></i>venue is required</div>
+                        </div>
+                    </div>
+        
+                    <div class="form-group">
+                        <label for="noOfRounds">Number of Rounds<span class="asterick">*</span></label>
+                        <select
+                        name="noOfRounds"
+                        type="number"
+                        [(ngModel)]="interview.noOfRounds"
+                        (change)='onOptionsSelected(interview.noOfRounds)'
+                        class="form-control"
+                        id="noOfRounds"
+                        #noOfRounds="ngModel"
+                        [ngClass]="{ 'is-invalid': noOfRounds.dirty && noOfRounds.invalid }" 
+                        min="3"
+                        max="5"
+                        required
+                        >
+                        <option class="select-css" *ngFor ="let number of [1,2,3,4,5,6,7,8,9,10]" [ngValue]="number">
+                            {{number}}
+                        </option>
+                        </select>
+                        <div *ngIf="noOfRounds.dirty && noOfRounds.errors?.required" class="invalid-feedback">
+                            <div><i class="mdi mdi-alert-outline"></i>No. of rounds is required</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="rounds" *ngIf="isRounds">
+                    <div *ngFor="let index of [].constructor(number); index as i">
+                    <div class="content" *ngIf="interview.round[i]?.id == roundID" >
+                    <div class="outer" >
+                        <div class="form-group">
+                            <label for="roundNumber">Round Number<span class="asterick">*</span></label>
+                            <input
+                            name="roundNumber_{{i}}"
+                            type="text"
+                            [(ngModel)]= "interview.round[i].roundNumber"
+                            class="form-control"
+                            id="roundNumber"
+                            #roundNumber="ngModel"
+                            [ngClass]="{ 'is-invalid': roundNumber.dirty && roundNumber.invalid }"
+                            placeholder="Round Number"
+                            required
+                            >
+                            <div *ngIf="roundNumber.dirty && roundNumber.errors?.required" class="invalid-feedback">
+                                <div><i class="mdi mdi-alert-outline"></i>roundNumber is required</div>
+                            </div>
+                        </div>
+                    </div> 
+
+                    <div class="inner" >
+                        <div class="form-group">
+                            <label for="roundType">Round Type<span class="asterick">*</span></label>
+                            <select
+                                name="roundType_{{i}}"
+                                type="text"
+                                [(ngModel)]= "interview.round[i].roundType"
+                                class="form-control"
+                                id="roundType"
+                                #roundType="ngModel"
+                                [ngClass]="{ 'is-invalid': roundType.dirty && roundType.invalid }" 
+                                required
+                            >
+
+                            <option class="select-css" *ngFor ="let type of RoundType" [ngValue]=type.id>
+                                {{type.name}}
+                                </option>
+                            </select>
+                            <div *ngIf="roundType.dirty && roundType.errors?.required" class="invalid-feedback">
+                                <div><i class="mdi mdi-alert-outline"></i>roundType is required</div>
+                            </div>
+                            </div>
+
+                            <div class="form-group">
+                            <label for="roundDate">Date<span class="asterick">*</span></label>
+                            <input
+                                name="roundDate_{{i}}"
+                                type="date"
+                                [(ngModel)]= "interview.round[i].roundDate"
+                                class="form-control"
+                                id="roundDate"
+                                #roundDate="ngModel"
+                                [ngClass]="{ 'is-invalid': roundDate.dirty && roundDate.invalid }"
+                                placeholder="roundDate"
+                                required
+                            >
+                            <div *ngIf="roundDate.dirty && roundDate.errors?.required" class="invalid-feedback">
+                                <div><i class="mdi mdi-alert-outline"></i>roundDate is required</div>
+                            </div>                
+                        </div>
+
+                        
+
+                        <div class="form-group">
+                            <label for="roundTime">Time<span class="asterick">*</span></label>
+                            <input
+                            name="roundTime_{{i}}"
+                            type="time"
+                            [(ngModel)]= "interview.round[i].roundTime"
+                            class="form-control"
+                            id="roundTime"
+                            #roundTime="ngModel"
+                            [ngClass]="{ 'is-invalid': roundTime.dirty && roundTime.invalid }"
+                            placeholder="roundTime"
+                            required
+                            >
+                            <div *ngIf="roundTime.dirty && roundTime.errors?.required" class="invalid-feedback">
+                                <div><i class="mdi mdi-alert-outline"></i>roundTime is required</div>
+                            </div>
+                        </div>
+                    </div> 
+                    </div> 
+                    </div>
+                </div>
+                <div class="d-flex flex-row-reverse">
+            
+                    <button
+                    type="submit"
+                    class="btn btn-gradient-danger mr-2"
+                    [disabled]="!form.valid"
+                    >
+                    Update
+                    </button>
+                    <button
+                    type="button"
+                    class="btn btn-light"
+                    (click)="form.resetForm()"
+                    >Cancel</button>
+                </div>
+                </form>
+            </div>         
+        </div>
+    </div>
+</div>
