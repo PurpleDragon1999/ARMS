@@ -4,7 +4,7 @@ import { HrInterviewAssessementComponent } from './hr-interview-assessement/hr-i
 import { CandidateAssessmentComponent } from './candidate-assessment/containers/candidate-assessment.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { MsalInterceptor, MsalModule } from '@azure/msal-angular';
 import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -41,6 +41,10 @@ import { IdProofTypeComponent } from './settings/components/id-proof-type/id-pro
 import { EmploymentTypeComponent } from './settings/components/employment-type/employment-type.component';
 import { EligibilityCriteriaComponent } from './settings/components/eligibility-criteria/eligibility-criteria.component';
 import { ApplicationStatusComponent } from './settings/components/application-status/application-status.component';
+import {AnalyticsComponent} from './dashboard/analytics/analytics.component';
+import {StatsComponent} from './dashboard/stats/stats.component';
+import {CandidateAssessmentFormComponent} from './candidate-assessment/components/candidate-assessment-form/candidate-assessment-form.component';
+import {CandidateDescriptionComponent} from './candidate-assessment/components/candidate-description/candidate-description.component';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -75,14 +79,12 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     InterviewListComponent,
     HrInterviewAssessementComponent,
     SettingsComponent,
-    RoundTypeComponent,
-    LocationComponent,
-    IdProofTypeComponent,
-    EmploymentTypeComponent,
-    EligibilityCriteriaComponent,
-    ApplicationStatusComponent,
     CandidateAssessmentComponent,
-    HrInterviewAssessementComponent
+    CandidateAssessmentFormComponent,
+    CandidateDescriptionComponent,
+    DashboardComponent,
+    StatsComponent,
+    AnalyticsComponent
   ],
   imports: [
     FileUploadModule,
