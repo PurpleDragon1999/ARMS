@@ -1,3 +1,5 @@
+import { RoundComponent } from './round/round.component';
+import { UpdateInterviewComponent } from './update-interview/update-interview.component';
 import { CandidateAssessmentFormComponent } from "./candidate-assessment/components/candidate-assessment-form/candidate-assessment-form.component";
 import { LocationComponent } from "./settings/components/location/location.component";
 import { RoundTypeComponent } from "./settings/components/round-type/round-type.component";
@@ -58,6 +60,7 @@ const isIE =
     CandidateFormComponent,
     EmployeeFormComponent,
     CreateInterviewComponent,
+    UpdateInterviewComponent,
     JdFormComponent,
     HrInterviewAssessementComponent,
     AppNavBarComponent,
@@ -87,6 +90,13 @@ const isIE =
     InterviewListComponent,
     HrInterviewAssessementComponent,
     SettingsComponent,
+    RoundComponent,   
+    RoundTypeComponent,
+    LocationComponent,
+    IdProofTypeComponent,
+    EmploymentTypeComponent,
+    EligibilityCriteriaComponent,
+    ApplicationStatusComponent,
     CandidateAssessmentComponent,
     HrInterviewAssessementComponent,
     InterviewTrackerComponent,

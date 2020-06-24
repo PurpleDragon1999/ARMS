@@ -15,7 +15,7 @@ namespace Arms.Api.Controllers
 {
 	[ApiController]
 	[Route("api/[controller]")]
-    [Authorize(Roles ="Admin")]
+	[Authorize(Roles ="Admin")]
 	public class InterviewController : BaseController
 	{   //mailController object 
 		public MailHelperController mailHelper = new MailHelperController();
@@ -25,7 +25,7 @@ namespace Arms.Api.Controllers
 		ArmsDbContext _context;
 		public InterviewController( ArmsDbContext armsContext)
 		{
-            _context = armsContext;
+			_context = armsContext;
 		}
 
 
@@ -99,10 +99,8 @@ namespace Arms.Api.Controllers
 								message = "Interview Record Retrieved Successfully"
 							}
 
-						};
-						
-					
-
+											
+						};											
 					  
 						return StatusCode(200, response);
 					}

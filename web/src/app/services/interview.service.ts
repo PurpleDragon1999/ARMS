@@ -39,12 +39,7 @@ export class InterviewService {
   }
 
   //new
-  getInterview():Observable<any>{
-    return this.http.get<any>(
-      `${HOST}/api/interview/66?append=1`, this.options
-    )
-  }
- 
+  
   createInterview(interviewObj: any):Observable<HttpResponse<any>>{
     return this.http.post<any>(`${HOST}/api/interview`, interviewObj, { ...this.options, observe: 'response' } )
   }
@@ -60,4 +55,36 @@ export class InterviewService {
       `${HOST}/api/roundType`, this.options
     )
   }
+
+  getInterview(id: number):Observable<any>{
+    return this.http.get<any>(
+      `${HOST}/api/interview/${id}`, this.options
+    )
+  }
+
+  getRounds(id: number, append: number):Observable<any>{
+    return this.http.get<any>(
+      `${HOST}/api/interview/${id}?append=${append}`, this.options
+    )
+  }
+
+  updateInterview (id:number, updateObj):Observable<any>{
+    return this.http.patch<any>(
+      `${HOST}/api/interview/${id}`, updateObj, this.options
+    )
+  }
+  
+  updateRound( id:number, roundID: number, updateObj):Observable<any>{
+    return this.http.patch<any>(
+      `${HOST}/api/interview/${id}?roundID=${roundID}`, updateObj, this.options
+    )
+  }
+
+  deleteRound( id:number, roundID:number):Observable<any>{
+    return this.http.delete<any>(
+      `${HOST}/api/interview/${id}?roundID=${roundID}`, this.options
+    )
+  }
 }
+
+
