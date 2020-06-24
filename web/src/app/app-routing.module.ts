@@ -19,6 +19,9 @@ import { RoleGuardService } from "./utilities/role-guard.service";
 import { ErrorPageComponent } from "./error-page/error-page.component";
 import { JdModalComponent } from "./jd-modal/jd-modal.component";
 import { CandidateComponent } from "./candidate/candidate.component";
+import { CandidateAssessmentComponent } from "./candidate-assessment/containers/candidate-assessment.component";
+import { DashboardComponent } from "./dashboard/dashboard.component";
+import { AnalyticsComponent } from "./dashboard/analytics/analytics.component";
 
 const routes: Routes = [
   { path: "assessment", component: HrInterviewAssessementComponent },
@@ -70,6 +73,10 @@ const routes: Routes = [
       {
         path: "employee",
         component: EmployeeComponent,
+      },
+      {
+        path: "interviews",
+        component: InterviewListComponent,
       },
       {
         path: "interviews",
@@ -176,6 +183,26 @@ const routes: Routes = [
   {
     path: "assessment",
     component: HrInterviewAssessementComponent,
+  },
+  {
+    path: "candidate-assessment/jd/:jdId/candidate/:candidateId",
+    component: AppNavBarComponent,
+    children: [
+      {
+        path: "",
+        component: CandidateAssessmentComponent,
+      },
+    ],
+  },
+  {
+    path: "dashboard",
+    component: AppNavBarComponent,
+    children: [
+      {
+        path: "",
+        component: AnalyticsComponent,
+      },
+    ],
   },
 ];
 

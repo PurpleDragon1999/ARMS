@@ -45,7 +45,6 @@ namespace Arms.Api.Controllers
                         success = false,
                         payload = new
                         {
-
                             message = "You are UnAuthorized on this Page"
                         }
 
@@ -62,9 +61,12 @@ namespace Arms.Api.Controllers
                         success = true,
                         payload = new
                         {
-                            Authorized = tokenString,
-                            message = "This Employee Exists in our Db"
-                        }
+                            data = new
+                            {
+                                Authorized = tokenString,
+                                message = "This Employee Exists in our Db"
+                            }
+                         }
 
                     };
                     return StatusCode(200, response);
@@ -108,12 +110,12 @@ namespace Arms.Api.Controllers
             var claims = new[] {
 
                new Claim(JwtRegisteredClaimNames.Email, empObj.armsEmployee.Email),
-                    new Claim("Id",empObj.armsEmployee.Id.ToString()),
+                   new Claim("Id",empObj.armsEmployee.Id.ToString()),
                    new Claim("role", role),
                    new Claim("experience", empObj.armsEmployee.Experience.ToString()),
                    new Claim("firstName", empObj.armsEmployee.FirstName),
                    new Claim("lastName", empObj.armsEmployee.LastName),
-                      new Claim("userName", empObj.armsEmployee.LastName),
+                   new Claim("userName", empObj.armsEmployee.LastName),
                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
@@ -153,7 +155,6 @@ namespace Arms.Api.Controllers
         {
             if (empObj.armsEmployeeRole.Name == "ResourceManager" || empObj.armsEmployeeRole.Name == "HumanResource")
                 return "Admin";
-
             else if (empObj.armsEmployeeRole.Name == "Executive" || empObj.armsEmployeeRole.Name == "Employee")
                 return "Employee";
 
@@ -164,11 +165,7 @@ namespace Arms.Api.Controllers
                 return "UnAuthorized";
 
             return "UnAuthorized";
-
-
-
         }
 
     }
 }
-
