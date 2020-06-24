@@ -78,7 +78,7 @@ namespace Arms.Api.Controllers
                         }
 
                     };
-                    return Ok(resume.Cv);
+                    return Ok(response);
                 }
                 else
                 {

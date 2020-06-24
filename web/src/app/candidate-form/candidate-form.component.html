@@ -154,7 +154,7 @@
           <div class="form-group">
             <label>Resume<span class="asterick">*</span></label>
             <div *ngIf="type !== 'progressTracker'" class="input-group  col-xs-12">           
-              <input type="file" accept=".pdf, .doc, .docx" name="file" id="file" class="form-control"
+              <input type="file" accept=".pdf, .doc" name="file" id="file" class="form-control"
                ngModel #file="ngModel" 
                (change) = "uploadResume($event)"
                [ngClass]="{ 'is-invalid': file.dirty && file.invalid}" required>

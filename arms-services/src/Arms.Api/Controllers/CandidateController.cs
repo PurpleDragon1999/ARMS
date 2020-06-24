@@ -293,11 +293,13 @@ namespace Arms.Api.Controllers
                 }
                 else
                 {
+                    candidate.nationality = customObj.nationality;
                     candidate.Name = customObj.Name;
                     candidate.Email = customObj.Email;
                     candidate.Phone = customObj.Phone;
                     candidate.ModifiedBy = customObj.ModifiedBy;
 
+                    _context.Candidate.Update(candidate);
                     _context.SaveChanges();
                 }
 
@@ -375,7 +377,7 @@ namespace Arms.Api.Controllers
             }
         }
 
-        [AllowAnonymous]
+        
         [HttpPatch("{id}")]
         public IActionResult UpdateCandidateDetails(int id, [FromForm] CandidateApplicationResume customObj)
 
@@ -388,6 +390,7 @@ namespace Arms.Api.Controllers
                 {  
                     var candidateId = application.CandidateId;
                     var candidate = _context.Candidate.SingleOrDefault(c => c.Id == candidateId);
+                    var resume = _context.Resume.FirstOrDefault(c => c.ApplicationId == id);
 
                     if (customObj.nationality != candidate.nationality || customObj.IdProofTypeId != candidate.IdProofTypeId ||customObj.IdentificationNo != candidate.IdentificationNo)
                     {
@@ -401,6 +404,7 @@ namespace Arms.Api.Controllers
                         };
                         return StatusCode(200, responseFalse);
                     }
+
                     var result = validateCandidate(customObj, candidateId);
                     if (!result.isValid)
                     {
@@ -419,12 +423,34 @@ namespace Arms.Api.Controllers
                     candidate.Email = customObj.Email;
                     candidate.Phone = customObj.Phone;
                     candidate.ModifiedBy = customObj.ModifiedBy;
-                    candidate.nationality = customObj.nationality;
+                    _context.Candidate.Update(candidate);
                     _context.SaveChanges();
 
-                    application.Education = customObj.Education;
-                    application.Experience = customObj.Experience;
-                    application.ModifiedBy = customObj.ModifiedBy;
+                    var modifiedApplication = _context.Application.FirstOrDefault(c => c.Id == id);
+                    
+                    modifiedApplication.Education = customObj.Education;
+                    modifiedApplication.Experience = customObj.Experience;
+                    modifiedApplication.ModifiedBy = customObj.ModifiedBy;
+                    _context.Application.Update(modifiedApplication);
+                    _context.SaveChanges();
+
+                    //Getting FileName
+                    var fileName = Path.GetFileName(customObj.Cv.FileName);
+                    //Getting file Extension
+                    var fileExtension = Path.GetExtension(fileName);
+                    // concatenating  FileName + FileExtension
+                    var newFileName = String.Concat(Convert.ToString(Guid.NewGuid()), fileExtension);
+
+                    resume.Name = fileName;
+                    resume.ModifiedBy = customObj.ModifiedBy;
+
+                    using (var target = new MemoryStream())
+                    {
+                        customObj.Cv.CopyTo(target);
+                        resume.Cv = target.ToArray();
+                    }
+
+                    _context.Resume.Update(resume);
                     _context.SaveChanges();
 
                     var response = new

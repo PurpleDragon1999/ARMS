@@ -125,7 +125,7 @@ export class CandidateFormComponent implements OnInit {
         this.resumeDetails = res.payload.data[0]
         this.model.cv = this.resumeDetails.cv ? 
         "data:application/" +
-        'pdf' +
+        this.resumeDetails.name.split(".")[1] +
         ";base64," +
         this.resumeDetails.cv
                     : null;
@@ -208,6 +208,7 @@ export class CandidateFormComponent implements OnInit {
           this.openModal(res)
           if (res.success == true){
             application.resetForm()
+            
           }
         }
         
