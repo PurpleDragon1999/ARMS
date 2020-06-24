@@ -179,7 +179,7 @@ const routes: Routes = [
     component: AppNavBarComponent,
     children: [{
       path: '',
-      component: AnalyticsComponent
+      component: DashboardComponent
     }]
   }
 ];
