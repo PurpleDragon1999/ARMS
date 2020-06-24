@@ -29,4 +29,11 @@ namespace Arms.Domain.CustomEntities
         public DateTime Date { get; set; }
         public TimeSpan Time { get; set; }
     }
+
+    public partial class RoundTimeUpdate
+    {
+        public int RoundId { get; set; }
+        public DateTime RoundDate { get; set; }
+        public TimeSpan RoundTime { get; set; }
+    }
 }

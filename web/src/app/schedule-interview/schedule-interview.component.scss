@@ -77,7 +77,12 @@ input[type="date"]::-webkit-inner-spin-button {
     width: 100%;
   }
 
+  .search-field ul {
+    margin-left: 0px;
+  }
+
   .search-field li {
+    height: 61px;
     font-size: 10px !important;
   }
 

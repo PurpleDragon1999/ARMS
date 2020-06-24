@@ -1,5 +1,5 @@
 import { IRoundPanel } from "./../models/panel.interface";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { AppServicesService } from "src/app/services/app-services.service";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
@@ -28,22 +28,27 @@ export class ScheduleInterviewComponent implements OnInit {
 
   error: any = { isError: false, errorMessage: "" };
   index: any;
-  schedule: any;
+  dateTimeForRounds: any[] = [];
+
   constructor(
     private _appService: AppServicesService,
-    private _activatedRoute: ActivatedRoute
+    private _activatedRoute: ActivatedRoute,
+    private _router: Router
   ) {}
 
   ngOnInit() {
     this._activatedRoute.params.subscribe((params) => {
       this.interviewId = parseInt(params.interviewId);
     });
-    this._appService
-      .getRoundsFromInterviewId(this.interviewId)
-      .subscribe((res: any) => {
+    this._appService.getRoundsFromInterviewId(this.interviewId).subscribe(
+      (res: any) => {
         this.rounds = res.payload.data;
         for (let i = 0; i < this.rounds.length; i++) {
           this.main.push(this.active);
+          this.dateTimeForRounds.push({
+            roundDate: this.rounds[i].roundDate.slice(0, 10),
+            roundTime: this.rounds[i].roundTime.slice(0, 5),
+          });
           this.searchData.push(this.temp);
           this.tableData.push({
             roundId: 0,
@@ -58,7 +63,13 @@ export class ScheduleInterviewComponent implements OnInit {
             },
           });
         }
-      });
+      },
+      (err) => {
+        if (err.status == 401) {
+          this._router.navigate(["/error/401"]);
+        }
+      }
+    );
   }
 
   changeActive(index: number, panel: number) {
@@ -83,6 +94,7 @@ export class ScheduleInterviewComponent implements OnInit {
   }
 
   select(data: any, roundId: number, index: number) {
+    data["status"] = "fas fa-clock text-warning";
     if (this.main[index][0] === "active") {
       this.tableData[index].roundId = roundId;
       if (
@@ -111,7 +123,13 @@ export class ScheduleInterviewComponent implements OnInit {
         this.employeeIds.push(data.id);
       }
     }
+    console.log(this.tableData);
   }
 
-  blockCalendar() {}
+  blockCalendar(index: number) {
+    console.log("Date: " + this.dateTimeForRounds[index].roundDate);
+    console.log("Time: " + this.dateTimeForRounds[index].roundTime);
+  }
+
+  schedule() {}
 }

@@ -1,4 +1,8 @@
-<div class="modal-dialog" role="document" style="overflow-y: initial !important;">
+<div
+  class="modal-dialog"
+  role="document"
+  style="overflow-y: initial !important;"
+>
   <div class="modal-content">
     <div class="modal-header">
       <h4 class="modal-title" id="exampleModalLabel">
@@ -6,113 +10,241 @@
       </h4>
     </div>
     <div class="modal-body" style="max-height: 30rem; overflow-y: auto;">
-      <form *ngIf="jobArray" class="forms-sample" #form="ngForm" (ngSubmit)="sendUpdateRequest(form.value)" novalidate>
+      <form
+        *ngIf="jobArray"
+        class="forms-sample"
+        #form="ngForm"
+        (ngSubmit)="sendUpdateRequest(form.value)"
+        novalidate
+      >
         <div class="form-group">
-          <label for="jobId"><b>Job ID</b><span class="asterick">*</span></label>
+          <label for="jobId"
+            ><b>Job ID</b><span class="asterick">*</span></label
+          >
           <div class="input-group col-xs-12">
             <span class="input-group-append btn btn-gradient-danger span">
               CYGJID
             </span>
-            class="form-control"
-            id="jdId"
-            #jobId="ngModel"
-            ngModel
-            required
+            <input
+              name="jdId"
+              [ngModel]="jdId"
+              readOnly
+              type="number"
+              class="form-control"
+              id="jdId"
+              #jobId="ngModel"
+              ngModel
+              required
             />
-            <div *ngIf="jobId.dirty && jobId.errors.required" class="invalid-feedback">
+            <div
+              *ngIf="jobId.dirty && jobId.errors.required"
+              class="invalid-feedback"
+            >
               <div><i class="mdi mdi-alert-outline"></i>Name is required</div>
             </div>
-
           </div>
         </div>
         <div>
-          <label for="jobTitle"><b>Job Title </b><span class="asterick">*</span></label>
-          <input name="jobTitle" [ngModel]="jobArray.jobTitle" type="text" class="form-control" id="jdTitle"
-            placeholder="Job Title" #jobTitle="ngModel" [ngClass]="{ 'is-invalid': jobTitle.dirty && jobTitle.invalid }"
-            required />
-          <div *ngIf="jobTitle.dirty && jobTitle.errors.required" class="invalid-feedback">
-            <div><i class="mdi mdi-alert-outline"></i>Job Title is required</div>
+          <label for="jobTitle"
+            ><b>Job Title </b><span class="asterick">*</span></label
+          >
+          <input
+            name="jobTitle"
+            [ngModel]="jobArray.jobTitle"
+            type="text"
+            class="form-control"
+            id="jdTitle"
+            placeholder="Job Title"
+            #jobTitle="ngModel"
+            [ngClass]="{ 'is-invalid': jobTitle.dirty && jobTitle.invalid }"
+            required
+          />
+          <div
+            *ngIf="jobTitle.dirty && jobTitle.errors.required"
+            class="invalid-feedback"
+          >
+            <div>
+              <i class="mdi mdi-alert-outline"></i>Job Title is required
+            </div>
           </div>
-
         </div>
 
         <div class="form-group">
-          <label for="description"><b>Job Description</b><span class="asterick">*</span></label>
-          <textarea name="description" [ngModel]="description" type="text" class="form-control" id="description"
-            placeholder="Job Description" ngModel
-            [ngClass]="{ 'is-invalid': jobDescription.dirty && jobDescription.invalid }" #jobDescription="ngModel"
-            required></textarea>
-          <div *ngIf="jobDescription.dirty && jobDescription.errors.required" class="invalid-feedback">
-            <div><i class="mdi mdi-alert-outline"></i>Job Description is required</div>
+          <label for="description"
+            ><b>Job Description</b><span class="asterick">*</span></label
+          >
+          <textarea
+            name="description"
+            [ngModel]="description"
+            type="text"
+            class="form-control"
+            id="description"
+            placeholder="Job Description"
+            ngModel
+            [ngClass]="{
+              'is-invalid': jobDescription.dirty && jobDescription.invalid
+            }"
+            #jobDescription="ngModel"
+            required
+          ></textarea>
+          <div
+            *ngIf="jobDescription.dirty && jobDescription.errors.required"
+            class="invalid-feedback"
+          >
+            <div>
+              <i class="mdi mdi-alert-outline"></i>Job Description is required
+            </div>
           </div>
         </div>
 
         <div class="form-group">
-          <label for="openingDate"><b>Opening date</b><span class="asterick">*</span></label>
-          <input name="openingDate" [ngModel]="openingDate" type="date" class="form-control" id="openingDate"
-            placeholder="Job Description" ngModel required />
-
+          <label for="openingDate"
+            ><b>Opening date</b><span class="asterick">*</span></label
+          >
+          <input
+            name="openingDate"
+            [ngModel]="openingDate"
+            type="date"
+            class="form-control"
+            id="openingDate"
+            placeholder="Job Description"
+            ngModel
+            required
+          />
         </div>
 
         <div class="form-group">
-          <label for="closingDate"><b>Closing Date</b><span class="asterick">*</span></label>
-          <input name="closingDate" [ngModel]="closingDate" type="date" required class="form-control"
-            placeholder="Closing Date" ngModel />
-
+          <label for="closingDate"
+            ><b>Closing Date</b><span class="asterick">*</span></label
+          >
+          <input
+            name="closingDate"
+            [ngModel]="closingDate"
+            type="date"
+            required
+            class="form-control"
+            placeholder="Closing Date"
+            ngModel
+          />
         </div>
 
         <div class="form-group">
-          <label for="skills"><b>Skills</b><span class="asterick">*</span></label>
-          <input name="skills" [ngModel]="skills" type="text" required class="form-control" placeholder="Skills"
-            ngModel />
-
+          <label for="skills"
+            ><b>Skills</b><span class="asterick">*</span></label
+          >
+          <input
+            name="skills"
+            [ngModel]="skills"
+            type="text"
+            required
+            class="form-control"
+            placeholder="Skills"
+            ngModel
+          />
         </div>
         <div class="form-group" *ngIf="jobArray.eligibilityCriteria">
-          <label for="eligibilityCriteria"><b>Eligibility criteria</b><span class="asterick">*</span></label>
-          <select id="eligibilityCriteria" name="eligibilityCriteriaId" [(ngModel)]="jobArray.eligibilityCriteriaId"
-            type="text" required class="form-control form-control-lg" placeholder="Eligibility Criteria"
-            #eligibilityCriteria="ngModel">
-            <option class="select-css" *ngFor="let el of eligibilityCriterias"
-              [selected]="jobArray.eligibilityCriteria.id===el.id" [value]="el.id">
+          <label for="eligibilityCriteria"
+            ><b>Eligibility criteria</b><span class="asterick">*</span></label
+          >
+          <select
+            id="eligibilityCriteria"
+            name="eligibilityCriteriaId"
+            [(ngModel)]="jobArray.eligibilityCriteriaId"
+            type="text"
+            required
+            class="form-control form-control-lg"
+            placeholder="Eligibility Criteria"
+            #eligibilityCriteria="ngModel"
+          >
+            <option
+              class="select-css"
+              *ngFor="let el of eligibilityCriterias"
+              [selected]="jobArray.eligibilityCriteria.id === el.id"
+              [value]="el.id"
+            >
               {{ el.eligibilityCriteriaName }}
             </option>
           </select>
-
         </div>
         <div class="form-group" *ngIf="jobArray.employmentType">
-          <label for="jobType"><b>Job Type</b><span class="asterick">*</span></label>
-          <select name="employmentTypeId" id="jobType" [(ngModel)]="jobArray.employmentTypeId" type="text" required
-            class="form-control form-control-lg" placeholder="Job Type" #jobType="ngModel">
-            <option class="select-css" *ngFor="let employmentType of employmentTypes" [value]="employmentType.id"
-              [selected]="jobArray.employmentType.id===employmentType.id">
+          <label for="jobType"
+            ><b>Job Type</b><span class="asterick">*</span></label
+          >
+          <select
+            name="employmentTypeId"
+            id="jobType"
+            [(ngModel)]="jobArray.employmentTypeId"
+            type="text"
+            required
+            class="form-control form-control-lg"
+            placeholder="Job Type"
+            #jobType="ngModel"
+          >
+            <option
+              class="select-css"
+              *ngFor="let employmentType of employmentTypes"
+              [value]="employmentType.id"
+              [selected]="jobArray.employmentType.id === employmentType.id"
+            >
               {{ employmentType.employmentTypeName }}
             </option>
           </select>
         </div>
         <div class="form-group" *ngIf="jobArray.loc">
-          <label for="location"><b>Location</b><span class="asterick">*</span></label>
-          <select name="locationId" id="location" [(ngModel)]="jobArray.locationId" type="text" required
-            class="form-control form-control-lg" placeholder="Location" #location="ngModel">
-            <option class="select-css" *ngFor="let location of locations"
-              [selected]="location.id === jobArray.locationId" [value]="location.id">
+          <label for="location"
+            ><b>Location</b><span class="asterick">*</span></label
+          >
+          <select
+            name="locationId"
+            id="location"
+            [(ngModel)]="jobArray.locationId"
+            type="text"
+            required
+            class="form-control form-control-lg"
+            placeholder="Location"
+            #location="ngModel"
+          >
+            <option
+              class="select-css"
+              *ngFor="let location of locations"
+              [selected]="location.id === jobArray.locationId"
+              [value]="location.id"
+            >
               {{ location.locationName }}
             </option>
           </select>
-
         </div>
         <div class="form-group">
           <label for="salary"><b>Salary (per annum)</b></label>
-          <input name="salary" [ngModel]="salary" type="number" required class="form-control" placeholder="Salary"
-            ngModel />
+          <input
+            name="salary"
+            [ngModel]="salary"
+            type="number"
+            required
+            class="form-control"
+            placeholder="Salary"
+            ngModel
+          />
         </div>
         <div class="form-group">
           <label for="vacancies"><b>No .of Vacancies </b></label>
-          <input name="vacancies" [ngModel]="vacancies" type="number" required class="form-control"
-            placeholder="Vacancies" ngModel />
+          <input
+            name="vacancies"
+            [ngModel]="vacancies"
+            type="number"
+            required
+            class="form-control"
+            placeholder="Vacancies"
+            ngModel
+          />
         </div>
         <br />
         <div class="d-flex flex-row-reverse">
-          <button type="submit" class="btn btn-gradient-danger mr-2" [disabled]="!form.valid">
+          <button
+            type="submit"
+            class="btn btn-gradient-danger mr-2"
+            [disabled]="!form.valid"
+          >
             <b>UPDATE</b>
           </button>
           <button type="button" class="btn btn-light" (click)="modalClose()">

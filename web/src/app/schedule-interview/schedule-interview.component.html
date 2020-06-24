@@ -1,14 +1,88 @@
 <div class="page-header">
-  <h3 class="page-title"><b>Schedule Interview</b></h3>
+  <h3 class="page-title"><b>Select Panel</b></h3>
 </div>
 <div class="card">
   <div class="card-body">
     <div *ngFor="let round of rounds; let i = index">
       <div class="panel-select mt-3">
-        <div class="d-flex flex-row justify-content-between">
-          <h4><b>Date:</b> {{ round.roundDate | slice: 0:10 }}</h4>
-          <h4><b>Time:</b> {{ round.roundTime | slice: 0:5 }}</h4>
+        <!--Date and Time for bigger screens-->
+        <div class="d-none d-sm-block">
+          <div
+            class="d-flex flex-row justify-content-between align-items-center"
+          >
+            <h4
+              class="d-flex flex-row justify-content-start align-items-center"
+            >
+              <b class="mr-2">Date:</b>
+              <input
+                name="date"
+                type="date"
+                [(ngModel)]="dateTimeForRounds[i].roundDate"
+                class="form-control"
+                id="date"
+                #date="ngModel"
+                [ngClass]="{ 'is-invalid': date.dirty && date.invalid }"
+                placeholder="Date"
+                required
+              />
+            </h4>
+            <h4
+              class="d-flex flex-row justify-content-start align-items-center"
+            >
+              <b class="mr-2">Time:</b>
+              <input
+                name="time"
+                type="time"
+                [(ngModel)]="dateTimeForRounds[i].roundTime"
+                class="form-control"
+                id="time"
+                #time="ngModel"
+                [ngClass]="{ 'is-invalid': time.dirty && time.invalid }"
+                placeholder="Time"
+                required
+              />
+            </h4>
+          </div>
         </div>
+
+        <!--Date and Time For round for smaller screens-->
+        <div class="d-block d-sm-none">
+          <div class="d-flex flex-column justify-content-center">
+            <h4
+              class="d-flex flex-row justify-content-start align-items-center"
+            >
+              <b class="mr-2">Date:</b>
+              <input
+                name="date"
+                type="date"
+                [(ngModel)]="dateTimeForRounds[i].roundDate"
+                class="form-control"
+                id="date"
+                #date="ngModel"
+                [ngClass]="{ 'is-invalid': date.dirty && date.invalid }"
+                placeholder="Date"
+                required
+              />
+            </h4>
+            <h4
+              class="d-flex flex-row justify-content-start align-items-center"
+            >
+              <b class="mr-2">Time:</b>
+              <input
+                name="time"
+                type="time"
+                [(ngModel)]="dateTimeForRounds[i].roundTime"
+                class="form-control"
+                id="time"
+                #time="ngModel"
+                [ngClass]="{ 'is-invalid': time.dirty && time.invalid }"
+                placeholder="Time"
+                required
+              />
+            </h4>
+          </div>
+        </div>
+
         <ul class="nav nav-tabs nav-fill mb-3">
           <li class="nav-item">
             <a
@@ -69,6 +143,8 @@
                 <th><b>Id</b></th>
                 <th><b>Name</b></th>
                 <th><b>Email</b></th>
+                <th><b>Status</b></th>
+                <th></th>
               </tr>
             </thead>
             <tbody *ngIf="main[i][0]">
@@ -76,6 +152,8 @@
                 <td>{{ data.id }}</td>
                 <td>{{ data.firstName | uppercase }} {{ data.lastName }}</td>
                 <td>{{ data.email }}</td>
+                <td><i [ngClass]="data.status"></i></td>
+                <td><i class="fas fa-trash"></i></td>
               </tr>
             </tbody>
             <tbody *ngIf="main[i][1]">
