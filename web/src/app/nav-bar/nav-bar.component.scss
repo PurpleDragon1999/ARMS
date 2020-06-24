@@ -1,14 +1,37 @@
-.nav-logout :hover{
-    color: #FC4C02;
+.nav-logout :hover {
+  color: #fc4c02;
 }
 
-#arms:hover{
-    color: #FC4C02;
-}
-.text{
-    padding-top: 2em;
+#arms:hover {
+  color: #fc4c02;
 }
 
-*,*::before,*::after {
-    box-sizing: border-box !important;
+.text {
+  padding-top: 2em;
+}
+
+// @media (min-width: 992px) {
+//   .sidebar-icon-only .sidebar .nav .nav-item .nav-link {
+//     margin-left: 0 !important;
+//   }
+// }
+
+.sidebar .nav .nav-item .nav-link .menu-title {
+  margin-left: 2rem !important;
+}
+
+.highlight {
+  //   margin-right: 2rem;
+  color: white;
+}
+
+.sidebar .nav .nav-item.active > .highlight {
+  background-color: rgb(240, 79, 35) !important;
+  color: rgb(240, 79, 35) !important;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box !important;
 }

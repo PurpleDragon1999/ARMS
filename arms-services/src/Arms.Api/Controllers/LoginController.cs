@@ -45,7 +45,6 @@ namespace Arms.Api.Controllers
                         success = false,
                         payload = new
                         {
-
                             message = "You are UnAuthorized on this Page"
                         }
 

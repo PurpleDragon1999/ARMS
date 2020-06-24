@@ -1,15 +1,8 @@
+import { IRoundPanel } from "./../models/panel.interface";
+import { ActivatedRoute, Router } from "@angular/router";
 import { AppServicesService } from "src/app/services/app-services.service";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
-interface round {
-  roundID: number;
-  panel: panel[];
-}
-
-interface panel {
-  panelName: string;
-  panel: number[];
-}
 
 @Component({
   selector: "app-schedule-interview",
@@ -17,98 +10,126 @@ interface panel {
   styleUrls: ["./schedule-interview.component.scss"],
 })
 export class ScheduleInterviewComponent implements OnInit {
-  rounds = [
-    {
-      roundId: 1,
-      name: "Aptitude",
-    },
-    {
-      roundId: 2,
-      name: "Technincal",
-    },
-    {
-      roundId: 3,
-      name: "Managerial",
-    },
-  ];
+  interviewId: number;
+  rounds: any[];
+  employeeIds: number[] = [];
 
   //To handle navigation for panel
   active: string[] = ["active", "", ""];
   main = [];
 
   //To handle search results
+  temp: any = [];
   searchData: any = [];
-  list: boolean = false;
+  list: boolean[] = [false, false, false];
 
   //To handle selected data
-
-  tableData: any = [];
-  roundsData: round[];
-  roundData = [
-    {
-      roundId: 1,
-      panel1: {
-        panelName: "",
-        employeesId: [],
-      },
-      panel2: {
-        panelName: "",
-        employeesId: [],
-      },
-      panel3: {
-        panelName: "",
-        employeesId: [],
-      },
-    },
-  ];
+  tableData: IRoundPanel[] = [];
 
   error: any = { isError: false, errorMessage: "" };
   index: any;
-  schedule: any;
-  constructor(private _appService: AppServicesService) {}
+  dateTimeForRounds: any[] = [];
+
+  constructor(
+    private _appService: AppServicesService,
+    private _activatedRoute: ActivatedRoute,
+    private _router: Router
+  ) {}
 
   ngOnInit() {
-    for (let i = 0; i < this.rounds.length; i++) {
-      this.main.push(this.active);
-    }
+    this._activatedRoute.params.subscribe((params) => {
+      this.interviewId = parseInt(params.interviewId);
+    });
+    this._appService.getRoundsFromInterviewId(this.interviewId).subscribe(
+      (res: any) => {
+        this.rounds = res.payload.data;
+        for (let i = 0; i < this.rounds.length; i++) {
+          this.main.push(this.active);
+          this.dateTimeForRounds.push({
+            roundDate: this.rounds[i].roundDate.slice(0, 10),
+            roundTime: this.rounds[i].roundTime.slice(0, 5),
+          });
+          this.searchData.push(this.temp);
+          this.tableData.push({
+            roundId: 0,
+            panel1: {
+              employees: [],
+            },
+            panel2: {
+              employees: [],
+            },
+            panel3: {
+              employees: [],
+            },
+          });
+        }
+      },
+      (err) => {
+        if (err.status == 401) {
+          this._router.navigate(["/error/401"]);
+        }
+      }
+    );
   }
 
   changeActive(index: number, panel: number) {
     this.main[index] = ["", "", ""];
     this.main[index][panel] = "active";
+    this.searchData[index] = [];
+    this.list[index] = false;
   }
 
-  search(input: string) {
+  search(input: string, i: number) {
     if (input != "") {
-    
+      this._appService.searchEmployee(input).subscribe((res: any) => {
+        this.searchData[i] = res.payload.data;
+      });
     } else if (input === "") {
-      this.searchData = [];
-      this.list = false;
+      this.searchData[i] = [];
+      this.list[i] = false;
     }
-    this.searchData.length == 0 ? (this.list = false) : (this.list = true);
+    this.searchData[i].length == 0
+      ? (this.list[i] = false)
+      : (this.list[i] = true);
   }
 
   select(data: any, roundId: number, index: number) {
-    if (index == 0) {
-      if (this.main[index][0] === "active") {
-        this.roundData[0].roundId = roundId;
-        this.roundData[0].panel1.panelName = "Java";
-        if (this.roundData[0].panel1.employeesId.length < 2) {
-          this.roundData[0].panel1.employeesId.push(data.id);
-        }
-      } else if (this.main[index][1] === "active") {
-        this.roundData[1].roundId = roundId;
-        this.roundData[1].panel2.panelName = "Java";
-        if (this.roundData[1].panel2.employeesId.length < 2) {
-          this.roundData[1].panel2.employeesId.push(data.id);
-        }
-      } else if (this.main[index][2] === "active") {
-        this.roundData[2].roundId = roundId;
-        this.roundData[2].panel3.panelName = "Java";
-        if (this.roundData[2].panel3.employeesId.length < 2) {
-          this.roundData[2].panel3.employeesId.push(data.id);
-        }
+    data["status"] = "fas fa-clock text-warning";
+    if (this.main[index][0] === "active") {
+      this.tableData[index].roundId = roundId;
+      if (
+        this.tableData[index].panel1.employees.length < 2 &&
+        !this.employeeIds.includes(data.id)
+      ) {
+        this.tableData[index].panel1.employees.push(data);
+        this.employeeIds.push(data.id);
+      }
+    } else if (this.main[index][1] === "active") {
+      this.tableData[index].roundId = roundId;
+      if (
+        this.tableData[index].panel2.employees.length < 2 &&
+        !this.employeeIds.includes(data.id)
+      ) {
+        this.tableData[index].panel2.employees.push(data);
+        this.employeeIds.push(data.id);
+      }
+    } else if (this.main[index][2] === "active") {
+      this.tableData[index].roundId = roundId;
+      if (
+        this.tableData[index].panel3.employees.length < 2 &&
+        !this.employeeIds.includes(data.id)
+      ) {
+        this.tableData[index].panel3.employees.push(data);
+        this.employeeIds.push(data.id);
       }
     }
+    console.log(this.tableData);
   }
+
+  blockCalendar(index: number) {
+    console.log("Date: " + this.dateTimeForRounds[index].roundDate);
+    console.log("Time: " + this.dateTimeForRounds[index].roundTime);
+  }
+
+  schedule() {}
 }

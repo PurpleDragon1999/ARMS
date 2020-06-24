@@ -2,28 +2,28 @@ import { IAssessment } from "./../models/assessment.interface";
 import { IResponse } from "src/app/models/response.interface";
 import { Injectable } from "@angular/core";
 import { JwtHelperService } from "@auth0/angular-jwt";
-import { HttpClient, HttpResponse, HttpHeaders, HttpParams } from "@angular/common/http";
+import {
+  HttpClient,
+  HttpResponse,
+  HttpHeaders,
+  HttpParams,
+} from "@angular/common/http";
 import { Observable } from "rxjs";
 import { ICreate } from "../models/create.interface";
-import { HOST } from 'src/app/config/apiHost.config';
+import { HOST } from "src/app/config/apiHost.config";
 
 const USER_DOMAIN = "http://localhost:3000";
 @Injectable({
   providedIn: "root",
 })
 export class AppServicesService {
- 
   headers: HttpHeaders = new HttpHeaders({
-    'Content-Type': 'application/json',
-     Authorization: localStorage.getItem("Authorized")
-     
-   
+    "Content-Type": "application/json",
+    Authorization: localStorage.getItem("Authorized"),
   });
-   httpOptions = {
-    headers: this.headers
+  httpOptions = {
+    headers: this.headers,
   };
-
- 
 
   constructor(private http: HttpClient) {}
 
@@ -37,7 +37,18 @@ export class AppServicesService {
     return helper.decodeToken(this.getToken());
   }
 
+  getRoundsFromInterviewId(id: number): Observable<HttpResponse<any>> {
+    return this.http.get<any>(`${HOST}/api/panel/round/${id}`, {
+      ...this.httpOptions,
+    });
+  }
+
   // For making HTTP calls
+  searchEmployee(keyword: string): Observable<HttpResponse<any>> {
+    return this.http.get<any>(`${HOST}/api/employee/${keyword}`, {
+      ...this.httpOptions,
+    });
+  }
 
   //For searching with pagination
   getAllIdProofTypes(): Observable<HttpResponse<any>> {
@@ -51,10 +62,7 @@ export class AppServicesService {
     });
   }
   getAllJobs(): Observable<any> {
-    return this.http.get<any>(
-      `${HOST}/api/jobDescription`,
-      this.httpOptions
-    );
+    return this.http.get<any>(`${HOST}/api/jobDescription`, this.httpOptions);
   }
 
   getAllEligibilityCriterias(): Observable<HttpResponse<any>> {
@@ -70,10 +78,7 @@ export class AppServicesService {
     });
   }
   getAllInterviews(): Observable<HttpResponse<any>> {
-    return this.http.get<any>(
-      `${HOST}/api/interview`,
-      this.httpOptions
-    );
+    return this.http.get<any>(`${HOST}/api/interview`, this.httpOptions);
   }
 
   deleteInterview(interviewId): Observable<IResponse> {
@@ -84,10 +89,7 @@ export class AppServicesService {
   }
 
   getInterviewById(Id): Observable<any> {
-    return this.http.get<any>(
-      `${HOST}/api/interview/${Id}`,
-      this.httpOptions
-    );
+    return this.http.get<any>(`${HOST}/api/interview/${Id}`, this.httpOptions);
   }
 
   getAllLocations(): Observable<HttpResponse<any>> {
@@ -96,11 +98,10 @@ export class AppServicesService {
     });
   }
 
-  
-  getSkills():Observable<HttpResponse<any>>{
+  getSkills(): Observable<HttpResponse<any>> {
     return this.http.get<any>(`${HOST}/api/skill`, this.httpOptions);
   }
-  
+
   deleteLocation(id): Observable<any> {
     return this.http.delete<any>(`${HOST}/api/location/${id}`, {
       ...this.httpOptions,
@@ -116,10 +117,10 @@ export class AppServicesService {
   }
 
   deleteApplicationStatusType(id): Observable<any> {
-    return this.http.delete<any>(
-      `${HOST}/api/applicationStatusTypes/${id}`,
-      { ...this.httpOptions, observe: "response" }
-    );
+    return this.http.delete<any>(`${HOST}/api/applicationStatusTypes/${id}`, {
+      ...this.httpOptions,
+      observe: "response",
+    });
   }
 
   getAllApplicationStatusTypes(): Observable<HttpResponse<any>> {
@@ -129,10 +130,10 @@ export class AppServicesService {
   }
 
   deleteEligibilityCriterion(id): Observable<any> {
-    return this.http.delete<any>(
-      `${HOST}/api/eligibilityCriteria/${id}`,
-      { ...this.httpOptions, observe: "response" }
-    );
+    return this.http.delete<any>(`${HOST}/api/eligibilityCriteria/${id}`, {
+      ...this.httpOptions,
+      observe: "response",
+    });
   }
   deleteIdProofType(id): Observable<any> {
     return this.http.delete<any>(`${HOST}/api/IdProofType/${id}`, {
