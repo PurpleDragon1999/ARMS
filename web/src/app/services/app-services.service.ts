@@ -186,7 +186,7 @@ export class AppServicesService {
   blockCalender(obj):Observable<any>{
     
      //return this.http.post<any>(CALENDER_API,obj);
-     return this.http.get<any>(CALENDER_VIEW_API,this.out_httpOptions);
+     return this.http.get<any>(CALENDER_VIEW_API);
     
    }
    getRound(jobId,employeeId){
