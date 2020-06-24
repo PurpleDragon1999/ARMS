@@ -15,6 +15,7 @@ using System.Net.Mail;
 using Arms.Domain.CustomEntities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
+using System.Buffers.Text;
 
 namespace Arms.Api.Controllers
 {
@@ -25,12 +26,14 @@ namespace Arms.Api.Controllers
     {
       
         ArmsDbContext _context;
+        
         public MailHelperController mailHelper=new MailHelperController();
      
         public JobDescriptionController(ArmsDbContext armsContext)
         {   
         
              _context = armsContext;
+             
           
         }
         //GET:api/jobDescriptions
@@ -60,7 +63,7 @@ namespace Arms.Api.Controllers
                     success = false,
                     payload = new
                     {
-                        message = ex.InnerException
+                        message = ex.InnerException.Message
                     }
 
                 };
@@ -135,10 +138,7 @@ namespace Arms.Api.Controllers
             try
             {
                 JobDescription checkinDb = _context.JobDescription.SingleOrDefault(c => c.jobTitle == job.jobTitle);
-                if (job.jobTitle == null || job.eligibilityCriteriaId == 0 || job.employmentTypeId == 0 || job.locationId == 0)
-                {
-                    throw new System.ArgumentException("These are required fields");
-                }
+               
 
                 if (checkinDb != null)
                 {
@@ -200,11 +200,15 @@ namespace Arms.Api.Controllers
         }
         //PUT:api/jobdescription/id
         [HttpPut("{id}")]
-        public IActionResult UpdateJd(int id, [FromBody]JobDescription job)
+        public IActionResult UpdateJd(int id, [FromBody]CustomJob job)
         {
             try
             {
+               
                 JobDescription jobInDb = _context.JobDescription.SingleOrDefault(c => c.Id == id);
+                
+               
+
                 if (jobInDb == null)
                 {
                     var resNull = new
@@ -250,6 +254,14 @@ namespace Arms.Api.Controllers
 
                 if (job.salary != null)
                     jobInDb.salary = job.salary;
+
+                if (job.pdfString != null)
+                {
+                    string converted = job.pdfString.Replace('-', '+');
+                    converted = converted.Replace('_', '/');
+                    jobInDb.pdfBlobData = Convert.FromBase64String(job.pdfString);
+                }
+
 
                 _context.JobDescription.Update(jobInDb);
                 _context.SaveChanges();

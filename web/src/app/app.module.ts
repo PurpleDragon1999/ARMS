@@ -109,7 +109,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     },
       {
         popUp: !isIE,
-        consentScopes: ["user.read", "openid", "profile"],
+        consentScopes: ["user.read", "openid", "profile","calenders.read"],
         unprotectedResources: [],
         protectedResourceMap: [
           ["https://graph.microsoft.com/v1.0/me", ["user.read"]],

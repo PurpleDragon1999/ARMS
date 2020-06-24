@@ -456,10 +456,11 @@ namespace Arms.Api.Controllers
        //function which returns round 
         public Round GetRound(int employeeId,int jobId)
         {
-                var interviewer = _context.Interviewer.FirstOrDefault(c => c.EmployeeId == employeeId && c.JobId==jobId);
-                var panel = _context.InterviewPanel.FirstOrDefault(c=>c.Id==interviewer.InterviewPanelId);
-                Round round = _context.Round.Include(c=>c.RoundType).FirstOrDefault(c => c.Id == panel.RoundId);
-            return round;
+                 var interviewer = _context.Interviewer.FirstOrDefault(c => c.EmployeeId == employeeId && c.JobId == jobId);
+                var panel = _context.InterviewPanel.FirstOrDefault(c => c.Id == interviewer.InterviewPanelId);
+                Round round = _context.Round.Include(c => c.RoundType).FirstOrDefault(c => c.Id == panel.RoundId);
+                return round;
+           
 
       }
         //function which returns list of filtered interviews

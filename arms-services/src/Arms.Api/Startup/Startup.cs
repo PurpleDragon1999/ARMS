@@ -34,7 +34,7 @@ namespace Arms.Api.Startup
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 .AddControllersAsServices();
-            string connString = this.Configuration.GetConnectionString("db");
+            string connString = this.Configuration.GetConnectionString("Db");
             services.AddDbContext<Arms.Infrastructure.ArmsDbContext>(o => o.UseSqlServer(connString));
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

@@ -21,6 +21,7 @@ export class CandidateComponent implements OnInit {
     pager: any;
     employeeId:any;
     jobId:any;
+    roundData:any;
     constructor(private candidateService: CandidateService, 
                 private bufferToPdf: BufferToPdf,
                 private route:ActivatedRoute,
@@ -50,7 +51,7 @@ export class CandidateComponent implements OnInit {
       }
       getRoundData(){
          this._service.getRound(this.jobId,this.employeeId).subscribe((res)=>{
-             console.log(res);
+            this.roundData=res.payload.data;
          }
          )
 

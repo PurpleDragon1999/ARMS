@@ -15,7 +15,7 @@ export class JobService {
 
   headers: HttpHeaders = new HttpHeaders({
     'Content-Type': 'application/json',
-        Authorization: localStorage.getItem("Authorized")
+     Authorization: localStorage.getItem("Authorized")
        //hard code token here
    
   });

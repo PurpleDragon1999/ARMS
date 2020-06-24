@@ -114,11 +114,11 @@ export class JdListComponent implements OnInit {
                          canvas_image_width*0.79, canvas_image_height*0.90);
           }
           pdf.save("jobdescription"+this.jdObject.id+'.pdf');
-          console.log(pdf.output())
-        //  this.jobService.updateJobInfo({pdfString:pdf},Number(this.jdObject.id)).subscribe((res: any) => {
+          var fileEncode = btoa(pdf.output());
+          this.jobService.updateJobInfo({pdfString:fileEncode},Number(this.jdObject.id)).subscribe((res: any) => {
                  
   
-        //     });
+            });
         });
     
         data.style.display="none";
