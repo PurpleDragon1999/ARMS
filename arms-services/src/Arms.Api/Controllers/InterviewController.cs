@@ -231,8 +231,13 @@ namespace Arms.Api.Controllers
 					success = true,
 					payload = new
 					{
+<<<<<<< HEAD
                         data=roundToAdd,
 						message = "Interview Record Created Successfully"
+=======
+						message = "Interview Record Created Successfully",
+                        data = id
+>>>>>>> 2a4d4b678e484326b992509c033b921fe45e3a58
 					}
 
 				};
@@ -268,7 +273,7 @@ namespace Arms.Api.Controllers
 					success = false,
 					payload = new
 					{
-						message = e.InnerException.Message
+						message = e.Message
 					}
 
 				};

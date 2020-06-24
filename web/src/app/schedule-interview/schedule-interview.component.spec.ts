@@ -1,20 +1,27 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { HttpClient } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { BrowserModule } from "@angular/platform-browser";
+import { HttpClientTestingModule } from "@angular/common/http/testing";
+import { HttpClient } from "@angular/common/http";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { ScheduleInterviewComponent } from './schedule-interview.component';
+import { ScheduleInterviewComponent } from "./schedule-interview.component";
+import { RouterTestingModule } from "@angular/router/testing";
 
-describe('ScheduleInterviewComponent', () => {
+describe("ScheduleInterviewComponent", () => {
   let component: ScheduleInterviewComponent;
   let fixture: ComponentFixture<ScheduleInterviewComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ScheduleInterviewComponent ], 
-      imports: [ FormsModule, ReactiveFormsModule, HttpClientTestingModule ]
-    })
-    .compileComponents();
+      declarations: [ScheduleInterviewComponent],
+      imports: [
+        FormsModule,
+        ReactiveFormsModule,
+        BrowserModule,
+        HttpClientTestingModule,
+        RouterTestingModule.withRoutes([]),
+      ],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -23,10 +30,10 @@ describe('ScheduleInterviewComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
   afterEach(() => {
     TestBed.resetTestingModule();
-  })
+  });
 });

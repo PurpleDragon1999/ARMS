@@ -44,17 +44,32 @@ namespace Arms.Api.Controllers
             {
                 List<JobDescription> jobDescriptions = _context.JobDescription.Include(l => l.employmentType).
                     Include(l => l.eligibilityCriteria).Include(l => l.loc).ToList();
-                var response = new
+                if(jobDescriptions != null)
                 {
-                    success = true,
-                    payload = new
+                    var response = new
                     {
-                        data = jobDescriptions,
-                        message = "Job Descriptions Retrieved Successfully"
-                    }
+                        success = true,
+                        payload = new
+                        {
+                            data = jobDescriptions,
+                            message = "Job Descriptions Retrieved Successfully"
+                        }
 
-                };
-                return StatusCode(200, response);
+                    };
+                    return StatusCode(200, response);
+                }
+                else
+                {
+                    Response response = new Response()
+                    {
+                        payload = new Payload()
+                    };
+                    response.success = "true";
+                    response.payload.msg = "No JD Found";
+                    return StatusCode(200, response);
+                }
+                
+                
             }
             catch (Exception ex)
             {
@@ -63,7 +78,9 @@ namespace Arms.Api.Controllers
                     success = false,
                     payload = new
                     {
-                        message = ex.InnerException.Message
+
+                        message = ex.Message
+
                     }
 
                 };

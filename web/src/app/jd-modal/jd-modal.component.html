@@ -18,7 +18,9 @@
         novalidate
       >
         <div class="form-group">
-          <label for="jobId"><b>Job ID</b><span class="asterick">*</span></label>
+          <label for="jobId"
+            ><b>Job ID</b><span class="asterick">*</span></label
+          >
           <div class="input-group col-xs-12">
             <span class="input-group-append btn btn-gradient-danger span">
               CYGJID
@@ -34,7 +36,10 @@
               ngModel
               required
             />
-            <div *ngIf="jobId.dirty && jobId.errors.required" class="invalid-feedback">
+            <div
+              *ngIf="jobId.dirty && jobId.errors.required"
+              class="invalid-feedback"
+            >
               <div><i class="mdi mdi-alert-outline"></i>Name is required</div>
             </div>
            
