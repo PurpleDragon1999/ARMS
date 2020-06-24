@@ -83,10 +83,10 @@ export class LoginComponent implements OnInit {
          
           window.localStorage.setItem(
             "Authorized",
-            `Bearer ${res.payload.authorized}`
+            `Bearer ${res.payload.data.authorized}`
           );
            let role = this.loginService.tokenDecoder().role;
-
+            console.log(role)
           if (role == this._env.ADMIN) {
             this._router.navigate(["/admin"]);
           } else if (role == this._env.SUPERUSER) {

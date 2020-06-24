@@ -19,7 +19,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { EmployeeFormComponent } from "./employee/components/employee-form/employee-form.component";
 import { EmployeeUploadComponent } from "./employee/components/employee-upload/employee-upload.component";
 import { EmployeeComponent } from "./employee/containers/employee/employee.component";
-import { HrComponent } from './hr/hr.component';
 import { JdFormComponent } from './jd-form/jd-form.component';
 import { JdPdfComponent } from './jd-form/jd-pdf/jd-pdf.component';
 import { JdListComponent } from './jd-list/jd-list.component';
@@ -48,8 +47,6 @@ import {CandidateDescriptionComponent} from './candidate-assessment/components/c
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,7 +63,6 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     EmployeeComponent,
     EmployeeUploadComponent,
     ModalComponent,
-    HrComponent,
     JdListComponent,
     ScheduleInterviewComponent,
     AppComponent,
@@ -79,6 +75,12 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     InterviewListComponent,
     HrInterviewAssessementComponent,
     SettingsComponent,
+    RoundTypeComponent,	
+    LocationComponent,	
+    IdProofTypeComponent,	
+    EmploymentTypeComponent,	
+    EligibilityCriteriaComponent,	
+    ApplicationStatusComponent,
     CandidateAssessmentComponent,
     CandidateAssessmentFormComponent,
     CandidateDescriptionComponent,

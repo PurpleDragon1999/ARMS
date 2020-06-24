@@ -1,7 +1,12 @@
+.main-panel{
+  width: inherit !important;
+}
+
 .app-stats{
   background-color: #fff;
   border-radius: 0.3125rem;
   margin-bottom: 2rem;
+  text-align: center;
 }
 
 .app-stats__heading{
@@ -15,6 +20,8 @@
 .app-stats-data{
   display: flex;
   text-align: center;
+  justify-content: center;
+  // align-items: center;
 
   &__parent{
     padding: 0.64rem 1.4rem;
@@ -22,7 +29,7 @@
     &--subdata{
       font-size: 1.465rem;
       font-weight: 600;
-      padding-bottom: 0.2rem;
+      // padding-bottom: 0.2rem;
     }
 
     &--subdataheading{
@@ -31,4 +38,8 @@
       text-align: center;
     }
   }
+}
+
+.card-body{
+  padding: 0.5rem !important;
 }
