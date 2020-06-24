@@ -1,16 +1,15 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using Arms.Api.Models;
-using Arms.Application.Services.Users;
 using Arms.Domain.Entities;
 using Arms.Infrastructure;
-using Hrms.Core;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Arms.Api.Controllers
 {
+    [Authorize(Roles="SuperAdministrator,Employee,Admin")]
     public class AssessmentController : BaseController
     {
         private readonly ArmsDbContext _context;
@@ -24,7 +23,7 @@ namespace Arms.Api.Controllers
         public IActionResult Index()
         {
             Response<IEnumerable<Assessment>> response;
-            
+
             try
             {
                 List<Assessment> data = _context.Assessment.ToList();
@@ -153,6 +152,25 @@ namespace Arms.Api.Controllers
             }
             
             return Ok(response);
+        }
+
+        [HttpGet("filtered-round-list")]
+        public IActionResult RoundListOnTheBasisOfEmployeeAndJd([FromQuery(Name = "PanelId")] int PanelId, [FromQuery(Name = "JdId")] int JdId)
+        {
+            var currentUserClaimsPrincipal = HttpContext.User;
+
+            try
+            {
+                string currentUser = currentUserClaimsPrincipal.Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
+
+                Console.WriteLine(currentUser);
+            }
+            catch (Exception e)
+            {
+                
+            }
+
+            return Ok("Successful");
         }
     }
 }
