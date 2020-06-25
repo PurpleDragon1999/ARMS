@@ -133,6 +133,72 @@ namespace Arms.Api.Controllers
             
         }
 
+
+        //For getting all rounds related to an interview Id
+        [HttpGet("round/{interviewId}")]
+        public IActionResult getRounds(int interviewId)
+        {
+            Response response = new Response()
+            {
+                payload = new Payload()
+            };
+            try
+            {
+                var data = _context.Round.Where(r => r.InterviewId == interviewId).Select(r => new { r.Id, r.RoundDate, r.RoundTime }).ToList();
+                if (data.Count != 0)
+                {
+                    response.success = "true";
+                    response.payload.data = data;
+                    return StatusCode(200, response);
+                }
+                else
+                {
+                    response.success = "false";
+                    response.payload.msg = "No Data Found";
+                    return StatusCode(404, response);
+                }
+            }
+            catch(Exception e)
+            {
+                response.success = "false";
+                response.payload.msg = "Some Error Occured. Details: " + e.Message;
+                return StatusCode(500, response);
+            }
+            
+        }
+
+        [HttpPut("round")]
+        public IActionResult updateRoundTime([FromBody] List<RoundTimeUpdate> roundTimeUpdate)
+        {
+            Response response = new Response()
+            {
+                payload = new Payload()
+            };
+            try
+            {
+                for (int i = 0; i < roundTimeUpdate.Count(); i++)
+                {
+                    Round round = _context.Round.SingleOrDefault(r => r.Id == roundTimeUpdate[i].RoundId);
+                    round.RoundDate = roundTimeUpdate[i].RoundDate;
+                    round.RoundTime = roundTimeUpdate[i].RoundTime;
+                    _context.Round.Update(round);
+                }
+                _context.SaveChanges();
+                response.success = "true";
+                response.payload.msg = "Records Updated Successfully";
+                return StatusCode(200, response);
+            }
+            catch(Exception e)
+            {
+                response.success = "false";
+                response.payload.msg = "Some Error Occured. Details: " + e.Message;
+                return StatusCode(500, response);
+
+            }
+            
+            
+        }
+
         [HttpGet("{id}")]
         public IActionResult getPanel(int id)
         {

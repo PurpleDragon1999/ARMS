@@ -64,7 +64,7 @@ namespace Arms.Api.Controllers
                         JobDescription = new
                         {
                             JobTitle = dataFromDb.Job.jobTitle,
-                            Location = dataFromDb.Job.location,
+                            Location = dataFromDb.Job.loc,
                             Id = dataFromDb.Job.Id,
                             Description = dataFromDb.Job.description,
                             Skills = dataFromDb.Job.skills
