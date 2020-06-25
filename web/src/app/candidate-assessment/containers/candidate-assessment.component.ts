@@ -4,13 +4,16 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {CandidateAssessmentService} from '../candidate-assessment.service';
 import { map, switchMap } from 'rxjs/operators';
 import {Observable} from 'rxjs';
+import {ModalComponent} from '../../reusable-components/modal/modal.component';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
     selector: 'app-candidate-assessment',
     templateUrl: 'candidate-assessment.component.html'
 })
 export class CandidateAssessmentComponent implements OnInit {
-    constructor(private candidateAssessmentService: CandidateAssessmentService, private route: ActivatedRoute) {}
+    constructor(private candidateAssessmentService: CandidateAssessmentService, private route: ActivatedRoute, private modalService: NgbModal) {}
 
     applicationData: any;
     criteriaData: Array<{roundTypeName: string, criteriaName: string, roundId: number, criteriaTypeId: number}> = new Array<{roundTypeName: string, criteriaName: string, roundId: number, criteriaTypeId: number}>();
@@ -24,22 +27,32 @@ export class CandidateAssessmentComponent implements OnInit {
       });
 
       getApplication$.subscribe((res: IResponse) => {
-          console.log(res, 'getApplication');
           this.applicationData = res.payload.data;
       });
 
       getCriteria$.subscribe((res: IResponse) => {
-        console.log(res, 'getCriteria');
         this.criteriaData = res.payload.data;
       });
     }
 
   storeAssessment(data: any) {
       data.applicationId = this.applicationData.applicationId;
-      console.log(data, 'data');
 
       this.candidateAssessmentService.storeAssessment(data).subscribe((res: IResponse) => {
-        console.log(res, 'Response');
+        const modalRef = this.modalService.open(ModalComponent);
+        modalRef.componentInstance.shouldConfirm = false;
+        modalRef.componentInstance.success = res.success;
+        modalRef.componentInstance.message = res.payload.message;
+        modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+          modalRef.close();
+        }, (error: HttpErrorResponse) => {
+          modalRef.componentInstance.shouldConfirm = false;
+          modalRef.componentInstance.success = error.error.success;
+          modalRef.componentInstance.message = error.error.payload.message;
+          modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+            modalRef.close();
+          });
+        });
       });
   }
 }

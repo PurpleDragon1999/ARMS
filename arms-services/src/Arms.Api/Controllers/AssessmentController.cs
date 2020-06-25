@@ -83,18 +83,19 @@ namespace Arms.Api.Controllers
 
                 foreach (var criteria in assessmentData.Criterias)
                 {
-                    _context.Criteria.Add(new Domain.Entities.Criteria()
+                    var criteriaToAdd = new Domain.Entities.Criteria()
                     {
                         AssessmentId = savedAssessmentId,
                         Marks = criteria.Marks,
                         Remarks = criteria.Remarks,
                         CriteriaTypeId = criteria.CriteriaTypeId
-                    });
+                    };
+                    _context.Criteria.Add(criteriaToAdd);
 
                     _context.SaveChanges();
                 }
                 
-                response = new Response<Assessment>(true, data, "Assessment Created successfully");
+                response = new Response<Assessment>(true, null, "Assessment Created successfully");
             }
             catch (Exception e)
             {
