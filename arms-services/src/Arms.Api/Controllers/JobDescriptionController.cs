@@ -240,10 +240,10 @@ namespace Arms.Api.Controllers
                     };
                     return StatusCode(404, resNull);
                 }
-                if (job.openingDate != null)
+                if (string.Compare(job.openingDate.ToLongDateString(), "01-01-0001 00:00:00")==0)
                     jobInDb.openingDate = job.openingDate;
 
-                if (job.closingDate != null)
+                if (string.Compare(job.closingDate.ToLongDateString(), "01-01-0001 00:00:00")== 0)
                     jobInDb.closingDate = job.closingDate;
 
                 if (job.locationId != 0)

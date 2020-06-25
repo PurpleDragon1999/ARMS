@@ -12,8 +12,9 @@ import { Observable } from "rxjs";
 import { ICreate } from "../models/create.interface";
 import { HOST } from 'src/app/config/apiHost.config';
 const CALENDER_API ="https://graph.microsoft.com/v1.0/me/events"
-const CALENDER_VIEW_API= "https://outlook.office.com/api/v2.0/vishal.ranjan@cygrp.com/calendarview?startdatetime=2015-01-01T00:00:00Z&enddatetime=2015-04-10T00:00:00Z"
+const CALENDER_VIEW_API= "https://outlook.office.com/api/v2.0/me/calendarview"
 const USER_DOMAIN = "http://localhost:3000";
+const OUTLOOK_API="https://graph.microsoft.com/v1.0/me/calendar/getSchedule" 
 @Injectable({
   providedIn: "root",
 })
@@ -24,6 +25,12 @@ export class AppServicesService {
   });
   httpOptions = {
     headers: this.headers,
+  };
+  out_headers: HttpHeaders = new HttpHeaders({
+    "Content-Type": "application/json",
+   });
+  out_httpOptions = {
+    headers: this.out_headers,
   };
   
 
@@ -183,10 +190,45 @@ export class AppServicesService {
       { ...this.httpOptions }
     );
   }
-  blockCalender(obj):Observable<any>{
+  blockCalender(index,panel,roundStartDateTime,roundEndDateTime,emailList,userNames):Observable<any>{
+   
+    let obj={
+      "Subject": index+" Interview with Himanshu sharma",
+      "Body": {
+        "ContentType": "HTML",
+        "Content": "I think it will meet our requirements!"
+      },
+      "Start": {
+          "DateTime":roundStartDateTime,
+          "TimeZone": "India Standard Time"
+      },
+      "End": {      
+          "DateTime":roundEndDateTime,
+          "TimeZone": "India Standard Time"
+      },
+      "reminderMinutesBeforeStart": 99,
+      "isOnlineMeeting": true,
+      "onlineMeetingProvider": "teamsForBusiness",
+      "isReminderOn": true,
+      "Attendees": [
+        {
+          "EmailAddress": {
+            "Address":emailList[0],
+            "Name":userNames[0]
+          },
+          "Type": "Required"
+        },
+        {
+          "EmailAddress": {
+            "Address":emailList[1],
+            "Name":userNames[1]
+          },
+          "Type": "Required"
+        }
+      ]
+    }
+     return this.http.post<any>(CALENDER_API,obj);
     
-     //return this.http.post<any>(CALENDER_API,obj);
-     return this.http.get<any>(CALENDER_VIEW_API);
     
    }
    getRound(jobId,employeeId){
@@ -196,5 +238,24 @@ export class AppServicesService {
     );
 
    }
- 
+   checkAvailability(roundStartDateTime,roundEndDateTime,emailList){
+    {
+      
+   let obj=    {        
+        "schedules":emailList,
+        "startTime": {
+            "dateTime": roundStartDateTime,
+            "timeZone": "India Standard Time"
+        },
+        "endTime": {
+            "dateTime": roundEndDateTime,
+            "timeZone": "India Standard Time"
+        },
+        "availabilityViewInterval": 60
+    }
+  
+    
+    return this.http.post<any>(OUTLOOK_API,obj);
+   }
+  } 
 }

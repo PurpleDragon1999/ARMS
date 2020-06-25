@@ -103,7 +103,7 @@ export class ScheduleInterviewComponent implements OnInit {
       ) {
         this.tableData[index].panel1.employees.push(data);
         this.employeeIds.push(data.id);
-      }
+       }
     } else if (this.main[index][1] === "active") {
       this.tableData[index].roundId = roundId;
       if (
@@ -123,13 +123,96 @@ export class ScheduleInterviewComponent implements OnInit {
         this.employeeIds.push(data.id);
       }
     }
-    console.log(this.tableData);
+   
+   
   }
 
-  blockCalendar(index: number) {
-    console.log("Date: " + this.dateTimeForRounds[index].roundDate);
-    console.log("Time: " + this.dateTimeForRounds[index].roundTime);
+  
+  checkAvailability(index:number,panel:number){
+    let panelEmployees=[];
+    let emailList=[];
+    
+    var roundDate=this.dateTimeForRounds[index].roundDate;
+    var roundTime=this.dateTimeForRounds[index].roundTime;
+    if(panel===0){
+     panelEmployees= this.tableData[index].panel1.employees;
+     } else if(panel===1){
+      panelEmployees= this.tableData[index].panel2.employees;
+    }else if(panel===2){
+      panelEmployees= this.tableData[index].panel3.employees;
+    }
+
+    for(let i=0;i<panelEmployees.length;i++){
+        emailList.push(panelEmployees[i].email);
+     }
+     
+     if(emailList.length!=0)
+    this.checkAvailabilityHelper(roundDate,roundTime,emailList);
+    
+    
+    
+
+  }
+  checkAvailabilityHelper(roundDate,roundTime,emailList){
+     let data=[];
+   
+     var roundStartDateTime=roundDate+"T"+roundTime;
+     var roundEndDateTime= new Date(roundStartDateTime);
+     roundEndDateTime.setHours( roundEndDateTime.getHours()+2);
+      this._appService.checkAvailability(roundStartDateTime,roundEndDateTime,emailList).
+      subscribe((res)=>{
+       
+        for(let i=0;i<res.value.length;i++){
+              data=res.value[i].scheduleItems;
+              var availFlag=true;
+              for(let j=0; j< data.length; j++){
+                
+                if(data[j].status==="busy"){
+                      availFlag=false;
+                      return false;
+                }
+            }
+            
+        }
+       
+    });
+
+  }
+  blockCalenderHelper(index,panel,roundDate,roundTime,emailList,userNames){
+    var roundStartDateTime=roundDate+"T"+roundTime;
+    var roundEndDateTime= new Date(roundStartDateTime);
+     roundEndDateTime.setHours( roundEndDateTime.getHours()+2);
+     this._appService.blockCalender(index,panel,roundStartDateTime,roundEndDateTime,emailList,userNames).
+     subscribe((res)=>{
+          console.log(res);
+    });
   }
 
-  schedule() {}
+  schedule(index:number) {
+    let panelEmployees=[];
+   
+    
+     var roundDate=this.dateTimeForRounds[index].roundDate;
+     var roundTime=this.dateTimeForRounds[index].roundTime;
+      for(let i=0;i<3;i++){
+        let emailList=[];
+        let userNames=[];
+          if(i===0){
+          panelEmployees= this.tableData[index].panel1.employees;
+        
+          } else if(i===1){
+            panelEmployees= this.tableData[index].panel2.employees;
+            
+          }else if(i===2){
+            panelEmployees= this.tableData[index].panel3.employees;
+          }
+            for(let j=0;j<panelEmployees.length;j++){
+              emailList.push(panelEmployees[j].email);
+              userNames.push(panelEmployees[j].firstName+ " "+panelEmployees[j].lastName);
+            }
+           
+            if(emailList.length!=0)
+            this.blockCalenderHelper(index,i,roundDate,roundTime,emailList,userNames);
+      }
+  }
 }
