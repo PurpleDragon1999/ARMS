@@ -1,0 +1,71 @@
+<div class="col-md-8 grid-margin stretch-card mt-4 mx-auto">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Assessment Form</h4>
+
+      <div class="form-group">
+        <div class="input-group">
+          <select class="form-control" name="round" id="round_id">
+            <option value="null" disabled>Enter Round</option>
+            <option value="round-1">Round 1</option>
+            <option value="round-2">Round 2</option>
+            <option value="round-3">Round 3</option>
+            <option value="round-4">Round 4</option>
+            <option value="round-5">Round 5</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="criteria-group">
+        <div class="form-group row">
+          <label for="criteria_1" class="col-sm-3 col-form-label">Criteria 1</label>
+          <div class="col-sm-9">
+            <input type="number" min="0" max="10" class="form-control" id="criteria_1" placeholder="Criteria 1" />
+          </div>
+          <div class="col-sm-9 ml-auto">
+            <input type="text" class="form-control" placeholder="Remarks" />
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="criteria_2" class="col-sm-3 col-form-label">Criteria 2</label>
+          <div class="col-sm-9">
+            <input type="number" min="0" max="10" class="form-control" id="criteria_2" placeholder="Criteria 2" />
+          </div>
+          <div class="col-sm-9 ml-auto">
+            <input type="text" class="form-control" placeholder="Remarks" />
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="criteria_3" class="col-sm-3 col-form-label">Criteria 3</label>
+          <div class="col-sm-9">
+            <input type="number" min="0" max="10" class="form-control" id="criteria_3" placeholder="Criteria 3" />
+          </div>
+          <div class="col-sm-9 ml-auto">
+            <input type="text" class="form-control" placeholder="Remarks" />
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="input-group">
+          <textarea class="form-control" id="feedback" rows="4" placeholder="Feedback"></textarea>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="input-group">
+          <select class="form-control" name="result" id="result">
+            <option value="null" disabled>Enter Result</option>
+            <option value="positive">Positive</option>
+            <option value="negative">Negative</option>
+          </select>
+        </div>
+      </div>
+
+      <button class="btn btn-gradient-primary btn-block" type="submit">Save Changes</button>
+
+    </div>
+  </div>
+</div>

@@ -89,10 +89,8 @@ export class UpdateInterviewComponent implements OnInit {
   }
 
   onDisplayRounds(id, append){
-    console.log("what do we get here", id, append)
     this.service.getRounds(id, append).subscribe((res:any)=>{
       let round = res.payload.data;
-      console.log(round)
       for (let index=0; index<this.number; index++){
         this.interview.round = round;
         this.interview.round[index].roundNumber = round[index].roundNumber;
@@ -108,14 +106,12 @@ export class UpdateInterviewComponent implements OnInit {
   }
 
   performUpdate(formValue){
-    console.log("form value", formValue)
     if(this.isInterview){
       this.updateObj.JobId = formValue.jobId;
       this.updateObj.Date = formValue.date;
       this.updateObj.Time = formValue.time;
       this.updateObj.Venue = formValue.venue;
       this.updateObj.NoOfRounds = formValue.noOfRounds;
-      console.log(this.updateObj);
       
       this.service.updateInterview(this.id, this.updateObj).subscribe((res:any) => {
         const modalRef = this.modalService.open(ModalComponent);
@@ -149,7 +145,6 @@ export class UpdateInterviewComponent implements OnInit {
         })
       }
       this.updateObj.Round = updateRound;
-      console.log("we are sending this", this.updateObj, this.id, this,this.roundID)
       this.service.updateRound(this.id, this.roundID, this.updateObj).subscribe((res:any) => {
       const modalRef = this.modalService.open(ModalComponent);
         modalRef.componentInstance.shouldConfirm = false;

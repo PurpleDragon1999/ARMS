@@ -1,6 +1,7 @@
 import { Router } from '@angular/router';
 import { UrltoFile } from './../utils/urlToFile';
 import { IResponse } from 'src/app/models/response.interface';
+import { AppServicesService } from 'src/app/services/app-services.service';
 import { Component, OnInit } from "@angular/core";
 import { CandidateService } from './services/candidate.service';
 import { IModelForPagination } from '../models/modelPagination.interface';
@@ -9,7 +10,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { BufferToPdf } from '../utils/bufferToPdf';
 import { NgbModal, NgbModalRef, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from 'src/app/reusable-components/modal/modal.component';
+import {  ActivatedRoute, Params } from "@angular/router";
 
+import { switchMap } from "rxjs/operators";
 @Component({
     selector: 'app-candidate',
     templateUrl: 'candidate.component.html',
@@ -22,13 +25,46 @@ export class CandidateComponent implements OnInit {
     pager: any;
     file : any;
     resumeDetails : any
+    employeeId:any;
+    jobId:any;
+    roundData:any;
+    constructor(private candidateService: CandidateService, 
+                private bufferToPdf: BufferToPdf,
+                private route:ActivatedRoute,
+                private _service:AppServicesService,
+                private router : Router,
+                private urltoFile: UrltoFile,
+                private modalService: NgbModal) { }
 
-    constructor(private router : Router,private urltoFile: UrltoFile,private modalService: NgbModal,private candidateService: CandidateService, private bufferToPdf: BufferToPdf) { }
-
-    ngOnInit(): void {
-        this.getCandidates();
-        //this.searchCandidate({ page: 1, character: '' });
+    ngOnInit():any{
+         this.employeeId=this._service.tokenDecoder().Id;
+         this.getCandidates();
+         this.getRoundData();
     }
+    getCandidates():any{
+        
+    this.route.params
+    .pipe(
+        switchMap((params: Params) => {
+            this.jobId=params.jobId;
+            return this.candidateService.getApplications(params.jobId);
+        })
+     )
+       .subscribe((res) => {
+       
+            this.candidates = res.payload.data
+            this.columns = ["name", "email", "experience", "Job Position"];
+    
+        });
+        
+      }
+      getRoundData(){
+         this._service.getRound(this.jobId,this.employeeId).subscribe((res)=>{
+            this.roundData=res.payload.data;
+         }
+         )
+
+      }
 
     deleteApplication(data ) {
         let id = data.id
@@ -51,13 +87,6 @@ export class CandidateComponent implements OnInit {
 
       });
       }
-
-    getCandidates(){
-        this.candidateService.getApplications().subscribe((res: IResponse)=>{
-        this.candidates = res.payload.data
-        this.columns = ["name", "email", "experience", "Job Position"];
-        })
-    }
 
     searchCandidate(event: IModelForPagination) {
         this.candidateService.searchCandidate(event.page, event.character).subscribe((res: IResponse) => {

@@ -22,4 +22,18 @@ namespace Arms.Domain.CustomEntities
         public List<int> employeesId { get; set; }
     }
 
+    //For getting rounds information related to an interview Id
+    public partial class RoundsData
+    {
+        public int RoundId { get; set; }
+        public DateTime Date { get; set; }
+        public TimeSpan Time { get; set; }
+    }
+
+    public partial class RoundTimeUpdate
+    {
+        public int RoundId { get; set; }
+        public DateTime RoundDate { get; set; }
+        public TimeSpan RoundTime { get; set; }
+    }
 }

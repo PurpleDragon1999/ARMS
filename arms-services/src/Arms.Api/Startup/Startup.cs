@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
@@ -34,7 +35,7 @@ namespace Arms.Api.Startup
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 .AddControllersAsServices();
-            string connString = this.Configuration.GetConnectionString("db");
+            string connString = this.Configuration.GetConnectionString("Db");
             services.AddDbContext<Arms.Infrastructure.ArmsDbContext>(o => o.UseSqlServer(connString));
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -75,14 +76,16 @@ namespace Arms.Api.Startup
             {
                 app.UseHsts();
             }
-            ConfigureAuth(app);
-
             app.UseCors(builder =>
             builder.AllowAnyOrigin()
                     .AllowAnyMethod()
                     .AllowAnyHeader());
             app.UseHttpsRedirection();
+    
+            ConfigureAuth(app);
             app.UseMvc();
+
+
 
 
         }

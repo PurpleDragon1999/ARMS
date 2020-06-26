@@ -14,6 +14,9 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Arms.Api.Controllers
 {
+    [ApiController]
+    [Route("api/[controller]")]
+    [Authorize(Roles = "Admin,SuperAdministrator,Employee")]
     public class CandidateController : BaseController
     {
         public ArmsDbContext _context;
@@ -25,6 +28,7 @@ namespace Arms.Api.Controllers
 
         [HttpGet]
         public IActionResult Getcandidates(int jobId = 0)
+
         {
             List<Arms.Domain.Entities.Application> applications;
             if (jobId != 0)
@@ -379,6 +383,7 @@ namespace Arms.Api.Controllers
 
         
         [HttpPatch("{id}")]
+        [AllowAnonymous]
         public IActionResult UpdateCandidateDetails(int id, [FromForm] CandidateApplicationResume customObj)
 
         {

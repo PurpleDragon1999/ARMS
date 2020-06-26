@@ -64,59 +64,105 @@
       id="sidebar"
     >
       <ul class="nav">
-        <!-- <li class="nav-item nav-profile" routerLink="profile">
-          <a class="nav-link">
-            <div class="nav-profile-text d-flex flex-column">
-              
-            </div>
-
-          </a>
-        </li> -->
-
-        <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" [routerLink]="['home']">
+        <li
+          class="nav-item d-flex flex-row pl-0"
+          *ngIf="adminBool"
+          routerLinkActive="active"
+        >
+          <span class="highlight">h</span>
+          <a class="nav-link w-100" [routerLink]="['home']">
             <span class="menu-title">Home</span>
             <i class="fas fa-home menu-icon"></i>
           </a>
         </li>
 
-        <li class="nav-item" *ngIf="adminBool" routerLinkActive="active">
-          <a class="nav-link" [routerLink]="['job-desc']">
+        <li
+          class="nav-item d-flex flex-row pl-0"
+          *ngIf="adminBool"
+          routerLinkActive="active"
+        >
+          <span class="highlight">h</span>
+          <a class="nav-link w-100" [routerLink]="['job-desc']">
             <span class="menu-title">Job Descriptions</span>
             <i class="fas fa-file-alt menu-icon"></i>
           </a>
         </li>
 
-        <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" [routerLink]="['candidate']">
+        <li
+          class="nav-item d-flex flex-row pl-0"
+          *ngIf="adminBool"
+          routerLinkActive="active"
+        >
+          <span class="highlight">h</span>
+          <a class="nav-link w-100" [routerLink]="['candidate']">
             <span class="menu-title">Applied Candidates</span>
             <i class="fas fa-users menu-icon"></i>
           </a>
         </li>
 
-        <li class="nav-item" *ngIf="adminBool" routerLinkActive="active">
-          <a class="nav-link" [routerLink]="['interviews']">
+        <li
+          class="nav-item d-flex flex-row pl-0"
+          *ngIf="adminBool"
+          routerLinkActive="active"
+        >
+          <span class="highlight">h</span>
+          <a class="nav-link w-100" [routerLink]="['interviews']">
             <span class="menu-title">Upcoming Interviews</span>
             <i class="fas fa-file-alt menu-icon"></i>
           </a>
         </li>
 
-        <li class="nav-item" *ngIf="adminBool" routerLinkActive="active">
-          <a class="nav-link" [routerLink]="['create-interview']">
+        <li
+          class="nav-item d-flex flex-row pl-0"
+          *ngIf="adminBool"
+          routerLinkActive="active"
+        >
+          <span class="highlight">h</span>
+          <a class="nav-link w-100" [routerLink]="['interview']">
             <span class="menu-title">Create Interview</span>
             <i class="fas fa-hourglass-half menu-icon"></i>
           </a>
         </li>
 
-        <li class="nav-item" *ngIf="superuserBool" routerLinkActive="active">
-          <a class="nav-link" [routerLink]="['employee']">
+        <li
+          class="nav-item d-flex flex-row pl-0"
+          *ngIf="superuserBool"
+          routerLinkActive="active"
+        >
+          <span class="highlight">h</span>
+          <a class="nav-link w-100" [routerLink]="['employee']">
             <span class="menu-title">Employees</span>
             <i class="fas fa-users menu-icon"></i>
           </a>
         </li>
 
-        <li class="nav-item d-lg-none">
-          <a class="nav-link" href="#">
+        <li
+          class="nav-item d-flex flex-row pl-0"
+          *ngIf="superuserBool"
+          routerLinkActive="active"
+        >
+          <span class="highlight">h</span>
+          <a class="nav-link w-100" [routerLink]="['settings']">
+            <span class="menu-title">Settings</span>
+            <i class="fas fa-cogs menu-icon"></i>
+          </a>
+        </li>
+
+        <li
+          class="nav-item d-flex flex-row pl-0"
+          *ngIf="employeeBool"
+          routerLinkActive="active"
+        >
+          <span class="highlight">h</span>
+          <a class="nav-link w-100" [routerLink]="['home']">
+            <span class="menu-title">Home</span>
+            <i class="fas fa-home menu-icon"></i>
+          </a>
+        </li>
+
+        <li class="nav-item d-flex flex-row pl-0 d-lg-none">
+          <span class="highlight">h</span>
+          <a class="nav-link w-100" href="#">
             <span class="menu-title" (click)="logout()">Log Out</span>
             <i class="fas fa-sign-out-alt menu-icon"></i>
           </a>

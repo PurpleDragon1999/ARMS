@@ -81,14 +81,15 @@ export class LoginComponent implements OnInit {
 
     this.loginService.checkPermissions(idToken).subscribe(
       (res) => {
+       
         if (res != null) {
-         
           window.localStorage.setItem(
 
             "Authorized",
-            `Bearer ${res.payload.authorized}`
+            `Bearer ${res.payload.data.authorized}`
           );
-           let role = this.loginService.tokenDecoder().role;
+          let role = this.loginService.tokenDecoder().role;
+
           if (role == this._env.ADMIN) {
             this._router.navigate(["/admin"]);
           } else if (role == this._env.SUPERUSER) {
@@ -100,6 +101,9 @@ export class LoginComponent implements OnInit {
         this.message = res.payload.message;
       },
       (err) => {
+        if (err.status == 401) {
+          this._router.navigate(["/error/401"]);
+        }
         this.message = err.error.message;
       }
     );

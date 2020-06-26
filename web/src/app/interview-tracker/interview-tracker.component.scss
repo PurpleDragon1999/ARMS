@@ -1,0 +1,51 @@
+@import "node_modules/progress-tracker/src/styles/progress-tracker.scss";
+
+.progress-tracker {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.progress-marker::after {
+  z-index: 10;
+}
+
+.progress-step.is-complete .progress-marker::before {
+  background-color: rgb(248, 164, 8);
+  text-decoration: none;
+}
+
+.progress-step.is-complete .progress-marker::after {
+  background: rgb(248, 164, 8);
+}
+
+.progress-step.is-active .progress-marker::before {
+  border: 2px solid rgb(248, 164, 8);
+  background-color: white;
+  color: black;
+}
+
+li:focus {
+  outline: none;
+}
+
+.progress-step:hover .progress-marker::before {
+  background-color: rgb(248, 164, 8);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.mdi {
+  font-size: 1.1rem;
+}
+
+.progress-text {
+  font-weight: bold;
+  font-size: larger;
+}
+
+a {
+  cursor: pointer;
+}

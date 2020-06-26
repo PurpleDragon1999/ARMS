@@ -27,10 +27,6 @@ export class CandidateService {
 
     constructor(private http: HttpClient) { };
 
-    getCandidate(): Observable<IResponse> {
-        return this.http.get<IResponse>(CANDIDATE_API, this.options);
-    };
-
     searchCandidate(page: number = 1, character: string = '') {
         const params: HttpParams = new HttpParams().set('character', character).set('page', page.toString());
 
@@ -40,11 +36,14 @@ export class CandidateService {
         );
     }
 
-    getApplications():Observable<IResponse>{
+    getApplications(jobId:number=0){
+        
         return this.http.get<IResponse>(
-            CANDIDATE_API, this.options
-        )
-    }
+               
+           `${CANDIDATE_API}?jobId=${jobId}`, this.options
+            )
+        
+        }
 
     getApplication(id): Observable<IResponse>{
         return this.http.get<IResponse>(
@@ -64,4 +63,11 @@ export class CandidateService {
     deleteApplication(id ): Observable<IResponse>{
         return this.http.delete<IResponse>(`${CANDIDATE_API}/${id}`, this.options)
     }
+
+    getIdProofTypes(){
+        return this.http.get<IResponse>(
+           `${HOST}/api/IdProofType`, this.options
+        )
+    }
+
 }
