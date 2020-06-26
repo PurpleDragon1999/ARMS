@@ -45,11 +45,6 @@ namespace Arms.Api.Controllers
                         success = false,
                         payload = new
                         {
-<<<<<<< HEAD
-                          
-=======
-
->>>>>>> 1c64452d6a136c8841e2f2133c15cdc0791728d8
                             message = "You are UnAuthorized on this Page"
                         }
 
@@ -161,11 +156,7 @@ namespace Arms.Api.Controllers
             if (empObj.armsEmployeeRole?.Name == "ResourceManager" || empObj.armsEmployeeRole?.Name == "HumanResource")
                 return "Admin";
 
-<<<<<<< HEAD
             else if (empObj.armsEmployeeRole?.Name == "Executive" || empObj.armsEmployeeRole?.Name == "Employee")
-=======
-            else if (empObj.armsEmployeeRole.Name == "Executive" || empObj.armsEmployeeRole.Name == "Employee")
->>>>>>> 1c64452d6a136c8841e2f2133c15cdc0791728d8
                 return "Employee";
 
             else if (empObj.armsEmployeeRole?.Name == "SuperAdministrator")

@@ -13,11 +13,7 @@ namespace Arms.Domain.Entities
         public string CreatedBy { get; set; }
         public DateTime ModifiedAt { get; set; }
         public string ModifiedBy { get; set; }
-<<<<<<< HEAD
         public ICollection<Round> Round { get; set; }
         
-=======
-
->>>>>>> 1c64452d6a136c8841e2f2133c15cdc0791728d8
     }
 }

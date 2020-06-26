@@ -68,20 +68,12 @@ export class JdListComponent implements OnInit {
     modalRef.componentInstance.emitPerformRequest.subscribe(() => {
       this.jobService.deleteJd(id).subscribe((res: any) => {
         this.loadJds();
-<<<<<<< HEAD
         modalRef.componentInstance.success = res.body.success;
         modalRef.componentInstance.message = res.body.payload.message;
       }, (error: HttpErrorResponse) => {
         modalRef.componentInstance.success = error.error.success;
         modalRef.componentInstance.message = error.error.payload.message;
       });
-=======
-        modalRef.componentInstance.success = res.success;
-        modalRef.componentInstance.message = res.payload.message;
-        }, (error: HttpErrorResponse) => {
-          modalRef.componentInstance.success = error.ok;
-          modalRef.componentInstance.message = error.error.payload.message;
->>>>>>> 1c64452d6a136c8841e2f2133c15cdc0791728d8
     });
   }
 
@@ -97,7 +89,6 @@ export class JdListComponent implements OnInit {
     )
   }
   convertToPDF() {
-<<<<<<< HEAD
     var data = document.getElementById('content');
     data.style.display = "block";
     html2canvas(data, { allowTaint: true }).then(canvas => {
@@ -123,53 +114,16 @@ export class JdListComponent implements OnInit {
           canvas_image_width * 0.79, canvas_image_height * 0.90);
       }
       pdf.save("jobdescription" + this.jdObject.id + '.pdf');
+      var fileEncode = btoa(pdf.output());
+      this.jobService.updateJobInfo({ pdfString: fileEncode }, Number(this.jdObject.id)).subscribe((res: any) => {
 
-      //  this.jobService.updateJobInfo({pdfString:pdf},Number(this.jdObject.id)).subscribe((res: any) => {
 
-
-      //     });
+      });
     });
 
     data.style.display = "none";
   }
 
-=======
-      var data = document.getElementById('content');
-      data.style.display="block";
-      html2canvas(data, { allowTaint: true }).then(canvas => {
-         let HTML_Width = canvas.width;
-         let HTML_Height = canvas.height;
-         let top_left_margin = 15;
-         let PDF_Width = HTML_Width*0.45 + (top_left_margin * 2);
-         let PDF_Height = (PDF_Width * 1.6 ) + (top_left_margin * 2);
-         let canvas_image_width = HTML_Width;
-         let canvas_image_height = HTML_Height;
-         let totalPDFPages = Math.ceil(HTML_Height / PDF_Height) - 1;
-         canvas.getContext('2d');
-         let imgData = canvas.toDataURL("image/png",1.0);
-         let pdf = new jsPDF('p', 'pt', 'a4');
-         pdf.addImage(imgData, 'PNG', top_left_margin, top_left_margin, canvas_image_width*0.79,
-                      canvas_image_height*0.90);
-       
-         for (let i = 1; i <= totalPDFPages; i++) {
-            pdf.addPage('a4', 'p');
-            pdf.setPage(i+1);
-            pdf.text("cyg", 400,1200 );
-            pdf.addImage(imgData, 'PNG',top_left_margin, -(PDF_Height * i) + (top_left_margin * 4)  ,
-                         canvas_image_width*0.79, canvas_image_height*0.90);
-          }
-          pdf.save("jobdescription"+this.jdObject.id+'.pdf');
-          var fileEncode = btoa(pdf.output());
-          this.jobService.updateJobInfo({pdfString:fileEncode},Number(this.jdObject.id)).subscribe((res: any) => {
-                 
-  
-            });
-        });
-    
-        data.style.display="none";
-   }
-  
->>>>>>> 1c64452d6a136c8841e2f2133c15cdc0791728d8
 
   datecheck(closingDate) {
     const currentDate = new Date().toISOString();
