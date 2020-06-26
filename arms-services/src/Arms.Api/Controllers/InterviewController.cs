@@ -149,8 +149,8 @@ namespace Arms.Api.Controllers
 													 .Include(c => c.Interview)
 													 .Include(c => c.RoundType)
 													 .Where(c => c.InterviewId == id)
-													 .ToList();  
-						var response = new
+													 .ToList();
+                       var response = new
 						{
 							success = true,
 							payload = new

@@ -97,8 +97,7 @@ export class JdModalComponent implements OnInit {
   }
 
   sendUpdateRequest(jdFormObject: any) {
-    jdFormObject.eligibilityCriteria
-    jdFormObject.jdId = `CYGJID${jdFormObject.jdId}`
+ 
     this.jobService.updateJobInfo(jdFormObject, this.jobArray.id).subscribe(
       (res: any) => {
         const modalRef = this.modalService.open(ModalComponent);

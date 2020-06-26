@@ -16,6 +16,7 @@ using Arms.Domain.CustomEntities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
 using System.Buffers.Text;
+using Arms.Api.Middlewares;
 
 namespace Arms.Api.Controllers
 {
@@ -24,15 +25,17 @@ namespace Arms.Api.Controllers
     [Authorize(Roles ="Admin")]
     public class JobDescriptionController : BaseController
     {
-      
+       
         ArmsDbContext _context;
-        
+      
         public MailHelperController mailHelper=new MailHelperController();
      
         public JobDescriptionController(ArmsDbContext armsContext)
         {   
         
              _context = armsContext;
+          
+              
              
           
         }
@@ -42,10 +45,13 @@ namespace Arms.Api.Controllers
         {
             try
             {
+               
                 List<JobDescription> jobDescriptions = _context.JobDescription.Include(l => l.employmentType).
                     Include(l => l.eligibilityCriteria).Include(l => l.loc).ToList();
                 if(jobDescriptions != null)
                 {
+                   
+                        string value = Request.Headers["Authorization"];
                     var response = new
                     {
                         success = true,
@@ -155,8 +161,8 @@ namespace Arms.Api.Controllers
             try
             {
                 JobDescription checkinDb = _context.JobDescription.SingleOrDefault(c => c.jobTitle == job.jobTitle);
-               
 
+                var decodedToken = new TokenDecoder(Request);
                 if (checkinDb != null)
                 {
                     var resAlreadyExists = new
@@ -170,6 +176,7 @@ namespace Arms.Api.Controllers
                     };
                     return StatusCode(400, resAlreadyExists);
                 }
+
                 JobDescription newJob = new JobDescription
                 {
                     openingDate = job.openingDate,
@@ -183,6 +190,8 @@ namespace Arms.Api.Controllers
                     salary = job.salary,
                     skills = job.skills,
                     pdfBlobData = job.pdfBlobData,
+                    createdBy = decodedToken.id,
+                    modifiedBy = decodedToken.id
 
                 };
                 _context.JobDescription.Add(newJob);
@@ -221,7 +230,8 @@ namespace Arms.Api.Controllers
         {
             try
             {
-               
+                var decodedToken = new TokenDecoder(Request);
+
                 JobDescription jobInDb = _context.JobDescription.SingleOrDefault(c => c.Id == id);
                 
                
@@ -240,10 +250,10 @@ namespace Arms.Api.Controllers
                     };
                     return StatusCode(404, resNull);
                 }
-                if (string.Compare(job.openingDate.ToLongDateString(), "01-01-0001 00:00:00")==0)
+                if (string.Compare(job.openingDate.ToLongDateString(), "01-01-0001 00:00:00")!=0)
                     jobInDb.openingDate = job.openingDate;
 
-                if (string.Compare(job.closingDate.ToLongDateString(), "01-01-0001 00:00:00")== 0)
+                if (string.Compare(job.closingDate.ToLongDateString(), "01-01-0001 00:00:00")!= 0)
                     jobInDb.closingDate = job.closingDate;
 
                 if (job.locationId != 0)
@@ -278,6 +288,10 @@ namespace Arms.Api.Controllers
                     converted = converted.Replace('_', '/');
                     jobInDb.pdfBlobData = Convert.FromBase64String(job.pdfString);
                 }
+                else
+                jobInDb.modifiedBy = decodedToken.id;
+
+
 
 
                 _context.JobDescription.Update(jobInDb);

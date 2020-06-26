@@ -49,7 +49,7 @@
                 <div *ngSwitchCase="columnName=='name'">{{entry['candidate']?.name}}</div>
                 <div *ngSwitchCase="columnName=='email'">{{entry['candidate']?.email}}</div>
                 <div *ngSwitchCase="columnName=='Job Position'">{{entry['job']?.jobTitle}}</div>
-                <div *ngSwitchCase="columnName=='date'">{{entry[columnName]|date}}</div>
+                <div *ngSwitchCase="columnName=='roundDate'">{{entry[columnName]|date}}</div>
                 <div *ngSwitchCase="columnName=='jdObjectId'">{{entry[columnName]?.jdTitle}}</div>
                 <div *ngSwitchCase="columnName=='roundType'">{{entry['roundType']?.name}}</div>
                 <div *ngSwitchDefault>{{entry[columnName]}}</div>
