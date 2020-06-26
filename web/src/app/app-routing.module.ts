@@ -147,7 +147,11 @@ const routes: Routes = [
       {
         path: "interview/schedule",
         component: ScheduleInterviewComponent,
-      }
+      },
+      {
+        path: "candidate",
+        children: [{ path: ":jobId", component: CandidateComponent }],
+      },
     ],
   },
   {
@@ -164,6 +168,11 @@ const routes: Routes = [
       {
         path: "home",
         component: InterviewListComponent,
+      },
+      { path: "interviews", component: InterviewListComponent },
+      {
+        path: "candidate",
+        children: [{ path: ":jobId", component: CandidateComponent }],
       },
     ],
   },

@@ -44,8 +44,9 @@ export class EmailListModalComponent implements OnInit {
       this.modalClose(true);
       const modalRef = this.modalService.open(ModalComponent);
       modalRef.componentInstance.shouldConfirm = false;
-      modalRef.componentInstance.success = res.body.success;
-      modalRef.componentInstance.message = res.body.payload.message;
+      console.log(res);
+      modalRef.componentInstance.success = res.success;
+      modalRef.componentInstance.message = res.payload.message;
       modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
       modalRef.close();
       });

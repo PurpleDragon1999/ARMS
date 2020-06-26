@@ -1,3 +1,4 @@
+import { AppServicesService } from 'src/app/services/app-services.service';
 import { INewResponse } from 'src/app/models/newResponse.interface';
 import { Component, OnInit } from "@angular/core";
 import { CandidateService } from './services/candidate.service';
@@ -6,7 +7,8 @@ import { IModelForPagination } from '../models/modelPagination.interface';
 import { ICandidate } from '../models/candidate.interface';
 import { HttpErrorResponse } from '@angular/common/http';
 import { BufferToPdf } from '../utils/bufferToPdf';
-
+import { Router, ActivatedRoute, Params } from "@angular/router";
+import { switchMap } from "rxjs/operators";
 @Component({
     selector: 'app-candidate',
     templateUrl: 'candidate.component.html',
@@ -17,16 +19,48 @@ export class CandidateComponent implements OnInit {
     candidates: ICandidate[];
     columns: Array<string>;
     pager: any;
+    employeeId:any;
+    jobId:any;
+    roundData:any;
+    constructor(private candidateService: CandidateService, 
+                private bufferToPdf: BufferToPdf,
+                private route:ActivatedRoute,
+                private _service:AppServicesService) { }
 
-    constructor(private candidateService: CandidateService, private bufferToPdf: BufferToPdf) { }
-
-    ngOnInit(): void {
-        this.getCandidates();
-        //this.searchCandidate({ page: 1, character: '' });
+    ngOnInit():any{
+         this.employeeId=this._service.tokenDecoder().Id;
+         this.callFunction();
+         this.getRoundData();
     }
+    callFunction():any{
+        
+    this.route.params
+    .pipe(
+        switchMap((params: Params) => {
+            this.jobId=params.jobId;
+            return this.candidateService.getApplications(params.jobId);
+        })
+     )
+       .subscribe((res) => {
+       
+            this.candidates = res.payload.data
+            this.columns = ["name", "email", "experience", "Job Position"];
+    
+        });
+        
+      }
+      getRoundData(){
+         this._service.getRound(this.jobId,this.employeeId).subscribe((res)=>{
+            this.roundData=res.payload.data;
+         }
+         )
 
-    getCandidates(){
-        this.candidateService.getApplications().subscribe((res: INewResponse)=>{
+      }
+   
+
+
+    getCandidates(jobId){
+        this.candidateService.getApplications(jobId).subscribe((res: INewResponse)=>{
         this.candidates = res.payload.data
         this.columns = ["name", "email", "experience", "Job Position"];
 

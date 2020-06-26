@@ -26,6 +26,8 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
 
             builder.Property(e => e.EmployeeId).HasColumnName("employeeId");
 
+            builder.Property(e => e.JobId).HasColumnName("jobId");
+
             builder.Property(e => e.InterviewPanelId).HasColumnName("interviewPanelId");
 
             builder.Property(e => e.ModifiedAt)

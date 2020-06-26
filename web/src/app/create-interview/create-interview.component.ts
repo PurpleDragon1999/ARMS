@@ -22,9 +22,10 @@ export class CreateInterviewComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+   
     this.getLocation();
     this.getRoundTypes();
-  }
+   }
 
   interview: any = {};
   interviewObj: any = {};
@@ -52,7 +53,7 @@ export class CreateInterviewComponent implements OnInit {
       this.RoundType = res.payload.data;
     });
   }
-
+  i:any;
   createInterview(interview: any) {
     let round = [];
     for (let index = 0; index < this.number; index++) {

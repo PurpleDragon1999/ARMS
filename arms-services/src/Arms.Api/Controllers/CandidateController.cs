@@ -18,7 +18,7 @@ namespace Arms.Api.Controllers
 
 
 
-    [Authorize(Roles = "Admin,SuperAdministrator")]
+    [Authorize(Roles = "Admin,SuperAdministrator,Employee")]
 
     
     public class CandidateController : BaseController
@@ -35,11 +35,13 @@ namespace Arms.Api.Controllers
 
         [HttpGet]
        
-        public IActionResult Getcandidates(int jobId = 0)
+        public IActionResult Getcandidates(int jobId=0)
         {
             List<Arms.Domain.Entities.Application> applications;
             if (jobId != 0)
             {
+               
+
                 applications = _context.Application.Include(c => c.Candidate).Include(c => c.ApplicationStatusType).Include(c=> c.Job).Where(c => c.JobId == jobId).ToList();
             }
             else

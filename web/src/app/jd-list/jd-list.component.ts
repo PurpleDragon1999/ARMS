@@ -68,10 +68,10 @@ export class JdListComponent implements OnInit {
     modalRef.componentInstance.emitPerformRequest.subscribe(() => {
       this.jobService.deleteJd(id).subscribe((res: any) => {
         this.loadJds();
-        modalRef.componentInstance.success = res.body.success;
-        modalRef.componentInstance.message = res.body.payload.message;
+        modalRef.componentInstance.success = res.success;
+        modalRef.componentInstance.message = res.payload.message;
         }, (error: HttpErrorResponse) => {
-          modalRef.componentInstance.success = error.error.success;
+          modalRef.componentInstance.success = error.ok;
           modalRef.componentInstance.message = error.error.payload.message;
     });
   });
@@ -114,10 +114,11 @@ export class JdListComponent implements OnInit {
                          canvas_image_width*0.79, canvas_image_height*0.90);
           }
           pdf.save("jobdescription"+this.jdObject.id+'.pdf');
-        //  this.jobService.updateJobInfo({pdfString:pdf},Number(this.jdObject.id)).subscribe((res: any) => {
+          var fileEncode = btoa(pdf.output());
+          this.jobService.updateJobInfo({pdfString:fileEncode},Number(this.jdObject.id)).subscribe((res: any) => {
                  
   
-        //     });
+            });
         });
     
         data.style.display="none";

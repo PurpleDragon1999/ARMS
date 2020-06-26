@@ -141,13 +141,13 @@ export class JdFormComponent implements OnInit {
       };
       return;
     }
-
+   
     this.jobService.jdFormData(this.jdFormObject).subscribe((res: any) => {
-      this.data = res.body.payload.data;
+      this.data = res.payload.data;
       const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
       modalRef.componentInstance.shouldConfirm = false;
-      modalRef.componentInstance.success = res.body.success;
-      modalRef.componentInstance.message = res.body.payload.message;
+      modalRef.componentInstance.success = res.success;
+      modalRef.componentInstance.message = res.payload.message;
       modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
         modalRef.close();
       });
@@ -155,6 +155,7 @@ export class JdFormComponent implements OnInit {
       this.router.navigate(["admin/job-desc"]);
     },
       (error: HttpErrorResponse) => {
+        console.log(error);
         const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
         modalRef.componentInstance.shouldConfirm = false;
         modalRef.componentInstance.success = error.error.success;

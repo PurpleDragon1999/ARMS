@@ -15,6 +15,7 @@ using System.Net.Mail;
 using Arms.Domain.CustomEntities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
+using System.Buffers.Text;
 
 namespace Arms.Api.Controllers
 {
@@ -25,12 +26,14 @@ namespace Arms.Api.Controllers
     {
       
         ArmsDbContext _context;
+        
         public MailHelperController mailHelper=new MailHelperController();
      
         public JobDescriptionController(ArmsDbContext armsContext)
         {   
         
              _context = armsContext;
+             
           
         }
         //GET:api/jobDescriptions
@@ -75,7 +78,9 @@ namespace Arms.Api.Controllers
                     success = false,
                     payload = new
                     {
+
                         message = ex.Message
+
                     }
 
                 };
@@ -87,7 +92,7 @@ namespace Arms.Api.Controllers
 
         //GET:api/jobDescription/id
         [HttpGet("{id}")]
-
+        [AllowAnonymous]
         public IActionResult GetJd(int id)
         {
 
@@ -150,6 +155,8 @@ namespace Arms.Api.Controllers
             try
             {
                 JobDescription checkinDb = _context.JobDescription.SingleOrDefault(c => c.jobTitle == job.jobTitle);
+               
+
                 if (checkinDb != null)
                 {
                     var resAlreadyExists = new
@@ -210,11 +217,15 @@ namespace Arms.Api.Controllers
         }
         //PUT:api/jobdescription/id
         [HttpPut("{id}")]
-        public IActionResult UpdateJd(int id, [FromBody]JobDescription job)
+        public IActionResult UpdateJd(int id, [FromBody]CustomJob job)
         {
             try
             {
+               
                 JobDescription jobInDb = _context.JobDescription.SingleOrDefault(c => c.Id == id);
+                
+               
+
                 if (jobInDb == null)
                 {
                     var resNull = new
@@ -229,10 +240,10 @@ namespace Arms.Api.Controllers
                     };
                     return StatusCode(404, resNull);
                 }
-                if (job.openingDate != null)
+                if (string.Compare(job.openingDate.ToLongDateString(), "01-01-0001 00:00:00")==0)
                     jobInDb.openingDate = job.openingDate;
 
-                if (job.closingDate != null)
+                if (string.Compare(job.closingDate.ToLongDateString(), "01-01-0001 00:00:00")== 0)
                     jobInDb.closingDate = job.closingDate;
 
                 if (job.locationId != 0)
@@ -260,6 +271,14 @@ namespace Arms.Api.Controllers
 
                 if (job.salary != null)
                     jobInDb.salary = job.salary;
+
+                if (job.pdfString != null)
+                {
+                    string converted = job.pdfString.Replace('-', '+');
+                    converted = converted.Replace('_', '/');
+                    jobInDb.pdfBlobData = Convert.FromBase64String(job.pdfString);
+                }
+
 
                 _context.JobDescription.Update(jobInDb);
                 _context.SaveChanges();
