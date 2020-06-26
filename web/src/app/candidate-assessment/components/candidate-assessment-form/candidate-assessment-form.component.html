@@ -24,8 +24,8 @@
                 <div class="col-sm-9">
                   <input type="number" [name]="'marks-' + criteria.criteriaTypeId" min="0" max="10" class="form-control"
                     [id]="criteria.criteriaTypeId" [ngClass]="{ 'is-invalid': marks.dirty && marks.invalid }"
-                    [placeholder]="criteria.criteriaName | titlecase"
-                    [ngModel]="formData['marks-' + criteria.criteriaTypeId] || 0" required #marks="ngModel" />
+                    placeholder="Marks" [ngModel]="formData['marks-' + criteria.criteriaTypeId] || 0" required
+                    #marks="ngModel" />
                 </div>
                 <div class="col-sm-9 ml-auto">
                   <input type="text" [name]="'remarks-' + criteria.criteriaTypeId" class="form-control"
@@ -54,7 +54,7 @@
           </div>
         </div>
 
-        <button class="btn btn-gradient-primary btn-block" [disabled]="form.invalid" type="submit">Save Changes</button>
+        <button class="btn btn-gradient-danger btn-block" [disabled]="form.invalid" type="submit">Save Changes</button>
       </form>
     </div>
   </div>

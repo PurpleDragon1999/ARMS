@@ -13,7 +13,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   templateUrl: 'candidate-assessment.component.html'
 })
 export class CandidateAssessmentComponent implements OnInit {
-  constructor(private candidateAssessmentService: CandidateAssessmentService, private route: ActivatedRoute, private modalService: NgbModal) { }
+  constructor(private candidateAssessmentService: CandidateAssessmentService, private route: ActivatedRoute, private modalService: NgbModal, private router: Router) { }
 
   applicationData: any;
   criteriaData: Array<{ roundTypeName: string, criteriaName: string, roundId: number, criteriaTypeId: number }> = new Array<{ roundTypeName: string, criteriaName: string, roundId: number, criteriaTypeId: number }>();
@@ -30,6 +30,9 @@ export class CandidateAssessmentComponent implements OnInit {
 
     getApplication$.subscribe((res: IResponse) => {
       this.applicationData = res.payload.data;
+      if (!this.applicationData) {
+        this.router.navigate(['/candidate']);
+      }
     });
 
     getCriteria$.subscribe((res: IResponse) => {
