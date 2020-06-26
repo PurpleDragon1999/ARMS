@@ -32,10 +32,22 @@ export class InterviewListComponent implements OnInit {
   }
 
   loadInterviews() {
-    return this._service.getAllInterviews().subscribe((response: any) => {
-      this.interviewsList = response.payload.data;
+    return this._service.getAllInterviews().subscribe((response: IResponse) => {
+      this.interviewsList = response.payload.data
     });
   }
+  appliedCandidates(jobId:number){
+    let data = this._service.tokenDecoder();
+    if(data!=null){
+      var role=data.role;
+    }
+      if(role=="Employee"){
+         this.router.navigate(['employee/candidate',jobId]);
+      }else{
+         this.router.navigate(['admin/candidate',jobId]);
+     }
+    
+    }
 
   interviewUpdateModal(id) {
     const modalRef: NgbModalRef = this.modalService.open(UpdateInterviewComponent)

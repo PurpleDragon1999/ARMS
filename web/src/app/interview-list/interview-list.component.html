@@ -19,7 +19,7 @@
             </div>
           
             <div class="noMatch">
-              <p class="p-2" *ngIf="jobsList?.length==0"> No Match Found</p>
+              <p class="p-2" *ngIf="interviewsList?.length==0"> No Match Found</p>
             </div>
           
             <div class="row">
@@ -46,6 +46,13 @@
                             (click)="deleteInterview(interview?.id)"
                             ></i>
                           </a>
+                           <a class="w3-bar-item w3-button">
+                            <i class="mdi mdi-account-multiple float-right"
+                            (click)="appliedCandidates(interview?.jobId)"
+                            ></i>
+                           </a>
+
+                         
                           <a class="w3-bar-item w3-button">
                             <i class="mdi mdi-view-array float-right"
                             [routerLink]="['round', interview?.id, 1]"
@@ -65,8 +72,11 @@
                       <i class="mdi mdi-pencil float-right d-none d-lg-block"
                       (click)="interviewUpdateModal(interview?.id)"
                       ></i>
-                  
-                    </h5>                   
+                      <i class="mdi mdi-account-multiple float-right d-none d-lg-block"
+                          (click)="appliedCandidates(interview?.jobId)"
+                      ></i>
+                    </h5>
+                     
                       <h6 class="font-weight-normal">
                         <b> Date : </b>{{ interview.date | date }}
                      </h6>

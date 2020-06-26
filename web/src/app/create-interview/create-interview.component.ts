@@ -22,9 +22,10 @@ export class CreateInterviewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+   
     this.getLocation();
     this.getRoundTypes();
-  }
+   }
 
   interview: any = {};
   interviewObj: any = {};
@@ -52,7 +53,7 @@ export class CreateInterviewComponent implements OnInit {
       this.RoundType = res.payload.data;
     });
   }
-
+  i:any;
   createInterview(interview: any) {
     let round = [];
     for (let index = 0; index < this.number; index++) {
@@ -72,7 +73,11 @@ export class CreateInterviewComponent implements OnInit {
 
     this.service.createInterview(this.interviewObj).subscribe(
       (res: any) => {
+<<<<<<< HEAD
 
+=======
+        console.log(res.body.payload.data.interviewId);
+>>>>>>> 1c64452d6a136c8841e2f2133c15cdc0791728d8
         const modalRef = this.modalService.open(ModalComponent);
         modalRef.componentInstance.shouldConfirm = false;
         modalRef.componentInstance.success = res.body.success;
