@@ -19,7 +19,7 @@ export class CreateInterviewComponent implements OnInit {
     private service: InterviewService,
     private router: Router,
     private modalService: NgbModal
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.getLocation();
@@ -72,7 +72,7 @@ export class CreateInterviewComponent implements OnInit {
 
     this.service.createInterview(this.interviewObj).subscribe(
       (res: any) => {
-        console.log(res);
+
         const modalRef = this.modalService.open(ModalComponent);
         modalRef.componentInstance.shouldConfirm = false;
         modalRef.componentInstance.success = res.body.success;

@@ -14,9 +14,9 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
             builder.ToTable("Round", "ARMS");
 
             builder.Property(e => e.Id).HasColumnName("id");
-            builder.Property(e => e.RoundNumber).HasColumnName("roundNumber");
-            builder.Property(e => e.RoundDate).HasColumnName("roundDate");
-            builder.Property(e => e.RoundTime).HasColumnName("roundTime");
+            // builder.Property(e => e.RoundNumber).HasColumnName("roundNumber");
+            // builder.Property(e => e.RoundDate).HasColumnName("roundDate");
+            // builder.Property(e => e.RoundTime).HasColumnName("roundTime");
 
             builder.Property(e => e.CreatedAt)
                 .HasColumnName("createdAt")
@@ -47,7 +47,7 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .HasConstraintName("FK_Interview");
 
             builder.HasOne(d => d.RoundType)
-                .WithMany( )
+                .WithMany(d => d.Round)
                 .HasForeignKey(d => d.RoundTypeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_roundType");

@@ -45,7 +45,7 @@ export class JdModalComponent implements OnInit {
   vacancies: number;
   jobArray: any;
   eligibilityCriteriaOptions: String;
-  jobId:any;
+  jobId: any;
   locationOptions: String;
   jobTypeOptions: String;
   jobListingForm: FormGroup;
@@ -78,7 +78,7 @@ export class JdModalComponent implements OnInit {
     this.jobService.getJdData(Id).subscribe((res: any) => {
       if (res.success) {
         this.jobArray = res.payload.data;
-        console.log(this.jobArray);
+
         this.setJobData();
       }
     });

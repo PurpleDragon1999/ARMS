@@ -60,6 +60,39 @@ namespace Arms.Api.Controllers
             return Ok(response);
         }
         
+        [HttpGet("round/{roundId}/application/{applicationId}")]
+        public IActionResult GetAssessmentAndCriteria(int roundId, int applicationId)
+        {
+            Response<AssessmentAndCriteria> response;
+            
+            try
+            {
+                int panelId = _context.InterviewPanel.FirstOrDefault(panel => panel.RoundId == roundId).Id;
+                Assessment assessmentData = _context.Assessment.FirstOrDefault(assessment => (assessment.RoundId == roundId) && (assessment.ApplicationId == applicationId) && (assessment.InterviewPanelId == panelId));
+                if (assessmentData == null)
+                {
+                    response = new Response<AssessmentAndCriteria>(true, null, "Data doesn't exist");
+                    return Ok(response);
+                }
+                List<Criteria> criteriaList = _context.Criteria.Where(c => c.AssessmentId == assessmentData.Id).ToList();
+                assessmentData.Criteria = null;
+                AssessmentAndCriteria assessmentAndCriteria = new AssessmentAndCriteria()
+                {
+                    assessment = assessmentData,
+                    criterias = criteriaList
+                };
+                response = new Response<AssessmentAndCriteria>(true, assessmentAndCriteria, "Assessment retrieved successfully");
+            }
+            catch (Exception e)
+            {
+                response = new Response<AssessmentAndCriteria>(false, null, "Something went wrong");
+
+                return StatusCode(500, response);
+            }
+            
+            return Ok(response);
+        }
+        
         [HttpPost("")]
         public IActionResult Create([FromBody] AssessmentCreateData assessmentData)
         {
@@ -68,6 +101,25 @@ namespace Arms.Api.Controllers
             try
             {
                 int panelId = _context.InterviewPanel.FirstOrDefault(c => c.RoundId == assessmentData.RoundId).Id;
+
+                foreach (var criteria in assessmentData.Criterias)
+                {
+                    if (!(criteria.Marks > 0 && criteria.Marks < 10))
+                    {
+                        throw new Exception("Please enter appropriate marks for criteria");
+                    }
+
+                    if (criteria.Remarks == null)
+                    {
+                        throw new Exception("Stop messing with developer tools or breaking our API");
+                    }
+                }
+
+                if (panelId == 0)
+                {
+                    throw new Exception("This feature doesn't suits you");
+                }
+                
                 Assessment data = new Assessment()
                 {
                     Feedback = assessmentData.Feedback,
@@ -76,6 +128,13 @@ namespace Arms.Api.Controllers
                     InterviewPanelId = panelId,
                     RoundId = assessmentData.RoundId
                 };
+
+                Assessment isAssessmentExist = _context.Assessment.FirstOrDefault(assessment => (assessment.RoundId == assessmentData.RoundId) && (assessment.ApplicationId == assessmentData.ApplicationId) && (assessment.InterviewPanelId == panelId));
+                if (isAssessmentExist != null)
+                {
+                    return UpdateAssessmentAndCriteria(isAssessmentExist, assessmentData, panelId);
+                }
+                
                 _context.Assessment.Add(data);
                 _context.SaveChanges();
 
@@ -83,7 +142,7 @@ namespace Arms.Api.Controllers
 
                 foreach (var criteria in assessmentData.Criterias)
                 {
-                    var criteriaToAdd = new Domain.Entities.Criteria()
+                    var criteriaToAdd = new Criteria()
                     {
                         AssessmentId = savedAssessmentId,
                         Marks = criteria.Marks,
@@ -99,11 +158,61 @@ namespace Arms.Api.Controllers
             }
             catch (Exception e)
             {
-                response = new Response<Assessment>(false, null, "Something went wrong");
+                response = new Response<Assessment>(false, null, e.Message);
 
                 return StatusCode(500, response);
             }
             
+            return Ok(response);
+        }
+
+        IActionResult UpdateAssessmentAndCriteria(Assessment previousAssessment, AssessmentCreateData assessmentData, int panelId)
+        {
+            Response<Assessment> response;
+            
+            try
+            {
+                previousAssessment.Feedback = assessmentData.Feedback;
+                previousAssessment.Result = assessmentData.Result;
+                previousAssessment.ApplicationId = assessmentData.ApplicationId;
+                previousAssessment.InterviewPanelId = panelId;
+                previousAssessment.RoundId = assessmentData.RoundId;
+
+                _context.Assessment.Update(previousAssessment);
+                _context.SaveChanges();
+
+                List<Criteria> criteriaList =
+                    _context.Criteria.Where(c => c.AssessmentId == previousAssessment.Id).ToList();
+
+                foreach (var criteria in criteriaList)
+                {
+                    _context.Criteria.Remove(criteria);
+                    _context.SaveChanges();
+                }
+
+                foreach (var criteria in assessmentData.Criterias)
+                {
+                    var criteriaToAdd = new Criteria()
+                    {
+                        AssessmentId = previousAssessment.Id,
+                        Marks = criteria.Marks,
+                        Remarks = criteria.Remarks,
+                        CriteriaTypeId = criteria.CriteriaTypeId
+                    };
+                    _context.Criteria.Add(criteriaToAdd);
+
+                    _context.SaveChanges();
+                }
+                
+                response = new Response<Assessment>(true, null, "Assessment Updated successfully");
+            }
+            catch (Exception e)
+            {
+                response = new Response<Assessment>(false, null, "Something went wrong");
+
+                return StatusCode(500, response);
+            }
+
             return Ok(response);
         }
         
@@ -286,14 +395,20 @@ namespace Arms.Api.Controllers
         public string Feedback;
         public bool Result;
         public int InterviewPanelId;
-        public List<Criteria> Criterias;
+        public List<InternalCriteria> Criterias;
     }
 
-    public class Criteria
+    public class InternalCriteria
     {
         public int CriteriaTypeId;
         public int Marks;
         public string Remarks;
         public int AssessmentId;
+    }
+
+    internal class AssessmentAndCriteria
+    {
+        public Assessment assessment;
+        public List<Criteria> criterias;
     }
 }

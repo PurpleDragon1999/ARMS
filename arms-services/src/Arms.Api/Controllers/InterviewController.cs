@@ -196,10 +196,7 @@ namespace Arms.Api.Controllers
 				var applications = _context.Application.Include(c => c.Candidate).
 										   Where(c => c.JobId == interviewObj.JobId);
 				//getting the job description object for sending in email
-				JobDescription jdObject = _context.JobDescription.Include(l => l.employmentType).
-															   Include(l => l.eligibilityCriteria).
-															   Include(l => l.loc).
-															  FirstOrDefault(c => c.Id == interviewObj.JobId);
+				JobDescription jdObject = _context.JobDescription.FirstOrDefault(c => c.Id == interviewObj.JobId);
 
 				//Adding Emails in string Array to send to candidates
 
@@ -276,24 +273,24 @@ namespace Arms.Api.Controllers
 					}
 					else
 					{
-						var round = _context.Round.SingleOrDefault(c => c.Id == roundID);
-						if (customDTO.Round[0].RoundNumber != 0)
-						{
-							round.RoundNumber = customDTO.Round[0].RoundNumber;
-						}
-						if (customDTO.Round[0].RoundTypeId != 0)
-						{
-							round.RoundTypeId = customDTO.Round[0].RoundTypeId;
-						}
-						if (customDTO.Round[0].RoundDate != System.DateTime.MinValue)
-						{
-							round.RoundDate = customDTO.Round[0].RoundDate;
-						}
-						if (customDTO.Round[0].RoundTime != System.TimeSpan.Zero)
-						{
-							round.RoundTime = customDTO.Round[0].RoundTime;
-						}
-						_context.Round.Update(round);
+						// var round = _context.Round.SingleOrDefault(c => c.Id == roundID);
+						// if (customDTO.Round[0].RoundNumber != 0)
+						// {
+						// 	round.RoundNumber = customDTO.Round[0].RoundNumber;
+						// }
+						// if (customDTO.Round[0].RoundTypeId != 0)
+						// {
+						// 	round.RoundTypeId = customDTO.Round[0].RoundTypeId;
+						// }
+						// if (customDTO.Round[0].RoundDate != System.DateTime.MinValue)
+						// {
+						// 	round.RoundDate = customDTO.Round[0].RoundDate;
+						// }
+						// if (customDTO.Round[0].RoundTime != System.TimeSpan.Zero)
+						// {
+						// 	round.RoundTime = customDTO.Round[0].RoundTime;
+						// }
+						// _context.Round.Update(round);
 						_context.SaveChanges();
 						var response = new
 						{
@@ -449,7 +446,7 @@ namespace Arms.Api.Controllers
 		  </tr>
 		  <tr>
 			<td><b>Job Type:</b></td>
-			<td>" + jdObject.employmentType.employmentTypeName + @"</td>
+			<td>" + jdObject + @"</td>
 		  </tr>
 		  <tr>
 		  <td ><b>Address:</b></td>

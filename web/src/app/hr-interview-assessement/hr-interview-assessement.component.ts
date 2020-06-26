@@ -24,7 +24,7 @@ export class HrInterviewAssessementComponent implements OnInit {
 
   ngOnInit() {
     this.candidateService.getCandidate().subscribe((res: IResponse) => {
-      console.log(res, 'response');
+
     });
   }
 

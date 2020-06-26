@@ -63,9 +63,9 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .HasColumnName("modifiedBy")
                 .HasMaxLength(50)
                 .IsUnicode(false);
-            builder.Property(e => e.locationId).HasColumnName("locationId");
-            builder.Property(e => e.employmentTypeId).HasColumnName("employmentTypeId");
-            builder.Property(e => e.eligibilityCriteriaId).HasColumnName("eligibilityCriteriaId");
+            // builder.Property(e => e.locationId).HasColumnName("locationId");
+            // builder.Property(e => e.employmentTypeId).HasColumnName("employmentTypeId");
+            // builder.Property(e => e.eligibilityCriteriaId).HasColumnName("eligibilityCriteriaId");
 
             builder.Property(e => e.openingDate).HasColumnName("openingDate");
 
@@ -75,23 +75,23 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
 
             builder.Property(e => e.vacancies).HasColumnName("vacancies");
 
-            builder.HasOne(d => d.loc)
-              .WithMany()
-              .HasForeignKey(d => d.locationId)
-              .OnDelete(DeleteBehavior.ClientSetNull)
-              .HasConstraintName("FK_location");
+            // builder.HasOne(d => d.loc)
+            //   .WithMany()
+            //   .HasForeignKey(d => d.locationId)
+            //   .OnDelete(DeleteBehavior.ClientSetNull)
+            //   .HasConstraintName("FK_location");
 
-            builder.HasOne(d => d.employmentType)
-              .WithMany()
-              .HasForeignKey(d => d.employmentTypeId)
-              .OnDelete(DeleteBehavior.ClientSetNull)
-              .HasConstraintName("FK_employmentType");
+            // builder.HasOne(d => d.employmentType)
+            //   .WithMany()
+            //   .HasForeignKey(d => d.employmentTypeId)
+            //   .OnDelete(DeleteBehavior.ClientSetNull)
+            //   .HasConstraintName("FK_employmentType");
 
-            builder.HasOne(d => d.eligibilityCriteria)
-             .WithMany()
-             .HasForeignKey(d => d.eligibilityCriteriaId)
-             .OnDelete(DeleteBehavior.ClientSetNull)
-             .HasConstraintName("FK_eligibilityCriteria");
+            // builder.HasOne(d => d.eligibilityCriteria)
+            //  .WithMany()
+            //  .HasForeignKey(d => d.eligibilityCriteriaId)
+            //  .OnDelete(DeleteBehavior.ClientSetNull)
+            //  .HasConstraintName("FK_eligibilityCriteria");
            
         }
     }

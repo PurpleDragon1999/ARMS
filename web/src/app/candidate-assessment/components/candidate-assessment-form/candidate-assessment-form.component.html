@@ -5,9 +5,12 @@
       <form #form="ngForm" (ngSubmit)="convertDataAccordingToApi(form.value)" novalidate>
         <div class="form-group">
           <div class="input-group">
-            <select class="form-control" name="roundId" id="round_id" [(ngModel)]="selectedRoundId" required>
+            <select class="form-control" name="roundId" id="round_id" [ngModel]="selectedRoundId"
+              (ngModelChange)="getAssessmentAndCriteriaAccordingToSelectedRound(selectedRound.value)" required
+              #selectedRound="ngModel">
               <option [value]="null" disabled>Enter Round</option>
-              <option *ngFor="let round of dataConstructedForForm" [selected]="round.roundId === selectedRoundId" [value]="round.roundId">{{ round.roundTypeName | titlecase }}</option>
+              <option *ngFor="let round of dataConstructedForForm" [selected]="round.roundId === selectedRoundId"
+                [value]="round.roundId">{{ round.roundTypeName | titlecase }}</option>
             </select>
           </div>
         </div>
@@ -16,12 +19,18 @@
           <ng-template ngFor let-round [ngForOf]="dataConstructedForForm">
             <ng-template let-criteria ngFor [ngForOf]="round.criterias">
               <div class="form-group row" *ngIf="round.roundId == selectedRoundId">
-                <label [for]="criteria.criteriaTypeId" class="col-sm-3 col-form-label">{{ criteria.criteriaName }}</label>
+                <label [for]="criteria.criteriaTypeId"
+                  class="col-sm-3 col-form-label">{{ criteria.criteriaName | titlecase }}: </label>
                 <div class="col-sm-9">
-                  <input type="number" [name]="'marks-' + criteria.criteriaTypeId" min="0" max="10" class="form-control" [id]="criteria.criteriaTypeId" [placeholder]="criteria.criteriaName" ngModel />
+                  <input type="number" [name]="'marks-' + criteria.criteriaTypeId" min="0" max="10" class="form-control"
+                    [id]="criteria.criteriaTypeId" [ngClass]="{ 'is-invalid': marks.dirty && marks.invalid }"
+                    [placeholder]="criteria.criteriaName | titlecase"
+                    [ngModel]="formData['marks-' + criteria.criteriaTypeId] || 0" required #marks="ngModel" />
                 </div>
                 <div class="col-sm-9 ml-auto">
-                  <input type="text" [name]="'remarks-' + criteria.criteriaTypeId" class="form-control" placeholder="Remarks" ngModel />
+                  <input type="text" [name]="'remarks-' + criteria.criteriaTypeId" class="form-control"
+                    [ngClass]="{ 'is-invalid': remarks.dirty && remarks.invalid }" placeholder="Remarks"
+                    [ngModel]="formData['remarks-' + criteria.criteriaTypeId] || ''" #remarks="ngModel" />
                 </div>
               </div>
             </ng-template>
@@ -30,13 +39,14 @@
 
         <div class="form-group">
           <div class="input-group">
-            <textarea class="form-control" name="feedback" id="feedback" rows="4" placeholder="Feedback" ngModel></textarea>
+            <textarea class="form-control" name="feedback" id="feedback" rows="4" placeholder="Feedback"
+              [ngModel]="formData.feedback"></textarea>
           </div>
         </div>
 
         <div class="form-group">
           <div class="input-group">
-            <select class="form-control" name="result" id="result" ngModel required>
+            <select class="form-control" name="result" id="result" [ngModel]="formData.result" required>
               <option value="null" disabled>Enter Result</option>
               <option value="1">Positive</option>
               <option value="0">Negative</option>

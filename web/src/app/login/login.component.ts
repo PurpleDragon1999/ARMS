@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
     private loginService: LoginService,
     private _router: Router,
     private _env: EnvVarService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.isIframe = window !== window.parent && !window.opener;
@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
       }
     });
     this.authService.setLogger(
-      new Logger((logLevel, message, piiEnabled) => {}, {
+      new Logger((logLevel, message, piiEnabled) => { }, {
         correlationId: CryptoUtils.createNewGuid(),
         piiLoggingEnabled: false,
       })
@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit {
   }
 
   async loginFunction() {
-    // this.loginService.login().subscribe((res) => console.log(res));
+    // this.loginService.login().subscribe((res) => 
     const isIE =
       window.navigator.userAgent.indexOf("MSIE ") > -1 ||
       window.navigator.userAgent.indexOf("Trident/") > -1;
@@ -80,11 +80,11 @@ export class LoginComponent implements OnInit {
 
     this.loginService.checkPermissions(idToken).subscribe(
       (res) => {
-        console.log(res);
+
         if (res != null) {
           window.localStorage.setItem(
             "Authorized",
-            `Bearer ${res.payload.authorized}`
+            `Bearer ${res.payload.data.authorized}`
           );
           let role = this.loginService.tokenDecoder().role;
 
@@ -96,7 +96,7 @@ export class LoginComponent implements OnInit {
             this._router.navigate(["/employee"]);
           }
         }
-        this.message = res.payload.message;
+        this.message = res.payload.data.message;
       },
       (err) => {
         if (err.status == 401) {

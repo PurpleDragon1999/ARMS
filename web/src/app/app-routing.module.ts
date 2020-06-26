@@ -108,7 +108,7 @@ const routes: Routes = [
       {
         path: "create-interview",
         component: CreateInterviewComponent,
-      },{
+      }, {
         path: "update-interview",
         component: UpdateInterviewComponent,
       },
@@ -197,11 +197,15 @@ const routes: Routes = [
     component: HrInterviewAssessementComponent,
   },
   {
-    path: "candidate-assessment/jd/:jdId/candidate/:candidateId",
+    path: "candidate-assessment",
     component: AppNavBarComponent,
     children: [
       {
         path: "",
+        component: CandidateComponent,
+      },
+      {
+        path: "jd/:jdId/candidate/:candidateId",
         component: CandidateAssessmentComponent,
       },
     ],
@@ -220,4 +224,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

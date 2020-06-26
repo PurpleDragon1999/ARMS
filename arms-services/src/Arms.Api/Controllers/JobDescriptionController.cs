@@ -39,32 +39,30 @@ namespace Arms.Api.Controllers
         {
             try
             {
-                List<JobDescription> jobDescriptions = _context.JobDescription.Include(l => l.employmentType).
-                    Include(l => l.eligibilityCriteria).Include(l => l.loc).ToList();
-                if(jobDescriptions != null)
+                List<JobDescription> jobDescriptions = _context.JobDescription.ToList();
+                
+                var response = new
                 {
-                    var response = new
+                    success = true,
+                    payload = new
                     {
-                        success = true,
-                        payload = new
-                        {
-                            data = jobDescriptions,
-                            message = "Job Descriptions Retrieved Successfully"
-                        }
+                        data = jobDescriptions,
+                        message = "Job Descriptions Retrieved Successfully"
+                    }
 
-                    };
-                    return StatusCode(200, response);
-                }
-                else
-                {
-                    Response response = new Response()
-                    {
-                        payload = new Payload()
-                    };
-                    response.success = "true";
-                    response.payload.msg = "No JD Found";
-                    return StatusCode(200, response);
-                }
+                };
+                return StatusCode(200, response);
+                
+                // else
+                // {
+                //     Response response = new Response()
+                //     {
+                //         payload = new Payload()
+                //     };
+                //     response.success = "true";
+                //     response.payload.msg = "No JD Found";
+                //     return StatusCode(200, response);
+                // }
                 
                 
             }
@@ -93,8 +91,7 @@ namespace Arms.Api.Controllers
 
             try
             {
-                JobDescription job = _context.JobDescription.Include(l => l.employmentType).
-                    Include(l => l.eligibilityCriteria).Include(l => l.loc).
+                JobDescription job = _context.JobDescription.
                     SingleOrDefault(c => c.Id == id);
 
 
@@ -167,9 +164,9 @@ namespace Arms.Api.Controllers
                 {
                     openingDate = job.openingDate,
                     closingDate = job.closingDate,
-                    locationId = job.locationId,
-                    employmentTypeId = job.employmentTypeId,
-                    eligibilityCriteriaId = job.eligibilityCriteriaId,
+                    // locationId = job.locationId,
+                    // employmentTypeId = job.employmentTypeId,
+                    // eligibilityCriteriaId = job.eligibilityCriteriaId,
                     description = job.description,
                     jobTitle = job.jobTitle,
                     vacancies = job.vacancies,
@@ -235,14 +232,14 @@ namespace Arms.Api.Controllers
                 if (job.closingDate != null)
                     jobInDb.closingDate = job.closingDate;
 
-                if (job.locationId != 0)
-                    jobInDb.locationId = job.locationId;
-
-                if (job.eligibilityCriteriaId != 0)
-                    jobInDb.eligibilityCriteriaId = job.eligibilityCriteriaId;
-
-                if (job.employmentTypeId != 0)
-                    jobInDb.employmentTypeId = job.employmentTypeId;
+                // if (job.locationId != 0)
+                //     jobInDb.locationId = job.locationId;
+                //
+                // if (job.eligibilityCriteriaId != 0)
+                //     jobInDb.eligibilityCriteriaId = job.eligibilityCriteriaId;
+                //
+                // if (job.employmentTypeId != 0)
+                //     jobInDb.employmentTypeId = job.employmentTypeId;
 
                
 

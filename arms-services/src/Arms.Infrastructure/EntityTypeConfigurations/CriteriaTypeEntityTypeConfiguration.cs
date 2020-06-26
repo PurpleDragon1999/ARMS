@@ -49,6 +49,12 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .HasMaxLength(255)
                 .IsUnicode(false);
 
+            // builder.HasOne(d => d.Citeria)
+            //     .WithMany(p => p.Assessment)
+            //     .HasForeignKey(d => d.ApplicationId)
+            //     .OnDelete(DeleteBehavior.ClientSetNull)
+            //     .HasConstraintName("FK_Assessment_ArmsApplication");
+            
             builder.HasOne(d => d.roundType)
               .WithMany()
               .HasForeignKey(d => d.roundTypeId)

@@ -34,7 +34,7 @@ export class ScheduleInterviewComponent implements OnInit {
     private _appService: AppServicesService,
     private _activatedRoute: ActivatedRoute,
     private _router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     this._activatedRoute.params.subscribe((params) => {
@@ -123,13 +123,13 @@ export class ScheduleInterviewComponent implements OnInit {
         this.employeeIds.push(data.id);
       }
     }
-    console.log(this.tableData);
+
   }
 
   blockCalendar(index: number) {
-    console.log("Date: " + this.dateTimeForRounds[index].roundDate);
-    console.log("Time: " + this.dateTimeForRounds[index].roundTime);
+
+
   }
 
-  schedule() {}
+  schedule() { }
 }
