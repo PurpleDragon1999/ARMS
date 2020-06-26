@@ -123,7 +123,7 @@ export class ScheduleInterviewComponent implements OnInit {
         this.employeeIds.push(data.id);
       }
     }
-   
+    console.log(this.tableData);
    
   }
 
@@ -188,7 +188,7 @@ export class ScheduleInterviewComponent implements OnInit {
     });
   }
 
-  schedule(index:number) {
+  schedulePanelHelper(index:number) {
     let panelEmployees=[];
    
     
@@ -208,11 +208,16 @@ export class ScheduleInterviewComponent implements OnInit {
           }
             for(let j=0;j<panelEmployees.length;j++){
               emailList.push(panelEmployees[j].email);
-              userNames.push(panelEmployees[j].firstName+ " "+panelEmployees[j].lastName);
+              userNames.push(panelEmployees[j].firstName + " "+ panelEmployees[j].lastName);
             }
            
             if(emailList.length!=0)
             this.blockCalenderHelper(index,i,roundDate,roundTime,emailList,userNames);
       }
   }
+  schedule(){
+     for(let i=0;i<this.tableData.length;i++){
+          this.schedulePanelHelper(i);
+     }
+   }
 }
