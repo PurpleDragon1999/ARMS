@@ -78,7 +78,6 @@ export class JdModalComponent implements OnInit {
     this.jobService.getJdData(Id).subscribe((res: any) => {
       if (res.success) {
         this.jobArray = res.payload.data;
-        console.log(this.jobArray);
         this.setJobData();
       }
     });
@@ -104,8 +103,8 @@ export class JdModalComponent implements OnInit {
       (res: any) => {
         const modalRef = this.modalService.open(ModalComponent);
         modalRef.componentInstance.shouldConfirm = false;
-        modalRef.componentInstance.success = res.body.success;
-        modalRef.componentInstance.message = res.body.payload.message;
+        modalRef.componentInstance.success = res.success;
+        modalRef.componentInstance.message = res.payload.message;
         modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
           modalRef.close();
         });

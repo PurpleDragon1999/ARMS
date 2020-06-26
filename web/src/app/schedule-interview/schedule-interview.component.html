@@ -161,6 +161,8 @@
                 <td>{{ data.id }}</td>
                 <td>{{ data.firstName | uppercase }} {{ data.lastName }}</td>
                 <td>{{ data.email }}</td>
+                <td><i [ngClass]="data.status"></i></td>
+                <td><i class="fas fa-trash"></i></td>
               </tr>
             </tbody>
             <tbody *ngIf="main[i][2]">
@@ -168,31 +170,50 @@
                 <td>{{ data.id }}</td>
                 <td>{{ data.firstName | uppercase }} {{ data.lastName }}</td>
                 <td>{{ data.email }}</td>
+                <td><i [ngClass]="data.status"></i></td>
+                <td><i class="fas fa-trash"></i></td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <div class="d-flex justify-content-end mt-3">
+        <div class="d-flex justify-content-end mt-3 "*ngIf="main[i][0]">
           <button
             class="btn btn-gradient-danger btn-sm"
-            (click)="blockCalendar(i)"
+            (click)="checkAvailability(i,0)"
+          >
+            Check availability
+          </button>
+        </div>
+        <div class="d-flex justify-content-end mt-3"*ngIf="main[i][1]">
+          <button
+            class="btn btn-gradient-danger btn-sm"
+            (click)="checkAvailability(i,1)"
+          >
+            Check availability
+          </button>
+        </div>
+        <div class="d-flex justify-content-end mt-3"*ngIf="main[i][2]">
+          <button
+            class="btn btn-gradient-danger btn-sm"
+            (click)="checkAvailability(i,2)"
           >
             Check availability
           </button>
         </div>
       </div>
     </div>
-
     <div class="mt-3 d-flex justify-content-end">
       <button type="reset" class="btn btn-sm btn-light">Cancel</button>
       <button
         type="submit"
         class="btn btn-sm btn-gradient-danger ml-2"
-        (click)="schedule()"
+        (click)="schedule(i)"
       >
         Schedule
       </button>
     </div>
+ 
+
   </div>
 </div>

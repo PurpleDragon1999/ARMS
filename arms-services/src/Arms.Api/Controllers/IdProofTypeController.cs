@@ -27,7 +27,7 @@ namespace Arms.Api.Controllers
 
         //GET:api/idProofType
         [HttpGet]
-        [Authorize(Roles = "SuperAdministrator,Admin")]
+       [AllowAnonymous]
         public IActionResult GetIds()
         {
             List<IdProofType> idProofType = _context.IdProofType.ToList();
