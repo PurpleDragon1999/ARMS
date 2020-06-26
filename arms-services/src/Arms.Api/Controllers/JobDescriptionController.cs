@@ -34,10 +34,6 @@ namespace Arms.Api.Controllers
         {   
         
              _context = armsContext;
-          
-              
-             
-          
         }
         //GET:api/jobDescriptions
         [HttpGet]
