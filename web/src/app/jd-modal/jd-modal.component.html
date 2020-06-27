@@ -68,7 +68,7 @@
         <div class="form-group">
           <label for="description"><b>Job Description</b><span class="asterick">*</span></label>
           <textarea
-            name="jobProfileDescription"
+            name="description"
             [ngModel]="description"
             type="text"
             class="form-control"
@@ -92,6 +92,7 @@
           type="date"
           class="form-control"
           id="openingDate"
+          [min]=minimumDate
           placeholder="Job Description"
           ngModel
           required
@@ -106,6 +107,7 @@
             [ngModel]="closingDate"
             type="date"
             required
+            [min]=minimumDate
             class="form-control"
             placeholder="Closing Date"
             ngModel

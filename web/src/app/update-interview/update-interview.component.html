@@ -54,6 +54,7 @@
                         class="form-control"
                         id="date"
                         #date="ngModel"
+                        [min]=minimumDate
                         [ngClass]="{ 'is-invalid': date.dirty && date.invalid }"
                         placeholder="Date"
                         required
@@ -182,6 +183,7 @@
                                 [(ngModel)]= "interview.round[i].roundDate"
                                 class="form-control"
                                 id="roundDate"
+                                [min]=minimumDate
                                 #roundDate="ngModel"
                                 [ngClass]="{ 'is-invalid': roundDate.dirty && roundDate.invalid }"
                                 placeholder="roundDate"

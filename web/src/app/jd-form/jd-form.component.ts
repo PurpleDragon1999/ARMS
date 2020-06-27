@@ -1,3 +1,4 @@
+import { MinDateService } from './../utilities/min-date.service';
 import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AppServicesService } from "./../services/app-services.service";
@@ -5,9 +6,6 @@ import { ViewChild, ElementRef, AfterViewInit } from "@angular/core";
 import { IResponse } from "src/app/models/response.interface";
 import { Router } from "@angular/router";
 import { ModalComponent } from "./../reusable-components/modal/modal.component";
-import * as jsPDF from "jspdf";
-import { IJobDescription } from "../models/jobDescription.interface";
-import html2canvas from "html2canvas";
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { NgbModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
 import { JobService } from '../services/job.service'
@@ -22,7 +20,8 @@ export class JdFormComponent implements OnInit {
     private _service: AppServicesService,
     private router: Router,
     private modalService: NgbModal,
-    private jobService: JobService
+    private jobService: JobService,
+    private minDateService:MinDateService
   ) { }
 
   @Output()
@@ -55,9 +54,8 @@ export class JdFormComponent implements OnInit {
   locations: any;
   skillArray: any;
   currencyText: string;
-  dtToday:any=new Date(Date.now());
-  minimumDate:string;
   buttonName: string = "Select Currency"
+  minimumDate:string;
   selectChangeHandlerEligibilityCriteria(event: any) {
     this.eligibilityCriteriaOptions = event.target.value;
   }
@@ -103,21 +101,9 @@ export class JdFormComponent implements OnInit {
     //   this.skillArray = res.payload.data;
 
     // });
-      this.setMinimumDate();
+     this.minimumDate= this.minDateService.setMinimumDate();
   }
-  setMinimumDate(){
-    var month = this.dtToday.getMonth() + 1;
-    var day = this.dtToday.getDate();
-    var year = this.dtToday.getFullYear();
-    if(month < 10)
-        month = '0' + month.toString();
-    if(day < 10)
-        day = '0' + day.toString();
-    
-    this.minimumDate= year + '-' + month + '-' + day;
-    this.minimumDate=this.minimumDate.toString();
-
-  }
+  
   get formControls() {
     return this.jobListingForm.controls;
   }
