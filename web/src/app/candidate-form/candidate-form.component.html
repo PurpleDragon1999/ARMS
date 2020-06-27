@@ -164,9 +164,6 @@
             </div>
 
             <div *ngIf="type == 'progressTracker'" class="input-group col-xs-12"> 
-              <!-- <input [readOnly]="type == 'progressTracker'" type="text" [(ngModel)]="model.name" name="file" class="form-control"  (click)="openResume()"
-              placeholder="CV will be shown here">  -->
-              
               <a (click)="openResume()" ><i class="far fa-file-pdf"></i>  {{model.name}}|CV</a>
             </div>
           </div>   

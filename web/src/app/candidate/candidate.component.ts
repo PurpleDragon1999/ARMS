@@ -58,12 +58,12 @@ export class CandidateComponent implements OnInit {
         });
         
       }
+
       getRoundData(){
          this._service.getRound(this.jobId,this.employeeId).subscribe((res)=>{
             this.roundData=res.payload.data;
          }
          )
-
       }
 
     deleteApplication(data ) {

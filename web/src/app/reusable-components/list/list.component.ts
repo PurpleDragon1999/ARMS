@@ -11,6 +11,9 @@ import { ModalComponent } from 'src/app/reusable-components/modal/modal.componen
   styleUrls: ["./list.component.scss"],
 })
 export class ListComponent {
+  checkedEntriesId : Array<number> = []
+  isShowDiv : boolean = true
+
   @Input()
   title: string = '';
 
@@ -56,5 +59,41 @@ export class ListComponent {
 
   showPdf(id: string): void {
     this.emitDownloadPdf.emit(id);
+  }
+
+  // checkSelect(event, id){
+  //   this.data.forEach(entry=>{
+  //     if (entry.id == id){
+  //       if (entry.checked == true ){
+  //         entry.checked = false
+  //       }
+  //       else{
+  //         entry.checked = true
+  //       }
+  //     }
+  //   })
+  //   console.log(id, this.data, "dataaaaaaaaaaaaaaaaaaaa")
+  // }
+
+  checkAll() {
+    if (this.data.every(entry => entry.checked == true)){
+      this.data.forEach(entry => { entry.checked = false });
+      this.checkedEntriesId = []
+    }
+      
+    else{
+      this.data.forEach(entry => { entry.checked = true });
+      this.data.map(entry=>{
+      this.checkedEntriesId.push(entry.id)
+      })
+      
+    }
+      
+    console.log(this.checkedEntriesId, "ids")
+    
+  }
+
+  toggleDisplayDiv(){
+    this.isShowDiv = !this.isShowDiv;
   }
 }

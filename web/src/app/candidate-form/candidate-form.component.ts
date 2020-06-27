@@ -2,17 +2,13 @@ import {UrltoFile} from './../utils/urlToFile'
 import { IResponse } from './../models/response.interface';
 import { JobService } from './../services/job.service';
 import { CandidateService } from './../candidate/services/candidate.service';
-import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import { ICandidate } from './../models/candidate.interface';
 import { AppServicesService } from "../services/app-services.service";
-import { Component, OnInit, Input } from "@angular/core";
-import { FileItem, FileUploader, ParsedResponseHeaders } from "ng2-file-upload";
+import { Component, OnInit, ViewChild} from "@angular/core";
 import { NgbModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
 import { ModalComponent } from "../reusable-components/modal/modal.component"
-import { Router, Params, ActivatedRoute } from "@angular/router";
-import { error } from 'util';
-import { from } from 'rxjs';
-import { Url } from 'url';
+import { Router,ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: "app-candidate-form",
@@ -29,7 +25,6 @@ export class CandidateFormComponent implements OnInit {
   file : any
   resumeDetails : any
 
-  
   constructor(private modalService: NgbModal,
     private router: Router,
     private service: AppServicesService,
@@ -49,6 +44,7 @@ export class CandidateFormComponent implements OnInit {
     }
 
     loadJdData(){
+      console.log("inside load data")
       this.type = this.router.url.split("/")[1];
       if (this.type == "candidateForm"){
         var jobId 
@@ -58,7 +54,7 @@ export class CandidateFormComponent implements OnInit {
           }
         })
         this.service.getJdData(jobId).subscribe((res : IResponse)=>{
-          
+          console.log(res)
           if (res.success == true){
             this.model.appliedForJdId = res.payload.data.code;
             this.model.appliedForPosition = res.payload.data.jobTitle;
@@ -111,11 +107,6 @@ export class CandidateFormComponent implements OnInit {
     openResume(){
         let fileType = this.resumeDetails.name.split(".")[1];
         const blob = new Blob([this.file], { type:"application/" + fileType });
-        // var a = document.createElement("a");
-        // a.href = URL.createObjectURL(blob);
-        // //a.download = this.result.name;
-        // window.open(a.href)
-        // a.click();
         const url = window.URL.createObjectURL(blob);
         window.open(url);
     }
@@ -123,12 +114,7 @@ export class CandidateFormComponent implements OnInit {
     getResume(id : number){
       this.CandidateService.getResume(id).subscribe((res : IResponse)=>{
         this.resumeDetails = res.payload.data[0]
-        this.model.cv = this.resumeDetails.cv ? 
-        "data:application/" +
-        this.resumeDetails.name.split(".")[1] +
-        ";base64," +
-        this.resumeDetails.cv
-                    : null;
+        this.model.cv = this.resumeDetails.cv ? "data:application/" + this.resumeDetails.name.split(".")[1] +";base64," +this.resumeDetails.cv: null;
         this.urltoFile.urltoFile(
         this.model.cv,
         this.resumeDetails.name,
@@ -171,10 +157,8 @@ export class CandidateFormComponent implements OnInit {
           payload: {    
             message: "Enter valid Aadhar No."
         }}
-      }
-        
-      }
-  }
+      } 
+      }}
   return {
       success: true,
      }
@@ -210,9 +194,7 @@ export class CandidateFormComponent implements OnInit {
             application.resetForm()
             
           }
-        }
-        
-      },
+        } },
       error=>{
         console.log(error)
       })
@@ -220,17 +202,13 @@ export class CandidateFormComponent implements OnInit {
     else{
       this.openModal(isValid);
     }
-
   }
 
   openModal(res ){
     const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
-  
     modalRef.componentInstance.shouldConfirm = false;
-  
     modalRef.componentInstance.success = res.success;
     modalRef.componentInstance.message = res.payload.message;
-  
     modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
     modalRef.close();
     })

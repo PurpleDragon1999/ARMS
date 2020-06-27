@@ -45,7 +45,7 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .HasMaxLength(50);
 
             builder.HasOne(d => d.Application)
-                .WithMany()
+                .WithMany(c=> c.Resume)
                 .HasForeignKey(d => d.ApplicationId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_ResumeApplication");
