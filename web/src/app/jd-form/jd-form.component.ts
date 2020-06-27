@@ -103,6 +103,9 @@ export class JdFormComponent implements OnInit {
     //   this.skillArray = res.payload.data;
 
     // });
+      this.setMinimumDate();
+  }
+  setMinimumDate(){
     var month = this.dtToday.getMonth() + 1;
     var day = this.dtToday.getDate();
     var year = this.dtToday.getFullYear();
@@ -113,6 +116,7 @@ export class JdFormComponent implements OnInit {
     
     this.minimumDate= year + '-' + month + '-' + day;
     this.minimumDate=this.minimumDate.toString();
+
   }
   get formControls() {
     return this.jobListingForm.controls;
