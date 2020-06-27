@@ -161,6 +161,8 @@
                 <td>{{ data.id }}</td>
                 <td>{{ data.firstName | uppercase }} {{ data.lastName }}</td>
                 <td>{{ data.email }}</td>
+                <td><i [ngClass]="data.status"></i></td>
+                <td><i class="fas fa-trash"></i></td>
               </tr>
             </tbody>
             <tbody *ngIf="main[i][2]">
@@ -168,15 +170,33 @@
                 <td>{{ data.id }}</td>
                 <td>{{ data.firstName | uppercase }} {{ data.lastName }}</td>
                 <td>{{ data.email }}</td>
+                <td><i [ngClass]="data.status"></i></td>
+                <td><i class="fas fa-trash"></i></td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <div class="d-flex justify-content-end mt-3">
+        <div *ngIf="main[i][0]" class="d-flex justify-content-end mt-3">
           <button
             class="btn btn-gradient-danger btn-sm"
-            (click)="blockCalendar(i)"
+            (click)="blockCalendar(i, 0)"
+          >
+            Check availability
+          </button>
+        </div>
+        <div *ngIf="main[i][1]" class="d-flex justify-content-end mt-3">
+          <button
+            class="btn btn-gradient-danger btn-sm"
+            (click)="blockCalendar(i, 1)"
+          >
+            Check availability
+          </button>
+        </div>
+        <div *ngIf="main[i][2]" class="d-flex justify-content-end mt-3">
+          <button
+            class="btn btn-gradient-danger btn-sm"
+            (click)="blockCalendar(i, 2)"
           >
             Check availability
           </button>

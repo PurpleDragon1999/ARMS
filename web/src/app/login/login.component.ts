@@ -84,7 +84,7 @@ export class LoginComponent implements OnInit {
         if (res != null) {
           window.localStorage.setItem(
             "Authorized",
-            `Bearer ${res.payload.authorized}`
+            `Bearer ${res.payload.data.authorized}`
           );
           let role = this.loginService.tokenDecoder().role;
 

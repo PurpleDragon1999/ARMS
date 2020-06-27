@@ -126,9 +126,13 @@ export class ScheduleInterviewComponent implements OnInit {
     console.log(this.tableData);
   }
 
-  blockCalendar(index: number) {
-    console.log("Date: " + this.dateTimeForRounds[index].roundDate);
-    console.log("Time: " + this.dateTimeForRounds[index].roundTime);
+  blockCalendar(index: number, p: number) {
+    // console.log("Date: " + this.dateTimeForRounds[index].roundDate);
+    // console.log("Time: " + this.dateTimeForRounds[index].roundTime);
+    console.log(this.tableData[index].panel1.employees);
+    // if(p===0) {
+    //   this.tableData[index].panel1.employees
+    // }
   }
 
   schedule() {}
