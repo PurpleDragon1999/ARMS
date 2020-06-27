@@ -55,6 +55,8 @@ export class JdFormComponent implements OnInit {
   locations: any;
   skillArray: any;
   currencyText: string;
+  dtToday:any=new Date(Date.now());
+  minimumDate:string;
   buttonName: string = "Select Currency"
   selectChangeHandlerEligibilityCriteria(event: any) {
     this.eligibilityCriteriaOptions = event.target.value;
@@ -101,7 +103,16 @@ export class JdFormComponent implements OnInit {
     //   this.skillArray = res.payload.data;
 
     // });
-
+    var month = this.dtToday.getMonth() + 1;
+    var day = this.dtToday.getDate();
+    var year = this.dtToday.getFullYear();
+    if(month < 10)
+        month = '0' + month.toString();
+    if(day < 10)
+        day = '0' + day.toString();
+    
+    this.minimumDate= year + '-' + month + '-' + day;
+    this.minimumDate=this.minimumDate.toString();
   }
   get formControls() {
     return this.jobListingForm.controls;
