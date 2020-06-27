@@ -318,25 +318,25 @@ namespace Arms.Api.Controllers
 					}
 					else
 					{
-						// var round = _context.Round.SingleOrDefault(c => c.Id == roundID);
-						// if (customDTO.Round[0].RoundNumber != 0)
-						// {
-						// 	round.RoundNumber = customDTO.Round[0].RoundNumber;
-						// }
-						// if (customDTO.Round[0].RoundTypeId != 0)
-						// {
-						// 	round.RoundTypeId = customDTO.Round[0].RoundTypeId;
-						// }
-						// if (customDTO.Round[0].RoundDate != System.DateTime.MinValue)
-						// {
-						// 	round.RoundDate = customDTO.Round[0].RoundDate;
-						// }
-						// if (customDTO.Round[0].RoundTime != System.TimeSpan.Zero)
-						// {
-						// 	round.RoundTime = customDTO.Round[0].RoundTime;
-						// }
-						// _context.Round.Update(round);
-						_context.SaveChanges();
+                        var round = _context.Round.SingleOrDefault(c => c.Id == roundID);
+                        if (customDTO.Round[0].RoundNumber != 0)
+                        {
+                            round.RoundNumber = customDTO.Round[0].RoundNumber;
+                        }
+                        if (customDTO.Round[0].RoundTypeId != 0)
+                        {
+                            round.RoundTypeId = customDTO.Round[0].RoundTypeId;
+                        }
+                        if (customDTO.Round[0].RoundDate != System.DateTime.MinValue)
+                        {
+                            round.RoundDate = customDTO.Round[0].RoundDate;
+                        }
+                        if (customDTO.Round[0].RoundTime != System.TimeSpan.Zero)
+                        {
+                            round.RoundTime = customDTO.Round[0].RoundTime;
+                        }
+                        _context.Round.Update(round);
+                        _context.SaveChanges();
 						var response = new
 						{
 							success = true,
