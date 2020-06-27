@@ -30,6 +30,7 @@ export class CandidateComponent implements OnInit {
     ngOnInit():any{
          this.employeeId=this._service.tokenDecoder().Id;
          this.callFunction();
+      if(this._service.tokenDecoder().role=="Employee")
          this.getRoundData();
     }
     callFunction():any{
@@ -44,6 +45,7 @@ export class CandidateComponent implements OnInit {
        .subscribe((res) => {
        
             this.candidates = res.payload.data
+            console.log(this.candidates);
             this.columns = ["name", "email", "experience", "Job Position"];
     
         });

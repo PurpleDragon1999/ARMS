@@ -1,3 +1,4 @@
+import { AppServicesService } from './../../services/app-services.service';
 import { Component, EventEmitter, Input, Output, OnInit } from "@angular/core";
 import { IModelForPagination } from 'src/app/models/modelPagination.interface';
 
@@ -7,6 +8,8 @@ import { IModelForPagination } from 'src/app/models/modelPagination.interface';
   styleUrls: ["./list.component.scss"],
 })
 export class ListComponent {
+
+  constructor(private _service:AppServicesService){}
   @Input()
   title: string = '';
 
@@ -33,6 +36,12 @@ export class ListComponent {
 
   @Output()
   emitDownloadPdf: EventEmitter<string> = new EventEmitter<string>();
+
+  ngOnInit(){
+  console.log(this.data, 'this.data');
+  this.role=this._service.tokenDecoder().role;
+  }
+  role:any;
 
   openModal(formType: any["formType"], data?: any["data"]) {
     this.emitOpenModal.emit({ formType, data });

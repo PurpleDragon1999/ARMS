@@ -13,21 +13,21 @@ import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 })
 export class IdProofTypeComponent implements OnInit {
 
-  
 
-  
+
+
   ngOnInit() {
   }
 
-  idProofForm:FormGroup;
-  addIdProofs:boolean=false;
-  idProofList:any=[];
+  idProofForm: FormGroup;
+  addIdProofs: boolean = false;
+  idProofList: any = [];
 
   constructor(private fb: FormBuilder,
-    private _service:AppServicesService,
-    private modalService:NgbModal) {
+    private _service: AppServicesService,
+    private modalService: NgbModal) {
     this.idProofForm = this.fb.group({
-      idProofs: this.fb.array([]) ,
+      idProofs: this.fb.array([]),
     });
   }
 
@@ -45,7 +45,7 @@ export class IdProofTypeComponent implements OnInit {
     this.addIdProofs = true;
     this.idProofs().push(this.newidProof());
   }
-  
+
   loadIdProofTypes() {
     return this._service.getAllIdProofTypes().subscribe((response: any) => {
       this.idProofList = response.payload.data;
@@ -61,27 +61,27 @@ export class IdProofTypeComponent implements OnInit {
       modalRef.close();
     });
     this.idProofs().removeAt(idProofIndex);
-    if (idProofIndex==0) {
+    if (idProofIndex == 0) {
       this.addIdProofs = false;
     }
-   
+
     return this._service.deleteIdProofType(idProofIndex).subscribe((response: any) => {
 
       this.loadIdProofTypes();
       modalRef.componentInstance.success = response.body.result.success;
       modalRef.componentInstance.message = response.body.result.payload.message;
-      }, (error: HttpErrorResponse) => {
-        modalRef.componentInstance.success = error.error.success;
-        modalRef.componentInstance.message = error.error.payload.message;
-      }
+    }, (error: HttpErrorResponse) => {
+      modalRef.componentInstance.success = error.error.success;
+      modalRef.componentInstance.message = error.error.payload.message;
+    }
 
     );
-   
-    
+
+
   }
 
   onSubmit() {
-    console.log(this.idProofForm.value);
+
   }
 
 

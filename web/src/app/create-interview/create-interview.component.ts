@@ -24,7 +24,7 @@ export class CreateInterviewComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-   
+
     this.getLocation();
     this.getRoundTypes();
     this.minimumDate=this.minDateService.setMinimumDate();
@@ -56,7 +56,7 @@ export class CreateInterviewComponent implements OnInit {
       this.RoundType = res.payload.data;
     });
   }
-  i:any;
+  i: any;
   createInterview(interview: any) {
     let round = [];
     for (let index = 0; index < this.number; index++) {

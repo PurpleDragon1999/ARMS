@@ -11,7 +11,7 @@ import { ModalComponent } from "src/app/reusable-components/modal/modal.componen
   styleUrls: ["./eligibility-criteria.component.scss"],
 })
 export class EligibilityCriteriaComponent implements OnInit {
-  ngOnInit() {}
+  ngOnInit() { }
   eligibilityCriterionForm: FormGroup;
   addEligibilityCriteria: Boolean = false;
   eligibilityCriterionList: any;
@@ -77,6 +77,6 @@ export class EligibilityCriteriaComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.eligibilityCriterionForm.value);
+
   }
 }

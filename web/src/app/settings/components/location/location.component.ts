@@ -15,7 +15,7 @@ import {
   styleUrls: ["./location.component.scss"],
 })
 export class LocationComponent implements OnInit {
-  ngOnInit() {}
+  ngOnInit() { }
 
   locationForm: FormGroup;
   addLocations: Boolean = false;
@@ -78,6 +78,6 @@ export class LocationComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.locationForm.value);
+
   }
 }

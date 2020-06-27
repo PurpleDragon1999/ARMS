@@ -296,17 +296,17 @@ namespace Arms.Api.Controllers
                         message = "Registered Successfully"
                     }
                 };
-                JobDescription jdObject = _context.JobDescription.Include(l => l.employmentType).
-                    Include(l => l.eligibilityCriteria).Include(l => l.loc).
-                    FirstOrDefault(c => c.Id == applicationObj.JobId);
-                string emailHtmlBody = GenerateEmailBody( jdObject, candObj.Code,candObj.Name);
+                // JobDescription jdObject = _context.JobDescription.Include(l => l.employmentType).
+                //     Include(l => l.eligibilityCriteria).Include(l => l.loc).
+                //     FirstOrDefault(c => c.Id == applicationObj.JobId);
+                // string emailHtmlBody = GenerateEmailBody( jdObject, candObj.Code,candObj.Name);
                 //Adding Emails in string Array to send to candidates
                 string[] EmailToSend = new[]
                 {
                     candObj.Email
                 };
 
-                mailHelper.MailFunction(emailHtmlBody, EmailToSend);
+                // mailHelper.MailFunction(emailHtmlBody, EmailToSend);
                 return StatusCode(200, response);
             }
             catch (Exception e)
@@ -439,7 +439,7 @@ namespace Arms.Api.Controllers
      </tr>
        <tr>
          <td><b>Job Type:</b></td>
-         <td>" + jdObject.employmentType.employmentTypeName + @"</td>
+         <td>" + jdObject + @"</td>
        </tr>
         <tr>
        <td ><b>Address:</b></td>
