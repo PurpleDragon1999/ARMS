@@ -118,6 +118,7 @@ export class UpdateInterviewComponent implements OnInit {
       this.updateObj.NoOfRounds = formValue.noOfRounds;
       
       this.service.updateInterview(this.id, this.updateObj).subscribe((res:any) => {
+        console.log(res);
         const modalRef = this.modalService.open(ModalComponent);
         modalRef.componentInstance.shouldConfirm = false;
         modalRef.componentInstance.success = res.success;
