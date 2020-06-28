@@ -29,7 +29,7 @@ namespace Arms.Api.Controllers
         ArmsDbContext _context;
       
         public MailHelperController mailHelper=new MailHelperController();
-     
+      
         public JobDescriptionController(ArmsDbContext armsContext)
         {   
         
@@ -246,10 +246,10 @@ namespace Arms.Api.Controllers
                     };
                     return StatusCode(404, resNull);
                 }
-                if (string.Compare(job.openingDate.ToLongDateString(), "01-01-0001 00:00:00")!=0)
+                if (job.openingDate!= System.DateTime.MinValue)
                     jobInDb.openingDate = job.openingDate;
 
-                if (string.Compare(job.closingDate.ToLongDateString(), "01-01-0001 00:00:00")!= 0)
+                if (job.closingDate != System.DateTime.MinValue)
                     jobInDb.closingDate = job.closingDate;
 
                 if (job.locationId != 0)
@@ -321,10 +321,11 @@ namespace Arms.Api.Controllers
         //DELETE:/api/jobdescription/id
         [HttpDelete("{id}")]
         public IActionResult DeleteJd(int id)
-        {
+        {      
             try
             {
-                JobDescription jobInDb = _context.JobDescription.SingleOrDefault(c => c.Id == id);
+                 
+                  JobDescription jobInDb = _context.JobDescription.SingleOrDefault(c => c.Id == id);
                 if (jobInDb == null)
                 {
                     var resNull = new
@@ -339,7 +340,10 @@ namespace Arms.Api.Controllers
                     };
                     return StatusCode(404, resNull);
                 }
-                _context.JobDescription.Remove(jobInDb);
+                var interviewId = _context.Interview.FirstOrDefault(c => c.JobId == id).Id;
+                InterviewController controller=new InterviewController(_context);
+                controller.DeleteInterview(interviewId); 
+                 _context.JobDescription.Remove(jobInDb);
                 _context.SaveChanges();
                 var response = new
                 {
@@ -366,9 +370,7 @@ namespace Arms.Api.Controllers
                 return StatusCode(500, response);
             }
         }
-      
-
-
-
+    
     }
+    
 }
