@@ -6,7 +6,7 @@ namespace Arms.Domain.Entities
 {
     public class Loc : Entity
     {   [Key]
-        public int id { get; set; }
+        public int Id { get; set; }
         public string code { get; set; }
         public string locationName { get; set; }
         public DateTime createdAt { get; set; }

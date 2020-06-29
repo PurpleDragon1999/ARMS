@@ -13,9 +13,8 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
         {
             builder.ToTable("Location", "ARMS");
 
-            builder.Property(e => e.id).HasColumnName("id");
+            builder.Property(e => e.Id).ValueGeneratedOnAdd();
 
-            //builder.Property(e => e.id).ValueGeneratedOnAdd();
             builder.Property(e => e.code)
                 .IsRequired()
                 .HasColumnName("code")
@@ -36,8 +35,8 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
             builder.Property(e => e.locationName)
                 .IsRequired()
                 .HasColumnName("locationName")
-                .HasMaxLength(255)
-                .IsUnicode(false);
+                .HasMaxLength(255);
+                //.IsUnicode(false);
 
             builder.Property(e => e.modifiedAt)
                 .HasColumnName("modifiedAt")
