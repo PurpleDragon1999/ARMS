@@ -19,6 +19,7 @@ export class RoundTypeComponent implements OnInit {
   roundTypeForm: FormGroup;
   addRound: boolean = false;
   roundTypeList: any = [];
+
   constructor(
     private fb: FormBuilder,
     private _service: AppServicesService,
@@ -37,6 +38,8 @@ export class RoundTypeComponent implements OnInit {
     return this.fb.group({
       roundName: "",
       criteria: this.fb.array([]),
+      createdBy: this._service.tokenDecoder().userName,
+      modifiedBy: this._service.tokenDecoder().userName
     });
   }
 
@@ -44,37 +47,42 @@ export class RoundTypeComponent implements OnInit {
     this.addRound = true;
     this.roundTypes().push(this.newRoundType());
   }
+
   loadRoundTypes() {
     return this._service.getAllRoundTypes().subscribe((response: any) => {
       this.roundTypeList = response.payload.data;
     });
   }
 
+  deleteNewEntry(typeIndex){
+    this.roundTypes().removeAt(typeIndex);
+    if ((this.roundTypeForm.get('roundTypes').value.length)==0) {
+      this.addRound = false;
+    }
+  }
+
   removeRoundType(typeIndex: number) {
     const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
-
     modalRef.componentInstance.shouldConfirm = true;
-
     modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
       modalRef.close();
     });
-    this.roundTypes().removeAt(typeIndex);
-    if (typeIndex == 0) {
-      this.addRound = false;
-    }
 
-    return this._service.deleteRoundType(typeIndex).subscribe(
-      (response: any) => {
-        this.loadRoundTypes();
-        modalRef.componentInstance.success = response.body.result.success;
-        modalRef.componentInstance.message =
-          response.body.result.payload.message;
-      },
-      (error: HttpErrorResponse) => {
-        modalRef.componentInstance.success = error.error.success;
-        modalRef.componentInstance.message = error.error.payload.message;
-      }
-    );
+    modalRef.componentInstance.emitPerformRequest.subscribe(() => {
+      this.deleteNewEntry(typeIndex);
+
+      return this._service.deleteRoundType(typeIndex).subscribe(
+          (response: any) => {
+          this.loadRoundTypes();
+          modalRef.componentInstance.success = response.body.success;
+          modalRef.componentInstance.message = response.body.payload.message;
+        },
+       (error: HttpErrorResponse) => {
+          modalRef.componentInstance.success = error.error.success;
+          modalRef.componentInstance.message = error.error.payload.message;
+        }
+        );
+    });
   }
 
   roundCriteria(typeIndex: number): FormArray {
@@ -84,6 +92,8 @@ export class RoundTypeComponent implements OnInit {
   newCriterion(): FormGroup {
     return this.fb.group({
       criterion: "",
+      createdBy: this._service.tokenDecoder().userName,
+      modifiedBy: this._service.tokenDecoder().userName
     });
   }
 
@@ -95,7 +105,5 @@ export class RoundTypeComponent implements OnInit {
     this.roundCriteria(typeIndex).removeAt(criteriaIndex);
   }
 
-  onSubmit() {
-    console.log(this.roundTypeForm.value);
-  }
+  onSubmit() {  }
 }

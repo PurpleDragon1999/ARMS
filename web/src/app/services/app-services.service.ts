@@ -94,11 +94,14 @@ export class AppServicesService {
     });
   }
   getAllInterviews(): Observable<IResponse> {
+    console.log("here role")
     let data=this.tokenDecoder();
      if(data!=null){
        var role=data.role;
+       console.log(role, "role")
       }
      if(role=='Employee'){
+       console.log(role, "role")
       return this.http.get<IResponse>(
         `${HOST}/api/interview?employeeId=${data.Id}`,
         this.httpOptions
@@ -194,6 +197,38 @@ export class AppServicesService {
       { ...this.httpOptions }
     );
   }
+
+  createLocation(formObject): Observable<any> {
+    return this.http.post<any>(
+      `${HOST}/api/Location`,
+      formObject,
+      { ...this.httpOptions }
+    );
+  }
+
+  createIdProof(formObject): Observable<any> {
+    return this.http.post<any>(
+      `${HOST}/api/IdProofType`,
+      formObject,
+      { ...this.httpOptions }
+    );
+  }
+
+  createEmploymentType(formObject): Observable<any> {
+    return this.http.post<any>(
+      `${HOST}/api/employmentType`,
+      formObject,
+      { ...this.httpOptions }
+    );
+  }
+
+  createEligibilityCriteria(formObject): Observable<any> {
+    return this.http.post<any>(
+      `${HOST}/api/eligibilityCriteria`,
+      formObject,
+      { ...this.httpOptions }
+    );
+  }
   blockCalender(index,panel,roundStartDateTime,roundEndDateTime,emailList,userNames):Observable<any>{
    
     let obj={
@@ -235,7 +270,7 @@ export class AppServicesService {
     
     
    }
-   getRound(jobId,employeeId){
+   getRound(jobId : number = 0,employeeId :number = 0){
     return this.http.get<IResponse>(
       `${HOST}/api/interview?jobId=${jobId}&employeeId=${employeeId}`,
         { ...this.httpOptions }

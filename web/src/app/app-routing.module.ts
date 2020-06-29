@@ -10,7 +10,6 @@ import { ProgressTrackerComponent } from "./progress-tracker/progress-tracker.co
 import { NgModule, Component } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { EmployeeComponent } from "./employee/containers/employee/employee.component";
-import { HrComponent } from "./hr/hr.component";
 import { JdFormComponent } from "./jd-form/jd-form.component";
 import { JdPdfComponent } from "./jd-form/jd-pdf/jd-pdf.component";
 import { JdListComponent } from "./jd-list/jd-list.component";
@@ -60,10 +59,6 @@ const routes: Routes = [
       {
         path: "settings",
         component: SettingsComponent,
-      },
-      {
-        path: "home",
-        component: HrComponent,
       },
       {
         path: "candidate",
@@ -127,10 +122,6 @@ const routes: Routes = [
             component: ScheduleInterviewComponent,
           },
         ],
-      },
-      {
-        path: "home",
-        component: HrComponent,
       },
       {
         path: "job-desc",

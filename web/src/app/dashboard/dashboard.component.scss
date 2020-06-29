@@ -1,4 +1,13 @@
-.app-dashboard{
-  display: flex;
-  justify-content: space-between;
+// .app-dashboard{
+//   display: flex;
+//   justify-content: space-between;
+// }
+.main-panel {
+  width: inherit !important;
+}
+.page-header {
+  margin: 0 0.5rem 1rem;
+}
+.card{
+    margin:1rem;
 }

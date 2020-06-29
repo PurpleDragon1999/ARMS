@@ -61,21 +61,7 @@ export class ListComponent {
     this.emitDownloadPdf.emit(id);
   }
 
-  // checkSelect(event, id){
-  //   this.data.forEach(entry=>{
-  //     if (entry.id == id){
-  //       if (entry.checked == true ){
-  //         entry.checked = false
-  //       }
-  //       else{
-  //         entry.checked = true
-  //       }
-  //     }
-  //   })
-  //   console.log(id, this.data, "dataaaaaaaaaaaaaaaaaaaa")
-  // }
-
-  checkAll() {
+  checkAll(event) {
     if (this.data.every(entry => entry.checked == true)){
       this.data.forEach(entry => { entry.checked = false });
       this.checkedEntriesId = []

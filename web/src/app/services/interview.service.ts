@@ -40,6 +40,7 @@ export class InterviewService {
   }
 
   getInterviews(jobId : number = 0):Observable<any>{
+    console.log( "here ")
     return this.http.get<any>(
       `http://localhost:40802/api/interview?jobId=${jobId}`, this.options
     )

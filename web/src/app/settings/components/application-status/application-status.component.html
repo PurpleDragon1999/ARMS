@@ -56,7 +56,7 @@
             let appStatusIndex = index
           "
         >
-          <div class="card">
+          <div class="card" *ngIf="addApplicationStatusTypes == true">
             <div class="card-body" [formGroupName]="appStatusIndex">
               Application Status Type:
               <input
@@ -67,7 +67,7 @@
               <button class="btn mr-2 add-button del-button">
                 <i
                   class="fas fa-trash"
-                  (click)="removeApplicationStatus(appStatusIndex)"
+                  (click)="deleteNewEntry(appStatusIndex)"
                 >
                 </i>
               </button>

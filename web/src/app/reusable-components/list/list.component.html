@@ -43,7 +43,7 @@
           <tr>
             <td [hidden]="isShowDiv" class="form-check form-check-flat">
               <label class="form-check-label">
-                <input class="checkbox" type="checkbox" (change)="checkAll($event, i)">
+                <input class="checkbox" type="checkbox" (change)="checkAll($event)">
                 <i class="input-helper"></i>
               </label>
             </td>
@@ -57,7 +57,7 @@
           <tr *ngFor="let entry of data ; let i = index">
             <td [hidden]="isShowDiv" class="form-check form-check-flat">
               <label class="form-check-label">
-                <input class="checkbox" type="checkbox" [(ngModel)]="entry.checked" >
+                <input class="checkbox" type="checkbox" >
                 <i class="input-helper"></i>
               </label>
             </td>
