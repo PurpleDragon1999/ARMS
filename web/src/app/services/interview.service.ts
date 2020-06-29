@@ -3,6 +3,7 @@ import { IResponse } from '../models/response.interface';
 import { HttpHeaders, HttpResponse, HttpClient, HttpParams } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { HOST } from "../config/apiHost.config";
+import { retry } from 'rxjs/operators';
 const INTERVIEW_SEARCH = `${HOST}/api/interviewSearch`;
 const INTERVIEW_API=`${HOST}/api/interview`
 
@@ -38,8 +39,12 @@ export class InterviewService {
     );
   }
 
-  //new
-  
+  getInterviews(jobId : number = 0):Observable<any>{
+    return this.http.get<any>(
+      `http://localhost:40802/api/interview?jobId=${jobId}`, this.options
+    )
+  }
+ 
   createInterview(interviewObj: any):Observable<HttpResponse<any>>{
     return this.http.post<any>(`${HOST}/api/interview`, interviewObj, { ...this.options, observe: 'response' } )
   }
@@ -62,10 +67,11 @@ export class InterviewService {
     )
   }
 
-  getRounds(id: number, append: number):Observable<any>{
+  getRounds(id : number, append : number):Observable<any>{
     return this.http.get<any>(
       `${HOST}/api/interview/${id}?append=${append}`, this.options
     )
+
   }
 
   updateInterview (id:number, updateObj):Observable<any>{

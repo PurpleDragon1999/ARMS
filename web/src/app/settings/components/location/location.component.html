@@ -45,12 +45,12 @@
         <div
           *ngFor="let location of locations().controls; let locIndex = index"
         >
-          <div class="card">
+          <div class="card" *ngIf="addLocations == true">
             <div class="card-body" [formGroupName]="locIndex">
               Location:
-              <input type="text" class="input-box" formControlName="locName" />
+              <input type="text" class="input-box" formControlName="locationName" />
               <button class="btn mr-2 add-button del-button">
-                <i class="fas fa-trash" (click)="removeLocation(locIndex)"> </i>
+                <i class="fas fa-trash" (click)="deleteNewEntry(locIndex)"> </i>
               </button>
             </div>
           </div>

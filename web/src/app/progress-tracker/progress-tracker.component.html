@@ -1,85 +1,67 @@
 <div class="main-panel">
-  <div class="content-wrapper">
-    <div class="page-header">
-      <h3 class="page-title header"><b>Progress Tracker</b></h3>
-    </div>
-    <div class="row">
-      <div class="col-md-6 col-lg-12 grid-margin">
-        <br />
-        <ul class="progress-tracker progress-tracker--center">
-          <li class="progress-step anim--path is-complete">
-            <a href="">
-              <div class="progress-marker" data-text=""></div>
-              <div class="progress-text">
-
-              </div>
-            </a>
-          </li>
-
-          <li class="progress-step anim--path " routerLink="applied"
-            [ngClass]="{'is-active': flag==0, 'is-complete': flag >= 1}">
-            <a>
-              <div class="progress-marker" data-text="1"></div>
-              <div class="progress-text">
-                Applied Successfully
-                <i *ngIf="flag>=1" class="mdi mdi-checkbox-marked-circle-outline"></i>
-              </div>
-            </a>
-          </li>
-
-          <li class="progress-step anim--path " [ngClass]="{'is-active': flag==1, 'is-complete': flag >= 2}">
-            <a>
-              <div class="progress-marker" data-text="2"></div>
-              <div class="progress-text">
-                Interview Scheduled
-                <i *ngIf="flag>=2" class="mdi mdi-checkbox-marked-circle-outline"></i>
-              </div>
-            </a>
-          </li>
-
-          <li class="progress-step anim--path " [ngClass]="{'is-active': flag==2}"
-            [ngClass]="{'is-active': flag==2, 'is-complete': flag >= 3}" aria-current="step">
-            <a>
-              <div class="progress-marker" data-text="3"></div>
-              <div class="progress-text">
-                Round 1
-              </div>
-            </a>
-          </li>
-
-          <li class="progress-step anim--path " [ngClass]="{'is-active': flag==3}"
-            [ngClass]="{'is-active': flag==3, 'is-complete': flag >= 4}">
-            <a>
-              <div class="progress-marker" data-text="4"></div>
-              <div class="progress-text">
-                Round 2
-              </div>
-            </a>
-          </li>
-
-          <li class="progress-step anim--path" [ngClass]="{'is-active': flag==4}"
-            [ngClass]="{'is-active': flag==4, 'is-complete': flag >= 5}">
-            <a>
-              <div class="progress-marker" data-text="5"></div>
-              <div class="progress-text">
-                Round 3
-              </div>
-            </a>
-          </li>
-
-          <li class="progress-step anim--path" [ngClass]="{'is-active': flag==4}"
-            [ngClass]="{'is-active': flag==4, 'is-complete': flag >= 5}">
-            <a>
-              <div class="progress-marker" data-text="6"></div>
-              <div class="progress-text">
-                Result
-              </div>
-            </a>
-          </li>
-
-        </ul>
-        <router-outlet></router-outlet>
+    <div class="content-wrapper">
+      <div class="page-header">
+        <h3 class="page-title header"><b>Progress Tracker</b></h3>
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-lg-12 grid-margin">
+              <br />
+              <ul class="progress-tracker progress-tracker--center">
+                <li class="progress-step anim--path is-complete">
+                  <a >
+                    <div class="progress-marker" data-text=""></div>
+                    <div class="progress-text">
+                    
+                    </div>
+                  </a>
+                </li>
+                
+                <li class="progress-step anim--path " routerLink="applied" [ngClass]="{'is-complete': applicationStatusName === 'AppliedSuccessfully'}">
+                  <a>
+                    
+                    <div class="progress-marker" data-text=""></div>
+                    <div class="progress-text">
+                      Applied Successfully
+                      <div *ngIf="applicationStatusName === 'AppliedSuccessfully'">
+                        <i  class="mdi mdi-checkbox-marked-circle-outline"></i>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+  
+                <li class="progress-step anim--path"  [ngClass]="{'is-active': applicationStatusName === 'AppliedSuccessfully', 'is-complete': applicationStatusName === 'InterviewScheduled'}">
+                  <a>
+                    <div class="progress-marker" data-text=""></div>
+                    <div class="progress-text">
+                      Process Started
+                      <div *ngIf="applicationStatusName === 'InterviewScheduled'">
+                        <i  class="mdi mdi-checkbox-marked-circle-outline"></i>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+  
+                <li class="progress-step anim--path" 
+                *ngFor="let index of [].constructor(noOfRounds); index as i" aria-current="step">
+                  <a>
+                    <div class="progress-marker" data-text=''></div>
+                    <div class="progress-text">
+                      Round {{i+1}}
+                    </div>
+                  </a>
+                </li>
+  
+                <li class="progress-step anim--path" >
+                  <a>
+                    <div class="progress-marker" data-text=""></div>
+                    <div class="progress-text">
+                      Result
+                    </div>
+                  </a>
+                </li>
+              </ul>
+              <router-outlet  > </router-outlet>
+        </div>
       </div>
     </div>
   </div>
-</div>

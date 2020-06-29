@@ -28,8 +28,9 @@ namespace Arms.Domain.Entities
         public ApplicationStatusType ApplicationStatusType { get; set; }
         public Candidate Candidate { get; set; }
         public JobDescription Job { get; set; }
-        public ICollection<Assessment> Assessment { get; set; }
         public ICollection<Resume> Resume { get; set; }
+        public ICollection<Assessment> Assessment { get; set; }
+
 
     }
 }

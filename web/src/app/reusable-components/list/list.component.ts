@@ -8,8 +8,9 @@ import { IModelForPagination } from 'src/app/models/modelPagination.interface';
   styleUrls: ["./list.component.scss"],
 })
 export class ListComponent {
+  checkedEntriesId : Array<number> = []
+  isShowDiv : boolean = true
 
-  constructor(private _service:AppServicesService){}
   @Input()
   title: string = '';
 
@@ -37,13 +38,8 @@ export class ListComponent {
   @Output()
   emitDownloadPdf: EventEmitter<string> = new EventEmitter<string>();
 
-  ngOnInit(){
-  console.log(this.data, 'this.data');
-  this.role=this._service.tokenDecoder().role;
-  }
-  role:any;
-
-  openModal(formType: any["formType"], data?: any["data"]) {
+  openModal(formType: any["formType"], data? : any) {
+    console.log(data, "data")
     this.emitOpenModal.emit({ formType, data });
   }
 
@@ -59,7 +55,27 @@ export class ListComponent {
     this.emitPaginatedResult.emit({ page, character });
   }
 
-  showPdf(pdf: string): void {
-    this.emitDownloadPdf.emit(pdf);
+  showPdf(id: string): void {
+    this.emitDownloadPdf.emit(id);
+  }
+
+  checkAll(event) {
+    if (this.data.every(entry => entry.checked == true)){
+      this.data.forEach(entry => { entry.checked = false });
+      this.checkedEntriesId = []
+    }
+      
+    else{
+      this.data.forEach(entry => { entry.checked = true });
+      this.data.map(entry=>{
+      this.checkedEntriesId.push(entry.id)
+      })
+      
+    }
+    
+  }
+
+  toggleDisplayDiv(){
+    this.isShowDiv = !this.isShowDiv;
   }
 }

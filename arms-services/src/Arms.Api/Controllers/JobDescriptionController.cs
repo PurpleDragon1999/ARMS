@@ -22,7 +22,8 @@ namespace Arms.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "Admin")]
+
+    [Authorize(Roles ="Admin")]
     public class JobDescriptionController : BaseController
     {
 
@@ -31,10 +32,11 @@ namespace Arms.Api.Controllers
         public MailHelperController mailHelper = new MailHelperController();
 
         public JobDescriptionController(ArmsDbContext armsContext)
-        {
+        {   
+             _context = armsContext;
 
-            _context = armsContext;
         }
+
         //GET:api/jobDescriptions
         [HttpGet]
         public IActionResult GetJds()

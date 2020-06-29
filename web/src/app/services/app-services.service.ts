@@ -46,6 +46,10 @@ export class AppServicesService {
     return helper.decodeToken(this.getToken());
   }
 
+  getJdData(id):Observable<any>{
+    return this.http.get<any>(`${HOST}/api/jobDescription/${id}`,this.httpOptions)
+    }
+    
   getRoundsFromInterviewId(id: number): Observable<HttpResponse<any>> {
     return this.http.get<any>(`${HOST}/api/panel/round/${id}`, {
       ...this.httpOptions,
@@ -190,6 +194,38 @@ export class AppServicesService {
       { ...this.httpOptions }
     );
   }
+
+  createLocation(formObject): Observable<any> {
+    return this.http.post<any>(
+      `${HOST}/api/Location`,
+      formObject,
+      { ...this.httpOptions }
+    );
+  }
+
+  createIdProof(formObject): Observable<any> {
+    return this.http.post<any>(
+      `${HOST}/api/IdProofType`,
+      formObject,
+      { ...this.httpOptions }
+    );
+  }
+
+  createEmploymentType(formObject): Observable<any> {
+    return this.http.post<any>(
+      `${HOST}/api/employmentType`,
+      formObject,
+      { ...this.httpOptions }
+    );
+  }
+
+  createEligibilityCriteria(formObject): Observable<any> {
+    return this.http.post<any>(
+      `${HOST}/api/eligibilityCriteria`,
+      formObject,
+      { ...this.httpOptions }
+    );
+  }
   blockCalender(index,panel,roundStartDateTime,roundEndDateTime,emailList,userNames):Observable<any>{
    
     let obj={
@@ -231,7 +267,11 @@ export class AppServicesService {
     
     
    }
+<<<<<<< HEAD
    getRound(jobId:number=0,employeeId:number=0){
+=======
+   getRound(jobId : number = 0,employeeId :number = 0){
+>>>>>>> ae3399ae0ce2ae2f1b563f516d8edf10d5361dc0
     return this.http.get<IResponse>(
       `${HOST}/api/interview?jobId=${jobId}&employeeId=${employeeId}`,
         { ...this.httpOptions }
