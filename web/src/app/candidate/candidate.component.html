@@ -1,2 +1,2 @@
-<app-list title='candidate' [data]="candidates" [columns]="columns"
-(emitDownloadPdf)="downloadPdf($event)" (emitPaginatedResult)="searchCandidate($event)"></app-list>
+<app-list title='candidate'  [data]="candidates" [columns]="columns" (emitDelete) = "deleteApplication($event)"
+    (emitDownloadPdf)="getResume($event)"  (emitPaginatedResult)="searchCandidate($event)" (emitOpenModal)="updateCandidate($event)"></app-list>

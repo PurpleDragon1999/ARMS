@@ -82,6 +82,7 @@ export class LoginComponent implements OnInit {
        
         if (res != null) {
           window.localStorage.setItem(
+
             "Authorized",
             `Bearer ${res.payload.data.authorized}`
           );

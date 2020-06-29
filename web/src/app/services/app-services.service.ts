@@ -46,6 +46,10 @@ export class AppServicesService {
     return helper.decodeToken(this.getToken());
   }
 
+  getJdData(id):Observable<any>{
+    return this.http.get<any>(`${HOST}/api/jobDescription/${id}`,this.httpOptions)
+    }
+    
   getRoundsFromInterviewId(id: number): Observable<HttpResponse<any>> {
     return this.http.get<any>(`${HOST}/api/panel/round/${id}`, {
       ...this.httpOptions,
@@ -263,7 +267,7 @@ export class AppServicesService {
     
     
    }
-   getRound(jobId,employeeId){
+   getRound(jobId : number = 0,employeeId :number = 0){
     return this.http.get<IResponse>(
       `${HOST}/api/interview?jobId=${jobId}&employeeId=${employeeId}`,
         { ...this.httpOptions }

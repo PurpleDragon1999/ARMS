@@ -13,7 +13,6 @@ jobDescriptions
 .idea
 Building Blocks/
 
-
 *.swp
 *.*~
 project.lock.json
@@ -48,8 +47,6 @@ msbuild.wrn
 # Visual Studio 2015
 .vs/
 
-Buiding Blocks/
-
 *.exe
 *.pdb
 *.manifest
@@ -59,14 +56,12 @@ Buiding Blocks/
 **/appsettings.json 	
 *.g.targets	
 
-Arms.Api.csproj
-Arms.Api.csproj.user
-
 *.g.targets
 
+
+Arms.Api.csproj~2be29f0c4f54ca4f7629f009fdac4bbae995f4b2
 appsettings.json
+Arms.Api.csproj.user
 
 [Dd]esktop.ini
 debug.log
-
-ARMS_DB_Scripts/

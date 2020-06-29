@@ -23,7 +23,7 @@ namespace Arms.Domain.Entities
         public int? DivisionId { get; set; }
         public DateTime? HireDate { get; set; }
         public DateTime? LastLoginDateUtc { get; set; }
-        public Location Location{ get; set; }
-       
+        public Location Location { get; set; }
+
     }
 }

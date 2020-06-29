@@ -9,46 +9,37 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Arms.Domain.CustomEntities;
+using System.IO;
 using Microsoft.AspNetCore.Authorization;
 
 namespace Arms.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-
-
-
     [Authorize(Roles = "Admin,SuperAdministrator,Employee")]
-
-    
     public class CandidateController : BaseController
-
     {
-        
-        ArmsDbContext _context;
+        public ArmsDbContext _context;
         public MailHelperController mailHelper = new MailHelperController();
-        public CandidateController( ArmsDbContext armsContext)
+        public CandidateController(ArmsDbContext armsContext)
         {
-            
             _context = armsContext;
         }
 
         [HttpGet]
-       
-        public IActionResult Getcandidates(int jobId=0)
+        [AllowAnonymous]
+        public IActionResult Getcandidates(int jobId = 0)
+
         {
             List<Arms.Domain.Entities.Application> applications;
             if (jobId != 0)
             {
-               
-
-                applications = _context.Application.Include(c => c.Candidate).Include(c => c.ApplicationStatusType).Include(c=> c.Job).Where(c => c.JobId == jobId).ToList();
+                applications = _context.Application.Include(c => c.Candidate).Include(c => c.ApplicationStatusType).Include(c => c.Job).Where(c => c.JobId == jobId).ToList();
             }
             else
             {
                 applications = _context.Application.Include(c => c.Candidate).Include(c => c.ApplicationStatusType).Include(c => c.Job).ToList();
             }
-
 
             try
             {
@@ -80,11 +71,11 @@ namespace Arms.Api.Controllers
 
         [HttpGet("{id}")]
         [AllowAnonymous]
-        public IActionResult GetApplication(int id )
+        public IActionResult GetApplication(int id)
         {
             try
             {
-                var application = _context.Application.Include(c=> c.Candidate).Include(c=> c.ApplicationStatusType).Include(c=> c.Job).SingleOrDefault(c => c.Id == id);
+                var application = _context.Application.Include(c => c.Candidate).Include(c => c.ApplicationStatusType).Include(c => c.Job).SingleOrDefault(c => c.Id == id);
                 if (application != null)
                 {
                     var response = new
@@ -103,7 +94,7 @@ namespace Arms.Api.Controllers
                 {
                     var response = new
                     {
-                        success = true,
+                        success = false,
                         payload = new
                         {
                             message = "Application you are looking for does not exist"
@@ -112,7 +103,6 @@ namespace Arms.Api.Controllers
                     return Ok(response);
                 }
             }
-
             catch (Exception e)
             {
                 var response = new
@@ -128,16 +118,19 @@ namespace Arms.Api.Controllers
         }
 
         [HttpDelete("{id}")]
-       
         public IActionResult DeleteApplication(int id)
         {
             try
             {
-                var application = _context.Application.SingleOrDefault(c => c.Id == id);
+                var application = _context.Application.FirstOrDefault(c => c.Id == id);
+                var resume = _context.Resume.FirstOrDefault(c => c.ApplicationId == id);
                 if (application != null)
                 {
+                    _context.Resume.Remove(resume);
+                    _context.SaveChanges();
                     _context.Application.Remove(application);
                     _context.SaveChanges();
+
                     var response = new
                     {
                         success = true,
@@ -174,48 +167,110 @@ namespace Arms.Api.Controllers
                 return StatusCode(500, response);
             }
         }
-        public bool validateCandidate(CandidateApplicationResume candidateObj, int candidateId)
+        public dynamic validateCandidate(CandidateApplicationResume candidateObj, int candidateId = 0)
         {
-            var lastAppliedOn = _context.Application
-                .Where(c => c.CandidateId == candidateId)
-                .GroupBy(c => c.JobId )
-                .Select(g => g.OrderByDescending(c => c.DateOfApplication).First())
-                .Select(c => new {c.Id, c.DateOfApplication, c.JobId });
-
-            var applicationId = lastAppliedOn.ToArray()[0].Id;
-      
-            TimeSpan value = (DateTime.Now).Subtract(lastAppliedOn.ToArray()[0].DateOfApplication);
-
-            if (value.TotalDays > 183)
+            var candidateEmailValidate = _context.Candidate.FirstOrDefault(c => (c.Email == candidateObj.Email && c.Id != candidateId));
+            if (candidateEmailValidate != null)
             {
-                return true;
+                var res = new
+                {
+                    isValid = false,
+                    message = "This Email is already registered."
+                };
+                return res;
             }
 
+            var candidatePhoneValidate = _context.Candidate.FirstOrDefault(c => (c.Phone == candidateObj.Phone && c.Id != candidateId));
+            if (candidatePhoneValidate != null)
+            {
+                var res = new
+                {
+                    isValid = false,
+                    message = "This Phone Number is already registered."
+                };
+                return res;
+            }
+            var candidate = _context.Candidate.FirstOrDefault(c => c.IdentificationNo == candidateObj.IdentificationNo);
+            var application = _context.Application.FirstOrDefault(c => c.CandidateId == candidateId);
+            if (candidate == null || application == null)
+            {
+                var res = new
+                {
+                    isValid = true
+                };
+                return res;
+            }
+            var lastAppliedOn = _context.Application
+                .Where(c => c.CandidateId == candidateId)
+                .GroupBy(c => c.JobId)
+                .Select(g => g.OrderByDescending(c => c.DateOfApplication).First())
+                .Select(c => new { c.Id, c.DateOfApplication, c.JobId });
+
+            var applicationId = lastAppliedOn.ToArray()[0].Id;
+            TimeSpan value = (DateTime.Now).Subtract(lastAppliedOn.ToArray()[0].DateOfApplication);
+            if (value.TotalDays > 183)
+            {
+                var res = new
+                {
+                    isValid = true
+                };
+                return res;
+            }
             var assessment = _context.Assessment.SingleOrDefault(c => c.ApplicationId == applicationId);
             if (assessment != null)
             {
-                return false;
+                var res = new
+                {
+                    isValid = true,
+                    message = "You cannot register before 6 months"
+                };
+                return res;
             }
-
             if (candidateObj.JobId == lastAppliedOn.ToArray()[0].JobId)
             {
-                return false;
+                var res = new
+                {
+                    isValid = true,
+                    message = "You've already registered for this Job Position"
+                };
+                return res;
             }
-            return true;
-            
+            var resAllowed = new
+            {
+                isValid = true
+            };
+            return resAllowed;
         }
 
         [HttpPost]
         [AllowAnonymous]
-        public IActionResult CreateCandidate([FromBody] CandidateApplicationResume customObj)
+        public IActionResult CreateCandidate([FromForm] CandidateApplicationResume customObj)
         {
-            var candidate = _context.Candidate.FirstOrDefault(c => c.Email == customObj.Email || c.IdentificationNo == customObj.IdentificationNo || c.Phone == customObj.Phone);
+            var candidate = _context.Candidate.FirstOrDefault(c => c.IdentificationNo == customObj.IdentificationNo);
             var applicationStatus = _context.ApplicationStatusType.SingleOrDefault(c => c.StatusName == "AppliedSuccessfully");
             try
-            { Candidate candObj = new Candidate();
-                int id;
+            {
+                int id = 0;
+                if (candidate != null)
+                {
+                    id = candidate.Id;
+                }
+                var result = validateCandidate(customObj, id);
+
+                if (!result.isValid)
+                {
+                    var responseFalse = new
+                    {
+                        success = false,
+                        payload = new
+                        {
+                            message = result.message
+                        }
+                    };
+                    return StatusCode(200, responseFalse);
+                }
                 if (candidate == null)
-                {       
+                {
                     var candidateObj = new Candidate
                     {
                         Name = customObj.Name,
@@ -226,51 +281,20 @@ namespace Arms.Api.Controllers
                         nationality = customObj.nationality,
                         CreatedBy = customObj.CreatedBy,
                         ModifiedBy = customObj.ModifiedBy
-                        
-                       
                     };
                     _context.Candidate.Add(candidateObj);
                     _context.SaveChanges();
                     id = candidateObj.Id;
-                    candObj = candidateObj;
                 }
                 else
                 {
-                    id = candidate.Id;
-                    bool isAllowed = validateCandidate(customObj, id);
-                
-                    if (isAllowed)
-                    {
-                        id = candidate.Id;
-                        if (customObj.Name != null)
-                        {
-                            candidate.Name = customObj.Name;
-                            candidate.ModifiedBy = customObj.ModifiedBy;
-                        }
-                        if (customObj.Email != null)
-                        {
-                            candidate.Email = customObj.Email;
-                            candidate.ModifiedBy = customObj.ModifiedBy;
-                        }
-                        if (customObj.Phone != null)
-                        {
-                            candidate.Phone = customObj.Phone;
-                            candidate.ModifiedBy = customObj.ModifiedBy;
-                        }
-                        _context.SaveChanges();
-                    }
-                    else
-                    {
-                        var responseFalse = new
-                        {
-                            success = false,
-                            payload = new
-                            {
-                                message = "You Cannot Register"
-                            }
-                        };
-                        return StatusCode(200, responseFalse);
-                    }
+                    candidate.nationality = customObj.nationality;
+                    candidate.Name = customObj.Name;
+                    candidate.Email = customObj.Email;
+                    candidate.Phone = customObj.Phone;
+                    candidate.ModifiedBy = customObj.ModifiedBy;
+                    _context.Candidate.Update(candidate);
+                    _context.SaveChanges();
                 }
 
                 var applicationObj = new Domain.Entities.Application
@@ -287,26 +311,37 @@ namespace Arms.Api.Controllers
                 _context.Application.Add(applicationObj);
                 _context.SaveChanges();
                 int applicationId = applicationObj.Id;
-              
+                //Getting FileName
+                var fileName = Path.GetFileName(customObj.Cv.FileName);
+                //Getting file Extension
+                var fileExtension = Path.GetExtension(fileName);
+                // concatenating  FileName + FileExtension
+                var newFileName = String.Concat(Convert.ToString(Guid.NewGuid()), fileExtension);
+
+                var resumeObj = new Resume
+                {
+                    Name = newFileName,
+                    ApplicationId = applicationId,
+                    CreatedBy = customObj.CreatedBy,
+                    ModifiedBy = customObj.ModifiedBy
+                };
+
+                using (var target = new MemoryStream())
+                {
+                    customObj.Cv.CopyTo(target);
+                    resumeObj.Cv = target.ToArray();
+                }
+
+                _context.Resume.Add(resumeObj);
+                _context.SaveChanges();
                 var response = new
                 {
                     success = true,
                     payload = new
-                    {       
+                    {
                         message = "Registered Successfully"
                     }
                 };
-                JobDescription jdObject = _context.JobDescription.Include(l => l.employmentType).
-                    Include(l => l.eligibilityCriteria).Include(l => l.loc).
-                    FirstOrDefault(c => c.Id == applicationObj.JobId);
-                string emailHtmlBody = GenerateEmailBody( jdObject, candObj.Code,candObj.Name);
-                //Adding Emails in string Array to send to candidates
-                string[] EmailToSend = new[]
-                {
-                    candObj.Email
-                };
-
-                mailHelper.MailFunction(emailHtmlBody, EmailToSend);
                 return StatusCode(200, response);
             }
             catch (Exception e)
@@ -323,59 +358,74 @@ namespace Arms.Api.Controllers
             }
         }
 
-        [HttpPatch("{id}")]
-        
-        public IActionResult UpdateCandidateDetails(int id, [FromBody] CandidateApplicationResume customObj)
+        [HttpPut("{id}")]
+        [AllowAnonymous]
+        public IActionResult UpdateCandidateDetails(int id, [FromForm] CandidateApplicationResume customObj)
         {
-            var resume = _context.Resume.SingleOrDefault(c => c.ApplicationId == id);
             var application = _context.Application.SingleOrDefault(c => c.Id == id);
-            
             try
             {
                 if (application != null)
                 {
                     var candidateId = application.CandidateId;
                     var candidate = _context.Candidate.SingleOrDefault(c => c.Id == candidateId);
+                    var resume = _context.Resume.FirstOrDefault(c => c.ApplicationId == id);
 
-                    if (customObj.Name != null)
-                    {         
-                        candidate.Name = customObj.Name;
-                        candidate.ModifiedBy = customObj.ModifiedBy;
+                    if (customObj.nationality != candidate.nationality || customObj.IdProofTypeId != candidate.IdProofTypeId || customObj.IdentificationNo != candidate.IdentificationNo)
+                    {
+                        var responseFalse = new
+                        {
+                            success = false,
+                            payload = new
+                            {
+                                message = "You cannot Change Identification type or Identification Number"
+                            }
+                        };
+                        return StatusCode(200, responseFalse);
                     }
 
-                    if (customObj.Email != null)
-                    { 
-                        candidate.Email = customObj.Email;
-                        candidate.ModifiedBy = customObj.ModifiedBy;
+                    var result = validateCandidate(customObj, candidateId);
+                    if (!result.isValid)
+                    {
+                        var responseFalse = new
+                        {
+                            success = false,
+                            payload = new
+                            {
+                                message = result.message
+                            }
+                        };
+                        return StatusCode(200, responseFalse);
                     }
-
-                    if (customObj.Phone != null)
-                    { 
-                        candidate.Phone = customObj.Phone;
-                        candidate.ModifiedBy = customObj.ModifiedBy;
-                    }
-
-                    if (customObj.Education != null)
-                    {  
-                        application.Education = customObj.Education;
-                        application.ModifiedBy = customObj.ModifiedBy;
-                    }
-
-                    if (customObj.Experience != null)
-                    { 
-                        application.Experience = customObj.Experience;
-                        application.ModifiedBy = customObj.ModifiedBy;
-                    }
-                    
-                    //if (customObj.Cv != null)
-                    //{
-                    //    resume.Cv = customObj.Cv ;
-                    //}
-                    
+                    candidate.Name = customObj.Name;
+                    candidate.Email = customObj.Email;
+                    candidate.Phone = customObj.Phone;
+                    candidate.ModifiedBy = customObj.ModifiedBy;
                     _context.Candidate.Update(candidate);
                     _context.SaveChanges();
 
-                    _context.Application.Update(application);
+                    var modifiedApplication = _context.Application.FirstOrDefault(c => c.Id == id);
+                    modifiedApplication.Education = customObj.Education;
+                    modifiedApplication.Experience = customObj.Experience;
+                    modifiedApplication.ModifiedBy = customObj.ModifiedBy;
+                    _context.Application.Update(modifiedApplication);
+                    _context.SaveChanges();
+
+                    //Getting FileName
+                    var fileName = Path.GetFileName(customObj.Cv.FileName);
+                    //Getting file Extension
+                    var fileExtension = Path.GetExtension(fileName);
+                    // concatenating  FileName + FileExtension
+                    var newFileName = String.Concat(Convert.ToString(Guid.NewGuid()), fileExtension);
+                    resume.Name = fileName;
+                    resume.ModifiedBy = customObj.ModifiedBy;
+
+                    using (var target = new MemoryStream())
+                    {
+                        customObj.Cv.CopyTo(target);
+                        resume.Cv = target.ToArray();
+                    }
+                    _context.Resume.Update(resume);
                     _context.SaveChanges();
 
                     var response = new
@@ -411,13 +461,57 @@ namespace Arms.Api.Controllers
                         message = e
                     }
                 };
-                return StatusCode(500, response);      
+                return StatusCode(500, response);
             }
+        }
 
-       }
-        public string GenerateEmailBody(JobDescription jdObject, string Code,String Name)
+        [HttpPatch("{id}")]
+        public IActionResult shortlistCandidates(int jobId, [FromBody] List<int> applicationIds, bool shortlisted=true)
         {
+            try
+            {
+                foreach (int id in applicationIds)
+                {
+                    int applicationStatusId;
+                    var application = _context.Application.FirstOrDefault(c => c.Id == id);
+                    if (shortlisted == true)
+                    {
+                        applicationStatusId = _context.ApplicationStatusType.FirstOrDefault(c => c.StatusName == "Shortlisted").Id;
+                    }
+                    else
+                    {
+                        applicationStatusId = _context.ApplicationStatusType.FirstOrDefault(c => c.StatusName == "NotShortlisted").Id;
+                    }
+                    application.ApplicationStatusTypeId = applicationStatusId;
+                    _context.Update(application);
+                    _context.SaveChanges();
+                }
+                var response = new
+                {
+                    success = true,
+                    payload = new
+                    {
+                        message = "Applications Shortlisted"
+                    }
+                };
+                return StatusCode(404, response);
+            }
+            catch(Exception e)
+            {
+                var response = new
+                {
+                    success = false,
+                    payload = new
+                    {
+                        message = e
+                    }
+                };
+                return StatusCode(500, response);
+            }
+        }
 
+        public string GenerateEmailBody(JobDescription jdObject, string Code,String Name)
+        { 
             string output = @"<html>
        <head>    
 	       <style type=""text/css"">
@@ -458,8 +552,5 @@ namespace Arms.Api.Controllers
             ";
             return output;
         }
-
-
     }
- 
 }

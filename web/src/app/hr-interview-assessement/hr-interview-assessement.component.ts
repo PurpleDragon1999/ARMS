@@ -23,9 +23,6 @@ export class HrInterviewAssessementComponent implements OnInit {
   candidates: ICandidate[];
 
   ngOnInit() {
-    this.candidateService.getCandidate().subscribe((res: IResponse) => {
-      console.log(res, 'response');
-    });
   }
 
   assessment: any = {}

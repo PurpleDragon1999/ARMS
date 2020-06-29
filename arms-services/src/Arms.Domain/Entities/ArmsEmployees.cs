@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Arms.Domain.Entities
 {
-    public class ArmsEmployees:Entity
+    public class ArmsEmployees : Entity
     {
         public int Id { get; set; }
         public int? SpringAheadId { get; set; }
