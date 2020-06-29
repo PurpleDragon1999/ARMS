@@ -1,3 +1,4 @@
+import { map } from "rxjs/operators";
 import { IRoundPanel } from "./../models/panel.interface";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AppServicesService } from "src/app/services/app-services.service";
@@ -42,6 +43,7 @@ export class ScheduleInterviewComponent implements OnInit {
     });
     this._appService.getRoundsFromInterviewId(this.interviewId).subscribe(
       (res: any) => {
+        console.log(res);
         this.rounds = res.payload.data;
         for (let i = 0; i < this.rounds.length; i++) {
           this.main.push(this.active);
@@ -51,7 +53,7 @@ export class ScheduleInterviewComponent implements OnInit {
           });
           this.searchData.push(this.temp);
           this.tableData.push({
-            roundId: 0,
+            roundId: this.rounds[i].id,
             panel1: {
               employees: [],
             },
@@ -70,8 +72,11 @@ export class ScheduleInterviewComponent implements OnInit {
         }
       }
     );
+
+    //If data for panels exists, then simply assign data to tabledata in sync
   }
 
+  //Function to handle toggle between Panels
   changeActive(index: number, panel: number) {
     this.main[index] = ["", "", ""];
     this.main[index][panel] = "active";
@@ -79,6 +84,7 @@ export class ScheduleInterviewComponent implements OnInit {
     this.list[index] = false;
   }
 
+  //Function to search employees
   search(input: string, i: number) {
     if (input != "") {
       this._appService.searchEmployee(input).subscribe((res: any) => {
@@ -93,10 +99,11 @@ export class ScheduleInterviewComponent implements OnInit {
       : (this.list[i] = true);
   }
 
+  //Function to add selected employee in table
   select(data: any, roundId: number, index: number) {
     data["status"] = "fas fa-clock text-warning";
     if (this.main[index][0] === "active") {
-      this.tableData[index].roundId = roundId;
+      // this.tableData[index].roundId = roundId;
       if (
         this.tableData[index].panel1.employees.length < 2 &&
         !this.employeeIds.includes(data.id)
@@ -105,7 +112,7 @@ export class ScheduleInterviewComponent implements OnInit {
         this.employeeIds.push(data.id);
       }
     } else if (this.main[index][1] === "active") {
-      this.tableData[index].roundId = roundId;
+      // this.tableData[index].roundId = roundId;
       if (
         this.tableData[index].panel2.employees.length < 2 &&
         !this.employeeIds.includes(data.id)
@@ -114,7 +121,7 @@ export class ScheduleInterviewComponent implements OnInit {
         this.employeeIds.push(data.id);
       }
     } else if (this.main[index][2] === "active") {
-      this.tableData[index].roundId = roundId;
+      // this.tableData[index].roundId = roundId;
       if (
         this.tableData[index].panel3.employees.length < 2 &&
         !this.employeeIds.includes(data.id)
@@ -123,17 +130,198 @@ export class ScheduleInterviewComponent implements OnInit {
         this.employeeIds.push(data.id);
       }
     }
-    console.log(this.tableData);
   }
 
-  blockCalendar(index: number, p: number) {
-    // console.log("Date: " + this.dateTimeForRounds[index].roundDate);
-    // console.log("Time: " + this.dateTimeForRounds[index].roundTime);
-    console.log(this.tableData[index].panel1.employees);
-    // if(p===0) {
-    //   this.tableData[index].panel1.employees
+  //Both these functions checks the availability of employees for meeting
+  checkAvailability(index: number, panel: string) {
+    let emailList = [];
+
+    var roundDate = this.dateTimeForRounds[index].roundDate;
+    var roundTime = this.dateTimeForRounds[index].roundTime;
+    let panelEmployees = this.tableData[index][panel].employees;
+
+    for (let i = 0; i < panelEmployees.length; i++) {
+      emailList.push(panelEmployees[i].email);
+    }
+
+    if (emailList.length != 0) {
+      this.checkAvailabilityHelper(
+        index,
+        panel,
+        roundDate,
+        roundTime,
+        emailList
+      );
+    }
+  }
+
+  checkAvailabilityHelper(
+    index: number,
+    panel: string,
+    roundDate,
+    roundTime,
+    emailList
+  ) {
+    var roundStartDateTime = roundDate + "T" + roundTime;
+    var roundEndDateTime = new Date(roundStartDateTime);
+    roundEndDateTime.setHours(roundEndDateTime.getHours() + 2);
+
+    this._appService
+      .checkAvailability(roundStartDateTime, roundEndDateTime, emailList)
+      .subscribe((res) => {
+        console.log(res);
+        for (let i = 0; i < res.value.length; i++) {
+          let items = res.value[i].scheduleItems;
+          let id = res.value[i].scheduleId;
+          if (items.length != 0) {
+            items.map((item) => {
+              if (item.status != "free") {
+                this.tableData[index][panel].employees.map((e) => {
+                  if (e.email == id) {
+                    e.status = "fas fa-times-circle text-red";
+                  }
+                });
+              } else {
+                this.tableData[index][panel].employees.map((e) => {
+                  if (e.email == id) {
+                    e.status = "fas fa-check-circle text-green";
+                  }
+                });
+              }
+            });
+          } else {
+            this.tableData[index][panel].employees.map((e) => {
+              if (e.email == id) {
+                e.status = "fas fa-check-circle text-green";
+              }
+            });
+          }
+        }
+      });
+  }
+
+  blockCalenderHelper(
+    index,
+    panel,
+    roundDate,
+    roundTime,
+    emailList,
+    userNames
+  ) {
+    var roundStartDateTime = roundDate + "T" + roundTime;
+    var roundEndDateTime = new Date(roundStartDateTime);
+    roundEndDateTime.setHours(roundEndDateTime.getHours() + 2);
+    this._appService
+      .blockCalender(
+        index,
+        panel,
+        roundStartDateTime,
+        roundEndDateTime,
+        emailList,
+        userNames
+      )
+      .subscribe((res) => {
+        console.log(res);
+      });
+  }
+
+  schedulePanelHelper(index: number) {
+    let panelEmployees = [];
+
+    var roundDate = this.dateTimeForRounds[index].roundDate;
+    var roundTime = this.dateTimeForRounds[index].roundTime;
+    for (let i = 0; i < 3; i++) {
+      let emailList = [];
+      let userNames = [];
+      if (i === 0) {
+        panelEmployees = this.tableData[index].panel1.employees;
+      } else if (i === 1) {
+        panelEmployees = this.tableData[index].panel2.employees;
+      } else if (i === 2) {
+        panelEmployees = this.tableData[index].panel3.employees;
+      }
+      for (let j = 0; j < panelEmployees.length; j++) {
+        emailList.push(panelEmployees[j].email);
+        userNames.push(
+          panelEmployees[j].firstName + " " + panelEmployees[j].lastName
+        );
+      }
+
+      if (emailList.length != 0)
+        this.blockCalenderHelper(
+          index,
+          i,
+          roundDate,
+          roundTime,
+          emailList,
+          userNames
+        );
+    }
+  }
+
+  schedule() {
+    this.createPanels();
+    this.updateRoundtime();
+    // for (let i = 0; i < this.tableData.length; i++) {
+    //   this.schedulePanelHelper(i);
     // }
   }
 
-  schedule() {}
+  createPanels() {
+    let mainObject = {
+      rounds: [],
+    };
+    for (let i = 0; i < this.tableData.length; i++) {
+      let obj = {
+        roundId: this.tableData[i].roundId,
+        panel: [],
+      };
+      let tmp = ["panel1", "panel2", "panel3"];
+      for (let j = 0; j < tmp.length; j++) {
+        let empIds = this.getEmployeesId(i, tmp[j]);
+        if (empIds.length != 0) {
+          obj.panel.push({
+            employeesId: empIds,
+          });
+        }
+      }
+      if (obj.panel.length != 0) {
+        mainObject.rounds.push(obj);
+      }
+    }
+    // Call the service here
+  }
+
+  updateRoundtime() {
+    let mainObject = [];
+    for (let i = 0; i < this.tableData.length; i++) {
+      mainObject.push({
+        roundId: this.tableData[i].roundId,
+        roundDate: this.dateTimeForRounds[i].roundDate,
+        roundTime: this.dateTimeForRounds[i].roundTime,
+      });
+    }
+    console.log(mainObject);
+    console.log(this.tableData);
+  }
+
+  getEmployeesId(index: number, panel: string) {
+    let temp = [];
+    if (this.tableData[index][panel].employees.length != 0) {
+      this.tableData[index][panel].employees.map((e) => temp.push(e.id));
+    }
+    return temp;
+  }
+
+  //Function to remove employee from the tabel
+  removeFromTable(index: number, panel: string, empId: number) {
+    this.tableData[index][panel].employees = this.tableData[index][
+      panel
+    ].employees.filter(function (value, index, arr) {
+      return value.id != empId;
+    });
+    this.employeeIds = this.employeeIds.filter((value, index, arr) => {
+      return value != empId;
+    });
+  }
 }
