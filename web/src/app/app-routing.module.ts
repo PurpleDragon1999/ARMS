@@ -10,7 +10,6 @@ import { ProgressTrackerComponent } from "./progress-tracker/progress-tracker.co
 import { NgModule, Component } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { EmployeeComponent } from "./employee/containers/employee/employee.component";
-import { HrComponent } from "./hr/hr.component";
 import { JdFormComponent } from "./jd-form/jd-form.component";
 import { JdPdfComponent } from "./jd-form/jd-pdf/jd-pdf.component";
 import { JdListComponent } from "./jd-list/jd-list.component";
@@ -66,7 +65,7 @@ const routes: Routes = [
       },
       {
         path: "home",
-        component: HrComponent,
+        component: DashboardComponent,
       },
       {
         path: "candidate",
@@ -133,7 +132,7 @@ const routes: Routes = [
       },
       {
         path: "home",
-        component: HrComponent,
+        component: DashboardComponent,
       },
       {
         path: "job-desc",
@@ -214,17 +213,7 @@ const routes: Routes = [
         component: CandidateAssessmentComponent,
       },
     ],
-  },
-  {
-    path: "dashboard",
-    component: AppNavBarComponent,
-    children: [
-      {
-        path: "",
-        component: AnalyticsComponent,
-      },
-    ],
-  },
+  }
 ];
 
 @NgModule({

@@ -162,8 +162,6 @@ namespace Arms.Api.Controllers
             try
             {
                 string currentUser = currentUserClaimsPrincipal.Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
-
-                Console.WriteLine(currentUser);
             }
             catch (Exception e)
             {

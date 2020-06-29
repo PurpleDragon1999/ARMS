@@ -5,19 +5,13 @@ import { AppServicesService } from 'src/app/services/app-services.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 
-
 @Component({
   selector: 'app-id-proof-type',
   templateUrl: './id-proof-type.component.html',
   styleUrls: ['./id-proof-type.component.scss']
 })
 export class IdProofTypeComponent implements OnInit {
-
-  
-
-  
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   idProofForm:FormGroup;
   addIdProofs:boolean=false;
@@ -37,7 +31,9 @@ export class IdProofTypeComponent implements OnInit {
 
   newidProof(): FormGroup {
     return this.fb.group({
-      idProofName: ''
+      Name: '',
+      createdBy: this._service.tokenDecoder().userName,
+      modifiedBy: this._service.tokenDecoder().userName
     });
   }
 
@@ -52,38 +48,50 @@ export class IdProofTypeComponent implements OnInit {
     });
   }
 
+  deleteNewEntry(idProofIndex: number){
+    this.idProofs().removeAt(idProofIndex);
+    if ((this.idProofForm.get('idProofs').value.length)==0) {
+      this.addIdProofs = false;
+    }
+  }
+  
   removeidProof(idProofIndex: number) {
     const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
-
     modalRef.componentInstance.shouldConfirm = true;
-
     modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
       modalRef.close();
     });
-    this.idProofs().removeAt(idProofIndex);
-    if (idProofIndex==0) {
-      this.addIdProofs = false;
-    }
-   
-    return this._service.deleteIdProofType(idProofIndex).subscribe((response: any) => {
 
-      this.loadIdProofTypes();
-      modalRef.componentInstance.success = response.body.result.success;
-      modalRef.componentInstance.message = response.body.result.payload.message;
-      }, (error: HttpErrorResponse) => {
+    modalRef.componentInstance.emitPerformRequest.subscribe(() => {
+      this.deleteNewEntry(idProofIndex);
+
+      return this._service.deleteIdProofType(idProofIndex).subscribe((response: any) => {
+        this.loadIdProofTypes();
+        modalRef.componentInstance.success = response.body.success;
+        modalRef.componentInstance.message = response.body.payload.message;
+        }, 
+        (error: HttpErrorResponse) => {
         modalRef.componentInstance.success = error.error.success;
         modalRef.componentInstance.message = error.error.payload.message;
       }
-
-    );
-   
-    
+      );
+    });
   }
 
   onSubmit() {
-    console.log(this.idProofForm.value);
+    this._service.createIdProof(this.idProofForm.get('idProofs').value).subscribe((res:any) => {
+      const modalRef = this.modalService.open(ModalComponent);
+      modalRef.componentInstance.shouldConfirm = false;
+      modalRef.componentInstance.success = res.success;
+      modalRef.componentInstance.message = res.payload.message;
+      modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+        modalRef.close();
+
+        this.idProofForm.reset();
+        this.addIdProofs = false;
+        this.loadIdProofTypes();    
+      });
+    })
   }
-
-
 
 }

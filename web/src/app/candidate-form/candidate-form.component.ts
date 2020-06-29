@@ -49,7 +49,7 @@ export class CandidateFormComponent implements OnInit {
     this.uploader.onAfterAddingFile = (file) => {
       file.withCredentials = false;
     };
-    this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => { console.log('ImageUpload:uploaded:', item, status, response); alert('File uploaded successfully'); };
+    this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => { alert('File uploaded successfully'); };
     this.getIdProofType()
     this.load()
     }
@@ -205,7 +205,6 @@ createApplication(applicationObj : ICandidate){
           item.formData = candidateObj.education;
         };
         this.uploader.uploadAll();
-console
       }
     }
 
@@ -218,7 +217,6 @@ console
       let applicationId = (this.router.url.split("/")[2]).slice(7);
       this.CandidateService.getApplication(applicationId).subscribe(
         (res: INewResponse) => {
-          console.log(res, "progress")
           this.model = res.payload.data;
           this.model.appliedForPosition = this.model.job.jobTitle
           this.model.appliedForJdId = this.model.job.code

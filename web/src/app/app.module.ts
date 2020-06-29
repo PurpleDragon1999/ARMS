@@ -22,7 +22,6 @@ import { DashboardComponent } from "./dashboard/dashboard.component";
 import { EmployeeFormComponent } from "./employee/components/employee-form/employee-form.component";
 import { EmployeeUploadComponent } from "./employee/components/employee-upload/employee-upload.component";
 import { EmployeeComponent } from "./employee/containers/employee/employee.component";
-import { HrComponent } from "./hr/hr.component";
 import { JdFormComponent } from "./jd-form/jd-form.component";
 import { JdPdfComponent } from "./jd-form/jd-pdf/jd-pdf.component";
 import { JdListComponent } from "./jd-list/jd-list.component";
@@ -70,7 +69,6 @@ const isIE =
     EmployeeComponent,
     EmployeeUploadComponent,
     ModalComponent,
-    HrComponent,
     JdListComponent,
     ScheduleInterviewComponent,
     LocationComponent,
