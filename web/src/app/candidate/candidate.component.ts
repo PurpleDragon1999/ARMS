@@ -1,5 +1,5 @@
 import { TokenDecoderService } from './../utilities/token-decoder.service';
-import { UpdateCandidateComponent } from './../update-candidate/update-candidate.component';
+//import { UpdateCandidateComponent } from './../update-candidate/update-candidate.component';
 import { ListComponent } from './../reusable-components/list/list.component';
 import { Router } from '@angular/router';
 import { UrltoFile } from './../utils/urlToFile';
@@ -158,12 +158,12 @@ export class CandidateComponent  {
     }
 
     updateCandidate(data){
-      console.log(data, data.data.id, "datya")
-      const modalRef: NgbModalRef = this.modalService.open(UpdateCandidateComponent);
-      modalRef.componentInstance.applicationId = data.data.id;
-      // modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
-      //   modalRef.close();
-      // });
+      // console.log(data, data.data.id, "datya")
+      // const modalRef: NgbModalRef = this.modalService.open(UpdateCandidateComponent);
+      // modalRef.componentInstance.applicationId = data.data.id;
+      // // modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+      // //   modalRef.close();
+      // // });s
     }
 
     

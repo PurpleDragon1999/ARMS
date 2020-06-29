@@ -1,6 +1,10 @@
+import { HttpErrorResponse } from '@angular/common/http';
+import { IResponse } from 'src/app/models/response.interface';
+import { CandidateService } from './../../candidate/services/candidate.service';
 import { Component, EventEmitter, Input, Output, OnInit } from "@angular/core";
 import { IModelForPagination } from 'src/app/models/modelPagination.interface';
-
+import { NgbModal, NgbModalRef, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { ModalComponent } from 'src/app/reusable-components/modal/modal.component';
 @Component({
   selector: "app-list",
   templateUrl: "./list.component.html",
@@ -37,8 +41,7 @@ export class ListComponent {
   @Output()
   emitDownloadPdf: EventEmitter<string> = new EventEmitter<string>();
 
-  openModal(formType: any["formType"], data? : any) {
-    console.log(data, "data")
+  openModal(formType: any["formType"], data?: any["data"]) {
     this.emitOpenModal.emit({ formType, data });
   }
 

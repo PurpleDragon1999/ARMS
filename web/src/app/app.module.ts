@@ -48,7 +48,6 @@ import { AnalyticsComponent } from "./dashboard/analytics/analytics.component";
 import { StatsComponent } from "./dashboard/stats/stats.component";
 import { CandidateDescriptionComponent } from "./candidate-assessment/components/candidate-description/candidate-description.component";
 import { InterviewDetailComponent } from './interview-detail/interview-detail.component';
-import { UpdateCandidateComponent } from './update-candidate/update-candidate.component';
 
 const isIE =
   window.navigator.userAgent.indexOf("MSIE ") > -1 ||
@@ -105,7 +104,6 @@ const isIE =
     DashboardComponent,
     StatsComponent,
     AnalyticsComponent,
-    UpdateCandidateComponent,
   ],
   imports: [
     FileUploadModule,

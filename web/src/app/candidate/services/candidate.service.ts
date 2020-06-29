@@ -1,3 +1,4 @@
+import { InterviewService } from './../../services/interview.service';
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { HOST } from 'src/app/config/apiHost.config';
@@ -67,10 +68,6 @@ export class CandidateService {
         return this.http.get<IResponse>(
            `${HOST}/api/IdProofType`, this.options
         )
-    }
-
-    updateApplication(applicationObj, applicationId:number){
-        return this.http.put<IResponse>(`${CANDIDATE_API}/${applicationId}`, applicationObj, this.options)
     }
 
 }
