@@ -44,7 +44,7 @@ export class CandidateFormComponent implements OnInit {
     }
 
     loadJdData(){
-      console.log("inside load data")
+     
       this.type = this.router.url.split("/")[1];
       if (this.type == "candidateForm"){
         var jobId 
@@ -54,7 +54,7 @@ export class CandidateFormComponent implements OnInit {
           }
         })
         this.service.getJdData(jobId).subscribe((res : IResponse)=>{
-          console.log(res)
+         
           if (res.success == true){
             this.model.appliedForJdId = res.payload.data.code;
             this.model.appliedForPosition = res.payload.data.jobTitle;

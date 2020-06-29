@@ -74,8 +74,6 @@ export class ListComponent {
       })
       
     }
-      
-    console.log(this.checkedEntriesId, "ids")
     
   }
 

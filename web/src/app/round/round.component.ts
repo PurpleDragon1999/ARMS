@@ -35,7 +35,6 @@ export class RoundComponent implements OnInit {
       this.append = params['append'];
       });   
     this.service.getRounds(this.id,this.append).subscribe((res: any) =>{
-      console.log(res.payload.data, "rounds")
       this.rounds = res.payload.data;
       this.columns = ["roundNumber", "roundType", "roundDate", "roundTime"]
     })

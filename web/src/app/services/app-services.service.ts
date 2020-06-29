@@ -94,14 +94,11 @@ export class AppServicesService {
     });
   }
   getAllInterviews(): Observable<IResponse> {
-    console.log("here role")
     let data=this.tokenDecoder();
      if(data!=null){
        var role=data.role;
-       console.log(role, "role")
       }
      if(role=='Employee'){
-       console.log(role, "role")
       return this.http.get<IResponse>(
         `${HOST}/api/interview?employeeId=${data.Id}`,
         this.httpOptions
