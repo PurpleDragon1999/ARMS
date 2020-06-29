@@ -46,6 +46,11 @@ export class JobService {
        }
       return this.http.post<IResponse>(`${HOST}/api/jdEmail`, mailObj, { ...this.httpOptions });
     }
+    searchJd(character:string){
+
+      return this.http.get<IResponse>(`${HOST}/api/jobDescription/search?keyword=${character}`,{ ...this.httpOptions });
+
+    }
     
 
   

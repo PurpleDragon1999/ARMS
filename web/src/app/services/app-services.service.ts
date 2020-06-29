@@ -231,7 +231,7 @@ export class AppServicesService {
     
     
    }
-   getRound(jobId,employeeId){
+   getRound(jobId:number=0,employeeId:number=0){
     return this.http.get<IResponse>(
       `${HOST}/api/interview?jobId=${jobId}&employeeId=${employeeId}`,
         { ...this.httpOptions }

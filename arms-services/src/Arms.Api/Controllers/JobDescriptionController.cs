@@ -370,7 +370,41 @@ namespace Arms.Api.Controllers
                 return StatusCode(500, response);
             }
         }
-    
+        [HttpGet("search")]
+        public  IActionResult searchJd(string keyword)
+        {
+            Response response = new Response()
+            {
+                payload = new Payload()
+            };
+            try
+            {
+               if (!String.IsNullOrEmpty(keyword))
+                {
+                   var searchedJds =  _context.JobDescription.Where(e => e.jobTitle.StartsWith(keyword)).ToList();
+
+                    response.payload.data = searchedJds;
+                    response.success = "true";
+                    response.payload.msg = "Job Description searching done";
+                    return StatusCode(200, response);
+                }
+                else
+                {
+                    var searchedJds = _context.JobDescription.ToList();
+                    response.success = "true";
+                    response.payload.data = searchedJds;
+                    response.payload.msg = "All Job Descriptions retrieved";
+                    return StatusCode(200, response);
+                }
+
+            }catch(Exception Ex)
+            {
+                response.success = "false";
+                response.payload.msg = "Something Went Wrong";
+                return StatusCode(500, response);
+            }
+        }
+
     }
     
 }
