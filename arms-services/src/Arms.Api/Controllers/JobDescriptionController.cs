@@ -22,6 +22,7 @@ namespace Arms.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+
     [Authorize(Roles ="Admin")]
     public class JobDescriptionController : BaseController
     {
@@ -32,9 +33,13 @@ namespace Arms.Api.Controllers
       
         public JobDescriptionController(ArmsDbContext armsContext)
         {   
-        
              _context = armsContext;
+<<<<<<< HEAD
+=======
+
+>>>>>>> ae3399ae0ce2ae2f1b563f516d8edf10d5361dc0
         }
+
         //GET:api/jobDescriptions
         [HttpGet]
         public IActionResult GetJds()
@@ -202,7 +207,7 @@ namespace Arms.Api.Controllers
                     }
 
                 };
-                
+
                 return StatusCode(201, response);
             }
             catch (Exception ex)
@@ -261,7 +266,7 @@ namespace Arms.Api.Controllers
                 if (job.employmentTypeId != 0)
                     jobInDb.employmentTypeId = job.employmentTypeId;
 
-               
+
 
                 if (job.description != null)
                     jobInDb.description = job.description;
@@ -370,6 +375,7 @@ namespace Arms.Api.Controllers
                 return StatusCode(500, response);
             }
         }
+<<<<<<< HEAD
         [HttpGet("search")]
         public  IActionResult searchJd(string keyword)
         {
@@ -382,6 +388,9 @@ namespace Arms.Api.Controllers
                if (!String.IsNullOrEmpty(keyword))
                 {
                    var searchedJds =  _context.JobDescription.Where(e => e.jobTitle.StartsWith(keyword)).ToList();
+=======
+
+>>>>>>> ae3399ae0ce2ae2f1b563f516d8edf10d5361dc0
 
                     response.payload.data = searchedJds;
                     response.success = "true";

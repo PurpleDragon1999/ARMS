@@ -155,13 +155,21 @@ th{
     color: #fff;
 }
 
-// .customised-dropdown-parent{
-//     transform: translateY(0);
-//     transition: all .5s ease-in;
-// }
-
 .change-color{
     &:hover{
         color: #FC4C02;
     }   
+}
+
+td{
+    margin-left: 1em;
+}
+
+.shortlisting{
+    padding: 0.7em 2em 1em 1em;
+    color: #FC4C02;
+}
+
+.shortlisted{
+    color: limegreen;
 }

@@ -22,6 +22,7 @@ namespace Arms.Api.Controllers
 		public MailHelperController mailHelper = new MailHelperController();
 		//Email class Object
 		public Email email = new Email();
+
 		
 		ArmsDbContext _context;
 		public InterviewController( ArmsDbContext armsContext)
@@ -32,12 +33,13 @@ namespace Arms.Api.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult GetInterviews(int employeeId=0,int jobId=0)
-        {    if(employeeId!=0 && jobId != 0)
+        public IActionResult GetInterviews(int employeeId = 0, int jobId = 0)
+        {
+            if (employeeId != 0 && jobId != 0)
             {
 
 
-                Round round =GetRound(employeeId, jobId);
+                Round round = GetRound(employeeId, jobId);
                 var response = new
                 {
                     success = true,
@@ -71,55 +73,56 @@ namespace Arms.Api.Controllers
             }
 
             List<Interview> interviews = _context.Interview.Include(c => c.JobDescription).ToList();
-                try
+            try
+            {
+                if (interviews != null)
                 {
-                    if (interviews != null)
+                    var response = new
                     {
-                        var response = new
+                        success = true,
+                        payload = new
                         {
-                            success = true,
-                            payload = new
-                            {
-                                data = interviews,
-                                message = "Interview Records Retrieved Successfully"
-                            }
+                            data = interviews,
+                            message = "Interview Records Retrieved Successfully"
+                        }
 
-                        };
-                        return StatusCode(200, response);
-                    }
-                    else
-                    {
-                        var response = new
-                        {
-                            success = false,
-                            payload = new
-                            {
-                                message = "The Interview Records you are looking for do not exist"
-                            }
-
-                        };
-                        return StatusCode(404, response);
-                    }
+                    };
+                    return StatusCode(200, response);
                 }
-
-                catch (Exception e)
+                else
                 {
                     var response = new
                     {
                         success = false,
                         payload = new
                         {
-                            message = e.InnerException.Message
+                            message = "The Interview Records you are looking for do not exist"
                         }
 
                     };
-                    return StatusCode(500, response);
+                    return StatusCode(404, response);
                 }
-            
+            }
+
+            catch (Exception e)
+            {
+                var response = new
+                {
+                    success = false,
+                    payload = new
+                    {
+                        message = e.InnerException.Message
+                    }
+
+                };
+                return StatusCode(500, response);
+            }
+
         }
 
 
 		[HttpGet("{id}")]
+        [AllowAnonymous]
 		public IActionResult GetInterview(int id, int append=0)
         {
 			var interview = _context.Interview.Include(c => c.JobDescription).SingleOrDefault(c => c.Id == id);
@@ -550,14 +553,8 @@ namespace Arms.Api.Controllers
 		 </body>
 	 </html>
 			";
-            Console.WriteLine(output);
-            return output;
-        }
-
-
-
-
-
+				return output;
+			}
 
     }
 }

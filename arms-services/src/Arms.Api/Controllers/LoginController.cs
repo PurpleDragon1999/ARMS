@@ -37,6 +37,7 @@ namespace Arms.Api.Controllers
             try
             {
                 CustomEmployee empObj = AuthenticateUser(login);
+
                 string role = RoleMapper(empObj);
                 if (role == "UnAuthorized")
                 {
@@ -51,6 +52,7 @@ namespace Arms.Api.Controllers
 
                     };
                     return StatusCode(401, response);
+
 
                 }
                 if (empObj != null)
@@ -105,6 +107,7 @@ namespace Arms.Api.Controllers
             }
         }
         //This function generates Jwt token by adding claims
+
         private string GenerateJSONWebToken(CustomEmployee empObj, string role)
         {
 
@@ -133,8 +136,6 @@ namespace Arms.Api.Controllers
         //This function authenticates the credentials that are valid as per our db or not
         private CustomEmployee AuthenticateUser(LoginReq login)
         {
-            Console.WriteLine(login.idToken);
-
             var handler = new JwtSecurityTokenHandler();
 
             var jsonToken = handler.ReadToken(login.idToken) as JwtSecurityToken;
@@ -167,10 +168,8 @@ namespace Arms.Api.Controllers
                 return "UnAuthorized";
 
             return "UnAuthorized";
-
-
-
         }
 
     }
 }
+

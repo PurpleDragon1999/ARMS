@@ -1,10 +1,10 @@
+<!-- <app-interview-detail [data]="data[0]" [title]="title"></app-interview-detail> -->
 <div class="col-lg-12 stretch-card desktopView">
   <div class="card">
     <div class="card-body">
-
       <div class="itemsDiv">
         <div class="search-field  d-md-block ">
-          <form class="d-flex align-items-center h-100" action="#">
+          <form class=" h-100" action="#" >
             <div class="input-group ">
               <div class="input-group-prepend bg-transparent card">
                 <i class=" card-body input-group-text mdi mdi-magnify"></i>
@@ -13,6 +13,18 @@
                 class="form-control bg-transparent " placeholder="Search ">
             </div>
           </form>
+        </div>
+        <div class="d-flex">
+          <a class="shortlisting" (click)=toggleDisplayDiv()>Start Shortlisting</a>
+          
+          <div [hidden]="isShowDiv" *ngIf="title == 'candidate'" ngbDropdown >
+            <button class="btn btn-gradient-danger" id="addOption" ngbDropdownToggle>Mark As
+            </button>
+            <div ngbDropdownMenu class="customised-dropdown-parent">
+              <button ngbDropdownItem  class="btn btn-fw" (click)="openModal('create')">Shortlisted</button>
+              <button ngbDropdownItem class="btn  btn-fw" (click)="openFileUploadModal()">Not Shortlisted</button>
+            </div>
+          </div>
         </div>
         <div *ngIf="title == 'employee'" ngbDropdown class="addEmployee">
           <button class="btn btn-gradient-danger" id="addOption" ngbDropdownToggle><i
@@ -29,36 +41,43 @@
       <table class="table table-striped">
         <thead>
           <tr>
-            <th *ngFor="let columnName of columns; let i = index">
-              <div *ngIf="columnName=='jdObjectId';else otherCol">
-                JOB TITLE
-              </div>
-
-              <ng-template #otherCol>{{columnName | uppercase}}</ng-template>
+            <td [hidden]="isShowDiv" class="form-check form-check-flat">
+              <label class="form-check-label">
+                <input class="checkbox" type="checkbox" (change)="checkAll($event)">
+                <i class="input-helper"></i>
+              </label>
+            </td>
+            <th  *ngFor="let columnName of columns; let i = index">
+              {{columnName | uppercase}}
             </th>
           </tr>
         </thead>
         <tbody>
-
+          
           <tr *ngFor="let entry of data ; let i = index">
+            <td [hidden]="isShowDiv" class="form-check form-check-flat">
+              <label class="form-check-label">
+                <input class="checkbox" type="checkbox" >
+                <i class="input-helper"></i>
+              </label>
+            </td>
             <td *ngFor="let columnName of columns;">
-              <!-- <ng-container [ngSwitch]="columnName">
-                <div *ngSwitchCase="'date'">{{entry[columnName]|date}}</div>
-                <div *ngSwitchCase="'jdObjectId'">{{entry[columnName]?.jdTitle}}</div> -->
               <ng-container [ngSwitch]="true">
                 <div *ngSwitchCase="columnName=='name'">{{entry['candidate']?.name}}</div>
                 <div *ngSwitchCase="columnName=='email'">{{entry['candidate']?.email}}</div>
                 <div *ngSwitchCase="columnName=='Job Position'">{{entry['job']?.jobTitle}}</div>
                 <div *ngSwitchCase="columnName=='roundDate'">{{entry[columnName]|date}}</div>
+                <div *ngSwitchCase="columnName=='status'">
+                  {{entry['applicationStatusType']?.statusName }}</div>
                 <div *ngSwitchCase="columnName=='jdObjectId'">{{entry[columnName]?.jdTitle}}</div>
                 <div *ngSwitchCase="columnName=='roundType'">{{entry['roundType']?.name}}</div>
                 <div *ngSwitchDefault>{{entry[columnName]}}</div>
               </ng-container>
             </td>
-            <td *ngIf="title === 'candidate'"><button type="button" class="btn btn-gradient-danger"
-                (click)="showPdf(entry['pdf'])"><i class="fa fa-file-pdf-o"></i>Show CV</button>
+            <td *ngIf="title === 'candidate'">
+                <a (click)="showPdf(entry['pdf'])"><i class="fa fa-file-pdf-o"></i> CV</a>
             </td>
-            <td><a (click)="openModal('update', entry)"><i class="mdi mdi-pencil"></i></a></td>
+            <td ><a (click)="openModal('update', entry)"><i class="mdi mdi-pencil"></i></a></td>
             <td><a (click)="deleteEntry(entry)"><i class="mdi mdi-delete"></i></a> </td>
           </tr>
         </tbody>
@@ -97,7 +116,7 @@
         {{ title | titlecase }}(s)
       </button>
       <div ngbDropdownMenu>
-        <button ngbDropdownItem class="btn btn-gradient-danger" (click)="openModal('create')"><i
+        <button *ngIf="title == 'employee'" ngbDropdownItem class="btn btn-gradient-danger" (click)="openModal('create')"><i
             class="mdi mdi-account-plus"></i>Add {{ title | titlecase }} </button>
         <button ngbDropdownItem class="btn btn-gradient-danger" (click)="openFileUploadModal()"><i
             class="mdi mdi-account-plus"></i> Add through file upload</button>
@@ -130,7 +149,9 @@
                   <ng-container [ngSwitch]="true">
                     <!-- <h5 *ngSwitchCase="columnName=='jdObjectId'" class="m-0 p-3">{{entry[columnName].jdTitle}}
                     </h5>
-                    <h5 *ngSwitchDefault  class="m-0 p-3">{{ entry[columns[0]] }}</h5> -->
+                    <h5 *ngSwitchCase="columnName=='name'">{{entry['candidate']?.name}}</h5> -->
+                    <h5 *ngSwitchDefault  class="m-0 p-3">{{ entry[columns[0]] }}</h5>
+                    
                   </ng-container>
 
                 </div>
@@ -147,14 +168,18 @@
             </div>
           </ng-template>
           <ng-template ngbPanelContent>
-            <div *ngFor="let columnName of columns | slice: 1" class="py-2">
+            <div *ngFor="let columnName of columns " class="py-2">
               <div>
                 <b>
                   {{ columnName | uppercase }}
                 </b>
               </div>
               <div>
-                <ng-container [ngSwitch]="true">
+                <ng-container [ngSwitch]="columnName">
+                  <div *ngSwitchCase="columnName=='name'">{{entry['candidate']?.name}}</div>
+                  <div *ngSwitchCase="columnName=='email'">{{entry['candidate']?.email}}</div>
+                  <div *ngSwitchCase="columnName=='Job Position'">{{entry['job']?.jobTitle}}</div>
+                <!-- <ng-container [ngSwitch]="true"> -->
                   <div *ngSwitchCase="columnName=='date'">{{entry[columnName]|date}}</div>
                   <div *ngSwitchCase="columnName=='jdObjectId'">{{entry[columnName]?.jdTitle}}</div>
                   <div *ngSwitchCase="columnName=='roundType'">{{entry['roundType']?.name}}</div>

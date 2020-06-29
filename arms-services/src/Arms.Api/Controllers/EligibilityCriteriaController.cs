@@ -95,7 +95,7 @@ namespace Arms.Api.Controllers
                     success = false,
                     payload = new
                     {
-                        message = ex.InnerException.Message
+                        message = ex.Message
                     }
 
                 };
@@ -105,37 +105,42 @@ namespace Arms.Api.Controllers
         //POST:api/eligibilityCriteria
         [HttpPost]
         [Authorize(Roles = "SuperAdministrator")]
-        public IActionResult CreateEligibilityCriteria(EligibilityCriteria eligibility)
+        public IActionResult CreateEligibilityCriteria(List<EligibilityCriteria> eligibility)
         {
             try
             {
-                EligibilityCriteria checkinDb = _context.eligibilityCriteria.SingleOrDefault
-                    (c => c.eligibilityCriteriaName == eligibility.eligibilityCriteriaName);
-                if (checkinDb != null)
+                for (int i = 0; i < eligibility.Count; i++)
                 {
-                    var resAlreadyExists = new
+                    EligibilityCriteria checkinDb = _context.eligibilityCriteria.SingleOrDefault
+                        (c => c.eligibilityCriteriaName == eligibility[i].eligibilityCriteriaName);
+                    if (checkinDb != null)
                     {
-                        success = false,
-                        payload = new
+                        var resAlreadyExists = new
                         {
-                            message = "This Eligibility Criteria already exists"
-                        }
+                            success = false,
+                            payload = new
+                            {
+                                message = "This Eligibility Criteria already exists"
+                            }
 
+                        };
+                        return StatusCode(400, resAlreadyExists);
+                    }
+                    EligibilityCriteria newEligibilityCriteria = new EligibilityCriteria
+                    {
+                        eligibilityCriteriaName = eligibility[i].eligibilityCriteriaName,
+                        createdBy = eligibility[i].createdBy,
+                        modifiedBy = eligibility[i].modifiedBy
                     };
-                    return StatusCode(400, resAlreadyExists);
+                    _context.eligibilityCriteria.Add(newEligibilityCriteria);
+                    _context.SaveChanges();
                 }
-                EligibilityCriteria newEligibilityCriteria=new EligibilityCriteria
-               {
-                    eligibilityCriteriaName = eligibility.eligibilityCriteriaName
-                };
-                _context.eligibilityCriteria.Add(newEligibilityCriteria);
-                _context.SaveChanges();
                 var response = new
                 {
                     success = true,
                     payload = new
                     {
-                        data = newEligibilityCriteria,
+                        data = eligibility,
                         message = "Eligibility Criteria Created Successfully"
                     }
 
@@ -149,7 +154,7 @@ namespace Arms.Api.Controllers
                     success = false,
                     payload = new
                     {
-                        message = ex.InnerException.Message
+                        message = ex.Message
                     }
 
                 };
@@ -183,7 +188,7 @@ namespace Arms.Api.Controllers
                 _context.SaveChanges();
                 var response = new
                 {
-                    success = "true",
+                    success = true,
                     payload = new
                     {
                         data = checkInDb,
@@ -200,7 +205,7 @@ namespace Arms.Api.Controllers
                     success = false,
                     payload = new
                     {
-                        message = ex.InnerException.Message
+                        message = ex.Message
                     }
 
                 };
@@ -232,7 +237,7 @@ namespace Arms.Api.Controllers
                 _context.SaveChanges();
                 var response = new
                 {
-                    success = "true",
+                    success = true,
                     payload = new
                     {
 
@@ -249,7 +254,7 @@ namespace Arms.Api.Controllers
                     success = false,
                     payload = new
                     {
-                        message = ex.InnerException.Message
+                        message = ex.Message
                     }
 
                 };

@@ -66,7 +66,6 @@ export class LoginComponent implements OnInit {
   }
 
   async loginFunction() {
-    // this.loginService.login().subscribe((res) => console.log(res));
     const isIE =
       window.navigator.userAgent.indexOf("MSIE ") > -1 ||
       window.navigator.userAgent.indexOf("Trident/") > -1;
@@ -83,6 +82,7 @@ export class LoginComponent implements OnInit {
        
         if (res != null) {
           window.localStorage.setItem(
+
             "Authorized",
             `Bearer ${res.payload.data.authorized}`
           );

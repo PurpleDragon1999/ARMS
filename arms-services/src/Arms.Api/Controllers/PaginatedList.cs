@@ -15,10 +15,9 @@ namespace Arms.Api.Controllers
         {
             PageIndex = pageIndex;
             TotalPages = (int)Math.Ceiling(count / (double)pageSize);
-
             this.AddRange(items);
         }
-        
+     
         public bool HasPreviousPage
         {
             get

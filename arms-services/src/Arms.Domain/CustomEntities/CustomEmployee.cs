@@ -14,5 +14,5 @@ namespace Arms.Domain.CustomEntities
         public ArmsEmployeeRoles armsEmployeeRole { get; set; }
     }
 
-  
+
 }

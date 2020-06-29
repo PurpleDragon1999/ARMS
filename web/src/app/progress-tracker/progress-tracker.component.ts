@@ -1,10 +1,15 @@
+import { BufferToPdf } from './../utils/bufferToPdf';
+import { InterviewService } from './../services/interview.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { error } from 'util';
+import { CandidateService } from './../candidate/services/candidate.service';
 import { ICandidate } from './../models/candidate.interface';
 import { IResponse } from 'src/app/models/response.interface';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params } from "@angular/router";
 import { AppServicesService } from 'src/app/services/app-services.service';
 import { element } from 'protractor';
 import { Component, OnInit } from '@angular/core';
-
+import { switchMap } from "rxjs/operators";
 @Component({
   selector: 'app-progress-tracker',
   templateUrl: './progress-tracker.component.html',
@@ -12,21 +17,44 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class ProgressTrackerComponent implements OnInit {
-
-  flag : number = 0
-  candidatedata : ICandidate
-
-  constructor(private _service : AppServicesService, private _route : Router) { }
+  applicationdata : any
+  type : string
+  applicationStatusName : string
+  noOfRounds : number
+  applicationCode : string
+  
+  constructor( private route: ActivatedRoute,private _route : Router, private CandidateService : CandidateService, private InterviewService : InterviewService) { }
 
   ngOnInit() {
-    //progressTrackerDemo.init();
     this.loadcandidateStatus()
   }
-
+  
   loadcandidateStatus(){
-    let candidateId = this._route.url.split("/")[2]
-    
+    var applicationId
+    this.route.params.subscribe(params=>{
+      if (params.candidateId){
+        applicationId = params.candidateId.slice(7)
+      }
+    })
+
+    this.CandidateService.getApplication(applicationId).subscribe((res:IResponse)=>{  
+      if(res.success == false){
+        this._route.navigate(['/404'])
+      }
+      else{
+        this.applicationdata = res.payload.data
+        this.loadInterviews(this.applicationdata.job.id)
+        this.applicationStatusName = this.applicationdata.applicationStatusType.statusName
+      }    
+    }, (error )=>{
+      this._route.navigate(['/404'])
+    })
   }
 
+  loadInterviews(jobId : number){
+    this.InterviewService.getInterviews(this.applicationdata.job.id).subscribe((res : IResponse)=>{
+      this.noOfRounds = res.payload.data[0].noOfRounds;
+    })
+  }
 }
 

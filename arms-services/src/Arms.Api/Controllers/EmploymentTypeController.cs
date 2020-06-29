@@ -94,7 +94,7 @@ namespace Arms.Api.Controllers
                     success = false,
                     payload = new
                     {
-                        message = ex.InnerException.Message
+                        message = ex.Message
                     }
 
                 };
@@ -103,37 +103,42 @@ namespace Arms.Api.Controllers
         }
         [HttpPost]
         [Authorize(Roles = "SuperAdministrator")]
-        public IActionResult CreateEmploymentType(EmploymentType employmentType)
+        public IActionResult CreateEmploymentType(List<EmploymentType> employmentType)
         {
-            try
-            {
-                EmploymentType empType = _context.employmentType.SingleOrDefault
-                    (c => c.employmentTypeName == employmentType.employmentTypeName);
-                if (empType != null)
+                try
                 {
-                    var resAlreadyExists = new
+                for (int i = 0; i < employmentType.Count; i++)
+                {
+                    EmploymentType empType = _context.employmentType.SingleOrDefault
+                        (c => c.employmentTypeName == employmentType[i].employmentTypeName);
+                    if (empType != null)
                     {
-                        success = false,
-                        payload = new
+                        var resAlreadyExists = new
                         {
-                            message = "This Employment Type already exists"
-                        }
+                            success = false,
+                            payload = new
+                            {
+                                message = "This Employment Type already exists"
+                            }
 
+                        };
+                        return StatusCode(400, resAlreadyExists);
+                    }
+                    EmploymentType newEmploymentType = new EmploymentType
+                    {
+                        employmentTypeName = employmentType[i].employmentTypeName,
+                        createdBy = employmentType[i].createdBy,
+                        modifiedBy = employmentType[i].modifiedBy
                     };
-                    return StatusCode(400, resAlreadyExists);
+                    _context.employmentType.Add(newEmploymentType);
+                    _context.SaveChanges();
                 }
-                EmploymentType newEmploymentType = new EmploymentType
-                {
-                    employmentTypeName = employmentType.employmentTypeName
-                };
-                _context.employmentType.Add(newEmploymentType);
-                _context.SaveChanges();
                 var response = new
                 {
                     success = true,
                     payload = new
                     {
-                        data = newEmploymentType,
+                        data = employmentType,
                         message = "Employment Type Created Successfully"
                     }
 
@@ -147,7 +152,7 @@ namespace Arms.Api.Controllers
                     success = false,
                     payload = new
                     {
-                        message = ex.InnerException.Message
+                        message = ex.Message
                     }
 
                 };
@@ -198,7 +203,7 @@ namespace Arms.Api.Controllers
                     success = false,
                     payload = new
                     {
-                        message = ex.InnerException.Message
+                        message = ex.Message
                     }
 
                 };
@@ -247,7 +252,7 @@ namespace Arms.Api.Controllers
                     success = false,
                     payload = new
                     {
-                        message = ex.InnerException.Message
+                        message = ex.Message
                     }
 
                 };
