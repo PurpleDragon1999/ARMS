@@ -9,7 +9,9 @@ CREATE TABLE ARMS.Interviewer(
 id int identity(1,1) primary key,
 interviewPanelId int	NOT NULL,
 constraint FK_interviewPanel foreign key(interviewPanelId) references ARMS.InterviewPanel(id),
+jobId int NOT NULL,
 employeeId int NOT NULL,
+constraint FK_Interviewer_Emp Foreign key(employeeId) References ArmsEmployees(Id),
 createdAt datetime2  default (sysdatetime()) NOT NULL,
 createdBy varchar(50) NULL,
 modifiedAt datetime2  default (sysdatetime()) NOT NULL,
@@ -29,4 +31,9 @@ AS
 --new batch
 
 SELECT * from ARMS.Interviewer
+
+Alter TABLE  ARMS.Interviewer
+ADD  jobId int not null
+
+
 

@@ -19,7 +19,7 @@ constraint FK_eligibilityCriteria foreign key(eligibilityCriteriaId) references 
 [employmentTypeId] int NOT NULL,
 constraint FK_employmentType foreign key(employmentTypeId) references ARMS.EmploymentType(id),
 
-[salary] bigint NULL,
+[salary] varchar(50) NULL,
 [vacancies] int NULL,
 [pdfBlobData] varBinary(MAX),
 [createdAt] datetime2  default (sysdatetime()) NOT NULL,
@@ -40,9 +40,8 @@ AS
 GO
 --insert command for jobDescription
 
-Insert into ARMS.JobDescription([jobTitle],[openingDate],[closingDate],[description],[locationId],[eligibilityCriteriaId],[employmentTypeId],pdfBlobData)
-SELECT 'Software Developer','2020-09-02','2020-09-09','require a logically strong person','1','1','1', BulkColumn
- FROM OPENROWSET(Bulk 'C:\Users\deepanshu.balani\Pictures\anal2.jpg', SINGLE_BLOB) AS BLOB
+Insert into ARMS.JobDescription([jobTitle],[openingDate],[closingDate],[description],[locationId],[eligibilityCriteriaId],[employmentTypeId],pdfBlobData,salary)
+Values( 'Javascript Developer','2020-09-02','2020-09-09','require a logically strong person','1','1','1',NULL,'11000 USD')
  
 
 Select * FROM ARMS.JobDescription
@@ -60,17 +59,5 @@ GO
 ALTER TABLE ARMS.JobDescription 
 ADD skills varchar(255)
 
-GO
---dropping the column salary of type int
-ALTER TABLE ARMS.JobDescription
-DROP COLUMN salary
+select * from ARMS.JobDescription
 
-GO
---adding the column salary ofd type varchar
-ALTER TABLE ARMS.JobDescription
-ADD salary varchar(50)
-
-
---setting salary
-Update ARMS.JobDescription
-set salary='10000' where id>1
