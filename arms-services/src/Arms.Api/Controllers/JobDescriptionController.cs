@@ -311,7 +311,7 @@ namespace Arms.Api.Controllers
                     success = false,
                     payload = new
                     {
-                        message = ex.InnerException.Message
+                        message = "Something went wrong"
                     }
 
                 };
@@ -363,7 +363,7 @@ namespace Arms.Api.Controllers
                     success = false,
                     payload = new
                     {
-                        message = ex.InnerException.Message
+                        message = "Cnnot delete this Job"
                     }
 
                 };
