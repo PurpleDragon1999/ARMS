@@ -77,7 +77,7 @@
             <td *ngIf="title === 'candidate'">
                 <a (click)="showPdf(entry['pdf'])"><i class="fa fa-file-pdf-o"></i> CV</a>
             </td>
-            <td *ngIf="title != 'candidate'"><a (click)="openModal('update', entry)"><i class="mdi mdi-pencil"></i></a></td>
+            <td ><a (click)="openModal('update', entry)"><i class="mdi mdi-pencil"></i></a></td>
             <td><a (click)="deleteEntry(entry)"><i class="mdi mdi-delete"></i></a> </td>
           </tr>
         </tbody>

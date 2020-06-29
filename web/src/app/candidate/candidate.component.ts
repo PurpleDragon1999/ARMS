@@ -1,8 +1,10 @@
+import { UpdateCandidateComponent } from './../update-candidate/update-candidate.component';
+import { ListComponent } from './../reusable-components/list/list.component';
 import { Router } from '@angular/router';
 import { UrltoFile } from './../utils/urlToFile';
 import { IResponse } from 'src/app/models/response.interface';
 import { AppServicesService } from 'src/app/services/app-services.service';
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { CandidateService } from './services/candidate.service';
 import { IModelForPagination } from '../models/modelPagination.interface';
 import { ICandidate } from '../models/candidate.interface';
@@ -18,9 +20,11 @@ import { switchMap } from "rxjs/operators";
     templateUrl: 'candidate.component.html',
     styleUrls: ['candidate.component.scss'],
     providers: [UrltoFile, BufferToPdf],
+
 })
-export class CandidateComponent implements OnInit {
-    candidates: ICandidate[];
+export class CandidateComponent  {
+    //candidates: ICandidate[];
+    candidates : any
     columns: Array<string>;
     pager: any;
     file : any;
@@ -53,8 +57,12 @@ export class CandidateComponent implements OnInit {
        .subscribe((res) => {
        
             this.candidates = res.payload.data
-            this.columns = ["name", "email", "experience", "Job Position"];
-    
+            this.columns = ["name", "email", "experience", "Job Position", "status"];
+            if (this.candidates.length > 0){
+              this.candidates.forEach(entry=>{
+                entry.checked = false
+              })
+            }
         });
         
       }
@@ -84,7 +92,6 @@ export class CandidateComponent implements OnInit {
               modalRef.componentInstance.success = error.error.success;
               modalRef.componentInstance.message = error.error.payload.message;
           })
-
       });
       }
 
@@ -113,7 +120,7 @@ export class CandidateComponent implements OnInit {
             this.resumeDetails = res.payload.data[0]
             let cv = this.resumeDetails.cv ? 
             "data:application/" +
-            'pdf' +
+            this.resumeDetails.name.split(".")[1] +
             ";base64," +
             this.resumeDetails.cv
                         : null;
@@ -144,5 +151,16 @@ export class CandidateComponent implements OnInit {
         const url = window.URL.createObjectURL(blob);
         window.open(url);
     }
+
+    updateCandidate(data){
+      console.log(data, data.data.id, "datya")
+      const modalRef: NgbModalRef = this.modalService.open(UpdateCandidateComponent);
+      modalRef.componentInstance.applicationId = data.data.id;
+      modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+        modalRef.close();
+      });
+    }
+
+    
 
 }
