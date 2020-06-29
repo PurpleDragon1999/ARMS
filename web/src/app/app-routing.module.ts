@@ -61,6 +61,10 @@ const routes: Routes = [
         component: SettingsComponent,
       },
       {
+        path: "home",
+        component: DashboardComponent,
+      },
+      {
         path: "candidate",
         component: CandidateComponent,
       },
@@ -122,6 +126,10 @@ const routes: Routes = [
             component: ScheduleInterviewComponent,
           },
         ],
+      },
+      {
+        path: "home",
+        component: DashboardComponent,
       },
       {
         path: "job-desc",
@@ -211,17 +219,7 @@ const routes: Routes = [
         component: CandidateAssessmentComponent,
       },
     ],
-  },
-  {
-    path: "dashboard",
-    component: AppNavBarComponent,
-    children: [
-      {
-        path: "",
-        component: AnalyticsComponent,
-      },
-    ],
-  },
+  }
 ];
 
 @NgModule({

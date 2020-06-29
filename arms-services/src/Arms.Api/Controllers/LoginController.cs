@@ -136,8 +136,6 @@ namespace Arms.Api.Controllers
         //This function authenticates the credentials that are valid as per our db or not
         private CustomEmployee AuthenticateUser(LoginReq login)
         {
-            Console.WriteLine(login.idToken);
-
             var handler = new JwtSecurityTokenHandler();
 
             var jsonToken = handler.ReadToken(login.idToken) as JwtSecurityToken;
@@ -170,10 +168,8 @@ namespace Arms.Api.Controllers
                 return "UnAuthorized";
 
             return "UnAuthorized";
-
-
-
         }
 
     }
 }
+

@@ -584,7 +584,6 @@ namespace Arms.Api.Controllers
          </body>
      </html>
             ";
-            Console.WriteLine(output);
             return output;
         }
 
