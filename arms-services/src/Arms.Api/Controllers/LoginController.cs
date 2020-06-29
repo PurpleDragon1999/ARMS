@@ -133,8 +133,6 @@ namespace Arms.Api.Controllers
         //This function authenticates the credentials that are valid as per our db or not
         private CustomEmployee AuthenticateUser(LoginReq login)
         {
-            Console.WriteLine(login.idToken);
-
             var handler = new JwtSecurityTokenHandler();
 
             var jsonToken = handler.ReadToken(login.idToken) as JwtSecurityToken;
@@ -157,20 +155,13 @@ namespace Arms.Api.Controllers
             if (empObj.armsEmployeeRole.Name == "ResourceManager" || empObj.armsEmployeeRole.Name == "HumanResource")
                 return "Admin";
 
-            else if (empObj.armsEmployeeRole.Name == "Executive" || empObj.armsEmployeeRole.Name == "Employee")
+            if (empObj.armsEmployeeRole.Name == "Executive" || empObj.armsEmployeeRole.Name == "Employee")
                 return "Employee";
 
-            else if (empObj.armsEmployeeRole.Name == "SuperAdministrator")
+            if (empObj.armsEmployeeRole.Name == "SuperAdministrator")
                 return "SuperAdministrator";
 
-            else if (empObj.armsEmployeeRole.Name == "Finance")
-                return "UnAuthorized";
-
             return "UnAuthorized";
-
-
-
         }
-
     }
 }

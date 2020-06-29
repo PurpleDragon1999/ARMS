@@ -1,4 +1,4 @@
-const HOST = 'http://localhost:40802';
+const HOST = 'http://localhost:5000';
 
 export {
     HOST

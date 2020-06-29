@@ -70,3 +70,6 @@ appsettings.json
 debug.log
 
 ARMS_DB_Scripts/
+
+appsettings.json
+launchSettings.json
