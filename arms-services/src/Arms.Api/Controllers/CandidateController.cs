@@ -248,9 +248,7 @@ namespace Arms.Api.Controllers
         {
             var candidate = _context.Candidate.FirstOrDefault(c => c.IdentificationNo == customObj.IdentificationNo);
             var applicationStatus = _context.ApplicationStatusType.SingleOrDefault(c => c.StatusName == "AppliedSuccessfully");
-
             try
-
             {
                 int id = 0;
                 if (candidate != null)
@@ -344,16 +342,6 @@ namespace Arms.Api.Controllers
                         message = "Registered Successfully"
                     }
                 };
-                //JobDescription jdObject = _context.JobDescription.Include(l => l.employmentType).
-                //    Include(l => l.eligibilityCriteria).Include(l => l.loc).
-                //    FirstOrDefault(c => c.Id == applicationObj.JobId);
-                //string emailHtmlBody = GenerateEmailBody( jdObject, candObj.Code,candObj.Name);
-                ////Adding Emails in string Array to send to candidates
-                //string[] EmailToSend = new[]
-                //{
-                //    candObj.Email
-                //};
-
                 return StatusCode(200, response);
             }
             catch (Exception e)
