@@ -28,7 +28,6 @@ export class JdFormComponent implements OnInit {
   @Output()
   closeModal: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  //@ViewChild("jobId", { static: false }) jobId: ElementRef;
   @ViewChild("jobTitle", { static: false }) jobTitle: ElementRef;
   @ViewChild("openingDate", { static: false }) openingDate: ElementRef;
   @ViewChild("closingDate", { static: false }) closingDate: ElementRef;
@@ -97,10 +96,6 @@ export class JdFormComponent implements OnInit {
       this.employmentTypes = res.payload.data;
 
     });
-    // this._service.getSkills().subscribe((res: any) => {
-    //   this.skillArray = res.payload.data;
-
-    // });
 
   }
   get formControls() {
@@ -119,7 +114,6 @@ export class JdFormComponent implements OnInit {
 
   jdFormData() {
     this.jdFormObject = {
-      // jdId: `CYGJID${this.jobId.nativeElement.value}`,
       jobTitle: this.jobTitle.nativeElement.value,
       openingDate: this.openingDate.nativeElement.value,
       closingDate: this.closingDate.nativeElement.value,

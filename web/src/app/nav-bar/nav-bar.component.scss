@@ -10,18 +10,12 @@
   padding-top: 2em;
 }
 
-// @media (min-width: 992px) {
-//   .sidebar-icon-only .sidebar .nav .nav-item .nav-link {
-//     margin-left: 0 !important;
-//   }
-// }
-
 .sidebar .nav .nav-item .nav-link .menu-title {
-  margin-left: 2rem !important;
+  margin-left: 1rem !important;
+  margin-right: auto;;
 }
 
 .highlight {
-  //   margin-right: 2rem;
   color: white;
 }
 

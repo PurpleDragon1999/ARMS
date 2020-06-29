@@ -28,7 +28,6 @@
     &--subdata{
       font-size: 1.465rem;
       font-weight: 600;
-      // padding-bottom: 0.2rem;
     }
 
     &--subdataheading{
@@ -41,4 +40,5 @@
 
 .card-body{
   padding: 0.5rem !important;
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
 }

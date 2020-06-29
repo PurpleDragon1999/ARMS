@@ -36,29 +36,13 @@ export class EmployeeService {
       this.options
     );
   }
-
-  // getPaginatedEmployees(page: number = 1): Observable<IResponse> {
-  //   const params: HttpParams = new HttpParams().set('page', page.toString());
-  //   return this.http.get<IResponse>(EMPLOYEE_API, { ...this.options, params });
-  // }
-
   deleteEmployee(employeeId: String): Observable<IResponse> {
     return this.http.delete<IResponse>(
       `${EMPLOYEE_API}/${employeeId}`,
       this.options
     );
   }
-
-  // searchEmployee(page: number = 1, character: string = '') {
-  //   const params: HttpParams = new HttpParams().set('character', character).set('page', page.toString()).set("pagination", "true");
-
-  //   return this.http.get<IResponse>(
-  //     EMPLOYEE_SEARCH,
-  //     { ...this.options, params }
-  //   );
-  // }
-
-
+  
   searchEmployee(page: number = 1, character: string = '') {
     const params: HttpParams = new HttpParams().set('character', character).set('page', page.toString()).set("pagination", "true");
 

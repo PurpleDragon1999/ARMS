@@ -16,7 +16,6 @@ export class LoginService {
   };
 
   getToken(): string {
-    //return localStorage.getItem('x-auth-token');
     return localStorage.getItem("Authorized");
   }
 

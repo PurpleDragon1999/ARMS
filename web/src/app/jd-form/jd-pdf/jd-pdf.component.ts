@@ -43,36 +43,6 @@ export class JdPdfComponent implements OnInit {
     
     });
   }
-
-  //Earlier  function achieved which sets all the content into one page and increases page height
-  // public convertToPDF()
-  // {
-
-  // var data = document.getElementById('content');
-  // html2canvas(data).then(canvas => {
-
-  // // Few necessary setting options
-  // var width = canvas.width;
-  // var height = canvas.height;
-  // var millimeters = {width,height};
-  // millimeters.width = Math.floor(width * 0.50);
-  // millimeters.height = Math.floor(height*0.80);
-
-  // var imgData = canvas.toDataURL(
-  //     'image/png');
-  // var pdf = new jsPDF("p", "mm", "a4");
-  // pdf.deletePage(1);
-  // pdf.addPage([millimeters.width, millimeters.height]);
-  // pdf.addImage(imgData, 'PNG', 0, 0);
-  // pdf.save("jobdescription"+this.jdObject.jdId+'.pdf'); // Generated PDF
-
-  // });
-  // setTimeout(() => {
-  //   this.navigation();
-  // }, 5000); 
-
-
-  // }
   //later achieved function which divides the content into pagers too but not able to set top margins
   convertToPDF() {
     var data = document.getElementById('content');
