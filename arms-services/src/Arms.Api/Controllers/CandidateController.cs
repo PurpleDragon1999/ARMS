@@ -103,6 +103,7 @@ namespace Arms.Api.Controllers
                     return Ok(response);
                 }
             }
+
             catch (Exception e)
             {
                 var response = new
@@ -170,6 +171,7 @@ namespace Arms.Api.Controllers
         public dynamic validateCandidate(CandidateApplicationResume candidateObj, int candidateId = 0)
         {
             var candidateEmailValidate = _context.Candidate.FirstOrDefault(c => (c.Email == candidateObj.Email && c.Id != candidateId));
+
             if (candidateEmailValidate != null)
             {
                 var res = new
@@ -207,7 +209,9 @@ namespace Arms.Api.Controllers
                 .Select(c => new { c.Id, c.DateOfApplication, c.JobId });
 
             var applicationId = lastAppliedOn.ToArray()[0].Id;
+
             TimeSpan value = (DateTime.Now).Subtract(lastAppliedOn.ToArray()[0].DateOfApplication);
+
             if (value.TotalDays > 183)
             {
                 var res = new
@@ -216,6 +220,7 @@ namespace Arms.Api.Controllers
                 };
                 return res;
             }
+
             var assessment = _context.Assessment.SingleOrDefault(c => c.ApplicationId == applicationId);
             if (assessment != null)
             {
@@ -226,6 +231,7 @@ namespace Arms.Api.Controllers
                 };
                 return res;
             }
+
             if (candidateObj.JobId == lastAppliedOn.ToArray()[0].JobId)
             {
                 var res = new
@@ -240,6 +246,7 @@ namespace Arms.Api.Controllers
                 isValid = true
             };
             return resAllowed;
+
         }
 
         [HttpPost]
@@ -269,6 +276,8 @@ namespace Arms.Api.Controllers
                     };
                     return StatusCode(200, responseFalse);
                 }
+
+                //Candidate candidateObj = new Candidate();
                 if (candidate == null)
                 {
                     var candidateObj = new Candidate
@@ -293,6 +302,7 @@ namespace Arms.Api.Controllers
                     candidate.Email = customObj.Email;
                     candidate.Phone = customObj.Phone;
                     candidate.ModifiedBy = customObj.ModifiedBy;
+
                     _context.Candidate.Update(candidate);
                     _context.SaveChanges();
                 }
@@ -311,6 +321,7 @@ namespace Arms.Api.Controllers
                 _context.Application.Add(applicationObj);
                 _context.SaveChanges();
                 int applicationId = applicationObj.Id;
+
                 //Getting FileName
                 var fileName = Path.GetFileName(customObj.Cv.FileName);
                 //Getting file Extension
@@ -334,6 +345,7 @@ namespace Arms.Api.Controllers
 
                 _context.Resume.Add(resumeObj);
                 _context.SaveChanges();
+
                 var response = new
                 {
                     success = true,
@@ -342,6 +354,16 @@ namespace Arms.Api.Controllers
                         message = "Registered Successfully"
                     }
                 };
+
+                //JobDescription jdObject = _context.JobDescription.Include(l => l.employmentType).
+                //    Include(l => l.eligibilityCriteria).Include(l => l.loc).
+                //    FirstOrDefault(c => c.Id == applicationObj.JobId);
+                //string emailHtmlBody = GenerateEmailBody( jdObject, candObj.Code,candObj.Name);
+                ////Adding Emails in string Array to send to candidates
+                //string[] EmailToSend = new[]
+                //{
+                //    candObj.Email
+                //};
                 return StatusCode(200, response);
             }
             catch (Exception e)
@@ -357,10 +379,11 @@ namespace Arms.Api.Controllers
                 return StatusCode(500, response);
             }
         }
-
+   
         [HttpPut("{id}")]
         [AllowAnonymous]
         public IActionResult UpdateCandidateDetails(int id, [FromForm] CandidateApplicationResume customObj)
+
         {
             var application = _context.Application.SingleOrDefault(c => c.Id == id);
             try
@@ -397,6 +420,7 @@ namespace Arms.Api.Controllers
                         };
                         return StatusCode(200, responseFalse);
                     }
+
                     candidate.Name = customObj.Name;
                     candidate.Email = customObj.Email;
                     candidate.Phone = customObj.Phone;
@@ -405,6 +429,7 @@ namespace Arms.Api.Controllers
                     _context.SaveChanges();
 
                     var modifiedApplication = _context.Application.FirstOrDefault(c => c.Id == id);
+
                     modifiedApplication.Education = customObj.Education;
                     modifiedApplication.Experience = customObj.Experience;
                     modifiedApplication.ModifiedBy = customObj.ModifiedBy;
@@ -417,6 +442,7 @@ namespace Arms.Api.Controllers
                     var fileExtension = Path.GetExtension(fileName);
                     // concatenating  FileName + FileExtension
                     var newFileName = String.Concat(Convert.ToString(Guid.NewGuid()), fileExtension);
+
                     resume.Name = fileName;
                     resume.ModifiedBy = customObj.ModifiedBy;
 
@@ -425,6 +451,7 @@ namespace Arms.Api.Controllers
                         customObj.Cv.CopyTo(target);
                         resume.Cv = target.ToArray();
                     }
+
                     _context.Resume.Update(resume);
                     _context.SaveChanges();
 
@@ -463,6 +490,7 @@ namespace Arms.Api.Controllers
                 };
                 return StatusCode(500, response);
             }
+
         }
 
         [HttpPatch("{id}")]
@@ -511,7 +539,8 @@ namespace Arms.Api.Controllers
         }
 
         public string GenerateEmailBody(JobDescription jdObject, string Code,String Name)
-        { 
+        {
+
             string output = @"<html>
        <head>    
 	       <style type=""text/css"">
@@ -552,5 +581,8 @@ namespace Arms.Api.Controllers
             ";
             return output;
         }
+
+
     }
+ 
 }
