@@ -395,8 +395,37 @@ namespace Arms.Api.Controllers
 					{
                         var rounds = _context.Round.Where(c=>c.InterviewId==id);
                         foreach (var round in rounds)
-                        {
-                           _context.Round.Remove(round);
+                        {    //finnding interview Panel corresponding to round
+                            List<InterviewPanel> interviewPanels = _context.InterviewPanel.
+                                                                 Where(c => c.RoundId == round.Id).ToList();
+                            //finding interviewer correesponding to panel
+                             
+                           List< Interviewer>interviewers = _context.Interviewer.
+                                                             Where(c => c.JobId == interview.JobId).
+                                                              ToList();
+                            // removing interviewer data
+                           
+                            if (interviewers != null)
+                            {
+                                foreach (var interviewer in interviewers)
+                                {
+                                    _context.Interviewer.Remove(interviewer);
+                                }
+                            }
+                            // removing interview Panel
+                            if (interviewPanels != null)
+                            {
+                                // //removing interview Panel
+                                foreach (var interviewPanel in interviewPanels)
+                                {
+                                    _context.InterviewPanel.Remove(interviewPanel);
+                                }
+                            }
+                            if (round != null)
+                            {
+                                //removing Rounds 
+                                _context.Round.Remove(round);
+                            }
                         }
 
                        _context.Interview.Remove(interview);

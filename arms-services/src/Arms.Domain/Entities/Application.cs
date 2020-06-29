@@ -7,11 +7,7 @@ namespace Arms.Domain.Entities
 {
     public partial class Application : Entity
     {
-        public Application()
-        {
-            Assessment = new HashSet<Assessment>();
-        }
-
+        
         public int Id { get; set; }
         public string Code { get; set; }
         public string Education { get; set; }

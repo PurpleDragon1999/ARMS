@@ -79,6 +79,7 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .HasForeignKey(d => d.JobId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_ApplicationJob");
+           
         }
     }
 }

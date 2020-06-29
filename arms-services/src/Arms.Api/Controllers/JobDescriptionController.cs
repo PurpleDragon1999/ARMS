@@ -34,10 +34,7 @@ namespace Arms.Api.Controllers
         public JobDescriptionController(ArmsDbContext armsContext)
         {   
              _context = armsContext;
-<<<<<<< HEAD
-=======
 
->>>>>>> ae3399ae0ce2ae2f1b563f516d8edf10d5361dc0
         }
 
         //GET:api/jobDescriptions
@@ -51,9 +48,7 @@ namespace Arms.Api.Controllers
                     Include(l => l.eligibilityCriteria).Include(l => l.loc).ToList();
                 if(jobDescriptions != null)
                 {
-                   
-                        string value = Request.Headers["Authorization"];
-                    var response = new
+                  var response = new
                     {
                         success = true,
                         payload = new
@@ -375,7 +370,7 @@ namespace Arms.Api.Controllers
                 return StatusCode(500, response);
             }
         }
-<<<<<<< HEAD
+
         [HttpGet("search")]
         public  IActionResult searchJd(string keyword)
         {
@@ -388,9 +383,7 @@ namespace Arms.Api.Controllers
                if (!String.IsNullOrEmpty(keyword))
                 {
                    var searchedJds =  _context.JobDescription.Where(e => e.jobTitle.StartsWith(keyword)).ToList();
-=======
 
->>>>>>> ae3399ae0ce2ae2f1b563f516d8edf10d5361dc0
 
                     response.payload.data = searchedJds;
                     response.success = "true";
