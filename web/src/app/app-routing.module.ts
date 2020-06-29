@@ -1,3 +1,4 @@
+import { UpdateCandidateComponent } from './update-candidate/update-candidate.component';
 import { UpdateInterviewComponent } from './update-interview/update-interview.component';
 import { HrInterviewAssessementComponent } from './hr-interview-assessement/hr-interview-assessement.component';
 import { InterviewTrackerComponent } from "./interview-tracker/interview-tracker.component";
@@ -24,6 +25,7 @@ import { RoundComponent } from './round/round.component';
 import { CandidateAssessmentComponent } from "./candidate-assessment/containers/candidate-assessment.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { AnalyticsComponent } from "./dashboard/analytics/analytics.component";
+
 
 const routes: Routes = [
   { path: "assessment", component: HrInterviewAssessementComponent },
@@ -98,13 +100,18 @@ const routes: Routes = [
         component: CandidateComponent,
       },
       {
+        path: "update-candidate",
+        component: UpdateCandidateComponent,
+      },
+      {
         path: "interviews/round/:id/:append",
         component: RoundComponent,
       },
       {
         path: "create-interview",
         component: CreateInterviewComponent,
-      },{
+      },
+      {
         path: "update-interview",
         component: UpdateInterviewComponent,
       },
