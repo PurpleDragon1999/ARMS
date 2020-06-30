@@ -1,22 +1,16 @@
- <div
-  class="modal-dialog"
-  role="document"
-  style="overflow-y: initial !important;"
->
-  <div class="modal-content">
-    <div class="modal-header">
-        <h4 class="modal-title" id="exampleModalLabel">
-          <b>Update Job Application</b>
-        </h4>
-      </div>
-        <div class="modal-body">
-            <div class="modal-body">
-                <h4 class= "top"><b>Job Application</b></h4>
+<div class="modal-dialog" role="document" style="overflow-y: initial !important;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title" id="exampleModalLabel">
+              <b>Update Job Application</b>
+            </h4>
+          </div>
+            <div class="modal-body" style="max-height: 30rem; overflow-y: auto;">
                 <form name="form" #f="ngForm" (ngSubmit)="updateApplication(f)" >
         
                 <div class="form-group">
-                    <label for="appliedForJdId">Applied for JD<span class="asterick">*</span></label>
-                    <input [readOnly] type="text" name="appliedForJdId" class="form-control" [(ngModel)]="model.appliedForJdId" 
+                    <label for="appliedForJdId"><b> Applied for JD</b><span class="asterick">*</span></label>
+                    <input readOnly type="text" name="appliedForJdId" class="form-control" [(ngModel)]="model.appliedForJdId" 
                     placeholder="JD referral" #appliedForJdId="ngModel" id="appliedForJdId"
                     [ngClass]="{ 'is-invalid': f.submitted && appliedForJdId.invalid }">
                     <div *ngIf="f.submitted && appliedForJdId.invalid" class="invalid-feedback">
@@ -25,8 +19,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="appliedForPosition">Applied for Position<span class="asterick">*</span></label>
-                    <input [readOnly] type="text" name="appliedForPosition" class="form-control" [(ngModel)]="model.appliedForPosition" 
+                    <label for="appliedForPosition"><b> Applied for Position </b><span class="asterick">*</span></label>
+                    <input readOnly type="text" name="appliedForPosition" class="form-control" [(ngModel)]="model.appliedForPosition" 
                     placeholder="JD referral" #appliedForPosition="ngModel" id="appliedForPosition"
                     [ngClass]="{ 'is-invalid': f.submitted && appliedForPosition.invalid }">
                     <div *ngIf="f.submitted && appliedForPosition.invalid" class="invalid-feedback">
@@ -35,7 +29,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="Name">Full Name<span class="asterick">*</span></label>
+                    <label for="Name"><b> Full Name </b><span class="asterick">*</span></label>
                     <input type="text" name="name" class="form-control" 
                     [(ngModel)]="model.name"  placeholder="Name" #name="ngModel" id="name" 
                     [ngClass]="{ 'is-invalid': name.dirty && name.invalid}" required>
@@ -45,7 +39,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="education">Highest Qualification<span class="asterick">*</span></label>
+                    <label for="education"><b>Highest Qualification </b> <span class="asterick">*</span></label>
                     <input type="text" name="education" class="form-control" 
                     [(ngModel)]="model.education"  placeholder="eg: BTech" #education="ngModel" id="education" 
                     [ngClass]="{ 'is-invalid': education.dirty && education.invalid}" required>
@@ -55,7 +49,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="email">Email Address<span class="asterick">*</span></label>
+                    <label for="email"><b>Email Address</b> <span class="asterick">*</span></label>
                     <input type="email" name="email" placeholder="eg: example@gmail.com" 
                     class="form-control" id="email" [(ngModel)]="model.email" #email="ngModel" 
                     pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" 
@@ -69,8 +63,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="phone">Phone<span class="asterick">*</span></label>
-                    <input [readOnly]="type == 'progressTracker'" type="text" name="phone" class="form-control" 
+                    <label for="phone"><b> Phone </b><span class="asterick">*</span></label>
+                    <input type="text" name="phone" class="form-control" 
                     [(ngModel)]="model.phone"  placeholder="" #phone="ngModel" id="phone" 
                     [ngClass]="{ 'is-invalid': phone.dirty && phone.invalid}" required>
                     <div *ngIf="phone.dirty && phone.errors?.required" class="invalid-feedback">
@@ -79,9 +73,9 @@
                 </div>
 
                 <div class="form-group">
-                    <label >Experience</label>            
+                    <label ><b> Experience </b></label>            
                     <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-6">
                         <select type="text" name="experienceInYears" placeholder="In years" 
                         class="form-control" id="experienceInYears" [(ngModel)]="model.experienceInYears" #experienceInYears="ngModel" 
                         [ngClass]="{ 'is-invalid': experienceInYears.dirty && experienceInYears.invalid}" required>
@@ -95,7 +89,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-6">
                         <select type="text" name="experienceInMonths"                         placeholder="In months" 
                         class="form-control" id="experienceInMonths" [(ngModel)]="model.experienceInMonths" #experienceInMonths="ngModel" 
                         [ngClass]="{ 'is-invalid': experienceInMonths.dirty && experienceInMonths.invalid}" required>
@@ -110,7 +104,7 @@
                 </div>    
 
                 <div class="form-group">
-                    <label for="nationality">Nationality<span class="asterick">*</span></label>
+                    <label for="nationality"><b> Nationality</b><span class="asterick">*</span></label>
                     <input [readOnly] type="text" name="nationality" class="form-control" 
                     [(ngModel)]="model.nationality"  placeholder="eg: Indian" #nationality="ngModel" id="nationality" 
                     [ngClass]="{ 'is-invalid': nationality.dirty && nationality.invalid}" required>
@@ -120,9 +114,9 @@
                 </div>         
 
                 <div class="form-group">
-                    <label >Identification ID<span class="asterick">*</span></label>
+                    <label ><b>Identification ID</b><span class="asterick">*</span></label>
                     <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-6">
                         <select type="text" name="idProofTypeId"                         
                         class="form-control" id="idProofTypeId" [(ngModel)]="model.idProofTypeId" #idProofTypeId="ngModel" 
                         [ngClass]="{ 'is-invalid': (idProofTypeId.dirty && idProofTypeId.invalid) || (idProofTypeId.dirty && model.nationality=='Indian' && model.idProofTypeId != idProofTypes[0].id) || (idProofTypeId.dirty && model.nationality == null)}" required>
@@ -143,7 +137,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-6">
                         <input [readOnly] type="text" name="identificationNo"  
                         class="form-control" id="identificationNo" [(ngModel)]="model.identificationNo" #identificationNo="ngModel"
                         [ngClass]="{ 'is-invalid': (identificationNo.dirty && identificationNo.invalid) || (identificationNo.dirty && model.nationality == null)}" required>
@@ -162,31 +156,31 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Resume<span class="asterick">*</span></label>
-                    <div  class="input-group  col-xs-12">           
+                    <label><b>Resume</b><span class="asterick">*</span></label>
+                    <!-- <div  class="input-group  col-xs-12">           
                     <input type="file" accept=".pdf, .doc" name="file" id="file" class="form-control"
-                    ngModel #file="ngModel" 
+                    ngModel #file="ngModel" [(ngModel)]="model.cvName"
                     (change) = "uploadResume($event)"
                     [ngClass]="{ 'is-invalid': file.dirty && file.invalid}" required>
                     <div *ngIf="file.dirty  && file.errors?.required" class="invalid-feedback">
                         <div><i class="mdi mdi-alert-outline"></i>Resume is required</div>
                     </div>
-                    </div>
+                    </div> -->
 
                     <div  class="input-group col-xs-12"> 
-                    <a (click)="openResume()" ><i class="far fa-file-pdf"></i>  {{model.name}}|CV</a>
+                    <a (click)="openResume()" ><i class="far fa-file-pdf"></i>  {{model.cvName}}</a>
                     </div>
                 </div>   
 
-                <div class="d-flex flex-row-reverse" *ngIf="type !== 'progressTracker'" >
-                    <button type="submit" [disabled]="f.invalid" class="btn btn-gradient-danger mr-2" 
+                <div class="d-flex flex-row-reverse" >
+                    <button type="submit" [disabled]="f.pristine || f.invalid" class="btn btn-gradient-danger mr-2" 
                     ><b>Update</b></button>
-                    <button class="btn btn-light" ><b>Cancel</b></button>
+                    <button class="btn btn-light" (click)="closeUpdateModal()"><b>Cancel</b></button>
                 </div>
                 
                 </form>
             </div>
-        </div>
+        
     </div>
 </div> 
 

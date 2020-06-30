@@ -15,10 +15,12 @@ import { NgbModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
   providers : [UrltoFile]
 })
 export class UpdateCandidateComponent implements OnInit {
-  model : any;
+  model : any = {}
   resumeDetails : any;
   file : any;
   idProofTypes : any;
+  numbersInYears : Array<number>;
+  numbersInMonths : Array<number>;
 
   @Input()
   applicationId : number
@@ -33,7 +35,9 @@ export class UpdateCandidateComponent implements OnInit {
     private urltoFile : UrltoFile,
     private service : AppServicesService,
     private modalService : NgbModal
-  ) { }
+  ) { 
+    this.numbersInYears = Array(30).fill(0).map((x,i)=>i);
+    this.numbersInMonths = Array(12).fill(0).map((x,i)=>i);}
 
   ngOnInit() {
     this.getIdProofType()
@@ -41,8 +45,10 @@ export class UpdateCandidateComponent implements OnInit {
   }
 
   getIdProofType(){
+    
     this.service.getAllIdProofTypes().subscribe((res : any)=>{
       this.idProofTypes = res.payload.data
+    
     })
   }
 
@@ -95,17 +101,17 @@ export class UpdateCandidateComponent implements OnInit {
   
     if (isValid.success == true){
     
-      // this.candidateService.updateApplication(formData, this.applicationId).subscribe((res : IResponse)=>{
+      this.candidateService.updateApplication(formData, this.applicationId).subscribe((res : IResponse)=>{
         
-      //   if (res != null){
-      //     this.openModal(res)
-      //     if (res.success == true){
-            
-      //     }
-      //   } },
-      // error=>{
-      //   console.log(error)
-      // })
+        if (res != null){
+          this.openModal(res)
+          if (res.success == true){
+            this.closeUpdateModal()
+          }
+        } },
+      error=>{
+        
+      })
     }
     else{
       this.openModal(isValid);
@@ -124,8 +130,9 @@ export class UpdateCandidateComponent implements OnInit {
 
   loadApplicationData(){
     this.candidateService.getApplication(this.applicationId).subscribe((res:IResponse)=>{
-      console.log(res, "resp!!!!!")
+      
       if (res.success == true){
+        
         let application = res.payload.data
         this.model.appliedForJdId = application.job.code;
         this.model.appliedForPosition = application.job.jobTitle;
@@ -139,29 +146,33 @@ export class UpdateCandidateComponent implements OnInit {
         this.model.experienceInYears = (application.experience).split(" ")[0]
         this.model.experienceInMonths = (application.experience).split(" ")[2]
         this.getResume(application.id)
+        
         }
         else{
-          this.router.navigate(['/404']);
+          this.router.navigate(['error', 500]);
         }
-        console.log(this.model, "model")
+        
     })
   }
 
   getResume(id : number){
     this.candidateService.getResume(id).subscribe((res : IResponse)=>{
       this.resumeDetails = res.payload.data[0]
-      this.model.cv = this.resumeDetails.cv ? "data:application/" + this.resumeDetails.name.split(".")[1] +";base64," +this.resumeDetails.cv: null;
+      this.model.cvName = this.resumeDetails.name
+      this.model.cv = this.resumeDetails.cv ? "data:application/" + this.resumeDetails.name.split(".")[1] +";base64," +this.resumeDetails.cv: null;
       this.urltoFile.urltoFile(
       this.model.cv,
       this.resumeDetails.name,
       "application/octet-stream"
-                ).then(file=> {
-      this.file = file;
-                });
+                ).then(file=> {
+      this.file = file;
+                });
+                
     })
   }
 
   openResume(){
+    
     let fileType = this.resumeDetails.name.split(".")[1];
     const blob = new Blob([this.file], { type:"application/" + fileType });
     const url = window.URL.createObjectURL(blob);
@@ -172,6 +183,10 @@ export class UpdateCandidateComponent implements OnInit {
     if (event.target.files.length > 0) {
       this.file = event.target.files[0];
     }
+  }
+
+  closeUpdateModal(){
+    this.closeModal.emit()
   }
 
 }

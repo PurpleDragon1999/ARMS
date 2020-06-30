@@ -494,7 +494,7 @@ namespace Arms.Api.Controllers
         {
                  var interviewer = _context.Interviewer.FirstOrDefault(c => c.EmployeeId == employeeId && c.JobId == jobId);
                 var panel = _context.InterviewPanel.FirstOrDefault(c => c.Id == interviewer.InterviewPanelId);
-                Round round = _context.Round.Include(c => c.RoundType).FirstOrDefault(c => c.Id == panel.RoundId);
+                Round round = _context.Round.Include(c => c.RoundType).Include(c=> c.Interview).ThenInclude(c=> c.JobDescription).FirstOrDefault(c => c.Id == panel.RoundId);
                 return round;
            
 
@@ -515,10 +515,6 @@ namespace Arms.Api.Controllers
 
             return interviewsListing;
         }
-
-
-        
-      
 
     }
     //Email Class is made seperate to pass 3 different objects
