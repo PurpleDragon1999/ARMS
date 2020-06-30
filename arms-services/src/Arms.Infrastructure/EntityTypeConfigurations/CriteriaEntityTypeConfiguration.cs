@@ -23,7 +23,6 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .HasDefaultValueSql("(sysdatetime())");
 
             builder.Property(e => e.CreatedBy)
-                .IsRequired()
                 .HasColumnName("createdBy")
                 .HasMaxLength(255)
                 .IsUnicode(false);
@@ -38,7 +37,6 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .HasDefaultValueSql("(sysdatetime())");
 
             builder.Property(e => e.ModifiedBy)
-                .IsRequired()
                 .HasColumnName("modifiedBy")
                 .HasMaxLength(255)
                 .IsUnicode(false);
@@ -48,24 +46,17 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .HasColumnName("remarks");
 
             builder.HasOne(d => d.Assessment)
-                .WithMany()
+                .WithMany(x => x.Criteria)
                 .HasForeignKey(d => d.AssessmentId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_CR_ArmsAssessment");
 
-            // builder.HasOne(d => d.CriteriaType)
-            //     .WithMany(p => p.Criteria)
-            //     .HasForeignKey(d => d.CriteriaTypeId)
-            //     .OnDelete(DeleteBehavior.ClientSetNull)
-            //     .HasConstraintName("FK_CR_ArmsCriteriaType");
-           /* builder.HasOne(d => d.CriteriaType)
-                .WithMany(p => p.Criteria)
-
+          
             builder.HasOne(d => d.CriteriaType)
                 .WithMany()
                 .HasForeignKey(d => d.CriteriaTypeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_CR_ArmsCriteriaType");*/
+                .HasConstraintName("FK_CR_ArmsCriteriaType");
         }
     }
 }

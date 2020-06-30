@@ -1,4 +1,5 @@
-﻿using Arms.Application.Services.Users;
+﻿using Arms.Api.Middlewares;
+using Arms.Application.Services.Users;
 using Arms.Domain.Entities;
 using Arms.Infrastructure;
 using Microsoft.AspNetCore.Authorization;
@@ -120,6 +121,7 @@ namespace Arms.Api.Controllers
         {
             try
             {
+                TokenDecoder decodedToken = new TokenDecoder(Request);
                 for (int i = 0; i < id.Count; i++)
                 {
                     IdProofType checkinDb = _context.IdProofType.SingleOrDefault(c => c.Name == id[i].Name);
@@ -140,8 +142,8 @@ namespace Arms.Api.Controllers
                     {
 
                         Name = id[i].Name,
-                        CreatedBy = id[i].CreatedBy,
-                        ModifiedBy = id[i].ModifiedBy,
+                        CreatedBy = decodedToken.id,
+                        ModifiedBy = decodedToken.id
 
                     };
                     _context.IdProofType.Add(newIdentity);
@@ -182,6 +184,7 @@ namespace Arms.Api.Controllers
         {
             try
             {
+                TokenDecoder decodedToken = new TokenDecoder(Request);
                 IdProofType idInDb = _context.IdProofType.SingleOrDefault(c => c.Id == id);
                 if (idInDb == null)
                 {
@@ -200,13 +203,10 @@ namespace Arms.Api.Controllers
                 {
                     idInDb.Name = idObj.Name;
                 }
-                if(idObj.CreatedBy != null)
-                {
-                    idInDb.CreatedBy = idObj.CreatedBy;
-                }
+                
                 if (idObj.ModifiedBy != null)
                 {
-                    idInDb.ModifiedBy = idObj.ModifiedBy;
+                    idInDb.ModifiedBy = decodedToken.id;
                 }
 
 

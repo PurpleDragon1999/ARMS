@@ -64,4 +64,8 @@ appsettings.json
 Arms.Api.csproj.user
 
 [Dd]esktop.ini
+
 debug.log
+
+ARMS_DB_Scripts/
+

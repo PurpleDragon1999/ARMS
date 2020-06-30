@@ -71,7 +71,7 @@
                 <div *ngSwitchCase="columnName=='Job Position'">{{entry['job']?.jobTitle}}</div>
                 <div *ngSwitchCase="columnName=='status'" [ngClass]="{'shortlisted': entry.applicationStatusType.statusName=='Shortlisted', 'notShortlisted':entry.applicationStatusType.statusName=='NotShortlisted'}" >
                   {{entry['applicationStatusType']?.statusName }}</div>
-                <div *ngSwitchCase="columnName=='date'">{{entry[columnName] | date}}</div>
+                  <div *ngSwitchCase="columnName=='roundDate'">{{entry[columnName]|date}}</div>
                 <div *ngSwitchCase="columnName=='jdObjectId'">{{entry[columnName]?.jdTitle}}</div>
                 <div *ngSwitchCase="columnName=='roundType'">{{entry['roundType']?.name}}</div>
                 <div *ngSwitchDefault>{{entry[columnName]}}</div>

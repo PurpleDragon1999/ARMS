@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Arms.Api.Middlewares;
 using Arms.Application.Services.Users;
 using Arms.Domain.Entities;
 using Arms.Infrastructure;
@@ -107,6 +108,7 @@ namespace Arms.Api.Controllers
         {
                 try
                 {
+                TokenDecoder decodedToken = new TokenDecoder(Request);
                 for (int i = 0; i < employmentType.Count; i++)
                 {
                     EmploymentType empType = _context.employmentType.SingleOrDefault
@@ -127,8 +129,8 @@ namespace Arms.Api.Controllers
                     EmploymentType newEmploymentType = new EmploymentType
                     {
                         employmentTypeName = employmentType[i].employmentTypeName,
-                        createdBy = employmentType[i].createdBy,
-                        modifiedBy = employmentType[i].modifiedBy
+                        createdBy = decodedToken.id,
+                        modifiedBy = decodedToken.id
                     };
                     _context.employmentType.Add(newEmploymentType);
                     _context.SaveChanges();
@@ -167,6 +169,7 @@ namespace Arms.Api.Controllers
         {
             try
             {
+                TokenDecoder decodedToken = new TokenDecoder(Request);
                 EmploymentType empTypeInDb = _context.employmentType.SingleOrDefault(c => c.Id == id);
                 if (empTypeInDb == null)
                 {
@@ -182,6 +185,8 @@ namespace Arms.Api.Controllers
 
                 }
                 empTypeInDb.employmentTypeName = employmentType.employmentTypeName;
+                empTypeInDb.modifiedBy = decodedToken.id;
+                    
                 _context.employmentType.Update(empTypeInDb);
                 _context.SaveChanges();
                 var response = new

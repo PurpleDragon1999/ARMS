@@ -2,70 +2,60 @@
   <div class="card">
     <div class="card-body">
       <h4 class="card-title">Assessment Form</h4>
-
-      <div class="form-group">
-        <div class="input-group">
-          <select class="form-control" name="round" id="round_id">
-            <option value="null" disabled>Enter Round</option>
-            <option value="round-1">Round 1</option>
-            <option value="round-2">Round 2</option>
-            <option value="round-3">Round 3</option>
-            <option value="round-4">Round 4</option>
-            <option value="round-5">Round 5</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="criteria-group">
-        <div class="form-group row">
-          <label for="criteria_1" class="col-sm-3 col-form-label">Criteria 1</label>
-          <div class="col-sm-9">
-            <input type="number" min="0" max="10" class="form-control" id="criteria_1" placeholder="Criteria 1" />
-          </div>
-          <div class="col-sm-9 ml-auto">
-            <input type="text" class="form-control" placeholder="Remarks" />
+      <form #form="ngForm" (ngSubmit)="convertDataAccordingToApi(form.value)" novalidate>
+        <div class="form-group">
+          <div class="input-group">
+            <select class="form-control" name="roundId" id="round_id" [ngModel]="selectedRoundId"
+              (ngModelChange)="getAssessmentAndCriteriaAccordingToSelectedRound(selectedRound.value)" required
+              #selectedRound="ngModel">
+              <option [value]="null" disabled>Enter Round</option>
+              <option *ngFor="let round of dataConstructedForForm" [selected]="round.roundId === selectedRoundId"
+                [value]="round.roundId">{{ round.roundTypeName | titlecase }}</option>
+            </select>
           </div>
         </div>
 
-        <div class="form-group row">
-          <label for="criteria_2" class="col-sm-3 col-form-label">Criteria 2</label>
-          <div class="col-sm-9">
-            <input type="number" min="0" max="10" class="form-control" id="criteria_2" placeholder="Criteria 2" />
-          </div>
-          <div class="col-sm-9 ml-auto">
-            <input type="text" class="form-control" placeholder="Remarks" />
+        <div class="criteria-group" *ngIf="selectedRoundId">
+          <ng-template ngFor let-round [ngForOf]="dataConstructedForForm">
+            <ng-template let-criteria ngFor [ngForOf]="round.criterias">
+              <div class="form-group row" *ngIf="round.roundId == selectedRoundId">
+                <label [for]="criteria.criteriaTypeId"
+                  class="col-sm-3 col-form-label">{{ criteria.criteriaName | titlecase }}: </label>
+                <div class="col-sm-9">
+                  <input type="number" [name]="'marks-' + criteria.criteriaTypeId" min="0" max="10" class="form-control"
+                    [id]="criteria.criteriaTypeId" [ngClass]="{ 'is-invalid': marks.dirty && marks.invalid }"
+                    placeholder="Marks" [ngModel]="formData['marks-' + criteria.criteriaTypeId] || 0" required
+                    #marks="ngModel" />
+                </div>
+                <div class="col-sm-9 ml-auto">
+                  <input type="text" [name]="'remarks-' + criteria.criteriaTypeId" class="form-control"
+                    [ngClass]="{ 'is-invalid': remarks.dirty && remarks.invalid }" placeholder="Remarks"
+                    [ngModel]="formData['remarks-' + criteria.criteriaTypeId] || ''" #remarks="ngModel" />
+                </div>
+              </div>
+            </ng-template>
+          </ng-template>
+        </div>
+
+        <div class="form-group">
+          <div class="input-group">
+            <textarea class="form-control" name="feedback" id="feedback" rows="4" placeholder="Feedback"
+              [ngModel]="formData.feedback"></textarea>
           </div>
         </div>
 
-        <div class="form-group row">
-          <label for="criteria_3" class="col-sm-3 col-form-label">Criteria 3</label>
-          <div class="col-sm-9">
-            <input type="number" min="0" max="10" class="form-control" id="criteria_3" placeholder="Criteria 3" />
+        <div class="form-group">
+          <div class="input-group">
+            <select class="form-control" name="result" id="result" [ngModel]="formData.result" required>
+              <option value="null" disabled>Enter Result</option>
+              <option value="1">Positive</option>
+              <option value="0">Negative</option>
+            </select>
           </div>
-          <div class="col-sm-9 ml-auto">
-            <input type="text" class="form-control" placeholder="Remarks" />
-          </div>
         </div>
-      </div>
 
-      <div class="form-group">
-        <div class="input-group">
-          <textarea class="form-control" id="feedback" rows="4" placeholder="Feedback"></textarea>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <div class="input-group">
-          <select class="form-control" name="result" id="result">
-            <option value="null" disabled>Enter Result</option>
-            <option value="positive">Positive</option>
-            <option value="negative">Negative</option>
-          </select>
-        </div>
-      </div>
-
-      <button class="btn btn-gradient-primary btn-block" type="submit">Save Changes</button>
-
+        <button class="btn btn-gradient-danger btn-block" [disabled]="form.invalid" type="submit">Save Changes</button>
+      </form>
     </div>
   </div>
 </div>

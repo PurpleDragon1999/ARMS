@@ -1,5 +1,5 @@
 
-﻿using Hrms.Core.Domains.Entities;
+ using Hrms.Core.Domains.Entities;
 using System;
 using System.Collections.Generic;
 
@@ -7,11 +7,7 @@ namespace Arms.Domain.Entities
 {
     public partial class Application : Entity
     {
-        public Application()
-        {
-            Assessment = new HashSet<Assessment>();
-        }
-
+        
         public int Id { get; set; }
         public string Code { get; set; }
         public string Education { get; set; }

@@ -76,6 +76,9 @@ namespace Arms.Api.Startup
             {
                 app.UseHsts();
             }
+
+            app.UseAuthentication();
+
             app.UseCors(builder =>
             builder.AllowAnyOrigin()
                     .AllowAnyMethod()
@@ -88,10 +91,6 @@ namespace Arms.Api.Startup
 
 
 
-        }
-        private void ConfigureAuth(IApplicationBuilder app)
-        {
-            app.UseAuthentication();
         }
     }
 }

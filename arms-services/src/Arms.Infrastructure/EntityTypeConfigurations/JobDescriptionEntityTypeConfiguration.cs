@@ -92,7 +92,7 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
              .HasForeignKey(d => d.eligibilityCriteriaId)
              .OnDelete(DeleteBehavior.ClientSetNull)
              .HasConstraintName("FK_eligibilityCriteria");
-           
+
         }
     }
 }

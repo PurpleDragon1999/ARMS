@@ -1,3 +1,4 @@
+import { MinDateService } from './../utilities/min-date.service';
 import { Observable } from 'rxjs';
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { InterviewService } from './../services/interview.service';
@@ -18,6 +19,7 @@ export class UpdateInterviewComponent implements OnInit {
   constructor(
     private service: InterviewService,
     private modalService : NgbModal,
+    private minDateService:MinDateService
   ) {}
 
   ngOnInit() {
@@ -25,6 +27,7 @@ export class UpdateInterviewComponent implements OnInit {
     this.getRoundTypes();
     this.onDisplayInterview(this.id);
     this.onDisplayRounds(this.id,this.append);  
+    this.minimumDate=this.minDateService.setMinimumDate();
   }
 
   interview:any={
@@ -33,6 +36,7 @@ export class UpdateInterviewComponent implements OnInit {
     }
     ]
   }
+  minimumDate:string;
 
   updateObj:any={}
 
@@ -114,6 +118,7 @@ export class UpdateInterviewComponent implements OnInit {
       this.updateObj.NoOfRounds = formValue.noOfRounds;
       
       this.service.updateInterview(this.id, this.updateObj).subscribe((res:any) => {
+        console.log(res);
         const modalRef = this.modalService.open(ModalComponent);
         modalRef.componentInstance.shouldConfirm = false;
         modalRef.componentInstance.success = res.success;
