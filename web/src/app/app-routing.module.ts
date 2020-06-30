@@ -74,6 +74,14 @@ const routes: Routes = [
         component: EmployeeComponent,
       },
       {
+        path: "job-desc",
+        component: JdListComponent,
+      },
+      {
+        path: "job-desc/new",
+        component: JdFormComponent,
+      },
+      {
         path: "interviews",
         component: InterviewListComponent,
       },

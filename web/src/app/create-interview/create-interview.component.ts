@@ -1,3 +1,4 @@
+import { EnvVarService } from "./../utilities/env-var.service";
 import { MinDateService } from "./../utilities/min-date.service";
 import { InterviewService } from "./../services/interview.service";
 import { Component, OnInit, Input } from "@angular/core";
@@ -20,7 +21,8 @@ export class CreateInterviewComponent implements OnInit {
     private service: InterviewService,
     private router: Router,
     private modalService: NgbModal,
-    private minDateService: MinDateService
+    private minDateService: MinDateService,
+    private _env: EnvVarService
   ) {}
 
   ngOnInit() {
@@ -82,9 +84,16 @@ export class CreateInterviewComponent implements OnInit {
         modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
           modalRef.close();
           if (res.status == 200) {
-            this.router.navigate([
-              `/admin/interview/select-panel/${res.body.payload.data.jobId}/${res.body.payload.data.interviewId}`,
-            ]);
+            let role = this.AppServicesService.tokenDecoder().role;
+            if (role === this._env.ADMIN) {
+              this.router.navigate([
+                `/admin/interview/select-panel/${res.body.payload.data.jobId}/${res.body.payload.data.interviewId}`,
+              ]);
+            } else if (role === this._env.SUPERUSER) {
+              this.router.navigate([
+                `/superuser/interview/select-panel/${res.body.payload.data.jobId}/${res.body.payload.data.interviewId}`,
+              ]);
+            }
           }
         });
       }

@@ -15,7 +15,7 @@ namespace Arms.Api.Controllers
 {
     [Route("api/interviewer")]
     [ApiController]
-    
+    [Authorize(Roles = "Admin,SuperAdministrator")]
     public class InterviewerController : ControllerBase
     {
         ArmsDbContext _context;
