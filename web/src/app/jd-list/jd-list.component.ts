@@ -22,7 +22,7 @@ export class JdListComponent implements OnInit {
   jdObject: any;
   pager: any;
   obj:any;
-  searchJd:any;
+ 
   constructor(private _service: AppServicesService, private router: Router,
               private modalService: NgbModal,private jobService:JobService) {}
   imageUrl=
@@ -132,11 +132,12 @@ export class JdListComponent implements OnInit {
     } else { return 0; }
   }
 
-  // searchJd(character?: string, page?: number){
-  //   this._service.search(character, page).subscribe(res=> {
-  //     this.jobsList = res.payload.data.dataList
-  //     this.pager = res.payload.data.pager
-  //   });
-  // }
+  searchJd(character: string){
+    console.log(character,"ch");
+    this.jobService.searchJd(character).subscribe(res=> {
+      this.jobsList = res.payload.data;
+      //this.pager = res.payload.data.pager
+    });
+  }
 
 }

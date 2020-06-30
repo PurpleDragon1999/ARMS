@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Arms.Api.Middlewares;
 using Arms.Application.Services.Users;
 using Arms.Domain.Entities;
 using Arms.Infrastructure;
@@ -108,7 +109,7 @@ namespace Arms.Api.Controllers
         public IActionResult CreateEligibilityCriteria(List<EligibilityCriteria> eligibility)
         {
             try
-            {
+            { TokenDecoder decodedToken = new TokenDecoder(Request);
                 for (int i = 0; i < eligibility.Count; i++)
                 {
                     EligibilityCriteria checkinDb = _context.eligibilityCriteria.SingleOrDefault
@@ -129,8 +130,8 @@ namespace Arms.Api.Controllers
                     EligibilityCriteria newEligibilityCriteria = new EligibilityCriteria
                     {
                         eligibilityCriteriaName = eligibility[i].eligibilityCriteriaName,
-                        createdBy = eligibility[i].createdBy,
-                        modifiedBy = eligibility[i].modifiedBy
+                        createdBy = decodedToken.id,
+                        modifiedBy = decodedToken.id
                     };
                     _context.eligibilityCriteria.Add(newEligibilityCriteria);
                     _context.SaveChanges();
@@ -169,6 +170,7 @@ namespace Arms.Api.Controllers
         {
             try
             {
+                TokenDecoder decodedToken = new TokenDecoder(Request);
                 EligibilityCriteria checkInDb = _context.eligibilityCriteria.SingleOrDefault(c => c.Id == id);
                 if (checkInDb == null)
                 {
@@ -177,13 +179,14 @@ namespace Arms.Api.Controllers
                         success = false,
                         payload = new
                         {
-                            message = "This Eligibility Criteiria does not exist"
+                            message = "This Eligibility Criteria does not exist"
                         }
                     };
                     return StatusCode(404, resNull);
 
                 }
                 checkInDb.eligibilityCriteriaName = eligibility.eligibilityCriteriaName;
+                checkInDb.modifiedBy = decodedToken.id;
                 _context.eligibilityCriteria.Update(checkInDb);
                 _context.SaveChanges();
                 var response = new

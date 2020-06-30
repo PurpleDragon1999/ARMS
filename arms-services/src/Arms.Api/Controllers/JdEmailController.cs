@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading.Tasks;
 using Arms.Application.Services.Users;
 using Arms.Domain.CustomEntities;
@@ -42,6 +44,7 @@ namespace Arms.Api.Controllers
                 };
                 JobDescription jdObject = _context.JobDescription.SingleOrDefault(c => c.Id == emailObj.jobDescriptionId);
                 string[] emailList = emailObj.emailList;
+                showDocument(jdObject.pdfBlobData);
                 string emailHtmlBody = GenerateEmailBody(jdObject);
                 mailHelper.MailFunction(emailHtmlBody, emailList);
                 return StatusCode(200, response);
@@ -91,6 +94,19 @@ namespace Arms.Api.Controllers
             ";
             return output;
         }
+        public void showDocument(byte[] blobPdf)
+        {
+            string data = string.Empty;
+
+           
+                string temp_inBase64 = Convert.ToBase64String(blobPdf);
+                  //MemoryStream ms = new MemoryStream(Convert.FromBase64String(temp_inBase64));
+                  //PdfDocument doc = new PdfDocument();
+                  // doc.LoadFromStream(ms);
+                  // doc.SaveToFile("output.pdf");
+
+        }
+
 
     }
 }

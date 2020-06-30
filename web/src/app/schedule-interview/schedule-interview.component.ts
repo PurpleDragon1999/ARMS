@@ -3,7 +3,8 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { AppServicesService } from "src/app/services/app-services.service";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
-
+import { NgbModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
+import { ModalComponent } from "./../reusable-components/modal/modal.component";
 @Component({
   selector: "app-schedule-interview",
   templateUrl: "./schedule-interview.component.html",
@@ -33,7 +34,8 @@ export class ScheduleInterviewComponent implements OnInit {
   constructor(
     private _appService: AppServicesService,
     private _activatedRoute: ActivatedRoute,
-    private _router: Router
+    private _router: Router,
+    private modalService: NgbModal,
   ) {}
 
   ngOnInit() {
@@ -219,5 +221,12 @@ export class ScheduleInterviewComponent implements OnInit {
      for(let i=0;i<this.tableData.length;i++){
           this.schedulePanelHelper(i);
      }
+     const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
+     modalRef.componentInstance.shouldConfirm = false;
+     modalRef.componentInstance.success = true;
+     modalRef.componentInstance.message = "Panels Scheduled Successfully";
+     modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+       modalRef.close();
+     });
    }
 }
