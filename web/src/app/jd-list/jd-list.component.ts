@@ -139,4 +139,8 @@ export class JdListComponent implements OnInit {
   //   });
   // }
 
+  appliedCandidates(jobId : number){
+    this.router.navigate(['admin/candidate',jobId]);
+  }
+
 }

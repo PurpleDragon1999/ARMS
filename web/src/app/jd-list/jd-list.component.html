@@ -39,6 +39,11 @@
                   (click)="jdUpdateModal(job.id)"
                   ></i>
                 </a>
+                <a class="w3-bar-item w3-button">
+                  <i class="mdi mdi-account-multiple float-right "
+                (click)="appliedCandidates(job.id)" 
+                ></i>
+                </a>
                 <a  class="w3-bar-item w3-button">
                   <i class="mdi mdi-download float-right"
                   (click)="downloadPdf(job.id)"
@@ -59,6 +64,10 @@
               </div>
             </div>
             <!--large screens-->
+            
+              <i class="mdi mdi-account-multiple float-right d-none d-lg-block"
+              (click)="appliedCandidates(job.id)" 
+              ></i>
             <i
               class="mdi mdi-delete float-right d-none d-lg-block"
               (click)="deleteJd(job.id)"

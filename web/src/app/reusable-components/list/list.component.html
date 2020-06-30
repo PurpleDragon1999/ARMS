@@ -15,7 +15,7 @@
             </div>
           </form>
         </div>
-        <div *ngIf="role == 'Employee'" class="d-flex">
+        <div *ngIf="role == 'Admin' && title=='candidate' " class="d-flex">
           <div class="shortlisting pt-2 pr-2 ">
           <a (click)=toggleDisplayDiv()>Start Shortlisting</a>
           </div>
