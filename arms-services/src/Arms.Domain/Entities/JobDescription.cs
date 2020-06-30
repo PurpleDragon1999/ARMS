@@ -1,5 +1,4 @@
-
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Hrms.Core.Domains.Entities;
 using Microsoft.AspNetCore.Http;
@@ -12,7 +11,7 @@ namespace Arms.Domain.Entities
     public class JobDescription : Entity
     {
 
-        
+
         public int Id { get; set; }
         public string code { get; set; }
         public int eligibilityCriteriaId { get; set; }
@@ -31,11 +30,8 @@ namespace Arms.Domain.Entities
         public DateTime createdAt { get; set; }
         public DateTime modifiedAt { get; set; }
         public Byte[] pdfBlobData { get; set; }
-    
         public string createdBy { get; set; }
         public string modifiedBy { get; set; }
-
-
 
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Arms.Api.Middlewares;
 using Arms.Application.Services.Users;
 using Arms.Domain.Entities;
 using Arms.Infrastructure;
@@ -67,7 +68,7 @@ namespace Arms.Api.Controllers
             try
             {
                Loc location = _context.Loc.
-                    SingleOrDefault(c => c.id == id);
+                    SingleOrDefault(c => c.Id == id);
 
 
 
@@ -118,11 +119,14 @@ namespace Arms.Api.Controllers
         //POST:api/Location
         [Authorize(Roles = "SuperAdministrator")]
         [HttpPost]
-        public IActionResult CreateLocation(Location location)
+        public IActionResult CreateLocation(List<Loc> location)
         {
             try
             {
-                Loc checkinDb = _context.Loc.SingleOrDefault(c => c.locationName == location.locationName);
+                TokenDecoder decodedToken = new TokenDecoder(Request)
+;                for (int i = 0; i < location.Count; i++)
+                { 
+                    Loc checkinDb = _context.Loc.SingleOrDefault(c => c.locationName == location[i].locationName);
                 if (checkinDb != null)
                 {
                     var resAlreadyExists = new
@@ -136,18 +140,22 @@ namespace Arms.Api.Controllers
                     };
                     return StatusCode(400, resAlreadyExists);
                 }
-               Loc locationObj = new Loc
+                Loc locationObj = new Loc
                 {
-                    locationName = location.locationName
+                    locationName = location[i].locationName,
+                    createdBy = decodedToken.id,
+                    modifiedBy = decodedToken.id
                 };
                 _context.Loc.Add(locationObj);
                 _context.SaveChanges();
+
+            }
                 var response = new
                 {
                     success = true,
                     payload = new
                     {
-                        data = locationObj,
+                        data = location,
                         message = " Location Created Successfully"
                     }
 
@@ -156,8 +164,6 @@ namespace Arms.Api.Controllers
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.GetType().FullName);
-                Console.WriteLine(ex.Message);
                 var response = new
                 {
                     success = false,
@@ -177,7 +183,8 @@ namespace Arms.Api.Controllers
         {
             try
             {
-               Loc loc = _context.Loc.SingleOrDefault(c => c.id == id);
+                TokenDecoder decodedToken = new TokenDecoder(Request); 
+               Loc loc = _context.Loc.SingleOrDefault(c => c.Id == id);
                 if (loc == null)
                 {
                     var resNull = new
@@ -194,6 +201,8 @@ namespace Arms.Api.Controllers
                 }
 
                loc.locationName = location.locationName;
+                loc.modifiedBy = decodedToken.id;
+
                
                 _context.SaveChanges();
                 var response = new
@@ -229,7 +238,7 @@ namespace Arms.Api.Controllers
         {
             try
             {
-                Loc loc = _context.Loc.SingleOrDefault(c => c.id == id);
+                Loc loc = _context.Loc.SingleOrDefault(c => c.Id == id);
                 if (loc == null)
                 {
                     var resNull = new

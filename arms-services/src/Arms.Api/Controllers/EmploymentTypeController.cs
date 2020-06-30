@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Arms.Api.Middlewares;
 using Arms.Application.Services.Users;
 using Arms.Domain.Entities;
 using Arms.Infrastructure;
@@ -94,7 +95,7 @@ namespace Arms.Api.Controllers
                     success = false,
                     payload = new
                     {
-                        message = ex.InnerException.Message
+                        message = ex.Message
                     }
 
                 };
@@ -103,37 +104,43 @@ namespace Arms.Api.Controllers
         }
         [HttpPost]
         [Authorize(Roles = "SuperAdministrator")]
-        public IActionResult CreateEmploymentType(EmploymentType employmentType)
+        public IActionResult CreateEmploymentType(List<EmploymentType> employmentType)
         {
-            try
-            {
-                EmploymentType empType = _context.employmentType.SingleOrDefault
-                    (c => c.employmentTypeName == employmentType.employmentTypeName);
-                if (empType != null)
+                try
                 {
-                    var resAlreadyExists = new
+                TokenDecoder decodedToken = new TokenDecoder(Request);
+                for (int i = 0; i < employmentType.Count; i++)
+                {
+                    EmploymentType empType = _context.employmentType.SingleOrDefault
+                        (c => c.employmentTypeName == employmentType[i].employmentTypeName);
+                    if (empType != null)
                     {
-                        success = false,
-                        payload = new
+                        var resAlreadyExists = new
                         {
-                            message = "This Employment Type already exists"
-                        }
+                            success = false,
+                            payload = new
+                            {
+                                message = "This Employment Type already exists"
+                            }
 
+                        };
+                        return StatusCode(400, resAlreadyExists);
+                    }
+                    EmploymentType newEmploymentType = new EmploymentType
+                    {
+                        employmentTypeName = employmentType[i].employmentTypeName,
+                        createdBy = decodedToken.id,
+                        modifiedBy = decodedToken.id
                     };
-                    return StatusCode(400, resAlreadyExists);
+                    _context.employmentType.Add(newEmploymentType);
+                    _context.SaveChanges();
                 }
-                EmploymentType newEmploymentType = new EmploymentType
-                {
-                    employmentTypeName = employmentType.employmentTypeName
-                };
-                _context.employmentType.Add(newEmploymentType);
-                _context.SaveChanges();
                 var response = new
                 {
                     success = true,
                     payload = new
                     {
-                        data = newEmploymentType,
+                        data = employmentType,
                         message = "Employment Type Created Successfully"
                     }
 
@@ -147,7 +154,7 @@ namespace Arms.Api.Controllers
                     success = false,
                     payload = new
                     {
-                        message = ex.InnerException.Message
+                        message = ex.Message
                     }
 
                 };
@@ -162,6 +169,7 @@ namespace Arms.Api.Controllers
         {
             try
             {
+                TokenDecoder decodedToken = new TokenDecoder(Request);
                 EmploymentType empTypeInDb = _context.employmentType.SingleOrDefault(c => c.Id == id);
                 if (empTypeInDb == null)
                 {
@@ -177,6 +185,8 @@ namespace Arms.Api.Controllers
 
                 }
                 empTypeInDb.employmentTypeName = employmentType.employmentTypeName;
+                empTypeInDb.modifiedBy = decodedToken.id;
+                    
                 _context.employmentType.Update(empTypeInDb);
                 _context.SaveChanges();
                 var response = new
@@ -198,7 +208,7 @@ namespace Arms.Api.Controllers
                     success = false,
                     payload = new
                     {
-                        message = ex.InnerException.Message
+                        message = ex.Message
                     }
 
                 };
@@ -247,7 +257,7 @@ namespace Arms.Api.Controllers
                     success = false,
                     payload = new
                     {
-                        message = ex.InnerException.Message
+                        message = ex.Message
                     }
 
                 };

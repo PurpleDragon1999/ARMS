@@ -32,7 +32,7 @@
            <div class="form-group">
              <label for="openingDate"><b>Opening date </b></label>
              <input type="date" #openingDate class="form-control" formControlName="openingDate"
-               [ngClass]="{ 'is-invalid': submitted && formControls.openingDate.errors }" />
+               [ngClass]="{ 'is-invalid': submitted && formControls.openingDate.errors }"  [min]=minimumDate />
              <div *ngIf="submitted && formControls.openingDate.errors" class="invalid-feedback">
                <div *ngIf="formControls.openingDate.errors.required"><i class="mdi mdi-alert-outline"></i> Opening
                  Date is required</div>
@@ -41,7 +41,7 @@
 
            <div class="form-group">
              <label for="closingDate"><b>Closing Date </b></label>
-             <input type="date" #closingDate class="form-control" formControlName="closingDate" />
+             <input type="date" #closingDate class="form-control" formControlName="closingDate" [min]=minimumDate/>
              <div *ngIf="error.isError" class="alert alert-danger">
                {{ error.errorMessage }}
              </div>

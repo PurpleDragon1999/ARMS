@@ -62,6 +62,7 @@ export class RoundComponent implements OnInit {
     modalRef.componentInstance.isRounds = true;
     modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
       modalRef.close();
+    //  this.getRounds();
     });
   }
 

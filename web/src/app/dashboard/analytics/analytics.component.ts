@@ -12,7 +12,9 @@ export class AnalyticsComponent implements OnInit {
   // bar chart data
   public barChartOptions = {
     scaleShowVerticalLines: false,
-    responsive: true
+    responsive: true,
+    maintainAspectRatio: true,
+    barChartLegend : true
   };
   public barChartLabels = ['Java Developer', 'Full-stack developer', 'UI developer', 'Data analyst', 'DB administrator'];
   public barChartType = 'bar';
@@ -26,6 +28,10 @@ export class AnalyticsComponent implements OnInit {
   public doughnutChartLabels = ['Java Developer', 'Full-stack developer', 'UI developer', 'Data analyst', 'DB administrator'];
   public doughnutChartData = [28, 20, 40, 19, 27];
   public doughnutChartType = 'doughnut';
+  public doughnutChartOptions = {
+    responsive: true,
+    maintainAspectRatio: true
+  };
 
   ngOnInit() {
   }

@@ -14,8 +14,9 @@ import {
   templateUrl: "./location.component.html",
   styleUrls: ["./location.component.scss"],
 })
+
 export class LocationComponent implements OnInit {
-  ngOnInit() {}
+  ngOnInit() { }
 
   locationForm: FormGroup;
   addLocations: Boolean = false;
@@ -36,13 +37,16 @@ export class LocationComponent implements OnInit {
       this.locationList = response.payload.data;
     });
   }
+
   locations(): FormArray {
     return this.locationForm.get("locations") as FormArray;
   }
 
   newLocation(): FormGroup {
     return this.fb.group({
-      locName: "",
+      locationName: "",
+      createdBy: this._service.tokenDecoder().userName,
+      modifiedBy: this._service.tokenDecoder().userName
     });
   }
 
@@ -51,33 +55,52 @@ export class LocationComponent implements OnInit {
     this.locations().push(this.newLocation());
   }
 
+  deleteNewEntry(locIndex){
+    this.locations().removeAt(locIndex);
+    if ((this.locationForm.get('locations').value.length)==0) {
+      this.addLocations = false;
+    }
+  }
+
   removeLocation(locIndex: number) {
     const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
-
     modalRef.componentInstance.shouldConfirm = true;
-
     modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
       modalRef.close();
     });
-    this.locations().removeAt(locIndex);
-    if (locIndex == 0) {
-      this.addLocations = false;
-    }
-    return this._service.deleteLocation(locIndex).subscribe(
+    
+    modalRef.componentInstance.emitPerformRequest.subscribe(() => {
+      this.deleteNewEntry(locIndex);
+      
+      return this._service.deleteLocation(locIndex).subscribe(
       (response: any) => {
         this.loadLocations();
-        modalRef.componentInstance.success = response.body.result.success;
+        modalRef.componentInstance.success = response.body.success;
         modalRef.componentInstance.message =
-          response.body.result.payload.message;
+          response.body.payload.message;
       },
       (error: HttpErrorResponse) => {
         modalRef.componentInstance.success = error.error.success;
         modalRef.componentInstance.message = error.error.payload.message;
       }
-    );
+      );
+    });
   }
 
+
   onSubmit() {
-    console.log(this.locationForm.value);
+    this._service.createLocation(this.locationForm.get('locations').value).subscribe((res:any) => {
+      const modalRef = this.modalService.open(ModalComponent);
+      modalRef.componentInstance.shouldConfirm = false;
+      modalRef.componentInstance.success = res.success;
+      modalRef.componentInstance.message = res.payload.message;
+      modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+        modalRef.close();
+        
+        this.locationForm.reset();
+        this.addLocations = false;
+        this.loadLocations();
+      });
+    })
   }
 }

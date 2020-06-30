@@ -12,15 +12,14 @@ using System.IO;
 using System.Reflection.Metadata;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using Arms.Api.Middlewares;
 
 namespace Arms.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-  
     public class RoundTypeController : BaseController
     {
-       
         ArmsDbContext _context;
         public RoundTypeController(ArmsDbContext armsContext)
         {
@@ -28,18 +27,19 @@ namespace Arms.Api.Controllers
         }
         //GET:api/roundType
         [HttpGet]
-        [Authorize(Roles = "SuperAdministrator,Admin")]
-        public IActionResult GetRoundTypes()
+        public async Task<IActionResult> GetRoundTypes(int? pageNumber, int? pageSize)
         {
             try
             {
-                List<RoundType> roundTypes = _context.RoundType.ToList();
+                var paginatedRoundList = from rt in _context.RoundType select rt;
+                var paginatedList = await PaginatedList<RoundType>.CreateAsync(paginatedRoundList.AsNoTracking(), pageNumber ?? 1, pageSize ?? 5);
+                
                 var response = new
                 {
-                    success = "true",
+                    success = true,
                     payload = new
                     {
-                        data = roundTypes,
+                        data = paginatedList,
                         message = "Round Types Retrieved Successfully"
                     }
 
@@ -50,7 +50,7 @@ namespace Arms.Api.Controllers
             {
                 var response = new
                 {
-                    success = "false",
+                    success = false,
                     payload = new
                     {
                         message = ex.Message
@@ -59,7 +59,6 @@ namespace Arms.Api.Controllers
                 };
                 return StatusCode(500, response);
             }
-
         }
 
 
@@ -75,7 +74,7 @@ namespace Arms.Api.Controllers
                 {
                     var resNull = new
                     {
-                        success = "false",
+                        success = false,
                         payload = new
                         {
                             message = "No such round type exists"
@@ -88,7 +87,7 @@ namespace Arms.Api.Controllers
 
                     var response = new
                     {
-                        success = "true",
+                        success = true,
                         payload = new
                         {
                             data = round,
@@ -103,7 +102,7 @@ namespace Arms.Api.Controllers
             {
                 var response = new
                 {
-                    success = "false",
+                    success = false,
                     payload = new
                     {
                         message = ex.Message
@@ -122,16 +121,17 @@ namespace Arms.Api.Controllers
         {
             try
             {
+                TokenDecoder decodedToken = new TokenDecoder(Request);
                 RoundType newround = new RoundType
                 {
                     Name = round.Name,
-                    CreatedBy=round.CreatedBy,
+                    CreatedBy=decodedToken.id,
                 };
                 _context.RoundType.Add(newround);
                 _context.SaveChanges();
                 var response = new
                 {
-                    success = "true",
+                    success = true,
                     payload = new
                     {
                         data = newround,
@@ -143,11 +143,9 @@ namespace Arms.Api.Controllers
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.GetType().FullName);
-                Console.WriteLine(ex.Message);
                 var response = new
                 {
-                    success = "false",
+                    success = false,
                     payload = new
                     {
                         message = ex.Message
@@ -164,12 +162,13 @@ namespace Arms.Api.Controllers
         {
             try
             {
+                TokenDecoder decodedToken = new TokenDecoder(Request);
                 RoundType roundInDb = _context.RoundType.SingleOrDefault(c => c.Id == id);
                 if (roundInDb == null)
                 {
                     var resNull = new
                     {
-                        success = "false",
+                        success = false,
                         payload = new
                         {
 
@@ -181,12 +180,12 @@ namespace Arms.Api.Controllers
                 }
 
                 roundInDb.Name = round.Name;
-                roundInDb.ModifiedBy = round.ModifiedBy;
+                roundInDb.ModifiedBy = decodedToken.id;
                 _context.RoundType.Update(roundInDb);
                 _context.SaveChanges();
                 var response = new
                 {
-                    success = "false",
+                    success = false,
                     payload = new
                     {
                         data = roundInDb,
@@ -200,7 +199,7 @@ namespace Arms.Api.Controllers
             {
                 var response = new
                 {
-                    success = "false",
+                    success = false,
                     payload = new
                     {
                         message = ex.Message
@@ -222,7 +221,7 @@ namespace Arms.Api.Controllers
                 {
                     var resNull = new
                     {
-                        success = "false",
+                        success = false,
                         payload = new
                         {
 
@@ -236,7 +235,7 @@ namespace Arms.Api.Controllers
                 _context.SaveChanges();
                 var response = new
                 {
-                    success = "true",
+                    success = true,
                     payload = new
                     {
                         message = "Round type Deleted Successfully"
@@ -249,7 +248,7 @@ namespace Arms.Api.Controllers
             {
                 var response = new
                 {
-                    success = "false",
+                    success = false,
                     payload = new
                     {
                         message = ex.Message

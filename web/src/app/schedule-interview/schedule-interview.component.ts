@@ -1,4 +1,3 @@
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { map } from "rxjs/operators";
 import { IRoundPanel } from "./../models/panel.interface";
 import { ActivatedRoute, Router } from "@angular/router";
@@ -6,7 +5,7 @@ import { AppServicesService } from "src/app/services/app-services.service";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { ModalComponent } from "../reusable-components/modal/modal.component";
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
-
+import { NgbModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
 @Component({
   selector: "app-schedule-interview",
   templateUrl: "./schedule-interview.component.html",

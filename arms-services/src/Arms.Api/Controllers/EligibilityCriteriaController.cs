@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Arms.Api.Middlewares;
 using Arms.Application.Services.Users;
 using Arms.Domain.Entities;
 using Arms.Infrastructure;
@@ -95,7 +96,7 @@ namespace Arms.Api.Controllers
                     success = false,
                     payload = new
                     {
-                        message = ex.InnerException.Message
+                        message = ex.Message
                     }
 
                 };
@@ -105,37 +106,42 @@ namespace Arms.Api.Controllers
         //POST:api/eligibilityCriteria
         [HttpPost]
         [Authorize(Roles = "SuperAdministrator")]
-        public IActionResult CreateEligibilityCriteria(EligibilityCriteria eligibility)
+        public IActionResult CreateEligibilityCriteria(List<EligibilityCriteria> eligibility)
         {
             try
-            {
-                EligibilityCriteria checkinDb = _context.eligibilityCriteria.SingleOrDefault
-                    (c => c.eligibilityCriteriaName == eligibility.eligibilityCriteriaName);
-                if (checkinDb != null)
+            { TokenDecoder decodedToken = new TokenDecoder(Request);
+                for (int i = 0; i < eligibility.Count; i++)
                 {
-                    var resAlreadyExists = new
+                    EligibilityCriteria checkinDb = _context.eligibilityCriteria.SingleOrDefault
+                        (c => c.eligibilityCriteriaName == eligibility[i].eligibilityCriteriaName);
+                    if (checkinDb != null)
                     {
-                        success = false,
-                        payload = new
+                        var resAlreadyExists = new
                         {
-                            message = "This Eligibility Criteria already exists"
-                        }
+                            success = false,
+                            payload = new
+                            {
+                                message = "This Eligibility Criteria already exists"
+                            }
 
+                        };
+                        return StatusCode(400, resAlreadyExists);
+                    }
+                    EligibilityCriteria newEligibilityCriteria = new EligibilityCriteria
+                    {
+                        eligibilityCriteriaName = eligibility[i].eligibilityCriteriaName,
+                        createdBy = decodedToken.id,
+                        modifiedBy = decodedToken.id
                     };
-                    return StatusCode(400, resAlreadyExists);
+                    _context.eligibilityCriteria.Add(newEligibilityCriteria);
+                    _context.SaveChanges();
                 }
-                EligibilityCriteria newEligibilityCriteria=new EligibilityCriteria
-               {
-                    eligibilityCriteriaName = eligibility.eligibilityCriteriaName
-                };
-                _context.eligibilityCriteria.Add(newEligibilityCriteria);
-                _context.SaveChanges();
                 var response = new
                 {
                     success = true,
                     payload = new
                     {
-                        data = newEligibilityCriteria,
+                        data = eligibility,
                         message = "Eligibility Criteria Created Successfully"
                     }
 
@@ -149,7 +155,7 @@ namespace Arms.Api.Controllers
                     success = false,
                     payload = new
                     {
-                        message = ex.InnerException.Message
+                        message = ex.Message
                     }
 
                 };
@@ -164,6 +170,7 @@ namespace Arms.Api.Controllers
         {
             try
             {
+                TokenDecoder decodedToken = new TokenDecoder(Request);
                 EligibilityCriteria checkInDb = _context.eligibilityCriteria.SingleOrDefault(c => c.Id == id);
                 if (checkInDb == null)
                 {
@@ -172,18 +179,19 @@ namespace Arms.Api.Controllers
                         success = false,
                         payload = new
                         {
-                            message = "This Eligibility Criteiria does not exist"
+                            message = "This Eligibility Criteria does not exist"
                         }
                     };
                     return StatusCode(404, resNull);
 
                 }
                 checkInDb.eligibilityCriteriaName = eligibility.eligibilityCriteriaName;
+                checkInDb.modifiedBy = decodedToken.id;
                 _context.eligibilityCriteria.Update(checkInDb);
                 _context.SaveChanges();
                 var response = new
                 {
-                    success = "true",
+                    success = true,
                     payload = new
                     {
                         data = checkInDb,
@@ -200,7 +208,7 @@ namespace Arms.Api.Controllers
                     success = false,
                     payload = new
                     {
-                        message = ex.InnerException.Message
+                        message = ex.Message
                     }
 
                 };
@@ -232,7 +240,7 @@ namespace Arms.Api.Controllers
                 _context.SaveChanges();
                 var response = new
                 {
-                    success = "true",
+                    success = true,
                     payload = new
                     {
 
@@ -249,7 +257,7 @@ namespace Arms.Api.Controllers
                     success = false,
                     payload = new
                     {
-                        message = ex.InnerException.Message
+                        message = ex.Message
                     }
 
                 };

@@ -1,3 +1,4 @@
+import { MinDateService } from "./../utilities/min-date.service";
 import { InterviewService } from "./../services/interview.service";
 import { Component, OnInit, Input } from "@angular/core";
 import { AppServicesService } from "../services/app-services.service";
@@ -18,14 +19,16 @@ export class CreateInterviewComponent implements OnInit {
     private AppServicesService: AppServicesService,
     private service: InterviewService,
     private router: Router,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private minDateService: MinDateService
   ) {}
 
   ngOnInit() {
     this.getLocation();
     this.getRoundTypes();
+    this.minimumDate = this.minDateService.setMinimumDate();
   }
-
+  minimumDate: string;
   interview: any = {};
   interviewObj: any = {};
   formType: any;
@@ -72,7 +75,6 @@ export class CreateInterviewComponent implements OnInit {
 
     this.service.createInterview(this.interviewObj).subscribe(
       (res: any) => {
-        console.log(res.body.payload.data.interviewId);
         const modalRef = this.modalService.open(ModalComponent);
         modalRef.componentInstance.shouldConfirm = false;
         modalRef.componentInstance.success = res.body.success;

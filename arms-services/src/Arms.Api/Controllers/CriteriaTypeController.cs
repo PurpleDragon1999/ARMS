@@ -12,6 +12,7 @@ using System.IO;
 using System.Reflection.Metadata;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using Arms.Api.Middlewares;
 
 namespace Arms.Api.Controllers
 {
@@ -51,7 +52,7 @@ namespace Arms.Api.Controllers
             {
                 var response = new
                 {
-                    success = "false",
+                    success = false,
                     payload = new
                     {
                         message = ex.Message
@@ -128,6 +129,7 @@ namespace Arms.Api.Controllers
         {
             try
             {
+                TokenDecoder decodedToken = new TokenDecoder(Request);
                 CriteriaType checkinDb = _context.CriteriaType.SingleOrDefault(c => c.criteriaName == criteria.criteriaName);
                 if (checkinDb != null)
                 {
@@ -145,7 +147,8 @@ namespace Arms.Api.Controllers
                 CriteriaType criteriaObj = new CriteriaType
                 {
                     criteriaName = criteria.criteriaName,
-                      roundTypeId=criteria.roundTypeId
+                    roundTypeId = criteria.roundTypeId,
+                    createdBy = decodedToken.id
 
                 };
                 _context.CriteriaType.Add(criteriaObj);
@@ -164,11 +167,9 @@ namespace Arms.Api.Controllers
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.GetType().FullName);
-                Console.WriteLine(ex.Message);
                 var response = new
                 {
-                    success = "false",
+                    success = false,
                     payload = new
                     {
                         message = ex.Message
@@ -185,6 +186,7 @@ namespace Arms.Api.Controllers
         {
             try
             {
+                TokenDecoder decodedToken = new TokenDecoder(Request);
                 CriteriaType criteriaType = _context.CriteriaType.SingleOrDefault(c => c.Id == id);
                 if (criteriaType == null)
                 {
@@ -203,7 +205,7 @@ namespace Arms.Api.Controllers
 
                 criteriaType.criteriaName = criteria.criteriaName;
                 criteriaType.roundTypeId = criteria.roundTypeId;
-
+                criteriaType.modifiedBy = decodedToken.id;
                 
                 _context.SaveChanges();
                 var response = new

@@ -11,7 +11,7 @@ import { ModalComponent } from "src/app/reusable-components/modal/modal.componen
   styleUrls: ["./eligibility-criteria.component.scss"],
 })
 export class EligibilityCriteriaComponent implements OnInit {
-  ngOnInit() {}
+  ngOnInit() { }
   eligibilityCriterionForm: FormGroup;
   addEligibilityCriteria: Boolean = false;
   eligibilityCriterionList: any;
@@ -41,7 +41,9 @@ export class EligibilityCriteriaComponent implements OnInit {
 
   newEligibilityCriterion(): FormGroup {
     return this.fb.group({
-      eligibilityName: "",
+      eligibilityCriteriaName: "",
+      createdBy: this._service.tokenDecoder().userName,
+      modifiedBy: this._service.tokenDecoder().userName
     });
   }
 
@@ -50,33 +52,52 @@ export class EligibilityCriteriaComponent implements OnInit {
     this.eligibilityCriteria().push(this.newEligibilityCriterion());
   }
 
+  deleteNewEntry(eligibilityIndex){
+    this.eligibilityCriteria().removeAt(eligibilityIndex);
+    if ((this.eligibilityCriterionForm.get('eligibilityCriteria').value.length)==0) {
+      this.addEligibilityCriteria = false;
+    }
+  }
+  
   removeEligibilityCriterion(eligibilityIndex: number) {
     const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
-
     modalRef.componentInstance.shouldConfirm = true;
-
     modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
       modalRef.close();
     });
-    this.eligibilityCriteria().removeAt(eligibilityIndex);
-    if (eligibilityIndex == 0) {
-      this.addEligibilityCriteria = false;
-    }
+
+    modalRef.componentInstance.emitPerformRequest.subscribe(() => {
+    this.deleteNewEntry(eligibilityIndex);
+
     return this._service.deleteEligibilityCriterion(eligibilityIndex).subscribe(
       (response: any) => {
         this.loadEligibilityCriteria();
-        modalRef.componentInstance.success = response.body.result.success;
+        modalRef.componentInstance.success = response.body.success;
         modalRef.componentInstance.message =
-          response.body.result.payload.message;
+          response.body.payload.message;
       },
       (error: HttpErrorResponse) => {
         modalRef.componentInstance.success = error.error.success;
         modalRef.componentInstance.message = error.error.payload.message;
       }
-    );
-  }
+      );
+    });
+    }
+  
 
   onSubmit() {
-    console.log(this.eligibilityCriterionForm.value);
+    this._service.createEligibilityCriteria(this.eligibilityCriterionForm.get('eligibilityCriteria').value).subscribe((res:any) => {
+      const modalRef = this.modalService.open(ModalComponent);
+      modalRef.componentInstance.shouldConfirm = false;
+      modalRef.componentInstance.success = res.success;
+      modalRef.componentInstance.message = res.payload.message;
+      modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+        modalRef.close();    
+        
+        this.eligibilityCriterionForm.reset();
+        this.addEligibilityCriteria = false;
+        this.loadEligibilityCriteria();   
+      });
+    })
   }
 }

@@ -2,8 +2,8 @@
     <div class="card">
       <div class="card-body">
         <h4 class= "top"><b>Job Application</b></h4>
-        <form name="form" #f="ngForm" >
-
+        <form name="form" #f="ngForm" (ngSubmit)="createApplication(f)" >
+  
           <div class="form-group">
             <label for="appliedForJdId">Applied for JD<span class="asterick">*</span></label>
             <input [readOnly]="type == 'progressTracker' || 'candidate'" type="text" name="appliedForJdId" class="form-control" [(ngModel)]="model.appliedForJdId" 
@@ -75,7 +75,7 @@
                 <select type="text" name="experienceInYears" placeholder="In years" 
                 class="form-control" id="experienceInYears" [(ngModel)]="model.experienceInYears" #experienceInYears="ngModel" 
                 [ngClass]="{ 'is-invalid': experienceInYears.dirty && experienceInYears.invalid}" required>
-                  <option class="select-css" value="YYYY" selected disabled  >YYYY</option>
+                  <option class="select-css" value="0" selected disabled  >YYYY</option>
                   <option class="select-css" [disabled]="type == 'progressTracker'" *ngFor="let number of numbersInYears" value={{number}} >{{number}}</option>
                   <option class="select-css" [disabled]="type == 'progressTracker'" value="30+">30+</option>
                 </select>
@@ -88,8 +88,8 @@
               <div class="col-md-3">
                 <select type="text" name="experienceInMonths"                         placeholder="In months" 
                 class="form-control" id="experienceInMonths" [(ngModel)]="model.experienceInMonths" #experienceInMonths="ngModel" 
-                [ngClass]="{ 'is-invalid': experienceInMonths.dirty && experienceInMonths.invalid}">
-                  <option class="select-css" value="MM" selected disabled >MM</option>
+                [ngClass]="{ 'is-invalid': experienceInMonths.dirty && experienceInMonths.invalid}" required>
+                  <option class="select-css" value="0" selected disabled >MM</option>
                   <option class="select-css" [disabled]="type == 'progressTracker'" *ngFor="let number of numbersInMonths" value={{number}} >{{number}}</option>
                 </select>
                 <div *ngIf="experienceInMonths.dirty" class="invalid-feedback">  
@@ -114,28 +114,38 @@
             <div class="row">
               <div class="col-md-3">
                 <select type="text" name="idProofTypeId"                         
-                class="form-control" id="IdProofTypeId" [(ngModel)]="model.IdProofTypeId" #IdProofTypeId="ngModel" 
-                [ngClass]="{ 'is-invalid': IdProofTypeId.dirty && IdProofTypeId.invalid}" required>
+                class="form-control" id="idProofTypeId" [(ngModel)]="model.idProofTypeId" #idProofTypeId="ngModel" 
+                [ngClass]="{ 'is-invalid': (idProofTypeId.dirty && idProofTypeId.invalid) || (idProofTypeId.dirty && model.nationality=='Indian' && model.idProofTypeId != idProofTypes[0].id) || (idProofTypeId.dirty && model.nationality == null)}" required>
                   <option class="select-css" value="none" selected disabled >Select an option</option>
                   <option class="select-css" [disabled]="type == 'progressTracker'" *ngFor="let idProof of idProofTypes" value={{idProof.id}} >{{idProof.name}}</option>
                  
                 </select>
 
-                <div *ngIf="IdProofTypeId.dirty" class="invalid-feedback">  
+                <div *ngIf="idProofTypeId.dirty && idProofTypeId.invalid" class="invalid-feedback">  
                   <div><i class="mdi mdi-alert-outline"></i>ID type is required</div>
+                </div>
+                <div *ngIf="(idProofTypeId.dirty && model.nationality=='Indian' && model.idProofTypeId != idProofTypes[0].id)" class="invalid-feedback">  
+                  <div><i class="mdi mdi-alert-outline"></i>If you're Indian select Adhar Card</div>
+                </div>
+
+                <div *ngIf="(idProofTypeId.dirty && model.nationality == null)" class="invalid-feedback">  
+                  <div><i class="mdi mdi-alert-outline"></i>First Select Nationality</div>
                 </div>
               </div>
 
               <div class="col-md-3">
                 <input [readOnly]="type == 'progressTracker'"type="text" name="identificationNo"  
                 class="form-control" id="identificationNo" [(ngModel)]="model.identificationNo" #identificationNo="ngModel"
-                [ngClass]="{ 'is-invalid': identificationNo.dirty && identificationNo.invalid}" required>
+                [ngClass]="{ 'is-invalid': (identificationNo.dirty && identificationNo.invalid) || (identificationNo.dirty && model.nationality == null)}" required>
 
                 <div *ngIf="identificationNo.dirty && identificationNo.errors?.required" class="invalid-feedback">
                   <div><i class="mdi mdi-alert-outline"></i>Identification No is required</div>
                 </div>
                 <div *ngIf="identificationNo.dirty && identificationNo.errors?.pattern" class="invalid-feedback">
                   <div><i class="mdi mdi-alert-outline"></i>Enter valid Identification Number</div>
+                </div>
+                <div *ngIf="(identificationNo.dirty && model.nationality == null)" class="invalid-feedback">  
+                  <div><i class="mdi mdi-alert-outline"></i>First Select Nationality</div>
                 </div>
               </div>
            </div>
@@ -144,25 +154,24 @@
           <div class="form-group">
             <label>Resume<span class="asterick">*</span></label>
             <div *ngIf="type !== 'progressTracker'" class="input-group  col-xs-12">           
-              <input type="file" multiple accept=".pdf, .doc, .docx" name="file" id="file" class="form-control file-upload-info inputfile"
+              <input type="file" accept=".pdf, .doc" name="file" id="file" class="form-control"
                ngModel #file="ngModel" 
+               (change) = "uploadResume($event)"
                [ngClass]="{ 'is-invalid': file.dirty && file.invalid}" required>
-              <label for="file" class="file-upload-browse btn btn-gradient-danger mr-2">Upload Resume</label>
               <div *ngIf="file.dirty  && file.errors?.required" class="invalid-feedback">
                 <div><i class="mdi mdi-alert-outline"></i>Resume is required</div>
               </div>
             </div>
 
             <div *ngIf="type == 'progressTracker'" class="input-group col-xs-12"> 
-              <input [readOnly]="type == 'progressTracker'" type="text" name="file" class="form-control"
-              placeholder="CV will be shown here"> 
+              <a (click)="openResume()" ><i class="far fa-file-pdf"></i>  {{model.name}}|CV</a>
             </div>
           </div>   
 
           <div class="d-flex flex-row-reverse" *ngIf="type !== 'progressTracker'" >
             <button type="submit" [disabled]="f.invalid" class="btn btn-gradient-danger mr-2" 
-            (click)="f.form.valid; createApplication(f.value); f.resetForm()"><b>Submit</b></button>
-            <button class="btn btn-light" (click)="f.resetForm()"><b>Cancel</b></button>
+            ><b>Submit</b></button>
+            <button class="btn btn-light" ><b>Cancel</b></button>
           </div>
           
         </form>

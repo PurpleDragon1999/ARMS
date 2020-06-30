@@ -49,7 +49,7 @@
         <div
           *ngFor="let roundType of roundTypes().controls; let typeIndex = index"
         >
-          <div class="card">
+          <div class="card" *ngIf="addRound == true">
             <div class="card-body" [formGroupName]="typeIndex">
               Round Type Name :
               <input
@@ -60,7 +60,7 @@
               <button class="btn mr-2 add-button del-button">
                 <i
                   class="fas fa-trash"
-                  (click)="removeRoundType(typeIndex)"
+                  (click)="deleteNewEntry(typeIndex)"
                 ></i>
               </button>
               <div class="addCriteria" formArrayName="criteria">

@@ -13,7 +13,8 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
         {
             builder.ToTable("Assessment", "ARMS");
 
-            builder.Property(e => e.Id).HasColumnName("id");
+            builder.Property(e => e.Id).HasColumnName("id").ValueGeneratedOnAdd();
+            
 
             builder.Property(e => e.ApplicationId).HasColumnName("applicationId");
 

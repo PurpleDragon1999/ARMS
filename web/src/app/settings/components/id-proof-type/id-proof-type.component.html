@@ -41,15 +41,15 @@
             *ngFor="let idProof of idProofs().controls;
               let idProofIndex = index">
 
-            <div class="card">
+            <div class="card" *ngIf="addIdProofs == true">
               <div class="card-body" [formGroupName]="idProofIndex">
                 ID Proof:
                 <input type="text"
                        class="input-box"
-                       formControlName="idProofName"/>
+                       formControlName="Name"/>
                 <button class="btn mr-2 add-button del-button">
                   <i class="fas fa-trash"
-                    (click)="removeidProof(idProofIndex)">
+                    (click)="deleteNewEntry(idProofIndex)">
                   </i>
                 </button>
               </div>

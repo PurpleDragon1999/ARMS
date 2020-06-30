@@ -12,6 +12,7 @@ using System.IO;
 using System.Reflection.Metadata;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using Arms.Api.Middlewares;
 
 namespace Arms.Api.Controllers
 {
@@ -19,16 +20,15 @@ namespace Arms.Api.Controllers
     [ApiController]
 
 
-   
     public class ApplicationStatusTypesController : ControllerBase
     {
         ArmsDbContext _context;
+       
         public ApplicationStatusTypesController(ArmsDbContext armsContext)
         {
             _context = armsContext;
         }
-
-
+    
         [HttpGet]
         [Authorize(Roles ="Admin,SuperAdministrator")]
         public IActionResult GetAllStatusTypes()
@@ -38,7 +38,7 @@ namespace Arms.Api.Controllers
                 List<ApplicationStatusType> statusTypes = _context.ApplicationStatusType.ToList();
                 var response = new
                 {
-                    success = "true",
+                    success = true,
                     payload = new
                     {
                         data = statusTypes,
@@ -51,7 +51,7 @@ namespace Arms.Api.Controllers
             {
                 var response = new
                 {
-                    success = "false",
+                    success = false,
                     payload = new
                     {
                         message = ex.Message
@@ -75,7 +75,7 @@ namespace Arms.Api.Controllers
                 {
                     var resNull = new
                     {
-                        success = "false",
+                        success = false,
                         payload = new
                         {
                             message = "Application status type does not exist"
@@ -87,7 +87,7 @@ namespace Arms.Api.Controllers
                 {
                     var response = new
                     {
-                        success = "true",
+                        success = true,
                         payload = new
                         {
                             data = statusType,
@@ -101,7 +101,7 @@ namespace Arms.Api.Controllers
             {
                 var response = new
                 {
-                    success = "false",
+                    success = false,
                     payload = new
                     {
                         message = ex.Message
@@ -117,18 +117,19 @@ namespace Arms.Api.Controllers
         [Authorize(Roles = "SuperAdministrator")]
 
 
-        public IActionResult CreateStatusType(ApplicationStatusType[] statusType)
+        public IActionResult CreateStatusType(List<ApplicationStatusType> statusType)
         {
             try
             {
-                for (int i = 0; i < statusType.Length; i++)
+                TokenDecoder decodedToken = new TokenDecoder(Request);
+                for (int i = 0; i < statusType.Count; i++)
                 {
                     ApplicationStatusType checkinDb = _context.ApplicationStatusType.SingleOrDefault(c => c.StatusName == statusType[i].StatusName);
                     if (checkinDb != null)
                     {
                         var resAlreadyExists = new
                         {
-                            success = "false",
+                            success = false,
                             payload = new
                             {
                                 message = "Application status type already exists"
@@ -140,29 +141,30 @@ namespace Arms.Api.Controllers
                     ApplicationStatusType newStatusType = new ApplicationStatusType
                     {
                         StatusName = statusType[i].StatusName,
-                        CreatedBy = statusType[i].CreatedBy,
-                        ModifiedBy = statusType[i].ModifiedBy
+                        CreatedBy = decodedToken.id,
+                        ModifiedBy =decodedToken.id 
                     };
                     _context.ApplicationStatusType.Add(newStatusType);
                     _context.SaveChanges();
+                }
                     var response = new
                     {
-                        success = "true",
+                        success = true,
                         payload = new
                         {
-                            data = newStatusType,
+                            data = statusType,
                             message = "Application status type created successfully"
                         }
                     };
-                }
-                return StatusCode(201);
 
+                    return StatusCode(201, response);
+                
             }
             catch (Exception ex)
             {
                 var response = new
                 {
-                    success = "false",
+                    success = false,
                     payload = new
                     {
                         message = ex.Message
@@ -179,12 +181,13 @@ namespace Arms.Api.Controllers
         {
             try
             {
+                TokenDecoder decodedToken = new TokenDecoder(Request);
                 ApplicationStatusType statusTypeInDb = _context.ApplicationStatusType.SingleOrDefault(c => c.Id == id);
                 if (statusTypeInDb == null)
                 {
                     var resNull = new
                     {
-                        success = "false",
+                        success = false,
                         payload = new
                         {
                             message = "Application status type does not exist"
@@ -194,16 +197,16 @@ namespace Arms.Api.Controllers
                 }
 
                 if (statusType.StatusName != null)
-                    statusTypeInDb.StatusName = statusType.StatusName;
+                    statusTypeInDb.StatusName = decodedToken.id;
 
                 if (statusType.ModifiedBy != null)
-                    statusTypeInDb.ModifiedBy = statusType.ModifiedBy;
+                    statusTypeInDb.ModifiedBy = decodedToken.id;
 
                 _context.SaveChanges();
 
                 var response = new
                 {
-                    success = "true",
+                    success = true,
                     payload = new
                     {
                         data = statusTypeInDb,
@@ -216,7 +219,7 @@ namespace Arms.Api.Controllers
             {
                 var response = new
                 {
-                    success = "false",
+                    success = false,
                     payload = new
                     {
                         message = ex.Message
@@ -238,7 +241,7 @@ namespace Arms.Api.Controllers
                 {
                     var resNull = new
                     {
-                        success = "false",
+                        success = false,
                         payload = new
                         {
                             message = "Application status type does not exist"
@@ -251,7 +254,7 @@ namespace Arms.Api.Controllers
                 _context.SaveChanges();
                 var response = new
                 {
-                    success = "true",
+                    success = true,
                     payload = new
                     {
                         message = "Application status type deleted successfully"
@@ -264,7 +267,7 @@ namespace Arms.Api.Controllers
             {
                 var response = new
                 {
-                    success = "false",
+                    success = false,
                     payload = new
                     {
                         message = ex.Message

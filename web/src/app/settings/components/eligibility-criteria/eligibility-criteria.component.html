@@ -61,18 +61,18 @@
             let eligibilityIndex = index
           "
         >
-          <div class="card">
+          <div class="card" *ngIf="addEligibilityCriteria == true">
             <div class="card-body" [formGroupName]="eligibilityIndex">
               Eligibility Criteria:
               <input
                 type="text"
                 class="input-box"
-                formControlName="eligibilityName"
+                formControlName="eligibilityCriteriaName"
               />
               <button class="btn mr-2 add-button del-button">
                 <i
                   class="fas fa-trash"
-                  (click)="removeEligibilityCriterion(eligibilityIndex)"
+                  (click)="deleteNewEntry(eligibilityIndex)"
                 >
                 </i>
               </button>

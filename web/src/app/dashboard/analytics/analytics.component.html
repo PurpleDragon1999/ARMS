@@ -1,11 +1,9 @@
 <div class="main-panel">
   <div class="page-header">
-    <h4><b>Analytics</b></h4>
+    <h2 class="page-title"><b>Analytics </b></h2>
   </div>
 
-  <div class="row analytics-parent">
-    <div class="col-md-6 col-lg-6 grid-margin stretch-card">
-      <div class="card">
+  <div class="card mb-4">
         <div class="card-body">
           <div class="clearfix">
             <h4 class="card-title float-left">
@@ -13,22 +11,21 @@
             </h4>
           </div>
 
+          <div class="chart">
           <canvas
             id="applicants-vs-hired-chart"
-            class="mt-4"
+            class="mt-1"
             baseChart
             [datasets]="barChartData"
             [labels]="barChartLabels"
             [options]="barChartOptions"
-            [legend]="barChartLegend"
+          
             [chartType]="barChartType">
-          </canvas>
-
+        </canvas>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="col-md-6 col-lg-6 grid-margin stretch-card">
       <div class="card">
         <div class="card-body">
           <div class="clearfix">
@@ -39,15 +36,15 @@
 
           <canvas
             id="profile-vacancies-chart"
-            class="mt-4"
+            class="mt-1"
             baseChart
             [data]="doughnutChartData"
             [labels]="doughnutChartLabels"
-            [chartType]="doughnutChartType">
+            [chartType]="doughnutChartType"
+            [options]="doughnutChartOptions"
+            >
           </canvas>
 
         </div>
       </div>
-    </div>
-  </div>
 </div>
