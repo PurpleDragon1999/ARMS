@@ -1,8 +1,10 @@
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { map } from "rxjs/operators";
 import { IRoundPanel } from "./../models/panel.interface";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AppServicesService } from "src/app/services/app-services.service";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { ModalComponent } from "../reusable-components/modal/modal.component";
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 
 @Component({
@@ -12,6 +14,7 @@ import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 })
 export class ScheduleInterviewComponent implements OnInit {
   interviewId: number;
+  jobId: number;
   rounds: any[];
   employeeIds: number[] = [];
 
@@ -31,15 +34,21 @@ export class ScheduleInterviewComponent implements OnInit {
   index: any;
   dateTimeForRounds: any[] = [];
 
+  // Counters for tracking calendar blocking
+  completed: number = 0;
+  incompleted: number = 0;
+
   constructor(
     private _appService: AppServicesService,
     private _activatedRoute: ActivatedRoute,
-    private _router: Router
+    private _router: Router,
+    private _modalService: NgbModal
   ) {}
 
   ngOnInit() {
     this._activatedRoute.params.subscribe((params) => {
       this.interviewId = parseInt(params.interviewId);
+      this.jobId = parseInt(params.jobId);
     });
     this._appService.getRoundsFromInterviewId(this.interviewId).subscribe(
       (res: any) => {
@@ -220,9 +229,29 @@ export class ScheduleInterviewComponent implements OnInit {
         emailList,
         userNames
       )
-      .subscribe((res) => {
-        console.log(res);
-      });
+      .subscribe(
+        (res) => {
+          console.log("Sent to - " + userNames);
+          this.completed += 1;
+        },
+        (err: any) => {
+          console.log("Not sent to - " + userNames);
+          this.incompleted += 1;
+        }
+      );
+  }
+
+  modal(success: boolean, message: string, redirect: boolean) {
+    const modalRef = this._modalService.open(ModalComponent);
+    modalRef.componentInstance.shouldConfirm = false;
+    modalRef.componentInstance.success = success;
+    modalRef.componentInstance.message = message;
+    modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+      modalRef.close();
+      if (redirect) {
+        this._router.navigate([]);
+      }
+    });
   }
 
   schedulePanelHelper(index: number) {
@@ -249,8 +278,8 @@ export class ScheduleInterviewComponent implements OnInit {
 
       if (emailList.length != 0)
         this.blockCalenderHelper(
-          index,
-          i,
+          index + 1,
+          i + 1,
           roundDate,
           roundTime,
           emailList,
@@ -259,12 +288,23 @@ export class ScheduleInterviewComponent implements OnInit {
     }
   }
 
-  schedule() {
-    this.createPanels();
+  saveData() {
     this.updateRoundtime();
-    // for (let i = 0; i < this.tableData.length; i++) {
-    //   this.schedulePanelHelper(i);
-    // }
+  }
+
+  sendAlerts() {
+    for (let i = 0; i < this.tableData.length; i++) {
+      this.schedulePanelHelper(i);
+    }
+    if (this.incompleted === 0) {
+      this.modal(true, "Alerts successfully sent !", true);
+    } else {
+      this.modal(
+        false,
+        `${this.completed} alerts sent successfully. ${this.incompleted} alerts pending`,
+        false
+      );
+    }
   }
 
   createPanels() {
@@ -290,6 +330,14 @@ export class ScheduleInterviewComponent implements OnInit {
       }
     }
     // Call the service here
+    this._appService.createPanel(mainObject, this.jobId).subscribe(
+      (res: any) => {
+        this.modal(true, "Records saved in database", false);
+      },
+      (err: any) => {
+        this.modal(false, "Error while saving Panels", false);
+      }
+    );
   }
 
   updateRoundtime() {
@@ -301,8 +349,14 @@ export class ScheduleInterviewComponent implements OnInit {
         roundTime: this.dateTimeForRounds[i].roundTime,
       });
     }
-    console.log(mainObject);
-    console.log(this.tableData);
+    this._appService.updateRoundTime(mainObject).subscribe(
+      (res: any) => {
+        this.createPanels();
+      },
+      (err) => {
+        this.modal(false, "Error occured while updating time", false);
+      }
+    );
   }
 
   getEmployeesId(index: number, panel: string) {

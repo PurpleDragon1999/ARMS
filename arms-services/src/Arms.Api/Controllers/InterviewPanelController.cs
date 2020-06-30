@@ -25,14 +25,17 @@ namespace Arms.Api.Controllers
             _interviewerController = interviewerController;
         }
 
-        [HttpPost]
-        public IActionResult createPanel([FromBody] round rounds)
+        [HttpPost("{jobId}")]
+        public IActionResult createPanel(int jobId, [FromBody] round rounds)
         {
             Response response = new Response()
             {
                 payload = new Payload()
             };
-            InterviewerModels interviewerModel = new InterviewerModels();
+            InterviewerModels interviewerModel = new InterviewerModels()
+            {
+                interviewerModels = new List<InterviewerModel>()
+            };
             try
             {
                 for (int r = 0; r < rounds.rounds.Count; r++)
@@ -51,7 +54,8 @@ namespace Arms.Api.Controllers
                         InterviewerModel temp = new InterviewerModel()
                         {
                             EmployeesId = rounds.rounds[r].Panel[p].employeesId,
-                            PanelId = newPanelId
+                            PanelId = newPanelId,
+                            JobId = jobId
                         };
                         interviewerModel.interviewerModels.Add(temp);
                     }

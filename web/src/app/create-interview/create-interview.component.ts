@@ -22,10 +22,9 @@ export class CreateInterviewComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-   
     this.getLocation();
     this.getRoundTypes();
-   }
+  }
 
   interview: any = {};
   interviewObj: any = {};
@@ -53,7 +52,7 @@ export class CreateInterviewComponent implements OnInit {
       this.RoundType = res.payload.data;
     });
   }
-  i:any;
+  i: any;
   createInterview(interview: any) {
     let round = [];
     for (let index = 0; index < this.number; index++) {
@@ -82,7 +81,7 @@ export class CreateInterviewComponent implements OnInit {
           modalRef.close();
           if (res.status == 200) {
             this.router.navigate([
-              `/admin/interview/select-panel/${res.body.payload.data}`,
+              `/admin/interview/select-panel/${res.body.payload.data.jobId}/${res.body.payload.data.interviewId}`,
             ]);
           }
         });

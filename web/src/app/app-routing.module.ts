@@ -1,5 +1,5 @@
-import { UpdateInterviewComponent } from './update-interview/update-interview.component';
-import { HrInterviewAssessementComponent } from './hr-interview-assessement/hr-interview-assessement.component';
+import { UpdateInterviewComponent } from "./update-interview/update-interview.component";
+import { HrInterviewAssessementComponent } from "./hr-interview-assessement/hr-interview-assessement.component";
 import { InterviewTrackerComponent } from "./interview-tracker/interview-tracker.component";
 import { SettingsComponent } from "./settings/settings.component";
 import { CreateInterviewComponent } from "./create-interview/create-interview.component";
@@ -20,7 +20,7 @@ import { RoleGuardService } from "./utilities/role-guard.service";
 import { ErrorPageComponent } from "./error-page/error-page.component";
 import { JdModalComponent } from "./jd-modal/jd-modal.component";
 import { CandidateComponent } from "./candidate/candidate.component";
-import { RoundComponent } from './round/round.component';
+import { RoundComponent } from "./round/round.component";
 import { CandidateAssessmentComponent } from "./candidate-assessment/containers/candidate-assessment.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { AnalyticsComponent } from "./dashboard/analytics/analytics.component";
@@ -108,7 +108,8 @@ const routes: Routes = [
       {
         path: "create-interview",
         component: CreateInterviewComponent,
-      },{
+      },
+      {
         path: "update-interview",
         component: UpdateInterviewComponent,
       },
@@ -126,7 +127,7 @@ const routes: Routes = [
             component: CreateInterviewComponent,
           },
           {
-            path: "select-panel/:interviewId",
+            path: "select-panel/:jobId/:interviewId",
             component: ScheduleInterviewComponent,
           },
         ],

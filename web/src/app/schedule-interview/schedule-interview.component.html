@@ -206,7 +206,7 @@
         <div class="d-block d-sm-none">
           <div *ngIf="main[i][0]">
             <div
-              class="bg-secondary p-3 pb-4 mt-2"
+              class="bg-light p-3 pb-4 mt-2"
               *ngFor="let data of tableData[i].panel1.employees"
             >
               <div class="d-flex flex-row justify-content-between mb-2">
@@ -301,9 +301,15 @@
       <button
         type="submit"
         class="btn btn-sm btn-gradient-danger ml-2"
-        (click)="schedule()"
+        (click)="saveData()"
       >
-        Schedule
+        Save
+      </button>
+      <button
+        class="btn btn-sm btn-gradient-danger ml-2"
+        (click)="sendAlerts()"
+      >
+        Send Alerts
       </button>
     </div>
   </div>

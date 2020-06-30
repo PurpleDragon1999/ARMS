@@ -8,6 +8,7 @@ namespace Arms.Domain.CustomEntities
     {
         public List<int> EmployeesId { get; set; }
         public int PanelId { get; set; }
+        public int JobId { get; set; }
     }
 
     public partial class InterviewerModels

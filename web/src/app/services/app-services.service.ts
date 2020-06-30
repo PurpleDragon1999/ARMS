@@ -200,9 +200,9 @@ export class AppServicesService {
     userNames
   ): Observable<any> {
     let obj = {
-      Subject: index + `Interview of Round ${index}`,
+      Subject: `Interview of Round ${index}`,
       Body: {
-        ContentType: "Message",
+        ContentType: "HTML",
         Content: `Interview with Candidates for Round ${index}. You Belongs to Panel ${panel}. Kindly check with your fellow interviewer.`,
       },
       Start: {
@@ -267,7 +267,9 @@ export class AppServicesService {
     });
   }
 
-  createPanel(obj: any) {
-    return this.http.post(`${HOST}/api/panel`, obj, { ...this.httpOptions });
+  createPanel(obj: any, jobId: number) {
+    return this.http.post(`${HOST}/api/panel/${jobId}`, obj, {
+      ...this.httpOptions,
+    });
   }
 }
