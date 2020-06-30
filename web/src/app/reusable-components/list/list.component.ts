@@ -47,6 +47,9 @@ export class ListComponent implements OnInit{
   @Output()
   emitDownloadPdf: EventEmitter<string> = new EventEmitter<string>();
 
+  @Output()
+  emitShortlist: EventEmitter<any> = new EventEmitter<any>();
+
   constructor(private modalService : NgbModal,private _service : AppServicesService, private candidateService: CandidateService){
   }
 
@@ -112,23 +115,7 @@ export class ListComponent implements OnInit{
   }
 
   shorlisting(isShortlisted : boolean){
-    
-    this.candidateService.shorlistCandidates(this.data[0].jobId, this.checkedEntriesId, isShortlisted).subscribe((res:IResponse)=>{
-      
-      this.openResponseModal(res);
-    }, error =>{
-      
-    })
-  }
-
-  openResponseModal(res : IResponse){
-    const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
-    modalRef.componentInstance.shouldConfirm = false;
-    modalRef.componentInstance.success = res.success;
-    modalRef.componentInstance.message = res.payload.message;
-    modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
-    modalRef.close();
-    })
+    this.emitShortlist.emit({ jdId: this.data[0].jobId, checkedEntriesId: this.checkedEntriesId, isShortlisted });
   }
 
   toggleDisplayDiv(){
