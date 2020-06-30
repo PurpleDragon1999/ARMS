@@ -1,2 +1,5 @@
 <app-candidate-description [data]="applicationData"></app-candidate-description>
-<app-candidate-assessment-form></app-candidate-assessment-form>
+<app-candidate-assessment-form [data]="criteriaData"
+    [criteriaOnTheBasisOfSelectedRound]="criteriaOnTheBasisOfSelectedRound"
+    (storeAssessmentEmitter)="storeAssessment($event)" (getAssessmentEmitter)="getAssessment($event)">
+</app-candidate-assessment-form>

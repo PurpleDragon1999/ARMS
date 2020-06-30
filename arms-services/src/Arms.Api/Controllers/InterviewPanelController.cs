@@ -14,7 +14,7 @@ namespace Arms.Api.Controllers
 {
     [Route("api/panel")]
     [ApiController]
-    [Authorize(Roles ="Admin")]
+    [Authorize(Roles = "Admin")]
     public class InterviewPanelController : ControllerBase
     {
         private readonly ArmsDbContext _context;
@@ -57,31 +57,31 @@ namespace Arms.Api.Controllers
                     }
                 }
                 var result = _interviewerController.saveInterviewer(interviewerModel);
-                if(result == "Success")
+                if (result == "Success")
                 {
                     response.success = "true";
                     response.payload.msg = "Records Created Successfully";
-                    
+
                     return StatusCode(200, response);
                 }
                 else
                 {
                     response.success = "false";
                     response.payload.msg = "Some Error Occured. Details: " + result;
-                    
+
                     return StatusCode(500, response);
                 }
-                
+
 
             }
-            catch(SqlException sqe)
+            catch (SqlException sqe)
             {
                 response.success = "false";
                 response.payload.msg = "Some Error Occured. Details: " + sqe.Message;
-                
+
                 return StatusCode(500, response);
             }
-            
+
         }
 
         [HttpDelete("{id}")]
@@ -90,7 +90,7 @@ namespace Arms.Api.Controllers
             Response response = new Response()
             {
                 payload = new Payload()
-        };
+            };
             try
             {
                 InterviewPanel interviewPanel = _context.InterviewPanel.SingleOrDefault(p => p.Id == id);
@@ -104,14 +104,14 @@ namespace Arms.Api.Controllers
 
                         response.success = "true";
                         response.payload.msg = "Records Deleted Successfully";
-                        
+
                         return StatusCode(200, response);
                     }
                     else
                     {
                         response.success = "false";
                         response.payload.msg = "Some Error Occured. Details: " + result;
-                        
+
                         return StatusCode(500, response);
                     }
                 }
@@ -119,18 +119,18 @@ namespace Arms.Api.Controllers
                 {
                     response.success = "false";
                     response.payload.msg = "Data Not Found";
-                    
+
                     return StatusCode(404, response);
                 }
             }
-            catch(SqlException e)
+            catch (SqlException e)
             {
                 response.success = "false";
                 response.payload.msg = "Some Error Occured. Details: " + e.Message;
-                
+
                 return StatusCode(500, response);
             }
-            
+
         }
 
 
@@ -158,13 +158,13 @@ namespace Arms.Api.Controllers
                     return StatusCode(404, response);
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 response.success = "false";
                 response.payload.msg = "Some Error Occured. Details: " + e.Message;
                 return StatusCode(500, response);
             }
-            
+
         }
 
         [HttpPut("round")]
@@ -188,15 +188,15 @@ namespace Arms.Api.Controllers
                 response.payload.msg = "Records Updated Successfully";
                 return StatusCode(200, response);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 response.success = "false";
                 response.payload.msg = "Some Error Occured. Details: " + e.Message;
                 return StatusCode(500, response);
 
             }
-            
-            
+
+
         }
 
         [HttpGet("{id}")]
@@ -210,7 +210,7 @@ namespace Arms.Api.Controllers
             {
                 List<InterviewPanel> interview = _context.InterviewPanel.Where(p => p.RoundId == id).ToList();
                 List<Panel> panels = new List<Panel>();
-                if(interview.Count != 0)
+                if (interview.Count != 0)
                 {
                     for (int p = 0; p < interview.Count; p++)
                     {
@@ -230,25 +230,25 @@ namespace Arms.Api.Controllers
                     }
                     response.success = "true";
                     response.payload.data = panels;
-                    
+
                     return StatusCode(200, response);
                 }
                 else
                 {
                     response.success = "false";
                     response.payload.msg = "Data Not Found. Detail: Panel Not Found.";
-                    
+
                     return StatusCode(404, response);
                 }
             }
-            catch(SqlException e)
+            catch (SqlException e)
             {
                 response.success = "false";
                 response.payload.msg = "Some Error Occured. Details: " + e.Message;
-                
+
                 return StatusCode(200, response);
             }
-            
+
         }
     }
 }

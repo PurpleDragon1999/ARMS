@@ -248,10 +248,7 @@ namespace Arms.Api.Controllers
 				var applications = _context.Application.Include(c => c.Candidate).
 										   Where(c => c.JobId == interviewObj.JobId);
 				//getting the job description object for sending in email
-				JobDescription jdObject = _context.JobDescription.Include(l => l.employmentType).
-															   Include(l => l.eligibilityCriteria).
-															   Include(l => l.loc).
-															  FirstOrDefault(c => c.Id == interviewObj.JobId);
+				JobDescription jdObject = _context.JobDescription.FirstOrDefault(c => c.Id == interviewObj.JobId);
 
 				//Adding Emails in string Array to send to candidates
 
@@ -572,7 +569,7 @@ namespace Arms.Api.Controllers
 		  </tr>
 		  <tr>
 			<td><b>Job Type:</b></td>
-			<td>" + jdObject.employmentType.employmentTypeName + @"</td>
+			<td>" + jdObject + @"</td>
 		  </tr>
 		  <tr>
 		  <td ><b>Address:</b></td>

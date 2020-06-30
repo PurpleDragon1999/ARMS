@@ -26,7 +26,7 @@ namespace Arms.Api.Controllers
     [Authorize(Roles ="Admin")]
     public class JobDescriptionController : BaseController
     {
-       
+
         ArmsDbContext _context;
       
         public MailHelperController mailHelper=new MailHelperController();
@@ -43,10 +43,10 @@ namespace Arms.Api.Controllers
         {
             try
             {
-               
+
                 List<JobDescription> jobDescriptions = _context.JobDescription.Include(l => l.employmentType).
                     Include(l => l.eligibilityCriteria).Include(l => l.loc).ToList();
-                if(jobDescriptions != null)
+                if (jobDescriptions != null)
                 {
                   var response = new
                     {
@@ -70,8 +70,8 @@ namespace Arms.Api.Controllers
                     response.payload.msg = "No JD Found";
                     return StatusCode(200, response);
                 }
-                
-                
+
+
             }
             catch (Exception ex)
             {
@@ -229,8 +229,8 @@ namespace Arms.Api.Controllers
                 var decodedToken = new TokenDecoder(Request);
 
                 JobDescription jobInDb = _context.JobDescription.SingleOrDefault(c => c.Id == id);
-                
-               
+
+
 
                 if (jobInDb == null)
                 {
@@ -285,7 +285,7 @@ namespace Arms.Api.Controllers
                     jobInDb.pdfBlobData = Convert.FromBase64String(job.pdfString);
                 }
                 else
-                jobInDb.modifiedBy = decodedToken.id;
+                    jobInDb.modifiedBy = decodedToken.id;
 
 
 

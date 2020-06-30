@@ -27,28 +27,30 @@ namespace Arms.Api.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
-        public IActionResult Getcandidates(int jobId = 0)
-
+        public async Task<IActionResult> Getcandidates(int? pageNumber, int? pageSize, int jobId=0)
         {
-            List<Arms.Domain.Entities.Application> applications;
-            if (jobId != 0)
-            {
-                applications = _context.Application.Include(c => c.Candidate).Include(c => c.ApplicationStatusType).Include(c => c.Job).Where(c => c.JobId == jobId).ToList();
-            }
-            else
-            {
-                applications = _context.Application.Include(c => c.Candidate).Include(c => c.ApplicationStatusType).Include(c => c.Job).ToList();
-            }
+            var applications = from a in _context.Application select a;
 
             try
             {
+                if (jobId != 0)
+                {
+                    applications = _context.Application.Include(c => c.Candidate).Include(c => c.ApplicationStatusType).Include(c=> c.Job).Where(c => c.JobId == jobId);
+                }
+                else
+                {
+                    applications = _context.Application.Include(c => c.Candidate).Include(c => c.ApplicationStatusType).Include(c => c.Job);
+                }
+                
+                var paginatedList =
+                    await PaginatedList<Domain.Entities.Application>.CreateAsync(applications.AsNoTracking(), pageNumber ?? 1, pageSize ?? 5);
+                
                 var response = new
                 {
                     success = true,
                     payload = new
                     {
-                        data = applications,
+                        data = paginatedList,
                         message = "Applications Retrieved Successfully"
                     }
 

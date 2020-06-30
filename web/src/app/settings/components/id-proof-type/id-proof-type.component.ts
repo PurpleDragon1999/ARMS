@@ -13,15 +13,15 @@ import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 export class IdProofTypeComponent implements OnInit {
   ngOnInit() {}
 
-  idProofForm:FormGroup;
-  addIdProofs:boolean=false;
-  idProofList:any=[];
+  idProofForm: FormGroup;
+  addIdProofs: boolean = false;
+  idProofList: any = [];
 
   constructor(private fb: FormBuilder,
-    private _service:AppServicesService,
-    private modalService:NgbModal) {
+    private _service: AppServicesService,
+    private modalService: NgbModal) {
     this.idProofForm = this.fb.group({
-      idProofs: this.fb.array([]) ,
+      idProofs: this.fb.array([]),
     });
   }
 
@@ -41,7 +41,7 @@ export class IdProofTypeComponent implements OnInit {
     this.addIdProofs = true;
     this.idProofs().push(this.newidProof());
   }
-  
+
   loadIdProofTypes() {
     return this._service.getAllIdProofTypes().subscribe((response: any) => {
       this.idProofList = response.payload.data;

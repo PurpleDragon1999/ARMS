@@ -1,5 +1,5 @@
 
-﻿using Hrms.Core.Domains.Entities;
+ using Hrms.Core.Domains.Entities;
 using System;
 using System.Collections.Generic;
 

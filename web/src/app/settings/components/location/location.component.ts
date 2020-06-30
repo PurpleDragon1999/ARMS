@@ -16,7 +16,7 @@ import {
 })
 
 export class LocationComponent implements OnInit {
-  ngOnInit() {}
+  ngOnInit() { }
 
   locationForm: FormGroup;
   addLocations: Boolean = false;
