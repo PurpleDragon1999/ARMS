@@ -546,7 +546,7 @@ namespace Arms.Api.Controllers
      </tr>
        <tr>
          <td><b>Job Type:</b></td>
-         <td>" + jdObject + @"</td>
+         <td>" + jdObject.employmentType.employmentTypeName + @"</td>
        </tr>
         <tr>
        <td ><b>Address:</b></td>
