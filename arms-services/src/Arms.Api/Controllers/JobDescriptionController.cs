@@ -28,9 +28,9 @@ namespace Arms.Api.Controllers
     {
 
         ArmsDbContext _context;
-
-        public MailHelperController mailHelper = new MailHelperController();
-
+      
+        public MailHelperController mailHelper=new MailHelperController();
+      
         public JobDescriptionController(ArmsDbContext armsContext)
         {   
              _context = armsContext;
@@ -48,9 +48,7 @@ namespace Arms.Api.Controllers
                     Include(l => l.eligibilityCriteria).Include(l => l.loc).ToList();
                 if (jobDescriptions != null)
                 {
-
-                    string value = Request.Headers["Authorization"];
-                    var response = new
+                  var response = new
                     {
                         success = true,
                         payload = new
@@ -248,10 +246,10 @@ namespace Arms.Api.Controllers
                     };
                     return StatusCode(404, resNull);
                 }
-                if (string.Compare(job.openingDate.ToLongDateString(), "01-01-0001 00:00:00") != 0)
+                if (job.openingDate!= System.DateTime.MinValue)
                     jobInDb.openingDate = job.openingDate;
 
-                if (string.Compare(job.closingDate.ToLongDateString(), "01-01-0001 00:00:00") != 0)
+                if (job.closingDate != System.DateTime.MinValue)
                     jobInDb.closingDate = job.closingDate;
 
                 if (job.locationId != 0)
@@ -313,7 +311,7 @@ namespace Arms.Api.Controllers
                     success = false,
                     payload = new
                     {
-                        message = ex.InnerException.Message
+                        message = "Something went wrong"
                     }
 
                 };
@@ -323,10 +321,11 @@ namespace Arms.Api.Controllers
         //DELETE:/api/jobdescription/id
         [HttpDelete("{id}")]
         public IActionResult DeleteJd(int id)
-        {
+        {      
             try
             {
-                JobDescription jobInDb = _context.JobDescription.SingleOrDefault(c => c.Id == id);
+                 
+                  JobDescription jobInDb = _context.JobDescription.SingleOrDefault(c => c.Id == id);
                 if (jobInDb == null)
                 {
                     var resNull = new
@@ -341,7 +340,10 @@ namespace Arms.Api.Controllers
                     };
                     return StatusCode(404, resNull);
                 }
-                _context.JobDescription.Remove(jobInDb);
+                var interviewId = _context.Interview.FirstOrDefault(c => c.JobId == id).Id;
+                InterviewController controller=new InterviewController(_context);
+                controller.DeleteInterview(interviewId); 
+                 _context.JobDescription.Remove(jobInDb);
                 _context.SaveChanges();
                 var response = new
                 {
@@ -361,7 +363,7 @@ namespace Arms.Api.Controllers
                     success = false,
                     payload = new
                     {
-                        message = ex.InnerException.Message
+                        message = "Cnnot delete this Job"
                     }
 
                 };
@@ -369,8 +371,42 @@ namespace Arms.Api.Controllers
             }
         }
 
+        [HttpGet("search")]
+        public  IActionResult searchJd(string keyword)
+        {
+            Response response = new Response()
+            {
+                payload = new Payload()
+            };
+            try
+            {
+               if (!String.IsNullOrEmpty(keyword))
+                {
+                   var searchedJds =  _context.JobDescription.Where(e => e.jobTitle.StartsWith(keyword)).ToList();
 
 
+                    response.payload.data = searchedJds;
+                    response.success = "true";
+                    response.payload.msg = "Job Description searching done";
+                    return StatusCode(200, response);
+                }
+                else
+                {
+                    var searchedJds = _context.JobDescription.ToList();
+                    response.success = "true";
+                    response.payload.data = searchedJds;
+                    response.payload.msg = "All Job Descriptions retrieved";
+                    return StatusCode(200, response);
+                }
+
+            }catch(Exception Ex)
+            {
+                response.success = "false";
+                response.payload.msg = "Something Went Wrong";
+                return StatusCode(500, response);
+            }
+        }
 
     }
+    
 }

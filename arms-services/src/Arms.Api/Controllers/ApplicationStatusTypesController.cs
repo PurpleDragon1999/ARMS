@@ -12,6 +12,7 @@ using System.IO;
 using System.Reflection.Metadata;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using Arms.Api.Middlewares;
 
 namespace Arms.Api.Controllers
 {
@@ -120,6 +121,7 @@ namespace Arms.Api.Controllers
         {
             try
             {
+                TokenDecoder decodedToken = new TokenDecoder(Request);
                 for (int i = 0; i < statusType.Count; i++)
                 {
                     ApplicationStatusType checkinDb = _context.ApplicationStatusType.SingleOrDefault(c => c.StatusName == statusType[i].StatusName);
@@ -139,8 +141,8 @@ namespace Arms.Api.Controllers
                     ApplicationStatusType newStatusType = new ApplicationStatusType
                     {
                         StatusName = statusType[i].StatusName,
-                        CreatedBy = statusType[i].CreatedBy,
-                        ModifiedBy = statusType[i].ModifiedBy
+                        CreatedBy = decodedToken.id,
+                        ModifiedBy =decodedToken.id 
                     };
                     _context.ApplicationStatusType.Add(newStatusType);
                     _context.SaveChanges();
@@ -179,6 +181,7 @@ namespace Arms.Api.Controllers
         {
             try
             {
+                TokenDecoder decodedToken = new TokenDecoder(Request);
                 ApplicationStatusType statusTypeInDb = _context.ApplicationStatusType.SingleOrDefault(c => c.Id == id);
                 if (statusTypeInDb == null)
                 {
@@ -194,10 +197,10 @@ namespace Arms.Api.Controllers
                 }
 
                 if (statusType.StatusName != null)
-                    statusTypeInDb.StatusName = statusType.StatusName;
+                    statusTypeInDb.StatusName = decodedToken.id;
 
                 if (statusType.ModifiedBy != null)
-                    statusTypeInDb.ModifiedBy = statusType.ModifiedBy;
+                    statusTypeInDb.ModifiedBy = decodedToken.id;
 
                 _context.SaveChanges();
 

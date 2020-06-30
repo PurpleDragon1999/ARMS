@@ -12,6 +12,7 @@ using System.IO;
 using System.Reflection.Metadata;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using Arms.Api.Middlewares;
 
 namespace Arms.Api.Controllers
 {
@@ -120,10 +121,11 @@ namespace Arms.Api.Controllers
         {
             try
             {
+                TokenDecoder decodedToken = new TokenDecoder(Request);
                 RoundType newround = new RoundType
                 {
                     Name = round.Name,
-                    CreatedBy=round.CreatedBy,
+                    CreatedBy=decodedToken.id,
                 };
                 _context.RoundType.Add(newround);
                 _context.SaveChanges();
@@ -160,6 +162,7 @@ namespace Arms.Api.Controllers
         {
             try
             {
+                TokenDecoder decodedToken = new TokenDecoder(Request);
                 RoundType roundInDb = _context.RoundType.SingleOrDefault(c => c.Id == id);
                 if (roundInDb == null)
                 {
@@ -177,7 +180,7 @@ namespace Arms.Api.Controllers
                 }
 
                 roundInDb.Name = round.Name;
-                roundInDb.ModifiedBy = round.ModifiedBy;
+                roundInDb.ModifiedBy = decodedToken.id;
                 _context.RoundType.Update(roundInDb);
                 _context.SaveChanges();
                 var response = new

@@ -13,7 +13,8 @@ export class AnalyticsComponent implements OnInit {
   public barChartOptions = {
     scaleShowVerticalLines: false,
     responsive: true,
-    maintainAspectRatio: true
+    maintainAspectRatio: true,
+    barChartLegend : true
   };
   public barChartLabels = ['Java Developer', 'Full-stack developer', 'UI developer', 'Data analyst', 'DB administrator'];
   public barChartType = 'bar';

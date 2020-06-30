@@ -57,9 +57,9 @@
             #jobTitle="ngModel"
             [ngClass]="{ 'is-invalid': jobTitle.dirty && jobTitle.invalid }"
            
-            required
+           
           />
-          <div *ngIf="jobTitle.dirty && jobTitle.errors.required" class="invalid-feedback">
+          <div *ngIf="jobTitle.dirty && jobTitle.invalid" class="invalid-feedback">
             <div><i class="mdi mdi-alert-outline"></i>Job Title is required</div>
           </div>
           
@@ -74,12 +74,11 @@
             class="form-control"
             id="description"
             placeholder="Job Description"
-            ngModel
             [ngClass]="{ 'is-invalid': jobDescription.dirty && jobDescription.invalid }"
             #jobDescription="ngModel"
-            required
+             required
           ></textarea>
-          <div *ngIf="jobDescription.dirty && jobDescription.errors.required" class="invalid-feedback">
+          <div *ngIf="jobDescription.dirty && jobDescription.invalid" class="invalid-feedback">
             <div><i class="mdi mdi-alert-outline"></i>Job Description is required</div>
           </div>
         </div>

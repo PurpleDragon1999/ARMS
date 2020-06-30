@@ -344,6 +344,18 @@ namespace Arms.Api.Controllers
                         message = "Registered Successfully"
                     }
                 };
+                //JobDescription jdObject = _context.JobDescription.Include(l => l.employmentType).
+                //    Include(l => l.eligibilityCriteria).Include(l => l.loc).
+                //    FirstOrDefault(c => c.Id == applicationObj.JobId);
+                //string emailHtmlBody = GenerateEmailBody(jdObject, candObj.Code, candObj.Name);
+                ////Adding Emails in string Array to send to candidates
+                //string[] EmailToSend = new[]
+                //{
+                //    candObj.Email
+                //};
+
+                //mailHelper.MailFunction(emailHtmlBody, EmailToSend);
+
                 return StatusCode(200, response);
             }
             catch (Exception e)
@@ -468,7 +480,7 @@ namespace Arms.Api.Controllers
         }
 
         [HttpPatch("{id}")]
-        public IActionResult shortlistCandidates(int jobId, [FromBody] List<int> applicationIds, bool shortlisted=true)
+        public IActionResult shortlistCandidates(int jobId, [FromBody] List<int> applicationIds, bool shortlisted = true)
         {
             try
             {
@@ -498,7 +510,7 @@ namespace Arms.Api.Controllers
                 };
                 return StatusCode(404, response);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 var response = new
                 {
@@ -512,14 +524,13 @@ namespace Arms.Api.Controllers
             }
         }
 
-        public string GenerateEmailBody(JobDescription jdObject, string Code,String Name)
-        { 
+        public string GenerateEmailBody(JobDescription jdObject, string Code, String Name)
+        {
             string output = @"<html>
        <head>    
 	       <style type=""text/css"">
            </style>
        </head>
-
          <body aria-readonly=""false"" style=""cursor: auto;"">
                <p>Dear Mr/Ms.</p><b>" + Name + @"</b>We are pleased to inform you that you have 
     successfully registered for an interview process with CyberGroup.The details of interview will be communicated soon.

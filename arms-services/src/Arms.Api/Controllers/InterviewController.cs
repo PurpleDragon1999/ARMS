@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Arms.Domain.CustomEntities;
 using Microsoft.AspNetCore.Authorization;
 using System.Net.Http;
+using Arms.Api.Middlewares;
 
 namespace Arms.Api.Controllers
 {
@@ -202,6 +203,7 @@ namespace Arms.Api.Controllers
 		{
 			try
 			{
+                TokenDecoder decodedToken = new TokenDecoder(Request);
 				var interviewObj = new Interview
 				{
 					Date = customDTO.Date,
@@ -209,8 +211,8 @@ namespace Arms.Api.Controllers
 					Venue = customDTO.Venue,
 					JobId = customDTO.JobId,
 					NoOfRounds = customDTO.NoOfRounds,
-					CreatedBy = customDTO.CreatedBy,
-					ModifiedBy = customDTO.ModifiedBy
+					CreatedBy = decodedToken.id,
+					ModifiedBy = decodedToken.id
 				};
 				_context.Interview.Add(interviewObj);
 				_context.SaveChanges();
@@ -220,7 +222,9 @@ namespace Arms.Api.Controllers
 				{
 					var roundObj = round;
 					roundObj.InterviewId = id;
-					_context.Round.Add(roundObj);
+                    roundObj.CreatedBy = decodedToken.id;
+
+                    _context.Round.Add(roundObj);
                     _context.SaveChanges();
                   
                    
@@ -283,6 +287,7 @@ namespace Arms.Api.Controllers
 			var interview = _context.Interview.SingleOrDefault(c => c.Id == id);
 			try
 			{
+                TokenDecoder decodedToken = new TokenDecoder(Request);
 				if (interview != null)
 				{
 					if (roundID == 0)
@@ -307,6 +312,7 @@ namespace Arms.Api.Controllers
 						{
 							interview.NoOfRounds = customDTO.NoOfRounds;
 						}
+                        interview.ModifiedBy = decodedToken.id;
 						_context.Interview.Update(interview);
 						_context.SaveChanges();
 						var response = new
@@ -321,25 +327,26 @@ namespace Arms.Api.Controllers
 					}
 					else
 					{
-                        var round = _context.Round.SingleOrDefault(c => c.Id == roundID);
-                        if (customDTO.Round[0].RoundNumber != 0)
-                        {
-                            round.RoundNumber = customDTO.Round[0].RoundNumber;
-                        }
-                        if (customDTO.Round[0].RoundTypeId != 0)
-                        {
-                            round.RoundTypeId = customDTO.Round[0].RoundTypeId;
-                        }
-                        if (customDTO.Round[0].RoundDate != System.DateTime.MinValue)
-                        {
-                            round.RoundDate = customDTO.Round[0].RoundDate;
-                        }
-                        if (customDTO.Round[0].RoundTime != System.TimeSpan.Zero)
-                        {
-                            round.RoundTime = customDTO.Round[0].RoundTime;
-                        }
-                        _context.Round.Update(round);
-                        _context.SaveChanges();
+						var round = _context.Round.SingleOrDefault(c => c.Id == roundID);
+						if (customDTO.Round[0].RoundNumber != 0)
+						{
+							round.RoundNumber = customDTO.Round[0].RoundNumber;
+						}
+						if (customDTO.Round[0].RoundTypeId != 0)
+						{
+							round.RoundTypeId = customDTO.Round[0].RoundTypeId;
+						}
+						if (customDTO.Round[0].RoundDate != System.DateTime.MinValue)
+						{
+							round.RoundDate = customDTO.Round[0].RoundDate;
+						}
+						if (customDTO.Round[0].RoundTime != System.TimeSpan.Zero)
+						{
+							round.RoundTime = customDTO.Round[0].RoundTime;
+						}
+                        round.ModifiedBy = decodedToken.id;
+						_context.Round.Update(round);
+						_context.SaveChanges();
 						var response = new
 						{
 							success = true,
@@ -392,8 +399,37 @@ namespace Arms.Api.Controllers
 					{
                         var rounds = _context.Round.Where(c=>c.InterviewId==id);
                         foreach (var round in rounds)
-                        {
-                           _context.Round.Remove(round);
+                        {    //finnding interview Panel corresponding to round
+                            List<InterviewPanel> interviewPanels = _context.InterviewPanel.
+                                                                 Where(c => c.RoundId == round.Id).ToList();
+                            //finding interviewer correesponding to panel
+                             
+                           List< Interviewer>interviewers = _context.Interviewer.
+                                                             Where(c => c.JobId == interview.JobId).
+                                                              ToList();
+                            // removing interviewer data
+                           
+                            if (interviewers != null)
+                            {
+                                foreach (var interviewer in interviewers)
+                                {
+                                    _context.Interviewer.Remove(interviewer);
+                                }
+                            }
+                            // removing interview Panel
+                            if (interviewPanels != null)
+                            {
+                                // //removing interview Panel
+                                foreach (var interviewPanel in interviewPanels)
+                                {
+                                    _context.InterviewPanel.Remove(interviewPanel);
+                                }
+                            }
+                            if (round != null)
+                            {
+                                //removing Rounds 
+                                _context.Round.Remove(round);
+                            }
                         }
 
                        _context.Interview.Remove(interview);
