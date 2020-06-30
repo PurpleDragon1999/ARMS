@@ -14,7 +14,7 @@ import {
   styleUrls: ["./round-type.component.scss"],
 })
 export class RoundTypeComponent implements OnInit {
-  ngOnInit() {}
+  ngOnInit() { }
 
   roundTypeForm: FormGroup;
   addRound: boolean = false;

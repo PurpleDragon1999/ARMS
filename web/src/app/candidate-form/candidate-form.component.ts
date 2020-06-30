@@ -210,7 +210,7 @@ export class CandidateFormComponent implements OnInit {
     modalRef.componentInstance.success = res.success;
     modalRef.componentInstance.message = res.payload.message;
     modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
-    modalRef.close();
+      modalRef.close();
     })
   }
 }

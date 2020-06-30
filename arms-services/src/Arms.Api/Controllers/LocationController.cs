@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Arms.Api.Middlewares;
 using Arms.Application.Services.Users;
 using Arms.Domain.Entities;
 using Arms.Infrastructure;
@@ -122,7 +123,8 @@ namespace Arms.Api.Controllers
         {
             try
             {
-                for (int i = 0; i < location.Count; i++)
+                TokenDecoder decodedToken = new TokenDecoder(Request)
+;                for (int i = 0; i < location.Count; i++)
                 { 
                     Loc checkinDb = _context.Loc.SingleOrDefault(c => c.locationName == location[i].locationName);
                 if (checkinDb != null)
@@ -141,8 +143,8 @@ namespace Arms.Api.Controllers
                 Loc locationObj = new Loc
                 {
                     locationName = location[i].locationName,
-                    createdBy = location[i].createdBy,
-                    modifiedBy = location[i].modifiedBy
+                    createdBy = decodedToken.id,
+                    modifiedBy = decodedToken.id
                 };
                 _context.Loc.Add(locationObj);
                 _context.SaveChanges();
@@ -181,6 +183,7 @@ namespace Arms.Api.Controllers
         {
             try
             {
+                TokenDecoder decodedToken = new TokenDecoder(Request); 
                Loc loc = _context.Loc.SingleOrDefault(c => c.Id == id);
                 if (loc == null)
                 {
@@ -198,6 +201,8 @@ namespace Arms.Api.Controllers
                 }
 
                loc.locationName = location.locationName;
+                loc.modifiedBy = decodedToken.id;
+
                
                 _context.SaveChanges();
                 var response = new

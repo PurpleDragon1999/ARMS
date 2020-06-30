@@ -19,8 +19,9 @@ namespace Arms.Domain.Entities
         public string ModifiedBy { get; set; }
         public Interview Interview { get; set; }
 
-        public RoundType RoundType { get; set; }       
+        public RoundType RoundType { get; set; }
 
-        
+
     }
+
 }

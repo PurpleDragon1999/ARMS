@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading.Tasks;
 using Arms.Application.Services.Users;
 using Arms.Domain.CustomEntities;
@@ -14,7 +16,7 @@ namespace Arms.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles="Admin")]
+    [Authorize(Roles="Admin,SuperAdministrator")]
     public class JdEmailController : BaseController
     {
       
@@ -42,6 +44,7 @@ namespace Arms.Api.Controllers
                 };
                 JobDescription jdObject = _context.JobDescription.SingleOrDefault(c => c.Id == emailObj.jobDescriptionId);
                 string[] emailList = emailObj.emailList;
+                showDocument(jdObject.pdfBlobData);
                 string emailHtmlBody = GenerateEmailBody(jdObject);
                 mailHelper.MailFunction(emailHtmlBody, emailList);
                 return StatusCode(200, response);
@@ -72,12 +75,12 @@ namespace Arms.Api.Controllers
 
          <body aria-readonly=""false"" style=""cursor: auto;"">
               <p> Hello </p>
-             <p> Thank You for expressing your Interest for the position of"+ jdObject.jobTitle +
-              @",You can read more about us on our company career page </p>
+             <p> Thank You for expressing your Interest for the position of "+ jdObject.jobTitle +
+              @".You can read more about us on our company careers page. </p>
              <a href = 'www.cygrp.com/careers' > www.cygrp.com / careers </a>
              <p>Please signup if you wish to accept and proceed with our process</p>"+
             
-            @"<a href ='http://localhost:4200/candidateForm/"+ Id +"'>" + @"Click here to apply.</a>
+            @"<a href ='http://localhost:4200/candidateForm/"+ jdObject.code +"'>" + @"Click here to apply.</a>
              <p> Regards,</p>
              <p> HR,</p>
              <p> Cybergroup,B - 9, Block B, Sector 3, Noida, Uttar Pradesh 201301 </p>
@@ -91,6 +94,19 @@ namespace Arms.Api.Controllers
             ";
             return output;
         }
+        public void showDocument(byte[] blobPdf)
+        {
+            string data = string.Empty;
+
+           
+                string temp_inBase64 = Convert.ToBase64String(blobPdf);
+                  //MemoryStream ms = new MemoryStream(Convert.FromBase64String(temp_inBase64));
+                  //PdfDocument doc = new PdfDocument();
+                  // doc.LoadFromStream(ms);
+                  // doc.SaveToFile("output.pdf");
+
+        }
+
 
     }
 }

@@ -72,7 +72,7 @@
             <label >Experience</label>            
             <div class="row">
               <div class="col-md-3">
-                <select type="text" name="experienceInYears" placeholder="In years" 
+                <select type="text" name="experienceInYears"
                 class="form-control" id="experienceInYears" [(ngModel)]="model.experienceInYears" #experienceInYears="ngModel" 
                 [ngClass]="{ 'is-invalid': experienceInYears.dirty && experienceInYears.invalid}" required>
                   <option class="select-css" value="0" selected disabled  >YYYY</option>
@@ -86,7 +86,7 @@
               </div>
 
               <div class="col-md-3">
-                <select type="text" name="experienceInMonths"                         placeholder="In months" 
+                <select type="text" name="experienceInMonths"
                 class="form-control" id="experienceInMonths" [(ngModel)]="model.experienceInMonths" #experienceInMonths="ngModel" 
                 [ngClass]="{ 'is-invalid': experienceInMonths.dirty && experienceInMonths.invalid}" required>
                   <option class="select-css" value="0" selected disabled >MM</option>

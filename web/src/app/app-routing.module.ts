@@ -79,8 +79,16 @@ const routes: Routes = [
         component: InterviewListComponent,
       },
       {
-        path: "interviews",
-        component: InterviewListComponent,
+        path: "job-desc",
+        component: JdListComponent,
+      },
+      {
+        path: "job-desc/new",
+        component: JdFormComponent,
+      },
+      {
+        path: "create-interview",
+        component: CreateInterviewComponent,
       },
     ],
   },
@@ -218,14 +226,26 @@ const routes: Routes = [
     component: HrInterviewAssessementComponent,
   },
   {
-    path: "candidate-assessment/jd/:jdId/candidate/:candidateId",
+    path: "candidate-assessment",
     component: AppNavBarComponent,
     children: [
       {
         path: "",
+        component: CandidateComponent,
+      },
+      {
+        path: "jd/:jdId/candidate/:candidateId",
         component: CandidateAssessmentComponent,
       },
     ],
+  },
+  {
+    path: "dashboard",
+    component: AppNavBarComponent,
+    children: [{
+      path: '',
+      component: DashboardComponent
+    }]
   }
 ];
 
@@ -233,4 +253,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

@@ -11,7 +11,7 @@ import { AppServicesService } from "src/app/services/app-services.service";
   styleUrls: ["./employment-type.component.scss"],
 })
 export class EmploymentTypeComponent implements OnInit {
-  ngOnInit() {}
+  ngOnInit() { }
 
   employmentTypeForm: FormGroup;
   addEmploymentTypes: Boolean = false;

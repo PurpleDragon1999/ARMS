@@ -6,26 +6,27 @@
           <div class="col-8 mx-auto">
             <div class="border-bottom text-center pb-4">
               <div>
-                <h3>{{ data.candidate.name }}</h3>
+                <h3>{{ data?.candidate.name }}</h3>
               </div>
-              <p> {{ data.candidate.education }} </p>
-              <p class="text-muted"> Applied For: {{ data.jobDescription.jobTitle }} ( {{ data.jobDescription.description }} )</p>
+              <p> {{ data?.candidate.education }} </p>
+              <p class="text-muted"> Applied For: {{ data?.jobDescription.jobTitle }} (
+                {{ data?.jobDescription.description }} )</p>
             </div>
             <div class="py-4">
               <p class="clearfix">
                 <span class="float-left"> Mail </span>
-                <span class="float-right text-muted"> {{ data.candidate.email }} </span>
+                <span class="float-right text-muted"> {{ data?.candidate.email }} </span>
               </p>
               <p class="clearfix">
                 <span class="float-left"> Phone </span>
-                <span class="float-right text-muted"> {{ data.candidate.phone }} </span>
+                <span class="float-right text-muted"> {{ data?.candidate.phone }} </span>
               </p>
               <p class="clearfix">
                 <span class="float-left"> Experience </span>
-                <span class="float-right text-muted"> {{ data.candidate.experience }} years </span>
+                <span class="float-right text-muted"> {{ data?.candidate.experience }} years </span>
               </p>
             </div>
-            <button class="btn btn-gradient-primary btn-block">Resume</button>
+            <button class="btn btn-gradient-danger btn-block">Resume</button>
           </div>
         </div>
       </div>

@@ -27,28 +27,30 @@ namespace Arms.Api.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
-        public IActionResult Getcandidates(int jobId = 0)
-
+        public async Task<IActionResult> Getcandidates(int? pageNumber, int? pageSize, int jobId=0)
         {
-            List<Arms.Domain.Entities.Application> applications;
-            if (jobId != 0)
-            {
-                applications = _context.Application.Include(c => c.Candidate).Include(c => c.ApplicationStatusType).Include(c => c.Job).Where(c => c.JobId == jobId).ToList();
-            }
-            else
-            {
-                applications = _context.Application.Include(c => c.Candidate).Include(c => c.ApplicationStatusType).Include(c => c.Job).ToList();
-            }
+            var applications = from a in _context.Application select a;
 
             try
             {
+                if (jobId != 0)
+                {
+                    applications = _context.Application.Include(c => c.Candidate).Include(c => c.ApplicationStatusType).Include(c=> c.Job).Where(c => c.JobId == jobId);
+                }
+                else
+                {
+                    applications = _context.Application.Include(c => c.Candidate).Include(c => c.ApplicationStatusType).Include(c => c.Job);
+                }
+                
+                var paginatedList =
+                    await PaginatedList<Domain.Entities.Application>.CreateAsync(applications.AsNoTracking(), pageNumber ?? 1, pageSize ?? 5);
+                
                 var response = new
                 {
                     success = true,
                     payload = new
                     {
-                        data = applications,
+                        data = paginatedList,
                         message = "Applications Retrieved Successfully"
                     }
 
@@ -342,6 +344,18 @@ namespace Arms.Api.Controllers
                         message = "Registered Successfully"
                     }
                 };
+                //JobDescription jdObject = _context.JobDescription.Include(l => l.employmentType).
+                //    Include(l => l.eligibilityCriteria).Include(l => l.loc).
+                //    FirstOrDefault(c => c.Id == applicationObj.JobId);
+                //string emailHtmlBody = GenerateEmailBody(jdObject, candObj.Code, candObj.Name);
+                ////Adding Emails in string Array to send to candidates
+                //string[] EmailToSend = new[]
+                //{
+                //    candObj.Email
+                //};
+
+                //mailHelper.MailFunction(emailHtmlBody, EmailToSend);
+
                 return StatusCode(200, response);
             }
             catch (Exception e)
@@ -466,7 +480,7 @@ namespace Arms.Api.Controllers
         }
 
         [HttpPatch("{id}")]
-        public IActionResult shortlistCandidates(int jobId, [FromBody] List<int> applicationIds, bool shortlisted=true)
+        public IActionResult shortlistCandidates(int jobId, [FromBody] List<int> applicationIds, bool shortlisted = true)
         {
             try
             {
@@ -496,7 +510,7 @@ namespace Arms.Api.Controllers
                 };
                 return StatusCode(404, response);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 var response = new
                 {
@@ -510,14 +524,13 @@ namespace Arms.Api.Controllers
             }
         }
 
-        public string GenerateEmailBody(JobDescription jdObject, string Code,String Name)
-        { 
+        public string GenerateEmailBody(JobDescription jdObject, string Code, String Name)
+        {
             string output = @"<html>
        <head>    
 	       <style type=""text/css"">
            </style>
        </head>
-
          <body aria-readonly=""false"" style=""cursor: auto;"">
                <p>Dear Mr/Ms.</p><b>" + Name + @"</b>We are pleased to inform you that you have 
     successfully registered for an interview process with CyberGroup.The details of interview will be communicated soon.

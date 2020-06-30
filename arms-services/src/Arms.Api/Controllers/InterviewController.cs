@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Arms.Domain.CustomEntities;
 using Microsoft.AspNetCore.Authorization;
 using System.Net.Http;
+using Arms.Api.Middlewares;
 
 namespace Arms.Api.Controllers
 {
@@ -152,8 +153,8 @@ namespace Arms.Api.Controllers
 													 .Include(c => c.Interview)
 													 .Include(c => c.RoundType)
 													 .Where(c => c.InterviewId == id)
-													 .ToList();  
-						var response = new
+													 .ToList();
+                       var response = new
 						{
 							success = true,
 							payload = new
@@ -202,6 +203,7 @@ namespace Arms.Api.Controllers
 		{
 			try
 			{
+                TokenDecoder decodedToken = new TokenDecoder(Request);
 				var interviewObj = new Interview
 				{
 					Date = customDTO.Date,
@@ -209,8 +211,8 @@ namespace Arms.Api.Controllers
 					Venue = customDTO.Venue,
 					JobId = customDTO.JobId,
 					NoOfRounds = customDTO.NoOfRounds,
-					CreatedBy = customDTO.CreatedBy,
-					ModifiedBy = customDTO.ModifiedBy
+					CreatedBy = decodedToken.id,
+					ModifiedBy = decodedToken.id
 				};
 				_context.Interview.Add(interviewObj);
 				_context.SaveChanges();
@@ -220,7 +222,9 @@ namespace Arms.Api.Controllers
 				{
 					var roundObj = round;
 					roundObj.InterviewId = id;
-					_context.Round.Add(roundObj);
+                    roundObj.CreatedBy = decodedToken.id;
+
+                    _context.Round.Add(roundObj);
                     _context.SaveChanges();
                   
                    
@@ -244,10 +248,7 @@ namespace Arms.Api.Controllers
 				var applications = _context.Application.Include(c => c.Candidate).
 										   Where(c => c.JobId == interviewObj.JobId);
 				//getting the job description object for sending in email
-				JobDescription jdObject = _context.JobDescription.Include(l => l.employmentType).
-															   Include(l => l.eligibilityCriteria).
-															   Include(l => l.loc).
-															  FirstOrDefault(c => c.Id == interviewObj.JobId);
+				JobDescription jdObject = _context.JobDescription.FirstOrDefault(c => c.Id == interviewObj.JobId);
 
 				//Adding Emails in string Array to send to candidates
 
@@ -286,6 +287,7 @@ namespace Arms.Api.Controllers
 			var interview = _context.Interview.SingleOrDefault(c => c.Id == id);
 			try
 			{
+                TokenDecoder decodedToken = new TokenDecoder(Request);
 				if (interview != null)
 				{
 					if (roundID == 0)
@@ -310,6 +312,7 @@ namespace Arms.Api.Controllers
 						{
 							interview.NoOfRounds = customDTO.NoOfRounds;
 						}
+                        interview.ModifiedBy = decodedToken.id;
 						_context.Interview.Update(interview);
 						_context.SaveChanges();
 						var response = new
@@ -341,6 +344,7 @@ namespace Arms.Api.Controllers
 						{
 							round.RoundTime = customDTO.Round[0].RoundTime;
 						}
+                        round.ModifiedBy = decodedToken.id;
 						_context.Round.Update(round);
 						_context.SaveChanges();
 						var response = new
@@ -395,8 +399,37 @@ namespace Arms.Api.Controllers
 					{
                         var rounds = _context.Round.Where(c=>c.InterviewId==id);
                         foreach (var round in rounds)
-                        {
-                           _context.Round.Remove(round);
+                        {    //finnding interview Panel corresponding to round
+                            List<InterviewPanel> interviewPanels = _context.InterviewPanel.
+                                                                 Where(c => c.RoundId == round.Id).ToList();
+                            //finding interviewer correesponding to panel
+                             
+                           List< Interviewer>interviewers = _context.Interviewer.
+                                                             Where(c => c.JobId == interview.JobId).
+                                                              ToList();
+                            // removing interviewer data
+                           
+                            if (interviewers != null)
+                            {
+                                foreach (var interviewer in interviewers)
+                                {
+                                    _context.Interviewer.Remove(interviewer);
+                                }
+                            }
+                            // removing interview Panel
+                            if (interviewPanels != null)
+                            {
+                                // //removing interview Panel
+                                foreach (var interviewPanel in interviewPanels)
+                                {
+                                    _context.InterviewPanel.Remove(interviewPanel);
+                                }
+                            }
+                            if (round != null)
+                            {
+                                //removing Rounds 
+                                _context.Round.Remove(round);
+                            }
                         }
 
                        _context.Interview.Remove(interview);
@@ -536,7 +569,7 @@ namespace Arms.Api.Controllers
 		  </tr>
 		  <tr>
 			<td><b>Job Type:</b></td>
-			<td>" + jdObject.employmentType.employmentTypeName + @"</td>
+			<td>" + jdObject + @"</td>
 		  </tr>
 		  <tr>
 		  <td ><b>Address:</b></td>

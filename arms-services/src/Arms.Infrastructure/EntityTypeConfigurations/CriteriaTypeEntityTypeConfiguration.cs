@@ -49,6 +49,8 @@ namespace Arms.Infrastructure.EntityTypeConfigurations
                 .HasMaxLength(255)
                 .IsUnicode(false);
 
+        
+            
             builder.HasOne(d => d.roundType)
               .WithMany()
               .HasForeignKey(d => d.roundTypeId)
