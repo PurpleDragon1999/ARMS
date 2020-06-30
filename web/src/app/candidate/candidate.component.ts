@@ -31,7 +31,7 @@ export class CandidateComponent  {
     file : any;
     resumeDetails : any
     employeeId:any;
-    jobId:any;
+    jobId:any = 0;
     roundData:any;
     role : string;
     constructor(private candidateService: CandidateService, 
@@ -50,17 +50,15 @@ export class CandidateComponent  {
           this.getRoundData();
          }
     }
-    getCandidates():any{
-        
+    getCandidates(){
     this.route.params
     .pipe(
         switchMap((params: Params) => {
             this.jobId=params.jobId;
-            return this.candidateService.getApplications(params.jobId);
+            return this.candidateService.getApplications(this.jobId);
         })
      )
-       .subscribe((res) => {
-       
+       .subscribe((res) => { 
             this.candidates = res.payload.data
             this.columns = ["name", "email", "experience", "Job Position", "status"];
             if (this.candidates.length > 0){
@@ -103,7 +101,6 @@ export class CandidateComponent  {
     searchCandidate(event: IModelForPagination) {
         this.candidateService.searchCandidate(event.page, event.character).subscribe((res: IResponse) => {
             this.candidates = res.payload.data.dataList;
-            
             this.candidates.forEach((candidate: any) => {
                 candidate.pdf = this.bufferToPdf.bufferToPdf(candidate.cv.data);
                 if (candidate.appliedFor)
@@ -111,14 +108,11 @@ export class CandidateComponent  {
             });
             this.columns = ["name", "email", "appliedFor", "experience"];
             this.pager = res.payload.data.pager;
-            
         }, (error: HttpErrorResponse) => {
-
         });
     }
 
     getResume(id : number){
-       
         this.candidateService.getResume(id).subscribe((res : IResponse)=>{
           if (res.success==true){
            
@@ -139,7 +133,7 @@ export class CandidateComponent  {
                       });
           }
           else{
-              this.router.navigate(['/404'])
+              this.router.navigate(['error', 500])
           }
         })
         
@@ -148,24 +142,36 @@ export class CandidateComponent  {
     openResume(){
         let fileType = this.resumeDetails.name.split(".")[1];
         const blob = new Blob([this.file], { type:"application/" + fileType });
-        // var a = document.createElement("a");
-        // a.href = URL.createObjectURL(blob);
-        // //a.download = this.result.name;
-        // window.open(a.href)
-        // a.click();
         const url = window.URL.createObjectURL(blob);
         window.open(url);
     }
 
     updateCandidate(data){
-      console.log(data, data.data.id, "datya")
       const modalRef: NgbModalRef = this.modalService.open(UpdateCandidateComponent);
       modalRef.componentInstance.applicationId = data.data.id;
-      // modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
-      //   modalRef.close();
-      // });
+      modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+        modalRef.close();
+      });
     }
 
-    
-
+    shortlisting(data: any): void{
+      this.candidateService.shorlistCandidates(data.jdId, data.checkedEntriesId, data.isShortlisted).subscribe((res:IResponse)=>{
+      
+        this.openResponseModal(res);
+        if (res.success == true){
+          this.getCandidates();
+        }
+      }, error =>{
+        console.log(error)
+      })
+    }
+    openResponseModal(res : IResponse){
+      const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
+      modalRef.componentInstance.shouldConfirm = false;
+      modalRef.componentInstance.success = res.success;
+      modalRef.componentInstance.message = res.payload.message;
+      modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+      modalRef.close();
+      })
+    }
 }

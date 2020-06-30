@@ -154,7 +154,7 @@ export class JdFormComponent implements OnInit {
       this.router.navigate(["admin/job-desc"]);
     },
       (error: HttpErrorResponse) => {
-        console.log(error);
+        
         const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
         modalRef.componentInstance.shouldConfirm = false;
         modalRef.componentInstance.success = error.error.success;

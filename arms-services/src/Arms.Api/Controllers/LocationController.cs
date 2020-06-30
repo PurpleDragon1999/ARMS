@@ -58,7 +58,7 @@ namespace Arms.Api.Controllers
             }
 
         }
-        [Authorize(Roles = "SuperAdministrator")]
+        [Authorize(Roles = "SuperAdministrator,Admin")]
         //GET:api/location/id
         [HttpGet("{id}")]
 

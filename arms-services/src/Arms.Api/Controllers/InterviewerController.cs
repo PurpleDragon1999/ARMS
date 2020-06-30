@@ -38,7 +38,8 @@ namespace Arms.Api.Controllers
                             Interviewer data = new Interviewer
                             {
                                 EmployeeId = interviewerModels.interviewerModels[model].EmployeesId[emp],
-                                InterviewPanelId = interviewerModels.interviewerModels[model].PanelId
+                                InterviewPanelId = interviewerModels.interviewerModels[model].PanelId,
+                                JobId = interviewerModels.interviewerModels[model].JobId
                             };
                             _context.Interviewer.Add(data);
                         }

@@ -39,7 +39,7 @@ export class ProgressTrackerComponent implements OnInit {
 
     this.CandidateService.getApplication(applicationId).subscribe((res:IResponse)=>{  
       if(res.success == false){
-        this._route.navigate(['/404'])
+        this._route.navigate(['error', 404])
       }
       else{
         this.applicationdata = res.payload.data
@@ -47,7 +47,7 @@ export class ProgressTrackerComponent implements OnInit {
         this.applicationStatusName = this.applicationdata.applicationStatusType.statusName
       }    
     }, (error )=>{
-      this._route.navigate(['/404'])
+      this._route.navigate(['error', 404])
     })
   }
 

@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
@@ -58,7 +57,7 @@ namespace Arms.Api.Startup
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("RequireRoles",
-                     policy => policy.RequireRole("Admin","SuperAdministrator","Employee"));
+                     policy => policy.RequireRole("Admin", "SuperAdministrator", "Employee"));
             });
 
 
@@ -76,8 +75,7 @@ namespace Arms.Api.Startup
             {
                 app.UseHsts();
             }
-
-            //app.UseAuthentication();
+            ConfigureAuth(app);
 
             app.UseCors(builder =>
             builder.AllowAnyOrigin()
@@ -85,12 +83,14 @@ namespace Arms.Api.Startup
                     .AllowAnyHeader());
             app.UseHttpsRedirection();
 
-            ConfigureAuth(app);
             app.UseMvc();
+
+
         }
-            private void ConfigureAuth(IApplicationBuilder app)
-            {
-                app.UseAuthentication();
-            }
+        private void ConfigureAuth(IApplicationBuilder app)
+        {
+            app.UseAuthentication();
+        }
+            
     }
 }

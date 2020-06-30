@@ -63,7 +63,6 @@ export class CandidateAssessmentFormComponent implements OnChanges {
       }
     }
   }
-
   getAssessmentAndCriteriaAccordingToSelectedRound(selectedRound: number): void {
     this.selectedRoundId = selectedRound;
     this.getAssessmentEmitter.emit(this.selectedRoundId);
