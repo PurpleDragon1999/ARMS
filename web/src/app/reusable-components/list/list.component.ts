@@ -91,11 +91,11 @@ export class ListComponent implements OnInit{
         }
       }
     })
-    console.log(this.checkedEntriesId, "list--->>>")
+    
   }
 
   check(event, isChecked : boolean){
-    console.log(event, isChecked, "event")
+    
     if (isChecked == false){
       this.data.forEach(entry => { entry.checked = false });
       this.checkedEntriesId = []
@@ -108,16 +108,16 @@ export class ListComponent implements OnInit{
          this.checkedEntriesId.push(entry.id)
          })
     }
-    console.log(this.checkedEntriesId, "list all")
+    
   }
 
   shorlisting(isShortlisted : boolean){
-    console.log(this.checkedEntriesId, "list")
+    
     this.candidateService.shorlistCandidates(this.data[0].jobId, this.checkedEntriesId, isShortlisted).subscribe((res:IResponse)=>{
-      console.log(res, "resp!!!")
+      
       this.openResponseModal(res);
     }, error =>{
-      console.log(error)
+      
     })
   }
 

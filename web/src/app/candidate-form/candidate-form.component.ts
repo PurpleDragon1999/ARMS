@@ -60,11 +60,11 @@ export class CandidateFormComponent implements OnInit {
             this.model.appliedForPosition = res.payload.data.jobTitle;
           }
           else{
-            this.router.navigate(['/404']);
+            this.router.navigate(['error',404], );
           }
         },
         (error : HttpErrorResponse)=>{
-          this.router.navigate(['/404']);
+          this.router.navigate(['error', 500]);
         })
         
       }
@@ -93,12 +93,12 @@ export class CandidateFormComponent implements OnInit {
           this.getResume(applicationId)
           }
           else{
-            this.router.navigate(['/404']);
+            this.router.navigate(['error', 404]);
           }
 
         },(error : HttpErrorResponse)=>{
-          console.log(error)
-          this.router.navigate(['/404']);
+          
+          this.router.navigate(['error', 500]);
         })
         
       }
@@ -197,7 +197,7 @@ export class CandidateFormComponent implements OnInit {
           }
         } },
       error=>{
-        console.log(error)
+        
       })
     }
     else{

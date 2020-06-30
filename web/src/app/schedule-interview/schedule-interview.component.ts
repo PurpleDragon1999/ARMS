@@ -123,7 +123,7 @@ export class ScheduleInterviewComponent implements OnInit {
         this.employeeIds.push(data.id);
       }
     }
-    console.log(this.tableData);
+    
    
   }
 
@@ -184,7 +184,7 @@ export class ScheduleInterviewComponent implements OnInit {
      roundEndDateTime.setHours( roundEndDateTime.getHours()+2);
      this._appService.blockCalender(index,panel,roundStartDateTime,roundEndDateTime,emailList,userNames).
      subscribe((res)=>{
-          console.log(res);
+          
     });
   }
 

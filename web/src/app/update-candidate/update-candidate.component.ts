@@ -45,10 +45,10 @@ export class UpdateCandidateComponent implements OnInit {
   }
 
   getIdProofType(){
-    console.log("!!!!!!!!?????????")
+    
     this.service.getAllIdProofTypes().subscribe((res : any)=>{
       this.idProofTypes = res.payload.data
-    console.log(res, "inside update")
+    
     })
   }
 
@@ -110,7 +110,7 @@ export class UpdateCandidateComponent implements OnInit {
           }
         } },
       error=>{
-        console.log(error)
+        
       })
     }
     else{
@@ -130,9 +130,9 @@ export class UpdateCandidateComponent implements OnInit {
 
   loadApplicationData(){
     this.candidateService.getApplication(this.applicationId).subscribe((res:IResponse)=>{
-      console.log(res, "resp!!!!!")
+      
       if (res.success == true){
-        console.log("inside idf")
+        
         let application = res.payload.data
         this.model.appliedForJdId = application.job.code;
         this.model.appliedForPosition = application.job.jobTitle;
@@ -146,10 +146,10 @@ export class UpdateCandidateComponent implements OnInit {
         this.model.experienceInYears = (application.experience).split(" ")[0]
         this.model.experienceInMonths = (application.experience).split(" ")[2]
         this.getResume(application.id)
-        console.log(this.model, "model")
+        
         }
         else{
-          this.router.navigate(['/404']);
+          this.router.navigate(['error', 500]);
         }
         
     })
@@ -167,12 +167,12 @@ export class UpdateCandidateComponent implements OnInit {
                 ).then(file=> {
       this.file = file;
                 });
-                console.log(this.model, "model")
+                
     })
   }
 
   openResume(){
-    console.log(this.resumeDetails, "resume details")
+    
     let fileType = this.resumeDetails.name.split(".")[1];
     const blob = new Blob([this.file], { type:"application/" + fileType });
     const url = window.URL.createObjectURL(blob);

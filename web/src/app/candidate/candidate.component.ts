@@ -134,7 +134,7 @@ export class CandidateComponent  {
                       });
           }
           else{
-              this.router.navigate(['/404'])
+              this.router.navigate(['error', 500])
           }
         })
         
@@ -148,7 +148,6 @@ export class CandidateComponent  {
     }
 
     updateCandidate(data){
-      console.log(data, data.data.id, "datya")
       const modalRef: NgbModalRef = this.modalService.open(UpdateCandidateComponent);
       modalRef.componentInstance.applicationId = data.data.id;
       modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {

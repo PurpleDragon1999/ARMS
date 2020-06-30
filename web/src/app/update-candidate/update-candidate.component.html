@@ -64,7 +64,7 @@
 
                 <div class="form-group">
                     <label for="phone"><b> Phone </b><span class="asterick">*</span></label>
-                    <input [readOnly]="type == 'progressTracker'" type="text" name="phone" class="form-control" 
+                    <input type="text" name="phone" class="form-control" 
                     [(ngModel)]="model.phone"  placeholder="" #phone="ngModel" id="phone" 
                     [ngClass]="{ 'is-invalid': phone.dirty && phone.invalid}" required>
                     <div *ngIf="phone.dirty && phone.errors?.required" class="invalid-feedback">
@@ -171,8 +171,8 @@
                     <a (click)="openResume()" ><i class="far fa-file-pdf"></i>  {{model.cvName}}</a>
                     </div>
                 </div>   
-                
-                <div class="d-flex flex-row-reverse" *ngIf="type !== 'progressTracker'" >
+
+                <div class="d-flex flex-row-reverse" >
                     <button type="submit" [disabled]="f.pristine || f.invalid" class="btn btn-gradient-danger mr-2" 
                     ><b>Update</b></button>
                     <button class="btn btn-light" (click)="closeUpdateModal()"><b>Cancel</b></button>

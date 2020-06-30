@@ -1,3 +1,4 @@
+<div> 
 <app-interview-detail *ngIf="role == 'Employee' && title=='round'" [data]="data[0]" [title]="title"></app-interview-detail>
 <app-interview-detail *ngIf="role == 'Employee' && title=='candidate'" [data]="optionalCardData" [title]="title"></app-interview-detail>
 <div class="col-lg-12 stretch-card desktopView">
@@ -45,7 +46,7 @@
           <tr>
             <td [hidden]="isShowDiv" class="form-check form-check-flat">
               <label class="form-check-label">
-                <input #checkAll id="checkAll"  type="checkbox" (change)="check($event, checkAll.checked)">
+                <input #checkAll type="checkbox" (change)="check($event, checkAll.checked)">
                 <i class="input-helper"></i>
               </label>
             </td>
@@ -214,4 +215,5 @@
     </ul>
 
   </div>
+</div>
 </div>
