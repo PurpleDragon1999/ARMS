@@ -356,29 +356,6 @@ namespace Arms.Api.Controllers
                         message = "Registered Successfully"
                     }
                 };
-<<<<<<< HEAD
-
-                //JobDescription jdObject = _context.JobDescription.Include(l => l.employmentType).
-                //    Include(l => l.eligibilityCriteria).Include(l => l.loc).
-                //    FirstOrDefault(c => c.Id == applicationObj.JobId);
-                //string emailHtmlBody = GenerateEmailBody( jdObject, candObj.Code,candObj.Name);
-=======
-                //JobDescription jdObject = _context.JobDescription.Include(l => l.employmentType).
-                //    Include(l => l.eligibilityCriteria).Include(l => l.loc).
-                //    FirstOrDefault(c => c.Id == applicationObj.JobId);
-                //string emailHtmlBody = GenerateEmailBody(jdObject, candObj.Code, candObj.Name);
->>>>>>> bc70fe955573f2fce2dc1999db33a75cb2af30e3
-                ////Adding Emails in string Array to send to candidates
-                //string[] EmailToSend = new[]
-                //{
-                //    candObj.Email
-                //};
-<<<<<<< HEAD
-=======
-
-                //mailHelper.MailFunction(emailHtmlBody, EmailToSend);
-
->>>>>>> bc70fe955573f2fce2dc1999db33a75cb2af30e3
                 return StatusCode(200, response);
             }
             catch (Exception e)
@@ -556,14 +533,9 @@ namespace Arms.Api.Controllers
             }
         }
 
-<<<<<<< HEAD
-        public string GenerateEmailBody(JobDescription jdObject, string Code,String Name)
-        {
-
-=======
         public string GenerateEmailBody(JobDescription jdObject, string Code, String Name)
         {
->>>>>>> bc70fe955573f2fce2dc1999db33a75cb2af30e3
+
             string output = @"<html>
        <head>    
 	       <style type=""text/css"">
@@ -606,9 +578,5 @@ namespace Arms.Api.Controllers
 
 
     }
-<<<<<<< HEAD
- 
 }
-=======
-}
->>>>>>> bc70fe955573f2fce2dc1999db33a75cb2af30e3
+
