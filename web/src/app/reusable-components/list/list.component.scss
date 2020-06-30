@@ -166,23 +166,21 @@ td{
 }
 
 .shortlisting{
-    padding: 0.7em 2em 1em 1em;
-    color: #FC4C02;
+    color: #F04F23;
 }
-
 .shortlisted{
-    color: limegreen;
-}
-
-.shortlisted{
-    color:lightgreen;
+    color:#28a745;
     
 }
 
 .notShortlisted{
-    color: red;
+    color: rgb(201, 5, 5);
 }
 
-.shortlistedback{
-    background-color: seagreen;
+.shortlistedBack{
+    background-color: #F0FFFF;
+}
+
+.notShortlistedback{
+    background-color: #FFE4E1 ;
 }

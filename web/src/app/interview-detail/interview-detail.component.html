@@ -1,9 +1,8 @@
 <div class="col-md-12 grid-margin stretch-card" >
     <div class="card">
         <div class="card-header" >
-            (Details Of Round To Be Taken)
-            <h5  class=" title card-title text-center"> <b>JOB POSITION : </b>{{data?.interview?.jobDescription.jobTitle}}</h5>
-            </div>
+            <h5  class=" title card-title text-center row ml-2"> <b>JOB POSITION :  </b>{{data?.interview?.jobDescription.jobTitle}}    <h5 *ngIf="title=='candidate'" class="pl-2"> (Details Of Round To Be Taken)</h5></h5>
+        </div>
         <div class="card-body">
         <div class="row">
         <div class="col pb-1" >
@@ -26,7 +25,6 @@
             </div>
             <div>
                 <h6 *ngIf="title=='round'"><b>VENUE : </b> {{data?.interview?.venue}}</h6>
-                <!-- <h6 *ngIf="title=='candidate'"><b>INTERVIEW ID: </b> CYGJDID1</h6> -->
             </div>
         </div>
         <div class="col">
