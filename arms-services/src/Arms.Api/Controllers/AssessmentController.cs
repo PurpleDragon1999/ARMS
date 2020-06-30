@@ -298,7 +298,6 @@ namespace Arms.Api.Controllers
             try
             {
                 string currentUser = currentUserClaimsPrincipal.Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
-<<<<<<< HEAD
 
                 JobDescription jd = _context.JobDescription.FirstOrDefault(c => c.Id == jdId);
                 Interview interview = _context.Interview.FirstOrDefault(c => c.JobId == jd.Id);
@@ -373,8 +372,6 @@ namespace Arms.Api.Controllers
                 }
 
                 response = new Response<List<RoundAndCriteriaType>>(true, RoundAndCriteriaTypeList, "Assessment Updated successfully");
-=======
->>>>>>> ae3399ae0ce2ae2f1b563f516d8edf10d5361dc0
             }
             catch (Exception e)
             {
