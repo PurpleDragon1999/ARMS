@@ -216,12 +216,13 @@ namespace Arms.Api.Controllers
 				};
 				_context.Interview.Add(interviewObj);
 				_context.SaveChanges();
-				int id = interviewObj.Id;
+				int interviewId = interviewObj.Id;
+                int jobId = interviewObj.JobId;
                 List<Round> roundsList = new List<Round>();
 				foreach (Round round in customDTO.Round)
 				{
 					var roundObj = round;
-					roundObj.InterviewId = id;
+					roundObj.InterviewId = interviewId;
                     roundObj.CreatedBy = decodedToken.id;
 
                     _context.Round.Add(roundObj);
@@ -237,7 +238,7 @@ namespace Arms.Api.Controllers
 					payload = new
 					{
 
-                        data=id,
+                        data = new { interviewId = interviewId, jobId = jobId},
 						message = "Interview Record Created Successfully"
 
 					}

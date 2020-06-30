@@ -18291,6 +18291,12 @@ dl li {
   flex-grow: 1;
 }
 
+@media only screen and (max-width: 600px){
+  .content-wrapper{
+    padding: 2.75rem 1rem;
+  }
+}
+
 option {
   background-color: #f2edf3;
 }

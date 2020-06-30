@@ -5,7 +5,12 @@
         <h2 *ngIf="success === true"><b>Successful!</b></h2>
         <h2 *ngIf="success === false"><b>Error!!</b></h2>
         <p>{{ message }}.</p>
-        <button class=" btn btn-gradient-danger btn-fw" (click)="modalClose(false)">OK</button>
+        <button
+          class="btn btn-gradient-danger btn-fw"
+          (click)="modalClose(false)"
+        >
+          OK
+        </button>
       </div>
 
       <div *ngIf="shouldConfirm" class="modal-body text-center">
@@ -13,10 +18,28 @@
           <h2><b>Are you sure?</b></h2>
           <p>This process cannot be undone.</p>
           <span>
-            <button class=" btn btn-gradient-danger btn-fw mr-2" (click)="modalClose(false)">Cancel</button>
-            <button class=" btn btn-gradient-danger btn-fw" (click)="performRequest()">OK</button>
+            <button
+              class="btn btn-gradient-danger btn-fw mr-2"
+              (click)="modalClose(false)"
+            >
+              Cancel
+            </button>
+            <button
+              class="btn btn-gradient-danger btn-fw"
+              (click)="performRequest()"
+            >
+              OK
+            </button>
           </span>
         </div>
+
+        <!-- <div *ngIf="sendAlert">
+          <h2><b>{{message}}</b></h2>
+          <span>
+            <button class=" btn btn-gradient-danger btn-fw mr-2" (click)="modalClose(false)">Send Alert !</button>
+            <button class=" btn btn-gradient-danger btn-fw" (click)="performRequest()">Later</button>
+          </span>
+        </div> -->
 
         <!-- <div class="modal-body text-center" *ngIf="submitted === true">
           <h2 *ngIf="requestRes?.success === true"><b>Successful!</b></h2>
@@ -24,7 +47,7 @@
           <p>{{ requestRes?.payload.message }}.</p>
           <button class=" btn btn-outline-primary btn-fw" (click)="modalClose(true)">OK</button>
         </div> -->
-
       </div>
     </div>
   </div>
+</div>

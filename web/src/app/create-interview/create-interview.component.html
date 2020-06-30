@@ -185,7 +185,7 @@
               <input
                 name="roundNumber_{{ i }}"
                 type="text"
-                ngModel
+                [ngModel]="i + 1"
                 class="form-control"
                 id="roundNumber"
                 #roundNumber="ngModel"
@@ -200,7 +200,7 @@
                 class="invalid-feedback"
               >
                 <div>
-                  <i class="mdi mdi-alert-outline"></i>roundNumber is required
+                  <i class="mdi mdi-alert-outline"></i>RoundNumber is required
                 </div>
               </div>
             </div>
@@ -236,7 +236,7 @@
                 class="invalid-feedback"
               >
                 <div>
-                  <i class="mdi mdi-alert-outline"></i>roundType is required
+                  <i class="mdi mdi-alert-outline"></i>RoundType is required
                 </div>
               </div>
             </div>
@@ -262,7 +262,7 @@
                 class="invalid-feedback"
               >
                 <div>
-                  <i class="mdi mdi-alert-outline"></i>roundDate is required
+                  <i class="mdi mdi-alert-outline"></i>RoundDate is required
                 </div>
               </div>
             </div>
@@ -287,7 +287,7 @@
                 class="invalid-feedback"
               >
                 <div>
-                  <i class="mdi mdi-alert-outline"></i>roundTime is required
+                  <i class="mdi mdi-alert-outline"></i>RoundTime is required
                 </div>
               </div>
             </div>
