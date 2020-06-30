@@ -1,5 +1,5 @@
 import { TokenDecoderService } from './../utilities/token-decoder.service';
-//import { UpdateCandidateComponent } from './../update-candidate/update-candidate.component';
+import { UpdateCandidateComponent } from './../update-candidate/update-candidate.component';
 import { ListComponent } from './../reusable-components/list/list.component';
 import { Router } from '@angular/router';
 import { UrltoFile } from './../utils/urlToFile';
@@ -59,8 +59,7 @@ export class CandidateComponent  {
             return this.candidateService.getApplications(params.jobId);
         })
      )
-       .subscribe((res) => {
-       
+       .subscribe((res) => { 
             this.candidates = res.payload.data
             this.columns = ["name", "email", "experience", "Job Position", "status"];
             if (this.candidates.length > 0){
@@ -103,7 +102,6 @@ export class CandidateComponent  {
     searchCandidate(event: IModelForPagination) {
         this.candidateService.searchCandidate(event.page, event.character).subscribe((res: IResponse) => {
             this.candidates = res.payload.data.dataList;
-            
             this.candidates.forEach((candidate: any) => {
                 candidate.pdf = this.bufferToPdf.bufferToPdf(candidate.cv.data);
                 if (candidate.appliedFor)
@@ -111,14 +109,11 @@ export class CandidateComponent  {
             });
             this.columns = ["name", "email", "appliedFor", "experience"];
             this.pager = res.payload.data.pager;
-            
         }, (error: HttpErrorResponse) => {
-
         });
     }
 
     getResume(id : number){
-       
         this.candidateService.getResume(id).subscribe((res : IResponse)=>{
           if (res.success==true){
            
@@ -148,24 +143,16 @@ export class CandidateComponent  {
     openResume(){
         let fileType = this.resumeDetails.name.split(".")[1];
         const blob = new Blob([this.file], { type:"application/" + fileType });
-        // var a = document.createElement("a");
-        // a.href = URL.createObjectURL(blob);
-        // //a.download = this.result.name;
-        // window.open(a.href)
-        // a.click();
         const url = window.URL.createObjectURL(blob);
         window.open(url);
     }
 
     updateCandidate(data){
-      // console.log(data, data.data.id, "datya")
-      // const modalRef: NgbModalRef = this.modalService.open(UpdateCandidateComponent);
-      // modalRef.componentInstance.applicationId = data.data.id;
-      // // modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
-      // //   modalRef.close();
-      // // });s
+      console.log(data, data.data.id, "datya")
+      const modalRef: NgbModalRef = this.modalService.open(UpdateCandidateComponent);
+      modalRef.componentInstance.applicationId = data.data.id;
+      modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+        modalRef.close();
+      });
     }
-
-    
-
 }

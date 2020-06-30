@@ -70,4 +70,11 @@ export class CandidateService {
         )
     }
 
+    updateApplication(applicationObj, applicationId:number){
+        return this.http.put<IResponse>(`${CANDIDATE_API}/${applicationId}`, applicationObj, this.options)
+    }
+
+    shorlistCandidates(jobId:number,candidatesIdList : Array<number>, isShortlisted : boolean = true){
+        return this.http.patch<IResponse>(`${CANDIDATE_API}/${jobId}?shortlisted=${isShortlisted}`, candidatesIdList,this.options)
+    }
 }

@@ -114,6 +114,7 @@ export class CandidateFormComponent implements OnInit {
     getResume(id : number){
       this.CandidateService.getResume(id).subscribe((res : IResponse)=>{
         this.resumeDetails = res.payload.data[0]
+        this.model.cvName = this.resumeDetails.name
         this.model.cv = this.resumeDetails.cv ? "data:application/" + this.resumeDetails.name.split(".")[1] +";base64," +this.resumeDetails.cv: null;
         this.urltoFile.urltoFile(
         this.model.cv,

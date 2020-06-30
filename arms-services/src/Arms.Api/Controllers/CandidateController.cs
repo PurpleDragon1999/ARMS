@@ -498,6 +498,7 @@ namespace Arms.Api.Controllers
         {
             try
             {
+                string message="";
                 foreach (int id in applicationIds)
                 {
                     int applicationStatusId;
@@ -505,10 +506,12 @@ namespace Arms.Api.Controllers
                     if (shortlisted == true)
                     {
                         applicationStatusId = _context.ApplicationStatusType.FirstOrDefault(c => c.StatusName == "Shortlisted").Id;
+                        message = "Marked As Shortlisted";
                     }
                     else
                     {
                         applicationStatusId = _context.ApplicationStatusType.FirstOrDefault(c => c.StatusName == "NotShortlisted").Id;
+                        message = "Marked As Not Shortlisted";
                     }
                     application.ApplicationStatusTypeId = applicationStatusId;
                     _context.Update(application);
@@ -519,10 +522,10 @@ namespace Arms.Api.Controllers
                     success = true,
                     payload = new
                     {
-                        message = "Applications Shortlisted"
+                        message = message
                     }
                 };
-                return StatusCode(404, response);
+                return StatusCode(200, response);
             }
             catch(Exception e)
             {

@@ -1,3 +1,5 @@
+import { error } from 'util';
+import { AppServicesService } from 'src/app/services/app-services.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { IResponse } from 'src/app/models/response.interface';
 import { CandidateService } from './../../candidate/services/candidate.service';
@@ -10,9 +12,10 @@ import { ModalComponent } from 'src/app/reusable-components/modal/modal.componen
   templateUrl: "./list.component.html",
   styleUrls: ["./list.component.scss"],
 })
-export class ListComponent {
+export class ListComponent implements OnInit{
   checkedEntriesId : Array<number> = []
   isShowDiv : boolean = true
+  role : string
 
   @Input()
   title: string = '';
@@ -29,6 +32,9 @@ export class ListComponent {
   @Input()
   pager: any;
 
+  @Input()
+  optionalCardData : any = {}
+
   @Output()
   emitDelete: EventEmitter<any["data"]> = new EventEmitter<any["data"]>();
 
@@ -40,6 +46,13 @@ export class ListComponent {
 
   @Output()
   emitDownloadPdf: EventEmitter<string> = new EventEmitter<string>();
+
+  constructor(private modalService : NgbModal,private _service : AppServicesService, private candidateService: CandidateService){
+  }
+
+  ngOnInit(){
+    this.role = this._service.tokenDecoder().role
+  }
 
   openModal(formType: any["formType"], data?: any["data"]) {
     this.emitOpenModal.emit({ formType, data });
@@ -61,20 +74,61 @@ export class ListComponent {
     this.emitDownloadPdf.emit(id);
   }
 
-  checkAll(event) {
-    if (this.data.every(entry => entry.checked == true)){
+  checkSpecific(event, applicationId : number){
+    this.data.forEach(entry=>{
+      if (entry.id==applicationId){
+        if ( !this.checkedEntriesId.includes(applicationId) && entry.checked == false){
+          // entry.checked = true;
+          this.checkedEntriesId.push(applicationId)
+        }
+        else{
+          // entry.checked = false;
+          let idIndex = this.checkedEntriesId.indexOf(applicationId);  
+          //if its exists in array
+          if (idIndex > -1) {  
+            this.checkedEntriesId.splice(idIndex, 1);
+          }
+        }
+      }
+    })
+    console.log(this.checkedEntriesId, "list--->>>")
+  }
+
+  check(event, isChecked : boolean){
+    console.log(event, isChecked, "event")
+    if (isChecked == false){
       this.data.forEach(entry => { entry.checked = false });
       this.checkedEntriesId = []
+
     }
-      
-    else{
-      this.data.forEach(entry => { entry.checked = true });
-      this.data.map(entry=>{
-      this.checkedEntriesId.push(entry.id)
-      })
-      
+    else {
+         this.data.forEach(entry => { entry.checked = true });
+         this.checkedEntriesId = [];
+         this.data.map(entry=>{
+         this.checkedEntriesId.push(entry.id)
+         })
     }
-    
+    console.log(this.checkedEntriesId, "list all")
+  }
+
+  shorlisting(isShortlisted : boolean){
+    console.log(this.checkedEntriesId, "list")
+    this.candidateService.shorlistCandidates(this.data[0].jobId, this.checkedEntriesId, isShortlisted).subscribe((res:IResponse)=>{
+      console.log(res, "resp!!!")
+      this.openResponseModal(res);
+    }, error =>{
+      console.log(error)
+    })
+  }
+
+  openResponseModal(res : IResponse){
+    const modalRef: NgbModalRef = this.modalService.open(ModalComponent);
+    modalRef.componentInstance.shouldConfirm = false;
+    modalRef.componentInstance.success = res.success;
+    modalRef.componentInstance.message = res.payload.message;
+    modalRef.componentInstance.closeModal.subscribe((rerender: boolean) => {
+    modalRef.close();
+    })
   }
 
   toggleDisplayDiv(){
