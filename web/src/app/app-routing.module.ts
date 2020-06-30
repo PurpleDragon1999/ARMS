@@ -114,10 +114,6 @@ const routes: Routes = [
         component: CandidateComponent,
       },
       {
-        path: "update-candidate",
-        component: UpdateCandidateComponent,
-      },
-      {
         path: "interviews/round/:id/:append",
         component: RoundComponent,
       },

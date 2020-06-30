@@ -11,5 +11,5 @@ export class InterviewDetailComponent  {
   title: string = '';
 
   @Input()
-  data: any;
+  data: any = {};
 }
