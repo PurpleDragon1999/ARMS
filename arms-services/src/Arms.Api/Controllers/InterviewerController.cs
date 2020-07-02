@@ -157,15 +157,16 @@ namespace Arms.Api.Controllers
         {
             try
             {
-                List<Interviewer> interviewer = _context.Interviewer.Where(i => i.InterviewPanelId == panelId).ToList();
+                List<Interviewer> interviewer = _context.Interviewer.Where(i => i.InterviewPanelId == panelId).Include(i => i.Employee).ToList();
                 Panel panel = new Panel()
                 {
                     PanelId = panelId,
-                    employeesId = new List<int>()
+                    employees = new List<EmployeeDetails>()
                 };
                 for (int i = 0; i < interviewer.Count; i++)
                 {
-                    panel.employeesId.Add(interviewer[i].EmployeeId);
+                    //panel.employees.Add(interviewer[i].Employee.FirstName);
+                    //panel.employeesId.Add(interviewer[i].EmployeeId);
                 }
                 return panel;
             }

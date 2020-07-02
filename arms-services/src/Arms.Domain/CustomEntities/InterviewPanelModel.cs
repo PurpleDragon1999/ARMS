@@ -19,7 +19,15 @@ namespace Arms.Domain.CustomEntities
     {
         public string PanelName { get; set; }
         public int? PanelId { get; set; }
-        public List<int> employeesId { get; set; }
+        public List<EmployeeDetails> employees { get; set; }
+    }
+
+    public partial class EmployeeDetails
+    {
+        public int EmployeeId { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
     }
 
     //For getting rounds information related to an interview Id

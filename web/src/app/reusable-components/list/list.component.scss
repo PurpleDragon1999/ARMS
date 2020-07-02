@@ -58,7 +58,6 @@ ngb-pagination ::ng-deep ul > li:not(.active) > a {
 
 .paginationDiv ::ng-deep{
     .page-item.active .page-link {
-        // z-index: 1;
         color: #fff;
         background-color:#FC4C02;
         border-color: #FC4C02;
@@ -81,7 +80,6 @@ ngb-pagination ::ng-deep ul > li:not(.active) > a {
 
 .mobileView ::ng-deep{
     .btn-link {
-        //font-weight: 400;
         color: #212529;
         text-decoration: none;
     }
@@ -175,6 +173,11 @@ td{
 
 .notShortlisted{
     color: rgb(201, 5, 5);
+}
+
+.desktopView{
+    padding-left: 0 !important;
+    padding-right: 0 !important;
 }
 
 .shortlistedBack{

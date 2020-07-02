@@ -67,8 +67,8 @@ export class IdProofTypeComponent implements OnInit {
 
       return this._service.deleteIdProofType(idProofIndex).subscribe((response: any) => {
         this.loadIdProofTypes();
-        modalRef.componentInstance.success = response.body.success;
-        modalRef.componentInstance.message = response.body.payload.message;
+        modalRef.componentInstance.success = response.success;
+        modalRef.componentInstance.message = response.payload.message;
         }, 
         (error: HttpErrorResponse) => {
         modalRef.componentInstance.success = error.error.success;

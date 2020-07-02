@@ -30,6 +30,7 @@ export class CreateInterviewComponent implements OnInit {
     this.getRoundTypes();
     this.minimumDate = this.minDateService.setMinimumDate();
   }
+
   minimumDate: string;
   interview: any = {};
   interviewObj: any = {};
@@ -57,6 +58,7 @@ export class CreateInterviewComponent implements OnInit {
       this.RoundType = res.payload.data;
     });
   }
+
   i: any;
   createInterview(interview: any) {
     let round = [];

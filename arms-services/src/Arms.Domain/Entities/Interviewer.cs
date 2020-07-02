@@ -8,6 +8,7 @@ namespace Arms.Domain.Entities
         public int Id { get; set; }
         public int InterviewPanelId { get; set; }
         public int EmployeeId { get; set; }
+        public ArmsEmployees Employee { get; set; }
         public int JobId { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime ModifiedAt { get; set; }

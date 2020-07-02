@@ -14,9 +14,7 @@ const INTERVIEW_API=`${HOST}/api/interview`
 export class InterviewService {
   headers: HttpHeaders = new HttpHeaders({
     'Content-Type': 'application/json',
-        Authorization: localStorage.getItem("Authorized")
-       //hard code token here
-   
+        Authorization: localStorage.getItem("Authorized")   
   });
 
   options = {

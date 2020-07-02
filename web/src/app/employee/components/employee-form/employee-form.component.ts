@@ -79,10 +79,6 @@ export class EmployeeFormComponent {
       }
     );
   }
-
-  // modalClose(rerender: boolean): void {
-  //   this.closeModal.emit(rerender);
-  // }
   
   modalClose() {
     this.closeModal.emit();

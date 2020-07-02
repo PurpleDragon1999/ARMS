@@ -363,7 +363,7 @@ namespace Arms.Api.Controllers
                     success = false,
                     payload = new
                     {
-                        message = "Cnnot delete this Job"
+                        message = "This job cannot be deleted"
                     }
 
                 };

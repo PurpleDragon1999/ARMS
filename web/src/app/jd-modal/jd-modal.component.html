@@ -212,7 +212,7 @@
           <button
             type="submit"
             class="btn btn-gradient-danger mr-2"
-            [disabled]="!form.valid"
+            [disabled]="!form.valid && form.pristine"
           >
             <b>UPDATE</b>
           </button>

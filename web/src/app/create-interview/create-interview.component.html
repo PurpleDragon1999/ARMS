@@ -66,6 +66,7 @@
           <div><i class="mdi mdi-alert-outline"></i>Job Title is required</div>
         </div>
       </div>
+
       <div class="form-group">
         <label for="date">Date<span class="asterick">*</span></label>
         <input
@@ -75,7 +76,7 @@
           class="form-control"
           id="date"
           #date="ngModel"
-          [min]=minimumDate
+          [min]="minimumDate"
           [ngClass]="{ 'is-invalid': date.dirty && date.invalid }"
           placeholder="Date"
           required
@@ -249,7 +250,7 @@
                 ngModel
                 class="form-control"
                 id="roundDate"
-                [min]=minimumDate
+                [min]="minimumDate"
                 #roundDate="ngModel"
                 [ngClass]="{
                   'is-invalid': roundDate.dirty && roundDate.invalid

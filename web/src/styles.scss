@@ -7,7 +7,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(240, 79, 35, 0.2);
+  background: #f5f5f5;
 }
 /*-------------------------------------------------------------------
   ===== Table of Contents =====
@@ -4039,12 +4039,12 @@ pre code {
 }
 
 .table-striped tbody tr:nth-of-type(odd) {
-  background-color: #f2edf3;
+  background-color: #f5f5f5;
 }
 
 .table-hover tbody tr:hover {
   color: #212529;
-  background-color: #f2edf3;
+  background-color: #f5f5f5;
 }
 
 .table-primary,
@@ -8457,7 +8457,7 @@ a.close.disabled {
   flex-direction: column;
   width: 100%;
   pointer-events: auto;
-  background-color: #f2edf3;
+  background-color: #f5f5f5;
   background-clip: padding-box;
   border: 1px solid #ebedf2;
   border-radius: 0.3rem;
@@ -13494,7 +13494,7 @@ code {
 
 /* Footer */
 .footer {
-  background: #f2edf3;
+  background: #f5f5f5;
   border-top: 1px solid #e7dee9;
   padding: 30px 1rem;
   transition: all 0.25s ease;
@@ -15391,7 +15391,6 @@ code {
 .btn-gradient-warning:not(.btn-gradient-light):active {
   color: #ffffff;
 }
-// #fc8b02  #FC4C02 |\  #fd5914  #fe834f
 .btn-gradient-danger {
   background: -webkit-gradient(
     linear,
@@ -16903,7 +16902,6 @@ dl li {
   margin-bottom: 0;
 }
 .table thead th {
-  // border-top: 1px;
   border-bottom-width: 1px;
   font-family: "ubuntu-medium", sans-serif;
   font-weight: initial;
@@ -17062,7 +17060,7 @@ dl li {
   -ms-transition: width 0.25s ease, background 0.25s ease;
   background: #fff;
   width: 260px;
-  height: 70px;
+  height: 55px;
 }
 @media (max-width: 991px) {
   .navbar .navbar-brand-wrapper {
@@ -17083,7 +17081,6 @@ dl li {
   color: #fc4c02;
 }
 .navbar .navbar-brand-wrapper .navbar-brand img {
-  // width: calc(260px - 120px);
   max-width: 100%;
   height: 28px;
   margin: auto;
@@ -17093,7 +17090,6 @@ dl li {
   display: none;
 }
 .navbar .navbar-brand-wrapper .navbar-brand.brand-logo-mini img {
-  // width: calc(70px - 50px);
   max-width: 100%;
   height: 28px;
   margin: auto;
@@ -17107,7 +17103,7 @@ dl li {
   padding-left: 24px;
   padding-right: 24px;
   width: calc(100% - 260px);
-  height: 70px;
+  height: 55px;
 }
 @media (max-width: 991px) {
   .navbar .navbar-menu-wrapper {
@@ -17119,7 +17115,7 @@ dl li {
 .navbar .navbar-menu-wrapper .navbar-toggler {
   border: 0;
   color: inherit;
-  height: 70px;
+  height: 55px;
   border-radius: 0px;
   padding-left: 5px;
   padding-right: 20px;
@@ -17225,13 +17221,14 @@ dl li {
   font-size: 0.875rem;
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  height: 70px;
+  height: 55px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  line-height: 1;
 }
 @media (max-width: 767px) {
   .navbar .navbar-menu-wrapper .navbar-nav .nav-item .nav-link {
@@ -17884,8 +17881,8 @@ dl li {
 .sidebar .nav .nav-item .nav-link i.menu-icon {
   font-size: 1.125rem;
   line-height: 1;
-  margin-left: auto;
-  color: #bba8bff5;
+  margin-left: 1.5rem;
+  color: #a9a9a9;
 }
 .rtl .sidebar .nav .nav-item .nav-link i.menu-icon {
   margin-left: 0;
@@ -18063,7 +18060,7 @@ dl li {
 
 /* Layouts */
 .navbar.fixed-top + .page-body-wrapper {
-  padding-top: 70px;
+  padding-top: 55px;
 }
 
 @media (min-width: 992px) {
@@ -18283,7 +18280,7 @@ dl li {
 }
 
 .content-wrapper {
-  background: #f2edf3;
+  background: #f5f5f5;
   padding: 2.75rem 2.25rem;
   width: 100%;
   -webkit-box-flex: 1;
@@ -18298,7 +18295,7 @@ dl li {
 }
 
 option {
-  background-color: #f2edf3;
+  background-color: #f5f5f5;
 }
 // options css
 .select-css {

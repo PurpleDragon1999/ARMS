@@ -1,10 +1,10 @@
-import { UpdateInterviewComponent } from "./update-interview/update-interview.component";
-import { UpdateCandidateComponent } from "./update-candidate/update-candidate.component";
-import { HrInterviewAssessementComponent } from "./hr-interview-assessement/hr-interview-assessement.component";
+import { InterviewListComponent } from './interview-list/interview-list.component';
+import { UpdateCandidateComponent } from './update-candidate/update-candidate.component';
+import { UpdateInterviewComponent } from './update-interview/update-interview.component';
+import { HrInterviewAssessementComponent } from './hr-interview-assessement/hr-interview-assessement.component';
 import { InterviewTrackerComponent } from "./interview-tracker/interview-tracker.component";
 import { SettingsComponent } from "./settings/settings.component";
 import { CreateInterviewComponent } from "./create-interview/create-interview.component";
-import { InterviewListComponent } from "./interview-list/interview-list.component";
 import { ScheduleInterviewComponent } from "./schedule-interview/schedule-interview.component";
 import { CandidateFormComponent } from "./candidate-form/candidate-form.component";
 import { ProgressTrackerComponent } from "./progress-tracker/progress-tracker.component";
@@ -84,6 +84,14 @@ const routes: Routes = [
       {
         path: "interviews",
         component: InterviewListComponent,
+      },
+      {
+        path: "job-desc",
+        component: JdListComponent,
+      },
+      {
+        path: "job-desc/new",
+        component: JdFormComponent,
       },
       {
         path: "interview",

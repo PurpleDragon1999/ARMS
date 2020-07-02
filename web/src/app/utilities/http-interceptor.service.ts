@@ -1,6 +1,5 @@
 import { AppServicesService } from "./../services/app-services.service";
 import { tap, catchError, map } from "rxjs/operators";
-// import { AuthServiceService } from './services/auth-service.service';
 import { Injectable } from "@angular/core";
 import {
   HttpInterceptor,
@@ -18,7 +17,6 @@ import { Router } from "@angular/router";
   providedIn: "root",
 })
 export class HttpInterceptorService implements HttpInterceptor {
-  // constructor(private auth: AuthServiceService) { }
   constructor(private service: AppServicesService) {}
 
   intercept(

@@ -32,6 +32,11 @@ export class ScheduleInterviewComponent implements OnInit {
   error: any = { isError: false, errorMessage: "" };
   index: any;
   dateTimeForRounds: any[] = [];
+  durationForRounds: number[] = [];
+
+  buttonDisabled: boolean = false;
+
+  tableDataNumber: number = 0;
 
   // Counters for tracking calendar blocking
   completed: number = 0;
@@ -51,7 +56,6 @@ export class ScheduleInterviewComponent implements OnInit {
     });
     this._appService.getRoundsFromInterviewId(this.interviewId).subscribe(
       (res: any) => {
-        console.log(res);
         this.rounds = res.payload.data;
         for (let i = 0; i < this.rounds.length; i++) {
           this.main.push(this.active);
@@ -59,6 +63,7 @@ export class ScheduleInterviewComponent implements OnInit {
             roundDate: this.rounds[i].roundDate.slice(0, 10),
             roundTime: this.rounds[i].roundTime.slice(0, 5),
           });
+          this.durationForRounds.push(0.5);
           this.searchData.push(this.temp);
           this.tableData.push({
             roundId: this.rounds[i].id,
@@ -92,6 +97,16 @@ export class ScheduleInterviewComponent implements OnInit {
     this.list[index] = false;
   }
 
+  check(e) {
+    for (let i = 0; i < this.durationForRounds.length; i++) {
+      if (this.durationForRounds[i] < 0 || this.durationForRounds[i] == null) {
+        this.buttonDisabled = true;
+      } else {
+        this.buttonDisabled = false;
+      }
+    }
+  }
+
   //Function to search employees
   search(input: string, i: number) {
     if (input != "") {
@@ -109,9 +124,9 @@ export class ScheduleInterviewComponent implements OnInit {
 
   //Function to add selected employee in table
   select(data: any, roundId: number, index: number) {
+    this.tableDataNumber += 1;
     data["status"] = "fas fa-clock text-warning";
     if (this.main[index][0] === "active") {
-      // this.tableData[index].roundId = roundId;
       if (
         this.tableData[index].panel1.employees.length < 2 &&
         !this.employeeIds.includes(data.id)
@@ -120,7 +135,6 @@ export class ScheduleInterviewComponent implements OnInit {
         this.employeeIds.push(data.id);
       }
     } else if (this.main[index][1] === "active") {
-      // this.tableData[index].roundId = roundId;
       if (
         this.tableData[index].panel2.employees.length < 2 &&
         !this.employeeIds.includes(data.id)
@@ -129,7 +143,6 @@ export class ScheduleInterviewComponent implements OnInit {
         this.employeeIds.push(data.id);
       }
     } else if (this.main[index][2] === "active") {
-      // this.tableData[index].roundId = roundId;
       if (
         this.tableData[index].panel3.employees.length < 2 &&
         !this.employeeIds.includes(data.id)
@@ -177,7 +190,6 @@ export class ScheduleInterviewComponent implements OnInit {
     this._appService
       .checkAvailability(roundStartDateTime, roundEndDateTime, emailList)
       .subscribe((res) => {
-        console.log(res);
         for (let i = 0; i < res.value.length; i++) {
           let items = res.value[i].scheduleItems;
           let id = res.value[i].scheduleId;
@@ -288,7 +300,11 @@ export class ScheduleInterviewComponent implements OnInit {
   }
 
   saveData() {
-    this.updateRoundtime();
+    if (this.tableDataNumber != 0) {
+      this.updateRoundtime();
+    } else {
+      this.modal(false, "No Data Found.", false);
+    }
   }
 
   sendAlerts() {
@@ -376,5 +392,6 @@ export class ScheduleInterviewComponent implements OnInit {
     this.employeeIds = this.employeeIds.filter((value, index, arr) => {
       return value != empId;
     });
+    this.tableDataNumber -= 1;
   }
 }

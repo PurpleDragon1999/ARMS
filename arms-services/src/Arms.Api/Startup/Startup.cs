@@ -82,6 +82,7 @@ namespace Arms.Api.Startup
                     .AllowAnyMethod()
                     .AllowAnyHeader());
             app.UseHttpsRedirection();
+
             app.UseMvc();
 
 
@@ -90,5 +91,6 @@ namespace Arms.Api.Startup
         {
             app.UseAuthentication();
         }
+            
     }
 }

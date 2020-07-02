@@ -3,7 +3,7 @@
     <h2 class="page-title"><b>Analytics </b></h2>
   </div>
 
-  <div class="card mb-4">
+  <div class="card mb-2">
         <div class="card-body">
           <div class="clearfix">
             <h4 class="card-title float-left">
@@ -14,13 +14,12 @@
           <div class="chart">
           <canvas
             id="applicants-vs-hired-chart"
-            class="mt-1"
             baseChart
             [datasets]="barChartData"
             [labels]="barChartLabels"
             [options]="barChartOptions"
-          
-            [chartType]="barChartType">
+            [chartType]="barChartType"
+            width="500" height="200">
         </canvas>
           </div>
         </div>
@@ -34,17 +33,18 @@
             </h4>
           </div>
 
+          <div class="chart">
           <canvas
             id="profile-vacancies-chart"
-            class="mt-1"
             baseChart
             [data]="doughnutChartData"
             [labels]="doughnutChartLabels"
             [chartType]="doughnutChartType"
             [options]="doughnutChartOptions"
+            width="600" height="230"
             >
           </canvas>
-
+        </div>
         </div>
       </div>
 </div>
